@@ -1,17 +1,16 @@
 ---
 layout: main
-title: JSON to Dart Converter Online - Free JSON to Dart Model Tool
-description: Quickly convert JSON to Dart models online. Free JSON to Dart converter works in-browser, fast, and secure.
-keywords: json to dart converter, json to dart model, json to dart null safety, json to dart class, json to dart • quicktype, json to dart online, json to dart converter with null safety, json to dart model converter, json to dart flutter, json to dart json serializable online, json to dart object, json to dart freezed, json to dart converter online, json to dart model class, json to dart github, json to dart online converter, json to dart by netlify, json to dart quicktype, convert json to dart null safety, json to dart quick, convert json to dart class, json to dart model generator, json to dart with null, convert json to dart, from json to dart, convert from json to dart
+title: "JSON to Dart Converter Online – Free Flutter Model Generator | DataFrog"
+description: "Free online JSON to Dart converter. Generate Flutter model classes with null safety, fromJson/toJson. Browser‑based, no signup. Copy or download .dart file."
+keywords: "json to dart converter online, json to dart model generator, json to dart null safety, flutter json to dart, json to dart class, json to dart freezed, json to dart quicktype, convert json to dart class, json to dart flutter, json serializable dart"
 ---
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.css" rel="stylesheet">
 <!-- Tool section -->
 <section class="tool-section container" style="min-width: 99%">
-<h1>JSON to Dart Converter - Advance Dart Model Generation</h1>
-<p>Instantly convert JSON data into fully functional Dart classes with fromJson() and toJson() methods, supporting nested objects, arrays, and null-safety.
-Perfect for Flutter and Dart developers working with APIs, databases, or structured configuration files — no setup required.</p>
+<h1>JSON to Dart Converter – Generate Flutter Models with Null Safety</h1>
+
   <div id="json-tool-wrapper">
     <!-- JSON Editor -->
     <div id="json-editor-container">
@@ -21,7 +20,7 @@ Perfect for Flutter and Dart developers working with APIs, databases, or structu
       <label class="export-label"><input type="checkbox" id="required-fields"> Required Fields</label>
       <label class="export-label"><input type="checkbox" id="default-values"> Default Values</label>
       </div>
-      <textarea id="json-editor" placeholder="Paste your JSON string here..."></textarea>
+      <textarea id="json-editor" placeholder='Paste your JSON here, e.g., {"name":"John","age":30}'></textarea>
     </div>
     <!-- JSON Viewer -->
     <div id="json-viewer-wrapper" style="display: flex; flex-direction: column; position: relative; flex:1;">
@@ -41,35 +40,6 @@ Perfect for Flutter and Dart developers working with APIs, databases, or structu
       </div>
     </div>
   </div>
-  <div id="semantic-content-json" role="main" aria-label="JSON to Dart converter explanation">
-  <!-- Intro section -->
-  <section id="intro-json" aria-label="Introduction to JSON to Dart converter">
-    <p>
-      Convert JSON data into fully functional Dart classes instantly with this online JSON to Dart converter. 
-      Generate type-safe classes with <code>fromJson()</code> and <code>toJson()</code> methods, supporting nested objects, arrays, and optional null-safety.
-    </p>
-  </section>
-
-  <!-- Use cases section -->
-  <section id="use-cases-json" aria-label="Use cases for JSON to Dart conversion">
-    <p>
-      This tool is ideal for Flutter and Dart developers working with APIs, databases, or configuration files. 
-      It eliminates manual class creation, ensures consistent type safety, and speeds up development for both frontend and backend projects. 
-      Nested JSON objects and arrays are converted into structured Dart models automatically.
-    </p>
-  </section>
-
-  <!-- Features / functionality section -->
-  <section id="features-json" aria-label="Features of JSON to Dart converter">
-    <ul>
-      <li>Generate Dart classes from JSON objects or arrays</li>
-      <li>Supports nested objects and arrays with proper class generation</li>
-      <li>Optional null-safety, private fields, required fields, and default values</li>
-      <li>Copy or download generated Dart code instantly</li>
-      <li>Works in-browser without sending data to a server</li>
-    </ul>
-  </section>
-</div>
 
 </section>
 
@@ -141,6 +111,111 @@ Perfect for Flutter and Dart developers working with APIs, databases, or structu
   #json-tree-viewer .jqv-null { color: #d3d3d3 !important; }
 </style>
 
+
+<div style="display: flex; flex-direction: row">
+<div style="width: 20%"></div>
+<div style="width: 58%">
+
+<section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
+
+  <p id="intro" style="font-size:16px;color:#333;">
+    Generate Dart model classes from JSON instantly – perfect for Flutter and Dart applications. This browser‑based tool parses your JSON, infers types, and creates fully structured Dart classes with <code>fromJson</code> and <code>toJson</code> methods. Supports nested objects, lists, null safety, private fields, and required constructor parameters. No server upload – all processing happens locally.
+  </p>
+
+  <h2 id="when-to-use" style="margin-top:30px;">Why convert JSON to Dart models?</h2>
+  <ul style="padding-left:20px;">
+    <li>Build Flutter model classes directly from API JSON responses</li>
+    <li>Eliminate manual <code>fromJson</code> and <code>toJson</code> boilerplate</li>
+    <li>Ensure type‑safe Dart objects from dynamic JSON data</li>
+    <li>Handle nested JSON structures with automatically generated child classes</li>
+    <li>Speed up Flutter development and reduce human error</li>
+  </ul>
+
+  <h2 id="how-it-works" style="margin-top:30px;">How to generate Dart models from JSON – 3 simple steps</h2>
+  <ol style="padding-left:20px;">
+    <li><strong>Paste or upload JSON</strong> – copy your JSON into the editor or upload a .json file.</li>
+    <li><strong>Configure options</strong> – enable null safety, private fields, required fields, or default values as needed.</li>
+    <li><strong>Copy or download Dart code</strong> – the generated model class appears instantly. Click “Copy to Clipboard” or “Download Dart” to save.</li>
+  </ol>
+
+  <h2 id="key-features" style="margin-top:30px;">JSON to Dart converter – features you’ll love</h2>
+  <ul style="padding-left:20px;">
+    <li>✅ <strong>Instant model generation</strong> – no waiting, no server round‑trip</li>
+    <li>✅ <strong>Full null safety support</strong> – optional <code>?</code> for nullable fields</li>
+    <li>✅ <strong>Private fields option</strong> – underscores for internal variables</li>
+    <li>✅ <strong>Required fields in constructor</strong> – enforce non‑nullable parameters</li>
+    <li>✅ <strong>Default values</strong> – populate fields with fallback values</li>
+    <li>✅ <strong>Nested objects & arrays</strong> – auto‑creates separate Dart classes</li>
+    <li>✅ <strong>fromJson / toJson methods</strong> – production‑ready serialization code</li>
+    <li>✅ <strong>100% browser‑based</strong> – no upload, complete privacy</li>
+  </ul>
+
+  <h2 id="what-makes-different" style="margin-top:30px;">Why DataFrog’s JSON to Dart tool stands out</h2>
+  <ul style="padding-left:20px;">
+    <li><strong>Privacy first</strong> – your JSON never leaves your device. Many converters upload your data – we don’t.</li>
+    <li><strong>Flutter‑optimized code</strong> – produces clean, idiomatic Dart ready for production.</li>
+    <li><strong>Configurable output</strong> – null safety, private fields, required fields, default values – you choose.</li>
+    <li><strong>Handles real‑world JSON</strong> – nested objects, arrays of objects, mixed types, and empty values.</li>
+    <li><strong>No signup, no limits</strong> – generate as many models as you need.</li>
+  </ul>
+
+  <h2 id="supported-inputs" style="margin-top:30px;">Supported JSON structures</h2>
+  <ul style="padding-left:20px;">
+    <li>Simple JSON objects (<code>{"key": "value"}</code>)</li>
+    <li>Arrays of objects (<code>[{"id":1}, {"id":2}]</code>)</li>
+    <li>Deeply nested objects and lists</li>
+    <li>API response payloads (REST, GraphQL, etc.)</li>
+    <li>Any valid JSON that can be represented as a Dart class</li>
+  </ul>
+
+  <h2 id="use-cases" style="margin-top:30px;">Common use cases for JSON to Dart conversion</h2>
+  <ul style="padding-left:20px;">
+    <li>📱 Flutter mobile apps – parse API JSON into typed models</li>
+    <li>🖥️ Dart backend – model external API responses</li>
+    <li>🧪 Testing – generate test data classes from JSON fixtures</li>
+    <li>🚀 Rapid prototyping – convert API docs JSON to working models</li>
+    <li>🔄 Migration – transform legacy JSON exports into Dart classes</li>
+  </ul>
+
+  <h2 id="privacy-security" style="margin-top:30px;">Privacy & Security</h2>
+  <ul style="padding-left:20px;">
+    <li>🔒 All processing happens locally in your browser</li>
+    <li>🚫 No file upload – your data never touches our server</li>
+    <li>🕵️ No tracking, no logs, no third‑party scripts</li>
+    <li>💼 Safe for proprietary or sensitive JSON data</li>
+  </ul>
+
+  <h2 id="faq" style="margin-top:30px;">Frequently asked questions (JSON to Dart)</h2>
+
+  <h3 id="faq-1">Does this tool support Flutter null safety?</h3>
+  <p>Yes. Check the “Null Safety” checkbox, and the generated Dart code will use nullable types (<code>?</code>) for fields that can be missing or null in the JSON. Non‑nullable fields are marked as required or given default values.</p>
+
+  <h3 id="faq-2">Can it handle nested JSON objects?</h3>
+  <p>Absolutely. If your JSON contains nested objects, the tool automatically creates separate Dart classes for each level and links them together with proper type references.</p>
+
+  <h3 id="faq-3">Does it generate fromJson and toJson methods?</h3>
+  <p>Yes, every generated class includes both <code>fromJson(Map&lt;String, dynamic&gt; json)</code> factory constructor and <code>toJson()</code> method, enabling full JSON serialization/deserialization.</p>
+
+  <h3 id="faq-4">Is my JSON data uploaded to a server?</h3>
+  <p><strong>No.</strong> The conversion happens entirely in your browser. Your JSON never leaves your device – even works offline after first load.</p>
+
+  <h3 id="faq-5">Can I use the generated models in production Flutter apps?</h3>
+  <p>Yes. The output is clean, follows Dart best practices, and is ready for integration with <code>json_serializable</code> or direct manual serialization. Many developers use similar tools for production.</p>
+
+  <h3 id="faq-6">What are the checkbox options for?</h3>
+  <ul style="margin-top:5px;">
+    <li><strong>Null Safety</strong> – adds <code>?</code> to nullable fields.</li>
+    <li><strong>Private Fields</strong> – prefixes field names with <code>_</code> and generates getters/setters.</li>
+    <li><strong>Required Fields</strong> – non‑nullable parameters in constructor (using <code>required</code>).</li>
+    <li><strong>Default Values</strong> – initializes fields with <code>= defaultValue</code> (e.g., <code>0</code> for numbers, <code>""</code> for strings).</li>
+  </ul>
+
+</section>
+
+</div>
+<div style="width: 20%"></div>
+</div>
+
 <script src="/assets/js/json-to-dart.js"></script>
 
 <script type="application/ld+json">
@@ -148,9 +223,9 @@ Perfect for Flutter and Dart developers working with APIs, databases, or structu
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "@id": "https://reptilebirds.com/json-to-dart#webapp",
+    "@id": "https://datafrog.tools/json-to-dart#webapp",
     "name": "JSON to Dart Converter Online",
-    "url": "https://reptilebirds.com/json-to-dart",
+    "url": "https://datafrog.tools/json-to-dart",
     "description": "A free, browser-based tool that instantly transforms JSON objects into fully structured Dart classes with fromJson/toJson methods, ready for Flutter or Dart projects. All conversion happens securely offline in your browser.",
     "applicationCategory": "DeveloperTool",
     "operatingSystem": "Any",
@@ -176,7 +251,7 @@ Perfect for Flutter and Dart developers working with APIs, databases, or structu
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": "https://reptilebirds.com/json-to-dart#faq",
+    "@id": "https://datafrog.tools/json-to-dart#faq",
     "mainEntity": [
       {
         "@type": "Question",
@@ -247,7 +322,7 @@ Perfect for Flutter and Dart developers working with APIs, databases, or structu
   {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "@id": "https://reptilebirds.com/json-to-dart#howto",
+    "@id": "https://datafrog.tools/json-to-dart#howto",
     "name": "How to Convert JSON to Dart Classes",
     "description": "Step-by-step guide to transform JSON data into structured Dart classes using the free online converter.",
     "tool": {
@@ -263,25 +338,25 @@ Perfect for Flutter and Dart developers working with APIs, databases, or structu
         "@type": "HowToStep",
         "name": "Input Your JSON",
         "text": "Paste your JSON string into the editor or upload a .json file. The tool validates it in real-time.",
-        "url": "https://reptilebirds.com/json-to-dart#step1"
+        "url": "https://datafrog.tools/json-to-dart#step1"
       },
       {
         "@type": "HowToStep",
         "name": "Configure Dart Options",
         "text": "Choose your preferences for null safety, private fields, required fields, and default values.",
-        "url": "https://reptilebirds.com/json-to-dart#step2"
+        "url": "https://datafrog.tools/json-to-dart#step2"
       },
       {
         "@type": "HowToStep",
         "name": "Generate & Preview Code",
         "text": "The tool instantly generates Dart classes. Review the syntax-highlighted preview in the output pane.",
-        "url": "https://reptilebirds.com/json-to-dart#step3"
+        "url": "https://datafrog.tools/json-to-dart#step3"
       },
       {
         "@type": "HowToStep",
         "name": "Copy or Download",
         "text": "Copy the generated Dart code to your clipboard or download it as a model.dart file for your project.",
-        "url": "https://reptilebirds.com/json-to-dart#step4"
+        "url": "https://datafrog.tools/json-to-dart#step4"
       }
     ],
     "totalTime": "PT2M"

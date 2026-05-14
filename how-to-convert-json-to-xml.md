@@ -369,20 +369,20 @@ p{
   "@graph": [
     {
       "@type": "Article",
-      "@id": "https://reptilebirds.com/how-to-convert-json-to-xml",
-      "url": "https://reptilebirds.com/how-to-convert-json-to-xml",
+      "@id": "https://datafrog.tools/how-to-convert-json-to-xml",
+      "url": "https://datafrog.tools/how-to-convert-json-to-xml",
       "headline": "How to Convert JSON to XML — Step‑by‑Step Guide",
       "description": "Learn how to convert JSON data to XML format easily with step‑by‑step instructions and examples. Ideal for developers, API users, and config‑file conversions.",
       "inLanguage": "en",
       "author": {
         "@type": "Organization",
-        "name": "ReptileBirds Tools"
+        "name": "DataFrog Tools"
       },
       "datePublished": "2025-12-10",
       "dateModified": "2025-12-10",
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://reptilebirds.com/how-to-convert-json-to-xml"
+        "@id": "https://datafrog.tools/how-to-convert-json-to-xml"
       }
     },
     {

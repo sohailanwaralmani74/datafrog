@@ -1,17 +1,16 @@
-title: Reptile Birds — Free Online Tools for JSON, CSV, XML & Excel Conversion
-description: Convert, format, and manage your data easily with Reptile Birds. Free browser-based tools for JSON, CSV, XML, and Excel — secure, accurate, and fast.
+title: "DataFrog — Free Online Tools for JSON, CSV, XML & Excel Conversion"
+description: "Convert, format, and manage your data easily with DataFrog. Free browser-based tools for JSON, CSV, XML, and Excel — secure, accurate, and fast."
 permalink: ':title'
 baseurl: ""
-url: "https://reptilebirds.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://datafrog.tools" # the base hostname & protocol for your site, e.g. http://example.com
 site-twitter: #if your site has a twitter account, enter it here
 image: 
 # Author Settings
-author: Reptile Birds # add your name
-author-img: reptilebirds.pngp # add your photo
-about-author: Explore The Right Productivity Tools For JSON, XML, CSV And Excel to Skyrocket Your Workflow # add description
-social-twitter: # add your Twitter handle
+author: DataFrog # add your name
+author-img: datafrog.png # add your photo
+about-author: "Explore The Right Productivity Tools For JSON, XML, CSV And Excel to Skyrocket Your Workflow"social-twitter: # add your Twitter handle
 social-facebook: # add your Facebook handle
-social-github: sharpedge74-cmyk # add your Github handle
+social-github: sohailanwaralmani74 # add your Github handle
 social-linkedin: # add your Linkedin handle
 social-email: # add your Email address
 

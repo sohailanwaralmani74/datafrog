@@ -327,24 +327,24 @@ p{
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://reptilebirds.com/how-to-convert-json-to-csv"
+    "@id": "https://datafrog.tools/how-to-convert-json-to-csv"
   },
   "headline": "How to Convert JSON to CSV",
   "description": "Step-by-step guide to convert JSON files to CSV using Excel, VS Code, or our browser-based JSON to Excel converter. Learn tips, handle nested data, and avoid common errors.",
   "image": [
-    "https://reptilebirds.com/assets/img/json-to-csv-cover.webp"
+    "https://datafrog.tools/assets/img/json-to-csv-cover.webp"
   ],
   "author": {
     "@type": "Person",
     "name": "Sohail Anwar",
-    "url": "https://reptilebirds.com/sohail-anwar"
+    "url": "https://datafrog.tools/sohail-anwar"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Reptile Birds",
+    "name": "DataFrog",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://reptilebirds.com/assets/img/logo.png"
+      "url": "https://datafrog.tools/assets/img/logo.png"
     }
   },
   "datePublished": "2025-12-08",
@@ -369,24 +369,24 @@ p{
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://reptilebirds.com/how-to-convert-json-to-csv"
+    "@id": "https://datafrog.tools/how-to-convert-json-to-csv"
   },
   "headline": "How to Convert JSON to CSV",
   "description": "Step-by-step guide to convert JSON files to CSV using Excel, VS Code, or our browser-based JSON to Excel converter. Learn tips, handle nested data, and avoid common errors.",
   "image": [
-    "https://reptilebirds.com/assets/img/json-to-csv-cover.webp"
+    "https://datafrog.tools/assets/img/json-to-csv-cover.webp"
   ],
   "author": {
     "@type": "Person",
     "name": "Sohail Anwar",
-    "url": "https://reptilebirds.com/sohail-anwar"
+    "url": "https://datafrog.tools/sohail-anwar"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Reptile Birds",
+    "name": "DataFrog",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://reptilebirds.com/assets/img/logo.png"
+      "url": "https://datafrog.tools/assets/img/logo.png"
     }
   },
   "datePublished": "2025-12-08",

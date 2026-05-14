@@ -714,28 +714,28 @@ p{
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://reptilebirds.com/json-to-pdf"
+    "@id": "https://datafrog.tools/json-to-pdf"
   },
   "headline": "How to Convert JSON to PDF",
   "description": "Step-by-step guide on how to convert JSON files to PDF, covering manual conversion, IDE tools, online converters, and handling nested JSON structures efficiently.",
-  "image": "https://reptilebirds.com/assets/img/how-to-convert-json-to-pdf.webp",
+  "image": "https://datafrog.tools/assets/img/how-to-convert-json-to-pdf.webp",
   "author": {
     "@type": "Person",
     "name": "Gourav Mishra",
-    "url": "https://reptilebirds.com/gourav.mishra",
-    "image": "https://reptilebirds.com/assets/img/gourav.mishra.jpg"
+    "url": "https://datafrog.tools/gourav.mishra",
+    "image": "https://datafrog.tools/assets/img/gourav.mishra.jpg"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Reptile Birds",
+    "name": "DataFrog",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://reptilebirds.com/assets/img/how-to-convert-json-to-pdf.webp"
+      "url": "https://datafrog.tools/assets/img/how-to-convert-json-to-pdf.webp"
     }
   },
   "datePublished": "2025-11-21T16:00:00+05:00",
   "dateModified": "2025-12-10T16:00:00+05:00",
   "keywords": "JSON to PDF, convert JSON to PDF, online JSON converter, JSON tutorial, nested JSON PDF",
-  "url": "https://reptilebirds.com/json-to-pdf"
+  "url": "https://datafrog.tools/json-to-pdf"
 }
 </script>

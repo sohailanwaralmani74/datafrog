@@ -337,24 +337,24 @@ p{
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://reptilebirds.com/how-to-open-json-file-in-excel"
+    "@id": "https://datafrog.tools/how-to-open-json-file-in-excel"
   },
   "headline": "How To Open JSON File in Excel",
   "description": "Learn how to open JSON files in Excel using built-in tools or our browser-based converter. Handle nested arrays, large files, and avoid common errors with our step-by-step guide.",
   "image": [
-    "https://reptilebirds.com/assets/img/how-to-convert-json-to-excel.webp"
+    "https://datafrog.tools/assets/img/how-to-convert-json-to-excel.webp"
   ],
   "author": {
     "@type": "Person",
     "name": "Sohail Anwar",
-    "url": "https://reptilebirds.com/sohail-anwar"
+    "url": "https://datafrog.tools/sohail-anwar"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Reptile Birds",
+    "name": "DataFrog",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://reptilebirds.com/assets/img/reptilebirds.png"
+      "url": "https://datafrog.tools/assets/img/datafrog.png"
     }
   },
   "datePublished": "2025-12-08",
@@ -379,24 +379,24 @@ p{
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://reptilebirds.com/how-to-open-json-file-in-excel"
+    "@id": "https://datafrog.tools/how-to-open-json-file-in-excel"
   },
   "headline": "How To Open JSON File in Excel",
   "description": "Learn how to open JSON files in Excel using built-in tools or our browser-based converter. Handle nested arrays, large files, and avoid common errors with our step-by-step guide.",
   "image": [
-    "https://reptilebirds.com/assets/img/json-to-excel-cover.webp"
+    "https://datafrog.tools/assets/img/json-to-excel-cover.webp"
   ],
   "author": {
     "@type": "Person",
     "name": "Sohail Anwar",
-    "url": "https://reptilebirds.com/sohail-anwar"
+    "url": "https://datafrog.tools/sohail-anwar"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Reptile Birds",
+    "name": "DataFrog",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://reptilebirds.com/assets/img/logo.png"
+      "url": "https://datafrog.tools/assets/img/logo.png"
     }
   },
   "datePublished": "2025-12-08",

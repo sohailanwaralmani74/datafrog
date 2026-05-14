@@ -1,99 +1,45 @@
 ---
 layout: main
-title: "About Reptile Birds - Free Data Conversion Tools"
-description: "Learn about Reptile Birds, the free browser-based platform for data conversion and file management. No signup, no upload, works offline once loaded."
-keywords: about us, organization, Reptile Birds, data conversion, browser-based tools, secure file converter, JSON tools, Excel tools, XML tools, CSV tools
+title: "About DataFrog – Free, Private, Browser‑Based Data Conversion Tools"
+description: "DataFrog offers 100% free, offline‑first data conversion tools for JSON, Excel, CSV, XML, and more. No uploads, no signup, no tracking. Secure and private."
+keywords: "about DataFrog, free data conversion tools, browser based converters, private file converter, no upload tools, offline data tools"
 ---
 
-<div style="margin: 4rem; ">
-<h1>
-  About The Reptile Birds - Productivity Tools
-</h1>
+<div style="margin: 4rem;">
+  <h1>About DataFrog – Free, Private & Browser‑Based Data Tools</h1>
 
-<p >
-  <strong>Reptile Birds</strong> is a platform built to simplify everyday technical tasks through smart, 
-  reliable, and user-friendly online tools. Each feature is designed with precision to help developers, 
-  analysts, and creators save time and improve accuracy. Our mission is to turn small ideas into powerful 
-  digital utilities that make work faster, cleaner, and more meaningful.
-</p>
+  <p>
+    <strong>DataFrog</strong> is a collection of <strong>100% free, browser‑based data conversion and utility tools</strong> designed for developers, analysts, and everyday users. Every tool runs locally in your browser – <strong>no file uploads, no sign‑up, no server processing</strong>. Your data never leaves your device.
+  </p>
 
-<div class="container">
-  <div class="tool-grid" id="authorsGrid">
-    <!-- Sohail Anwar -->
-    <div class="profile-container">
-      <div class="profile-card">
-        <div class="profile-image">
-          <img src="assets/img/sohail-anwar.png" alt="Sohail Anwar - Senior Software Engineer">
-        </div>
-        <div class="profile-content">
-          <h2 style="display:flex; justify-content:center;">Sohail Anwar</h2>
-          <p class="title">Senior Software Engineer</p>
-          <p class="bio">
-            12+ years of experience in <strong>Java, Spring Boot, Struts, Angular,</strong> and <strong>JavaScript</strong>. 
-            Proficient problem-solver and collaborator, skilled at translating business requirements into robust technical solutions.
-          </p>
-          <div class="skills">
-            <span class="tag">Java</span>
-            <span class="tag">Android</span>
-            <span class="tag">Angular</span>
-            <span class="tag">JavaScript</span>
-          </div>
-          <a href="sohail-anwar" class="profile-button">See More About Sohail</a>
-        </div>
-      </div>
-    </div>
-    <!-- Saeed Ahmed -->
-    <div class="profile-container">
-      <div class="profile-card">
-        <div class="profile-image">
-          <img src="assets/img/saeed-ahmed.jpg" alt="Saeed Ahmed - Full Stack Developer">
-        </div>
-        <div class="profile-content">
-          <h2 style="display:flex; justify-content:center;">Saeed Ahmed</h2>
-          <p class="title">Full Stack Developer</p>
-          <p class="bio">
-            6+ years of experience in <strong>Java, Spring Boot, Node.js, Electron,</strong> and <strong>DevOps</strong>. 
-            Dedicated to building efficient full-stack systems and creating seamless, reliable digital experiences.
-          </p>
-          <div class="skills">
-            <span class="tag">Node.js</span>
-            <span class="tag">Electron</span>
-            <span class="tag">DevOps</span>
-            <span class="tag">Java</span>
-            <span class="tag">Angular</span>
-            <span class="tag">JavaScript</span>
-          </div>
-          <a href="saeed-ahmed" class="profile-button">See More About Saeed</a>
-        </div>
-      </div>
-    </div>
-<div class="profile-container">
-  <div class="profile-card">
-    <div class="profile-image">
-      <img src="assets/img/gourav-mishra.jpg" alt="Gourav Mishra - Business Analyst">
-    </div>
-    <div class="profile-content">
-      <h2 style="display:flex; justify-content:center;">Gourav Mishra</h2>
-      <p class="title">Business Analyst</p>
-      <p class="bio">
-        Experienced Business Analyst specializing in <strong>mortgage underwriting, fraud analysis, and credit history evaluation</strong>. 
-        Skilled in IT business analysis, BRD creation, and identifying qualifying factors for financial applications.
-      </p>
-      <div class="skills">
-        <span class="tag">Business Analysis</span>
-        <span class="tag">Mortgage Underwriting</span>
-        <span class="tag">Fraud Analysis</span>
-        <span class="tag">Credit Evaluation</span>
-        <span class="tag">BRD</span>
-      </div>
-      <a href="gourav-mishra" class="profile-button">See More About Gourav</a>
-    </div>
-  </div>
+  <h2>What We Offer</h2>
+  <p>
+    Convert, format, and manipulate <strong>JSON, Excel (XLSX/XLS), CSV, XML, YAML, QIF, PowerPoint, and more</strong>. Generate UUIDs, create PDFs, extract text, and handle schemas – all offline and instantly.
+  </p>
+
+  <h2>Privacy First – Always</h2>
+  <p>
+    Unlike most online converters, DataFrog never uploads your files. All processing uses JavaScript in your browser. We don’t track, log, or store any personal data. No cookies, no third‑party trackers.
+  </p>
+
+  <h2>Why DataFrog?</h2>
+  <ul>
+    <li>✅ <strong>100% free</strong> – no watermarks, no premium tiers.</li>
+    <li>✅ <strong>Offline‑capable</strong> – works after first load even without internet.</li>
+    <li>✅ <strong>Secure</strong> – sensitive documents stay on your computer.</li>
+    <li>✅ <strong>Fast & reliable</strong> – built with modern, trusted libraries.</li>
+  </ul>
+
+  <h2>Our Mission</h2>
+  <p>
+    We believe essential data tools should be accessible, private, and hassle‑free. DataFrog is built to save you time without compromising your security or budget.
+  </p>
+
+  <h2>Contact & Support</h2>
+  <p>
+    For questions, feedback, or partnership inquiries, reach us at:<br />
+    📧 <strong>sohailanwaralmani74@gmail.com</strong>
+  </p>
+
+  <p><strong>Last updated:</strong> {{ site.time | date: "%B %d, %Y" }}</p>
 </div>
-  </div>
-
-  
-</div>
- 
-</div>
-

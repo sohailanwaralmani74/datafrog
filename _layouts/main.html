@@ -4,8 +4,8 @@ layout: default
 <a id="skip-to-content" href="#content">Skip to the content.</a>
 <header>
   <div class="container header-container">
-    <a href="/" class="logo" title="Reptile Birds">
-      <img src="assets/img/reptilebirds.png" class="cover-author-image" alt="Reptile Birds" width="40px" height="40px"/>
+    <a href="/" class="logo" title="DataFrog">
+      <img src="assets/img/datafrog.png"  alt="DataFrog" width="60px" height="60px"/>
     </a>
     
   <div class="nav-controls">
@@ -13,7 +13,8 @@ layout: default
   <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">CSV Tools</span> | 
   <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">Excel Tools</span> | 
   <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">XML Tools</span> | 
-  <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">QIF Tools</span> 
+  <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">QIF Tools</span>  | 
+  <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">PDF Tools</span>
  </div>
     <!-- Add this CSS to your <head> section -->
 <style>
@@ -100,10 +101,10 @@ layout: default
   <a href="excel-to-json">Excel to JSON</a>
   <a href="excel-to-html">Excel to HTML</a>
   <a href="excel-to-txt">Excel to TXT</a>
-  <a href="xlsx-to-pdf">XLSX to PDF</a>
-  <a href="xlsx-to-sql-converter">XLSX to SQL</a>
-  <a href="convert-xlsx-to-csv">XLSX to CSV</a>
-  <a href="convert-xlsx-to-xml">XLSX to XML</a>
+  <a href="xlsx-to-pdf">Excel to PDF</a>
+  <a href="xlsx-to-sql-converter">Excel to SQL</a>
+  <a href="convert-xlsx-to-csv">Excel to CSV</a>
+  <a href="convert-xlsx-to-xml">Excel to XML</a>
 </div>
 
 <div class="popup-grid" id="xmlTools">
@@ -116,6 +117,11 @@ layout: default
   <a href="qif-to-excel">QIF to Excel</a>
   <a href="qif-to-qbo">QIF to QBO</a>
 </div>
+<div class="popup-grid" id="pdfTools">
+  <a href="pptx-to-pdf" title="Convert PPTX to PDF online">PPTX to PDF</a>
+  <a href="pdf-to-powerpoint" title="Convert PDF to PPTX online">PDF to PPTX</a>
+  
+</div>
 
 <script>
 // Wait for everything to load completely
@@ -126,7 +132,7 @@ window.addEventListener('load', function() {
     span.classList.add('nav-trigger');
   });
   
-  const popups = ['jsonTools', 'csvTools', 'excelTools', 'xmlTools', 'qifTools'];
+  const popups = ['jsonTools', 'csvTools', 'excelTools', 'xmlTools', 'qifTools', 'pdfTools'];
   
   // Function to position popup at the top of the viewport
   function positionPopupAtTop(trigger, popup) {
@@ -229,60 +235,25 @@ window.addEventListener('load', function() {
 </main>
 <footer>
   <div class="container">
-    <div class="footer-content">                
-      <div class="footer-column">
-        <h3>PPT & PDF Tools</h3>
-        <ul class="footer-links">
-          <li><a href="pptx-to-pdf" title="Convert PPTX to PDF online">📽️ PPTX to PDF Converter</a></li>
-          <li><a href="pdf-to-powerpoint" title="Convert PDF to PPTX online">📄 PDF to PPTX Converter</a></li>
-        </ul>
-      </div>
+    <div style="display: flex; flex-direction: row; justify-content: flex-end; gap: 1rem;">    
 
-      <div class="footer-column">
-        <h3>Text Tools</h3>
-        <ul class="footer-links">
-          <li><a href="word-counter" title="Word Counter and text Analyser">📝 Word Counter</a></li>
-          <li><a href="lrem-ipsum-generator" title="Generate Lorem Ipsum placeholder text for designs and layouts">📄 Lorem Ipsum Generator</a></li>
+        
+            <a  href="blog" aria-label="DataFrog Blog" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">📝 Blog</a></li>
+            <a href="privacy-policy" aria-label="DataFrog Privacy Policy" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">🔒 Privacy Policy</a> 
+            <a href="contact-us" aria-label="DataFrog Contact Us" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">📞 Contact Us</a> 
+            <a href="about-us" aria-label="DataFrog About Us" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">ℹ️ About Us</a> 
+            <a href="terms-of-service" aria-label="DataFrog Terms of Service" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">⚖️ Terms of Service</a> 
+            <a href="/404" aria-label="DataFrog 404 Test Page" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">🔍 404 Test Page</a>
 
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h3>Developer Tools</h3>
-        <ul class="footer-links">
-          <li><a href="xml-to-xsd-generator" title="Generate XSD from XML online">🗂️ XML to XSD Generator</a></li>
-          <li><a href="json-to-dart" title="Convert JSON data to Dart models">🖥️ JSON to Dart</a></li>
-          <li><a href="json-to-json-schema" title="Generate JSON Schema from JSON data">📊 JSON to JSON Schema</a></li>
-          <li><a href="uuid-generator" title="Generate UUID, GUID, ULID, NanoID, KSUID, and CUID online">🆔 UUID & GUID Generator</a></li>
-          <li><a href="json-to-sql" title="Json To Sql Data Conversion">🧮 JSON To SQL</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-column">
-        <h3>Resources</h3>
-        <ul class="footer-links">
-            <li><a href="blog" aria-label="Reptile Birds Blog">📝 Blog</a></li>
-            <li><a href="privacy-policy" aria-label="Reptile Birds Privacy Policy">🔒 Privacy Policy</a></li>
-            <li><a href="contact-us" aria-label="Reptile Birds Contact Us">📞 Contact Us</a></li>
-            <li><a href="about-us" aria-label="Reptile Birds About Us">ℹ️ About Us</a></li>
-            <li><a href="terms-of-service" aria-label="Reptile Birds Terms of Service">⚖️ Terms of Service</a></li>
-            <li><a href="/404" aria-label="Reptile Birds 404 Test Page">🔍 404 Test Page</a></li>
-        </ul>
-      </div>
     </div>
     
     <div class="footer-bottom">
       <div class="footer-column">
-        <h3><a href="/">Reptile Birds</a></h3>
-        <p>
-          Reptile Birds provides free, secure browser-based tools for structured data — convert and format 
-          <strong>JSON, CSV, XML, and Excel</strong> files instantly.  
-          Our mission is to simplify data handling for developers, analysts, and learners with reliable, ad-free utilities that run directly in your browser.
-          Explore tutorials, productivity insights, and best practices in our blog to enhance your data workflow.
-        </p>
+        <h3><a href="/">DataFrog</a></h3>
+        <p> <strong>DataFrog</strong> offers <strong>100% free, browser‑based data conversion tools</strong> — no signup, no file uploads, no server processing. Convert <strong>JSON to CSV, Excel to JSON, CSV to XML, YAML to JSON, PDF to PowerPoint, QIF to Excel, XLSX to SQL, XML to XSD, UUID generation, and many more formats</strong> instantly. Every tool runs locally in your browser, keeping your data private and secure. Used by thousands of developers, data analysts, and IT professionals daily. <strong>Fast, reliable, and completely ad‑free</strong> — because essential utilities should just work. 📌 Check our <strong>DataFrog Blog</strong> for tutorials, workflow tips, and best practices to level up your data game. </p>
       </div>
       <div style="width: 99%; display: flex; justify-content: flex-end;">
-        <p>&copy; {{ site.time | date: "%Y" }} Reptile Birds | Built with precision and ❤️</p>
+        <p>&copy; {{ site.time | date: "%Y" }} DataFrog | Built with precision and ❤️</p>
       </div>
     </div>
   </div>
