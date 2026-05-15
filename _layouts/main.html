@@ -1,260 +1,404 @@
 ---
 layout: default
 ---
+
 <a id="skip-to-content" href="#content">Skip to the content.</a>
-<header>
+
+<header class="header">
   <div class="container header-container">
+
     <a href="/" class="logo" title="DataFrog">
-      <img src="assets/img/datafrog.png"  alt="DataFrog" width="60px" height="60px"/>
+      <img
+        src="assets/img/datafrog.png"
+        alt="DataFrog"
+        width="50px"
+        height="50px"
+      />
     </a>
-    
-  <div class="nav-controls">
-  <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">JSON Tools</span> | 
-  <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">CSV Tools</span> | 
-  <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">Excel Tools</span> | 
-  <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">XML Tools</span> | 
-  <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">QIF Tools</span>  | 
-  <span style="cursor: pointer;" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='black';">PDF Tools</span>
- </div>
-    <!-- Add this CSS to your <head> section -->
-<style>
-.nav-trigger {
-  cursor: pointer;
-  color: black;
-}
 
-.nav-trigger:hover {
-  color: rgb(239, 96, 8);
-}
+    <!-- MAIN NAV -->
+    <div class="nav-controls">
 
-.popup-grid {
-  position: fixed !important;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 15px;
-  z-index: 9999;
-  display: none;
-  width: auto;
-  max-width: 90vw;
-  max-height: 80vh;
-  overflow-y: auto;
-  margin: 0;
-}
+      <span class="nav-trigger" data-popup="converterTools" id="dataConverters" aria-label="Data Converters">
+        Data Converters
+      </span> 
 
-.popup-grid a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  padding: 8px 10px;
-  font-size: 0.9em;
-  border-radius: 4px;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 120px;
-}
+    </div>
 
-.popup-grid a:hover {
-  color: rgb(239, 96, 8);
-  text-decoration: underline;
-  background-color: #f8f8f8;
-}
-
-/* Responsive for smaller screens */
-@media (max-width: 768px) {
-  .popup-grid {
-    max-width: 95vw;
-  }
-}
-</style>
-
-<!-- Add this HTML to your page (keep your existing nav-controls but add these popups after it) -->
-<div class="popup-grid" id="jsonTools">
-  <a href="json-to-csv">JSON to CSV</a>
-  <a href="json-to-excel">JSON to Excel</a>
-  <a href="json-to-html">JSON to HTML</a>
-  <a href="json-to-pdf">JSON to PDF</a>
-  <a href="json-to-sql">JSON to SQL</a>
-  <a href="json-to-txt">JSON to TXT</a>
-  <a href="json-to-xml">JSON to XML</a>
-  <a href="json-to-yaml">JSON to YAML</a>
-  <a href="json-string-to-json-object">JSON String to Object</a>
-  <a href="json-to-dart">JSON to Dart</a>
-  <a href="json-to-json-schema">JSON to JSON Schema</a>
-  <a href="yaml-to-json">YAML To JSON</a>
-</div>
-
-<div class="popup-grid" id="csvTools">
-  <a href="convert-csv-to-excel">CSV to Excel</a>
-  <a href="convert-csv-to-html">CSV to HTML</a>
-  <a href="convert-csv-to-json">CSV to JSON</a>
-  <a href="convert-csv-to-pdf">CSV to PDF</a>
-  <a href="convert-csv-to-txt">CSV to TXT</a>
-  <a href="convert-csv-to-xml">CSV to XML</a>
-  <a href="csv-to-sql">CSV to SQL</a>
-</div>
-
-<div class="popup-grid" id="excelTools">
-  <a href="excel-to-json">Excel to JSON</a>
-  <a href="excel-to-html">Excel to HTML</a>
-  <a href="excel-to-txt">Excel to TXT</a>
-  <a href="xlsx-to-pdf">Excel to PDF</a>
-  <a href="xlsx-to-sql-converter">Excel to SQL</a>
-  <a href="convert-xlsx-to-csv">Excel to CSV</a>
-  <a href="convert-xlsx-to-xml">Excel to XML</a>
-</div>
-
-<div class="popup-grid" id="xmlTools">
-  <a href="xml-to-json">XML to JSON</a>
-  <a href="xml-to-xsd-generator">XML to XSD</a>
-</div>
-
-<div class="popup-grid" id="qifTools">
-  <a href="qif-to-csv">QIF to CSV</a>
-  <a href="qif-to-excel">QIF to Excel</a>
-  <a href="qif-to-qbo">QIF to QBO</a>
-</div>
-<div class="popup-grid" id="pdfTools">
-  <a href="pptx-to-pdf" title="Convert PPTX to PDF online">PPTX to PDF</a>
-  <a href="pdf-to-powerpoint" title="Convert PDF to PPTX online">PDF to PPTX</a>
-  
-</div>
-
-<script>
-// Wait for everything to load completely
-window.addEventListener('load', function() {
-  // Add nav-trigger class to your existing spans
-  const navSpans = document.querySelectorAll('.nav-controls span');
-  navSpans.forEach(span => {
-    span.classList.add('nav-trigger');
-  });
-  
-  const popups = ['jsonTools', 'csvTools', 'excelTools', 'xmlTools', 'qifTools', 'pdfTools'];
-  
-  // Function to position popup at the top of the viewport
-  function positionPopupAtTop(trigger, popup) {
-    // First, make popup visible to get its dimensions
-    popup.style.display = 'grid';
-    popup.style.visibility = 'hidden'; // Hide but keep layout
-    
-    // Get popup dimensions
-    const popupWidth = popup.offsetWidth;
-    const popupHeight = popup.offsetHeight;
-    const viewportWidth = window.innerWidth;
-    
-    // Calculate position - always at top of viewport
-    let left = 20; // Start with some margin
-    let top = 50; // Position from top of viewport
-    
-    // Try to align with trigger if possible
-    const rect = trigger.getBoundingClientRect();
-    const triggerCenter = rect.left + (rect.width / 2);
-    
-    // Center popup relative to trigger, but ensure it's within viewport
-    left = Math.max(20, triggerCenter - (popupWidth / 2));
-    
-    // Ensure popup doesn't go off right side
-    if (left + popupWidth > viewportWidth - 10) {
-      left = viewportWidth - popupWidth - 10;
+    <!-- CSS -->
+    <style>
+    .header{
+      background-color: rgb(19, 18, 18);
     }
-    
-    // Ensure popup doesn't go off left side
-    if (left < 20) {
-      left = 20;
-    }
-    
-    // Apply positions
-    popup.style.left = left + 'px';
-    popup.style.top = top + 'px';
-    popup.style.visibility = 'visible'; // Now show it
-  }
-  
-  // Set up hover events
-  navSpans.forEach((trigger, index) => {
-    let hideTimeout;
-    const popupId = popups[index];
-    const popup = document.getElementById(popupId);
-    
-    if (!popup) return;
-    
-    // Set a fixed grid layout for simplicity
-    popup.style.gridTemplateColumns = 'repeat(3, minmax(20px, auto))';
-    
-    trigger.addEventListener('mouseenter', () => {
-      clearTimeout(hideTimeout);
-      
-      // Hide all other popups
-      popups.forEach(id => {
-        const p = document.getElementById(id);
-        if (p && p !== popup) {
-          p.style.display = 'none';
+      .nav-trigger{
+        cursor:pointer;
+        color:white;
+      }
+
+      .nav-trigger:hover{
+        color:rgb(239,96,8);
+      }
+
+      .popup-grid{
+        position:fixed !important;
+
+        background:white;
+
+        border:1px solid #ddd;
+        border-radius:10px;
+
+        box-shadow:
+          0 6px 20px rgba(0,0,0,0.12);
+
+        padding:20px;
+
+        z-index:9999;
+
+        display:none;
+
+        max-width:95vw;
+        max-height:80vh;
+
+        overflow-y:auto;
+
+        gap:25px;
+
+        grid-template-columns:
+          repeat(auto-fit,minmax(220px,1fr));
+      }
+
+      .popup-column h3{
+        margin-top:0;
+        margin-bottom:12px;
+
+        font-size:1rem;
+        color:rgb(239,96,8);
+      }
+
+      .popup-column a{
+        display:block;
+
+        color:#333;
+
+        text-decoration:none;
+
+        padding:7px 8px;
+
+        font-size:0.92em;
+
+        border-radius:4px;
+      }
+
+      .popup-column a:hover{
+        color:rgb(239,96,8);
+        background:#f8f8f8;
+        text-decoration:underline;
+      }
+
+      @media (max-width:768px){
+
+        .popup-grid{
+          width:95vw !important;
+
+          grid-template-columns:1fr;
         }
-      });
-      
-      // Position and show this popup at the top
-      positionPopupAtTop(trigger, popup);
-    });
-    
-    trigger.addEventListener('mouseleave', () => {
-      hideTimeout = setTimeout(() => {
-        popup.style.display = 'none';
-      }, 100);
-    });
-    
-    popup.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
-    popup.addEventListener('mouseleave', () => {
-      hideTimeout = setTimeout(() => {
-        popup.style.display = 'none';
-      }, 100);
-    });
-  });
-  
-  // Close popups when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.nav-trigger') && !e.target.closest('.popup-grid')) {
-      popups.forEach(popupId => {
-        const popup = document.getElementById(popupId);
-        if (popup) {
-          popup.style.display = 'none';
+
+      }
+
+    </style>
+
+    <!-- CONVERTERS -->
+    <div class="popup-grid" id="converterTools">
+
+      <div class="popup-column">
+
+        <h3>JSON Converters</h3>
+         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+        <a href="json-string-to-json-object">String to Object</a>
+        <a href="json-to-csv">JSON to CSV</a>
+        <a href="json-to-dart">JSON to Dart</a>
+        <a href="json-to-excel">JSON to Excel</a>
+        <a href="json-to-html">JSON to HTML</a>
+        <a href="json-to-json-schema">JSON to Schema</a>
+        <a href="json-to-pdf">JSON to PDF</a>
+        <a href="json-to-sql">JSON to SQL</a>
+        <a href="json-to-txt">JSON to TXT</a>
+        <a href="json-to-xml">JSON to XML</a>
+        <a href="json-to-yaml">JSON to YAML</a>
+        </div>
+      </div>
+
+      <div class="popup-column">
+
+        <h3>CSV Converters</h3>
+          <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+        <a href="convert-csv-to-excel">CSV to Excel</a>
+        <a href="convert-csv-to-html">CSV to HTML</a>
+        <a href="convert-csv-to-json">CSV to JSON</a>
+        <a href="convert-csv-to-pdf">CSV to PDF</a>
+        <a href="convert-csv-to-txt">CSV to TXT</a>
+        <a href="convert-csv-to-xml">CSV to XML</a>
+        <a href="csv-to-sql">CSV to SQL</a>
+        </div>
+
+      </div>
+
+      <div class="popup-column">
+
+        <h3>Excel Converters</h3>
+       <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+        <a href="excel-to-json">Excel to JSON</a>
+        <a href="excel-to-html">Excel to HTML</a>
+        <a href="excel-to-txt">Excel to TXT</a>
+        <a href="xlsx-to-pdf">Excel to PDF</a>
+        <a href="xlsx-to-sql-converter">Excel to SQL</a>
+        <a href="convert-xlsx-to-csv">Excel to CSV</a>
+        <a href="convert-xlsx-to-xml">Excel to XML</a>
+        </div>
+
+      </div>
+
+      <div class="popup-column">
+     
+        <h3>XML Tools</h3>
+         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+        <a href="xml-to-json">XML to JSON</a>
+        <a href="xml-to-xsd-generator">XML to XSD</a>
+        </div>
+      </div>
+
+      <div class="popup-column">
+
+        <h3>QIF Tools</h3>
+         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+        <a href="qif-to-csv">QIF to CSV</a>
+        <a href="qif-to-excel">QIF to Excel</a>
+        <a href="qif-to-qbo">QIF to QBO</a>
+        </div>
+
+      </div>
+
+      <div class="popup-column">
+
+        <h3>PDF Tools</h3>
+         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+        <a href="pptx-to-pdf">PPTX to PDF</a>
+        <a href="pdf-to-powerpoint">PDF to PPTX</a>
+        </div>
+
+      </div>
+
+      <div class="popup-column">
+
+        <h3>YAML Tools</h3>
+         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+        <a href="/yaml-to-json.">YAML to JSON</a>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+    <!-- SCRIPT -->
+    <script>
+
+      window.addEventListener('load', function(){
+
+        const triggers =
+          document.querySelectorAll('.nav-trigger');
+
+        const popups =
+          document.querySelectorAll('.popup-grid');
+
+        function hideAllPopups(){
+
+          popups.forEach(popup => {
+            popup.style.display = 'none';
+          });
+
         }
+
+        function positionPopup(trigger, popup){
+
+          popup.style.display = 'grid';
+          popup.style.visibility = 'hidden';
+
+          const rect =
+            trigger.getBoundingClientRect();
+
+          const popupWidth =
+            popup.offsetWidth;
+
+          let left =
+            rect.left - (popupWidth / 2) + (rect.width / 2);
+
+          if(left < 20){
+            left = 20;
+          }
+
+          if(left + popupWidth > window.innerWidth - 20){
+            left =
+              window.innerWidth - popupWidth - 20;
+          }
+
+          popup.style.left = left + 'px';
+          popup.style.top = '55px';
+
+          popup.style.visibility = 'visible';
+
+        }
+
+        triggers.forEach(trigger => {
+
+          let timeout;
+
+          const popupId =
+            trigger.dataset.popup;
+
+          const popup =
+            document.getElementById(popupId);
+
+          trigger.addEventListener('mouseenter', () => {
+
+            clearTimeout(timeout);
+
+            hideAllPopups();
+
+            positionPopup(trigger, popup);
+
+          });
+
+          trigger.addEventListener('mouseleave', () => {
+
+            timeout = setTimeout(() => {
+
+              if(!popup.matches(':hover')){
+                popup.style.display = 'none';
+              }
+
+            },100);
+
+          });
+
+          popup.addEventListener('mouseenter', () => {
+            clearTimeout(timeout);
+          });
+
+          popup.addEventListener('mouseleave', () => {
+
+            timeout = setTimeout(() => {
+              popup.style.display = 'none';
+            },100);
+
+          });
+
+        });
+
+        document.addEventListener('click', (e) => {
+
+          if(
+            !e.target.closest('.nav-trigger') &&
+            !e.target.closest('.popup-grid')
+          ){
+            hideAllPopups();
+          }
+
+        });
+
       });
-    }
-  });
-});
-</script>
+
+    </script>
 
   </div>
-  
 </header>
+
 <main id="content" role="main">
-  <!-- HERO -->
   {{content}}
 </main>
+
 <footer>
+
   <div class="container">
-    <div style="display: flex; flex-direction: row; justify-content: flex-end; gap: 1rem;">    
 
-        
-            <a  href="blog" aria-label="DataFrog Blog" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">📝 Blog</a></li>
-            <a href="privacy-policy" aria-label="DataFrog Privacy Policy" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">🔒 Privacy Policy</a> 
-            <a href="contact-us" aria-label="DataFrog Contact Us" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">📞 Contact Us</a> 
-            <a href="about-us" aria-label="DataFrog About Us" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">ℹ️ About Us</a> 
-            <a href="terms-of-service" aria-label="DataFrog Terms of Service" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">⚖️ Terms of Service</a> 
-            <a href="/404" aria-label="DataFrog 404 Test Page" onmouseover="this.style.color='rgb(239, 96, 8)';" onmouseout="this.style.color='white';">🔍 404 Test Page</a>
+    <div
+      style="
+        display:flex;
+        flex-direction:row;
+        justify-content:flex-end;
+        gap:1rem;
+      "
+    >
+
+      <a href="blog">📝 Blog</a>
+
+      <a href="privacy-policy">
+        🔒 Privacy Policy
+      </a>
+
+      <a href="contact-us">
+        📞 Contact Us
+      </a>
+
+      <a href="about-us">
+        ℹ️ About Us
+      </a>
+
+      <a href="terms-of-service">
+        ⚖️ Terms of Service
+      </a>
+
+      <a href="/404">
+        🔍 404 Test Page
+      </a>
 
     </div>
-    
+
     <div class="footer-bottom">
+
       <div class="footer-column">
-        <h3><a href="/">DataFrog</a></h3>
-        <p> <strong>DataFrog</strong> offers <strong>100% free, browser‑based data conversion tools</strong> — no signup, no file uploads, no server processing. Convert <strong>JSON to CSV, Excel to JSON, CSV to XML, YAML to JSON, PDF to PowerPoint, QIF to Excel, XLSX to SQL, XML to XSD, UUID generation, and many more formats</strong> instantly. Every tool runs locally in your browser, keeping your data private and secure. Used by thousands of developers, data analysts, and IT professionals daily. <strong>Fast, reliable, and completely ad‑free</strong> — because essential utilities should just work. 📌 Check our <strong>DataFrog Blog</strong> for tutorials, workflow tips, and best practices to level up your data game. </p>
+
+        <h3>
+          <a href="/">DataFrog</a>
+        </h3>
+
+        <p>
+
+          <strong>DataFrog</strong>
+          offers
+          <strong>
+            100% free, browser-based data conversion tools
+          </strong>
+          — no signup, no file uploads, no server processing.
+
+        </p>
+
       </div>
-      <div style="width: 99%; display: flex; justify-content: flex-end;">
-        <p>&copy; {{ site.time | date: "%Y" }} DataFrog | Built with precision and ❤️</p>
+
+      <div
+        style="
+          width:99%;
+          display:flex;
+          justify-content:flex-end;
+        "
+      >
+
+        <p>
+
+          &copy;
+          {{ site.time | date: "%Y" }}
+          DataFrog |
+          Built with precision and ❤️
+
+        </p>
+
       </div>
+
     </div>
+
   </div>
+
 </footer>
