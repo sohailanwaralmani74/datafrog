@@ -1430,7 +1430,6 @@ button:hover {
   background: rgba(255, 255, 255, 0.02);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.02);
-  padding: 10px;
   max-height: 19rem;
   min-height: 19rem;
   overflow: auto;
@@ -1685,4 +1684,241 @@ table.sheet tbody tr:hover {
 
 .csvx-container1 {
   min-height: 520px;
+}
+
+.dfx-controls-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content: flex-end;
+  padding:12px;
+
+  background:#1e1e1e;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+
+  margin-bottom:1px;
+}
+
+/* BUTTON LABELS */
+.dfx-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:4px 12px;
+
+  border-radius:999px;
+
+  background:#ffffff;
+  border:1px solid #d1d5db;
+
+  font-size:13px;
+  font-weight:400;
+
+  color:#111827;
+
+  cursor:pointer;
+  user-select:none;
+
+  transition:.15s ease;
+}
+
+.dfx-btn:hover{
+  transform:translateY(-1px);
+  border-color:#9ca3af;
+}
+
+.dfx-btn:active{
+  transform:scale(.97);
+}
+
+.dfx-btn--disabled{
+  opacity:.45;
+  pointer-events:none;
+}
+
+/* =========================
+   VIEWER (DARK AREA)
+========================= */
+
+.dfx-viewer{
+  position:relative;
+
+  width:100%;
+  max-height:calc(100vh - 190px);
+  min-height:calc(100vh - 240px);
+  background:#1e1e1e;
+  border:1px solid #2d2d2d;
+  border-radius:14px;
+  overflow:auto;
+scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+
+
+/* PLACEHOLDER */
+.dfx-placeholder{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#9ca3af;
+  text-align:center;
+  padding:20px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.dfx-table{
+  border-collapse:collapse;
+  width:max-content;
+  min-width:100%;
+  table-layout:fixed;
+}
+
+.dfx-th,
+.dfx-td{
+  position:relative;
+
+  border:1px solid #2d2d2d;
+
+  min-width:120px;
+  padding:10px;
+
+  color:#d4d4d4;
+  background:#1e1e1e;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dfx-th{
+  background:#252526;
+  color:#ffffff;
+
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+
+/* EDIT MODE */
+.dfx-td:focus{
+  outline:none;
+  background:rgba(59,130,246,.25);
+}
+
+/* =========================
+   COLUMN RESIZER
+========================= */
+
+.dfx-resizer{
+  position:absolute;
+  right:0;
+  top:0;
+  width:6px;
+  height:100%;
+  cursor:col-resize;
+}
+
+/* =========================
+   DUPLICATES
+========================= */
+
+.dfx-row--duplicate .dfx-td{
+  background:rgba(255,140,0,.15);
+}
+
+.sqlfx-controls-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:flex-end;
+
+  padding:12px;
+
+  background:#1e1e1e;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+
+  margin-bottom:1px;
+}
+
+/* BUTTONS */
+.sqlfx-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  background:#ffffff;
+  border:1px solid #d1d5db;
+
+  font-size:13px;
+  font-weight:600;
+
+  color:#111827;
+
+  cursor:pointer;
+  user-select:none;
+
+  transition:.15s ease;
+}
+
+.sqlfx-btn:hover{
+  transform:translateY(-1px);
+  border-color:#9ca3af;
+}
+
+.sqlfx-btn:active{
+  transform:scale(.97);
+}
+
+.sqlfx-btn--disabled{
+  opacity:.45;
+  pointer-events:none;
+}
+
+/* =========================
+   EDITOR
+========================= */
+
+.sqlfx-editor{
+
+  width:100%;
+  height:calc(100vh - 140px);
+
+  background:#1e1e1e;
+  border:1px solid #2d2d2d;
+  border-radius:14px;
+
+  padding:18px;
+
+  color:#d4d4d4;
+
+  font-size:14px;
+  line-height:1.6;
+
+  resize:none;
+  outline:none;
+
+  overflow:auto;
+
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.08) transparent;
+
+}
+
+.sqlfx-editor::placeholder{
+  color:#6b7280;
 }

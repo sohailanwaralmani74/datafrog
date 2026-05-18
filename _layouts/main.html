@@ -22,6 +22,10 @@ layout: default
       <span class="nav-trigger" data-popup="converterTools" id="dataConverters" aria-label="Data Converters">
         Data Converters
       </span> 
+       | 
+       <span class="nav-trigger" data-popup="deduplicateTools" id="deduplicate" aria-label="Remove duplicate data">
+        Deduplicate
+      </span> 
 
     </div>
 
@@ -160,7 +164,7 @@ layout: default
 
       <div class="popup-column">
      
-        <h3>XML Tools</h3>
+        <h3>XML Converters</h3>
          <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
         <a href="xml-to-json">XML to JSON</a>
         <a href="xml-to-xsd-generator">XML to XSD</a>
@@ -169,7 +173,7 @@ layout: default
 
       <div class="popup-column">
 
-        <h3>QIF Tools</h3>
+        <h3>QIF Converters</h3>
          <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
         <a href="qif-to-csv">QIF to CSV</a>
         <a href="qif-to-excel">QIF to Excel</a>
@@ -180,7 +184,7 @@ layout: default
 
       <div class="popup-column">
 
-        <h3>PDF Tools</h3>
+        <h3>PDF Converters</h3>
          <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
         <a href="pptx-to-pdf">PPTX to PDF</a>
         <a href="pdf-to-powerpoint">PDF to PPTX</a>
@@ -190,12 +194,30 @@ layout: default
 
       <div class="popup-column">
 
-        <h3>YAML Tools</h3>
+        <h3>YAML Converters</h3>
          <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
         <a href="/yaml-to-json.">YAML to JSON</a>
         </div>
 
       </div>
+
+    </div>
+    <div class="popup-grid" id="deduplicateTools">
+
+
+       <div class="popup-column">
+        <h3>Deduplicate Data Tools</h3>
+         <div style="display: grid;  grid-template-columns: repeat(3, 1fr);">
+        <a href="/remove-excel-duplicates">Remove Excel Duplicates</a>
+        <a href="/remove-duplicates-in-sql">Remove Duplicates in SQL</a>
+        <a href="/excel-duplicate-remover">Excel Duplicate Remover</a>
+        <a href="/excel-duplicate-remover">Excel Duplicate Remover</a>
+        <a href="/excel-duplicate-remover">Excel Duplicate Remover</a>
+        </div>
+
+      </div>
+
+      
 
     </div>
 

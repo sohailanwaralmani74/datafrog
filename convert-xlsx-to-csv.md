@@ -26,7 +26,7 @@ keywords: "convert xlsx to csv online free, excel to csv converter, xlsx to csv 
         <button class="csvx-btn primary" id="convertBtnExcelCsv" disabled title="Convert Excel to CSV">🔄 Convert to CSV</button>
       </div>
     </div>
-    <div id="excelPreviewCsv" class="csvx-preview" contenteditable>
+    <div id="excelPreviewCsv" class="csvx-preview">
       <div class="small" id="placeholderExcelCsv">No file uploaded yet. Upload an Excel file to preview its content here.</div>
     </div>
     <div id="toastExcelCsv" class="csvx-toast">✅ CSV ready – copy or download below</div>
@@ -46,7 +46,7 @@ keywords: "convert xlsx to csv online free, excel to csv converter, xlsx to csv 
           <button class="csvx-btn" id="exportCsvBtn" title="Download as CSV File">💾 Export .csv</button>
         </div>
       </div>
-      <textarea id="csvOutputPreview" class="csvx-preview" style="min-height:300px; background:#1b1b1b; color:#eee; font-family:monospace; padding:10px; border:none; width:100%; border-radius:8px;" contenteditable="true"></textarea>
+      <textarea id="csvOutputPreview" class="csvx-preview" style="min-height:300px; background:#1b1b1b; color:#eee; font-family:monospace; padding:10px; border:none; width:100%; border-radius:8px;"></textarea>
     </div>
   </div>
 </div>
