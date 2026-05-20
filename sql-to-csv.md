@@ -241,7 +241,7 @@ keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, p
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "webapplication",
   "name": "SQL to CSV Converter",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "All (Browser-based)",

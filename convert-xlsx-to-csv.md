@@ -148,13 +148,13 @@ keywords: "convert xlsx to csv online free, excel to csv converter, xlsx to csv 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/convert-xlsx-to-csv#webapp",
     "name": "Convert XLSX to CSV - Online Excel to CSV Converter",
     "url": "https://datafrog.tools/convert-xlsx-to-csv",
     "description": "A free, browser-based tool that converts Excel files (XLSX, XLS) into clean CSV format. Configure delimiters, preview data, and process files offline with full data privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

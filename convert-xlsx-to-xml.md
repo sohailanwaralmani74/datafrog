@@ -152,13 +152,13 @@ keywords: "convert xlsx to xml online free, excel to xml converter, xlsx to xml 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/convert-xlsx-to-xml#webapp",
     "name": "XLSX to XML Converter Online",
     "url": "https://datafrog.tools/convert-xlsx-to-xml",
     "description": "A free, browser-based tool that converts Excel files (XLSX) into structured XML data. Process spreadsheets offline with customizable element names and full data privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

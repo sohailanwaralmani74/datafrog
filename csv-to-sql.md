@@ -154,13 +154,13 @@ keywords: "convert csv to sql online free, csv to sql insert, csv to mysql, csv 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/csv-to-sql#webapp",
     "name": "CSV to SQL Converter Online",
     "url": "https://datafrog.tools/csv-to-sql",
     "description": "A free, browser-based tool that converts CSV files into production-ready SQL INSERT statements. Configure delimiters, headers, and table settings with all processing happening offline for full data security.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

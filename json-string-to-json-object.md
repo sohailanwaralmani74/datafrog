@@ -207,13 +207,13 @@ keywords: "json string to json object, convert string to json, parse json string
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/json-string-to-json-object#webapp",
     "name": "JSON String to JSON Object Converter Online",
     "url": "https://datafrog.tools/json-string-to-json-object",
     "description": "A free, browser-based tool to instantly parse, validate, and format JSON strings into structured JSON objects. All processing happens offline in your browser for maximum data security.",
     "applicationCategory": "DeveloperTool",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

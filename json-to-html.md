@@ -168,13 +168,13 @@ keywords: "json to html online free, convert json to html table, json to html co
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/json-to-html#webapp",
     "name": "JSON to HTML Converter Online",
     "url": "https://datafrog.tools/json-to-html",
     "description": "A free, browser-based tool to instantly convert JSON data into structured HTML tables or formatted code. All processing happens offline in your browser for maximum data security and privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

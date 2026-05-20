@@ -148,13 +148,13 @@ keywords: "qif to excel online free, convert qif to xlsx, qif to xls converter, 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/qif-to-excel#webapp",
     "name": "QIF to Excel Converter - Free QIF to XLSX/XLS Converter",
     "url": "https://datafrog.tools/qif-to-excel",
     "description": "A free, browser-based tool that converts Quicken Interchange Format (QIF) files into Excel spreadsheets. Securely process financial transaction data from banks and accounting software offline.",
     "applicationCategory": "FinanceConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

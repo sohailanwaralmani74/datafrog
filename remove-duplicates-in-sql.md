@@ -307,7 +307,7 @@ keywords: "sql duplicate remover, remove duplicates from sql table, find duplica
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "webapplication",
   "name": "Remove SQL Duplicates Tool",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "All (Browser-based)",

@@ -167,13 +167,13 @@ keywords: "json to yaml online free, convert json to yaml, json to yaml converte
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/json-to-yaml#webapp",
     "name": "JSON to YAML Converter Online – Free & Private",
     "url": "https://datafrog.tools/json-to-yaml",
     "description": "A free, browser-based tool to instantly convert JSON data into properly formatted YAML. All processing happens offline in your browser, keeping your data secure and private. Perfect for Kubernetes, Docker, Ansible, and DevOps configs.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

@@ -221,13 +221,13 @@ background-color: #66fcf1;
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/json-to-excel#webapp",
     "name": "JSON to Excel Converter Online",
     "url": "https://datafrog.tools/json-to-excel",
     "description": "Instantly convert JSON data into Excel spreadsheets (XLSX or XLS) for free. This browser-based tool processes data offline, keeping your information secure and private.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

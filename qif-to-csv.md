@@ -145,13 +145,13 @@ keywords: "qif to csv online free, convert qif to csv, qif to csv converter, qui
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/qif-to-csv#webapp",
     "name": "QIF to CSV Converter - Free QIF to CSV Converter Online",
     "url": "https://datafrog.tools/qif-to-csv",
     "description": "A free, browser-based tool that converts Quicken Interchange Format (QIF) files into CSV format. Securely process and export financial transaction data from banks and accounting software offline.",
     "applicationCategory": "FinanceConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

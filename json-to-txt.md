@@ -180,7 +180,7 @@ keywords: "json to txt online free, convert json to text, json to plain text, fl
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "webapplication",
   "name": "JSON to Text Converter",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "All",

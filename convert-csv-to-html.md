@@ -155,13 +155,13 @@ keywords: "convert csv to html table online, csv to html free, csv to html table
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/convert-csv-to-html#webapp",
     "name": "Convert CSV to HTML - Online CSV to HTML Table Converter",
     "url": "https://datafrog.tools/convert-csv-to-html",
     "description": "A free, browser-based tool that converts CSV files into clean HTML tables or lists. Customize styling and format with all processing happening offline for full data privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

@@ -222,13 +222,13 @@ keywords: "json to dart converter online, json to dart model generator, json to 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/json-to-dart#webapp",
     "name": "JSON to Dart Converter Online",
     "url": "https://datafrog.tools/json-to-dart",
     "description": "A free, browser-based tool that instantly transforms JSON objects into fully structured Dart classes with fromJson/toJson methods, ready for Flutter or Dart projects. All conversion happens securely offline in your browser.",
     "applicationCategory": "DeveloperTool",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

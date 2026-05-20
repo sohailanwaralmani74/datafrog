@@ -147,13 +147,13 @@ keywords: "convert excel to txt online free, excel to text converter, xlsx to tx
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/excel-to-txt#webapp",
     "name": "Excel to TXT (Plain Text) Converter Online",
     "url": "https://datafrog.tools/excel-to-txt",
     "description": "A free, browser-based tool that converts Excel files (XLSX, XLS) into plain TXT format with customizable delimiters. All processing happens offline for full data privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

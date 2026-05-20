@@ -147,13 +147,13 @@ keywords: "qif to qbo online free, convert qif to qbo, quicken to quickbooks onl
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/qif-to-qbo#webapp",
     "name": "QIF to QBO Converter - Free QIF to QuickBooks Online Converter",
     "url": "https://datafrog.tools/qif-to-qbo",
     "description": "A free, browser-based tool that converts Quicken Interchange Format (QIF) files into QuickBooks Online (QBO) format. Securely migrate financial data from Quicken or other software to QuickBooks, with all processing done offline.",
     "applicationCategory": "FinanceConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

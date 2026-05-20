@@ -267,7 +267,7 @@ INSERT INTO employees VALUES (102, 'Ben', 'Developer');</code></pre>
       ]
     },
     {
-      "@type": "SoftwareApplication",
+      "@type": "webapplication",
       "@id": "https://datafrog.tools/sql-to-xml#software",
       "name": "SQL to XML Converter",
       "applicationCategory": "DeveloperApplication",

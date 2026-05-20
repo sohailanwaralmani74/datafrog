@@ -257,13 +257,13 @@ p{
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/pdf-to-powerpoint#webapp",
     "name": "PDF to PowerPoint Converter – Free, Fast & High-Quality",
     "url": "https://datafrog.tools/pdf-to-powerpoint",
     "description": "A free, browser-based tool that converts PDF files into PowerPoint (PPTX) presentations instantly. It preserves the original layout, graphics, and formatting as high-resolution slides, with all processing happening securely offline in your browser.",
     "applicationCategory": "FileFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

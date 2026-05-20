@@ -142,13 +142,13 @@ keywords: "xlsx to pdf online free, convert excel to pdf, xlsx to pdf converter,
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/xlsx-to-pdf#webapp",
     "name": "Excel to PDF Converter Online",
     "url": "https://datafrog.tools/xlsx-to-pdf",
     "description": "A free, browser-based tool that converts Excel files (XLSX, XLS) to professional PDF documents. Customize layout and formatting with all processing happening offline for complete data security.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

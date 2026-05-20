@@ -156,13 +156,13 @@ keywords: "convert csv to excel online, csv to xlsx free, csv to xls converter, 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/convert-csv-to-excel#webapp",
     "name": "Convert CSV to Excel - Online CSV to XLSX/XLS Converter",
     "url": "https://datafrog.tools/convert-csv-to-excel",
     "description": "A free, browser-based tool that converts CSV files into Excel spreadsheets (XLSX or XLS). Process your data offline with customizable options, preserving structure and formatting.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

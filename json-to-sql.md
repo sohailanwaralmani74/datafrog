@@ -172,13 +172,13 @@ keywords: "json to sql online free, convert json to sql insert, json to mysql, j
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/json-to-sql#webapp",
     "name": "JSON to SQL Converter Online",
     "url": "https://datafrog.tools/json-to-sql",
     "description": "A free, browser-based tool to instantly convert JSON data into SQL queries (INSERT, CREATE TABLE). All processing happens offline in your browser for maximum data security.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

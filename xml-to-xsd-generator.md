@@ -157,13 +157,13 @@ keywords: "xml to xsd generator online, xml to xsd converter free, generate xsd 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/xml-to-xsd-generator#webapp",
     "name": "XML to XSD Generator - Online XML Schema Generator",
     "url": "https://datafrog.tools/xml-to-xsd-generator",
     "description": "A free, browser-based tool that automatically generates XML Schema Definition (XSD) from any XML document. Create validation rules, define data types, and handle complex structures offline with full data privacy.",
     "applicationCategory": "DeveloperTool",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

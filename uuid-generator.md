@@ -150,13 +150,13 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/uuid-generator#webapp",
     "name": "UUID Generator - Online UUID, GUID, KSUID, NanoID, ULID, CUID Generator",
     "url": "https://datafrog.tools/uuid-generator",
     "description": "A free, browser-based tool to generate cryptographically secure UUIDs, GUIDs, KSUIDs, NanoIDs, ULIDs, CUIDs, and CUID2. Bulk generate up to 1000 IDs, export to CSV, Excel, JSON, SQL, or XML. All processing happens offline in your browser.",
     "applicationCategory": "DeveloperTool",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

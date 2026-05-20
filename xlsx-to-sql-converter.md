@@ -148,13 +148,13 @@ keywords: "xlsx to sql online free, convert excel to sql insert, xlsx to sql con
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/xlsx-to-sql-converter#webapp",
     "name": "XLSX to SQL Converter - Production Ready SQL Generator",
     "url": "https://datafrog.tools/xlsx-to-sql-converter",
     "description": "A free, browser-based tool that converts Excel files (XLSX, XLS) into production-ready SQL INSERT statements. Edit data in a preview table and generate code instantly, with all processing happening offline for full security.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

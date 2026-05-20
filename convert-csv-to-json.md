@@ -154,13 +154,13 @@ keywords: "convert csv to json online, csv to json free, csv to json converter, 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/convert-csv-to-json#webapp",
     "name": "Convert CSV to JSON - Online CSV to JSON Converter",
     "url": "https://datafrog.tools/convert-csv-to-json",
     "description": "A free, browser-based tool that converts CSV files into structured JSON data. Handle nested objects, arrays, and custom parsing with all processing happening offline for full data privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

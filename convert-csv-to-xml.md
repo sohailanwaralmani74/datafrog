@@ -150,13 +150,13 @@ keywords: "convert csv to xml online free, csv to xml converter, csv to xml file
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/convert-csv-to-xml#webapp",
     "name": "Convert CSV to XML - Online CSV to XML Converter",
     "url": "https://datafrog.tools/convert-csv-to-xml",
     "description": "A free, browser-based tool that converts CSV files into well-formed XML data. Customize root and element names, handle nested structures, and process files offline with full data privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

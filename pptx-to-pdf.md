@@ -255,13 +255,13 @@ p{
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/pptx-to-pdf#webapp",
     "name": "PPTX to PDF Converter – Free, Browser-Based Converter",
     "url": "https://datafrog.tools/pptx-to-pdf",
     "description": "A free, browser-based tool that converts PowerPoint presentations (PPTX) into PDF documents instantly. It preserves slide layouts, fonts, and graphics with high fidelity, with all processing done securely offline in your browser.",
     "applicationCategory": "FileFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

@@ -307,7 +307,7 @@ keywords: "csv duplicate remove, csv find duplicates, eliminate duplicate csv, e
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "webapplication",
   "name": "Remove CSV Duplicates Tool",
   "applicationCategory": "SpreadsheetApplication",
   "operatingSystem": "All (Browser-based)",

@@ -321,7 +321,7 @@ keywords: "excel duplicate remove, excel find duplicates, eliminate duplicate ex
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "webapplication",
   "name": "Remove Excel Duplicates Tool",
   "applicationCategory": "SpreadsheetApplication",
   "operatingSystem": "All (Browser-based)",

@@ -153,13 +153,13 @@ keywords: "json to pdf online free, convert json to pdf, json to pdf generator, 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/json-to-pdf#webapp",
     "name": "JSON to PDF Converter Online",
     "url": "https://datafrog.tools/json-to-pdf",
     "description": "A free, browser-based tool to instantly convert JSON data into PDF documents. All processing happens offline in your browser for maximum data security and privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

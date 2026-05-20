@@ -279,13 +279,13 @@ p{
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/json-to-json-schema#webapp",
     "name": "JSON to JSON Schema Converter Online",
     "url": "https://datafrog.tools/json-to-json-schema",
     "description": "A free, browser-based tool that instantly generates a valid JSON Schema Draft-07 from any JSON input. Ideal for API validation, documentation, and defining data structure rules, all processed securely offline.",
     "applicationCategory": "DeveloperTool",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

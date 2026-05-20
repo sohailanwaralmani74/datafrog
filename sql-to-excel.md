@@ -229,7 +229,7 @@ INSERT INTO employees VALUES (102, 'Ben', 'Developer');</code></pre>
       ]
     },
     {
-      "@type": "SoftwareApplication",
+      "@type": "webapplication",
       "@id": "https://datafrog.tools/sql-to-excel#software",
       "name": "SQL to Excel Converter",
       "applicationCategory": "BusinessApplication",

@@ -149,13 +149,13 @@ keywords: "convert csv to pdf online free, csv to pdf converter no upload, csv t
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/convert-csv-to-pdf#webapp",
     "name": "Convert CSV to PDF - Online CSV to PDF Converter",
     "url": "https://datafrog.tools/convert-csv-to-pdf",
     "description": "A free, browser-based tool that converts CSV files into formatted PDF documents. Customize layout, templates, and design with all processing happening offline for full data security.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

@@ -150,13 +150,13 @@ keywords: "convert excel to html online free, excel to html table converter, xls
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/excel-to-html#webapp",
     "name": "Excel to HTML Converter Online",
     "url": "https://datafrog.tools/excel-to-html",
     "description": "A free, browser-based tool that converts Excel files (XLSX, XLS) into clean HTML tables or formatted web content. Process your data offline with full privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

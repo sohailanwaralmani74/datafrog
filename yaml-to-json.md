@@ -166,13 +166,13 @@ keywords: "yaml to json online free, convert yaml to json, yaml to json converte
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/yaml-to-json#webapp",
     "name": "YAML to JSON Converter - Online Bidirectional YAML/JSON Converter",
     "url": "https://datafrog.tools/yaml-to-json",
     "description": "A free, browser-based tool for bidirectional conversion between YAML and JSON formats. Validate, format, and transform your data structures offline with full privacy and security.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

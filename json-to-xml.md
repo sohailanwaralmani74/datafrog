@@ -164,13 +164,13 @@ keywords: "json to xml online free, convert json to xml, json to xml converter, 
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/json-to-xml#webapp",
     "name": "JSON to XML Converter Online",
     "url": "https://datafrog.tools/json-to-xml",
     "description": "A free, browser-based tool to instantly convert JSON data into well-formed XML. All processing happens offline in your browser for maximum data security and privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

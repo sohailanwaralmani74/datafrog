@@ -153,13 +153,13 @@ keywords: "convert csv to txt online free, csv to plain text converter, csv to t
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/convert-csv-to-txt#webapp",
     "name": "Convert CSV to TXT - Online CSV to Plain Text Converter",
     "url": "https://datafrog.tools/convert-csv-to-txt",
     "description": "A free, browser-based tool that converts CSV files into plain TXT format. Customize delimiters, handle headers, and process files offline with full data privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",

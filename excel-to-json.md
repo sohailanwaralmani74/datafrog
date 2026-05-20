@@ -148,13 +148,13 @@ keywords: "convert excel to json online free, excel to json converter, xlsx to j
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "webapplication",
     "@id": "https://datafrog.tools/excel-to-json#webapp",
     "name": "Excel to JSON Converter Online",
     "url": "https://datafrog.tools/excel-to-json",
     "description": "A free, browser-based tool that converts Excel files (XLSX, XLS) to JSON format instantly. Process your spreadsheets offline with full data privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any",
+    "operatingSystem": "Any Broswer",
     "offers": {
       "@type": "Offer",
       "price": "0",
