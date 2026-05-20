@@ -46,7 +46,7 @@ keywords: "qif to excel online free, convert qif to xlsx, qif to xls converter, 
               <button class="csvx-btn" id="exportXlsxBtn" title="Export as .xlsx">💾 Download .xlsx</button>
             </div>
           </div>
-          <div id="excelPreview" class="csvx-preview" contenteditable></div>
+          <div id="excelPreview" class="csvx-preview"></div>
         </div>
       </div>
     </div>      

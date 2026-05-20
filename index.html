@@ -225,7 +225,14 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     { name: "PPTX to PDF", url: "/pptx-to-pdf", category: "PDF", description: "Convert PowerPoint presentations to high‑quality PDF documents." },
     { name: "PDF to PPTX", url: "/pdf-to-powerpoint", category: "PDF", description: "Convert PDF pages to editable PPTX slides." },
     // Other Utilities
-    { name: "UUID & GUID Generator", url: "/uuid-generator", category: "Utility", description: "Generate UUID v4, v7, NanoID, ULID, and more – up to 1000 IDs." },
+    { name: "UUID & GUID Generator", url: "/uuid-generator", category: "Generators", description: "Generate UUID v4, v7, NanoID, ULID, and more – up to 1000 IDs." },
+    // Remove duplicates
+    { name: "Remove Excel Duplicates", url: "/remove-excel-duplicates", category: "Deduplicate", description: "Remove duplicate rows and values from Excel spreadsheets quickly and easily." },
+    { name: "Remove Duplicates in SQL", url: "/remove-duplicates-in-sql", category: "Deduplicate", description: "Learn how to find and remove duplicate records in SQL databases using practical queries." },
+    { name: "Remove CSV Duplicates", url: "/remove-csv-duplicates", category: "Deduplicate", description: "Remove duplicate rows and values from CSV files quickly and easily." },
+    { name: "SQL to XML", url: "/sql-to-xml", category: "SQL", description: "Convert SQL INSERT statements to XML (elements, attributes, or flat)." }, 
+    { name: "SQL to Excel", url: "/sql-to-excel", category: "SQL", description: "Transform SQL INSERT statements to multi‑sheet Excel files." }, 
+    { name: "SQL to CSV", url: "/sql-to-csv", category: "SQL", description: "Convert SQL INSERT statements to CSV format." },
   ];
 
   const categories = [...new Set(toolsData.map(t => t.category))].sort();

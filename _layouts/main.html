@@ -22,7 +22,7 @@ layout: default
       <span class="nav-trigger" data-popup="converterTools" id="dataConverters" aria-label="Data Converters">
         Data Converters
       </span> 
-       | 
+       <label style="color: #ddd;">|</label>
        <span class="nav-trigger" data-popup="deduplicateTools" id="deduplicate" aria-label="Remove duplicate data">
         Deduplicate
       </span> 
@@ -201,6 +201,17 @@ layout: default
 
       </div>
 
+      <div class="popup-column">
+
+        <h3>SQL Converters</h3>
+         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+        <a href="/sql-to-csv">SQL to CSV</a>
+        <a href="/sql-to-excel">SQL to Excel</a>
+        <a href="/sql-to-xml">SQL to XML</a>
+        </div>
+
+      </div>
+
     </div>
     <div class="popup-grid" id="deduplicateTools">
 
@@ -210,6 +221,7 @@ layout: default
          <div style="display: grid;  grid-template-columns: repeat(3, 1fr);">
         <a href="/remove-excel-duplicates">Remove Excel Duplicates</a>
         <a href="/remove-duplicates-in-sql">Remove Duplicates in SQL</a>
+        <a href="/remove-csv-duplicates">Remove CSV Duplicates</a>
         </div>
 
       </div>

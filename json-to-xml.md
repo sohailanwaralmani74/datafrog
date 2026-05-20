@@ -41,7 +41,7 @@ keywords: "json to xml online free, convert json to xml, json to xml converter, 
 
 <!-- Output Section -->
 <div class="jsonx-container">
-  <div class="jsonx-panel" id="outputPanel">
+  <div class="jsonx-panel" id="outputPanel" >
     <div class="jsonx-header" style="justify-content: space-between; align-items: center;">
       <div>
         <div class="jsonx-title">XML Output – Copy or Download</div>

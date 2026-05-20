@@ -16,7 +16,7 @@ keywords: "convert csv to xml online free, csv to xml converter, csv to xml file
     <div class="panel-header">
       <div>
         <div class="title">CSV to XML Converter – Hierarchical XML Output</div>
-        <div class="small">Upload any CSV file – preview data – convert to clean, structured XML – copy or download .xml – all in your browser.</div>
+        <div class="small">Upload any CSV file – preview data – convert to clean XML – copy or download .xml.</div>
       </div>
       <div class="controls">
         <label class="csvx-btn" id="uploadBtnXml" title="Upload CSV">

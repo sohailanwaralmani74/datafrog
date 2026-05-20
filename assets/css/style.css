@@ -1355,13 +1355,15 @@ button:hover {
   color: #fff;
 }
 .csvx-container {
-  min-width: 90%;
+  min-width: 98%;
   max-width: 1200px;
   margin: 0 auto;
   color: #e6eef6;
   margin-top: 1rem;
   overflow: hidden;
   max-height: 28rem;
+  min-height: 28rem;
+   border-radius: 12px;
 }
 .csvx-panel {
   background: #181a1c;
@@ -1372,7 +1374,8 @@ button:hover {
   position: relative;
   overflow: auto;
   max-width: 100%;
-  max-height: 25rem;
+  max-height: 28rem;
+  min-height: 28rem;
 }
 .panel-header {
   display: flex;
@@ -1394,20 +1397,7 @@ button:hover {
   display: flex;
 }
 .csvx-btn {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.03),
-    rgba(255, 255, 255, 0.01)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  color: #9aa3ad;
-  padding: 8px 12px;
-  border-radius: 8px;
-  display: inline-flex;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.14s ease;
-  user-select: none;
+  background: #1e293b; color: white; border: 1px solid #334155; border-radius: 8px; padding: 5px 8px; font-size: 12px;
 }
 .csvx-btn:hover {
   transform: translateY(-2px);
@@ -1430,8 +1420,8 @@ button:hover {
   background: rgba(255, 255, 255, 0.02);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.02);
-  max-height: 19rem;
-  min-height: 19rem;
+  max-height: 22rem;
+  min-height: 22rem;
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
@@ -1683,7 +1673,7 @@ table.sheet tbody tr:hover {
 }
 
 .csvx-container1 {
-  min-height: 520px;
+  min-height: 560px;
 }
 
 .dfx-controls-bar{
@@ -1918,7 +1908,6 @@ scrollbar-width: thin;
   scrollbar-color:rgba(255,255,255,.08) transparent;
 
 }
-
 .sqlfx-editor::placeholder{
   color:#6b7280;
 }
