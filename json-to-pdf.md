@@ -11,7 +11,17 @@ keywords: "json to pdf online free, convert json to pdf, json to pdf generator, 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.26/jspdf.plugin.autotable.min.js"></script>
 
-<section>  <h1>Convert JSON to PDF – Generate Printable PDF Reports Instantly</h1> </section>
+<section>  <h1>Convert JSON to PDF Online – Generate Printable PDF Reports Instantly</h1> 
+<p id="intro" style="font-size:14px;color:#333;">
+  <strong>PDF (Portable Document Format)</strong> is the universal standard for sharing 
+  documents that must look identical on every device — no software dependencies, no 
+  formatting shifts, no editing by recipients. When your data lives in JSON — whether 
+  from an API, a database export, or a configuration file — converting it to PDF creates 
+  a professional, printable, shareable document instantly. This tool transforms any JSON 
+  array or object into a formatted PDF report directly in your browser, with no upload 
+  and no signup required.
+</p>
+</section>
 
 <div class="jsonx-container">
   <!-- Top Panel -->
@@ -55,11 +65,9 @@ keywords: "json to pdf online free, convert json to pdf, json to pdf generator, 
 <div style="display: flex; flex-direction: row">
 <div style="width: 20%"></div>
 <div style="width: 58%">
+<article>
 <section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
-  <p id="intro" style="font-size:16px;color:#333;">
-    Convert JSON to PDF online in seconds – completely free, no signup. This browser‑based tool transforms any JSON array or object into a professional, printable PDF document. Perfect for generating reports from API data, creating invoices, or sharing structured data in a universal format – all without uploading your files to any server.
-  </p>
 
   <h2 id="when-to-use" style="margin-top:30px;">Why convert JSON to PDF?</h2>
   <ul style="padding-left:20px;">
@@ -143,6 +151,16 @@ keywords: "json to pdf online free, convert json to pdf, json to pdf generator, 
   <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks. DataFrog believes essential tools should be accessible to everyone.</p>
 
 </section>
+<section aria-label="Related tools">
+  <h2>Related Tools</h2>
+  <ul>
+    <li><a href="/convert-csv-to-pdf">CSV to PDF Converter</a> – convert CSV data into a PDF document</li>
+    <li><a href="/xlsx-to-pdf">Excel to PDF Converter</a> – export Excel spreadsheets as PDF files</li>
+    <li><a href="/json-to-html">JSON to HTML Converter</a> – generate a web-ready HTML table instead</li>
+    <li><a href="/json-to-csv">JSON to CSV Converter</a> – export JSON as an editable spreadsheet</li>
+  </ul>
+</section>
+</article>
 </div>
 <div style="width: 20%"></div>
 </div>
@@ -153,13 +171,13 @@ keywords: "json to pdf online free, convert json to pdf, json to pdf generator, 
 [
   {
     "@context": "https://schema.org",
-    "@type": "webapplication",
+    "@type": "WebApplication",
     "@id": "https://datafrog.tools/json-to-pdf#webapp",
     "name": "JSON to PDF Converter Online",
     "url": "https://datafrog.tools/json-to-pdf",
     "description": "A free, browser-based tool to instantly convert JSON data into PDF documents. All processing happens offline in your browser for maximum data security and privacy.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any Broswer",
+    "operatingSystem": "Any",
     "offers": {
       "@type": "Offer",
       "price": "0",

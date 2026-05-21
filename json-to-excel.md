@@ -4,7 +4,18 @@ title: "JSON to Excel Converter Online – Free XLSX / XLS Export | DataFrog"
 description: "Free online JSON to Excel converter. Convert JSON arrays or objects to Excel spreadsheets (XLSX / XLS) instantly. Browser‑based, no signup. Supports nested JSON as multi‑sheet workbooks."
 keywords: "json to excel online free, convert json to excel, json to xlsx, json to xls, nested json to excel, json to excel multiple sheets, browser based json to excel"
 ---
-<section> <h1>Convert JSON to Excel – Multi‑Sheet XLSX / XLS Exporter</h1> </section>
+<section> <h1>Convert JSON to Excel Online – Multi‑Sheet XLSX / XLS Exporter</h1> 
+  <p id="intro" style="font-size:13px;">
+    <strong>Excel (XLSX/XLS)</strong> is the world's most widely used spreadsheet format — 
+    supported by Microsoft Excel, Google Sheets, Apple Numbers, LibreOffice, and virtually 
+    every business intelligence tool. When your data lives in JSON — from an API response, 
+    a database export, or a nested configuration — converting it to Excel creates a 
+    professional, multi-sheet workbook ready for analysis, charting, and sharing. This tool 
+    uses the <strong>SheetJS</strong> library to convert any JSON structure into XLSX or XLS 
+    entirely in your browser, with nested objects and arrays automatically separated into 
+    distinct sheets.
+  </p>
+</section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.js"></script>
@@ -122,97 +133,155 @@ background-color: #66fcf1;
 <div style="width: 20%"></div>
 <div style="width: 58%">
 
-<section id="tool-content" style="max-width: 900px; margin: 40px auto; padding: 10px 20px; line-height: 1.7; font-family: Arial, sans-serif;">
+<article>
+<section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
-  <p id="intro" style="font-size: 16px; color: #333;">
-    Convert JSON to Excel online instantly – completely free, no signup. This browser‑based tool transforms any JSON array or object into a professional Excel workbook (.xlsx or .xls). Nested objects and arrays are automatically separated into multiple sheets, making complex hierarchical data easy to analyze in Excel. All processing happens locally – your data never leaves your device.
-  </p>
+  <section aria-labelledby="when-to-use">
+    <h2 id="when-to-use">Why convert JSON to Excel?</h2>
+    <ul>
+      <li>Turn API JSON responses into ready-to-use Excel reports for business stakeholders</li>
+      <li>Create multi-sheet workbooks from nested JSON data (e.g., orders + order items on separate tabs)</li>
+      <li>Prepare database exports for analysts who work in Excel rather than JSON tools</li>
+      <li>Migrate JSON data to Excel for charting, pivot tables, and further manipulation</li>
+      <li>Handle complex hierarchical JSON with automatic sheet separation — no manual splitting needed</li>
+    </ul>
+  </section>
 
-  <h2 id="when-to-use" style="margin-top: 30px;">Why convert JSON to Excel?</h2>
-  <ul style="padding-left: 20px;">
-    <li>Turn API JSON responses into ready‑to‑use Excel reports</li>
-    <li>Create multi‑sheet workbooks from nested JSON data (e.g., orders + order items)</li>
-    <li>Prepare database exports for business analysts and stakeholders</li>
-    <li>Migrate JSON data to Excel for further manipulation and charting</li>
-    <li>Handle complex hierarchical JSON with automatic sheet separation</li>
-  </ul>
+  <section aria-labelledby="conversion-example">
+    <h2 id="conversion-example">JSON to Excel conversion example</h2>
+    <p>
+      Nested JSON structures become separate sheets in the workbook, preserving 
+      parent-child relationships without losing data:
+    </p>
+    <h3>Input JSON</h3>
+    <pre><code>{
+  "order": { "id": 1001, "customer": "Alice", "total": 250.00 },
+  "items": [
+    { "product": "Laptop Stand", "qty": 1, "price": 150.00 },
+    { "product": "USB Hub",      "qty": 2, "price": 50.00 }
+  ]
+}</code></pre>
+    <h3>Output Excel workbook</h3>
+    <pre><code>Sheet 1 – order:
+id      | customer | total
+1001    | Alice    | 250.00
 
-  <h2 id="how-it-works" style="margin-top: 30px;">How to convert JSON to Excel – 3 simple steps</h2>
-  <ol style="padding-left: 20px;">
-    <li><strong>Paste or upload JSON</strong> – copy your JSON into the editor or click “Upload JSON File” to load a .json file.</li>
-    <li><strong>Validate and preview</strong> – the tool checks syntax and shows a collapsible tree view of your data.</li>
-    <li><strong>Convert and download</strong> – click “Convert to Excel”, then download as XLSX or XLS. Nested structures become separate sheets automatically.</li>
-  </ol>
+Sheet 2 – items:
+product      | qty | price
+Laptop Stand | 1   | 150.00
+USB Hub      | 2   | 50.00</code></pre>
+    <p>
+      Each nested key becomes a named sheet tab, making complex JSON immediately 
+      navigable in Excel without any manual reorganisation.
+    </p>
+  </section>
 
-  <h2 id="key-features" style="margin-top: 30px;">JSON to Excel converter – features you’ll love</h2>
-  <ul style="padding-left: 20px;">
-    <li>✅ <strong>100% browser‑based</strong> – no upload, no server, complete privacy</li>
-    <li>✅ <strong>Multi‑sheet Excel output</strong> – each nested object or array becomes its own sheet</li>
-    <li>✅ <strong>Supports both XLSX and XLS</strong> – modern and legacy Excel formats</li>
-    <li>✅ <strong>Live JSON preview</strong> – validate and inspect your data before conversion</li>
-    <li>✅ <strong>Automatic sheet naming</strong> – uses JSON keys to create readable sheet names</li>
-    <li>✅ <strong>Works offline</strong> after first load – no internet required</li>
-    <li>✅ <strong>Handles large JSON arrays</strong> – browser memory permitting</li>
-  </ul>
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to convert JSON to Excel – 3 simple steps</h2>
+    <ol>
+      <li><strong>Paste or upload JSON</strong> – copy your JSON into the editor or click "Upload JSON File" to load a .json file.</li>
+      <li><strong>Validate and preview</strong> – the tool checks syntax and shows a collapsible tree view of your data.</li>
+      <li><strong>Convert and download</strong> – click "Convert to Excel", then download as XLSX or XLS. Nested structures become separate sheets automatically.</li>
+    </ol>
+  </section>
 
-  <h2 id="what-makes-different" style="margin-top: 30px;">Why DataFrog’s JSON to Excel tool stands out</h2>
-  <ul style="padding-left: 20px;">
-    <li><strong>Privacy first</strong> – your JSON never leaves your device. Many converters upload your data – we don’t.</li>
-    <li><strong>Intelligent multi‑sheet generation</strong> – preserves parent‑child relationships by separating nested structures into distinct sheets with reference links.</li>
-    <li><strong>Real‑time sheet preview</strong> – view each sheet as a formatted HTML table before exporting.</li>
-    <li><strong>No signup, no limits</strong> – convert as many JSON files as you want, any size.</li>
-  </ul>
+  <section aria-labelledby="key-features">
+    <h2 id="key-features">JSON to Excel converter – features</h2>
+    <ul>
+      <li>✅ <strong>100% browser-based</strong> – no upload, no server, complete privacy</li>
+      <li>✅ <strong>Multi-sheet Excel output</strong> – each nested object or array becomes its own named sheet</li>
+      <li>✅ <strong>Supports both XLSX and XLS</strong> – modern and legacy Excel formats</li>
+      <li>✅ <strong>Live JSON preview</strong> – validate and inspect your data before conversion</li>
+      <li>✅ <strong>Automatic sheet naming</strong> – uses JSON keys to create readable, Excel-safe sheet names</li>
+      <li>✅ <strong>Real-time sheet preview</strong> – view each sheet as a formatted HTML table before exporting</li>
+      <li>✅ <strong>Works offline</strong> after first load – no internet required</li>
+      <li>✅ <strong>Handles large JSON arrays</strong> – browser memory permitting</li>
+    </ul>
+  </section>
 
-  <h2 id="supported-formats" style="margin-top: 30px;">Supported JSON structures</h2>
-  <ul style="padding-left: 20px;">
-    <li>JSON arrays of objects (<code>[{"id":1,"name":"John"}, ...]</code>)</li>
-    <li>Single JSON objects (converted to a single sheet)</li>
-    <li>Nested objects (e.g., <code>{"order": {...}, "items": [...]}</code> – creates multiple sheets)</li>
-    <li>Deeply nested arrays – each distinct sub‑array becomes its own sheet</li>
-    <li>Any valid JSON that represents tabular or hierarchical data</li>
-  </ul>
+  <section aria-labelledby="what-makes-different">
+    <h2 id="what-makes-different">Why DataFrog's JSON to Excel converter stands out</h2>
+    <ul>
+      <li><strong>Privacy first</strong> – your JSON never leaves your device. Many converters upload your data – we don't.</li>
+      <li><strong>Intelligent multi-sheet generation</strong> – preserves parent-child relationships by separating nested structures into distinct sheets using SheetJS.</li>
+      <li><strong>Real-time sheet preview</strong> – view each sheet as a formatted HTML table before exporting to confirm the output looks right.</li>
+      <li><strong>No signup, no limits</strong> – convert as many JSON files as you want, any size.</li>
+    </ul>
+  </section>
 
-  <h2 id="use-cases" style="margin-top: 30px;">Common use cases for JSON to Excel conversion</h2>
-  <ul style="padding-left: 20px;">
-    <li>📊 Business reporting – convert API payloads into Excel dashboards</li>
-    <li>🔄 Database migration – export JSON data to Excel for review before SQL import</li>
-    <li>📁 Data analysis – turn nested JSON logs into structured spreadsheets</li>
-    <li>📤 Sharing data – give non‑technical teams Excel files from JSON sources</li>
-    <li>🧪 Testing – generate Excel fixtures from JSON test data</li>
-  </ul>
+  <section aria-labelledby="supported-formats">
+    <h2 id="supported-formats">Supported JSON structures</h2>
+    <ul>
+      <li>JSON arrays of objects (<code>[{"id":1,"name":"John"}, ...]</code>) — most common API format</li>
+      <li>Single JSON objects — converted to a single sheet</li>
+      <li>Nested objects (e.g., <code>{"order": {...}, "items": [...]}</code>) — creates multiple named sheets</li>
+      <li>Deeply nested arrays — each distinct sub-array becomes its own sheet</li>
+      <li>Any valid JSON that represents tabular or hierarchical data</li>
+    </ul>
+  </section>
 
-  <h2 id="privacy-security" style="margin-top: 30px;">Privacy & Security</h2>
-  <ul style="padding-left: 20px;">
-    <li>🔒 All processing happens locally in your browser</li>
-    <li>🚫 No file upload – your data never touches our server</li>
-    <li>🕵️ No tracking, no logs, no third‑party scripts</li>
-    <li>💼 Safe for sensitive data (financial, personal, proprietary)</li>
-  </ul>
+  <section aria-labelledby="use-cases">
+    <h2 id="use-cases">Common use cases for JSON to Excel conversion</h2>
+    <ul>
+      <li>📊 <strong>Business reporting</strong> – convert API payloads into Excel dashboards for stakeholders</li>
+      <li>🔄 <strong>Database migration</strong> – export JSON data to Excel for review before SQL import</li>
+      <li>📁 <strong>Data analysis</strong> – turn nested JSON logs into structured, filterable spreadsheets</li>
+      <li>📤 <strong>Data sharing</strong> – give non-technical teams Excel files from JSON API sources</li>
+      <li>🧪 <strong>Testing</strong> – generate Excel fixtures from JSON test data or API mocks</li>
+    </ul>
+  </section>
 
-  <h2 id="faq" style="margin-top: 30px;">Frequently asked questions (JSON to Excel)</h2>
+  <section aria-labelledby="privacy-security">
+    <h2 id="privacy-security">Privacy & Security</h2>
+    <ul>
+      <li>🔒 All processing happens locally in your browser using SheetJS — no server involved</li>
+      <li>🚫 No file upload — your JSON never leaves your device</li>
+      <li>🕵️ No tracking, no logs, no third-party analytics scripts</li>
+      <li>💼 Safe for sensitive data including financial records, personal information, and proprietary datasets</li>
+    </ul>
+  </section>
 
-  <h3 id="faq-1">Does this tool support multiple sheets in Excel?</h3>
-  <p>Yes. If your JSON contains nested objects or arrays, the tool automatically creates separate sheets for each level. For example, an object with keys <code>order</code> and <code>items</code> will generate two sheets: "order" and "items".</p>
+  <section aria-labelledby="faq">
+    <h2 id="faq">Frequently asked questions (JSON to Excel)</h2>
 
-  <h3 id="faq-2">Is my JSON data uploaded to a server?</h3>
-  <p><strong>No.</strong> All processing happens locally in your browser using the SheetJS library. Your data never leaves your computer – it even works offline.</p>
+    <h3 id="faq-1">Does this tool support multiple sheets in Excel?</h3>
+    <p>Yes. If your JSON contains nested objects or arrays, the tool automatically creates separate sheets for each level. For example, a JSON object with keys <code>order</code> and <code>items</code> generates two sheets — "order" and "items" — in a single workbook.</p>
 
-  <h3 id="faq-3">Can it handle large JSON files (e.g., 100,000 rows)?</h3>
-  <p>Yes – performance depends on your device’s memory and browser engine. The tool is optimized for most production‑size JSON arrays (tens of thousands of rows). Extremely large files may cause lag, but typical API responses convert instantly.</p>
+    <h3 id="faq-2">Is my JSON data uploaded to a server?</h3>
+    <p><strong>No.</strong> All processing happens locally in your browser using the SheetJS library. Your data never leaves your computer and the tool continues to work offline after the first load.</p>
 
-  <h3 id="faq-4">What Excel formats can I download?</h3>
-  <p>You can export as <strong>.xlsx</strong> (Excel 2007 and later – recommended) or legacy <strong>.xls</strong> (Excel 97-2003) for compatibility with older software.</p>
+    <h3 id="faq-3">Can it handle large JSON files (e.g., 100,000 rows)?</h3>
+    <p>Performance depends on your device's memory and browser engine. The tool handles most production-size JSON arrays — tens of thousands of rows — without issue. Extremely large files may cause lag, but typical API responses convert instantly.</p>
 
-  <h3 id="faq-5">How are nested arrays and objects represented in Excel?</h3>
-  <p>Each distinct nested object or array becomes a separate sheet. The parent sheet includes a column with the sheet name where child details can be found, making relationships clear.</p>
+    <h3 id="faq-4">What Excel formats can I download?</h3>
+    <p>You can export as <strong>.xlsx</strong> (Excel 2007 and later — recommended for all modern use) or <strong>.xls</strong> (Excel 97-2003) for compatibility with older software or systems that don't accept XLSX.</p>
 
-  <h3 id="faq-6">Can I preview the Excel sheets before downloading?</h3>
-  <p>Yes. After conversion, the tool displays interactive sheet tabs below the output panel. Click any tab to see a formatted HTML preview of that sheet’s content.</p>
+    <h3 id="faq-5">How are nested arrays and objects represented in Excel?</h3>
+    <p>Each distinct nested object or array becomes a separate named sheet in the workbook. Sheet names are taken from the JSON keys and automatically sanitised to meet Excel's naming requirements — no duplicates, no invalid characters.</p>
 
-  <h3 id="faq-7">Is this JSON to Excel converter really free?</h3>
-  <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks. DataFrog believes essential tools should be accessible to everyone.</p>
+    <h3 id="faq-6">Can I preview the Excel sheets before downloading?</h3>
+    <p>Yes. After conversion, the tool displays interactive sheet tabs below the output panel. Click any tab to see a formatted HTML table preview of that sheet's content before committing to the download.</p>
+
+    <h3 id="faq-7">What happens if my JSON is invalid?</h3>
+    <p>The tool displays a clear error message highlighting the issue and disables the Convert button until the JSON is corrected. The live preview also stops updating so you can identify the problem easily.</p>
+
+    <h3 id="faq-8">Is this JSON to Excel converter really free?</h3>
+    <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks on the output. DataFrog believes essential data tools should be accessible to everyone.</p>
+
+  </section>
+
+  <section aria-labelledby="related-tools">
+    <h2 id="related-tools">Related Tools</h2>
+    <ul>
+      <li><a href="/excel-to-json">Excel to JSON Converter</a> – convert Excel spreadsheets back into JSON format</li>
+      <li><a href="/json-to-csv">JSON to CSV Converter</a> – export JSON as a flat CSV file instead</li>
+      <li><a href="/convert-csv-to-excel">CSV to Excel Converter</a> – convert a CSV file directly to Excel XLSX</li>
+      <li><a href="/remove-excel-duplicates">Remove Excel Duplicates</a> – clean duplicate rows from your Excel output</li>
+    </ul>
+  </section>
 
 </section>
+</article>
   
 </div>
 <div style="width: 20%"></div>
@@ -221,30 +290,36 @@ background-color: #66fcf1;
 [
   {
     "@context": "https://schema.org",
-    "@type": "webapplication",
+    "@type": "WebApplication",
     "@id": "https://datafrog.tools/json-to-excel#webapp",
     "name": "JSON to Excel Converter Online",
     "url": "https://datafrog.tools/json-to-excel",
-    "description": "Instantly convert JSON data into Excel spreadsheets (XLSX or XLS) for free. This browser-based tool processes data offline, keeping your information secure and private.",
-    "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any Broswer",
+    "description": "Free browser-based tool to convert JSON arrays or objects into Excel spreadsheets (XLSX or XLS). Uses SheetJS to process data entirely client-side — nested objects and arrays become separate sheets automatically. No upload, no signup required.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
     "featureList": [
-      "Fast and secure client-side conversion (no data uploaded to servers)",
-      "Handles nested JSON arrays and objects, creating separate Excel sheets",
-      "Dynamic sheet naming to avoid Excel limitations",
-      "Real-time JSON preview with a collapsible tree view",
-      "Export options for both XLSX and XLS formats",
-      "Robust error handling for invalid JSON input"
+      "Multi-sheet Excel workbook generation from nested JSON",
+      "Supports XLSX and XLS export formats",
+      "Automatic Excel-safe sheet naming from JSON keys",
+      "Real-time JSON preview with collapsible tree view",
+      "Interactive sheet preview before download",
+      "Client-side processing using SheetJS — no data uploaded",
+      "Works offline after first load"
     ],
     "softwareRequirements": "A modern web browser",
     "softwareVersion": "1.0",
     "datePublished": "2025-10-01",
-    "dateModified": "2025-12-16"
+    "dateModified": "2026-05-21",
+    "provider": {
+      "@type": "Organization",
+      "name": "DataFrog",
+      "url": "https://datafrog.tools"
+    }
   },
   {
     "@context": "https://schema.org",
@@ -253,50 +328,50 @@ background-color: #66fcf1;
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Is this JSON to Excel converter free?",
+        "name": "Does this tool support multiple sheets in Excel?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, it is completely free and works entirely in your browser."
+          "text": "Yes. If your JSON contains nested objects or arrays, the tool automatically creates separate sheets for each level. For example, a JSON object with keys 'order' and 'items' generates two sheets in a single workbook."
         }
       },
       {
         "@type": "Question",
-        "name": "Does conversion happen online or offline?",
+        "name": "Is my JSON data uploaded to a server?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "All processing is performed client-side. No data leaves your device."
+          "text": "No. All processing happens locally in your browser using the SheetJS library. Your data never leaves your computer and the tool works offline after the first load."
         }
       },
       {
         "@type": "Question",
-        "name": "Can the tool handle nested JSON?",
+        "name": "Can it handle large JSON files?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, nested arrays and objects are converted into separate sheets while maintaining relationships."
+          "text": "Performance depends on your device's memory and browser engine. The tool handles most production-size JSON arrays — tens of thousands of rows — without issue. Extremely large files may cause lag, but typical API responses convert instantly."
         }
       },
       {
         "@type": "Question",
-        "name": "Which Excel formats are supported?",
+        "name": "What Excel formats can I download?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You can export XLSX or XLS files depending on your preference."
+          "text": "You can export as .xlsx (Excel 2007 and later, recommended) or .xls (Excel 97-2003) for compatibility with older software or systems that do not accept XLSX."
         }
       },
       {
         "@type": "Question",
-        "name": "Can I preview my JSON before conversion?",
+        "name": "How are nested arrays and objects represented in Excel?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, the collapsible tree preview shows the full JSON structure including nested objects."
+          "text": "Each distinct nested object or array becomes a separate named sheet in the workbook. Sheet names are taken from the JSON keys and automatically sanitised to meet Excel's naming requirements — no duplicates, no invalid characters."
         }
       },
       {
         "@type": "Question",
-        "name": "Is my data secure?",
+        "name": "Can I preview the Excel sheets before downloading?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, all conversions happen locally in your browser. No data is uploaded to any server."
+          "text": "Yes. After conversion, the tool displays interactive sheet tabs below the output panel. Click any tab to see a formatted HTML table preview of that sheet's content before downloading."
         }
       },
       {
@@ -304,55 +379,15 @@ background-color: #66fcf1;
         "name": "What happens if my JSON is invalid?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The tool displays a clear error message and disables conversion until corrected."
+          "text": "The tool displays a clear error message and disables the Convert button until the JSON is corrected. The live preview also stops updating so you can identify and fix the problem easily."
         }
       },
       {
         "@type": "Question",
-        "name": "Can I export multiple nested sheets separately?",
+        "name": "Is this JSON to Excel converter really free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, nested objects or arrays generate separate sheets automatically in a single workbook."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does the tool work on mobile devices?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, it is fully responsive and works on smartphones and tablets."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do I need to install software?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No installation is required; the tool runs directly in your browser."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I edit JSON before conversion?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, the live preview panel allows editing JSON before exporting."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Will sheet names be sanitized automatically?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, all sheet names are adjusted to be valid and unique in Excel."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is there a file size limit for JSON?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "While there’s no strict limit, extremely large JSON files may take longer to process depending on your device performance."
+          "text": "Yes, completely free. No hidden fees, no premium tiers, no watermarks on the output. DataFrog believes essential data tools should be accessible to everyone."
         }
       }
     ]
@@ -361,43 +396,61 @@ background-color: #66fcf1;
     "@context": "https://schema.org",
     "@type": "HowTo",
     "@id": "https://datafrog.tools/json-to-excel#howto",
-    "name": "How to Convert JSON to Excel",
-    "description": "Step-by-step guide to convert JSON data into an Excel spreadsheet using the free online converter.",
+    "name": "How to Convert JSON to Excel Online",
+    "description": "Step-by-step guide to convert JSON data into an Excel XLSX or XLS workbook using DataFrog's free browser-based converter.",
     "tool": {
       "@type": "HowToTool",
-      "name": "JSON to Excel Converter"
+      "name": "DataFrog JSON to Excel Converter"
     },
     "supply": {
       "@type": "HowToSupply",
-      "name": "JSON Data"
+      "name": "JSON data (array, object, or .json file)"
     },
     "step": [
       {
         "@type": "HowToStep",
         "name": "Paste or Upload JSON",
-        "text": "Paste your JSON string into the editor or use the Upload JSON button to select a JSON file from your device.",
+        "text": "Paste your JSON string into the editor or click Upload JSON File to select a .json file from your device.",
         "url": "https://datafrog.tools/json-to-excel#step1"
       },
       {
         "@type": "HowToStep",
-        "name": "Preview Your JSON",
-        "text": "The collapsible preview tree helps you inspect nested structures and validate data before conversion.",
+        "name": "Validate and Preview",
+        "text": "The collapsible tree preview validates your JSON and lets you inspect nested structures before conversion.",
         "url": "https://datafrog.tools/json-to-excel#step2"
       },
       {
         "@type": "HowToStep",
-        "name": "Convert JSON",
-        "text": "Click the Convert JSON button. Nested arrays or objects automatically generate separate sheets.",
+        "name": "Convert to Excel",
+        "text": "Click Convert to Excel. Nested arrays and objects are automatically separated into named sheets in the workbook.",
         "url": "https://datafrog.tools/json-to-excel#step3"
       },
       {
         "@type": "HowToStep",
-        "name": "Export Excel File",
-        "text": "Download the workbook as XLSX or XLS. All nested data is included in structured sheets for analysis.",
+        "name": "Download XLSX or XLS",
+        "text": "Preview each sheet using the tab interface, then download the workbook as XLSX or XLS.",
         "url": "https://datafrog.tools/json-to-excel#step4"
       }
     ],
     "totalTime": "PT2M"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://datafrog.tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "JSON to Excel Converter",
+        "item": "https://datafrog.tools/json-to-excel"
+      }
+    ]
   }
 ]
 </script>

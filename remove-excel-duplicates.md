@@ -11,7 +11,11 @@ keywords: "excel duplicate remove, excel find duplicates, eliminate duplicate ex
 <div style="width: 69%;">
 
 <h1>Remove Excel Duplicates – Eliminate Repeats in Excel Fast</h1>
-
+  <p id="excel-duplicate-remover-intro">
+    Remove duplicate rows from Excel files online without installing software.
+    Upload XLSX or XLS spreadsheets, detect repeated records, preview duplicate rows,
+    remove duplicates instantly, and export clean Excel or CSV files directly from your browser.
+  </p>
 <!-- CONTROLS -->
 <div class="dfx-controls-bar">
 
@@ -52,19 +56,7 @@ keywords: "excel duplicate remove, excel find duplicates, eliminate duplicate ex
   <table class="dfx-table" id="dfx-table"></table>
 
 </div>
-
-<section id="remove-excel-duplicates-tool">
-
-  <p id="excel-duplicate-remover-intro">
-    Remove duplicate rows from Excel files online without installing software.
-    Upload XLSX or XLS spreadsheets, detect repeated records, preview duplicate rows,
-    remove duplicates instantly, and export clean Excel or CSV files directly from your browser.
-  </p>
-
-  <p id="excel-duplicate-remover-privacy">
-    This Excel duplicate remover processes files locally in your browser for better privacy and faster performance.
-    Your spreadsheet data is not uploaded or stored on external servers.
-  </p>
+<article id="remove-excel-duplicates-tool">
 
   <section id="how-to-remove-duplicates-from-excel">
 
@@ -308,7 +300,7 @@ keywords: "excel duplicate remove, excel find duplicates, eliminate duplicate ex
 
   </section>
 
-</section>
+</article>
 
 </div>
 
@@ -321,7 +313,7 @@ keywords: "excel duplicate remove, excel find duplicates, eliminate duplicate ex
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "webapplication",
+  "@type": "WebApplication",
   "name": "Remove Excel Duplicates Tool",
   "applicationCategory": "SpreadsheetApplication",
   "operatingSystem": "All (Browser-based)",

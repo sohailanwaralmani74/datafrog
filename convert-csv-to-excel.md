@@ -12,6 +12,11 @@ keywords: "convert csv to excel online, csv to xlsx free, csv to xls converter, 
 <div style="width: 10%;"></div>
 <div style="width: 69%;">
  <h1>Convert CSV to Excel Online – Free & Secure (No Upload)</h1>
+  <p id="intro" style="font-size:14px;color:#333;">
+    Convert CSV to Excel online in seconds – completely free, no signup, no file uploads. This tool runs entirely in your browser using SheetJS. 
+    Upload a CSV (comma‑separated values) file, preview the data in a table, then export directly as .xlsx (Excel 2007+) or .xls (Excel 97-2003). 
+    Perfect for converting database exports, API responses, or spreadsheet data into native Excel format.
+  </p>
  <div class="csvx-container">
     <div class="csvx-panel" id="csvPanel">
       <div class="panel-header">
@@ -51,13 +56,10 @@ keywords: "convert csv to excel online, csv to xlsx free, csv to xls converter, 
   </div>
  </div>  
 
+<article>
 <section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
-  <p id="intro" style="font-size:16px;color:#333;">
-    Convert CSV to Excel online in seconds – completely free, no signup, no file uploads. This tool runs entirely in your browser using SheetJS. 
-    Upload a CSV (comma‑separated values) file, preview the data in a table, then export directly as .xlsx (Excel 2007+) or .xls (Excel 97-2003). 
-    Perfect for converting database exports, API responses, or spreadsheet data into native Excel format.
-  </p>
+
 
   <h2 id="when-to-use" style="margin-top:30px;">Why convert CSV to Excel?</h2>
   <ul style="padding-left:20px;">
@@ -145,7 +147,7 @@ keywords: "convert csv to excel online, csv to xlsx free, csv to xls converter, 
   <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks. DataFrog believes essential tools should be accessible to everyone.</p>
 
 </section>
-
+</article>
 </div>
 
 <div style="width: 10%;"></div>
@@ -156,13 +158,13 @@ keywords: "convert csv to excel online, csv to xlsx free, csv to xls converter, 
 [
   {
     "@context": "https://schema.org",
-    "@type": "webapplication",
+    "@type": "WebApplication",
     "@id": "https://datafrog.tools/convert-csv-to-excel#webapp",
     "name": "Convert CSV to Excel - Online CSV to XLSX/XLS Converter",
     "url": "https://datafrog.tools/convert-csv-to-excel",
     "description": "A free, browser-based tool that converts CSV files into Excel spreadsheets (XLSX or XLS). Process your data offline with customizable options, preserving structure and formatting.",
     "applicationCategory": "DataFormatConverter",
-    "operatingSystem": "Any Broswer",
+    "operatingSystem": "Any",
     "offers": {
       "@type": "Offer",
       "price": "0",

@@ -9,7 +9,16 @@ keywords: "json to dart converter online, json to dart model generator, json to 
 <link href="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.css" rel="stylesheet">
 <!-- Tool section -->
 <section class="tool-section container" style="min-width: 99%">
-<h1>JSON to Dart Converter – Generate Flutter Models with Null Safety</h1>
+<h1>JSON to Dart Converter Online – Generate Flutter Model Classes</h1>
+
+<p id="intro" style="font-size:14px;color:#333;">
+  <strong>Dart</strong> is the programming language behind Flutter, Google's cross-platform 
+  mobile framework. When building Flutter apps, API responses arrive as raw JSON and must 
+  be mapped into typed Dart model classes — a repetitive, error-prone task when done manually. 
+  This tool generates complete Dart model classes from any JSON instantly, including 
+  <code>fromJson</code> and <code>toJson</code> methods, null safety, and nested class 
+  support — all in your browser with no upload required.
+</p>
 
   <div id="json-tool-wrapper">
     <!-- JSON Editor -->
@@ -115,12 +124,8 @@ keywords: "json to dart converter online, json to dart model generator, json to 
 <div style="display: flex; flex-direction: row">
 <div style="width: 20%"></div>
 <div style="width: 58%">
-
+<article>
 <section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
-
-  <p id="intro" style="font-size:16px;color:#333;">
-    Generate Dart model classes from JSON instantly – perfect for Flutter and Dart applications. This browser‑based tool parses your JSON, infers types, and creates fully structured Dart classes with <code>fromJson</code> and <code>toJson</code> methods. Supports nested objects, lists, null safety, private fields, and required constructor parameters. No server upload – all processing happens locally.
-  </p>
 
   <h2 id="when-to-use" style="margin-top:30px;">Why convert JSON to Dart models?</h2>
   <ul style="padding-left:20px;">
@@ -211,7 +216,16 @@ keywords: "json to dart converter online, json to dart model generator, json to 
   </ul>
 
 </section>
-
+<section aria-label="Related tools">
+  <h2>Related Tools</h2>
+  <ul>
+    <li><a href="/json-to-json-schema">JSON Schema Generator</a> – generate a JSON Schema from your API response</li>
+    <li><a href="/json-to-csv">JSON to CSV Converter</a> – export JSON data as a spreadsheet</li>
+    <li><a href="/json-string-to-json-object">JSON String to Object</a> – parse stringified JSON before converting</li>
+    <li><a href="/yaml-to-json">YAML to JSON Converter</a> – convert YAML configs to JSON first</li>
+  </ul>
+</section>
+</article>
 </div>
 <div style="width: 20%"></div>
 </div>
@@ -222,13 +236,13 @@ keywords: "json to dart converter online, json to dart model generator, json to 
 [
   {
     "@context": "https://schema.org",
-    "@type": "webapplication",
+    "@type": "WebApplication",
     "@id": "https://datafrog.tools/json-to-dart#webapp",
     "name": "JSON to Dart Converter Online",
     "url": "https://datafrog.tools/json-to-dart",
     "description": "A free, browser-based tool that instantly transforms JSON objects into fully structured Dart classes with fromJson/toJson methods, ready for Flutter or Dart projects. All conversion happens securely offline in your browser.",
     "applicationCategory": "DeveloperTool",
-    "operatingSystem": "Any Broswer",
+    "operatingSystem": "Any",
     "offers": {
       "@type": "Offer",
       "price": "0",

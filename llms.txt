@@ -21,6 +21,7 @@
 - [/json-to-dart](https://datafrog.tools/json-to-dart): Create Flutter-ready model classes with fromJson/toJson
 - [/json-to-yaml](https://datafrog.tools/json-to-yaml): Convert JSON to human-readable YAML for Kubernetes, Docker Compose
 - [/yaml-to-json](https://datafrog.tools/yaml-to-json): Convert YAML configuration files to JSON instantly
+- [/json-to-txt](https://datafrog.tools/json-to-txt): Convert JSON data to plain text format for logging, reporting, or simple data extraction
 
 ## Excel Tools
 

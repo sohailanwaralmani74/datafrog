@@ -10,6 +10,14 @@ keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, p
 <div style="width: 69%;">
 
 <h1>SQL to CSV Converter – Extract INSERT Data</h1>
+<section id="introSection">
+
+  <p id="introText">
+    This tool converts SQL INSERT dumps into structured CSV format directly in the browser.
+    It is designed to extract table data from SQL files without requiring database execution.
+  </p>
+
+</section>
 
 <!-- INPUT -->
 <div class="csvx-container">
@@ -80,15 +88,8 @@ keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, p
 </div>
 <div id="df-sqlcsv-toast" class="jsonx-toast"></div>
 
-<section id="introSection">
 
-  <p id="introText">
-    This tool converts SQL INSERT dumps into structured CSV format directly in the browser.
-    It is designed to extract table data from SQL files without requiring database execution.
-  </p>
-
-</section>
-
+<article>
 <section id="toolPurposeSection">
 
   <h2 id="purposeTitle">Purpose of this tool</h2>
@@ -231,7 +232,7 @@ keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, p
   </div>
 
 </section>
-
+</article>
 </div>
 <div style="width: 15%;"></div>
 
@@ -241,7 +242,7 @@ keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, p
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "webapplication",
+  "@type": "WebApplication",
   "name": "SQL to CSV Converter",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "All (Browser-based)",

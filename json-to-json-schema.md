@@ -11,6 +11,16 @@ keywords: "json to json schema online free, generate json schema from json, json
 <section class="tool-section container" style="min-width: 99%">
 <h1>JSON to JSON Schema Converter – Instantly Generate Draft-07 Schema</h1>
 
+  <p id="intro" style="font-size: 13px;">
+    <strong>JSON Schema</strong> is a vocabulary that describes the structure and 
+    validation rules of JSON data — defining required fields, data types, nested 
+    object shapes, and array item constraints. It is the standard used by OpenAPI 
+    (Swagger), Ajv, Postman, and most modern API validation frameworks. Writing 
+    JSON Schema by hand is tedious and error-prone. This tool generates a complete, 
+    standards-compliant <strong>JSON Schema Draft-07</strong> from any JSON sample 
+    instantly — detecting field types, inferring required fields, handling nested 
+    objects and arrays — all in your browser with no upload required.
+  </p>
 
   <div id="json-tool-wrapper">
     <!-- JSON Editor -->
@@ -155,137 +165,212 @@ p{
 </style>
 
 <div style="display: flex; flex-direction: row">
-<div style="width: 20%"></div>
-<div style="width: 58%">
+<div style="width: 15%"></div>
+<div style="width: 69%">
 
-<div style="display: flex;">
-    <div class="blog-post-meta">
-     <span class="post-date">Created By</span>
-     <a href="sohail-anwar" style="display:flex; gap: 10px;" class="link">
-      <img src="assets/img/sohail-anwar.png" alt="Sohail Anwar - Senior Software Engineer" class="author-img">
+<div style="display:flex;">
+  <div class="blog-post-meta">
+    <span class="post-date">Created By</span>
+    <a href="/sohail-anwar" style="display:flex;gap:10px;" class="link">
+      <img src="/assets/img/sohail-anwar.png" alt="Sohail Anwar - Senior Software Engineer" class="author-img">
       <span class="author-name">Sohail Anwar</span>
-      </a>
-    </div>
-    <div class="blog-post-meta">
-     <span class="post-date">Tested And Validated By</span>
-     <a href="gourav-mishra" style="display:flex; gap: 10px;" class="link">
-      <img src="assets/img/gourav-mishra.jpg" alt="Gourav Mishra - Business Analyst" class="author-img">
-      <span class="author-name">Gourav Mishra</span>
-      </a>
-    </div>
-    <div class="blog-post-meta">
-     <a href="saeed-ahmed" style="display:flex; gap: 10px;" class="link">
-      <img src="assets/img/saeed-ahmed.jpg" alt="Saeed Ahmed - Full Stack Developer" class="author-img">
-      <span class="author-name">Saeed Ahmed</span>
-      </a>
-    </div>
+    </a>
   </div>
-
-<section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
-
-  <p id="intro" style="font-size:16px;color:#333;">
-    Generate a valid JSON Schema (Draft‑07) from any JSON data instantly – right in your browser. This tool analyzes your JSON structure, detects field types (string, number, boolean, array, object), handles nested objects, and produces a complete schema including properties and required fields. Perfect for API validation, data contracts, documentation, and form validation systems.
-  </p>
-
-  <h2 id="when-to-use" style="margin-top:30px;">Why generate JSON Schema from JSON?</h2>
-  <ul style="padding-left:20px;">
-    <li>Validate API payloads against a defined schema automatically</li>
-    <li>Document JSON‑based APIs with a standard contract</li>
-    <li>Build frontend form validation rules from backend JSON examples</li>
-    <li>Define data structures for databases or configuration files</li>
-    <li>Generate schema for mocking or testing JSON data</li>
-  </ul>
-
-  <h2 id="how-it-works" style="margin-top:30px;">How to generate JSON Schema from JSON – 3 simple steps</h2>
-  <ol style="padding-left:20px;">
-    <li><strong>Paste or upload your JSON</strong> – copy your JSON into the editor or click “Upload JSON File” to load a .json file.</li>
-    <li><strong>Auto‑analysis</strong> – the tool parses your JSON, detects all fields and types, and identifies required fields (non‑null values).</li>
-    <li><strong>Get schema</strong> – a Draft‑07 compatible JSON Schema appears instantly. Copy it or download as a .json file.</li>
-  </ol>
-
-  <h2 id="key-features" style="margin-top:30px;">JSON to JSON Schema converter – features you’ll love</h2>
-  <ul style="padding-left:20px;">
-    <li>✅ <strong>100% browser‑based</strong> – no upload, no server, complete privacy</li>
-    <li>✅ <strong>Draft‑07 compatible</strong> – industry‑standard JSON Schema version</li>
-    <li>✅ <strong>Automatic type detection</strong> – string, number, boolean, null, array, object</li>
-    <li>✅ <strong>Nested object support</strong> – creates <code>properties</code> recursively</li>
-    <li>✅ <strong>Required fields inference</strong> – marks fields as required when they appear in all instances</li>
-    <li>✅ <strong>Array handling</strong> – detects array item types and generates <code>items</code> schema</li>
-    <li>✅ <strong>Live JSON preview</strong> – validate and inspect your data before conversion</li>
-    <li>✅ <strong>Copy or download schema</strong> – one click to copy JSON schema or save as .json file</li>
-  </ul>
-
-  <h2 id="what-makes-different" style="margin-top:30px;">Why DataFrog’s JSON to Schema tool stands out</h2>
-  <ul style="padding-left:20px;">
-    <li><strong>Privacy first</strong> – your JSON never leaves your device. Many converters upload your data – we don’t.</li>
-    <li><strong>Production‑ready schema</strong> – generates complete, standards‑compliant JSON Schema Draft‑07 with proper <code>$schema</code> and <code>required</code> arrays.</li>
-    <li><strong>Accurate nested handling</strong> – deeply nested objects and arrays of objects are fully represented.</li>
-    <li><strong>No signup, no limits</strong> – convert as many JSON samples as you need, any size.</li>
-  </ul>
-
-  <h2 id="supported-inputs" style="margin-top:30px;">Supported JSON structures</h2>
-  <ul style="padding-left:20px;">
-    <li>Simple JSON objects (<code>{"key": "value"}</code>)</li>
-    <li>Arrays of primitive values (<code>[1,2,3]</code>)</li>
-    <li>Arrays of objects (<code>[{"id":1}, {"id":2}]</code>)</li>
-    <li>Deeply nested objects and mixed types</li>
-    <li>API response payloads (REST, GraphQL, etc.)</li>
-  </ul>
-
-  <h2 id="use-cases" style="margin-top:30px;">Common use cases for JSON to JSON Schema</h2>
-  <ul style="padding-left:20px;">
-    <li>🔍 API validation – define expected request/response structures</li>
-    <li>📄 API documentation – generate schema for OpenAPI/Swagger</li>
-    <li>🖥️ Backend data modeling – create validation rules for microservices</li>
-    <li>📝 Frontend form validation – translate JSON examples to validation schemas (e.g., Ajv, Yup)</li>
-    <li>🧪 Testing & mocking – generate schema for mock data generators</li>
-  </ul>
-
-  <h2 id="privacy-security" style="margin-top:30px;">Privacy & Security</h2>
-  <ul style="padding-left:20px;">
-    <li>🔒 All processing happens locally in your browser</li>
-    <li>🚫 No file upload – your data never touches our server</li>
-    <li>🕵️ No tracking, no logs, no third‑party scripts</li>
-    <li>💼 Safe for sensitive data (API keys, personal info, proprietary schemas)</li>
-  </ul>
-
-  <h2 id="faq" style="margin-top:30px;">Frequently asked questions (JSON to JSON Schema)</h2>
-
-  <h3 id="faq-1">What version of JSON Schema does this tool generate?</h3>
-  <p>It generates <strong>JSON Schema Draft‑07</strong> (<code>$schema: "http://json-schema.org/draft-07/schema#"</code>), which is widely supported by validators and tools.</p>
-
-  <h3 id="faq-2">Does it support nested objects and arrays?</h3>
-  <p>Yes. Nested objects become <code>type: "object"</code> with their own <code>properties</code>. Arrays are represented with <code>type: "array"</code> and an <code>items</code> schema describing the element type (primitive or object).</p>
-
-  <h3 id="faq-3">How are required fields determined?</h3>
-  <p>If a field exists in every object of a collection (or appears as non‑null in a single object), it is added to the <code>required</code> array. For arrays of objects, the tool analyzes all samples to infer which fields are mandatory.</p>
-
-  <h3 id="faq-4">Is my JSON data uploaded to a server?</h3>
-  <p><strong>No.</strong> The tool runs entirely in your browser. Your JSON never leaves your computer – even works offline after first load.</p>
-
-  <h3 id="faq-5">Can I use the generated schema for API validation?</h3>
-  <p>Absolutely. The output is standard JSON Schema Draft‑07, compatible with validators like Ajv, tv4, and many API gateways (e.g., Express middleware, Postman, etc.).</p>
-
-  <h3 id="faq-6">Is this JSON to JSON Schema converter really free?</h3>
-  <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks. DataFrog believes essential developer tools should be accessible to everyone.</p>
-
-</section>
+  <div class="blog-post-meta">
+    <span class="post-date">Tested And Validated By</span>
+    <a href="/gourav-mishra" style="display:flex;gap:10px;" class="link">
+      <img src="/assets/img/gourav-mishra.jpg" alt="Gourav Mishra - Business Analyst" class="author-img">
+      <span class="author-name">Gourav Mishra</span>
+    </a>
+  </div>
+  <div class="blog-post-meta">
+    <a href="/saeed-ahmed" style="display:flex;gap:10px;" class="link">
+      <img src="/assets/img/saeed-ahmed.jpg" alt="Saeed Ahmed - Full Stack Developer" class="author-img">
+      <span class="author-name">Saeed Ahmed</span>
+    </a>
+  </div>
 </div>
-<div style="width: 20%"></div>
+
+<article id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
+
+
+  <section aria-labelledby="when-to-use">
+    <h2 id="when-to-use">Why generate JSON Schema from JSON?</h2>
+    <ul>
+      <li>Validate API request and response payloads against a defined schema automatically</li>
+      <li>Document JSON-based APIs with a standard machine-readable contract</li>
+      <li>Build frontend form validation rules (Ajv, Yup, Zod) from backend JSON examples</li>
+      <li>Define data structures for databases, microservices, or configuration files</li>
+      <li>Generate schema for mock data generators and testing frameworks</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="conversion-example">
+    <h2 id="conversion-example">JSON to JSON Schema conversion example</h2>
+    <p>
+      Given a JSON object, the tool infers each field's type, marks present fields 
+      as required, and recurses into nested objects. Here is a simple example:
+    </p>
+    <h3>Input JSON</h3>
+    <pre><code>{
+  "id": 101,
+  "name": "Alice",
+  "active": true,
+  "address": {
+    "city": "London",
+    "zip": "E1 6RF"
+  },
+  "tags": ["admin", "user"]
+}</code></pre>
+    <h3>Generated JSON Schema (Draft-07)</h3>
+    <pre><code>{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id":     { "type": "integer" },
+    "name":   { "type": "string" },
+    "active": { "type": "boolean" },
+    "address": {
+      "type": "object",
+      "properties": {
+        "city": { "type": "string" },
+        "zip":  { "type": "string" }
+      },
+      "required": ["city", "zip"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["id", "name", "active", "address", "tags"]
+}</code></pre>
+    <p>
+      Every field type is detected automatically — including nested objects with 
+      their own <code>properties</code> and <code>required</code> arrays, and arrays 
+      with typed <code>items</code> schemas.
+    </p>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to generate JSON Schema from JSON – 3 simple steps</h2>
+    <ol>
+      <li><strong>Paste or upload your JSON</strong> – copy your JSON into the editor or click "Upload JSON File" to load a .json file.</li>
+      <li><strong>Auto-analysis</strong> – the tool parses your JSON, detects all fields and types, and identifies required fields.</li>
+      <li><strong>Get your schema</strong> – a Draft-07 compatible JSON Schema appears instantly. Copy it or download as a .json file.</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="key-features">
+    <h2 id="key-features">JSON to JSON Schema converter – features</h2>
+    <ul>
+      <li>✅ <strong>100% browser-based</strong> – no upload, no server, complete privacy</li>
+      <li>✅ <strong>Draft-07 compatible</strong> – industry-standard JSON Schema version supported by Ajv, Postman, and OpenAPI</li>
+      <li>✅ <strong>Automatic type detection</strong> – string, number, integer, boolean, null, array, object</li>
+      <li>✅ <strong>Nested object support</strong> – creates <code>properties</code> blocks recursively for any depth</li>
+      <li>✅ <strong>Required fields inference</strong> – marks fields as required when present across all instances</li>
+      <li>✅ <strong>Array handling</strong> – detects array item types and generates typed <code>items</code> schema</li>
+      <li>✅ <strong>Live JSON preview</strong> – syntax-highlighted collapsible tree view before conversion</li>
+      <li>✅ <strong>Copy or download schema</strong> – one click to copy or save as .json file</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="what-makes-different">
+    <h2 id="what-makes-different">Why DataFrog's JSON Schema generator stands out</h2>
+    <ul>
+      <li><strong>Privacy first</strong> – your JSON never leaves your device. Many tools upload your data to generate schema – we don't.</li>
+      <li><strong>Production-ready output</strong> – generates complete Draft-07 schema with correct <code>$schema</code> URI, typed <code>properties</code>, and <code>required</code> arrays.</li>
+      <li><strong>Accurate nested handling</strong> – deeply nested objects and arrays of objects are fully and correctly represented.</li>
+      <li><strong>No signup, no limits</strong> – generate schema from as many JSON samples as you need.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="supported-inputs">
+    <h2 id="supported-inputs">Supported JSON structures</h2>
+    <ul>
+      <li>Simple JSON objects (<code>{"key": "value"}</code>)</li>
+      <li>Arrays of primitive values (<code>[1, 2, 3]</code>)</li>
+      <li>Arrays of objects (<code>[{"id":1}, {"id":2}]</code>) — required fields inferred across all items</li>
+      <li>Deeply nested objects and mixed types</li>
+      <li>API response payloads from REST, GraphQL, and other sources</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="use-cases">
+    <h2 id="use-cases">Common use cases for JSON Schema generation</h2>
+    <ul>
+      <li>🔍 <strong>API validation</strong> – define expected request and response structures for REST or GraphQL APIs</li>
+      <li>📄 <strong>API documentation</strong> – generate schema blocks for OpenAPI / Swagger specifications</li>
+      <li>🖥️ <strong>Backend data modeling</strong> – create validation rules for microservices and message queues</li>
+      <li>📝 <strong>Frontend form validation</strong> – translate JSON examples into Ajv, Yup, or Zod-compatible schemas</li>
+      <li>🧪 <strong>Testing and mocking</strong> – generate schema for Faker.js, JSON Schema Faker, and similar tools</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="privacy-security">
+    <h2 id="privacy-security">Privacy & Security</h2>
+    <ul>
+      <li>🔒 All processing happens locally in your browser — no server involved</li>
+      <li>🚫 No file upload — your JSON never leaves your device</li>
+      <li>🕵️ No tracking, no logs, no third-party analytics scripts</li>
+      <li>💼 Safe for sensitive data including API keys, personal records, and proprietary data structures</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="faq">
+    <h2 id="faq">Frequently asked questions (JSON to JSON Schema)</h2>
+
+    <h3 id="faq-1">What version of JSON Schema does this tool generate?</h3>
+    <p>It generates <strong>JSON Schema Draft-07</strong> with the correct <code>$schema: "http://json-schema.org/draft-07/schema#"</code> declaration. Draft-07 is the most widely supported version, used by Ajv, tv4, Postman, and most OpenAPI tooling.</p>
+
+    <h3 id="faq-2">Does it support nested objects and arrays?</h3>
+    <p>Yes. Nested objects become <code>type: "object"</code> blocks with their own <code>properties</code> and <code>required</code> arrays. Arrays are represented with <code>type: "array"</code> and an <code>items</code> schema describing the element type — whether primitive or a full object schema.</p>
+
+    <h3 id="faq-3">How are required fields determined?</h3>
+    <p>For a single JSON object, all present non-null fields are marked as required. For arrays of objects, the tool analyses all items and marks only fields that appear consistently across every object as required — giving you an accurate contract for your data.</p>
+
+    <h3 id="faq-4">Is my JSON data uploaded to a server?</h3>
+    <p><strong>No.</strong> The tool runs entirely in your browser. Your JSON never leaves your computer and continues to work offline after the first page load.</p>
+
+    <h3 id="faq-5">Can I use the generated schema for API validation?</h3>
+    <p>Yes. The output is standard JSON Schema Draft-07, directly compatible with Ajv, tv4, and most API gateways and middleware — including Express validators, Postman test scripts, and AWS API Gateway request validation.</p>
+
+    <h3 id="faq-6">Can I use the schema with OpenAPI or Swagger?</h3>
+    <p>Yes. OpenAPI 3.0 uses a subset of JSON Schema Draft-07 for its component schemas. You can paste the generated schema directly into your OpenAPI spec's <code>components/schemas</code> section with minor adjustments for OpenAPI-specific keywords.</p>
+
+    <h3 id="faq-7">Is this JSON Schema generator really free?</h3>
+    <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks. DataFrog believes essential developer tools should be accessible to everyone.</p>
+
+  </section>
+
+  <section aria-labelledby="related-tools">
+    <h2 id="related-tools">Related Tools</h2>
+    <ul>
+      <li><a href="/xml-to-xsd-generator">XML to XSD Generator</a> – generate an XML Schema Definition from any XML document</li>
+      <li><a href="/json-string-to-json-object">JSON String to Object</a> – parse and validate JSON before generating schema</li>
+      <li><a href="/json-to-csv">JSON to CSV Converter</a> – export JSON data as a flat CSV file</li>
+      <li><a href="/yaml-to-json">YAML to JSON Converter</a> – convert YAML to JSON before generating schema</li>
+    </ul>
+  </section>
+
+</article>
+</div>
+<div style="width: 15%"></div>
 </div>
 
 <script src="assets/js/json-to-json-schema.js"></script>
+
 <script type="application/ld+json">
 [
   {
     "@context": "https://schema.org",
-    "@type": "webapplication",
+    "@type": "WebApplication",
     "@id": "https://datafrog.tools/json-to-json-schema#webapp",
     "name": "JSON to JSON Schema Converter Online",
     "url": "https://datafrog.tools/json-to-json-schema",
-    "description": "A free, browser-based tool that instantly generates a valid JSON Schema Draft-07 from any JSON input. Ideal for API validation, documentation, and defining data structure rules, all processed securely offline.",
-    "applicationCategory": "DeveloperTool",
-    "operatingSystem": "Any Broswer",
+    "description": "Free browser-based tool that instantly generates a valid JSON Schema Draft-07 from any JSON input. Detects field types, infers required fields, handles nested objects and arrays. No upload, no signup — processed entirely client-side.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -293,17 +378,23 @@ p{
     },
     "featureList": [
       "Generates JSON Schema Draft-07 with correct $schema metadata",
-      "Runs entirely client-side; no data is uploaded to servers",
-      "Supports JSON file upload and real-time conversion",
-      "Accurately maps types (string, number, boolean, array, object)",
-      "Handles nested objects and arrays within the schema",
-      "Provides a collapsible, syntax-highlighted JSON viewer for preview",
-      "Instant copy to clipboard or download as a .json file"
+      "Automatic type detection — string, number, integer, boolean, null, array, object",
+      "Required fields inference across arrays of objects",
+      "Recursive nested object and array schema generation",
+      "Syntax-highlighted collapsible JSON viewer",
+      "Copy to clipboard or download as .json file",
+      "Client-side processing — no data uploaded to any server",
+      "Works offline after first load"
     ],
     "softwareRequirements": "A modern web browser",
     "softwareVersion": "1.0",
     "datePublished": "2025-09-28",
-    "dateModified": "2025-12-13"
+    "dateModified": "2026-05-21",
+    "provider": {
+      "@type": "Organization",
+      "name": "DataFrog",
+      "url": "https://datafrog.tools"
+    }
   },
   {
     "@context": "https://schema.org",
@@ -312,66 +403,58 @@ p{
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Is this JSON to JSON Schema converter free?",
+        "name": "What version of JSON Schema does this tool generate?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, it is completely free and works entirely in your browser."
+          "text": "It generates JSON Schema Draft-07 with the correct $schema declaration. Draft-07 is the most widely supported version, used by Ajv, tv4, Postman, and most OpenAPI tooling."
         }
       },
       {
         "@type": "Question",
-        "name": "Does conversion happen online or offline?",
+        "name": "Does it support nested objects and arrays?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "All operations happen client-side. Your JSON data never leaves your device."
+          "text": "Yes. Nested objects become type: object blocks with their own properties and required arrays. Arrays are represented with type: array and an items schema describing the element type — whether primitive or a full object schema."
         }
       },
       {
         "@type": "Question",
-        "name": "Which JSON Schema draft is used?",
+        "name": "How are required fields determined?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The tool generates JSON Schema Draft-07 compatible output."
+          "text": "For a single JSON object, all present non-null fields are marked as required. For arrays of objects, the tool analyses all items and marks only fields that appear consistently across every object as required."
         }
       },
       {
         "@type": "Question",
-        "name": "Can I copy or download the generated schema?",
+        "name": "Is my JSON data uploaded to a server?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, you can copy it to clipboard or download it as a .json file."
+          "text": "No. The tool runs entirely in your browser. Your JSON never leaves your computer and continues to work offline after the first page load."
         }
       },
       {
         "@type": "Question",
-        "name": "Can it handle nested JSON structures?",
+        "name": "Can I use the generated schema for API validation?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, nested objects and arrays are correctly represented in the schema."
+          "text": "Yes. The output is standard JSON Schema Draft-07, directly compatible with Ajv, tv4, and most API gateways including Express validators, Postman test scripts, and AWS API Gateway request validation."
         }
       },
       {
         "@type": "Question",
-        "name": "Does the tool provide a preview?",
+        "name": "Can I use the schema with OpenAPI or Swagger?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, the generated schema is shown in a collapsible, syntax-highlighted viewer."
+          "text": "Yes. OpenAPI 3.0 uses a subset of JSON Schema Draft-07 for its component schemas. You can paste the generated schema into your OpenAPI spec's components/schemas section with minor adjustments for OpenAPI-specific keywords."
         }
       },
       {
         "@type": "Question",
-        "name": "Is my data secure?",
+        "name": "Is this JSON Schema generator really free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, all processing happens client-side; nothing is transmitted to a server."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can this tool help with API documentation?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, it can generate JSON Schema for API contracts and validation rules."
+          "text": "Yes, completely free. No hidden fees, no premium tiers, no watermarks. DataFrog believes essential developer tools should be accessible to everyone."
         }
       }
     ]
@@ -380,43 +463,61 @@ p{
     "@context": "https://schema.org",
     "@type": "HowTo",
     "@id": "https://datafrog.tools/json-to-json-schema#howto",
-    "name": "How to Generate a JSON Schema from JSON",
-    "description": "Step-by-step guide to convert JSON data into a JSON Schema Draft-07 using the free online converter.",
+    "name": "How to Generate JSON Schema from JSON Online",
+    "description": "Step-by-step guide to generate a JSON Schema Draft-07 from any JSON data using DataFrog's free browser-based converter.",
     "tool": {
       "@type": "HowToTool",
-      "name": "JSON to JSON Schema Converter"
+      "name": "DataFrog JSON to JSON Schema Converter"
     },
     "supply": {
       "@type": "HowToSupply",
-      "name": "JSON Data"
+      "name": "JSON data (object, array, or .json file)"
     },
     "step": [
       {
         "@type": "HowToStep",
-        "name": "Upload or Paste Your JSON",
-        "text": "Import a .json file using the upload button or paste your JSON data directly into the editor.",
+        "name": "Paste or Upload Your JSON",
+        "text": "Paste your JSON string into the editor or click Upload JSON File to select a .json file from your device.",
         "url": "https://datafrog.tools/json-to-json-schema#step1"
       },
       {
         "@type": "HowToStep",
         "name": "Auto-Generate the Schema",
-        "text": "The tool will automatically parse your JSON and generate the corresponding JSON Schema Draft-07.",
+        "text": "The tool automatically parses your JSON, detects all field types, infers required fields, and generates a complete JSON Schema Draft-07.",
         "url": "https://datafrog.tools/json-to-json-schema#step2"
       },
       {
         "@type": "HowToStep",
         "name": "Preview the Schema",
-        "text": "Review the generated schema in the collapsible, color-coded JSON viewer to verify the structure.",
+        "text": "Review the generated schema in the collapsible, syntax-highlighted JSON viewer to verify the structure and field types.",
         "url": "https://datafrog.tools/json-to-json-schema#step3"
       },
       {
         "@type": "HowToStep",
         "name": "Copy or Download",
-        "text": "Copy the schema text to your clipboard for immediate use or download it as a .json file.",
+        "text": "Copy the schema to your clipboard for immediate use in your project, or download it as a .json file.",
         "url": "https://datafrog.tools/json-to-json-schema#step4"
       }
     ],
     "totalTime": "PT2M"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://datafrog.tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "JSON to JSON Schema Converter",
+        "item": "https://datafrog.tools/json-to-json-schema"
+      }
+    ]
   }
 ]
 </script>

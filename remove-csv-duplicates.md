@@ -10,7 +10,12 @@ keywords: "csv duplicate remove, csv find duplicates, eliminate duplicate csv, e
 
 <div style="width: 15%;"></div>
 <div style="width: 69%;">
-
+<h1>Remove CSV Duplicates Online – CSV Duplicates Cleaner</h1>
+  <p id="csv-duplicate-remover-intro">
+    Remove duplicate rows from CSV files online without installing software.
+    Upload CSV files, detect repeated records, preview duplicate rows,
+    remove duplicates instantly, and download clean CSV or Excel files directly from your browser.
+  </p>
 <div class="dfx-controls-bar">
 
   <label class="dfx-btn">
@@ -51,13 +56,9 @@ keywords: "csv duplicate remove, csv find duplicates, eliminate duplicate csv, e
 
 </div>
 
-<section id="remove-csv-duplicates-tool">
+<article id="remove-csv-duplicates-tool">
 
-  <p id="csv-duplicate-remover-intro">
-    Remove duplicate rows from CSV files online without installing software.
-    Upload CSV files, detect repeated records, preview duplicate rows,
-    remove duplicates instantly, and download clean CSV or Excel files directly from your browser.
-  </p>
+
 
   <p id="csv-duplicate-remover-privacy">
     This CSV duplicate remover processes files locally in your browser for better privacy and faster performance.
@@ -296,7 +297,7 @@ keywords: "csv duplicate remove, csv find duplicates, eliminate duplicate csv, e
 
   </section>
 
-</section>
+</article>
 
 </div>
 
@@ -307,7 +308,7 @@ keywords: "csv duplicate remove, csv find duplicates, eliminate duplicate csv, e
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "webapplication",
+  "@type": "WebApplication",
   "name": "Remove CSV Duplicates Tool",
   "applicationCategory": "SpreadsheetApplication",
   "operatingSystem": "All (Browser-based)",

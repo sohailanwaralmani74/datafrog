@@ -9,6 +9,12 @@ keywords: "sql duplicate remover, remove duplicates from sql table, find duplica
 
 <div style="width: 15%;"></div>
 <div style="width: 69%;">
+<h1> Remove Duplicates In SQL Online - Free, Fast and Secure</h1>
+  <p id="sql-duplicate-remover-intro">
+    Remove duplicate rows from SQL data online without installing software.
+    Upload SQL data, detect repeated records, preview duplicate rows,
+    remove duplicates instantly, and download clean SQL or Excel files directly from your browser.
+  </p>
 
 <!-- CONTROLS -->
 <div class="sqlfx-controls-bar">
@@ -51,13 +57,8 @@ keywords: "sql duplicate remover, remove duplicates from sql table, find duplica
 ></textarea>
 
 
-<section id="remove-sql-duplicates-tool">
+<article id="remove-sql-duplicates-tool">
 
-  <p id="sql-duplicate-remover-intro">
-    Remove duplicate rows from SQL data online without installing software.
-    Upload SQL data, detect repeated records, preview duplicate rows,
-    remove duplicates instantly, and download clean SQL or Excel files directly from your browser.
-  </p>
 
   <p id="sql-duplicate-remover-privacy">
     This SQL duplicate remover processes data locally in your browser for better privacy and faster performance.
@@ -296,7 +297,7 @@ keywords: "sql duplicate remover, remove duplicates from sql table, find duplica
 
   </section>
 
-</section>
+</article>
 
 </div>
 
@@ -307,7 +308,7 @@ keywords: "sql duplicate remover, remove duplicates from sql table, find duplica
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "webapplication",
+  "@type": "WebApplication",
   "name": "Remove SQL Duplicates Tool",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "All (Browser-based)",
