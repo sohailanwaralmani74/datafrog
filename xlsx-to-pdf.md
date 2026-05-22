@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "XLSX to PDF Converter – Free Excel to PDF Online | DataFrog"
-description: "Free online XLSX to PDF converter. Convert Excel spreadsheets (XLSX, XLS) to PDF instantly. Preserve tables, rows, columns. Browser‑based, no signup. Download PDF file."
+description: "Free online XLSX to PDF converter. Convert Excel spreadsheets (XLSX, XLS) to PDF instantly. Preserve tables, rows, columns."
 keywords: "xlsx to pdf online free, convert excel to pdf, xlsx to pdf converter, excel to pdf without email, browser based excel to pdf, free xlsx to pdf tool, excel to pdf print ready"
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

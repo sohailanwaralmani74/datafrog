@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "JSON to JSON Schema Converter Online – Generate Draft-07 Schema | DataFrog"
-description: "Free online JSON to JSON Schema converter. Generate valid Draft-07 schema from any JSON instantly. Browser‑based, no signup. Copy or download .json schema file."
+title: "JSON to JSON Schema Converter – Generate Draft-07 Schema"
+description: "Free online JSON to JSON Schema converter. Generate valid Draft-07 schema from any JSON instantly. Browser‑based."
 keywords: "json to json schema online free, generate json schema from json, json schema generator, json to schema draft 07, json validator schema generator, browser based json schema"
 ---
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

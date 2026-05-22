@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Convert CSV to TXT Online – Free, Secure & No Upload | DataFrog"
-description: "Free online CSV to TXT converter. No upload – 100% browser‑based. Convert any CSV file to clean plain text with aligned columns. Copy or download .txt instantly."
+description: "Free online CSV to TXT converter. No upload – 100% browser‑based. Convert any CSV file to clean plain text with aligned columns."
 keywords: "convert csv to txt online free, csv to plain text converter, csv to txt no upload, convert csv to text file, browser based csv to txt, csv to txt column alignment, free txt converter offline"
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

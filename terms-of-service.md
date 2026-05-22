@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Terms of Service – DataFrog Free Data Conversion Tools"
-description: "Read the Terms of Service for DataFrog. Learn about usage guidelines, liability, privacy, and your responsibilities when using our free browser-based data conversion tools."
+description: "Read the Terms of Service for DataFrog. Learn about usage guidelines, liability, privacy, and your responsibilities when using tools."
 keywords: "terms of service, DataFrog TOS, data conversion rules, browser-based tools, JSON tools, Excel tools, CSV tools, fair use policy"
 ---
 

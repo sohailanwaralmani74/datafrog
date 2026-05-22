@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "XML to XSD Generator Online – Free XML Schema Creator | DataFrog"
-description: "Free online XML to XSD generator. Convert any XML file to XML Schema Definition (XSD) instantly. Browser‑based, no upload, no signup. Infers data types, handles nested elements and repeated tags."
+description: "Free online XML to XSD generator. Convert any XML file to XML Schema Definition (XSD) instantly. Browser‑based, no upload, no signup."
 keywords: "xml to xsd generator online, xml to xsd converter free, generate xsd from xml online, xml schema generator free, xml to xsd tool, xml to xsd large files, free online xml to xsd"
 ---
 <section style="display: flex; justify-content: center">

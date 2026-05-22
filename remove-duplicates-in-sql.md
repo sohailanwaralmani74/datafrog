@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Remove Duplicates in SQL – No upload, No signup | DataFrog"
-description: "Tool to remove duplicate rows in SQL. Find and delete duplicate records in your SQL queries or tables instantly. Browser‑based, no upload, no signup. Get clean SQL output."
+description: "Tool to remove duplicate rows in SQL. Find and delete duplicate records in your SQL queries or tables instantly. Browser‑based."
 keywords: "sql duplicate remover, remove duplicates from sql table, find duplicates in sql, delete duplicate rows sql, sql find duplicates, sql select duplicates, sql show duplicates, how to remove duplicates in sql, deduplicate sql, sql delete duplicate records, sql distinct duplicates, sql remove duplicate rows, clear duplicate sql, check duplicate in sql"
 ---
 

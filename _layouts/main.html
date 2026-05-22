@@ -20,12 +20,16 @@ layout: default
     <div class="nav-controls">
 
       <span class="nav-trigger" data-popup="converterTools" id="dataConverters" aria-label="Data Converters">
-        Data Converters
+        Converters
       </span> 
        <label style="color: #ddd;">|</label>
        <span class="nav-trigger" data-popup="deduplicateTools" id="deduplicate" aria-label="Remove duplicate data">
         Deduplicate
       </span> 
+      <label style="color: #ddd;">|</label>
+       <span class="nav-trigger" data-popup="generatorTools" id="generators" aria-label="Data Generators">
+        Generators
+      </span>  
 
     </div>
 
@@ -214,8 +218,6 @@ layout: default
 
     </div>
     <div class="popup-grid" id="deduplicateTools">
-
-
        <div class="popup-column">
         <h3>Deduplicate Data Tools</h3>
          <div style="display: grid;  grid-template-columns: repeat(3, 1fr);">
@@ -224,12 +226,16 @@ layout: default
         <a href="/remove-csv-duplicates">Remove CSV Duplicates</a>
         </div>
 
-      </div>
-
-      
-
+      </div>   
     </div>
-
+    <div class="popup-grid" id="generatorTools">
+       <div class="popup-column">
+        <h3>Data Generator</h3>
+        <div style="display: grid;  grid-template-columns: repeat(3, 1fr);">
+         <a href="/uuid-generator.md">UUID Generator</a>
+        </div>
+      </div>   
+    </div>
 
 
 

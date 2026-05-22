@@ -1,10 +1,9 @@
 ---
 layout: main
-title: "UUID Generator – Generate GUID, KSUID, NanoID, ULID, CUID Online | DataFrog"
-description: "Free online UUID generator. Create UUID v1/v4/v7, GUID, KSUID, ULID, NanoID, CUID, CUID2. Bulk generate up to 1000 IDs. Export to CSV, Excel, JSON, SQL, XML. Browser‑based, no signup."
+title: "UUID Generator – GUID, KSUID, NanoID, ULID, CUID"
+description: "Create UUID v1/v4/v7, GUID, KSUID, ULID, NanoID, CUID, CUID2. Generate up to 1000 IDs. Export to CSV, Excel, JSON, SQL, XML. "
 keywords: "uuid generator online, guid generator, ksuid generator, nanoid generator, ulid generator, cuid generator, bulk id generator, unique identifier generator, free uuid v4"
 ---
-
 
 <section style="display: flex; justify-content: center">
   <div style="width: 15%;"></div>
@@ -49,8 +48,7 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
     <div id="toastUUID" class="jsonx-toast">✅ IDs generated successfully</div>
 
 
-
-<article style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
+  <article style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
   <section id="why-use-generator">
     <h2 style="margin-top:30px;">Why use a UUID / unique ID generator?</h2>
@@ -152,12 +150,11 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
     <p>Yes. Once the page loads, all generation scripts are cached. You can disconnect from the internet and still generate unlimited IDs.</p>
   </section>
 
-</article>
-
-</div>
-
+ </article>
 
   </div>
+
+
   <div style="width: 15%;"></div>
 </section>
 

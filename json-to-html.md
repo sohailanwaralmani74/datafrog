@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "JSON to HTML Table Converter Online – Free & Private | DataFrog"
-description: "Free online JSON to HTML converter. Convert JSON arrays or objects to clean HTML tables instantly. Browser‑based, no signup. Copy or download .html file. Supports nested JSON."
+description: "Free online JSON to HTML converter. Convert JSON arrays or objects to clean HTML tables instantly. Browser‑based, no signup."
 keywords: "json to html online free, convert json to html table, json to html converter, json to html table generator, nested json to html, browser based json to html"
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

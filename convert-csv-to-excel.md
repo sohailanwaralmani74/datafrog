@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Convert CSV to Excel Online – Free XLSX / XLS Converter | DataFrog"
-description: "Free online CSV to Excel converter. No upload – 100% browser‑based. Convert CSV to XLSX or XLS instantly. Preserve data, preview before download. Secure & offline."
+description: "Free online CSV to Excel converter. No upload – 100% browser‑based. Convert CSV to XLSX or XLS instantly. Preserve data."
 keywords: "convert csv to excel online, csv to xlsx free, csv to xls converter, browser based csv to excel, no upload csv converter, free excel converter offline, csv to excel without email"
 ---
 

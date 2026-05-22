@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "QIF to Excel Converter Online – Free XLSX / XLS (No Upload) | DataFrog"
-description: "Free online QIF to Excel converter. Convert Quicken files to XLSX or XLS instantly. Browser‑based, no signup. Preserve financial transactions. Download Excel file."
+description: "Free online QIF to Excel converter. Convert Quicken files to XLSX or XLS instantly. Browser‑based, no signup. Download Excel file."
 keywords: "qif to excel online free, convert qif to xlsx, qif to xls converter, quicken to excel, bank qif to excel, free qif to excel tool, browser based qif to excel"
 ---
 

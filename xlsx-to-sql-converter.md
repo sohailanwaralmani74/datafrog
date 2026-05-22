@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "XLSX to SQL Converter – Free Excel to SQL (INSERT Statements) | DataFrog"
-description: "Free online XLSX to SQL converter. Convert Excel spreadsheets (XLSX, XLS) to SQL INSERT statements. Browser‑based, no signup. Preview and edit data. Download .sql file."
+title: "XLSX to SQL Converter – Free Online"
+description: "Free online XLSX to SQL converter. Convert Excel spreadsheets (XLSX, XLS) to SQL INSERT statements. Browser‑based, no signup."
 keywords: "xlsx to sql online free, convert excel to sql insert, xlsx to sql converter, excel to mysql, excel to postgresql, bulk insert from excel, xlsx to sql without upload"
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

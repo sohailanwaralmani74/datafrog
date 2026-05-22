@@ -279,18 +279,6 @@ keywords: "json to xml online free, convert json to xml, json to xml converter, 
     </p>
   </section>
 
-  <section>
-    <h2>Related developer tools</h2>
-
-    <ul>
-      <li><a href="/xml-to-json">XML to JSON Converter</a></li>
-      <li><a href="/json-formatter">JSON Formatter</a></li>
-      <li><a href="/json-validator">JSON Validator</a></li>
-      <li><a href="/xml-formatter">XML Formatter</a></li>
-      <li><a href="/xml-validator">XML Validator</a></li>
-    </ul>
-  </section>
-
 </article>
 </div>
 <div style="width: 20%"></div>

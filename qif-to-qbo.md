@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "QIF to QBO Converter Online – Free, Secure & Browser-Based | DataFrog"
-description: "Free online QIF to QBO converter. Convert Quicken files to QuickBooks Online format instantly. Browser‑based, no signup. Preserve financial transactions. Download .qbo file."
+description: "Free online QIF to QBO converter. Convert Quicken files to QuickBooks Online format instantly. Browser‑based, no signup. Download .qbo file."
 keywords: "qif to qbo online free, convert qif to qbo, quicken to quickbooks online, qif to qbo converter, free qif to qbo tool, browser based qif to qbo"
 ---
 

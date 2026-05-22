@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "DataFrog Privacy Policy – 100% Local Processing, No Uploads, GDPR & CCPA Compliant"
+title: "DataFrog Privacy Policy – 100% Local Processing"
 description: "DataFrog Privacy Policy: Your files never leave your device. No tracking, no cookies, no data collection. Fully GDPR and CCPA compliant browser‑based tools."
 keywords: "privacy policy, GDPR, CCPA, data protection, local file processing, no file upload, browser-based tools, secure converter, DataFrog privacy"
 ---

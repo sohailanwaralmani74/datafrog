@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "JSON to Excel Converter Online – Free XLSX / XLS Export | DataFrog"
-description: "Free online JSON to Excel converter. Convert JSON arrays or objects to Excel spreadsheets (XLSX / XLS) instantly. Browser‑based, no signup. Supports nested JSON as multi‑sheet workbooks."
+title: "JSON to Excel Converter Online – Free XLSX and XLS Export"
+description: "Free online JSON to Excel converter. Convert JSON arrays or objects to Excel spreadsheets (XLSX / XLS) instantly."
 keywords: "json to excel online free, convert json to excel, json to xlsx, json to xls, nested json to excel, json to excel multiple sheets, browser based json to excel"
 ---
 <section> <h1>Convert JSON to Excel Online – Multi‑Sheet XLSX / XLS Exporter</h1> 

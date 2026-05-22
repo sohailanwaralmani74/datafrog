@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "SQL to Excel Converter – Free XLSX / XLS Export Online | DataFrog"
-description: "Free online SQL to Excel converter. Convert SQL INSERT statements into XLSX or XLS spreadsheets instantly. Browser-based, no signup. Download Excel files directly."
+description: "Free online SQL to Excel converter. Convert SQL INSERT statements into XLSX or XLS spreadsheets instantly. Browser-based, no signup."
 keywords: "sql to excel online free, convert sql to xlsx, sql to xls converter, sql insert to excel, export sql to excel, sql dump to spreadsheet, browser based sql to excel"
 ---
 
@@ -68,7 +68,7 @@ keywords: "sql to excel online free, convert sql to xlsx, sql to xls converter, 
   </div>
  </div>
  <div id="sql-excel-toast" class="jsonx-toast"></div>
- 
+
 <article style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
   <section id="why-use-sql-to-excel">
@@ -219,11 +219,7 @@ INSERT INTO employees VALUES (102, 'Ben', 'Developer');</code></pre>
           "text": "Review the table preview, then choose 'Download .xlsx' for modern Excel or 'Download .xls' for legacy Excel formats."
         }
       ],
-      "totalTime": "PT2M",
-      "tool": {
-        "@type": "WebApplication",
-        "@id": "https://datafrog.tools/sql-to-excel#webapp"
-      }
+      "totalTime": "PT2M"
     },
     {
       "@type": "BreadcrumbList",

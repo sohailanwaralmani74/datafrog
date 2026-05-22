@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "YAML to JSON Converter Online – Free, Fast & Private | DataFrog"
-description: "Free online YAML to JSON converter. Convert YAML to JSON instantly in your browser. No upload, no signup. Preserves nested structures, arrays, and data types. Download .json file."
+description: "Free online YAML to JSON converter. Convert YAML to JSON instantly in your browser. No upload, no signup. Preserves nested structures."
 keywords: "yaml to json online free, convert yaml to json, yaml to json converter, yaml to json without upload, browser based yaml to json, free yaml to json tool, yaml to json config"
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "JSON to Dart Converter Online – Free Flutter Model Generator | DataFrog"
-description: "Free online JSON to Dart converter. Generate Flutter model classes with null safety, fromJson/toJson. Browser‑based, no signup. Copy or download .dart file."
+title: "JSON to Dart Converter Online – Model Generator | DataFrog"
+description: "Free online JSON to Dart converter. Generate Flutter model classes with null safety, fromJson/toJson."
 keywords: "json to dart converter online, json to dart model generator, json to dart null safety, flutter json to dart, json to dart class, json to dart freezed, json to dart quicktype, convert json to dart class, json to dart flutter, json serializable dart"
 ---
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

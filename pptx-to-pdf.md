@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "PPTX to PDF Converter – Free PowerPoint to PDF (No Upload) | DataFrog"
-description: "Free online PPTX to PDF converter. Convert PowerPoint presentations (PPTX/PPT) to PDF instantly. Browser‑based, no signup. Preview slides, download PDF with original layout preserved."
+description: "Free online PPTX to PDF converter. Convert PowerPoint presentations (PPTX/PPT) to PDF instantly. Browser‑based, no signup."
 keywords: "pptx to pdf free, convert powerpoint to pdf, ppt to pdf online, pptx to pdf without upload, free pptx to pdf converter, browser based powerpoint to pdf, pptx to pdf no signup"
 ---
 <style>

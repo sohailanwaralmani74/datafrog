@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Convert XLSX to CSV Online – Free Excel to CSV Converter | DataFrog"
-description: "Free online XLSX to CSV converter. Convert Excel spreadsheets to CSV format instantly. Browser‑based, no signup, private. Copy or download .csv file."
+description: "Free online XLSX to CSV converter. Convert Excel spreadsheets to CSV format instantly. Browser‑based, no signup, private."
 keywords: "convert xlsx to csv online free, excel to csv converter, xlsx to csv without upload, convert excel to csv, free xlsx to csv tool, excel to csv browser based"
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "PDF to PowerPoint Converter – Free PPTX (No Upload) | DataFrog"
-description: "Free online PDF to PowerPoint converter. Turn any PDF into PPTX slides instantly. Browser‑based, no signup, no upload. Preserves layout as high‑quality images. Download .pptx file."
+description: "Free online PDF to PowerPoint converter. Turn any PDF into PPTX slides instantly. Preserves layout as high‑quality images."
 keywords: "pdf to powerpoint free, pdf to pptx online, convert pdf to ppt, pdf to powerpoint without upload, free pdf to ppt converter, browser based pdf to pptx, pdf to ppt no signup"
 ---
 <style>

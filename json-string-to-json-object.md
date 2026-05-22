@@ -225,7 +225,7 @@ keywords: "json string to json object, convert string to json, parse json string
 [
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     "name": "JSON String to JSON Object Converter",
     "url": "https://datafrog.tools/json-string-to-json-object",
     "description": "Free online tool to parse any JSON string into a structured JSON object. Handles escaped, double-encoded, and stringified JSON instantly in your browser. No upload, no signup.",

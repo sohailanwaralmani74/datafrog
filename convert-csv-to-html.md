@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Convert CSV to HTML Table Online – Free & Secure (No Upload) | DataFrog"
-description: "Free online CSV to HTML table converter. No upload – 100% browser‑based. Convert CSV to clean HTML table code instantly. Copy or download .html file. Secure & offline."
+title: "Convert CSV to HTML Table – Free & Secure| DataFrog"
+description: "Free online CSV to HTML table converter. No upload – 100% browser‑based. Convert CSV to clean HTML table code instantly. "
 keywords: "convert csv to html table online, csv to html free, csv to html table code, browser based csv to html, no upload csv converter, generate html from csv, csv to html without email"
 ---
 
@@ -11,7 +11,7 @@ keywords: "convert csv to html table online, csv to html free, csv to html table
 
 <div style="width: 10%;"></div>
 <div style="width: 69%;">
-<h1>Convert CSV to HTML Table – Free & Secure (No Upload)</h1>
+<h1>Convert CSV to HTML Table Online - No Signup Required</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert CSV to HTML table online in seconds – completely free, no signup, no file uploads. This tool runs entirely in your browser. 
     Upload any CSV file (comma‑separated values), preview the parsed data, and instantly generate clean, semantic HTML table code. 

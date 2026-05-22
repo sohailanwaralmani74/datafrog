@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Convert Excel to HTML Table Online – Free & Secure | DataFrog"
-description: "Free online Excel to HTML converter. Transform XLSX or XLS files into clean, responsive HTML tables instantly. Browser‑based, no signup. Copy or download .html file."
+description: "Free online Excel to HTML converter. Transform XLSX or XLS files into clean, responsive HTML tables instantly. Browser‑based, no signup."
 keywords: "convert excel to html online free, excel to html table converter, xlsx to html, xls to html, excel to html without upload, free excel to html tool, browser based excel to html"
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

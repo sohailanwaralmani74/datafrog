@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Convert CSV to XML Online – Free, Fast & Secure | DataFrog"
-description: "Free online CSV to XML converter. Convert any CSV file to well-formed XML instantly. Browser‑based, no signup, private. Copy or download .xml file."
+description: "Free online CSV to XML converter. Convert any CSV file to well-formed XML instantly. Browser‑based, no signup, private."
 keywords: "convert csv to xml online free, csv to xml converter, csv to xml file, csv to xml with headers, browser based csv to xml, free csv to xml tool, csv to xml without upload"
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

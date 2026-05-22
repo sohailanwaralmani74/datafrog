@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "QIF to CSV Converter Online – Free, Secure & Browser-Based | DataFrog"
-description: "Free online QIF to CSV converter. Convert Quicken Interchange Format files to CSV instantly. Browser‑based, no signup. Preserves financial transaction data. Download .csv file."
+description: "Free online QIF to CSV converter. Convert Quicken Interchange Format files to CSV instantly. Browser‑based, no signup. Download .csv file."
 keywords: "qif to csv online free, convert qif to csv, qif to csv converter, quicken to csv, bank statement qif to csv, free qif to csv tool, browser based qif to csv"
 ---
 

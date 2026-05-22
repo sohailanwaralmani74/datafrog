@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Convert CSV to PDF Online – Free, Secure & No Upload | DataFrog"
-description: "Free online CSV to PDF converter. No upload – 100% browser‑based. Convert any CSV file to a professional PDF table instantly. Secure, private, and works offline."
+description: "Free online CSV to PDF converter. No upload – 100% browser‑based. Convert any CSV file to a professional PDF table instantly."
 keywords: "convert csv to pdf online free, csv to pdf converter no upload, csv to pdf table, browser based csv to pdf, free csv to pdf without email, csv to pdf offline, csv to pdf secure"
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -176,7 +176,7 @@ keywords: "convert csv to pdf online free, csv to pdf converter no upload, csv t
 <script type="application/ld+json">
 [
   {
-    "@context": "https://schema.org", a                                                                           
+    "@context":"https://schema.org",
     "@type": "WebApplication",
     "@id": "https://datafrog.tools/convert-csv-to-pdf#webapp",
     "name": "Convert CSV to PDF - Online CSV to PDF Converter",

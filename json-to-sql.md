@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "JSON to SQL Converter Online – Free MySQL, PostgreSQL, SQLite | DataFrog"
-description: "Free online JSON to SQL converter. Generate INSERT statements or CREATE TABLE schema from JSON instantly. Browser‑based, no signup. Download .sql file."
+title: "JSON to SQL Converter Online – RDBMS Compatible"
+description: "Free online JSON to SQL converter. Generate INSERT statements or CREATE TABLE schema from JSON instantly."
 keywords: "json to sql online free, convert json to sql insert, json to mysql, json to postgresql, json to sqlite, generate sql from json, json to create table, json to sql without upload"
 ---
 

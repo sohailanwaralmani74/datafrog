@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "JSON to YAML Converter Online – Free, Secure & Offline | DataFrog"
-description: "Free online JSON to YAML converter. Transform JSON arrays or objects to clean YAML instantly. Browser‑based, no signup. Download .yaml file. Perfect for Kubernetes, DevOps, and config files."
+description: "Free online JSON to YAML converter. Transform JSON arrays or objects to clean YAML instantly. Browser‑based, no signup."
 keywords: "json to yaml online free, convert json to yaml, json to yaml converter, json to yaml kubernetes, browser based json to yaml, json to yaml without upload, yaml generator from json"
 ---
 
