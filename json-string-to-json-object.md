@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "JSON String to JSON Object Converter – Parse & Validate Online | DataFrog"
+title: "JSON String to JSON Object Converter Online | DataFrog"
 description: "Free online tool to convert JSON string to JSON object instantly. Parse, validate, and format stringified JSON. Browser‑based, no signup. Copy or download."
 keywords: "json string to json object, convert string to json, parse json string online, json string parser, json validator, string to json converter, json object formatter"
 ---

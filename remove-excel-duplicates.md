@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Remove Duplicates in Excel – Duplicate Remover Tool | DataFrog"
-description: "Tool to remove duplicates in Excel. Find and delete duplicate rows in XLSX or XLS files instantly. No upload, browser‑based, no signup. Download cleaned Excel file."
+description: "Tool to remove duplicates in Excel. Find and delete duplicate rows in XLSX or XLS files instantly."
 keywords: "excel duplicate remove, excel find duplicates, eliminate duplicate excel, eliminate repeats in excel, excel search duplicates, excel select duplicates, excel show duplicates, in excel how to remove duplicates, xls find duplicates, xls remove duplicates, excel delete duplicates, check duplicate in excel, clear duplicate excel, deduplicate excel"
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
