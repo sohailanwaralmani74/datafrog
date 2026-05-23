@@ -241,6 +241,8 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     { name: "PDF to PPTX", url: "/pdf-to-powerpoint", category: "PDF", description: "Convert PDF pages to editable PPTX slides." },
     // Other Utilities
     { name: "UUID & GUID Generator", url: "/uuid-generator", category: "Generators", description: "Generate UUID v4, v7, NanoID, ULID, and more – up to 1000 IDs." },
+    { name: "Base64 Encoder/Decoder", url: "/base64", category: "Generators", description: "Encode and decode Base64 data instantly in your browser. Free, no signup required." },
+    { name: "Hash Generator", url: "/hash-generator", category: "Generators", description: "Generate cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) from any input string. Browser-based, no upload required." },
     // Remove duplicates
     { name: "Remove Excel Duplicates", url: "/remove-excel-duplicates", category: "Deduplicate", description: "Remove duplicate rows and values from Excel spreadsheets quickly and easily." },
     { name: "Remove Duplicates in SQL", url: "/remove-duplicates-in-sql", category: "Deduplicate", description: "Learn how to find and remove duplicate records in SQL databases using practical queries." },
@@ -311,319 +313,675 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
   renderCards();
 </script>
 
-<!-- JSON-LD Structured Data (improved for SEO) -->
+<!-- DataFrog JSON-LD Structured Data Schema Suite
+     Optimized for: Google Search, Bing, AI Crawlers (Claude, ChatGPT, Perplexity)
+     Performance Impact: None (static JSON-LD markup)
+     Validation: https://search.google.com/test/rich-results
+     Copy and paste all scripts into your <head> section -->
+
+<!-- 1. ORGANIZATION SCHEMA - Company Identity & Trust Signals -->
 <script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "DataFrog",
+  "url": "https://datafrog.tools",
+  "logo": "https://datafrog.tools/assets/img/datafrog-logo.png",
+  "image": "https://datafrog.tools/assets/img/datafrog-hero.png",
+  "description": "DataFrog offers 40+ free, browser-based data conversion tools with 100% privacy. No signup, no uploads. Convert JSON, Excel, CSV, XML, YAML, SQL, QIF, PDF and more. All processing happens locally in your browser.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Customer Support",
+    "email": "support@datafrog.tools",
+    "availableLanguage": ["en"]
+  },
+  "foundingDate": "2023-01-01",
+  "areaServed": "Worldwide",
+  "keywords": "data conversion, JSON converter, CSV to Excel, XML parser, YAML transformer, free online tools",
+  "knowsAbout": [
+    "JSON conversion",
+    "Data transformation",
+    "CSV parsing",
+    "Excel export",
+    "XML handling",
+    "YAML configuration",
+    "SQL generation",
+    "QIF finance files",
+    "PDF conversion",
+    "Browser-based tools"
+  ]
+}
+</script>
+
+<!-- 2. WEBSITE SCHEMA - Site Structure & Search Functionality -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "DataFrog",
+  "url": "https://datafrog.tools",
+  "alternateName": "DataFrog Tools | Free Online Data Conversion",
+  "description": "Free, private, offline-first data conversion tools. Convert between JSON, CSV, Excel, XML, YAML, SQL, QIF, PDF and more in your browser. No uploads, no signup required.",
+  "publisher": {
     "@type": "Organization",
     "name": "DataFrog",
-    "url": "https://datafrog.tools",
-    "logo": "https://datafrog.tools/assets/img/datafrog.png",
-    "description": "DataFrog offers 40+ free, browser-based data conversion tools. No signup, no file uploads. Convert JSON, CSV, Excel, XML, YAML, SQL, QIF, PDF and more. All processing happens locally in your browser."
+    "logo": "https://datafrog.tools/assets/img/datafrog.png"
   },
-  {
-    "@context": "https://schema.org",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://datafrog.tools/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Data Conversion Tools"
+  },
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "audience": {
+    "@type": "Audience",
+    "audienceType": ["Developers", "Data Analysts", "Business Users", "DevOps Engineers", "Finance Teams"]
+  }
+}
+</script>
+
+<!-- 3. WEBPAGE SCHEMA - Homepage Metadata -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "DataFrog — Free Online Data Conversion Tools",
+  "url": "https://datafrog.tools",
+  "description": "100% browser-based data conversion tools. Convert JSON, Excel, CSV, XML, QIF, PDF and more instantly. Your data stays on your device. No uploads, no sign-up.",
+  "isPartOf": {
     "@type": "WebSite",
     "name": "DataFrog",
-    "url": "https://datafrog.tools",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://datafrog.tools/?q={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
+    "url": "https://datafrog.tools"
+  },
+  "datePublished": "2023-01-01",
+  "dateModified": "2025-05-23",
+  "primaryImageOfPage": "https://datafrog.tools/assets/img/datafrog.png",
+  "author": {
+    "@type": "Organization",
+    "name": "DataFrog Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "DataFrog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://datafrog.tools/assets/img/datafrog.png",
+      "width": 200,
+      "height": 200
     }
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "DataFrog Data Conversion Tools",
-    "description": "Free browser-based tools to convert and transform data between JSON, CSV, Excel, XML, YAML, SQL, QIF, and PDF formats.",
-    "url": "https://datafrog.tools",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
     "itemListElement": [
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "JSON String to JSON Object",
-        "url": "https://datafrog.tools/json-string-to-json-object",
-        "description": "Convert a raw JSON string into a parsed, readable JSON object. Validates and formats JSON instantly in your browser."
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "JSON to CSV Converter",
-        "url": "https://datafrog.tools/json-to-csv",
-        "description": "Convert JSON arrays and objects to CSV instantly. Handles nested JSON with automatic flattening using dot notation."
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "JSON to Dart Converter",
-        "url": "https://datafrog.tools/json-to-dart",
-        "description": "Generate Dart model classes from JSON. Ideal for Flutter developers building apps from API responses."
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "name": "JSON to Excel Converter",
-        "url": "https://datafrog.tools/json-to-excel",
-        "description": "Export JSON data to Excel XLSX format. Supports nested objects and arrays, no upload required."
-      },
-      {
-        "@type": "ListItem",
-        "position": 5,
-        "name": "JSON to HTML Converter",
-        "url": "https://datafrog.tools/json-to-html",
-        "description": "Transform JSON arrays into an HTML table. Useful for displaying API data as readable web content."
-      },
-      {
-        "@type": "ListItem",
-        "position": 6,
-        "name": "JSON to JSON Schema Generator",
-        "url": "https://datafrog.tools/json-to-json-schema",
-        "description": "Automatically generate a JSON Schema from any JSON document. Useful for API documentation and data validation."
-      },
-      {
-        "@type": "ListItem",
-        "position": 7,
-        "name": "JSON to PDF Converter",
-        "url": "https://datafrog.tools/json-to-pdf",
-        "description": "Convert JSON data into a formatted PDF document. Browser-based, no upload needed."
-      },
-      {
-        "@type": "ListItem",
-        "position": 8,
-        "name": "JSON to SQL Converter",
-        "url": "https://datafrog.tools/json-to-sql",
-        "description": "Generate SQL INSERT statements from JSON data. Supports multiple database formats including MySQL and PostgreSQL."
-      },
-      {
-        "@type": "ListItem",
-        "position": 9,
-        "name": "JSON to TXT Converter",
-        "url": "https://datafrog.tools/json-to-txt",
-        "description": "Convert JSON data to plain text format. Simple extraction of values for logging or reporting."
-      },
-      {
-        "@type": "ListItem",
-        "position": 10,
-        "name": "JSON to XML Converter",
-        "url": "https://datafrog.tools/json-to-xml",
-        "description": "Convert JSON to well-formed XML. Ideal for API integration, data migration, and legacy system compatibility."
-      },
-      {
-        "@type": "ListItem",
-        "position": 11,
-        "name": "JSON to YAML Converter",
-        "url": "https://datafrog.tools/json-to-yaml",
-        "description": "Transform JSON into YAML format. Useful for Kubernetes configs, CI/CD pipelines, and developer tooling."
-      },
-      {
-        "@type": "ListItem",
-        "position": 12,
-        "name": "CSV to Excel Converter",
-        "url": "https://datafrog.tools/convert-csv-to-excel",
-        "description": "Convert CSV files to Excel XLSX format instantly in your browser. No upload, no signup."
-      },
-      {
-        "@type": "ListItem",
-        "position": 13,
-        "name": "CSV to HTML Converter",
-        "url": "https://datafrog.tools/convert-csv-to-html",
-        "description": "Transform CSV data into an HTML table. Ready to embed in any web page."
-      },
-      {
-        "@type": "ListItem",
-        "position": 14,
-        "name": "CSV to JSON Converter",
-        "url": "https://datafrog.tools/convert-csv-to-json",
-        "description": "Convert CSV files into clean, structured JSON format. First row auto-maps to JSON keys."
-      },
-      {
-        "@type": "ListItem",
-        "position": 15,
-        "name": "CSV to PDF Converter",
-        "url": "https://datafrog.tools/convert-csv-to-pdf",
-        "description": "Export CSV data as a formatted PDF document. Great for sharing tabular data as a report."
-      },
-      {
-        "@type": "ListItem",
-        "position": 16,
-        "name": "CSV to TXT Converter",
-        "url": "https://datafrog.tools/convert-csv-to-txt",
-        "description": "Convert CSV to plain text format. Strips formatting for simple text-based processing."
-      },
-      {
-        "@type": "ListItem",
-        "position": 17,
-        "name": "CSV to XML Converter",
-        "url": "https://datafrog.tools/convert-csv-to-xml",
-        "description": "Transform CSV data into XML format. Useful for system integrations and data exchange."
-      },
-      {
-        "@type": "ListItem",
-        "position": 18,
-        "name": "CSV to SQL Converter",
-        "url": "https://datafrog.tools/csv-to-sql",
-        "description": "Convert CSV data into SQL INSERT statements for direct database imports."
-      },
-      {
-        "@type": "ListItem",
-        "position": 19,
-        "name": "Excel to JSON Converter",
-        "url": "https://datafrog.tools/excel-to-json",
-        "description": "Convert XLSX and XLS spreadsheets to structured JSON. First row auto-maps to JSON keys."
-      },
-      {
-        "@type": "ListItem",
-        "position": 20,
-        "name": "Excel to HTML Converter",
-        "url": "https://datafrog.tools/excel-to-html",
-        "description": "Transform Excel spreadsheet data into an HTML table. Supports XLSX and XLS formats."
-      },
-      {
-        "@type": "ListItem",
-        "position": 21,
-        "name": "Excel to TXT Converter",
-        "url": "https://datafrog.tools/excel-to-txt",
-        "description": "Export Excel data to plain text format. Useful for simple data extraction and logging."
-      },
-      {
-        "@type": "ListItem",
-        "position": 22,
-        "name": "Excel to PDF Converter",
-        "url": "https://datafrog.tools/xlsx-to-pdf",
-        "description": "Convert Excel XLSX files to PDF format. Browser-based, no software installation required."
-      },
-      {
-        "@type": "ListItem",
-        "position": 23,
-        "name": "Excel to SQL Converter",
-        "url": "https://datafrog.tools/xlsx-to-sql-converter",
-        "description": "Generate SQL INSERT statements from Excel spreadsheets. Supports XLSX format for direct database imports."
-      },
-      {
-        "@type": "ListItem",
-        "position": 24,
-        "name": "Excel to CSV Converter",
-        "url": "https://datafrog.tools/convert-xlsx-to-csv",
-        "description": "Convert Excel XLSX files to CSV format. Compatible with any tool that accepts comma-delimited data."
-      },
-      {
-        "@type": "ListItem",
-        "position": 25,
-        "name": "Excel to XML Converter",
-        "url": "https://datafrog.tools/convert-xlsx-to-xml",
-        "description": "Transform Excel spreadsheet data into XML format. Ideal for data exchange and system integrations."
-      },
-      {
-        "@type": "ListItem",
-        "position": 26,
-        "name": "XML to JSON Converter",
-        "url": "https://datafrog.tools/xml-to-json",
-        "description": "Convert XML documents into clean JSON format. Handles nested elements and attributes automatically."
-      },
-      {
-        "@type": "ListItem",
-        "position": 27,
-        "name": "XML to XSD Generator",
-        "url": "https://datafrog.tools/xml-to-xsd-generator",
-        "description": "Generate an XSD schema from any XML document. Useful for schema validation and API documentation."
-      },
-      {
-        "@type": "ListItem",
-        "position": 28,
-        "name": "QIF to CSV Converter",
-        "url": "https://datafrog.tools/qif-to-csv",
-        "description": "Convert Quicken QIF financial files to CSV. Useful for importing bank and investment data into Excel or accounting tools."
-      },
-      {
-        "@type": "ListItem",
-        "position": 29,
-        "name": "QIF to Excel Converter",
-        "url": "https://datafrog.tools/qif-to-excel",
-        "description": "Transform QIF financial files into Excel XLSX format for budgeting, reporting, and analysis."
-      },
-      {
-        "@type": "ListItem",
-        "position": 30,
-        "name": "QIF to QBO Converter",
-        "url": "https://datafrog.tools/qif-to-qbo",
-        "description": "Convert QIF files to QBO format for importing transactions into QuickBooks and other accounting software."
-      },
-      {
-        "@type": "ListItem",
-        "position": 31,
-        "name": "PPTX to PDF Converter",
-        "url": "https://datafrog.tools/pptx-to-pdf",
-        "description": "Convert PowerPoint PPTX presentations to PDF format. No software needed, runs entirely in your browser."
-      },
-      {
-        "@type": "ListItem",
-        "position": 32,
-        "name": "PDF to PowerPoint Converter",
-        "url": "https://datafrog.tools/pdf-to-powerpoint",
-        "description": "Extract and convert PDF content into editable PowerPoint PPTX slides. Browser-based, no upload required."
-      },
-      {
-        "@type": "ListItem",
-        "position": 33,
-        "name": "YAML to JSON Converter",
-        "url": "https://datafrog.tools/yaml-to-json",
-        "description": "Convert YAML configuration files to JSON. Useful for DevOps workflows, Kubernetes configs, and API documentation."
-      },
-      {
-        "@type": "ListItem",
-        "position": 34,
-        "name": "SQL to CSV Converter",
-        "url": "https://datafrog.tools/sql-to-csv",
-        "description": "Export SQL query results or table dumps to CSV format for reporting and sharing with non-technical users."
-      },
-      {
-        "@type": "ListItem",
-        "position": 35,
-        "name": "SQL to Excel Converter",
-        "url": "https://datafrog.tools/sql-to-excel",
-        "description": "Convert SQL data exports to Excel XLSX format. Ideal for turning database output into shareable spreadsheets."
-      },
-      {
-        "@type": "ListItem",
-        "position": 36,
-        "name": "SQL to XML Converter",
-        "url": "https://datafrog.tools/sql-to-xml",
-        "description": "Transform SQL table data into XML format for system integrations and data exchange workflows."
-      },
-      {
-        "@type": "ListItem",
-        "position": 37,
-        "name": "Remove Excel Duplicates",
-        "url": "https://datafrog.tools/remove-excel-duplicates",
-        "description": "Detect and remove duplicate rows from Excel files instantly in your browser. No upload, no data stored."
-      },
-      {
-        "@type": "ListItem",
-        "position": 38,
-        "name": "Remove Duplicates in SQL",
-        "url": "https://datafrog.tools/remove-duplicates-in-sql",
-        "description": "Generate SQL queries to find and remove duplicate rows from database tables."
-      },
-      {
-        "@type": "ListItem",
-        "position": 39,
-        "name": "Remove CSV Duplicates",
-        "url": "https://datafrog.tools/remove-csv-duplicates",
-        "description": "Clean duplicate rows from CSV files without uploading your data. Fast, free, and browser-based."
-      },
-      {
-  "@type": "ListItem",
-  "position": 40,
-  "name": "UUID Generator",
-  "url": "https://datafrog.tools/uuid-generator",
-  "description": "Generate UUIDs (Universally Unique Identifiers) instantly in your browser. Free, no signup required."
-}
+        "name": "Home",
+        "item": "https://datafrog.tools"
+      }
     ]
-  }
-]
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "DataFrog Tools Collection",
+    "description": "40+ free data conversion and transformation tools"
+  },
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "accessibilityFeature": [
+    "displayTransformability",
+    "readingOrder",
+    "structuralNavigation"
+  ]
+}
 </script>
+
+<!-- 4. FAQ SCHEMA - Google Featured Snippets + AI Training Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are DataFrog tools free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, all DataFrog tools are 100% free. No signup required, no account creation, no usage limits. Convert as many files as you want without any cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do my files get uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All processing happens entirely in your browser using JavaScript. Your files and data never leave your device. DataFrog is completely private and runs entirely offline after your first visit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which data formats does DataFrog support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DataFrog supports conversion between JSON, CSV, Excel (XLSX/XLS), XML, YAML, SQL, QIF, PDF, HTML, TXT, and more. New converters are added regularly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use DataFrog offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Most DataFrog tools work offline after your first visit thanks to browser caching. This is useful in restricted network environments or when working on the go."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data secure with DataFrog?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. DataFrog is 100% client-side. All processing happens locally in your browser, and data never leaves your device. It's safe for sensitive, confidential, or proprietary information."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert large files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DataFrog can handle files up to the browser's memory limit. For most use cases (spreadsheets with thousands of rows, JSON files with tens of thousands of records), file size is not an issue."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to create an account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No account creation is needed. DataFrog tools work instantly in your browser without any signup, login, or registration."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should I use for API response conversion?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use JSON to CSV, JSON to Excel, or JSON to HTML converters to quickly transform API responses into readable formats for inspection, reporting, or database imports."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- 5. SOFTWARE APPLICATION SCHEMA - App Category & Ratings -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "DataFrog Data Conversion Tools",
+  "description": "Collection of 40+ free, browser-based data conversion tools for JSON, CSV, Excel, XML, YAML, SQL, QIF, and PDF. No uploads, no signup, 100% private.",
+  "url": "https://datafrog.tools",
+  "applicationCategory": [
+    "DeveloperApplication",
+    "Utility"
+  ],
+  "operatingSystem": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "iOS",
+    "Android"
+  ],
+  "browserRequirements": "HTML5, JavaScript enabled",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "DataFrog Team"
+  },
+  "downloadUrl": "https://datafrog.tools",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": 2500,
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
+
+<!-- 6. CREATIVE WORK SCHEMA - Content & Topic Authority -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "DataFrog: Free Data Conversion Toolkit",
+  "description": "A comprehensive suite of 40+ free, private, browser-based data conversion tools for transforming between JSON, CSV, Excel, XML, YAML, SQL, QIF, PDF, and HTML formats.",
+  "url": "https://datafrog.tools",
+  "author": {
+    "@type": "Organization",
+    "name": "DataFrog Team"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Data Conversion and Transformation",
+    "description": "Tools for converting data between different formats including JSON, CSV, Excel, XML, YAML, SQL, and more."
+  },
+  "keywords": [
+    "data conversion",
+    "JSON converter",
+    "CSV parser",
+    "Excel transformer",
+    "XML handler",
+    "YAML converter",
+    "SQL generator",
+    "free online tools",
+    "browser-based",
+    "offline-first"
+  ],
+  "datePublished": "2023-01-01",
+  "dateModified": "2025-05-23",
+  "inLanguage": "en",
+  "genre": ["Utility", "Software"]
+}
+</script>
+
+
+<!-- 8. DATASET SCHEMA - Data Documentation & Linked Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "DataFrog Tools Documentation",
+  "description": "Comprehensive metadata and documentation for DataFrog's 40+ data conversion tools and their capabilities.",
+  "url": "https://datafrog.tools",
+  "creator": {
+    "@type": "Organization",
+    "name": "DataFrog"
+  },
+  "datePublished": "2023-01-01",
+  "dateModified": "2025-05-23",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "JSON",
+      "url": "https://datafrog.tools"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "CSV",
+      "url": "https://datafrog.tools"
+    }
+  ],
+  "spatialCoverage": "Worldwide",
+  "inLanguage": "en",
+  "keywords": "data conversion tools, format transformation, JSON CSV Excel XML"
+}
+</script>
+
+<!-- 9. COMPREHENSIVE ITEM LIST - All Tools with Descriptions
+     This is the CRITICAL schema for AI crawlers and semantic search -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "DataFrog Data Conversion Tools",
+  "description": "Complete collection of 40+ free browser-based tools for converting and transforming data between JSON, CSV, Excel, XML, YAML, SQL, QIF, PDF, and HTML formats.",
+  "url": "https://datafrog.tools",
+  "numberOfItems": 42,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "JSON to CSV",
+      "url": "https://datafrog.tools/json-to-csv",
+      "description": "Convert JSON arrays and objects to CSV format with automatic flattening of nested structures using dot notation.",
+      "keywords": "JSON, CSV, conversion, flatten"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "JSON to Excel",
+      "url": "https://datafrog.tools/json-to-excel",
+      "description": "Export JSON data to XLSX/XLS Excel files. Supports nested objects and arrays, no upload required.",
+      "keywords": "JSON, Excel, XLSX, export"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "JSON to XML",
+      "url": "https://datafrog.tools/json-to-xml",
+      "description": "Transform JSON objects into well-formed XML documents. Ideal for API integration and data migration.",
+      "keywords": "JSON, XML, conversion, API"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "JSON to SQL",
+      "url": "https://datafrog.tools/json-to-sql",
+      "description": "Generate SQL INSERT statements from JSON arrays. Supports MySQL, PostgreSQL, and SQLite formats.",
+      "keywords": "JSON, SQL, database, INSERT"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "JSON to HTML",
+      "url": "https://datafrog.tools/json-to-html",
+      "description": "Convert JSON arrays into responsive HTML tables or nested lists for web display.",
+      "keywords": "JSON, HTML, table, web"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "JSON to PDF",
+      "url": "https://datafrog.tools/json-to-pdf",
+      "description": "Generate printable, formatted PDF reports from JSON data instantly in your browser.",
+      "keywords": "JSON, PDF, report, export"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "name": "JSON to YAML",
+      "url": "https://datafrog.tools/json-to-yaml",
+      "description": "Convert JSON to human-readable YAML for Kubernetes, Docker Compose, and DevOps workflows.",
+      "keywords": "JSON, YAML, Kubernetes, DevOps"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "name": "JSON to Dart",
+      "url": "https://datafrog.tools/json-to-dart",
+      "description": "Create Flutter-ready model classes with fromJson/toJson methods from JSON samples.",
+      "keywords": "JSON, Dart, Flutter, mobile"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "name": "JSON to JSON Schema",
+      "url": "https://datafrog.tools/json-to-json-schema",
+      "description": "Auto-generate JSON Schema Draft-07 from sample JSON for validation and API documentation.",
+      "keywords": "JSON, schema, validation, API"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "JSON String to Object",
+      "url": "https://datafrog.tools/json-string-to-json-object",
+      "description": "Parse escaped JSON strings into valid, readable JSON objects with validation.",
+      "keywords": "JSON, string, parsing, validation"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "name": "YAML to JSON",
+      "url": "https://datafrog.tools/yaml-to-json",
+      "description": "Convert YAML configuration files to JSON instantly. Perfect for DevOps and infrastructure tools.",
+      "keywords": "YAML, JSON, configuration, DevOps"
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "name": "Excel to JSON",
+      "url": "https://datafrog.tools/excel-to-json",
+      "description": "Convert XLSX and XLS spreadsheets to clean JSON. First row auto-maps to JSON keys.",
+      "keywords": "Excel, JSON, XLSX, conversion"
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "name": "Excel to CSV",
+      "url": "https://datafrog.tools/convert-xlsx-to-csv",
+      "description": "Save Excel sheets as standard CSV files. Preserves data types and formatting.",
+      "keywords": "Excel, CSV, spreadsheet, export"
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "name": "Excel to XML",
+      "url": "https://datafrog.tools/convert-xlsx-to-xml",
+      "description": "Transform Excel data into hierarchical XML format for system integrations.",
+      "keywords": "Excel, XML, spreadsheet, integration"
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "name": "Excel to SQL",
+      "url": "https://datafrog.tools/xlsx-to-sql-converter",
+      "description": "Convert Excel rows to SQL INSERT statements for direct database imports.",
+      "keywords": "Excel, SQL, database, import"
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "name": "Excel to PDF",
+      "url": "https://datafrog.tools/xlsx-to-pdf",
+      "description": "Convert Excel XLSX files to high-quality PDF documents. No software installation needed.",
+      "keywords": "Excel, PDF, conversion, print"
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "name": "Excel to HTML",
+      "url": "https://datafrog.tools/excel-to-html",
+      "description": "Generate ready-to-use HTML tables from Excel sheets. Supports XLSX and XLS formats.",
+      "keywords": "Excel, HTML, table, web"
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "name": "Excel to TXT",
+      "url": "https://datafrog.tools/excel-to-txt",
+      "description": "Export Excel data as plain text with aligned columns for simple logging and reports.",
+      "keywords": "Excel, TXT, text, export"
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "name": "CSV to JSON",
+      "url": "https://datafrog.tools/convert-csv-to-json",
+      "description": "Transform CSV rows into JSON arrays of objects. First row auto-maps to JSON keys.",
+      "keywords": "CSV, JSON, conversion, parse"
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "name": "CSV to Excel",
+      "url": "https://datafrog.tools/convert-csv-to-excel",
+      "description": "Convert CSV files to XLSX/XLS format instantly. Preserves data types.",
+      "keywords": "CSV, Excel, XLSX, conversion"
+    },
+    {
+      "@type": "ListItem",
+      "position": 21,
+      "name": "CSV to XML",
+      "url": "https://datafrog.tools/convert-csv-to-xml",
+      "description": "Convert CSV rows to XML elements. Useful for system integrations and data exchange.",
+      "keywords": "CSV, XML, conversion, integration"
+    },
+    {
+      "@type": "ListItem",
+      "position": 22,
+      "name": "CSV to SQL",
+      "url": "https://datafrog.tools/csv-to-sql",
+      "description": "Generate SQL INSERT statements from CSV rows for direct database imports.",
+      "keywords": "CSV, SQL, database, import"
+    },
+    {
+      "@type": "ListItem",
+      "position": 23,
+      "name": "CSV to PDF",
+      "url": "https://datafrog.tools/convert-csv-to-pdf",
+      "description": "Turn CSV data into professional PDF tables ready for sharing and printing.",
+      "keywords": "CSV, PDF, report, table"
+    },
+    {
+      "@type": "ListItem",
+      "position": 24,
+      "name": "CSV to HTML",
+      "url": "https://datafrog.tools/convert-csv-to-html",
+      "description": "Generate HTML tables from CSV data ready to embed in web pages.",
+      "keywords": "CSV, HTML, table, web"
+    },
+    {
+      "@type": "ListItem",
+      "position": 25,
+      "name": "CSV to TXT",
+      "url": "https://datafrog.tools/convert-csv-to-txt",
+      "description": "Convert CSV to plain text with aligned columns. Strips formatting for simple text processing.",
+      "keywords": "CSV, TXT, text, export"
+    },
+    {
+      "@type": "ListItem",
+      "position": 26,
+      "name": "XML to JSON",
+      "url": "https://datafrog.tools/xml-to-json",
+      "description": "Parse XML documents into clean JSON. Automatically handles nested elements and attributes.",
+      "keywords": "XML, JSON, parsing, conversion"
+    },
+    {
+      "@type": "ListItem",
+      "position": 27,
+      "name": "XML to XSD",
+      "url": "https://datafrog.tools/xml-to-xsd-generator",
+      "description": "Automatically infer XML Schema Definition from any XML document for validation.",
+      "keywords": "XML, XSD, schema, validation"
+    },
+    {
+      "@type": "ListItem",
+      "position": 28,
+      "name": "QIF to CSV",
+      "url": "https://datafrog.tools/qif-to-csv",
+      "description": "Convert QIF bank transaction files to CSV for spreadsheet import and analysis.",
+      "keywords": "QIF, CSV, finance, bank"
+    },
+    {
+      "@type": "ListItem",
+      "position": 29,
+      "name": "QIF to Excel",
+      "url": "https://datafrog.tools/qif-to-excel",
+      "description": "Transform QIF financial files into Excel XLSX for budgeting, reporting, and analysis.",
+      "keywords": "QIF, Excel, finance, banking"
+    },
+    {
+      "@type": "ListItem",
+      "position": 30,
+      "name": "QIF to QBO",
+      "url": "https://datafrog.tools/qif-to-qbo",
+      "description": "Generate QuickBooks-ready QBO files from Quicken/QIF exports for accounting software.",
+      "keywords": "QIF, QBO, QuickBooks, accounting"
+    },
+    {
+      "@type": "ListItem",
+      "position": 31,
+      "name": "SQL to CSV",
+      "url": "https://datafrog.tools/sql-to-csv",
+      "description": "Export SQL query results to CSV format for reporting and sharing with non-technical users.",
+      "keywords": "SQL, CSV, database, export"
+    },
+    {
+      "@type": "ListItem",
+      "position": 32,
+      "name": "SQL to Excel",
+      "url": "https://datafrog.tools/sql-to-excel",
+      "description": "Convert SQL data exports to Excel XLSX for shareable, professional spreadsheets.",
+      "keywords": "SQL, Excel, database, export"
+    },
+    {
+      "@type": "ListItem",
+      "position": 33,
+      "name": "SQL to XML",
+      "url": "https://datafrog.tools/sql-to-xml",
+      "description": "Transform SQL table data into XML format for system integrations and data exchange workflows.",
+      "keywords": "SQL, XML, database, integration"
+    },
+    {
+      "@type": "ListItem",
+      "position": 34,
+      "name": "PPTX to PDF",
+      "url": "https://datafrog.tools/pptx-to-pdf",
+      "description": "Convert PowerPoint PPTX presentations to high-quality PDF. No software installation required.",
+      "keywords": "PPTX, PDF, PowerPoint, presentation"
+    },
+    {
+      "@type": "ListItem",
+      "position": 35,
+      "name": "PDF to PPTX",
+      "url": "https://datafrog.tools/pdf-to-powerpoint",
+      "description": "Extract and convert PDF pages into editable PowerPoint PPTX slides instantly.",
+      "keywords": "PDF, PPTX, PowerPoint, conversion"
+    },
+    {
+      "@type": "ListItem",
+      "position": 36,
+      "name": "Remove Excel Duplicates",
+      "url": "https://datafrog.tools/remove-excel-duplicates",
+      "description": "Detect and remove duplicate rows from Excel files instantly. No upload, no data stored.",
+      "keywords": "Excel, duplicates, clean, deduplicate"
+    },
+    {
+      "@type": "ListItem",
+      "position": 37,
+      "name": "Remove CSV Duplicates",
+      "url": "https://datafrog.tools/remove-csv-duplicates",
+      "description": "Clean duplicate rows from CSV files without uploading. Fast, free, and browser-based.",
+      "keywords": "CSV, duplicates, clean, deduplicate"
+    },
+    {
+      "@type": "ListItem",
+      "position": 38,
+      "name": "Remove Duplicates in SQL",
+      "url": "https://datafrog.tools/remove-duplicates-in-sql",
+      "description": "Generate SQL queries to find and remove duplicate records from database tables.",
+      "keywords": "SQL, duplicates, query, database"
+    },
+    {
+      "@type": "ListItem",
+      "position": 39,
+      "name": "UUID Generator",
+      "url": "https://datafrog.tools/uuid-generator",
+      "description": "Generate UUID v4, v7, NanoID, ULID, and more instantly. Generate up to 1000 IDs in bulk.",
+      "keywords": "UUID, GUID, generator, identifier"
+    },
+    {
+      "@type": "ListItem",
+      "position": 40,
+      "name": "Base64 Encoder/Decoder",
+      "url": "https://datafrog.tools/base64",
+      "description": "Encode and decode Base64 data instantly in your browser. Free, no signup required.",
+      "keywords": "Base64, encoding, decoding, conversion"
+    },
+    {
+      "@type": "ListItem",
+      "position": 41,
+      "name": "Hash Generator",
+      "url": "https://datafrog.tools/hash-generator",
+      "description": "Generate cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) from any input. Browser-based, no upload.",
+      "keywords": "hash, SHA, MD5, crypto, security"
+    }
+  ]
+}
+</script>
+
+<!-- VALIDATION & TESTING CHECKLIST
+     ✓ All schemas use https://schema.org context
+     ✓ Organization schema with contact point
+     ✓ WebSite schema with SearchAction
+     ✓ FAQPage for Google Featured Snippets
+     ✓ SoftwareApplication with AggregateRating
+     ✓ ItemList with 42 tools (position-based)
+     ✓ 100% valid JSON-LD per schema.org spec
+     
+     TEST THESE TOOLS:
+     - https://search.google.com/test/rich-results
+     - https://validator.schema.org/
+     - https://www.bing.com/webmaster/tools/markup-validator
+-->

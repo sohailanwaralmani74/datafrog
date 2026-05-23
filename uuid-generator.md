@@ -35,14 +35,14 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
         </div>
         <!-- Export labels on top-right corner -->
         <div style="text-align: right; margin: 5px 0;">
-          <span class="csvx-btn small" style="color: white;" id="copyUUIDBtn">📋 Copy All</span>
-          <span class="csvx-btn small" style="color: white;" id="exportCSVBtn">💾 CSV</span>
-          <span class="csvx-btn small" style="color: white;" id="exportExcelBtn">💾 Excel</span>
-          <span class="csvx-btn small" style="color: white;" id="exportJSONBtn">💾 JSON</span>
-          <span class="csvx-btn small" style="color: white;" id="exportSQLBtn">💾 SQL</span>
-          <span class="csvx-btn small" style="color: white;" id="exportXMLBtn">💾 XML</span>
+          <span class="csvx-btn small" style="color: white; cursor: pointer;" id="copyUUIDBtn">📋 Copy All</span>
+          <span class="csvx-btn small" style="color: white; cursor: pointer;" id="exportCSVBtn">💾 CSV</span>
+          <span class="csvx-btn small" style="color: white; cursor: pointer;" id="exportExcelBtn">💾 Excel</span>
+          <span class="csvx-btn small" style="color: white; cursor: pointer;" id="exportJSONBtn">💾 JSON</span>
+          <span class="csvx-btn small" style="color: white; cursor: pointer;" id="exportSQLBtn">💾 SQL</span>
+          <span class="csvx-btn small" style="color: white; cursor: pointer;" id="exportXMLBtn">💾 XML</span>
         </div>
-        <textarea id="uuid-output" class="csvx-preview" style="min-height:19rem; max-height:19rem; background:#1b1b1b; color:#eee; font-family:monospace; padding:20px; border:1px solid orange; width:100%; border-radius:8px;"></textarea>
+        <textarea id="uuid-output" class="csvx-preview" style="min-height:19.8rem; max-height:19.8rem; background:#1b1b1b; color:#eee; font-family:monospace; padding:20px; border:1px solid orange; width:100%; border-radius:8px;"></textarea>
       </div>
     </div>
     <div id="toastUUID" class="jsonx-toast">✅ IDs generated successfully</div>

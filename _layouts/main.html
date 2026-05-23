@@ -24,7 +24,7 @@ layout: default
       </span> 
        <label style="color: #ddd;">|</label>
        <span class="nav-trigger" data-popup="deduplicateTools" id="deduplicate" aria-label="Remove duplicate data">
-        Deduplicate
+        Clean Data
       </span> 
       <label style="color: #ddd;">|</label>
        <span class="nav-trigger" data-popup="generatorTools" id="generators" aria-label="Data Generators">
@@ -219,7 +219,7 @@ layout: default
     </div>
     <div class="popup-grid" id="deduplicateTools">
        <div class="popup-column">
-        <h3>Deduplicate Data Tools</h3>
+        <h3>Deduplicate</h3>
          <div style="display: grid;  grid-template-columns: repeat(3, 1fr);">
         <a href="/remove-excel-duplicates">Remove Excel Duplicates</a>
         <a href="/remove-duplicates-in-sql">Remove Duplicates in SQL</a>
@@ -231,10 +231,18 @@ layout: default
     <div class="popup-grid" id="generatorTools">
        <div class="popup-column">
         <h3>Data Generator</h3>
-        <div style="display: grid;  grid-template-columns: repeat(3, 1fr);">
+        <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
          <a href="/uuid-generator">UUID Generator</a>
         </div>
+      </div>  
+      <div class="popup-column">
+        <h3>Encoding | Hashing</h3>
+        <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+         <a href="/base64">Base64 Encoder/Decoder</a>
+         <a href="/hash-generator">Hash Generator</a>
+        </div>
       </div>   
+      
     </div>
 
 
