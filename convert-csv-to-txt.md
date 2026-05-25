@@ -55,7 +55,7 @@ keywords: "convert csv to txt online free, csv to plain text converter, csv to t
   </div>
 </div>
 
-<article>
+<article itemscope itemtype="https://schema.org/TechArticle">
 
 <section id="tool-content">
 

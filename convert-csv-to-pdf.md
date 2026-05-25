@@ -50,7 +50,7 @@ keywords: "convert csv to pdf online free, csv to pdf converter no upload, csv t
   </div>
 </div>
 
-<article>
+<article itemscope itemtype="https://schema.org/TechArticle">
 
   <section id="why-use">
     <h2>Why convert CSV to PDF?</h2>

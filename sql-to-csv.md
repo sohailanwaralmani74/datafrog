@@ -89,7 +89,7 @@ keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, p
 <div id="df-sqlcsv-toast" class="jsonx-toast"></div>
 
 
-<article>
+<article itemscope itemtype="https://schema.org/TechArticle">
 <section id="toolPurposeSection">
 
   <h2 id="purposeTitle">Purpose of this tool</h2>

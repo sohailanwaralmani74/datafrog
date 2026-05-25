@@ -65,15 +65,6 @@ keywords: "hash generator, md5 generator, sha1 generator, sha256 generator, sha5
       border-left: 4px solid #2dd4bf;
       animation: slideIn 0.2s ease;
     }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(40px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    @media (max-width: 650px) {
-      body { padding: 1rem; }
-      .panel-header { flex-direction: column; align-items: stretch; }
-      .controls { justify-content: flex-end; }
-    }
   </style>
 
 <div style="display: flex; justify-content: center">

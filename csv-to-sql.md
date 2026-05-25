@@ -54,7 +54,7 @@ keywords: "convert csv to sql online free, csv to sql insert, csv to mysql, csv 
   </div>
 </div>
 
-<article>
+<article itemscope itemtype="https://schema.org/TechArticle">
 
 <section id="tool-content">
 

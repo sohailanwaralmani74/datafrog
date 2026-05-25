@@ -6,18 +6,6 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
 ---
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-    background: #f8fafc;
-    color: #0f172a;
-  }
-
   /* Main container – full width, no sidebar interference */
   .tools-container {
     margin: 0 auto;
@@ -171,7 +159,15 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     <p><strong>100% browser‑based</strong> – no uploads, no sign‑up. Convert JSON, Excel, CSV, XML, QIF, PDF, and more instantly. Your data stays on your device.</p>
 
   </div>
-    <section aria-label="About DataFrog">
+  <div class="search-section">
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="🔍 Search tools... (e.g., JSON to Excel, CSV to SQL)" aria-label="Search tools">
+    </div>
+    <div class="category-bar" id="categoryBar"></div>
+  </div>
+
+  <div class="cards-grid" id="cardsGrid"></div>
+  <section aria-label="About DataFrog">
   <h2>Why DataFrog Data Conversion Tools</h2>
   <p>
     DataFrog is a free collection of 40+ online data tools built for developers, analysts, and anyone who works with structured data. Every tool runs entirely in your browser — your files and data never leave your device, no account is needed, and there are no usage limits.
@@ -186,14 +182,6 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     DataFrog is used by developers converting API responses for quick inspection, analysts preparing data for database imports, finance teams processing QIF bank files, DevOps engineers working with YAML configs, and business users cleaning exports without writing code. No matter your background, if you work with data, there is a DataFrog tool for your task.
   </p>
 </section>
-  <div class="search-section">
-    <div class="search-wrapper">
-      <input type="text" id="searchInput" placeholder="🔍 Search tools... (e.g., JSON to Excel, CSV to SQL)" aria-label="Search tools">
-    </div>
-    <div class="category-bar" id="categoryBar"></div>
-  </div>
-
-  <div class="cards-grid" id="cardsGrid"></div>
 </div>
 
 <script>
@@ -213,6 +201,11 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     { name: "JSON to Dart", url: "/json-to-dart", category: "JSON", description: "Create Flutter‑ready model classes with fromJson/toJson." },
     { name: "JSON to YAML", url: "/json-to-yaml", category: "JSON", description: "Convert JSON to human‑readable YAML for Kubernetes, Docker Compose." },
     { name: "YAML to JSON", url: "/yaml-to-json", category: "JSON", description: "Convert YAML configuration files to JSON instantly." },
+    { name: "Minify and Prettify JSON", url: "/json-minify-prettify", category: "JSON", description: "Minify or prettify JSON data with a single click." },
+    { name: "JSON To TypeScript", url: "/json-to-ts", category: "JSON", description: "Convert JSON data to TypeScript interfaces or classes." },
+    { name:"JSON To Java", url: "/json-to-java", category: "JSON", description: "Generate Java POJO classes from JSON data." },
+    { name: "JSON to C#", url: "/json-to-c-sharp", category: "JSON", description: "Convert JSON data to C# classes with properties." },
+    { name: "JSON to Go Structs", url: "/json-to-go", category: "JSON", description: "Generate Go struct definitions from JSON data." },
     // Excel Tools
     { name: "Excel to JSON", url: "/excel-to-json", category: "Excel", description: "Convert XLSX/XLS files to clean JSON objects." },
     { name: "Excel to TXT", url: "/excel-to-txt", category: "Excel", description: "Export spreadsheets as plain text with aligned columns." },
@@ -240,13 +233,13 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     { name: "PPTX to PDF", url: "/pptx-to-pdf", category: "PDF", description: "Convert PowerPoint presentations to high‑quality PDF documents." },
     { name: "PDF to PPTX", url: "/pdf-to-powerpoint", category: "PDF", description: "Convert PDF pages to editable PPTX slides." },
     // Other Utilities
-    { name: "UUID & GUID Generator", url: "/uuid-generator", category: "Generators", description: "Generate UUID v4, v7, NanoID, ULID, and more – up to 1000 IDs." },
-    { name: "Base64 Encoder/Decoder", url: "/base64", category: "Generators", description: "Encode and decode Base64 data instantly in your browser. Free, no signup required." },
-    { name: "Hash Generator", url: "/hash-generator", category: "Generators", description: "Generate cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) from any input string. Browser-based, no upload required." },
+    { name: "UUID & GUID Generator", url: "/uuid-generator", category: "Utilities", description: "Generate UUID v4, v7, NanoID, ULID, and more – up to 1000 IDs." },
+    { name: "Base64 Encoder/Decoder", url: "/base64", category: "Utilities", description: "Encode and decode Base64 data instantly in your browser. Free, no signup required." },
+    { name: "Hash Generator", url: "/hash-generator", category: "Utilities", description: "Generate cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) from any input string. Browser-based, no upload required." },
     // Remove duplicates
-    { name: "Remove Excel Duplicates", url: "/remove-excel-duplicates", category: "Deduplicate", description: "Remove duplicate rows and values from Excel spreadsheets quickly and easily." },
-    { name: "Remove Duplicates in SQL", url: "/remove-duplicates-in-sql", category: "Deduplicate", description: "Learn how to find and remove duplicate records in SQL databases using practical queries." },
-    { name: "Remove CSV Duplicates", url: "/remove-csv-duplicates", category: "Deduplicate", description: "Remove duplicate rows and values from CSV files quickly and easily." },
+    { name: "Remove Excel Duplicates", url: "/remove-excel-duplicates", category: "Excel", description: "Remove duplicate rows and values from Excel spreadsheets quickly and easily." },
+    { name: "Remove Duplicates in SQL", url: "/remove-duplicates-in-sql", category: "SQL", description: "Learn how to find and remove duplicate records in SQL databases using practical queries." },
+    { name: "Remove CSV Duplicates", url: "/remove-csv-duplicates", category: "CSV", description: "Remove duplicate rows and values from CSV files quickly and easily." },
     { name: "SQL to XML", url: "/sql-to-xml", category: "SQL", description: "Convert SQL INSERT statements to XML (elements, attributes, or flat)." }, 
     { name: "SQL to Excel", url: "/sql-to-excel", category: "SQL", description: "Transform SQL INSERT statements to multi‑sheet Excel files." }, 
     { name: "SQL to CSV", url: "/sql-to-csv", category: "SQL", description: "Convert SQL INSERT statements to CSV format." },

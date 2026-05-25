@@ -77,7 +77,7 @@ keywords: "json to html online free, convert json to html table, json to html co
 <div style="width: 20%"></div>
 <div style="width: 58%">
 
-<article>
+<article itemscope itemtype="https://schema.org/TechArticle">
 <section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
 

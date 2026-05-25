@@ -56,7 +56,7 @@ keywords: "convert csv to excel online, csv to xlsx free, csv to xls converter, 
   </div>
  </div>  
 
-<article>
+<article itemscope itemtype="https://schema.org/TechArticle">
 <section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
 

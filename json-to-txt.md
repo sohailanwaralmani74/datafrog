@@ -75,7 +75,7 @@ keywords: "json to txt online free, convert json to text, json to plain text, fl
 
 <div id="toastJson" class="jsonx-toast">✅ Text ready – copy or download below</div>
 
-<article>
+<article itemscope itemtype="https://schema.org/TechArticle">
 <div style="display: flex; flex-direction: row">
 <div style="width: 20%"></div>
 <div style="width: 58%">

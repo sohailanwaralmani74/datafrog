@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Base64 Encoder/Decoder - Text and Files | DataFrog"
-description: "Free online Base64 tool: encode/decode text, images, files. Client-side, private, no upload."
+description: "Free online Base64 tool: encode/decode text, images, files. Client-side, private, no upload. upload file or input any text to encode and decode."
 keywords: "base64 encoder, base64 decoder, base64 to text, text to base64, encode file to base64, decode base64 to file, online base64 tool, base64 image, base64 converter"
 ---
   <style>
@@ -75,17 +75,6 @@ keywords: "base64 encoder, base64 decoder, base64 to text, text to base64, encod
       font-family: monospace;
     }
 
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
     .preview-image-area {
       margin-top: 0.4rem;
       background: #0f1115;
@@ -108,13 +97,6 @@ keywords: "base64 encoder, base64 decoder, base64 to text, text to base64, encod
       border-radius: 30px;
       font-size: 0.7rem;
       color: #94a3b8;
-    }
-
-    @media (max-width: 650px) {
-      body { padding: 1rem; }
-      .panel-header { flex-direction: column; align-items: stretch; }
-      .controls { justify-content: flex-end; }
-      .title { font-size: 1.3rem; }
     }
   </style>
 

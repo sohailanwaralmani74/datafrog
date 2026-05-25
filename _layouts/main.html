@@ -8,355 +8,419 @@ layout: default
   <div class="container header-container">
 
     <a href="/" class="logo" title="DataFrog">
-      <img
-        src="assets/img/datafrog.png"
-        alt="DataFrog"
-        width="50px"
-        height="50px"
-      />
+      <img src="assets/img/datafrog.png" alt="DataFrog" width="50px" height="50px" />
     </a>
-
     <!-- MAIN NAV -->
     <div class="nav-controls">
-
-      <span class="nav-trigger" data-popup="converterTools" id="dataConverters" aria-label="Data Converters">
-        Converters
-      </span> 
-       <label style="color: #ddd;">|</label>
-       <span class="nav-trigger" data-popup="deduplicateTools" id="deduplicate" aria-label="Remove duplicate data">
-        Clean Data
-      </span> 
+      <span class="nav-trigger" data-popup="excelTools" id="excelToolsNav" aria-label="Excel Tools">
+        Excel
+      </span>
       <label style="color: #ddd;">|</label>
-       <span class="nav-trigger" data-popup="generatorTools" id="generators" aria-label="Data Generators">
-        Generators
-      </span>  
+      <span class="nav-trigger" data-popup="csvTools" id="csvToolsNav" aria-label="CSV Tools">
+        CSV
+      </span>
+      <label style="color: #ddd;">|</label>
+      <span class="nav-trigger" data-popup="jsonTools" id="jsonToolsNav" aria-label="JSON Tools">
+        JSON
+      </span>
+      <label style="color: #ddd;">|</label>
+      <span class="nav-trigger" data-popup="xmlTools" id="xmlToolsNav" aria-label="XML Tools">
+        XML
+      </span>
+      <label style="color: #ddd;">|</label>
+      <span class="nav-trigger" data-popup="sqlTools" id="sqlToolsNav" aria-label="SQL Tools">
+        SQL
+      </span>
+      <label style="color: #ddd;">|</label>
+      <span class="nav-trigger" data-popup="financeTools" id="financeToolsNav" aria-label="Finance Tools">
+        Finance
+      </span>
+      <label style="color: #ddd;">|</label>
+      <span class="nav-trigger" data-popup="utilitiesTools" id="utilitiesToolsNav" aria-label="Utilities">
+        Utilities
+      </span>
 
     </div>
 
     <!-- CSS -->
     <style>
-    .header{
-      background-color: rgb(19, 18, 18);
-    }
-      .nav-trigger{
-        cursor:pointer;
-        color:white;
+      .header {
+        background-color: rgb(19, 18, 18);
+        position: sticky;
+        top: 0;
+        z-index: 100
       }
 
-      .nav-trigger:hover{
-        color:rgb(239,96,8);
+      .nav-trigger {
+        cursor: pointer;
+        color: white;
       }
 
-      .popup-grid{
-        position:fixed !important;
+      .nav-trigger:hover {
+        color: rgb(239, 96, 8);
+      }
 
-        background:white;
+      .popup-grid {
+        position: fixed !important;
 
-        border:1px solid #ddd;
-        border-radius:10px;
+        background: white;
+
+        border: 1px solid #ddd;
+        border-radius: 10px;
 
         box-shadow:
-          0 6px 20px rgba(0,0,0,0.12);
+          0 6px 20px rgba(0, 0, 0, 0.12);
 
-        padding:20px;
+        padding: 20px;
 
-        z-index:9999;
+        z-index: 9999;
 
-        display:none;
+        display: none;
 
-        max-width:95vw;
-        max-height:80vh;
+        max-width: 95vw;
+        max-height: 80vh;
 
-        overflow-y:auto;
+        overflow-y: auto;
 
-        gap:25px;
+        gap: 5px;
 
         grid-template-columns:
-          repeat(auto-fit,minmax(220px,1fr));
+          repeat(auto-fit, minmax(10rem, 1fr));
       }
 
-      .popup-column h3{
-        margin-top:0;
-        margin-bottom:12px;
+      .popup-column h3 {
+        margin-top: 0;
+        margin-bottom: 12px;
 
-        font-size:1rem;
-        color:rgb(239,96,8);
+        font-size: 1rem;
+        color: rgb(239, 96, 8);
       }
 
-      .popup-column a{
-        display:block;
+      .popup-column a {
+        display: block;
 
-        color:#333;
+        color: #333;
 
-        text-decoration:none;
+        text-decoration: none;
 
-        padding:7px 8px;
+        padding: 7px 8px;
 
-        font-size:0.92em;
+        font-size: 0.92em;
 
-        border-radius:4px;
+        border-radius: 4px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
       }
 
-      .popup-column a:hover{
-        color:rgb(239,96,8);
-        background:#f8f8f8;
-        text-decoration:underline;
+      .popup-column a:hover {
+        color: rgb(239, 96, 8);
+        background: #f8f8f8;
+        text-decoration: underline;
       }
 
-      @media (max-width:768px){
+      @media (max-width:768px) {
 
-        .popup-grid{
-          width:95vw !important;
+        .popup-grid {
+          width: 95vw !important;
 
-          grid-template-columns:1fr;
+          grid-template-columns: 1fr;
         }
 
       }
-
     </style>
 
-    <!-- CONVERTERS -->
-    <div class="popup-grid" id="converterTools">
+    <!-- Updated Window-->
+    <!-- Excel Window-->
+
+    <div class="popup-grid" id="excelTools">
 
       <div class="popup-column">
 
-        <h3>JSON Converters</h3>
-         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
-        <a href="json-string-to-json-object">String to Object</a>
+        <h3>Converters</h3>
+        <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+          <a href="excel-to-json">Excel to JSON</a>
+          <a href="excel-to-html">Excel to HTML</a>
+          <a href="excel-to-txt">Excel to TXT</a>
+          <a href="xlsx-to-pdf">Excel to PDF</a>
+          <a href="xlsx-to-sql-converter">Excel to SQL</a>
+          <a href="convert-xlsx-to-csv">Excel to CSV</a>
+          <a href="convert-xlsx-to-xml">Excel to XML</a>
+        </div>
+      </div>
+      <div class="popup-column">
+
+        <h3>Transform</h3>
+        <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+          <a href="/remove-excel-duplicates">Remove Excel Duplicates</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- CSV Window-->
+
+    <div class="popup-grid" id="csvTools">
+
+      <div class="popup-column">
+
+        <h3>Converters</h3>
+        <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+          <a href="convert-csv-to-excel">CSV to Excel</a>
+          <a href="convert-csv-to-html">CSV to HTML</a>
+          <a href="convert-csv-to-json">CSV to JSON</a>
+          <a href="convert-csv-to-pdf">CSV to PDF</a>
+          <a href="convert-csv-to-txt">CSV to TXT</a>
+          <a href="convert-csv-to-xml">CSV to XML</a>
+          <a href="csv-to-sql">CSV to SQL</a>
+        </div>
+      </div>
+      <div class="popup-column">
+
+        <h3>Transform</h3>
+        <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+          <a href="/remove-csv-duplicates">Remove CSV Duplicates</a>
+        </div>
+      </div>
+
+    </div>
+  
+  <!-- JSON Window-->
+
+  <div class="popup-grid" id="jsonTools">
+
+    <div class="popup-column">
+
+      <h3>Converters</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="json-string-to-json-object">JSON String to JSON Object</a>
         <a href="json-to-csv">JSON to CSV</a>
-        <a href="json-to-dart">JSON to Dart</a>
         <a href="json-to-excel">JSON to Excel</a>
-        <a href="json-to-html">JSON to HTML</a>
-        <a href="json-to-json-schema">JSON to Schema</a>
+        <a href="json-to-json-schema">JSON to JSON Schema</a>
         <a href="json-to-pdf">JSON to PDF</a>
         <a href="json-to-sql">JSON to SQL</a>
         <a href="json-to-txt">JSON to TXT</a>
         <a href="json-to-xml">JSON to XML</a>
         <a href="json-to-yaml">JSON to YAML</a>
-        </div>
       </div>
+    </div>
+    <div class="popup-column">
 
-      <div class="popup-column">
-
-        <h3>CSV Converters</h3>
-          <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
-        <a href="convert-csv-to-excel">CSV to Excel</a>
-        <a href="convert-csv-to-html">CSV to HTML</a>
-        <a href="convert-csv-to-json">CSV to JSON</a>
-        <a href="convert-csv-to-pdf">CSV to PDF</a>
-        <a href="convert-csv-to-txt">CSV to TXT</a>
-        <a href="convert-csv-to-xml">CSV to XML</a>
-        <a href="csv-to-sql">CSV to SQL</a>
-        </div>
-
+      <h3>Code Generators</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="json-to-dart">JSON to Dart</a>
+        <a href="json-to-html">JSON to HTML</a>
+        <a href="json-to-ts">JSON to TypeScript</a>
+        <a href="json-to-java">JSON to Java</a>
+        <a href="json-to-c-sharp">JSON to C#</a>
+        <a href="json-to-go">JSON to Go Structs</a>
       </div>
+    </div>
+    <div class="popup-column">
 
-      <div class="popup-column">
-
-        <h3>Excel Converters</h3>
-       <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
-        <a href="excel-to-json">Excel to JSON</a>
-        <a href="excel-to-html">Excel to HTML</a>
-        <a href="excel-to-txt">Excel to TXT</a>
-        <a href="xlsx-to-pdf">Excel to PDF</a>
-        <a href="xlsx-to-sql-converter">Excel to SQL</a>
-        <a href="convert-xlsx-to-csv">Excel to CSV</a>
-        <a href="convert-xlsx-to-xml">Excel to XML</a>
-        </div>
-
+      <h3>Format / Validate</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="/json-minify-prettify.md">Minify and Prettify JSON</a>
       </div>
+    </div>
+  </div>
 
-      <div class="popup-column">
-     
-        <h3>XML Converters</h3>
-         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+  <!-- XML Window-->
+
+  <div class="popup-grid" id="xmlTools">
+
+    <div class="popup-column">
+
+      <h3>Converters</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
         <a href="xml-to-json">XML to JSON</a>
         <a href="xml-to-xsd-generator">XML to XSD</a>
-        </div>
       </div>
+    </div>
 
-      <div class="popup-column">
+  </div>
+  <!-- SQL Window-->
 
-        <h3>QIF Converters</h3>
-         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
-        <a href="qif-to-csv">QIF to CSV</a>
-        <a href="qif-to-excel">QIF to Excel</a>
-        <a href="qif-to-qbo">QIF to QBO</a>
-        </div>
+  <div class="popup-grid" id="sqlTools">
+    <div class="popup-column">
 
-      </div>
-
-      <div class="popup-column">
-
-        <h3>PDF Converters</h3>
-         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
-        <a href="pptx-to-pdf">PPTX to PDF</a>
-        <a href="pdf-to-powerpoint">PDF to PPTX</a>
-        </div>
-
-      </div>
-
-      <div class="popup-column">
-
-        <h3>YAML Converters</h3>
-         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
-        <a href="/yaml-to-json">YAML to JSON</a>
-        </div>
-
-      </div>
-
-      <div class="popup-column">
-
-        <h3>SQL Converters</h3>
-         <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+      <h3>Converters</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
         <a href="/sql-to-csv">SQL to CSV</a>
         <a href="/sql-to-excel">SQL to Excel</a>
         <a href="/sql-to-xml">SQL to XML</a>
-        </div>
+      </div>
+    </div>
+    <div class="popup-column">
 
+      <h3>Transform</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="/remove-duplicates-in-sql">Remove Duplicates in SQL</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Finance Window-->
+
+  <div class="popup-grid" id="financeTools">
+
+    <div class="popup-column">
+
+      <h3>QIF Converters</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="qif-to-csv">QIF to CSV</a>
+        <a href="qif-to-excel">QIF to Excel</a>
+        <a href="qif-to-qbo">QIF to QBO</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Utilities Window-->
+
+  <div class="popup-grid" id="utilitiesTools">
+    <div class="popup-column">
+      <h3>Data Generator</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="/uuid-generator">UUID Generator</a>
+      </div>
+    </div>
+    <div class="popup-column">
+      <h3>Encoding | Hashing</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="/base64">Base64 Encoder/Decoder</a>
+        <a href="/hash-generator">Hash Generator</a>
+      </div>
+    </div>
+    <div class="popup-column">
+
+      <h3>PDF</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="pptx-to-pdf">PPTX to PDF</a>
+        <a href="pdf-to-powerpoint">PDF to PPTX</a>
       </div>
 
     </div>
-    <div class="popup-grid" id="deduplicateTools">
-       <div class="popup-column">
-        <h3>Deduplicate</h3>
-         <div style="display: grid;  grid-template-columns: repeat(3, 1fr);">
-        <a href="/remove-excel-duplicates">Remove Excel Duplicates</a>
-        <a href="/remove-duplicates-in-sql">Remove Duplicates in SQL</a>
-        <a href="/remove-csv-duplicates">Remove CSV Duplicates</a>
-        </div>
 
-      </div>   
-    </div>
-    <div class="popup-grid" id="generatorTools">
-       <div class="popup-column">
-        <h3>Data Generator</h3>
-        <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
-         <a href="/uuid-generator">UUID Generator</a>
-        </div>
-      </div>  
-      <div class="popup-column">
-        <h3>Encoding | Hashing</h3>
-        <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
-         <a href="/base64">Base64 Encoder/Decoder</a>
-         <a href="/hash-generator">Hash Generator</a>
-        </div>
-      </div>   
-      
+    <div class="popup-column">
+
+      <h3>YAML</h3>
+      <div style="display: grid;  grid-template-columns: repeat(2, 1fr);">
+        <a href="/yaml-to-json">YAML to JSON</a>
+      </div>
+
     </div>
 
+  </div>
 
 
+  <!-- SCRIPT -->
+  <script>
 
-    <!-- SCRIPT -->
-    <script>
+    window.addEventListener('load', function () {
 
-      window.addEventListener('load', function(){
+      const triggers =
+        document.querySelectorAll('.nav-trigger');
 
-        const triggers =
-          document.querySelectorAll('.nav-trigger');
+      const popups =
+        document.querySelectorAll('.popup-grid');
 
-        const popups =
-          document.querySelectorAll('.popup-grid');
+      function hideAllPopups() {
 
-        function hideAllPopups(){
+        popups.forEach(popup => {
+          popup.style.display = 'none';
+        });
 
-          popups.forEach(popup => {
-            popup.style.display = 'none';
-          });
+      }
 
+      function positionPopup(trigger, popup) {
+
+        popup.style.display = 'grid';
+        popup.style.visibility = 'hidden';
+
+        const rect =
+          trigger.getBoundingClientRect();
+
+        const popupWidth =
+          popup.offsetWidth;
+
+        let left =
+          rect.left - (popupWidth / 2) + (rect.width / 2);
+
+        if (left < 20) {
+          left = 20;
         }
 
-        function positionPopup(trigger, popup){
-
-          popup.style.display = 'grid';
-          popup.style.visibility = 'hidden';
-
-          const rect =
-            trigger.getBoundingClientRect();
-
-          const popupWidth =
-            popup.offsetWidth;
-
-          let left =
-            rect.left - (popupWidth / 2) + (rect.width / 2);
-
-          if(left < 20){
-            left = 20;
-          }
-
-          if(left + popupWidth > window.innerWidth - 20){
-            left =
-              window.innerWidth - popupWidth - 20;
-          }
-
-          popup.style.left = left + 'px';
-          popup.style.top = '55px';
-
-          popup.style.visibility = 'visible';
-
+        if (left + popupWidth > window.innerWidth - 20) {
+          left =
+            window.innerWidth - popupWidth - 20;
         }
 
-        triggers.forEach(trigger => {
+        popup.style.left = left + 'px';
+        popup.style.top = '55px';
 
-          let timeout;
+        popup.style.visibility = 'visible';
 
-          const popupId =
-            trigger.dataset.popup;
+      }
 
-          const popup =
-            document.getElementById(popupId);
+      triggers.forEach(trigger => {
 
-          trigger.addEventListener('mouseenter', () => {
+        let timeout;
 
-            clearTimeout(timeout);
+        const popupId =
+          trigger.dataset.popup;
 
-            hideAllPopups();
+        const popup =
+          document.getElementById(popupId);
 
-            positionPopup(trigger, popup);
+        trigger.addEventListener('mouseenter', () => {
 
-          });
+          clearTimeout(timeout);
 
-          trigger.addEventListener('mouseleave', () => {
+          hideAllPopups();
 
-            timeout = setTimeout(() => {
-
-              if(!popup.matches(':hover')){
-                popup.style.display = 'none';
-              }
-
-            },100);
-
-          });
-
-          popup.addEventListener('mouseenter', () => {
-            clearTimeout(timeout);
-          });
-
-          popup.addEventListener('mouseleave', () => {
-
-            timeout = setTimeout(() => {
-              popup.style.display = 'none';
-            },100);
-
-          });
+          positionPopup(trigger, popup);
 
         });
 
-        document.addEventListener('click', (e) => {
+        trigger.addEventListener('mouseleave', () => {
 
-          if(
-            !e.target.closest('.nav-trigger') &&
-            !e.target.closest('.popup-grid')
-          ){
-            hideAllPopups();
-          }
+          timeout = setTimeout(() => {
+
+            if (!popup.matches(':hover')) {
+              popup.style.display = 'none';
+            }
+
+          }, 100);
+
+        });
+
+        popup.addEventListener('mouseenter', () => {
+          clearTimeout(timeout);
+        });
+
+        popup.addEventListener('mouseleave', () => {
+
+          timeout = setTimeout(() => {
+            popup.style.display = 'none';
+          }, 100);
 
         });
 
       });
 
-    </script>
+      document.addEventListener('click', (e) => {
+
+        if (
+          !e.target.closest('.nav-trigger') &&
+          !e.target.closest('.popup-grid')
+        ) {
+          hideAllPopups();
+        }
+
+      });
+
+    });
+
+  </script>
 
   </div>
 </header>
@@ -369,14 +433,12 @@ layout: default
 
   <div class="container">
 
-    <div
-      style="
+    <div style="
         display:flex;
         flex-direction:row;
         justify-content:flex-end;
         gap:1rem;
-      "
-    >
+      ">
 
       <a href="blog">📝 Blog</a>
 
@@ -423,13 +485,11 @@ layout: default
 
       </div>
 
-      <div
-        style="
+      <div style="
           width:99%;
           display:flex;
           justify-content:flex-end;
-        "
-      >
+        ">
 
         <p>
 

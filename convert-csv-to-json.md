@@ -54,7 +54,7 @@ keywords: "convert csv to json online, csv to json free, csv to json converter, 
     </div>
   </div>
 </div>
-<article>
+<article itemscope itemtype="https://schema.org/TechArticle">
 
 <section id="tool-content">
 
