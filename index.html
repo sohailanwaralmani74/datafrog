@@ -51,7 +51,7 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
   }
   #searchInput {
     width: 100%;
-    padding: 0.8rem 1.2rem;
+    padding: 0.8rem 1.6rem;
     font-size: 1rem;
     border: 2px solid #e2e8f0;
     border-radius: 60px;
@@ -60,7 +60,7 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     transition: all 0.2s;
   }
   #searchInput:focus {
-    border-color: #ef6008;
+    border-color: #0c71d6;
     box-shadow: 0 0 0 3px rgba(239,96,8,0.1);
   }
 
@@ -82,13 +82,14 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     cursor: pointer;
     transition: all 0.2s;
     border: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   .chip:hover {
     background: #e2e8f0;
     transform: translateY(-1px);
   }
   .chip.active {
-    background: #ef6008;
+    background: #0c71d6;
     color: white;
   }
 
@@ -110,6 +111,7 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   .tool-card:hover {
     transform: translateY(-4px);
@@ -118,16 +120,16 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
   }
   .tool-card .category {
     display: inline-block;
-    background: #f1f5f9;
+    background: #0c71d6;
     padding: 0.2rem 0.8rem;
     border-radius: 30px;
     font-size: 0.7rem;
     font-weight: 600;
-    color: #ef6008;
+    color: white;
     text-transform: uppercase;
     width: fit-content;
   }
-  .tool-card h3 {
+  .tool-card h2 {
     font-size: 1.25rem;
     font-weight: 600;
     color: #0f172a;
@@ -287,7 +289,7 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
     cardsGrid.innerHTML = filtered.map(tool => `
       <a href="${tool.url}" class="tool-card">
         <span class="category">${tool.category}</span>
-        <h3>${tool.name}</h3>
+        <h2>${tool.name}</h2>
         <p>${tool.description}</p>
       </a>
     `).join('');

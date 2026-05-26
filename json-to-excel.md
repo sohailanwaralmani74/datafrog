@@ -243,28 +243,20 @@ USB Hub      | 2   | 50.00</code></pre>
 
   <section aria-labelledby="faq">
     <h2 id="faq">Frequently asked questions (JSON to Excel)</h2>
-
     <h3 id="faq-1">Does this tool support multiple sheets in Excel?</h3>
     <p>Yes. If your JSON contains nested objects or arrays, the tool automatically creates separate sheets for each level. For example, a JSON object with keys <code>order</code> and <code>items</code> generates two sheets — "order" and "items" — in a single workbook.</p>
-
     <h3 id="faq-2">Is my JSON data uploaded to a server?</h3>
     <p><strong>No.</strong> All processing happens locally in your browser using the SheetJS library. Your data never leaves your computer and the tool continues to work offline after the first load.</p>
-
     <h3 id="faq-3">Can it handle large JSON files (e.g., 100,000 rows)?</h3>
     <p>Performance depends on your device's memory and browser engine. The tool handles most production-size JSON arrays — tens of thousands of rows — without issue. Extremely large files may cause lag, but typical API responses convert instantly.</p>
-
     <h3 id="faq-4">What Excel formats can I download?</h3>
     <p>You can export as <strong>.xlsx</strong> (Excel 2007 and later — recommended for all modern use) or <strong>.xls</strong> (Excel 97-2003) for compatibility with older software or systems that don't accept XLSX.</p>
-
     <h3 id="faq-5">How are nested arrays and objects represented in Excel?</h3>
     <p>Each distinct nested object or array becomes a separate named sheet in the workbook. Sheet names are taken from the JSON keys and automatically sanitised to meet Excel's naming requirements — no duplicates, no invalid characters.</p>
-
     <h3 id="faq-6">Can I preview the Excel sheets before downloading?</h3>
     <p>Yes. After conversion, the tool displays interactive sheet tabs below the output panel. Click any tab to see a formatted HTML table preview of that sheet's content before committing to the download.</p>
-
     <h3 id="faq-7">What happens if my JSON is invalid?</h3>
     <p>The tool displays a clear error message highlighting the issue and disables the Convert button until the JSON is corrected. The live preview also stops updating so you can identify the problem easily.</p>
-
     <h3 id="faq-8">Is this JSON to Excel converter really free?</h3>
     <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks on the output. DataFrog believes essential data tools should be accessible to everyone.</p>
 
