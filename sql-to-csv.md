@@ -22,30 +22,23 @@ keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, p
 <!-- INPUT -->
 <div class="csvx-container">
   <div id="df-sqlcsv-input-panel" class="csvx-panel">
-
     <div class="panel-header">
       <div>
         <div class="title">Convert SQL TO CSV</div>
         <div class="small">Upload SQL file or paste INSERT statements</div>
       </div>
-
       <div class="controls">
-
         <label class="csvx-btn">
           📂 Upload SQL
           <input id="df-file-input" type="file" accept=".sql,.txt">
         </label>
-
         <button class="csvx-btn primary" id="df-convert-btn">
           🔄 Convert to CSV
         </button>
-
       </div>
     </div>
-
     <!-- KEEP ID (JS SAFE) -->
  <textarea id="df-input" class="csvx-preview" style="min-height:345px; max-height:345px; background:#1b1b1b; color:#eee; font-family:monospace; padding:10px; border:none; width:100%; border-radius:8px; resize:none;" placeholder="Insert SQL here or upload"></textarea>
-
   </div>
 </div>
 
@@ -53,28 +46,20 @@ keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, p
 <div class="csvx-container">
 
   <div id="df-output-panel" class="csvx-excel-panel" style="display:none;">
-
     <div class="csvx-panel" style="padding:12px;">
-
       <div class="excel-header">
-
         <div>
           <div style="font-weight:700">CSV Output – Extracted Data</div>
           <div class="small">Copy or export CSV file</div>
         </div>
-
         <div class="controls">
-
           <button class="csvx-btn" id="df-copy-btn">
             📋 Copy CSV
           </button>
-
           <button class="csvx-btn" id="df-download-btn">
             💾 Export CSV
           </button>
-
         </div>
-
       </div>
 
       <!-- KEEP ID -->

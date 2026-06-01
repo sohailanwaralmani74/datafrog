@@ -17,7 +17,7 @@ keywords: "xml to xsd generator online, xml to xsd converter free, generate xsd 
     <div class="panel-header">
       <div>
         <div class="title">XML to XSD Schema Generator</div>
-        <div class="small">Upload an XML file, preview and edit the content, then generate the corresponding XSD schema automatically.</div>
+        <div class="small">Upload an XML file, preview and edit and, generate the corresponding XSD schema.</div>
       </div>
       <div class="controls">
         <label class="csvx-btn" id="uploadBtnXsd" title="Upload XML">
@@ -28,7 +28,7 @@ keywords: "xml to xsd generator online, xml to xsd converter free, generate xsd 
       </div>
     </div>
     <div id="xmlPreviewPanel" class="csvx-preview" contenteditable>
-      <div class="small" id="placeholderXsd">No XML file uploaded. Upload an XML document – you can preview and edit before generating the XSD schema.</div>
+      <div class="small" id="placeholderXsd">No XML file uploaded. Upload an XML document – Preview and edit before generating the XSD schema.</div>
     </div>
     <div id="toastXsd" class="csvx-toast">✅ XSD generated – ready to copy or download</div>
   </div>
