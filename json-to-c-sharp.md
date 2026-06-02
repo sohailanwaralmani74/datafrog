@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "JSON to C# - Convert JSON to C# Classes with JSON Annotations"
-description: "Advanced JSON to C# converter: generate C# classes with System.Text.Json or Newtonsoft.Json annotations, records, nullable types. Export as ZIP. 100% client-side."
+description: "Advanced JSON to C# converter: generate C# classes with System.Text.Json or Newtonsoft.Json annotations, records, nullable types."
 keywords: "json to c#, json to csharp, c# code generator, json to class, json to record, system.text.json, newtonsoft.json, json to c# online"
 ---
 
