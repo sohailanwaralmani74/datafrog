@@ -306,8 +306,9 @@ keywords: "json to c#, json to csharp, c# code generator, json to class, json to
       "name": "JSON to C# Converter",
       "url": "https://datafrog.tools/json-to-csharp",
       "description": "Free online tool to convert JSON to C# classes with System.Text.Json or Newtonsoft.Json annotations. Auto‑prettify, duplicate‑free types, ZIP export. 100% client‑side.",
+      "image": "https://datafrog.tools/assets/img/json-to-csharp-screenshot.png",
       "operatingSystem": "All",
-      "applicationCategory": "DeveloperTool",
+      "applicationCategory": "DeveloperApplication",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "featureList": [
         "JSON to C# class/record",
@@ -319,26 +320,75 @@ keywords: "json to c#, json to csharp, c# code generator, json to class, json to
         "ZIP export (model folder)",
         "Syntax highlighting (Ace Editor)"
       ],
-      "inLanguage": "en"
+      "inLanguage": "en",
+      "datePublished": "2024-01-15",
+      "dateModified": "2025-05-23",
+      "author": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "publisher": { "@type": "Organization", "name": "DataFrog", "logo": "https://datafrog.tools/assets/img/datafrog-logo.png", "url": "https://datafrog.tools" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "JSON to C# Class Generator",
+      "description": "Generates C# classes or records from JSON samples with System.Text.Json or Newtonsoft.Json attributes.",
+      "programmingLanguage": { "@type": "ComputerLanguage", "name": "C#" },
+      "codeSampleType": "full",
+      "codeRepository": "https://github.com/datafrog/json-to-csharp",
+      "targetProduct": { "@type": "SoftwareApplication", "name": "Visual Studio, VS Code, Rider" },
+      "url": "https://datafrog.tools/json-to-csharp"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "How to Generate C# Classes from JSON",
+      "headline": "Convert JSON to C# Classes – Step by Step",
+      "description": "Learn how to convert any JSON structure into clean, ready‑to‑use C# classes or records with System.Text.Json or Newtonsoft.Json annotations. 100% client‑side, no uploads.",
+      "proficiencyLevel": "Beginner",
+      "dependencies": ".NET 5 or higher",
+      "url": "https://datafrog.tools/json-to-csharp",
+      "datePublished": "2024-01-15",
+      "author": { "@type": "Organization", "name": "DataFrog" }
+    },
+    {
+      "@type": "Product",
+      "name": "JSON to C# Converter",
+      "description": "Completely free tool – no paid tiers. Generate C# classes from JSON instantly in your browser.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+      "url": "https://datafrog.tools/json-to-csharp",
+      "brand": { "@type": "Brand", "name": "DataFrog" }
+    },
+    {
+      "@type": "Service",
+      "name": "JSON to C# Conversion Service",
+      "description": "Free, client‑side service to convert JSON to C# classes. No signup, no server uploads.",
+      "serviceType": "Developer Tool",
+      "provider": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "DataFrog Service Plans",
+        "itemListElement": { "@type": "Offer", "name": "Free Forever", "price": "0", "priceCurrency": "USD" }
+      }
     },
     {
       "@type": "HowTo",
       "@id": "https://datafrog.tools/json-to-csharp#howto",
       "name": "How to convert JSON to C#",
+      "description": "Three simple steps to generate clean C# classes.",
+      "tool": { "@type": "HowToTool", "@id": "https://datafrog.tools/json-to-csharp#webapp", "name": "DataFrog JSON to C# Converter" },
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Enter JSON", "text": "Paste JSON or upload a file." },
-        { "@type": "HowToStep", "position": 2, "name": "Choose options", "text": "Select annotation library, record, nullable types." },
-        { "@type": "HowToStep", "position": 3, "name": "Convert & export", "text": "Click Convert to see C# code, then Copy or Export ZIP." }
+        { "@type": "HowToStep", "position": 1, "name": "Enter JSON", "text": "Paste JSON or upload a .json file." },
+        { "@type": "HowToStep", "position": 2, "name": "Choose options", "text": "Select annotation library (System.Text.Json or Newtonsoft.Json), record type, nullable options." },
+        { "@type": "HowToStep", "position": 3, "name": "Convert & export", "text": "Click 'Convert' to see the C# code, then copy individual files or export a ZIP archive." }
       ]
     },
     {
       "@type": "FAQPage",
       "@id": "https://datafrog.tools/json-to-csharp#faq",
+      "about": { "@id": "https://datafrog.tools/json-to-csharp#webapp" },
       "mainEntity": [
-        { "@type": "Question", "name": "Does this tool handle nested objects and arrays?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It recursively creates a separate C# class for each unique nested object." } },
+        { "@type": "Question", "name": "Does this tool handle nested objects and arrays?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It recursively creates separate C# classes for each unique nested object." } },
         { "@type": "Question", "name": "What JSON serialization libraries are supported?", "acceptedAnswer": { "@type": "Answer", "text": "System.Text.Json and Newtonsoft.Json." } },
         { "@type": "Question", "name": "Can I generate records instead of classes?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, the 'Use record' checkbox generates C# 9+ records." } },
-        { "@type": "Question", "name": "Is my JSON data sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs locally." } }
+        { "@type": "Question", "name": "Is my JSON data sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. 100% client‑side, your data never leaves your device." } }
       ]
     },
     {
@@ -346,8 +396,7 @@ keywords: "json to c#, json to csharp, c# code generator, json to class, json to
       "@id": "https://datafrog.tools/json-to-csharp#breadcrumb",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools" },
-        { "@type": "ListItem", "position": 2, "name": "Developer Toolbox", "item": "https://datafrog.tools/developer-toolbox" },
-        { "@type": "ListItem", "position": 3, "name": "JSON to C#", "item": "https://datafrog.tools/json-to-csharp" }
+        { "@type": "ListItem", "position": 2, "name": "JSON to C#", "item": "https://datafrog.tools/json-to-csharp" }
       ]
     }
   ]

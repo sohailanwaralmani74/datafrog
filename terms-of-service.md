@@ -6,7 +6,7 @@ keywords: "terms of service, DataFrog TOS, data conversion rules, browser-based 
 ---
 
 <article class="tos-container" style="max-width: 900px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02); font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; line-height: 1.6; color: #1e1e2a;">
-  <h1 style="font-size: 2.2rem; font-weight: 700; margin-top: 0; margin-bottom: 0.5rem; color: #0a0a23; border-left: 5px solid #f97316; padding-left: 1rem;">Terms of Service</h1>
+  <h1 style="font-size: 2.2rem; font-weight: 700; margin-top: 0; margin-bottom: 0.5rem; color: #0a0a23; border-left: 5px solid #f97316; padding-left: 1rem;">Terms of Service | Datafrog.tools</h1>
   <p style="color: #4b5563; margin-bottom: 2rem;">Effective date: {{ site.time | date: "%B %d, %Y" }}</p>
 
   <p>Welcome to <strong>DataFrog</strong>. By accessing or using our website and browser‑based data conversion tools, you agree to be bound by these Terms of Service. Please read them carefully before using any tool.</p>

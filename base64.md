@@ -285,13 +285,10 @@ keywords: "base64 encoder, base64 decoder, base64 to text, text to base64, encod
       "name": "Base64 Encoder / Decoder",
       "url": "https://datafrog.tools/base64",
       "description": "Free online tool to encode text, images, and files to Base64 or decode Base64 back to original format. 100% client-side, private, no upload.",
+      "image": "https://datafrog.tools/assets/img/base64-screenshot.png",
       "operatingSystem": "All",
-      "applicationCategory": "Utility",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
+      "applicationCategory": "DeveloperApplication",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "featureList": [
         "Encode any text or file to Base64",
         "Decode Base64 to text, images, PDFs, or binary files",
@@ -301,97 +298,83 @@ keywords: "base64 encoder, base64 decoder, base64 to text, text to base64, encod
         "No server upload – fully client-side"
       ],
       "inLanguage": "en",
-      "softwareVersion": "2.0"
+      "datePublished": "2023-01-01",
+      "dateModified": "2025-05-23",
+      "author": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "publisher": { "@type": "Organization", "name": "DataFrog", "logo": "https://datafrog.tools/assets/img/datafrog-logo.png", "url": "https://datafrog.tools" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "Base64 JavaScript Implementation",
+      "description": "Client‑side Base64 encoding/decoding using browser APIs (btoa/atob) with UTF‑8 support and file handling.",
+      "programmingLanguage": { "@type": "ComputerLanguage", "name": "JavaScript" },
+      "codeSampleType": "full",
+      "codeRepository": "https://github.com/datafrog/base64-tool",
+      "targetProduct": { "@type": "SoftwareApplication", "name": "Any web browser" },
+      "url": "https://datafrog.tools/base64"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "How to Encode and Decode Base64 Online",
+      "headline": "Base64 Encoder/Decoder – Complete Guide",
+      "description": "Learn how to safely convert text, images, and files to Base64 and back, all in your browser without any server upload.",
+      "proficiencyLevel": "Beginner",
+      "url": "https://datafrog.tools/base64",
+      "datePublished": "2023-01-01",
+      "author": { "@type": "Organization", "name": "DataFrog" }
+    },
+    {
+      "@type": "Product",
+      "name": "DataFrog Base64 Encoder/Decoder",
+      "description": "Completely free, client‑side tool for all your Base64 conversion needs. No signup, no limits.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+      "url": "https://datafrog.tools/base64",
+      "brand": { "@type": "Brand", "name": "DataFrog" }
+    },
+    {
+      "@type": "Service",
+      "name": "Base64 Conversion Service",
+      "description": "Free, private, browser‑based Base64 encoding and decoding service. No data leaves your device.",
+      "serviceType": "Developer Utility",
+      "provider": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "DataFrog Base64 Plans",
+        "itemListElement": { "@type": "Offer", "name": "Free Forever", "price": "0", "priceCurrency": "USD" }
+      }
     },
     {
       "@type": "HowTo",
       "@id": "https://datafrog.tools/base64#howto",
       "name": "How to encode or decode Base64 online",
       "description": "Use this free tool in three simple steps.",
+      "tool": { "@type": "HowToTool", "@id": "https://datafrog.tools/base64#webapp", "name": "DataFrog Base64 Encoder/Decoder" },
       "step": [
-        {
-          "@type": "HowToStep",
-          "name": "Enter your data",
-          "text": "Paste any text or a Base64 string into the input area. Alternatively, upload a file (image, PDF, ZIP, etc.) to automatically convert it to Base64.",
-          "position": 1
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Choose action",
-          "text": "Click 'Encode' to convert the input to a Base64 string, or 'Decode' to convert a Base64 string back to its original form.",
-          "position": 2
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Copy or download the result",
-          "text": "Once the output appears, use 'Copy Output' to copy text results or 'Download Data' to save the decoded file. For encoded data, you can also download the Base64 string as a .txt file.",
-          "position": 3
-        }
+        { "@type": "HowToStep", "position": 1, "name": "Enter your data", "text": "Paste any text or a Base64 string into the input area. Alternatively, upload a file (image, PDF, ZIP, etc.) to automatically convert it to Base64." },
+        { "@type": "HowToStep", "position": 2, "name": "Choose action", "text": "Click 'Encode' to convert the input to a Base64 string, or 'Decode' to convert a Base64 string back to its original form." },
+        { "@type": "HowToStep", "position": 3, "name": "Copy or download the result", "text": "Once the output appears, use 'Copy Output' to copy text results or 'Download Data' to save the decoded file. For encoded data, you can also download the Base64 string as a .txt file." }
       ],
       "totalTime": "PT1M"
     },
     {
       "@type": "FAQPage",
       "@id": "https://datafrog.tools/base64#faq",
+      "about": { "@id": "https://datafrog.tools/base64#webapp" },
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is this Base64 tool secure for sensitive data?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Everything runs locally in your browser. No file or text is ever uploaded to any server. You can safely encode passwords, API keys, or private images."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I decode a Base64 string back to an image?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely. Paste the Base64 string, click 'Decode', and if the decoded content is an image (PNG, JPEG, GIF, WebP), the tool shows a live preview and lets you download the original image file."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What happens when I upload a file?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The file is read locally and instantly converted to its Base64 representation. The Encode button is disabled because the input is already Base64 – you can then decode it or copy the Base64 string."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does this tool support large files?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes for reasonable sizes (up to ~50 MB). Extremely large files may hit browser memory limits – we recommend files under 50 MB for optimal performance."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What Base64 standard is used?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We implement standard Base64 as defined in RFC 4648, with character set A‑Z, a‑z, 0‑9, +, / and = padding. UTF-8 encoding is used for text to ensure full byte accuracy."
-          }
-        }
+        { "@type": "Question", "name": "Is this Base64 tool secure for sensitive data?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Everything runs locally in your browser. No file or text is ever uploaded to any server. You can safely encode passwords, API keys, or private images." } },
+        { "@type": "Question", "name": "Can I decode a Base64 string back to an image?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Paste the Base64 string, click 'Decode', and if the decoded content is an image (PNG, JPEG, GIF, WebP), the tool shows a live preview and lets you download the original image file." } },
+        { "@type": "Question", "name": "What happens when I upload a file?", "acceptedAnswer": { "@type": "Answer", "text": "The file is read locally and instantly converted to its Base64 representation. The 'Encode' button is disabled because the input is already Base64 – you can then decode it or copy the Base64 string." } },
+        { "@type": "Question", "name": "Does this tool support large files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes for reasonable sizes (up to ~50 MB). Extremely large files may hit browser memory limits – we recommend files under 50 MB for optimal performance." } },
+        { "@type": "Question", "name": "What Base64 standard is used?", "acceptedAnswer": { "@type": "Answer", "text": "We implement standard Base64 as defined in RFC 4648, with character set A‑Z, a‑z, 0‑9, +, / and = padding. UTF-8 encoding is used for text to ensure full byte accuracy." } }
       ]
     },
     {
       "@type": "BreadcrumbList",
       "@id": "https://datafrog.tools/base64#breadcrumb",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://datafrog.tools"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Base64 Encoder/Decoder",
-          "item": "https://datafrog.tools/base64"
-        }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools" },
+        { "@type": "ListItem", "position": 2, "name": "Base64 Encoder/Decoder", "item": "https://datafrog.tools/base64" }
       ]
     }
   ]

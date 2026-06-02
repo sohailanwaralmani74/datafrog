@@ -8,7 +8,7 @@ keywords: "qif to qbo online free, convert qif to qbo, quicken to quickbooks onl
 <section style="display: flex; justify-content: center">
   <div style="width: 15%;"></div>
    <div style="width: 69%;">
-    <h1>QIF to QBO Converter – Turn Quicken Exports into QuickBooks‑Ready Files</h1>
+    <h1>QIF to QBO Converter – Turn Quicken into QuickBooks Files</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert QIF (Quicken Interchange Format) to QBO online in seconds – completely free, no signup. This browser‑based tool transforms your Quicken bank, credit card, or investment transactions into a valid QBO file (OFX/SGML format) ready for import into QuickBooks Online or QuickBooks Desktop. Perfect for migrating financial data from Quicken to QuickBooks – all without uploading your sensitive data.
   </p>

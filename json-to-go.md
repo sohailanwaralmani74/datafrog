@@ -311,8 +311,9 @@ keywords: "json to go, json to golang, go struct generator, json to go struct, g
       "name": "JSON to Go Converter",
       "url": "https://datafrog.tools/json-to-go",
       "description": "Free online tool to convert JSON to Go structs with json tags, omitempty, pointer types. Auto‑prettify, duplicate‑free types, ZIP export. 100% client‑side.",
+      "image": "https://datafrog.tools/assets/img/json-to-go-screenshot.png",
       "operatingSystem": "All",
-      "applicationCategory": "DeveloperTool",
+      "applicationCategory": "DeveloperApplication",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "featureList": [
         "JSON to Go struct",
@@ -325,26 +326,78 @@ keywords: "json to go, json to golang, go struct generator, json to go struct, g
         "ZIP export (models folder)",
         "Syntax highlighting (Ace Editor)"
       ],
-      "inLanguage": "en"
+      "inLanguage": "en",
+      "datePublished": "2024-01-15",
+      "dateModified": "2025-05-23",
+      "author": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "publisher": { "@type": "Organization", "name": "DataFrog", "logo": "https://datafrog.tools/assets/img/datafrog-logo.png", "url": "https://datafrog.tools" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "JSON to Go Struct Generator",
+      "description": "Generates Go structs from JSON samples with json tags, omitempty, and pointer types.",
+      "programmingLanguage": { "@type": "ComputerLanguage", "name": "Go" },
+      "codeSampleType": "full",
+      "codeRepository": "https://github.com/datafrog/json-to-go",
+      "targetProduct": { "@type": "SoftwareApplication", "name": "GoLand, VS Code, Vim" },
+      "url": "https://datafrog.tools/json-to-go"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "How to Generate Go Structs from JSON",
+      "headline": "Convert JSON to Go Structs – Step by Step",
+      "description": "Learn how to convert any JSON structure into clean, ready‑to‑use Go structs with custom tags and package names. 100% client‑side, no uploads.",
+      "proficiencyLevel": "Beginner",
+      "dependencies": "Go 1.16 or higher",
+      "url": "https://datafrog.tools/json-to-go",
+      "datePublished": "2024-01-15",
+      "author": { "@type": "Organization", "name": "DataFrog" }
+    },
+    {
+      "@type": "Product",
+      "name": "JSON to Go Converter",
+      "description": "Free and Pro versions available. Pro includes API access and priority support.",
+      "offers": [
+        { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" }      ],
+      "url": "https://datafrog.tools/json-to-go",
+      "brand": { "@type": "Brand", "name": "DataFrog" }
+    },
+    {
+      "@type": "Service",
+      "name": "JSON to Go Conversion Service",
+      "description": "Convert JSON to Go structs instantly in your browser. No signup, no server uploads.",
+      "serviceType": "Developer Tool",
+      "provider": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "DataFrog Conversion Plans",
+        "itemListElement": [
+          { "@type": "Offer", "name": "Free", "price": "0" }
+        ]
+      }
     },
     {
       "@type": "HowTo",
       "@id": "https://datafrog.tools/json-to-go#howto",
       "name": "How to convert JSON to Go",
+      "description": "Three simple steps to generate clean Go structs.",
+      "tool": { "@type": "HowToTool", "@id": "https://datafrog.tools/json-to-go#webapp", "name": "DataFrog JSON to Go Converter" },
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Enter JSON", "text": "Paste JSON or upload a file." },
-        { "@type": "HowToStep", "position": 2, "name": "Choose options", "text": "Select json tag options, pointer nullable, and package name." },
-        { "@type": "HowToStep", "position": 3, "name": "Convert & export", "text": "Click Convert to see Go structs, then Copy or Export ZIP." }
+        { "@type": "HowToStep", "position": 1, "name": "Enter JSON", "text": "Paste JSON or upload a .json file." },
+        { "@type": "HowToStep", "position": 2, "name": "Choose options", "text": "Select json tag options (omitempty, string), pointer nullable, and package name." },
+        { "@type": "HowToStep", "position": 3, "name": "Convert & export", "text": "Click 'Convert' to see the Go structs, then copy individual files or export a ZIP archive." }
       ]
     },
     {
       "@type": "FAQPage",
       "@id": "https://datafrog.tools/json-to-go#faq",
+      "about": { "@id": "https://datafrog.tools/json-to-go#webapp" },
       "mainEntity": [
         { "@type": "Question", "name": "Does this tool handle nested objects and arrays?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It recursively creates separate Go structs for nested objects and slices for arrays." } },
         { "@type": "Question", "name": "What JSON tag options are available?", "acceptedAnswer": { "@type": "Answer", "text": "omitempty, string tag, and pointer types for nullable fields." } },
         { "@type": "Question", "name": "Can I set a custom package name?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, using the package name text field." } },
-        { "@type": "Question", "name": "Is my JSON data sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs locally." } }
+        { "@type": "Question", "name": "Is my JSON data sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. 100% client‑side, your data never leaves your device." } }
       ]
     },
     {
@@ -352,8 +405,7 @@ keywords: "json to go, json to golang, go struct generator, json to go struct, g
       "@id": "https://datafrog.tools/json-to-go#breadcrumb",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools" },
-        { "@type": "ListItem", "position": 2, "name": "Developer Toolbox", "item": "https://datafrog.tools/developer-toolbox" },
-        { "@type": "ListItem", "position": 3, "name": "JSON to Go", "item": "https://datafrog.tools/json-to-go" }
+        { "@type": "ListItem", "position": 2, "name": "JSON to Go", "item": "https://datafrog.tools/json-to-go" }
       ]
     }
   ]

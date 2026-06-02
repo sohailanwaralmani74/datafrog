@@ -10,7 +10,7 @@ keywords: "json to sql online free, convert json to sql insert, json to mysql, j
 <script src="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.css" rel="stylesheet">
 
-<section> <h1>JSON to SQL Converter – Generate Database‑Ready INSERT & CREATE TABLE Statements</h1>
+<section> <h1>JSON to SQL Converter – Generate Database‑Ready Statements</h1>
 <p id="intro" style="font-size: 13px">
     <strong>SQL INSERT statements</strong> are the standard way to load data into 
     relational databases — MySQL, PostgreSQL, SQLite, and others. When your data 

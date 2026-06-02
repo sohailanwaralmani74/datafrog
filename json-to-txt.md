@@ -8,7 +8,7 @@ keywords: "json to txt online free, convert json to text, json to plain text, fl
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.css" rel="stylesheet">
-<section> <h1>JSON to TXT Converter Online – Extract Readable Text from JSON Instantly</h1> 
+<section> <h1>JSON to TXT Converter Online – Convert JSON To TXT</h1> 
 <p id="intro" style="font-size:14px;color:#333;">
   <strong>Plain text (TXT)</strong> is the most universally compatible format for data — 
   readable by every application, scriptable from the command line, and processable by 

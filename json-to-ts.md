@@ -275,7 +275,9 @@ keywords: "json to typescript, json to ts, convert json to typescript interface,
   </section>  
 </article>
 
-<!-- JSON‑LD Structured Data (enhanced SEO + AI crawling) -->
+<script src="/assets/js/json-to-ts.js"></script>
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -286,8 +288,9 @@ keywords: "json to typescript, json to ts, convert json to typescript interface,
       "name": "JSON to TypeScript Converter",
       "url": "https://datafrog.tools/json-to-ts",
       "description": "Free online tool to convert JSON to TypeScript interfaces or classes. Auto‑prettify, duplicate‑free types, ZIP export. 100% client‑side.",
+      "image": "https://datafrog.tools/assets/img/json-to-ts-screenshot.png",
       "operatingSystem": "All",
-      "applicationCategory": "DeveloperTool",
+      "applicationCategory": "DeveloperApplication",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "featureList": [
         "JSON to TypeScript interface/class",
@@ -297,26 +300,74 @@ keywords: "json to typescript, json to ts, convert json to typescript interface,
         "Syntax highlighting (Ace Editor)",
         "File upload support"
       ],
-      "inLanguage": "en"
+      "inLanguage": "en",
+      "datePublished": "2024-01-15",
+      "dateModified": "2025-05-23",
+      "author": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "publisher": { "@type": "Organization", "name": "DataFrog", "logo": "https://datafrog.tools/assets/img/datafrog-logo.png", "url": "https://datafrog.tools" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "JSON to TypeScript Generator",
+      "description": "Generates TypeScript interfaces or classes from JSON samples.",
+      "programmingLanguage": { "@type": "ComputerLanguage", "name": "TypeScript" },
+      "codeSampleType": "full",
+      "codeRepository": "https://github.com/datafrog/json-to-typescript",
+      "targetProduct": { "@type": "SoftwareApplication", "name": "Visual Studio Code, WebStorm, any TS editor" },
+      "url": "https://datafrog.tools/json-to-ts"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "How to Generate TypeScript Types from JSON",
+      "headline": "Convert JSON to TypeScript Interfaces/Classes – Step by Step",
+      "description": "Learn how to convert any JSON structure into clean, ready‑to‑use TypeScript interfaces or classes, entirely in your browser without any server upload.",
+      "proficiencyLevel": "Beginner",
+      "dependencies": "TypeScript 4.0 or higher",
+      "url": "https://datafrog.tools/json-to-ts",
+      "datePublished": "2024-01-15",
+      "author": { "@type": "Organization", "name": "DataFrog" }
+    },
+    {
+      "@type": "Product",
+      "name": "DataFrog JSON to TypeScript Converter",
+      "description": "Completely free, client‑side tool for generating TypeScript definitions from JSON. No signup, no limits.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+      "url": "https://datafrog.tools/json-to-ts",
+      "brand": { "@type": "Brand", "name": "DataFrog" }
+    },
+    {
+      "@type": "Service",
+      "name": "JSON to TypeScript Conversion Service",
+      "description": "Free, private, browser‑based service to convert JSON to TypeScript interfaces/classes. No data leaves your device.",
+      "serviceType": "Developer Tool",
+      "provider": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "DataFrog TypeScript Plans",
+        "itemListElement": { "@type": "Offer", "name": "Free Forever", "price": "0", "priceCurrency": "USD" }
+      }
     },
     {
       "@type": "HowTo",
       "@id": "https://datafrog.tools/json-to-ts#howto",
       "name": "How to convert JSON to TypeScript",
-      "description": "Three simple steps.",
+      "description": "Three simple steps to generate clean TypeScript types.",
+      "tool": { "@type": "HowToTool", "@id": "https://datafrog.tools/json-to-ts#webapp", "name": "DataFrog JSON to TypeScript Converter" },
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Enter JSON", "text": "Paste JSON or upload a file." },
+        { "@type": "HowToStep", "position": 1, "name": "Enter JSON", "text": "Paste JSON or upload a .json file." },
         { "@type": "HowToStep", "position": 2, "name": "Choose interface/class", "text": "Toggle checkbox for interface or class generation." },
-        { "@type": "HowToStep", "position": 3, "name": "Convert & export", "text": "Click Convert to see TypeScript, then Copy or Export ZIP." }
+        { "@type": "HowToStep", "position": 3, "name": "Convert & export", "text": "Click 'Convert' to see the TypeScript code, then copy individual files or export a ZIP archive." }
       ]
     },
     {
       "@type": "FAQPage",
       "@id": "https://datafrog.tools/json-to-ts#faq",
+      "about": { "@id": "https://datafrog.tools/json-to-ts#webapp" },
       "mainEntity": [
         { "@type": "Question", "name": "Does this tool handle nested objects and arrays?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It recursively creates a separate type for each unique nested object." } },
         { "@type": "Question", "name": "What is the difference between interface and class?", "acceptedAnswer": { "@type": "Answer", "text": "Interfaces are compile‑only; classes emit JavaScript. Our tool generates simple property‑only classes." } },
-        { "@type": "Question", "name": "Is my JSON data sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs locally in your browser – 100% client‑side." } },
+        { "@type": "Question", "name": "Is my JSON data sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. 100% client‑side, your data never leaves your device." } },
         { "@type": "Question", "name": "Can I export all types as separate files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Click Export ZIP to download a model folder with individual .ts files." } }
       ]
     },
@@ -325,12 +376,9 @@ keywords: "json to typescript, json to ts, convert json to typescript interface,
       "@id": "https://datafrog.tools/json-to-ts#breadcrumb",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools" },
-        { "@type": "ListItem", "position": 2, "name": "Developer Toolbox", "item": "https://datafrog.tools/developer-toolbox" },
-        { "@type": "ListItem", "position": 3, "name": "JSON to TypeScript", "item": "https://datafrog.tools/json-to-ts" }
+        { "@type": "ListItem", "position": 2, "name": "JSON to TypeScript", "item": "https://datafrog.tools/json-to-ts" }
       ]
     }
   ]
 }
 </script>
-
-<script src="/assets/js/json-to-ts.js"></script>

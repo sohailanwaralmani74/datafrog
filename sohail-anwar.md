@@ -16,8 +16,8 @@ description: Senior Consultant in App Development with 12+ years experience in J
     </div>
     <!-- Intro & Summary -->
     <div>
-      <h1 style="font-size:2rem; margin-bottom:0.5rem;">Sohail Anwar</h1>
-      <p style="font-weight:600; color:#444;">Senior Consultant – App Development, Systems Ltd.</p>
+      <h1 style="font-size:2rem; margin-bottom:0.5rem;">Sohail Anwar - Software Engineer | Datafrog.tools</h1>
+      <p style="font-weight:600; color:#444;">Senior Consultant – App Development.</p>
       <p style="color:#555; line-height:1.7;">
         A passionate <strong>Full Stack Developer</strong> with over <strong>12 years of experience</strong> in enterprise software development,
         Sohail excels in <strong>Java, Spring Boot, JSF, Struts, Hibernate, Angular, and Microservices</strong>.

@@ -6,7 +6,7 @@ keywords: "contact DataFrog, feedback, tool suggestions, support, data conversio
 ---
 
 <div class="contact-page" style="max-width:800px; margin:80px auto; padding:0 20px; font-family:Arial, sans-serif; text-align:center;">
-  <h1 style="font-size:2.5em; margin-bottom:20px; color:#007BFF;">Contact DataFrog</h1>
+  <h1 style="font-size:2.5em; margin-bottom:20px; color:#007BFF;">Contact US | Datafrog.tools</h1>
   <p style="font-size:1.2em; margin-bottom:30px; color:#555;">
     Have a question, need support, or want to suggest a new tool? We’d love to hear from you.
   </p>

@@ -17,8 +17,8 @@ description: Business Analyst with experience in mortgage underwriting, fraud an
     </div>
 
     <!-- Intro & Summary -->
-    <div>
-      <h1 style="font-size:2rem; margin-bottom:0.5rem;">Gourav Mishra</h1>
+  <div>
+      <h1 style="font-size:2rem; margin-bottom:0.5rem;">Gourav Mishra  - Business Analyst | Datafrog.tools</h1>
       <p style="font-weight:600; color:#444;">Business Analyst – Strategy & Risk Management</p>
       <p style="color:#555; line-height:1.7;">
         Experienced <strong>Business Analyst</strong> specializing in <strong>mortgage underwriting, fraud detection, and credit evaluation</strong>. 

@@ -116,7 +116,7 @@ keywords: "minify and prettify JSON, JSON formatter, JSON beautifier, JSON minif
 </style>
 
   <section id="intro">
-    <h1 itemprop="headline">JSON Minify & Prettify – Free Online JSON Editor with Syntax Highlighting</h1>
+    <h1 itemprop="headline">JSON Minify & Prettify – JSON Editor with Syntax Highlighting</h1>
     <p><strong>JSON (JavaScript Object Notation)</strong> is the universal data format for APIs, config files, and databases. Our <strong>free, client‑side JSON tool</strong> lets you <strong>prettify</strong> (beautify) messy JSON, <strong>minify</strong> (compress) it for production, and edit directly with <strong>syntax highlighting</strong> – all in your browser. No upload, no server, 100% private.</p>
   </section>
 

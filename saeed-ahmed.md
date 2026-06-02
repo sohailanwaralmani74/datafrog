@@ -16,7 +16,7 @@ description: Full Stack Developer with 6+ years experience in Java, Spring Boot,
     </div>
     <!-- Intro & Summary -->
     <div>
-      <h1 style="font-size:2rem; margin-bottom:0.5rem;">Saeed Ahmed Sheikh</h1>
+      <h1 style="font-size:2rem; margin-bottom:0.5rem;">Saeed Ahmed Sheikh  - Software Engineer | Datafrog.tools</h1>
       <p style="font-weight:600; color:#444;">Full Stack Developer – Java & Angular</p>
       <p style="color:#555; line-height:1.7;">
         Experienced <strong>Full Stack Developer</strong> with over <strong>6 years of experience</strong> delivering enterprise-grade applications.

@@ -271,13 +271,10 @@ keywords: "hash generator, md5 generator, sha1 generator, sha256 generator, sha5
       "name": "Hash Generator – MD5, SHA‑1, SHA‑256, SHA‑512, SHA‑3",
       "url": "https://datafrog.tools/hash",
       "description": "Free online hash generator: compute MD5, SHA‑1, SHA‑256, SHA‑512, SHA‑3 from text or files. Client‑side, private, no upload.",
+      "image": "https://datafrog.tools/assets/img/hash-screenshot.png",
       "operatingSystem": "All",
-      "applicationCategory": "Utility",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
+      "applicationCategory": "DeveloperApplication",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "featureList": [
         "Generate MD5, SHA‑1, SHA‑256, SHA‑512, SHA‑3 hashes",
         "Hash text or any file (images, PDFs, binaries)",
@@ -286,103 +283,84 @@ keywords: "hash generator, md5 generator, sha1 generator, sha256 generator, sha5
         "100% client‑side – no server upload"
       ],
       "inLanguage": "en",
-      "softwareVersion": "1.0"
+      "datePublished": "2023-01-01",
+      "dateModified": "2025-05-23",
+      "author": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "publisher": { "@type": "Organization", "name": "DataFrog", "logo": "https://datafrog.tools/assets/img/datafrog-logo.png", "url": "https://datafrog.tools" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "JavaScript Hash Library",
+      "description": "Client‑side implementation of MD5, SHA‑1, SHA‑256, SHA‑512, SHA‑3 using Web Crypto API and fallback libraries.",
+      "programmingLanguage": { "@type": "ComputerLanguage", "name": "JavaScript" },
+      "codeSampleType": "full",
+      "codeRepository": "https://github.com/datafrog/hash-generator",
+      "targetProduct": { "@type": "SoftwareApplication", "name": "Any web browser" },
+      "url": "https://datafrog.tools/hash"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "How to Generate Cryptographic Hashes Online",
+      "headline": "MD5, SHA‑1, SHA‑256, SHA‑3 Hash Generator – Complete Guide",
+      "description": "Learn how to securely compute hash digests from text or files, entirely in your browser without any server upload.",
+      "proficiencyLevel": "Beginner",
+      "url": "https://datafrog.tools/hash",
+      "datePublished": "2023-01-01",
+      "author": { "@type": "Organization", "name": "DataFrog" }
+    },
+    {
+      "@type": "Product",
+      "name": "DataFrog Hash Generator",
+      "description": "Completely free, client‑side tool for MD5, SHA‑1, SHA‑256, SHA‑512, and SHA‑3 hashing. No signup, no limits.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+      "url": "https://datafrog.tools/hash",
+      "brand": { "@type": "Brand", "name": "DataFrog" }
+    },
+    {
+      "@type": "Service",
+      "name": "Hash Generation Service",
+      "description": "Free, private, browser‑based cryptographic hash service. No data leaves your device.",
+      "serviceType": "Developer Utility",
+      "provider": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "DataFrog Hash Plans",
+        "itemListElement": { "@type": "Offer", "name": "Free Forever", "price": "0", "priceCurrency": "USD" }
+      }
     },
     {
       "@type": "HowTo",
       "@id": "https://datafrog.tools/hash#howto",
       "name": "How to generate a hash online",
       "description": "Follow these simple steps to get any cryptographic hash from your text or file.",
+      "tool": { "@type": "HowToTool", "@id": "https://datafrog.tools/hash#webapp", "name": "DataFrog Hash Generator" },
       "step": [
-        {
-          "@type": "HowToStep",
-          "name": "Enter your data",
-          "text": "Paste text into the input area or click 'Upload File' to select any file from your device.",
-          "position": 1
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Choose a hash algorithm",
-          "text": "Select from MD5, SHA‑1, SHA‑256, SHA‑512, or SHA‑3 (256/512) using the dropdown menu.",
-          "position": 2
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Generate the hash",
-          "text": "Click the 'Generate Hash' button – the hexadecimal digest appears instantly.",
-          "position": 3
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Copy or download",
-          "text": "Use the 'Copy Hash' button to copy to clipboard, or 'Download .txt' to save the hash as a file.",
-          "position": 4
-        }
+        { "@type": "HowToStep", "position": 1, "name": "Enter your data", "text": "Paste text into the input area or click 'Upload File' to select any file from your device." },
+        { "@type": "HowToStep", "position": 2, "name": "Choose a hash algorithm", "text": "Select from MD5, SHA‑1, SHA‑256, SHA‑512, or SHA‑3 (256/512) using the dropdown menu." },
+        { "@type": "HowToStep", "position": 3, "name": "Generate the hash", "text": "Click the 'Generate Hash' button – the hexadecimal digest appears instantly." },
+        { "@type": "HowToStep", "position": 4, "name": "Copy or download", "text": "Use the 'Copy Hash' button to copy to clipboard, or 'Download .txt' to save the hash as a file." }
       ],
       "totalTime": "PT1M"
     },
     {
       "@type": "FAQPage",
       "@id": "https://datafrog.tools/hash#faq",
+      "about": { "@id": "https://datafrog.tools/hash#webapp" },
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is MD5 online? Is it secure?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "MD5 online tools generate MD5 hashes. However, MD5 is cryptographically broken and not secure against collisions. Use it only for non‑critical checksums, not for passwords or security."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I generate SHA‑256 online for large files?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, files up to ~50 MB work smoothly in your browser. Larger files may cause memory limits depending on your device. For very large files, command‑line tools like sha256sum are recommended."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What’s the difference between SHA‑256 and SHA‑3?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Both are secure, but SHA‑3 is based on the Keccak algorithm and serves as a backup for SHA‑2. Our tool supports both."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is this hash tool free and private?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely. Everything runs locally in your browser – no data is uploaded to any server. It's 100% free and unlimited."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I hash a file without uploading it to a server?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, the file is read locally via JavaScript’s FileReader API. Nothing is transmitted over the network."
-          }
-        }
+        { "@type": "Question", "name": "What is MD5 online? Is it secure?", "acceptedAnswer": { "@type": "Answer", "text": "MD5 online tools generate MD5 hashes. However, MD5 is cryptographically broken and not secure against collisions. Use it only for non‑critical checksums, not for passwords or security." } },
+        { "@type": "Question", "name": "Can I generate SHA‑256 online for large files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, files up to ~50 MB work smoothly in your browser. Larger files may cause memory limits depending on your device. For very large files, command‑line tools like sha256sum are recommended." } },
+        { "@type": "Question", "name": "What’s the difference between SHA‑256 and SHA‑3?", "acceptedAnswer": { "@type": "Answer", "text": "Both are secure, but SHA‑3 is based on the Keccak algorithm and serves as a backup for SHA‑2. Our tool supports both." } },
+        { "@type": "Question", "name": "Is this hash tool free and private?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Everything runs locally in your browser – no data is uploaded to any server. It's 100% free and unlimited." } },
+        { "@type": "Question", "name": "Can I hash a file without uploading it to a server?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, the file is read locally via JavaScript's FileReader API. Nothing is transmitted over the network." } }
       ]
     },
     {
       "@type": "BreadcrumbList",
       "@id": "https://datafrog.tools/hash#breadcrumb",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://datafrog.tools"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Hash Generator",
-          "item": "https://datafrog.tools/hash"
-        }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools" },
+        { "@type": "ListItem", "position": 2, "name": "Hash Generator", "item": "https://datafrog.tools/hash" }
       ]
     }
   ]

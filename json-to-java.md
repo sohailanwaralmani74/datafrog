@@ -141,7 +141,7 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
 
 <article id="intro" style="margin-left: 5rem; margin-right: 5rem;">
 <section>
-  <h1>JSON to Java Converter – Generate POJOs with Lombok, Jackson & Validation</h1>
+  <h1>JSON to Java Converter – Generate POJOs with Lombok and Jackson</h1>
   <p><strong>Convert any JSON into production‑ready Java classes</strong>. Choose Lombok annotations, Jackson property mapping, Bean Validation, and more. All code is generated client‑side – no upload, no server, 100% private.</p>
   </section>
 </article>
@@ -316,7 +316,8 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
   </section>
 </article>
 
-<!-- JSON‑LD Structured Data (enhanced SEO + AI crawling) -->
+<script src="/assets/js/json-to-java.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -327,8 +328,9 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
       "name": "JSON to Java Converter",
       "url": "https://datafrog.tools/json-to-java",
       "description": "Free online tool to convert JSON to Java POJOs with Lombok, Jackson, and validation annotations. Auto‑prettify, duplicate‑free types, ZIP export. 100% client‑side.",
+      "image": "https://datafrog.tools/assets/img/json-to-java-screenshot.png",
       "operatingSystem": "All",
-      "applicationCategory": "DeveloperTool",
+      "applicationCategory": "DeveloperApplication",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "featureList": [
         "JSON to Java POJO",
@@ -341,28 +343,79 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
         "Syntax highlighting (Ace Editor)",
         "File upload support"
       ],
-      "inLanguage": "en"
+      "inLanguage": "en",
+      "datePublished": "2024-01-15",
+      "dateModified": "2025-05-23",
+      "author": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "publisher": { "@type": "Organization", "name": "DataFrog", "logo": "https://datafrog.tools/assets/img/datafrog-logo.png", "url": "https://datafrog.tools" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "JSON to Java POJO Generator",
+      "description": "Generates Java POJOs from JSON samples with Jackson, Lombok, and validation annotations.",
+      "programmingLanguage": { "@type": "ComputerLanguage", "name": "Java" },
+      "codeSampleType": "full",
+      "codeRepository": "https://github.com/datafrog/json-to-java",
+      "targetProduct": { "@type": "SoftwareApplication", "name": "IntelliJ IDEA, Eclipse, VS Code" },
+      "url": "https://datafrog.tools/json-to-java"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "How to Generate Java POJOs from JSON",
+      "headline": "Convert JSON to Java Classes – Step by Step",
+      "description": "Learn how to convert any JSON structure into clean, ready‑to‑use Java POJOs with optional Lombok, Jackson, and Bean Validation annotations. 100% client‑side, no uploads.",
+      "proficiencyLevel": "Beginner",
+      "dependencies": "Java 11 or higher",
+      "url": "https://datafrog.tools/json-to-java",
+      "datePublished": "2024-01-15",
+      "author": { "@type": "Organization", "name": "DataFrog" }
+    },
+    {
+      "@type": "Product",
+      "name": "JSON to Java Converter",
+      "description": "Free and Pro versions available. Pro includes API access and priority support.",
+      "offers": [
+        { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Pro API", "price": "49.99", "priceCurrency": "USD" }
+      ],
+      "url": "https://datafrog.tools/json-to-java",
+      "brand": { "@type": "Brand", "name": "DataFrog" }
+    },
+    {
+      "@type": "Service",
+      "name": "JSON to Java Conversion Service",
+      "description": "Convert JSON to Java POJOs instantly in your browser. No signup, no server uploads.",
+      "serviceType": "Developer Tool",
+      "provider": { "@type": "Organization", "name": "DataFrog", "url": "https://datafrog.tools" },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "DataFrog Conversion Plans",
+        "itemListElement": [
+          { "@type": "Offer", "name": "Free", "price": "0" }
+        ]
+      }
     },
     {
       "@type": "HowTo",
       "@id": "https://datafrog.tools/json-to-java#howto",
       "name": "How to convert JSON to Java",
-      "description": "Three simple steps.",
+      "description": "Three simple steps to generate clean Java POJOs.",
+      "tool": { "@type": "HowToTool", "@id": "https://datafrog.tools/json-to-java#webapp", "name": "DataFrog JSON to Java Converter" },
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Enter JSON", "text": "Paste JSON or upload a file." },
+        { "@type": "HowToStep", "position": 1, "name": "Enter JSON", "text": "Paste JSON or upload a .json file." },
         { "@type": "HowToStep", "position": 2, "name": "Choose annotations", "text": "Select Lombok, Jackson, or Validation options." },
-        { "@type": "HowToStep", "position": 3, "name": "Convert & export", "text": "Click Convert to see Java classes, then Copy or Export ZIP." }
+        { "@type": "HowToStep", "position": 3, "name": "Convert & export", "text": "Click Convert, then copy or export ZIP." }
       ]
     },
     {
       "@type": "FAQPage",
       "@id": "https://datafrog.tools/json-to-java#faq",
+      "about": { "@id": "https://datafrog.tools/json-to-java#webapp" },
       "mainEntity": [
-        { "@type": "Question", "name": "Does this tool handle nested objects and arrays?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It recursively creates a separate Java class for each unique nested object." } },
-        { "@type": "Question", "name": "What Lombok annotations are supported?", "acceptedAnswer": { "@type": "Answer", "text": "@Data and @Builder (optional). If Lombok is off, plain getters/setters are generated." } },
-        { "@type": "Question", "name": "What Jackson annotations are generated?", "acceptedAnswer": { "@type": "Answer", "text": "@JsonIgnoreProperties and @JsonProperty for each field." } },
-        { "@type": "Question", "name": "Is my JSON data sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs locally in your browser – 100% client‑side." } },
-        { "@type": "Question", "name": "Can I export all classes as separate files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Click Export ZIP to download a model folder with individual .java files." } }
+        { "@type": "Question", "name": "Does this tool handle nested objects?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It creates separate classes for each unique nested structure." } },
+        { "@type": "Question", "name": "What Lombok annotations are supported?", "acceptedAnswer": { "@type": "Answer", "text": "@Data and @Builder." } },
+        { "@type": "Question", "name": "Is my data sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. 100% client‑side, your data never leaves your device." } }
       ]
     },
     {
@@ -370,12 +423,9 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
       "@id": "https://datafrog.tools/json-to-java#breadcrumb",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools" },
-        { "@type": "ListItem", "position": 2, "name": "Developer Toolbox", "item": "https://datafrog.tools/developer-toolbox" },
-        { "@type": "ListItem", "position": 3, "name": "JSON to Java", "item": "https://datafrog.tools/json-to-java" }
+        { "@type": "ListItem", "position": 2, "name": "JSON to Java", "item": "https://datafrog.tools/json-to-java" }
       ]
     }
   ]
 }
 </script>
-
-<script src="/assets/js/json-to-java.js"></script>
