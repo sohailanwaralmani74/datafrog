@@ -48,7 +48,7 @@ keywords: "convert excel to json online free, excel to json converter, xlsx to j
           <button class="csvx-btn" id="exportJsonBtn" title="Download as JSON File">💾 Export .json</button>
         </div>
       </div>
-      <textarea id="jsonPreview" class="csvx-preview" style="min-height:300px; background:#1b1b1b; color:#eee; font-family:monospace; padding:10px; border:none; width:100%; border-radius:8px;" contenteditable="true"></textarea>
+      <textarea id="jsonPreview" class="csvx-preview" style="min-height:360px; max-height:360px; background:#1b1b1b; color:#eee; font-family:monospace; padding:10px; border:none; width:100%; border-radius:8px;" contenteditable="true" spellcheck="false" resize="none"></textarea>
     </div>
   </div>
 </div>
