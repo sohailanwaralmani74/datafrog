@@ -183,6 +183,25 @@ keywords: "data conversion blog, online file converter tips, json to csv guide, 
 <section class="blog-list">
 
 <article class="blog-post">
+  <a href="how-to-convert-excel-to-json" class="blog-post-link">
+    <figure class="blog-post-image">
+      <img src="assets/img/how-to-convert-excel-to-json.webp" alt="How to Convert Excel to JSON">
+    </figure>
+    <div class="blog-post-content">
+      <h2 class="blog-post-title">How to Convert Excel to JSON</h2>
+      <p class="blog-post-description">
+        Need to convert Excel data into JSON format quickly? This guide walks you through easy methods using our free browser-based XLS to JSON converter and Excel's built-in tools, making the process smooth and error-free.
+      </p>
+      <div class="blog-post-meta">
+        <img src="assets/img/gourav-mishra.jpg" alt="Gourav Mishra" class="author-img">
+        <span class="author-name">Gourav Mishra</span>
+        <span class="post-date">June 02, 2026</span>
+      </div>
+    </div>
+  </a>
+</article>
+
+<article class="blog-post">
   <a href="how-to-open-json-file-in-excel" class="blog-post-link">
     <figure class="blog-post-image">
       <img src="assets/img/how-to-convert-json-to-excel.webp" alt="How To Open JSON File in Excel">
@@ -264,5 +283,4 @@ keywords: "data conversion blog, online file converter tips, json to csv guide, 
 <div style="width:15%"></div>
 
 </div>
-<script src="/assets/js/blog.js"></script>
 

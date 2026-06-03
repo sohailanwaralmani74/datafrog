@@ -32,12 +32,13 @@ layout: default
         SQL
       </span>
       <label style="color: #ddd;">|</label>
-      <span class="nav-trigger" data-popup="financeTools" id="financeToolsNav" aria-label="Finance Tools">
-        Finance
-      </span>
-      <label style="color: #ddd;">|</label>
       <span class="nav-trigger" data-popup="utilitiesTools" id="utilitiesToolsNav" aria-label="Utilities">
         Utilities
+      </span>
+
+      <label style="color: #ddd;">|</label>
+       <span class="nav-trigger" data-popup="blogPosts" id="blogPostsNav" aria-label="Blog">
+        Blog
       </span>
 
     </div>
@@ -85,7 +86,7 @@ layout: default
         gap: 5px;
 
         grid-template-columns:
-          repeat(auto-fit, minmax(10rem, 1fr));
+          repeat(auto-fit, minmax(15rem, 1fr));
       }
 
       .popup-column h3 {
@@ -258,22 +259,6 @@ layout: default
 
   </div>
 
-  <!-- Finance Window-->
-
-  <div class="popup-grid" id="financeTools">
-
-    <div class="popup-column">
-
-      <h3>QIF Converters</h3>
-      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
-        <a href="qif-to-csv">QIF to CSV</a>
-        <a href="qif-to-excel">QIF to Excel</a>
-        <a href="qif-to-qbo">QIF to QBO</a>
-      </div>
-    </div>
-
-  </div>
-
   <!-- Utilities Window-->
 
   <div class="popup-grid" id="utilitiesTools">
@@ -308,7 +293,15 @@ layout: default
       </div>
 
     </div>
+   <div class="popup-column">
 
+      <h3>QIF Converter</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="qif-to-csv">QIF to CSV</a>
+        <a href="qif-to-excel">QIF to Excel</a>
+        <a href="qif-to-qbo">QIF to QBO</a>
+      </div>
+    </div>
     <div class="popup-column">
 
       <h3>Others</h3>
@@ -317,9 +310,34 @@ layout: default
       </div>
 
     </div>
+    
 
   </div>
 
+  <!-- Blog Window-->
+
+  <div class="popup-grid" id="blogPosts">
+    <div class="popup-column">
+
+      <h3>Excel Data Conversion</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="/how-to-convert-excel-to-json">How to Convert Excel to JSON</a>
+      </div>
+    </div>
+    <div class="popup-column">
+
+      <h3>JSON Data Conversion</h3>
+      <div style="display: grid;  grid-template-columns: repeat(1, 1fr);">
+        <a href="/how-to-convert-json-to-csv">How to Convert JSON to CSV</a>
+        <a href="/how-to-convert-json-to-pdf">How to Convert JSON to PDF</a>
+        <a href="/how-to-convert-json-to-xml">How to Convert JSON to XML</a>
+        <a href="/how-to-open-json-file-in-excel">How to Open JSON File in Excel</a>
+      </div>
+    </div>
+
+    
+
+  </div>
 
   <!-- SCRIPT -->
   <script>
@@ -449,9 +467,7 @@ layout: default
         gap:1rem;
       ">
 
-      <a href="blog">📝 Blog</a>
-
-      <a href="privacy-policy">
+      <a href="privacy-policy" class="nav-trigger">
         🔒 Privacy Policy
       </a>
 
