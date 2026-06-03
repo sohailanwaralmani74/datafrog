@@ -8,7 +8,7 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
 <section style="display: flex; justify-content: center">
   <div style="width: 15%;"></div>
   <div style="width: 69%;">
-    <h1>UUID & ID Generator – Create UUID, GUID, KSUID, NanoID, ULID, CUID</h1>
+    <h1>UUID Generator Online – Generate UUID, GUID, KSUID, and More</h1>
       <p id="intro" style="font-size:14px;color:#333;">
     Generate universally unique identifiers (UUID, GUID, KSUID, ULID, NanoID, CUID) instantly in your browser – no uploads, no signups. Choose from nine identifier formats, generate up to 1000 IDs at once, and export as CSV, Excel, JSON, SQL, or XML. Perfect for database keys, API tokens, distributed systems, and testing – all processed locally with cryptographic randomness.
   </p>
@@ -16,7 +16,7 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
       <div class="csvx-panel" id="csvPanelXsd" style="min-height: 450px;">
         <div class="panel-header">
           <div class="controls">
-            <select id="uuidVersion" class="csvx-input" style="background:#1b1b1b; color:#eee;">
+            <select id="uuidVersion" class="csvx-input csvx-btn primary" style="background:#1b1b1b; color:#eee;">
               <option value="v1">UUID v1 (Timestamp-based)</option>
               <option value="v4">UUID v4 (Random)</option>
               <option value="v7">UUID v7 (Sortable Timestamp)</option>
@@ -27,7 +27,7 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
               <option value="cuid">CUID (Collision‑resistant)</option>
               <option value="cuid2">CUID2 (Next‑gen, secure)</option>
             </select>
-            <input type="number" id="uuidCount" class="csvx-input" value="1" min="1" max="1000" title="Number of IDs to generate (1–1000)" style="width: 220px; background:#1b1b1b; color:#eee;" oninput="this.value = Math.max(1, Math.min(1000, this.value))">
+            <input type="number" id="uuidCount" class="csvx-input csvx-btn primary" value="1" min="1" max="1000" title="Number of IDs to generate (1–1000)" style="width: 220px; background:#1b1b1b; color:#eee;" oninput="this.value = Math.max(1, Math.min(1000, this.value))">
           </div>
           <div class="controls">
             <button class="csvx-btn primary" id="generateUUIDBtn">🔄 Generate Unique IDs</button>
@@ -45,7 +45,7 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
         <textarea id="uuid-output" class="csvx-preview" style="min-height:19.8rem; max-height:19.8rem; background:#1b1b1b; color:#eee; font-family:monospace; padding:20px; border:1px solid orange; width:100%; border-radius:8px;"></textarea>
       </div>
     </div>
-    <div id="toastUUID" class="jsonx-toast">✅ IDs generated successfully</div>
+    <div id="toastUUID" class="jsonx-toast" style="background: #1e293b; backdrop-filter: blur(16px);  color: #e0f2fe; padding: 12px 22px; border-radius: 60px; font-size: 0.85rem; border-left: 4px solid #2dd4bf; animation: slideIn 0.2s ease;">✅ IDs generated successfully</div>
 
 
   <article style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
