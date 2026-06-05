@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "UUID Generator Online – Generate UUID v1, v4 and v7 Free"
+title: "How to Generate UUID or GUID with Datafrog"
 description: "Generate UUID online instantly — UUID v1, v4, or v7. Free browser-based tool, no signup, no uploads. Understand the difference and pick the right version for your project."
 keywords: "uuid generator, random uuid, uuid v4, generate uuid online, online uuid generator, get uuid, create a uuid, make uuid, uuid gen, uuid4 generator, uuid example, generate random uuid, generate uuid v4, get random uuid"
 ---

@@ -47,7 +47,7 @@ keywords: "xml to xsd generator online, xml to xsd converter free, generate xsd 
           <button class="csvx-btn" id="exportXsdBtn" title="Download as XSD File">💾 Download .xsd</button>
         </div>
       </div>
-      <textarea id="xsdPreview" class="csvx-preview" style="min-height:300px; background:#1b1b1b; color:#eee; font-family:monospace; padding:10px; border:none; width:100%; border-radius:8px;" contenteditable="true"></textarea>
+      <textarea id="xsdPreview" class="csvx-preview" style="min-height:350px; resize: none; background:#1b1b1b; color:#eee; font-family:monospace; padding:10px; border:none; width:100%; border-radius:8px;" contenteditable="true"></textarea>
     </div>
   </div>
 </div>

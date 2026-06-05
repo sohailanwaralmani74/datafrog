@@ -191,7 +191,6 @@ keywords: "base64 encoder, base64 decoder, base64 to text, text to base64, encod
 
   <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
     <h2>❓ Frequently Asked Questions about Base64</h2>
-    
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What is Base64 and why is it used?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
