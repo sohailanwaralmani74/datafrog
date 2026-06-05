@@ -181,11 +181,11 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>🚀 Featured Tools</h2>
                     <p>Most popular and frequently used converters</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/uuid-generator">UUID Generator</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-minify-prettify">JSON Minify & Prettify</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-csv">JSON To CSV Converter</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-xml">JSON To XML Converter</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/hash-generator">Hash Generator</a></li>
+                        <li itemprop="itemListElement"><a href="/uuid-generator">UUID Generator</a></li>
+                        <li itemprop="itemListElement"><a href="/json-minify-prettify">JSON Minify & Prettify</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-csv">JSON To CSV Converter</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-xml">JSON To XML Converter</a></li>
+                        <li itemprop="itemListElement"><a href="/hash-generator">Hash Generator</a></li>
                     </ul>
                     <div class="tag">Most Used</div>
                 </section>
@@ -194,22 +194,22 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>JSON Tools</h2>
                     <p>Convert, validate, and transform JSON data</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-minify-prettify">JSON Minify & Prettify</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-string-to-json-object">JSON String To Object</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-c-sharp">JSON To C#</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-csv">JSON To CSV</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-dart">JSON To Dart</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-excel">JSON To Excel</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-go">JSON To Go</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-html">JSON To HTML</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-java">JSON To Java</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-json-schema">JSON To Schema</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-pdf">JSON To PDF</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-sql">JSON To SQL</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-ts">JSON To TypeScript</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-txt">JSON To TXT</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-xml">JSON To XML</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/json-to-yaml">JSON To YAML</a></li>
+                        <li itemprop="itemListElement"><a href="/json-minify-prettify">JSON Minify & Prettify</a></li>
+                        <li itemprop="itemListElement"><a href="/json-string-to-json-object">JSON String To Object</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-c-sharp">JSON To C#</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-csv">JSON To CSV</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-dart">JSON To Dart</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-excel">JSON To Excel</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-go">JSON To Go</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-html">JSON To HTML</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-java">JSON To Java</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-json-schema">JSON To Schema</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-pdf">JSON To PDF</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-sql">JSON To SQL</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-ts">JSON To TypeScript</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-txt">JSON To TXT</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-xml">JSON To XML</a></li>
+                        <li itemprop="itemListElement"><a href="/json-to-yaml">JSON To YAML</a></li>
                     </ul>
                     <div class="tag">16 Tools</div>
                 </section>
@@ -218,14 +218,14 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>CSV Tools</h2>
                     <p>Process and convert CSV spreadsheet data</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/convert-csv-to-excel">CSV To Excel</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/convert-csv-to-html">CSV To HTML</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/convert-csv-to-json">CSV To JSON</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/convert-csv-to-pdf">CSV To PDF</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/convert-csv-to-txt">CSV To TXT</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/convert-csv-to-xml">CSV To XML</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/csv-to-sql">CSV To SQL</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/remove-csv-duplicates">Remove CSV Duplicates</a></li>
+                        <li itemprop="itemListElement"><a href="/convert-csv-to-excel">CSV To Excel</a></li>
+                        <li itemprop="itemListElement"><a href="/convert-csv-to-html">CSV To HTML</a></li>
+                        <li itemprop="itemListElement"><a href="/convert-csv-to-json">CSV To JSON</a></li>
+                        <li itemprop="itemListElement"><a href="/convert-csv-to-pdf">CSV To PDF</a></li>
+                        <li itemprop="itemListElement"><a href="/convert-csv-to-txt">CSV To TXT</a></li>
+                        <li itemprop="itemListElement"><a href="/convert-csv-to-xml">CSV To XML</a></li>
+                        <li itemprop="itemListElement"><a href="/csv-to-sql">CSV To SQL</a></li>
+                        <li itemprop="itemListElement"><a href="/remove-csv-duplicates">Remove CSV Duplicates</a></li>
                     </ul>
                     <div class="tag">8 Tools</div>
                 </section>
@@ -234,14 +234,14 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>Excel & XLSX Tools</h2>
                     <p>Work with Excel spreadsheets and XLSX files</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/convert-xlsx-to-csv">XLSX To CSV</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/convert-xlsx-to-xml">XLSX To XML</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/excel-to-html">Excel To HTML</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/excel-to-json">Excel To JSON</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/excel-to-txt">Excel To TXT</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/remove-excel-duplicates">Remove Excel Duplicates</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/xlsx-to-pdf">XLSX To PDF</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/xlsx-to-sql-converter">XLSX To SQL</a></li>
+                        <li itemprop="itemListElement"><a href="/convert-xlsx-to-csv">XLSX To CSV</a></li>
+                        <li itemprop="itemListElement"><a href="/convert-xlsx-to-xml">XLSX To XML</a></li>
+                        <li itemprop="itemListElement"><a href="/excel-to-html">Excel To HTML</a></li>
+                        <li itemprop="itemListElement"><a href="/excel-to-json">Excel To JSON</a></li>
+                        <li itemprop="itemListElement"><a href="/excel-to-txt">Excel To TXT</a></li>
+                        <li itemprop="itemListElement"><a href="/remove-excel-duplicates">Remove Excel Duplicates</a></li>
+                        <li itemprop="itemListElement"><a href="/xlsx-to-pdf">XLSX To PDF</a></li>
+                        <li itemprop="itemListElement"><a href="/xlsx-to-sql-converter">XLSX To SQL</a></li>
                     </ul>
                     <div class="tag">8 Tools</div>
                 </section>
@@ -250,14 +250,14 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>XML, SQL & Data</h2>
                     <p>Advanced data transformation and database tools</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/xml-to-json">XML To JSON</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/xml-to-xsd-generator">XML To XSD Generator</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/sql-to-csv">SQL To CSV</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/sql-to-excel">SQL To Excel</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/sql-to-xml">SQL To XML</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/remove-duplicates-in-sql">Remove SQL Duplicates</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/recordset-converter">Recordset Converter</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/yaml-to-json">YAML To JSON</a></li>
+                        <li itemprop="itemListElement"><a href="/xml-to-json">XML To JSON</a></li>
+                        <li itemprop="itemListElement"><a href="/xml-to-xsd-generator">XML To XSD Generator</a></li>
+                        <li itemprop="itemListElement"><a href="/sql-to-csv">SQL To CSV</a></li>
+                        <li itemprop="itemListElement"><a href="/sql-to-excel">SQL To Excel</a></li>
+                        <li itemprop="itemListElement"><a href="/sql-to-xml">SQL To XML</a></li>
+                        <li itemprop="itemListElement"><a href="/remove-duplicates-in-sql">Remove SQL Duplicates</a></li>
+                        <li itemprop="itemListElement"><a href="/recordset-converter">Recordset Converter</a></li>
+                        <li itemprop="itemListElement"><a href="/yaml-to-json">YAML To JSON</a></li>
                     </ul>
                     <div class="tag">8 Tools</div>
                 </section> 
@@ -266,9 +266,9 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>💰 Financial Tools</h2>
                     <p>Convert financial data formats (QIF, QBO)</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/qif-to-csv">QIF To CSV</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/qif-to-excel">QIF To Excel</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/qif-to-qbo">QIF To QBO</a></li>
+                        <li itemprop="itemListElement"><a href="/qif-to-csv">QIF To CSV</a></li>
+                        <li itemprop="itemListElement"><a href="/qif-to-excel">QIF To Excel</a></li>
+                        <li itemprop="itemListElement"><a href="/qif-to-qbo">QIF To QBO</a></li>
                     </ul>
                     <div class="tag">3 Tools</div>
                 </section>
@@ -277,8 +277,8 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>📄 PDF & Presentation</h2>
                     <p>Convert between PDFs and presentations</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/pdf-to-powerpoint">PDF To PowerPoint</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/pptx-to-pdf">PPTX To PDF</a></li>
+                        <li itemprop="itemListElement"><a href="/pdf-to-powerpoint">PDF To PowerPoint</a></li>
+                        <li itemprop="itemListElement"><a href="/pptx-to-pdf">PPTX To PDF</a></li>
                     </ul>
                     <div class="tag">2 Tools</div>
                 </section>
@@ -287,9 +287,10 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>👨‍💻 Developer Tools</h2>
                     <p>Utilities for developers and programmers</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/uuid-generator">UUID Generator (v4, v5, v1)</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/hash-generator">Hash Generator (MD5, SHA)</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/base64">Base64 Encoder & Decoder</a></li>
+                        <li itemprop="itemListElement"><a href="/uuid-generator">UUID Generator (v4, v5, v1)</a></li>
+                        <li itemprop="itemListElement"><a href="/hash-generator">Hash Generator (MD5, SHA)</a></li>
+                        <li itemprop="itemListElement"><a href="/base64">Base64 Encoder & Decoder</a></li>
+                        <li itemprop="itemListElement"><a href="/jwt-decoder">JWT Decoder</a></li>
                     </ul>
                     <div class="tag">3 Tools</div>
                 </section>
@@ -298,10 +299,10 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>📚 How-To Guides</h2>
                     <p>Step-by-step tutorials and conversion guides</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/how-to-convert-json-to-csv">How To Convert JSON To CSV</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/how-to-convert-json-to-pdf">How To Convert JSON To PDF</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/how-to-convert-json-to-xml">How To Convert JSON To XML</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/how-to-open-json-file-in-excel">How To Open JSON in Excel</a></li>
+                        <li itemprop="itemListElement"><a href="/how-to-convert-json-to-csv">How To Convert JSON To CSV</a></li>
+                        <li itemprop="itemListElement"><a href="/how-to-convert-json-to-pdf">How To Convert JSON To PDF</a></li>
+                        <li itemprop="itemListElement"><a href="/how-to-convert-json-to-xml">How To Convert JSON To XML</a></li>
+                        <li itemprop="itemListElement"><a href="/how-to-open-json-file-in-excel">How To Open JSON in Excel</a></li>
                     </ul>
                     <div class="tag">4 Guides</div>
                 </section> 
@@ -310,12 +311,12 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>🏢 Company Pages</h2>
                     <p>Information about Datafrog and policies</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/">Home</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/about-us">About Us</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/blog">Blog & Articles</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/contact-us">Contact Us</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/privacy-policy">Privacy Policy</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/terms-of-service">Terms of Service</a></li>
+                        <li itemprop="itemListElement"><a href="/">Home</a></li>
+                        <li itemprop="itemListElement"><a href="/about-us">About Us</a></li>
+                        <li itemprop="itemListElement"><a href="/blog">Blog & Articles</a></li>
+                        <li itemprop="itemListElement"><a href="/contact-us">Contact Us</a></li>
+                        <li itemprop="itemListElement"><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li itemprop="itemListElement"><a href="/terms-of-service">Terms of Service</a></li>
                     </ul>
                     <div class="tag">6 Pages</div>
                 </section>  
@@ -324,9 +325,9 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <h2>✍️ Contributors</h2>
                     <p>Meet the team behind Datafrog</p>
                     <ul>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/sohail-anwar">Sohail Anwar</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/saeed-ahmed">Saeed Ahmed</a></li>
-                        <li itemprop="itemListElement"><a href="https://datafrog.tools/gourav-mishra">Gourav Mishra</a></li>
+                        <li itemprop="itemListElement"><a href="/sohail-anwar">Sohail Anwar</a></li>
+                        <li itemprop="itemListElement"><a href="/saeed-ahmed">Saeed Ahmed</a></li>
+                        <li itemprop="itemListElement"><a href="/gourav-mishra">Gourav Mishra</a></li>
                     </ul>
                     <div class="tag">3 Contributors</div>
                 </section>

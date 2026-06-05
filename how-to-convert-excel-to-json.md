@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "How to Convert Excel to JSON – Step-by-Step Guide"
-description: "Learn how to convert Excel to JSON online in seconds. This free browser-based XLS to JSON converter requires no signup, no uploads, and works with .xlsx and .xls files instantly."
+description: "Learn how to convert Excel to JSON online in seconds. This free browser-based XLS and XLSX to JSON converter requires no signup, no uploads."
 keywords: "excel to json, convert xls to json, xlsx to json, xls to json converter, excel to json converter, convert excel to json online, xls to json online, export excel to json, convert excel into json, convert from excel to json"
 ---
 
