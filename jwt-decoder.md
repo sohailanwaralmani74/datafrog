@@ -4,136 +4,7 @@ title: "JWT Decoder - Browser Based , Secure, and Private Tool"
 description: "Free online tools to decode, parse, and verify JWT tokens. Fast and secure. JWT Decoder works within browser. No code uploaded to server."
 keywords: "jwt decoder, jwt token decode, decode jwt, decodejwt, jwt token decrypt, jwt parser, jwt decode online, token decode, decode jwt token, jwt token decode online, decode token, bearer token decode, parse jwt, parse jwt token, jwt decrypt, decode bearer token, decode jwt token online, json web token decode online, jwt decode npm, jwt io decode, jwt online decode, online jwt decode, decode token online, read jwt token, access token decode"
 ---
-<!-- Structured Data: SoftwareApplication (no aggregate rating) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "JWT Decoder",
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "A free online JWT decoder that lets developers instantly decode JWT tokens, parse the header and payload, and inspect claims without any login or installation.",
-  "featureList": [
-    "Decode JWT header and payload",
-    "Parse all standard JWT claims",
-    "Detect token expiry (exp)",
-    "Support for all signing algorithms",
-    "No data sent to server — 100% client-side"
-  ],
-  "url": "https://datafrog.tools/jwt-decoder"
-}
-</script>
 
-<!-- Structured Data: FAQPage (no reviews) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is a JWT decoder?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A JWT decoder is a tool that reads the three Base64url-encoded parts of a JSON Web Token — header, payload, and signature — and renders them as human-readable JSON. It reveals the algorithm, token type, user claims, expiry, and other metadata embedded inside the token."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I decode a JWT token online?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Paste your JWT token into the input field above and click Decode. The tool instantly splits the token into its three parts and displays the header and payload as formatted JSON. No login, no installation, no data sent to any server."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is JWT decoding the same as JWT decryption?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Standard JWTs are signed, not encrypted — their payload is simply Base64url-encoded, not hidden. Decoding reads the content. Decryption applies only to JWE (JSON Web Encryption) tokens, which are a separate, less common format. Most auth tokens you encounter — from Auth0, Firebase, Cognito, or custom backends — are signed JWTs that can be freely decoded."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I decode a bearer token?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Bearer tokens used in Authorization headers are almost always JWTs. Copy the token value (everything after 'Bearer ') and paste it into the decoder. The header, payload, and signature will be displayed immediately."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is it safe to decode a JWT token online?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "This tool decodes entirely in your browser — no token data is ever sent to a server. However, as a general rule, avoid pasting production tokens containing sensitive user data into any third-party tool. Use test tokens or redact sensitive claims before decoding in a shared environment."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I decode a JWT in JavaScript?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You can decode a JWT in JavaScript without any library using atob(). Split the token by '.', take the second part (payload), replace - with + and _ with /, pad to a multiple of 4, then call JSON.parse(atob(paddedBase64)). For production use, the jwt-decode npm package (jsonwebtoken decode) is the most popular choice."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I decode a JWT in Python?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "In Python, use the PyJWT library: import jwt; decoded = jwt.decode(token, options={'verify_signature': False}). For manual decoding without verification, split by '.', base64-decode the payload segment, and parse the JSON string."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the difference between JWT parsing and JWT decoding?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Decoding simply converts Base64url bytes to readable JSON. Parsing typically implies also validating the structure, checking required fields, and sometimes verifying the signature or claims like exp and iss. Our online JWT parser does both — it decodes and structurally validates the token in one step."
-      }
-    }
-  ]
-}
-</script>
-
-<!-- Structured Data: HowTo (no reviews or ratings) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Decode a JWT Token Online",
-  "description": "Step-by-step guide to decode any JWT token using our free online JWT decoder tool.",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "name": "Copy your JWT token",
-      "text": "Copy the JWT token from your API response, browser storage, Authorization header, or any source. It looks like three Base64url strings joined by dots."
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Paste it into the decoder",
-      "text": "Paste the full token into the input panel above. The token should start with eyJ (the Base64-encoded opening brace of JSON)."
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Click Decode",
-      "text": "Press the Decode button. The tool instantly splits the token and renders the header and payload as colour-coded, human-readable JSON."
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Inspect your claims",
-      "text": "Review the decoded output. Check the sub (subject/user ID), exp (expiry date), iss (issuer), roles, and any custom claims your application embeds."
-    }
-  ]
-}
-</script>
 <style>
 .jwt-wrap{background:#1e1e1e;border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:16px;min-height:100px}
 .panel-card{background:#252526;border-radius:8px;border:1px solid #3c3c3c;overflow:hidden}
@@ -458,7 +329,7 @@ keywords: "jwt decoder, jwt token decode, decode jwt, decodejwt, jwt token decry
   }
 </style>
 
-<div id="jwt-decoder" aria-label="JWT Decoder Tool " style="display: flex; flex-direction: column; justify-content: center; margin: 1rem;" itemscope itemtype="https://schema.org/WebPage">
+<div id="jwt-decoder" aria-label="JWT Decoder Tool " style="display: flex; flex-direction: column; justify-content: center; margin: 1rem;">
 <h1 itemprop="name">JWT Decoder — Decode Any JWT Token Instantly</h1>
 <p  itemprop="description">
       Paste your <strong>JWT token</strong> above and decode it in one click. The header, payload, and signature are rendered as readable JSON — no server calls, no login, no data ever leaves your browser.
