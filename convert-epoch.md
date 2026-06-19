@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Unix Timestamp Converter - Epoch to Date, Browser-Based & Private"
-description: "Free online Unix timestamp converter. Convert epoch time to human-readable date and back, instantly in your browser. Batch conversion supported. No data leaves your device."
+description: "Free online Unix timestamp converter. Convert epoch time to human-readable date and back. Batch conversion supported. No data leaves your device."
 keywords: "unix timestamp converter, epoch converter, epoch to date, timestamp to date, convert epoch time, unix time converter, epoch time converter, current unix timestamp, date to epoch, datetime to unix timestamp, online epoch converter, timestamp converter online, unix epoch time now, batch timestamp converter, epoch to human readable date"
 ---
 
