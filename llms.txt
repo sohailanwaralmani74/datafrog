@@ -71,8 +71,7 @@
 ## Utilities
 
 - [/uuid-generator](https://datafrog.tools/uuid-generator): Generate UUIDs (Universally Unique Identifiers)
-
-## Blog & Guides
+- [/uuid-generator](https://datafrog.tools/convert-epoch): Convert Epoch to UTC, Date and so on
 
 - [/blog](https://datafrog.tools/blog): Data conversion tutorials and workflow tips
 - [/how-to-convert-json-to-pdf](https://datafrog.tools/how-to-convert-json-to-pdf): Step-by-step guide to converting JSON to PDF
