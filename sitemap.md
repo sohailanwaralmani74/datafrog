@@ -313,7 +313,6 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
                     <ul>
                         <li itemprop="itemListElement"><a href="/">Home</a></li>
                         <li itemprop="itemListElement"><a href="/about-us">About Us</a></li>
-                        <li itemprop="itemListElement"><a href="/blog">Blog & Articles</a></li>
                         <li itemprop="itemListElement"><a href="/contact-us">Contact Us</a></li>
                         <li itemprop="itemListElement"><a href="/privacy-policy">Privacy Policy</a></li>
                         <li itemprop="itemListElement"><a href="/terms-of-service">Terms of Service</a></li>
