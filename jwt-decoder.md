@@ -3,7 +3,6 @@ layout: main
 title: "JWT Decoder - Browser Based , Secure, and Private Tool"
 description: "Free online tools to decode, parse, and verify JWT tokens. Fast and secure. JWT Decoder works within browser. No code uploaded to server."
 keywords: "jwt decoder, jwt token decode, decode jwt, decodejwt, jwt token decrypt, jwt parser, jwt decode online, token decode, decode jwt token, jwt token decode online, decode token, bearer token decode, parse jwt, parse jwt token, jwt decrypt, decode bearer token, decode jwt token online, json web token decode online, jwt decode npm, jwt io decode, jwt online decode, online jwt decode, decode token online, read jwt token, access token decode"
-category: utilities
 ---
 
 <style>
@@ -330,12 +329,12 @@ category: utilities
   }
 </style>
 
-<div id="jwt-decoder" aria-label="JWT Decoder Tool " style="display: flex; flex-direction: column; justify-content: center; margin: 1rem;">
-<h1 itemprop="name">JWT Decoder — Decode Any JWT Token Instantly</h1>
-<p  itemprop="description">
+<div id="jwt-decoder" aria-label="JWT Decoder Tool " >
+  <h1 itemprop="name">JWT Decoder — Decode Any JWT Token Instantly</h1>
+ <p  itemprop="description">
       Paste your <strong>JWT token</strong> above and decode it in one click. The header, payload, and signature are rendered as readable JSON — no server calls, no login, no data ever leaves your browser.
     </p>
-<div class="hero-badges">
+  <div class="hero-badges">
       <span class="badge green">✓ 100% Client-Side</span>
       <span class="badge blue">✓ All Algorithms Supported</span>
       <span class="badge amber">✓ Expiry Detection</span>
@@ -343,11 +342,7 @@ category: utilities
       <span class="badge">✓ Free Forever</span>
     </div>
 </div>
-
-<section id="jwt-decoder" aria-label="JWT Decoder Tool " style="display: flex; justify-content: center" itemscope itemtype="https://schema.org/WebPage">
-
-
-<div style="width:98%;" style="margin-left: 2rem;">
+<div id="jwt-decoder" aria-label="JWT Decoder Tool " itemscope itemtype="https://schema.org/WebPage">
     
 
 <div class="jwt-wrap">
@@ -396,9 +391,8 @@ category: utilities
 
 
 <!-- ══ WHAT IS A JWT ══ -->
-  <article class="section" itemscope itemtype="https://schema.org/Article">
+  <article itemscope itemtype="https://schema.org/Article" style="margin:2rem;">
     <h2 itemprop="headline">What Is a JWT Token? A Plain-English Explanation</h2>
- 
     <p itemprop="description">
       A <strong>JSON Web Token</strong> (JWT, pronounced "jot") is a compact, self-contained string that securely
       carries information between two parties. You see them constantly in modern web development — they are the
@@ -449,7 +443,7 @@ category: utilities
   </article>
  
   <!-- ══ HOW TO USE ══ -->
-  <article class="section" itemscope itemtype="https://schema.org/HowTo">
+  <article  itemscope itemtype="https://schema.org/HowTo" style="margin:2rem;">
     <h2 itemprop="name">How to Decode a JWT Token Online — Step by Step</h2>
     <meta itemprop="description" content="Step-by-step instructions to decode a JWT token using this free online JWT decoder tool.">
  
@@ -491,7 +485,7 @@ category: utilities
   </article>
  
   <!-- ══ STANDARD CLAIMS ══ -->
-  <article class="section">
+  <article style="margin:2rem;">
     <h2>Standard JWT Claims Explained</h2>
     <p>When you decode a JWT token, the payload contains <em>claims</em>. Here are the registered claims
     defined by <a href="https://datatracker.ietf.org/doc/html/rfc7519" rel="noopener noreferrer" target="_blank">RFC 7519</a>
@@ -556,7 +550,7 @@ category: utilities
   </article>
  
   <!-- ══ DECODE vs DECRYPT ══ -->
-  <article class="section">
+  <article style="margin:2rem;">
     <h2>JWT Decode vs JWT Decrypt — What Is the Difference?</h2>
  
     <p>This is the question developers ask most often, and the confusion is completely understandable.
@@ -595,7 +589,7 @@ category: utilities
   </article>
  
   <!-- ══ CODE EXAMPLES ══ -->
-  <article class="section">
+  <article style="margin:2rem;">
     <h2>How to Decode a JWT in Code — Language Examples</h2>
     <p>Our online JWT parser is the quickest way to inspect a token, but sometimes you need to decode
     a JWT programmatically inside your application. Here are concise examples for the most popular languages.</p>
@@ -685,7 +679,7 @@ $decoded = JWT::<span class="c-fn">decode</span>(
   </article>
  
   <!-- ══ ALGORITHMS ══ -->
-  <article class="section">
+  <article style="margin:2rem;">
     <h2>Supported JWT Algorithms</h2>
     <p>This JWT decoder works with tokens signed by any algorithm. Here is a quick reference for what
     you will see in the <code>alg</code> field of the decoded header:</p>
@@ -709,7 +703,7 @@ $decoded = JWT::<span class="c-fn">decode</span>(
   </article>
  
   <!-- ══ SECURITY ══ -->
-  <article class="section">
+  <article style="margin:2rem;">
     <h2>Is It Safe to Decode a JWT Online?</h2>
  
     <p>Security-conscious developers rightly ask this question before pasting anything into a third-party
@@ -740,9 +734,9 @@ $decoded = JWT::<span class="c-fn">decode</span>(
       online tool. Decode only short-lived access tokens, and prefer using test credentials during development.</p>
     </div>
   </article>
- 
+  
   <!-- ══ FAQ ══ -->
-  <section class="section" itemscope itemtype="https://schema.org/FAQPage">
+  <section style="margin:2rem;"  itemscope itemtype="https://schema.org/FAQPage">
     <h2>Frequently Asked Questions</h2>
  
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -843,7 +837,7 @@ $decoded = JWT::<span class="c-fn">decode</span>(
   </section>
  
   <!-- ══ CLOSING / ABOUT ══ -->
-  <section class="section" style="border-top:1px solid var(--border);padding-top:32px;">
+  <section  style="border-top:1px solid var(--border);padding-top:32px;">
     <p style="font-size:14px;color:var(--ink-3);font-family:var(--font-ui);">
       This free online JWT decoder is built for developers who need to quickly inspect tokens during
       development and debugging. It supports all standard JWT algorithms and processes everything
@@ -851,10 +845,5 @@ $decoded = JWT::<span class="c-fn">decode</span>(
     </p>
   </section>
 </div>
-
-
-</section>
-
-
 
 <script src="/assets/js/jwt-decoder.js"></script>
