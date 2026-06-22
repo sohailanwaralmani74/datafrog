@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Advanced Word Counter - Text Analysis Tool, Browser-Based & Private"
-description: "Free online advanced word counter and text analysis tool. Count words, characters, sentences, paragraphs, lexical density, readability scores, keyword frequency, and more. No data leaves your device."
+description: "Word counter and text analyzer. Count words, characters, sentences, paragraphs, lexical density, readability scores, etc."
 keywords: "word counter, advanced word counter, text analysis, character counter, sentence counter, readability score, lexical density, keyword density, word frequency, letter counter, count words online, reading time calculator, text analyzer, word count tool, online word counter, content analysis, vocabulary analyzer, text statistics, free word counter, writing assistant"
 category: utilities
 ---

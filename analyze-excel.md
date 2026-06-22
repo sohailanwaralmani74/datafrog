@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Analyse Excel - Excel File Analyzer, Browser-Based & Private"
-description: "Free online Excel file analyzer. Upload an Excel file (.xlsx, .xls, .csv) and get instant analysis: row count, column stats, data types, missing values, duplicates, summary statistics, and more. No data leaves your device."
+description: "Free online Excel file analyzer. Get instant analysis: row count, column stats, data types, missing values, duplicates, summary statistics."
 keywords: "analyse excel, analyze excel, excel analyzer, excel file analyzer, excel spreadsheet analyzer, xlsx analyzer, excel data analysis, excel statistics, excel column analyzer, excel data profiler, excel file stats, analyse excel online, excel metadata, excel row counter, excel column stats, data profiling, excel dataset analysis"
 category: excel
 ---

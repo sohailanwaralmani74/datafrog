@@ -158,7 +158,7 @@ keywords: datafrog sitemap, data conversion tools, json tools, csv tools, excel 
             }
         }
     </style>
-<div class="content">
+<div >
             <h1>Datafrog Sitemap - Navigation for Data Conversion Tools</h1>
 <p>A complete directory of 60+ data tools for developers, analysts, and business users. Convert formats, clean duplicates, and generate code—all locally, without uploading sensitive data. Free, offline-first, and no sign-up required.</p>        <div class="content">
             <div class="stats">

@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "Case Converter Online - camelCase, snake_case, kebab-case & More | DataFrog"
+title: "Case Converter Online - Convert To 10+ Cases | DataFrog"
 description: "Convert text between camelCase, PascalCase, snake_case, kebab-case, UPPERCASE, Title Case and more — instantly, in your browser."
 keywords: "case converter, camelcase converter, snake case converter, kebab case converter, pascalcase converter, title case converter, text case converter, string case converter, convert camelcase to snake_case, convert snake_case to camelcase, constant case converter, screaming snake case, sentence case converter, online case converter, free case converter, uppercase to lowercase converter, paragraph case converter"
 category: utilities
