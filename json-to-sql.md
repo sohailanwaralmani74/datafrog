@@ -3,6 +3,7 @@ layout: main
 title: "JSON to SQL Converter Online – RDBMS Compatible"
 description: "Free online JSON to SQL converter. Generate INSERT statements or CREATE TABLE schema from JSON instantly."
 keywords: "json to sql online free, convert json to sql insert, json to mysql, json to postgresql, json to sqlite, generate sql from json, json to create table, json to sql without upload"
+category: json
 ---
 
 
@@ -32,7 +33,7 @@ keywords: "json to sql online free, convert json to sql insert, json to mysql, j
         <div class="jsonx-header" style="justify-content: space-between;">
           <div class="jsonx-title"></div>
           <label class="jsonx-btn jsonx-upload-label" id="uploadBtnJson">
-            📂 Upload JSON File
+            📂 Upload JSON 
             <input id="fileInputJson" type="file" accept=".json,application/json">
           </label>
         </div>
@@ -73,8 +74,7 @@ keywords: "json to sql online free, convert json to sql insert, json to mysql, j
 <div id="toastJson" class="jsonx-toast">✅ SQL ready – copy or download below</div>
 
 <div style="display: flex; flex-direction: row">
-<div style="width: 20%"></div>
-<div style="width: 58%">
+<div style="width: 98%">
 <article id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
   <section aria-labelledby="when-to-use">
@@ -214,22 +214,9 @@ INSERT INTO `my_table` (`id`, `name`, `age`, `active`) VALUES
     <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks. DataFrog believes essential developer tools should be accessible to everyone.</p>
 
   </section>
-
-  <section aria-labelledby="related-tools">
-    <h2 id="related-tools">Related Tools</h2>
-    <ul>
-      <li><a href="/csv-to-sql">CSV to SQL Converter</a> – generate SQL INSERT statements from CSV files</li>
-      <li><a href="/xlsx-to-sql-converter">Excel to SQL Converter</a> – convert Excel spreadsheets to SQL statements</li>
-      <li><a href="/sql-to-csv">SQL to CSV Converter</a> – export SQL data as a CSV file</li>
-      <li><a href="/json-to-csv">JSON to CSV Converter</a> – convert JSON to CSV before importing elsewhere</li>
-      <li><a href="/remove-duplicates-in-sql">Remove Duplicates in SQL</a> – generate SQL to find and remove duplicate rows</li>
-    </ul>
-  </section>
-
 </article>
 
 </div>
-<div style="width: 20%"></div>
 </div>
 
 <script src="/assets/js/json-to-sql.js"></script>

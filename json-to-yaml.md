@@ -3,6 +3,7 @@ layout: main
 title: "JSON to YAML Converter Online – Free, Secure & Offline | DataFrog"
 description: "Free online JSON to YAML converter. Transform JSON arrays or objects to clean YAML instantly. Browser‑based, no signup."
 keywords: "json to yaml online free, convert json to yaml, json to yaml converter, json to yaml kubernetes, browser based json to yaml, json to yaml without upload, yaml generator from json"
+category: json
 ---
 
 <!-- Add js-yaml library -->
@@ -30,7 +31,7 @@ keywords: "json to yaml online free, convert json to yaml, json to yaml converte
         <div class="jsonx-header" style="justify-content: space-between;">
           <div class="jsonx-title">JSON Input</div>
           <label class="jsonx-btn jsonx-upload-label" id="uploadBtnJson">
-            📂 Upload JSON File
+            📂 Upload JSON 
             <input id="fileInputJson" type="file" accept=".json,application/json">
           </label>
         </div>
@@ -72,8 +73,7 @@ keywords: "json to yaml online free, convert json to yaml, json to yaml converte
 <div id="toastJson" class="jsonx-toast">✅ YAML ready – copy or download below</div>
 
 <div style="display: flex; flex-direction: row">
-<div style="width: 20%"></div>
-<div style="width: 58%">
+<div style="width:98%;" style="margin-left: 2rem;">
 <article id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
   <section aria-labelledby="when-to-use">
@@ -214,7 +214,6 @@ keywords: "json to yaml online free, convert json to yaml, json to yaml converte
 </article>
 
 </div>
-<div style="width: 20%"></div>
 </div>
 
 <script src="/assets/js/json-to-yaml.js"></script>

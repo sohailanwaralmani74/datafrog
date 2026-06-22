@@ -3,13 +3,13 @@ layout: main
 title: "Remove Duplicates in CSV – CSV Duplicate Remover Tool | DataFrog"
 description: "Tool to remove duplicates in CSV files. Find and delete duplicate rows and values instantly. No upload, browser-based, no signup. Download cleaned CSV file."
 keywords: "csv duplicate remove, csv find duplicates, eliminate duplicate csv, eliminate repeats in csv, csv search duplicates, csv select duplicates, csv show duplicates, in csv how to remove duplicates, csv remove duplicates, csv delete duplicates, check duplicate in csv, clear duplicate csv, deduplicate csv"
+category: validator
 ---
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 15%;"></div>
-<div style="width: 69%;">
+<div style="width:98%;" style="margin-left: 2rem;">
 <h1>Remove CSV Duplicates Online – CSV Duplicates Cleaner</h1>
   <p id="csv-duplicate-remover-intro">
     Remove duplicate rows from CSV files online without installing software.
@@ -301,7 +301,6 @@ keywords: "csv duplicate remove, csv find duplicates, eliminate duplicate csv, e
 
 </div>
 
-<div style="width: 15%;"></div>
 </section>
 <script src="/assets/js/excel-duplicate-remover.js"></script>
 

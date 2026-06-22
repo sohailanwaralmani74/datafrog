@@ -3,13 +3,13 @@ layout: main
 title: "Convert Excel to HTML Table Online – Free & Secure | DataFrog"
 description: "Free online Excel to HTML converter. Transform XLSX or XLS files into clean, responsive HTML tables instantly. Browser‑based, no signup."
 keywords: "convert excel to html online free, excel to html table converter, xlsx to html, xls to html, excel to html without upload, free excel to html tool, browser based excel to html"
+category: excel
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <!-- JSONView (depends on jQuery) -->
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>Convert Excel to HTML Table – Free Online Converter</h1>
 
   <p id="intro" style="font-size:14px;color:#333;">
@@ -158,7 +158,7 @@ keywords: "convert excel to html online free, excel to html table converter, xls
 
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 <script src="/assets/js/xlsx-to-html.js"></script>
 

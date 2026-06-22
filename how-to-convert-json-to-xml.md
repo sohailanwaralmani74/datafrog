@@ -3,6 +3,7 @@ layout: main
 title: How to Convert JSON to XML - Simple Step-by-Step Guide
 description: Learn the easiest ways to convert JSON to XML using editors, built-in tools, and our free browser-based JSON to XML converter.
 keywords: Convert JSON to XML, JSON to XML, Online JSON to XML Converter, How to Convert JSON to XML, JSON Converter, Data Conversion Tools
+category: json
 ---
 <style>
 .blog-post-meta {
@@ -100,8 +101,7 @@ p{
 </style>
 
 <div style="display:flex; justify-content:center; margin-top:1.5rem;">
-  <div style="width:20%"></div>
-  <div style="width:55%; font-family:Georgia, serif;">
+  <div style="width:99%; font-family:Georgia, serif; margin-left: 3rem;">
 
 <h1 id="convert-json-to-xml">How To Convert JSON To XML - The Best Practices</h1>
 <section class="blog-intro" aria-labelledby="convert-json-to-xml">
@@ -353,14 +353,6 @@ p{
 
 </section>
 
-  </div>
-  <div style="width:20%">
-  <label style="margin: 3rem;">Related Articles</label>
-  <ul style="margin-left: 2rem;">
-   <li><a href ="how-to-convert-json-to-csv" class="link">Convert JSON To CSV</a></li>
-   <li><a href ="how-to-open-json-file-in-excel" class="link">Open JSON In Excel</a></li>
-   <li><a href ="how-to-convert-json-to-pdf" class="link">Convert JSON To PDF</a></li>
-  </ul>
   </div>
 </div>
 <script type="application/ld+json">

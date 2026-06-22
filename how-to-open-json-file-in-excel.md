@@ -3,6 +3,7 @@ layout: main
 title: How to Open JSON File in Excel – Step-by-Step Guide
 description: Wondering how to open a JSON file in Excel easily? This step-by-step guide shows you how to turn any JSON file into a clean, readable sheet.
 keywords: how to open JSON file in Excel, JSON to Excel converter, convert JSON to Excel online, open JSON in Excel, JSON to Excel guide
+category: json
 ---
 <style>
 .blog-post-meta {
@@ -100,8 +101,7 @@ p{
 </style>
 
 <div style="display: flex; justify-content: center; margin-top: 1.5rem;">
-<div style="width:20%"></div>
-<div style="width:55%">
+<div style="width:99%; margin-left: 3rem;">
 <h1 id="intro-heading">How To Open JSON File in Excel</h1>
 <section class="blog-intro" aria-labelledby="intro-heading">
    <p>
@@ -295,14 +295,7 @@ p{
 </section>
 
 </div>
-<div style="width:20%">
-<label style="margin: 3rem;">You May Also Like</label>
-  <ul style="margin-left: 2rem;">
-   <li><a href ="how-to-convert-json-to-csv" class="link">Convert JSON To CSV</a></li>
-   <li><a href ="how-to-convert-json-to-xml" class="link">Convert JSON To XML</a></li>
-   <li><a href ="how-to-convert-json-to-pdf" class="link">Convert JSON To PDF</a></li>
-  </ul>
-</div>
+
 
 <div>
 

@@ -1,359 +1,14 @@
 ---
 layout: main
-title: "DataFrog Tools — Free Online Data Conversion Tools"
+title: "DataFrog — Free Online Data Conversion Tools"
 description: "DataFrog offers 100% free, browser-based data conversion tools. No sign-up, no file uploads. Convert JSON, Excel, CSV, XML, QIF, and more."
 keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to XML, XML to JSON, QIF to CSV, browser-based tools, private data converter"
+is_homepage: true
 ---
 
-<style>
-  /* Main container – full width, no sidebar interference */
-  .tools-container {
-    margin: 0 auto;
-    padding: 1rem 2rem 1rem;
-  }
-
-  /* Hero section */
-  .hero {
-    text-align: center;
-    margin-bottom: 1rem;
-    background-color: whitesmoke;
-    border: 1px solid;
-    border-radius: 20px;
-  }
-  .hero h1 {
-    font-size: 2.5rem;
-    background: linear-gradient(135deg, #1e2a3e, #ef6008);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 0.5rem;
-  }
-  .hero p {
-    max-width: 800px;
-    margin: 0 auto;
-    color: #334155;
-    line-height: 1.6;
-  }
-
-  /* Fixed search bar */
-  .search-section {
-    position: sticky;
-    top: 0;
-    background: #f8fafc;
-    z-index: 20;
-    padding: 3.8rem 0 0.5rem;
-    border-bottom: 1px solid #e2e8f0;
-    margin-bottom: 1.5rem;
-  }
-  .search-wrapper {
-    max-width: 600px;
-    margin: 0 auto 1rem;
-  }
-  #searchInput {
-    width: 100%;
-    padding: 0.8rem 1.6rem;
-    font-size: 1rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 60px;
-    background: white;
-    outline: none;
-    transition: all 0.2s;
-  }
-  #searchInput:focus {
-    border-color: #0c71d6;
-    box-shadow: 0 0 0 3px rgba(239,96,8,0.1);
-  }
-
-  /* Category chips */
-  .category-bar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.6rem;
-    margin-bottom: 1rem;
-  }
-  .chip {
-    background: #f1f5f9;
-    padding: 0.4rem 1.2rem;
-    border-radius: 40px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #1e293b;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: none;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-  }
-  .chip:hover {
-    background: #e2e8f0;
-    transform: translateY(-1px);
-  }
-  .chip.active {
-    background: #0c71d6;
-    color: white;
-  }
-
-  /* Cards grid */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-  .tool-card {
-    background: white;
-    border-radius: 24px;
-    padding: 1.25rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: all 0.2s;
-    border: 1px solid #e2e8f0;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-  }
-  .tool-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px -8px rgba(0,0,0,0.15);
-    border-color: #ef6008;
-  }
-  .tool-card .category {
-    display: inline-block;
-    background: #0c71d6;
-    padding: 0.2rem 0.8rem;
-    border-radius: 30px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: white;
-    text-transform: uppercase;
-    width: fit-content;
-  }
-  .tool-card h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin: 0;
-  }
-  .tool-card p {
-    font-size: 0.85rem;
-    color: #475569;
-    line-height: 1.4;
-  }
-  .no-results {
-    text-align: center;
-    padding: 3rem;
-    color: #64748b;
-    font-size: 1.1rem;
-    grid-column: 1 / -1;
-  }
-
-  @media (max-width: 640px) {
-    .tools-container { padding: 1rem; }
-    .hero h1 { font-size: 1.8rem; }
-    .cards-grid { gap: 1rem; }
-  }
-</style>
-
-<div class="tools-container">
-  <div class="hero">
-    <h1>DataFrog — Free, Private & Offline‑First Data Conversion Tools</h1>
-    <p><strong>100% browser‑based</strong> – no uploads, no sign‑up. Convert JSON, Excel, CSV, XML, QIF, PDF, and more instantly. Your data stays on your device.</p>
-
-  </div>
-  <div class="search-section">
-    <div class="search-wrapper">
-      <input type="text" id="searchInput" placeholder="🔍 Search tools... (e.g., JSON to Excel, CSV to SQL)" aria-label="Search tools">
-    </div>
-    <div class="category-bar" id="categoryBar"></div>
-  </div>
-
-  <div class="cards-grid" id="cardsGrid"></div>
-  <section aria-label="About DataFrog">
-  <h2>Why DataFrog Data Conversion Tools</h2>
-  <p>
-    DataFrog is a free collection of online data tools built for developers, analysts, and anyone who works with structured data. Every tool runs entirely in your browser — your files and data never leave your device, no account is needed, and there are no usage limits.
-  </p>
-  <p>
-    Whether you need to convert JSON to CSV, transform an Excel spreadsheet into JSON for an API, export SQL data to Excel for reporting, or clean duplicate rows from a CSV — DataFrog handles it instantly without uploading anything to a server. Tools cover JSON, CSV, Excel (XLSX/XLS), XML, YAML, SQL, QIF, PDF, and more, with new converters added regularly.
-  </p>
-  <p>
-    Unlike most online converters, DataFrog is fully client-side. All processing happens locally using JavaScript in your browser, which makes it safe for sensitive, confidential, or proprietary data. Most tools also work offline after your first visit — useful in restricted network environments or when working on the go.
-  </p>
-  <p>
-    DataFrog is used by developers converting API responses for quick inspection, analysts preparing data for database imports, finance teams processing QIF bank files, DevOps engineers working with YAML configs, and business users cleaning exports without writing code. No matter your background, if you work with data, there is a DataFrog tool for your task.
-  </p>
-</section>
-</div>
-
-<script>
-  // --------------------------------------------------------------
-  // Complete tools data extracted from your static sections
-  // --------------------------------------------------------------
-  const toolsData = [
-    // JSON Tools
-    { name: "JSON to Excel", url: "/json-to-excel", category: "JSON", description: "Convert JSON arrays or objects to XLSX/XLS files. Preserve nested structures." },
-    { name: "JSON to CSV", url: "/json-to-csv", category: "JSON", description: "Turn JSON data into CSV with automatic flattening of nested objects." },
-    { name: "JSON to PDF", url: "/json-to-pdf", category: "JSON", description: "Generate printable, formatted PDF reports from JSON data." },
-    { name: "JSON to HTML", url: "/json-to-html", category: "JSON", description: "Convert JSON to responsive HTML tables or nested lists." },
-    { name: "JSON to XML", url: "/json-to-xml", category: "JSON", description: "Transform JSON objects into well-formed XML documents." },
-    { name: "JSON to SQL", url: "/json-to-sql", category: "JSON", description: "Generate INSERT statements from JSON arrays – MySQL, PostgreSQL, SQLite." },
-    { name: "JSON String to Object", url: "/json-string-to-json-object", category: "JSON", description: "Parse escaped JSON strings into valid objects." },
-    { name: "JSON to JSON Schema", url: "/json-to-json-schema", category: "JSON", description: "Auto‑generate JSON Schema Draft‑07 from sample JSON." },
-    { name: "JSON to Dart", url: "/json-to-dart", category: "JSON", description: "Create Flutter‑ready model classes with fromJson/toJson." },
-    { name: "JSON to YAML", url: "/json-to-yaml", category: "JSON", description: "Convert JSON to human‑readable YAML for Kubernetes, Docker Compose." },
-    { name: "YAML to JSON", url: "/yaml-to-json", category: "JSON", description: "Convert YAML configuration files to JSON instantly." },
-    { name: "Minify and Prettify JSON", url: "/json-minify-prettify", category: "Formatter", description: "Minify or prettify JSON data with a single click." },
-    { name: "JSON To TypeScript", url: "/json-to-ts", category: "JSON", description: "Convert JSON data to TypeScript interfaces or classes." },
-    { name:"JSON To Java", url: "/json-to-java", category: "JSON", description: "Generate Java POJO classes from JSON data." },
-    { name: "JSON to C#", url: "/json-to-c-sharp", category: "JSON", description: "Convert JSON data to C# classes with properties." },
-    { name: "JSON to Go Structs", url: "/json-to-go", category: "JSON", description: "Generate Go struct definitions from JSON data." },
-    // Excel Tools
-    { name: "Excel to JSON", url: "/excel-to-json", category: "Excel", description: "Convert XLSX/XLS files to clean JSON objects." },
-    { name: "Excel to TXT", url: "/excel-to-txt", category: "Excel", description: "Export spreadsheets as plain text with aligned columns." },
-    { name: "Excel to PDF", url: "/xlsx-to-pdf", category: "Excel", description: "Convert Excel tables to printable PDF documents." },
-    { name: "Excel to HTML", url: "/excel-to-html", category: "Excel", description: "Generate ready‑to‑use HTML tables from Excel sheets." },
-    { name: "Excel to XML", url: "/convert-xlsx-to-xml", category: "Excel", description: "Transform Excel data into hierarchical XML." },
-    { name: "Excel to SQL", url: "/xlsx-to-sql-converter", category: "Excel", description: "Convert Excel rows to INSERT statements." },
-    { name: "Excel to CSV", url: "/convert-xlsx-to-csv", category: "Excel", description: "Save Excel sheets as standard CSV files." },
-    // CSV Tools
-    { name: "CSV to Excel", url: "/convert-csv-to-excel", category: "CSV", description: "Convert CSV files to XLSX/XLS. Preserve data types." },
-    { name: "CSV to JSON", url: "/convert-csv-to-json", category: "CSV", description: "Transform CSV rows into JSON arrays of objects." },
-    { name: "CSV to XML", url: "/convert-csv-to-xml", category: "CSV", description: "Convert CSV rows to XML elements." },
-    { name: "CSV to PDF", url: "/convert-csv-to-pdf", category: "CSV", description: "Turn CSV data into professional PDF tables." },
-    { name: "CSV to HTML", url: "/convert-csv-to-html", category: "CSV", description: "Generate HTML tables from CSV." },
-    { name: "CSV to SQL", url: "/csv-to-sql", category: "CSV", description: "Generate INSERT statements from CSV rows." },
-    { name: "CSV to TXT", url: "/convert-csv-to-txt", category: "CSV", description: "Convert CSV to plain text with aligned columns." },
-    // XML Tools
-    { name: "XML to JSON", url: "/xml-to-json", category: "XML", description: "Parse XML into clean JSON objects. Handles attributes and nested elements." },
-    { name: "XML to XSD", url: "/xml-to-xsd-generator", category: "XML", description: "Automatically infer XML Schema Definition from any XML document." },
-    { name: "XML Formatter", url:"/xml-formatter", category:"Formatter", description: "Format and indent XML documents for better readability." },
-    // QIF Tools
-    { name: "QIF to Excel", url: "/qif-to-excel", category: "QIF", description: "Turn QIF bank transactions into XLSX spreadsheets." },
-    { name: "QIF to CSV", url: "/qif-to-csv", category: "QIF", description: "Convert QIF transactions to CSV for any spreadsheet." },
-    { name: "QIF to QBO", url: "/qif-to-qbo", category: "QIF", description: "Generate QuickBooks‑ready QBO files from Quicken exports." },
-    // PDF / PPT Tools
-    { name: "PPTX to PDF", url: "/pptx-to-pdf", category: "PDF", description: "Convert PowerPoint presentations to high‑quality PDF documents." },
-    { name: "PDF to PPTX", url: "/pdf-to-powerpoint", category: "PDF", description: "Convert PDF pages to editable PPTX slides." },
-    // Other Utilities
-    { name: "UUID & GUID Generator", url: "/uuid-generator", category: "Utilities", description: "Generate UUID v4, v7, NanoID, ULID, and more – up to 1000 IDs." },
-    { name: "Base64 Encoder/Decoder", url: "/base64", category: "Utilities", description: "Encode and decode Base64 data instantly in your browser. Free, no signup required." },
-    { name: "Hash Generator", url: "/hash-generator", category: "Utilities", description: "Generate cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) from any input string. Browser-based, no upload required." },
-    { name: "JWT Decoder", url: "/jwt-decoder", category: "Utilities", description: "Decode JSON Web Tokens (JWT) to inspect header, payload, and signature. No signup, 100% free." },
-    { name: "Epoch Converter", url:"/convert-epoch", category: "Utilities", description:"Convert epoch to date time or UTC"},
-    // Remove duplicates
-    { name: "Remove Excel Duplicates", url: "/remove-excel-duplicates", category: "Excel", description: "Remove duplicate rows and values from Excel spreadsheets quickly and easily." },
-    { name: "Remove Duplicates in SQL", url: "/remove-duplicates-in-sql", category: "SQL", description: "Learn how to find and remove duplicate records in SQL databases using practical queries." },
-    { name: "Remove CSV Duplicates", url: "/remove-csv-duplicates", category: "CSV", description: "Remove duplicate rows and values from CSV files quickly and easily." },
-    { name: "SQL to XML", url: "/sql-to-xml", category: "SQL", description: "Convert SQL INSERT statements to XML (elements, attributes, or flat)." }, 
-    { name: "SQL to Excel", url: "/sql-to-excel", category: "SQL", description: "Transform SQL INSERT statements to multi‑sheet Excel files." }, 
-    { name: "SQL to CSV", url: "/sql-to-csv", category: "SQL", description: "Convert SQL INSERT statements to CSV format." },
-    { name: "SQL Formatter", url: "/sql-formatter", category: "Formatter", description: "Format SQL queries for better readability." },
-    { name: "Html Beautifier and HTML Formatter", url: "/html-beautifier", category: "Formatter", description: "Format and minify HTML code instantly in your browser. No data upload – 100% private." }
-  ];
-
-  const categories = [...new Set(toolsData.map(t => t.category))].sort();
-  const searchInput = document.getElementById('searchInput');
-  const categoryBar = document.getElementById('categoryBar');
-  const cardsGrid = document.getElementById('cardsGrid');
-
-  let activeCategory = 'all';
-  let searchTerm = '';
-
-  function renderCategories() {
-    const chips = ['all', ...categories].map(cat => {
-      const isActive = activeCategory === cat;
-      return `<button class="chip ${isActive ? 'active' : ''}" data-category="${cat}">${cat === 'all' ? '📁 All Tools' : cat}</button>`;
-    }).join('');
-    categoryBar.innerHTML = chips;
-    document.querySelectorAll('.chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        activeCategory = chip.getAttribute('data-category');
-        renderCategories();
-        filterAndRenderCards();
-      });
-    });
-  }
-
-  function filterTools() {
-    return toolsData.filter(tool => {
-      if (activeCategory !== 'all' && tool.category !== activeCategory) return false;
-      const term = searchTerm.toLowerCase();
-      return tool.name.toLowerCase().includes(term) ||
-             tool.description.toLowerCase().includes(term) ||
-             tool.category.toLowerCase().includes(term);
-    });
-  }
-
-  function renderCards() {
-    const filtered = filterTools();
-    if (filtered.length === 0) {
-      cardsGrid.innerHTML = `<div class="no-results">✨ No tools match "${searchTerm}" in ${activeCategory === 'all' ? 'all categories' : activeCategory}. Try another keyword.</div>`;
-      return;
-    }
-    cardsGrid.innerHTML = filtered.map(tool => `
-      <a href="${tool.url}" class="tool-card">
-        <span class="category">${tool.category}</span>
-        <h2>${tool.name}</h2>
-        <p>${tool.description}</p>
-      </a>
-    `).join('');
-  }
-
-  function filterAndRenderCards() {
-    renderCards();
-  }
-
-  searchInput.addEventListener('input', (e) => {
-    searchTerm = e.target.value;
-    filterAndRenderCards();
-  });
-
-  renderCategories();
-  renderCards();
-</script>
-
-<!-- DataFrog JSON-LD Structured Data Schema Suite
-     Optimized for: Google Search, Bing, AI Crawlers (Claude, ChatGPT, Perplexity)
-     Performance Impact: None (static JSON-LD markup)
-     Validation: https://search.google.com/test/rich-results
-     Copy and paste all scripts into your <head> section -->
-
-<!-- 1. ORGANIZATION SCHEMA - Company Identity & Trust Signals -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "DataFrog",
-  "url": "https://datafrog.tools",
-  "logo": "https://datafrog.tools/assets/img/datafrog-logo.png",
-  "image": "https://datafrog.tools/assets/img/datafrog-hero.png",
-  "description": "DataFrog offers 40+ free, browser-based data conversion tools with 100% privacy. No signup, no uploads. Convert JSON, Excel, CSV, XML, YAML, SQL, QIF, PDF and more. All processing happens locally in your browser.",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "Customer Support",
-    "email": "support@datafrog.tools",
-    "availableLanguage": ["en"]
-  },
-  "foundingDate": "2023-01-01",
-  "areaServed": "Worldwide",
-  "keywords": "data conversion, JSON converter, CSV to Excel, XML parser, YAML transformer, free online tools",
-  "knowsAbout": [
-    "JSON conversion",
-    "Data transformation",
-    "CSV parsing",
-    "Excel export",
-    "XML handling",
-    "YAML configuration",
-    "SQL generation",
-    "QIF finance files",
-    "PDF conversion",
-    "Browser-based tools"
-  ]
-}
-</script>
-
-<!-- 2. WEBSITE SCHEMA - Site Structure & Search Functionality -->
+<!-- ═══════════════════════════════════════════════════
+     JSON-LD — WebSite + SearchAction Schema
+═══════════════════════════════════════════════════ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -362,11 +17,7 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
   "url": "https://datafrog.tools",
   "alternateName": "DataFrog Tools | Free Online Data Conversion",
   "description": "Free, private, offline-first data conversion tools. Convert between JSON, CSV, Excel, XML, YAML, SQL, QIF, PDF and more in your browser. No uploads, no signup required.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "DataFrog",
-    "logo": "https://datafrog.tools/assets/img/datafrog.png"
-  },
+  "inLanguage": "en",
   "potentialAction": {
     "@type": "SearchAction",
     "target": {
@@ -374,77 +25,58 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
       "urlTemplate": "https://datafrog.tools/?q={search_term_string}"
     },
     "query-input": "required name=search_term_string"
-  },
-  "mainEntity": {
-    "@type": "ItemList",
-    "name": "Data Conversion Tools"
-  },
-  "inLanguage": "en",
-  "isAccessibleForFree": true,
-  "audience": {
-    "@type": "Audience",
-    "audienceType": ["Developers", "Data Analysts", "Business Users", "DevOps Engineers", "Finance Teams"]
   }
 }
 </script>
 
-<!-- 3. WEBPAGE SCHEMA - Homepage Metadata -->
+<!-- ═══════════════════════════════════════════════════
+     SCHEMA — Organization
+═══════════════════════════════════════════════════ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "DataFrog — Free Online Data Conversion Tools",
+  "@type": "Organization",
+  "name": "DataFrog",
   "url": "https://datafrog.tools",
-  "description": "100% browser-based data conversion tools. Convert JSON, Excel, CSV, XML, QIF, PDF and more instantly. Your data stays on your device. No uploads, no sign-up.",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "DataFrog",
-    "url": "https://datafrog.tools"
-  },
-  "datePublished": "2023-01-01",
-  "dateModified": "2025-05-23",
-  "primaryImageOfPage": "https://datafrog.tools/assets/img/datafrog.png",
-  "author": {
-    "@type": "Organization",
-    "name": "DataFrog Team"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "DataFrog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://datafrog.tools/assets/img/datafrog.png",
-      "width": 200,
-      "height": 200
-    }
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://datafrog.tools"
-      }
-    ]
-  },
-  "mainEntity": {
-    "@type": "ItemList",
-    "name": "DataFrog Tools Collection",
-    "description": "40+ free data conversion and transformation tools"
-  },
-  "inLanguage": "en",
-  "isAccessibleForFree": true,
-  "accessibilityFeature": [
-    "displayTransformability",
-    "readingOrder",
-    "structuralNavigation"
-  ]
+  "logo": "https://datafrog.tools/assets/img/datafrog-logo.png",
+  "description": "DataFrog offers 40+ free, browser-based data conversion tools with 100% privacy. No signup, no uploads. Convert JSON, Excel, CSV, XML, YAML, SQL, QIF, PDF and more.",
+  "foundingDate": "2023",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Customer Support",
+    "email": "support@datafrog.tools",
+    "availableLanguage": "English"
+  }
 }
 </script>
 
-<!-- 4. FAQ SCHEMA - Google Featured Snippets + AI Training Data -->
+<!-- ═══════════════════════════════════════════════════
+     SCHEMA — WebApplication
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DataFrog — Free Data Conversion Tools",
+  "url": "https://datafrog.tools",
+  "description": "40+ free browser-based data conversion tools. No signup required. Convert JSON, Excel, CSV, XML, QIF, PDF and more.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Works on Chrome, Firefox, Safari, Edge.",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     SCHEMA — FAQPage
+═══════════════════════════════════════════════════ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -473,155 +105,14 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
         "@type": "Answer",
         "text": "DataFrog supports conversion between JSON, CSV, Excel (XLSX/XLS), XML, YAML, SQL, QIF, PDF, HTML, TXT, and more. New converters are added regularly."
       }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use DataFrog offline?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Most DataFrog tools work offline after your first visit thanks to browser caching. This is useful in restricted network environments or when working on the go."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is my data secure with DataFrog?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. DataFrog is 100% client-side. All processing happens locally in your browser, and data never leaves your device. It's safe for sensitive, confidential, or proprietary information."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I convert large files?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "DataFrog can handle files up to the browser's memory limit. For most use cases (spreadsheets with thousands of rows, JSON files with tens of thousands of records), file size is not an issue."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need to create an account?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No account creation is needed. DataFrog tools work instantly in your browser without any signup, login, or registration."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What should I use for API response conversion?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Use JSON to CSV, JSON to Excel, or JSON to HTML converters to quickly transform API responses into readable formats for inspection, reporting, or database imports."
-      }
     }
   ]
 }
 </script>
 
-<!-- 5. SOFTWARE APPLICATION SCHEMA - App Category & Ratings -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "DataFrog Data Conversion Tools",
-  "description": "Collection of 40+ free, browser-based data conversion tools for JSON, CSV, Excel, XML, YAML, SQL, QIF, and PDF. No uploads, no signup, 100% private.",
-  "url": "https://datafrog.tools",
-  "applicationCategory": [
-    "DeveloperApplication",
-    "Utility"
-  ],
-  "operatingSystem": [
-    "Windows",
-    "macOS",
-    "Linux",
-    "iOS",
-    "Android"
-  ],
-  "browserRequirements": "HTML5, JavaScript enabled",
-  "isAccessibleForFree": true,
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "DataFrog Team"
-  }
-}
-</script>
-
-<!-- 6. CREATIVE WORK SCHEMA - Content & Topic Authority -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CreativeWork",
-  "name": "DataFrog: Free Data Conversion Toolkit",
-  "description": "A comprehensive suite of 40+ free, private, browser-based data conversion tools for transforming between JSON, CSV, Excel, XML, YAML, SQL, QIF, PDF, and HTML formats.",
-  "url": "https://datafrog.tools",
-  "author": {
-    "@type": "Organization",
-    "name": "DataFrog Team"
-  },
-  "about": {
-    "@type": "Thing",
-    "name": "Data Conversion and Transformation",
-    "description": "Tools for converting data between different formats including JSON, CSV, Excel, XML, YAML, SQL, and more."
-  },
-  "keywords": [
-    "data conversion",
-    "JSON converter",
-    "CSV parser",
-    "Excel transformer",
-    "XML handler",
-    "YAML converter",
-    "SQL generator",
-    "free online tools",
-    "browser-based",
-    "offline-first"
-  ],
-  "datePublished": "2023-01-01",
-  "dateModified": "2025-05-23",
-  "inLanguage": "en",
-  "genre": ["Utility", "Software"]
-}
-</script>
-
-
-<!-- 8. DATASET SCHEMA - Data Documentation & Linked Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Dataset",
-  "name": "DataFrog Tools Documentation",
-  "description": "Comprehensive metadata and documentation for DataFrog's 40+ data conversion tools and their capabilities.",
-  "url": "https://datafrog.tools",
-  "creator": {
-    "@type": "Organization",
-    "name": "DataFrog"
-  },
-  "datePublished": "2023-01-01",
-  "dateModified": "2025-05-23",
-  "distribution": [
-    {
-      "@type": "DataDownload",
-      "encodingFormat": "JSON",
-      "url": "https://datafrog.tools"
-    },
-    {
-      "@type": "DataDownload",
-      "encodingFormat": "CSV",
-      "url": "https://datafrog.tools"
-    }
-  ],
-  "spatialCoverage": "Worldwide",
-  "inLanguage": "en",
-  "keywords": "data conversion tools, format transformation, JSON CSV Excel XML"
-}
-</script>
-
-<!-- 9. COMPREHENSIVE ITEM LIST - All Tools with Descriptions
-     This is the CRITICAL schema for AI crawlers and semantic search -->
+<!-- ═══════════════════════════════════════════════════
+     SCHEMA — ItemList
+═══════════════════════════════════════════════════ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -631,349 +122,548 @@ keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to
   "url": "https://datafrog.tools",
   "numberOfItems": 42,
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "JSON to CSV",
-      "url": "https://datafrog.tools/json-to-csv",
-      "description": "Convert JSON arrays and objects to CSV format with automatic flattening of nested structures using dot notation.",
-      "keywords": "JSON, CSV, conversion, flatten"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "JSON to Excel",
-      "url": "https://datafrog.tools/json-to-excel",
-      "description": "Export JSON data to XLSX/XLS Excel files. Supports nested objects and arrays, no upload required.",
-      "keywords": "JSON, Excel, XLSX, export"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "JSON to XML",
-      "url": "https://datafrog.tools/json-to-xml",
-      "description": "Transform JSON objects into well-formed XML documents. Ideal for API integration and data migration.",
-      "keywords": "JSON, XML, conversion, API"
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": "JSON to SQL",
-      "url": "https://datafrog.tools/json-to-sql",
-      "description": "Generate SQL INSERT statements from JSON arrays. Supports MySQL, PostgreSQL, and SQLite formats.",
-      "keywords": "JSON, SQL, database, INSERT"
-    },
-    {
-      "@type": "ListItem",
-      "position": 5,
-      "name": "JSON to HTML",
-      "url": "https://datafrog.tools/json-to-html",
-      "description": "Convert JSON arrays into responsive HTML tables or nested lists for web display.",
-      "keywords": "JSON, HTML, table, web"
-    },
-    {
-      "@type": "ListItem",
-      "position": 6,
-      "name": "JSON to PDF",
-      "url": "https://datafrog.tools/json-to-pdf",
-      "description": "Generate printable, formatted PDF reports from JSON data instantly in your browser.",
-      "keywords": "JSON, PDF, report, export"
-    },
-    {
-      "@type": "ListItem",
-      "position": 7,
-      "name": "JSON to YAML",
-      "url": "https://datafrog.tools/json-to-yaml",
-      "description": "Convert JSON to human-readable YAML for Kubernetes, Docker Compose, and DevOps workflows.",
-      "keywords": "JSON, YAML, Kubernetes, DevOps"
-    },
-    {
-      "@type": "ListItem",
-      "position": 8,
-      "name": "JSON to Dart",
-      "url": "https://datafrog.tools/json-to-dart",
-      "description": "Create Flutter-ready model classes with fromJson/toJson methods from JSON samples.",
-      "keywords": "JSON, Dart, Flutter, mobile"
-    },
-    {
-      "@type": "ListItem",
-      "position": 9,
-      "name": "JSON to JSON Schema",
-      "url": "https://datafrog.tools/json-to-json-schema",
-      "description": "Auto-generate JSON Schema Draft-07 from sample JSON for validation and API documentation.",
-      "keywords": "JSON, schema, validation, API"
-    },
-    {
-      "@type": "ListItem",
-      "position": 10,
-      "name": "JSON String to Object",
-      "url": "https://datafrog.tools/json-string-to-json-object",
-      "description": "Parse escaped JSON strings into valid, readable JSON objects with validation.",
-      "keywords": "JSON, string, parsing, validation"
-    },
-    {
-      "@type": "ListItem",
-      "position": 11,
-      "name": "YAML to JSON",
-      "url": "https://datafrog.tools/yaml-to-json",
-      "description": "Convert YAML configuration files to JSON instantly. Perfect for DevOps and infrastructure tools.",
-      "keywords": "YAML, JSON, configuration, DevOps"
-    },
-    {
-      "@type": "ListItem",
-      "position": 12,
-      "name": "Excel to JSON",
-      "url": "https://datafrog.tools/excel-to-json",
-      "description": "Convert XLSX and XLS spreadsheets to clean JSON. First row auto-maps to JSON keys.",
-      "keywords": "Excel, JSON, XLSX, conversion"
-    },
-    {
-      "@type": "ListItem",
-      "position": 13,
-      "name": "Excel to CSV",
-      "url": "https://datafrog.tools/convert-xlsx-to-csv",
-      "description": "Save Excel sheets as standard CSV files. Preserves data types and formatting.",
-      "keywords": "Excel, CSV, spreadsheet, export"
-    },
-    {
-      "@type": "ListItem",
-      "position": 14,
-      "name": "Excel to XML",
-      "url": "https://datafrog.tools/convert-xlsx-to-xml",
-      "description": "Transform Excel data into hierarchical XML format for system integrations.",
-      "keywords": "Excel, XML, spreadsheet, integration"
-    },
-    {
-      "@type": "ListItem",
-      "position": 15,
-      "name": "Excel to SQL",
-      "url": "https://datafrog.tools/xlsx-to-sql-converter",
-      "description": "Convert Excel rows to SQL INSERT statements for direct database imports.",
-      "keywords": "Excel, SQL, database, import"
-    },
-    {
-      "@type": "ListItem",
-      "position": 16,
-      "name": "Excel to PDF",
-      "url": "https://datafrog.tools/xlsx-to-pdf",
-      "description": "Convert Excel XLSX files to high-quality PDF documents. No software installation needed.",
-      "keywords": "Excel, PDF, conversion, print"
-    },
-    {
-      "@type": "ListItem",
-      "position": 17,
-      "name": "Excel to HTML",
-      "url": "https://datafrog.tools/excel-to-html",
-      "description": "Generate ready-to-use HTML tables from Excel sheets. Supports XLSX and XLS formats.",
-      "keywords": "Excel, HTML, table, web"
-    },
-    {
-      "@type": "ListItem",
-      "position": 18,
-      "name": "Excel to TXT",
-      "url": "https://datafrog.tools/excel-to-txt",
-      "description": "Export Excel data as plain text with aligned columns for simple logging and reports.",
-      "keywords": "Excel, TXT, text, export"
-    },
-    {
-      "@type": "ListItem",
-      "position": 19,
-      "name": "CSV to JSON",
-      "url": "https://datafrog.tools/convert-csv-to-json",
-      "description": "Transform CSV rows into JSON arrays of objects. First row auto-maps to JSON keys.",
-      "keywords": "CSV, JSON, conversion, parse"
-    },
-    {
-      "@type": "ListItem",
-      "position": 20,
-      "name": "CSV to Excel",
-      "url": "https://datafrog.tools/convert-csv-to-excel",
-      "description": "Convert CSV files to XLSX/XLS format instantly. Preserves data types.",
-      "keywords": "CSV, Excel, XLSX, conversion"
-    },
-    {
-      "@type": "ListItem",
-      "position": 21,
-      "name": "CSV to XML",
-      "url": "https://datafrog.tools/convert-csv-to-xml",
-      "description": "Convert CSV rows to XML elements. Useful for system integrations and data exchange.",
-      "keywords": "CSV, XML, conversion, integration"
-    },
-    {
-      "@type": "ListItem",
-      "position": 22,
-      "name": "CSV to SQL",
-      "url": "https://datafrog.tools/csv-to-sql",
-      "description": "Generate SQL INSERT statements from CSV rows for direct database imports.",
-      "keywords": "CSV, SQL, database, import"
-    },
-    {
-      "@type": "ListItem",
-      "position": 23,
-      "name": "CSV to PDF",
-      "url": "https://datafrog.tools/convert-csv-to-pdf",
-      "description": "Turn CSV data into professional PDF tables ready for sharing and printing.",
-      "keywords": "CSV, PDF, report, table"
-    },
-    {
-      "@type": "ListItem",
-      "position": 24,
-      "name": "CSV to HTML",
-      "url": "https://datafrog.tools/convert-csv-to-html",
-      "description": "Generate HTML tables from CSV data ready to embed in web pages.",
-      "keywords": "CSV, HTML, table, web"
-    },
-    {
-      "@type": "ListItem",
-      "position": 25,
-      "name": "CSV to TXT",
-      "url": "https://datafrog.tools/convert-csv-to-txt",
-      "description": "Convert CSV to plain text with aligned columns. Strips formatting for simple text processing.",
-      "keywords": "CSV, TXT, text, export"
-    },
-    {
-      "@type": "ListItem",
-      "position": 26,
-      "name": "XML to JSON",
-      "url": "https://datafrog.tools/xml-to-json",
-      "description": "Parse XML documents into clean JSON. Automatically handles nested elements and attributes.",
-      "keywords": "XML, JSON, parsing, conversion"
-    },
-    {
-      "@type": "ListItem",
-      "position": 27,
-      "name": "XML to XSD",
-      "url": "https://datafrog.tools/xml-to-xsd-generator",
-      "description": "Automatically infer XML Schema Definition from any XML document for validation.",
-      "keywords": "XML, XSD, schema, validation"
-    },
-    {
-      "@type": "ListItem",
-      "position": 28,
-      "name": "QIF to CSV",
-      "url": "https://datafrog.tools/qif-to-csv",
-      "description": "Convert QIF bank transaction files to CSV for spreadsheet import and analysis.",
-      "keywords": "QIF, CSV, finance, bank"
-    },
-    {
-      "@type": "ListItem",
-      "position": 29,
-      "name": "QIF to Excel",
-      "url": "https://datafrog.tools/qif-to-excel",
-      "description": "Transform QIF financial files into Excel XLSX for budgeting, reporting, and analysis.",
-      "keywords": "QIF, Excel, finance, banking"
-    },
-    {
-      "@type": "ListItem",
-      "position": 30,
-      "name": "QIF to QBO",
-      "url": "https://datafrog.tools/qif-to-qbo",
-      "description": "Generate QuickBooks-ready QBO files from Quicken/QIF exports for accounting software.",
-      "keywords": "QIF, QBO, QuickBooks, accounting"
-    },
-    {
-      "@type": "ListItem",
-      "position": 31,
-      "name": "SQL to CSV",
-      "url": "https://datafrog.tools/sql-to-csv",
-      "description": "Export SQL query results to CSV format for reporting and sharing with non-technical users.",
-      "keywords": "SQL, CSV, database, export"
-    },
-    {
-      "@type": "ListItem",
-      "position": 32,
-      "name": "SQL to Excel",
-      "url": "https://datafrog.tools/sql-to-excel",
-      "description": "Convert SQL data exports to Excel XLSX for shareable, professional spreadsheets.",
-      "keywords": "SQL, Excel, database, export"
-    },
-    {
-      "@type": "ListItem",
-      "position": 33,
-      "name": "SQL to XML",
-      "url": "https://datafrog.tools/sql-to-xml",
-      "description": "Transform SQL table data into XML format for system integrations and data exchange workflows.",
-      "keywords": "SQL, XML, database, integration"
-    },
-    {
-      "@type": "ListItem",
-      "position": 34,
-      "name": "PPTX to PDF",
-      "url": "https://datafrog.tools/pptx-to-pdf",
-      "description": "Convert PowerPoint PPTX presentations to high-quality PDF. No software installation required.",
-      "keywords": "PPTX, PDF, PowerPoint, presentation"
-    },
-    {
-      "@type": "ListItem",
-      "position": 35,
-      "name": "PDF to PPTX",
-      "url": "https://datafrog.tools/pdf-to-powerpoint",
-      "description": "Extract and convert PDF pages into editable PowerPoint PPTX slides instantly.",
-      "keywords": "PDF, PPTX, PowerPoint, conversion"
-    },
-    {
-      "@type": "ListItem",
-      "position": 36,
-      "name": "Remove Excel Duplicates",
-      "url": "https://datafrog.tools/remove-excel-duplicates",
-      "description": "Detect and remove duplicate rows from Excel files instantly. No upload, no data stored.",
-      "keywords": "Excel, duplicates, clean, deduplicate"
-    },
-    {
-      "@type": "ListItem",
-      "position": 37,
-      "name": "Remove CSV Duplicates",
-      "url": "https://datafrog.tools/remove-csv-duplicates",
-      "description": "Clean duplicate rows from CSV files without uploading. Fast, free, and browser-based.",
-      "keywords": "CSV, duplicates, clean, deduplicate"
-    },
-    {
-      "@type": "ListItem",
-      "position": 38,
-      "name": "Remove Duplicates in SQL",
-      "url": "https://datafrog.tools/remove-duplicates-in-sql",
-      "description": "Generate SQL queries to find and remove duplicate records from database tables.",
-      "keywords": "SQL, duplicates, query, database"
-    },
-    {
-      "@type": "ListItem",
-      "position": 39,
-      "name": "UUID Generator",
-      "url": "https://datafrog.tools/uuid-generator",
-      "description": "Generate UUID v4, v7, NanoID, ULID, and more instantly. Generate up to 1000 IDs in bulk.",
-      "keywords": "UUID, GUID, generator, identifier"
-    },
-    {
-      "@type": "ListItem",
-      "position": 40,
-      "name": "Base64 Encoder/Decoder",
-      "url": "https://datafrog.tools/base64",
-      "description": "Encode and decode Base64 data instantly in your browser. Free, no signup required.",
-      "keywords": "Base64, encoding, decoding, conversion"
-    },
-    {
-      "@type": "ListItem",
-      "position": 41,
-      "name": "Hash Generator",
-      "url": "https://datafrog.tools/hash-generator",
-      "description": "Generate cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) from any input. Browser-based, no upload.",
-      "keywords": "hash, SHA, MD5, crypto, security"
-    }
+    {"@type":"ListItem","position":1,"name":"JSON to CSV","url":"https://datafrog.tools/json-to-csv"},
+    {"@type":"ListItem","position":2,"name":"JSON to Excel","url":"https://datafrog.tools/json-to-excel"},
+    {"@type":"ListItem","position":3,"name":"JSON to XML","url":"https://datafrog.tools/json-to-xml"},
+    {"@type":"ListItem","position":4,"name":"JSON to SQL","url":"https://datafrog.tools/json-to-sql"},
+    {"@type":"ListItem","position":5,"name":"JSON to HTML","url":"https://datafrog.tools/json-to-html"},
+    {"@type":"ListItem","position":6,"name":"JSON to PDF","url":"https://datafrog.tools/json-to-pdf"},
+    {"@type":"ListItem","position":7,"name":"JSON to YAML","url":"https://datafrog.tools/json-to-yaml"},
+    {"@type":"ListItem","position":8,"name":"JSON to Dart","url":"https://datafrog.tools/json-to-dart"},
+    {"@type":"ListItem","position":9,"name":"JSON to JSON Schema","url":"https://datafrog.tools/json-to-json-schema"},
+    {"@type":"ListItem","position":10,"name":"Excel to JSON","url":"https://datafrog.tools/excel-to-json"},
+    {"@type":"ListItem","position":11,"name":"Excel to CSV","url":"https://datafrog.tools/convert-xlsx-to-csv"},
+    {"@type":"ListItem","position":12,"name":"Excel to XML","url":"https://datafrog.tools/convert-xlsx-to-xml"},
+    {"@type":"ListItem","position":13,"name":"Excel to SQL","url":"https://datafrog.tools/xlsx-to-sql-converter"},
+    {"@type":"ListItem","position":14,"name":"Excel to PDF","url":"https://datafrog.tools/xlsx-to-pdf"},
+    {"@type":"ListItem","position":15,"name":"CSV to JSON","url":"https://datafrog.tools/convert-csv-to-json"},
+    {"@type":"ListItem","position":16,"name":"CSV to Excel","url":"https://datafrog.tools/convert-csv-to-excel"},
+    {"@type":"ListItem","position":17,"name":"CSV to XML","url":"https://datafrog.tools/convert-csv-to-xml"},
+    {"@type":"ListItem","position":18,"name":"CSV to SQL","url":"https://datafrog.tools/csv-to-sql"},
+    {"@type":"ListItem","position":19,"name":"XML to JSON","url":"https://datafrog.tools/xml-to-json"},
+    {"@type":"ListItem","position":20,"name":"XML to XSD","url":"https://datafrog.tools/xml-to-xsd-generator"},
+    {"@type":"ListItem","position":21,"name":"QIF to CSV","url":"https://datafrog.tools/qif-to-csv"},
+    {"@type":"ListItem","position":22,"name":"QIF to Excel","url":"https://datafrog.tools/qif-to-excel"},
+    {"@type":"ListItem","position":23,"name":"QIF to QBO","url":"https://datafrog.tools/qif-to-qbo"},
+    {"@type":"ListItem","position":24,"name":"SQL to CSV","url":"https://datafrog.tools/sql-to-csv"},
+    {"@type":"ListItem","position":25,"name":"SQL to Excel","url":"https://datafrog.tools/sql-to-excel"},
+    {"@type":"ListItem","position":26,"name":"SQL to XML","url":"https://datafrog.tools/sql-to-xml"},
+    {"@type":"ListItem","position":27,"name":"PPTX to PDF","url":"https://datafrog.tools/pptx-to-pdf"},
+    {"@type":"ListItem","position":28,"name":"PDF to PPTX","url":"https://datafrog.tools/pdf-to-powerpoint"},
+    {"@type":"ListItem","position":29,"name":"UUID Generator","url":"https://datafrog.tools/uuid-generator"},
+    {"@type":"ListItem","position":30,"name":"Base64 Encoder/Decoder","url":"https://datafrog.tools/base64"},
+    {"@type":"ListItem","position":31,"name":"Hash Generator","url":"https://datafrog.tools/hash-generator"},
+    {"@type":"ListItem","position":32,"name":"JWT Decoder","url":"https://datafrog.tools/jwt-decoder"},
+    {"@type":"ListItem","position":33,"name":"Epoch Converter","url":"https://datafrog.tools/convert-epoch"},
+    {"@type":"ListItem","position":34,"name":"URL Decoder","url":"https://datafrog.tools/decode-a-url"},
+    {"@type":"ListItem","position":35,"name":"Case Converter","url":"https://datafrog.tools/case-converter"},
+    {"@type":"ListItem","position":36,"name":"Word Counter","url":"https://datafrog.tools/word-counter"}
   ]
 }
 </script>
 
-<!-- VALIDATION & TESTING CHECKLIST
-     ✓ All schemas use https://schema.org context
-     ✓ Organization schema with contact point
-     ✓ WebSite schema with SearchAction
-     ✓ FAQPage for Google Featured Snippets
-     ✓ SoftwareApplication with AggregateRating
-     ✓ ItemList with 42 tools (position-based)
-     ✓ 100% valid JSON-LD per schema.org spec
-     
-     TEST THESE TOOLS:
-     - https://search.google.com/test/rich-results
-     - https://validator.schema.org/
-     - https://www.bing.com/webmaster/tools/markup-validator
--->
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section class="home-hero" aria-label="DataFrog — Free Data Conversion Tools">
+  <h1>Free, Private &amp; Offline‑First <span>Data Conversion</span> Tools</h1>
+  <p>100% browser‑based – no uploads, no sign‑up. Convert JSON, Excel, CSV, XML, QIF, PDF, and more instantly. Your data stays on your device.</p>
+
+  <!-- Trust badges -->
+  <div class="trust-badges" aria-label="Site trust indicators">
+    <span>✓ 100% Free</span>
+    <span>✓ No Signup</span>
+    <span>✓ No Uploads</span>
+    <span>✓ 100% Private</span>
+    <span>✓ Works Offline</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEARCH
+═══════════════════════════════════════════════════ -->
+<div class="home-search" role="search">
+ <section class="filter-section" aria-label="Search Tool by name and description">
+
+    <input
+    type="search"
+    id="toolSearch"
+    name="q"
+    placeholder="Search data tools... (e.g. JSON to Excel, CSV to SQL)"
+    aria-label="Search all DataFrog tools"
+    autocomplete="off"
+    spellcheck="false"
+  />
+
+ </section>   
+  
+
+  <!-- ═══════════════════════════════════════════════════
+     CATEGORY FILTER TABS
+═══════════════════════════════════════════════════ -->
+<section class="filter-section" aria-label="Filter tools by category">
+  <div class="filter-tabs" role="tablist" aria-label="Tool categories">
+    <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true" aria-controls="toolGrid">All Tools</button>
+    <button class="filter-tab" data-filter="json" role="tab" aria-selected="false" aria-controls="toolGrid">JSON</button>
+    <button class="filter-tab" data-filter="excel" role="tab" aria-selected="false" aria-controls="toolGrid">Excel</button>
+    <button class="filter-tab" data-filter="csv" role="tab" aria-selected="false" aria-controls="toolGrid">CSV</button>
+    <button class="filter-tab" data-filter="xml" role="tab" aria-selected="false" aria-controls="toolGrid">XML</button>
+    <button class="filter-tab" data-filter="qif" role="tab" aria-selected="false" aria-controls="toolGrid">QIF</button>
+    <button class="filter-tab" data-filter="sql" role="tab" aria-selected="false" aria-controls="toolGrid">SQL</button>
+    <button class="filter-tab" data-filter="pdf" role="tab" aria-selected="false" aria-controls="toolGrid">PDF</button>
+    <button class="filter-tab" data-filter="utilities" role="tab" aria-selected="false" aria-controls="toolGrid">Utilities</button>
+    <button class="filter-tab" data-filter="formatter" role="tab" aria-selected="false" aria-controls="toolGrid">Formatter</button>
+  </div>
+</section>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     TOOL GRID
+═══════════════════════════════════════════════════ -->
+<section id="toolGrid" class="tool-grid-section" aria-label="All DataFrog data conversion tools" aria-live="polite">
+
+  <!-- No results message -->
+  <div class="no-results" id="noResults" hidden aria-live="assertive">
+    <p>No tools found for "<span id="searchQuery"></span>". Try a different keyword.</p>
+  </div>
+
+  <!-- ── JSON Tools ── -->
+  <div class="cat-block" data-category="json">
+    <h2 class="cat-block-title"><span class="cat-icon">📋</span> JSON Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="/json-to-excel" data-cat="json" data-tags="json excel xlsx export">
+        <div class="tool-card-title">JSON to Excel</div>
+        <div class="tool-card-desc">Convert JSON arrays or objects to XLSX/XLS files. Preserve nested structures.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-csv" data-cat="json" data-tags="json csv convert flatten">
+        <div class="tool-card-title">JSON to CSV</div>
+        <div class="tool-card-desc">Turn JSON data into CSV with automatic flattening of nested objects.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-pdf" data-cat="json" data-tags="json pdf report print">
+        <div class="tool-card-title">JSON to PDF</div>
+        <div class="tool-card-desc">Generate printable, formatted PDF reports from JSON data.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-html" data-cat="json" data-tags="json html table web">
+        <div class="tool-card-title">JSON to HTML</div>
+        <div class="tool-card-desc">Convert JSON to responsive HTML tables or nested lists.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-xml" data-cat="json" data-tags="json xml transform api">
+        <div class="tool-card-title">JSON to XML</div>
+        <div class="tool-card-desc">Transform JSON objects into well-formed XML documents.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-sql" data-cat="json" data-tags="json sql insert database">
+        <div class="tool-card-title">JSON to SQL</div>
+        <div class="tool-card-desc">Generate INSERT statements from JSON arrays – MySQL, PostgreSQL, SQLite.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-string-to-json-object" data-cat="json" data-tags="json string parse escape">
+        <div class="tool-card-title">JSON String to Object</div>
+        <div class="tool-card-desc">Parse escaped JSON strings into valid objects.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-json-schema" data-cat="json" data-tags="json schema generate draft">
+        <div class="tool-card-title">JSON to JSON Schema</div>
+        <div class="tool-card-desc">Auto‑generate JSON Schema Draft‑07 from sample JSON.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-dart" data-cat="json" data-tags="json dart flutter model class">
+        <div class="tool-card-title">JSON to Dart</div>
+        <div class="tool-card-desc">Create Flutter‑ready model classes with fromJson/toJson.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-yaml" data-cat="json" data-tags="json yaml kubernetes docker config">
+        <div class="tool-card-title">JSON to YAML</div>
+        <div class="tool-card-desc">Convert JSON to human‑readable YAML for Kubernetes, Docker Compose.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/yaml-to-json" data-cat="json" data-tags="yaml json config convert">
+        <div class="tool-card-title">YAML to JSON</div>
+        <div class="tool-card-desc">Convert YAML configuration files to JSON instantly.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-ts" data-cat="json" data-tags="json typescript interface class">
+        <div class="tool-card-title">JSON to TypeScript</div>
+        <div class="tool-card-desc">Convert JSON data to TypeScript interfaces or classes.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-java" data-cat="json" data-tags="json java pojo class generator">
+        <div class="tool-card-title">JSON to Java</div>
+        <div class="tool-card-desc">Generate Java POJO classes from JSON data.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-c-sharp" data-cat="json" data-tags="json csharp class property">
+        <div class="tool-card-title">JSON to C#</div>
+        <div class="tool-card-desc">Convert JSON data to C# classes with properties.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+      <a class="tool-card" href="/json-to-go" data-cat="json" data-tags="json go structs generator">
+        <div class="tool-card-title">JSON to Go Structs</div>
+        <div class="tool-card-desc">Generate Go struct definitions from JSON data.</div>
+        <span class="tool-card-tag">JSON</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Excel Tools ── -->
+  <div class="cat-block" data-category="excel">
+    <h2 class="cat-block-title"><span class="cat-icon">📊</span> Excel Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="/excel-to-json" data-cat="excel" data-tags="excel json xlsx convert">
+        <div class="tool-card-title">Excel to JSON</div>
+        <div class="tool-card-desc">Convert XLSX/XLS files to clean JSON objects.</div>
+        <span class="tool-card-tag">Excel</span>
+      </a>
+      <a class="tool-card" href="/excel-to-txt" data-cat="excel" data-tags="excel txt text export">
+        <div class="tool-card-title">Excel to TXT</div>
+        <div class="tool-card-desc">Export spreadsheets as plain text with aligned columns.</div>
+        <span class="tool-card-tag">Excel</span>
+      </a>
+      <a class="tool-card" href="/xlsx-to-pdf" data-cat="excel" data-tags="excel pdf convert print">
+        <div class="tool-card-title">Excel to PDF</div>
+        <div class="tool-card-desc">Convert Excel tables to printable PDF documents.</div>
+        <span class="tool-card-tag">Excel</span>
+      </a>
+      <a class="tool-card" href="/excel-to-html" data-cat="excel" data-tags="excel html table web">
+        <div class="tool-card-title">Excel to HTML</div>
+        <div class="tool-card-desc">Generate ready‑to‑use HTML tables from Excel sheets.</div>
+        <span class="tool-card-tag">Excel</span>
+      </a>
+      <a class="tool-card" href="/convert-xlsx-to-xml" data-cat="excel" data-tags="excel xml transform hierarchy">
+        <div class="tool-card-title">Excel to XML</div>
+        <div class="tool-card-desc">Transform Excel data into hierarchical XML.</div>
+        <span class="tool-card-tag">Excel</span>
+      </a>
+      <a class="tool-card" href="/xlsx-to-sql-converter" data-cat="excel" data-tags="excel sql insert database">
+        <div class="tool-card-title">Excel to SQL</div>
+        <div class="tool-card-desc">Convert Excel rows to INSERT statements.</div>
+        <span class="tool-card-tag">Excel</span>
+      </a>
+      <a class="tool-card" href="/convert-xlsx-to-csv" data-cat="excel" data-tags="excel csv save convert">
+        <div class="tool-card-title">Excel to CSV</div>
+        <div class="tool-card-desc">Save Excel sheets as standard CSV files.</div>
+        <span class="tool-card-tag">Excel</span>
+      </a>
+      <a class="tool-card" href="/remove-excel-duplicates" data-cat="excel" data-tags="excel duplicates remove clean">
+        <div class="tool-card-title">Remove Excel Duplicates</div>
+        <div class="tool-card-desc">Remove duplicate rows and values from Excel spreadsheets quickly and easily.</div>
+        <span class="tool-card-tag">Excel</span>
+      </a>
+      <a class="tool-card" href="/analyze-excel" data-cat="excel" data-tags="analyze excel for detailed data preview">
+        <div class="tool-card-title">Analyze Excel</div>
+        <div class="tool-card-desc">Upload an Excel file (.xlsx, .xls, .csv) and get instant analysis.</div>
+        <span class="tool-card-tag">Excel</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── CSV Tools ── -->
+  <div class="cat-block" data-category="csv">
+    <h2 class="cat-block-title"><span class="cat-icon">📄</span> CSV Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="/convert-csv-to-excel" data-cat="csv" data-tags="csv excel xlsx convert">
+        <div class="tool-card-title">CSV to Excel</div>
+        <div class="tool-card-desc">Convert CSV files to XLSX/XLS. Preserve data types.</div>
+        <span class="tool-card-tag">CSV</span>
+      </a>
+      <a class="tool-card" href="/convert-csv-to-json" data-cat="csv" data-tags="csv json convert arrays">
+        <div class="tool-card-title">CSV to JSON</div>
+        <div class="tool-card-desc">Transform CSV rows into JSON arrays of objects.</div>
+        <span class="tool-card-tag">CSV</span>
+      </a>
+      <a class="tool-card" href="/convert-csv-to-xml" data-cat="csv" data-tags="csv xml convert elements">
+        <div class="tool-card-title">CSV to XML</div>
+        <div class="tool-card-desc">Convert CSV rows to XML elements.</div>
+        <span class="tool-card-tag">CSV</span>
+      </a>
+      <a class="tool-card" href="/convert-csv-to-pdf" data-cat="csv" data-tags="csv pdf table report">
+        <div class="tool-card-title">CSV to PDF</div>
+        <div class="tool-card-desc">Turn CSV data into professional PDF tables.</div>
+        <span class="tool-card-tag">CSV</span>
+      </a>
+      <a class="tool-card" href="/convert-csv-to-html" data-cat="csv" data-tags="csv html table web">
+        <div class="tool-card-title">CSV to HTML</div>
+        <div class="tool-card-desc">Generate HTML tables from CSV.</div>
+        <span class="tool-card-tag">CSV</span>
+      </a>
+      <a class="tool-card" href="/csv-to-sql" data-cat="csv" data-tags="csv sql insert database">
+        <div class="tool-card-title">CSV to SQL</div>
+        <div class="tool-card-desc">Generate INSERT statements from CSV rows.</div>
+        <span class="tool-card-tag">CSV</span>
+      </a>
+      <a class="tool-card" href="/convert-csv-to-txt" data-cat="csv" data-tags="csv txt text convert">
+        <div class="tool-card-title">CSV to TXT</div>
+        <div class="tool-card-desc">Convert CSV to plain text with aligned columns.</div>
+        <span class="tool-card-tag">CSV</span>
+      </a>
+      <a class="tool-card" href="/remove-csv-duplicates" data-cat="csv" data-tags="csv duplicates remove clean">
+        <div class="tool-card-title">Remove CSV Duplicates</div>
+        <div class="tool-card-desc">Remove duplicate rows and values from CSV files quickly and easily.</div>
+        <span class="tool-card-tag">CSV</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── XML Tools ── -->
+  <div class="cat-block" data-category="xml">
+    <h2 class="cat-block-title"><span class="cat-icon">📝</span> XML Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="/xml-to-json" data-cat="xml" data-tags="xml json parse convert">
+        <div class="tool-card-title">XML to JSON</div>
+        <div class="tool-card-desc">Parse XML into clean JSON objects. Handles attributes and nested elements.</div>
+        <span class="tool-card-tag">XML</span>
+      </a>
+      <a class="tool-card" href="/xml-to-xsd-generator" data-cat="xml" data-tags="xml xsd schema generate">
+        <div class="tool-card-title">XML to XSD</div>
+        <div class="tool-card-desc">Automatically infer XML Schema Definition from any XML document.</div>
+        <span class="tool-card-tag">XML</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── QIF Tools ── -->
+  <div class="cat-block" data-category="qif">
+    <h2 class="cat-block-title"><span class="cat-icon">🏦</span> QIF Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="/qif-to-excel" data-cat="qif" data-tags="qif excel finance bank">
+        <div class="tool-card-title">QIF to Excel</div>
+        <div class="tool-card-desc">Turn QIF bank transactions into XLSX spreadsheets.</div>
+        <span class="tool-card-tag">QIF</span>
+      </a>
+      <a class="tool-card" href="/qif-to-csv" data-cat="qif" data-tags="qif csv finance convert">
+        <div class="tool-card-title">QIF to CSV</div>
+        <div class="tool-card-desc">Convert QIF transactions to CSV for any spreadsheet.</div>
+        <span class="tool-card-tag">QIF</span>
+      </a>
+      <a class="tool-card" href="/qif-to-qbo" data-cat="qif" data-tags="qif qbo quickbooks convert">
+        <div class="tool-card-title">QIF to QBO</div>
+        <div class="tool-card-desc">Generate QuickBooks‑ready QBO files from Quicken exports.</div>
+        <span class="tool-card-tag">QIF</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── SQL Tools ── -->
+  <div class="cat-block" data-category="sql">
+    <h2 class="cat-block-title"><span class="cat-icon">🗄️</span> SQL Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="/sql-to-xml" data-cat="sql" data-tags="sql xml convert elements">
+        <div class="tool-card-title">SQL to XML</div>
+        <div class="tool-card-desc">Convert SQL INSERT statements to XML (elements, attributes, or flat).</div>
+        <span class="tool-card-tag">SQL</span>
+      </a>
+      <a class="tool-card" href="/sql-to-excel" data-cat="sql" data-tags="sql excel export sheet">
+        <div class="tool-card-title">SQL to Excel</div>
+        <div class="tool-card-desc">Transform SQL INSERT statements to multi‑sheet Excel files.</div>
+        <span class="tool-card-tag">SQL</span>
+      </a>
+      <a class="tool-card" href="/sql-to-csv" data-cat="sql" data-tags="sql csv export convert">
+        <div class="tool-card-title">SQL to CSV</div>
+        <div class="tool-card-desc">Convert SQL INSERT statements to CSV format.</div>
+        <span class="tool-card-tag">SQL</span>
+      </a>
+      <a class="tool-card" href="/remove-duplicates-in-sql" data-cat="sql" data-tags="sql duplicates remove query">
+        <div class="tool-card-title">Remove Duplicates in SQL</div>
+        <div class="tool-card-desc">Learn how to find and remove duplicate records in SQL databases using practical queries.</div>
+        <span class="tool-card-tag">SQL</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── PDF Tools ── -->
+  <div class="cat-block" data-category="pdf">
+    <h2 class="cat-block-title"><span class="cat-icon">📕</span> PDF Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="/pptx-to-pdf" data-cat="pdf" data-tags="pptx pdf powerpoint convert">
+        <div class="tool-card-title">PPTX to PDF</div>
+        <div class="tool-card-desc">Convert PowerPoint presentations to high‑quality PDF documents.</div>
+        <span class="tool-card-tag">PDF</span>
+      </a>
+      <a class="tool-card" href="/pdf-to-powerpoint" data-cat="pdf" data-tags="pdf pptx powerpoint convert">
+        <div class="tool-card-title">PDF to PPTX</div>
+        <div class="tool-card-desc">Convert PDF pages to editable PPTX slides.</div>
+        <span class="tool-card-tag">PDF</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Utilities ── -->
+  <div class="cat-block" data-category="utilities">
+    <h2 class="cat-block-title"><span class="cat-icon">🔧</span> Utilities</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="/uuid-generator" data-cat="utilities" data-tags="uuid guid generate id">
+        <div class="tool-card-title">UUID Generator</div>
+        <div class="tool-card-desc">Generate UUID v4, v7, NanoID, ULID, and more – up to 1000 IDs.</div>
+        <span class="tool-card-tag">Utilities</span>
+      </a>
+      <a class="tool-card" href="/base64" data-cat="utilities" data-tags="base64 encode decode convert">
+        <div class="tool-card-title">Base64 Encoder/Decoder</div>
+        <div class="tool-card-desc">Encode and decode Base64 data instantly in your browser.</div>
+        <span class="tool-card-tag">Utilities</span>
+      </a>
+      <a class="tool-card" href="/hash-generator" data-cat="utilities" data-tags="hash md5 sha generate crypto">
+        <div class="tool-card-title">Hash Generator</div>
+        <div class="tool-card-desc">Generate cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) from any input string.</div>
+        <span class="tool-card-tag">Utilities</span>
+      </a>
+      <a class="tool-card" href="/jwt-decoder" data-cat="utilities" data-tags="jwt decode token inspect">
+        <div class="tool-card-title">JWT Decoder</div>
+        <div class="tool-card-desc">Decode JSON Web Tokens (JWT) to inspect header, payload, and signature.</div>
+        <span class="tool-card-tag">Utilities</span>
+      </a>
+      <a class="tool-card" href="/convert-epoch" data-cat="utilities" data-tags="epoch timestamp convert unix date">
+        <div class="tool-card-title">Epoch Converter</div>
+        <div class="tool-card-desc">Convert Unix timestamps to human-readable dates and vice versa.</div>
+        <span class="tool-card-tag">Utilities</span>
+      </a>
+      <a class="tool-card" href="/decode-a-url" data-cat="utilities" data-tags="url decode percent encode query">
+        <div class="tool-card-title">URL Decoder</div>
+        <div class="tool-card-desc">Decode percent-encoded URLs and query parameters instantly.</div>
+        <span class="tool-card-tag">Utilities</span>
+      </a>
+      <a class="tool-card" href="/case-converter" data-cat="utilities" data-tags="case converter camel snake pascal kebab">
+        <div class="tool-card-title">Case Converter</div>
+        <div class="tool-card-desc">Convert text between camelCase, PascalCase, snake_case, kebab-case, and more.</div>
+        <span class="tool-card-tag">Utilities</span>
+      </a>
+      <a class="tool-card" href="/word-counter" data-cat="utilities" data-tags="word count counter text analysis">
+        <div class="tool-card-title">Word Counter</div>
+        <div class="tool-card-desc">Count words, characters, sentences, readability scores, and keyword frequency.</div>
+        <span class="tool-card-tag">Utilities</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Formatter Tools ── -->
+  <div class="cat-block" data-category="formatter">
+    <h2 class="cat-block-title"><span class="cat-icon">✨</span> Formatter Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="/json-minify-prettify" data-cat="formatter" data-tags="json minify prettify format">
+        <div class="tool-card-title">Minify and Prettify JSON</div>
+        <div class="tool-card-desc">Minify or prettify JSON data with a single click.</div>
+        <span class="tool-card-tag">Formatter</span>
+      </a>
+      <a class="tool-card" href="/xml-formatter" data-cat="formatter" data-tags="xml format indent beautify">
+        <div class="tool-card-title">XML Formatter</div>
+        <div class="tool-card-desc">Format and indent XML documents for better readability.</div>
+        <span class="tool-card-tag">Formatter</span>
+      </a>
+      <a class="tool-card" href="/html-beautifier" data-cat="formatter" data-tags="html format beautify minify">
+        <div class="tool-card-title">HTML Beautifier</div>
+        <div class="tool-card-desc">Format and minify HTML code instantly in your browser.</div>
+        <span class="tool-card-tag">Formatter</span>
+      </a>
+      <a class="tool-card" href="/sql-formatter" data-cat="formatter" data-tags="sql format beautify query">
+        <div class="tool-card-title">SQL Formatter</div>
+        <div class="tool-card-desc">Format SQL queries for better readability.</div>
+        <span class="tool-card-tag">Formatter</span>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEO CONTENT BLOCK
+═══════════════════════════════════════════════════ -->
+<section class="seo-block" aria-labelledby="about-datafrog">
+  <h2 id="about-datafrog">Why DataFrog Data Conversion Tools</h2>
+  
+  <p>
+    DataFrog is a free collection of online data tools built for developers, analysts, and anyone who works with structured data. Every tool runs entirely in your browser — your files and data never leave your device, no account is needed, and there are no usage limits.
+  </p>
+  
+  <p>
+    Whether you need to convert JSON to CSV, transform an Excel spreadsheet into JSON for an API, export SQL data to Excel for reporting, or clean duplicate rows from a CSV — DataFrog handles it instantly without uploading anything to a server. Tools cover JSON, CSV, Excel (XLSX/XLS), XML, YAML, SQL, QIF, PDF, and more, with new converters added regularly.
+  </p>
+  
+  <p>
+    Unlike most online converters, DataFrog is fully client-side. All processing happens locally using JavaScript in your browser, which makes it safe for sensitive, confidential, or proprietary data. Most tools also work offline after your first visit — useful in restricted network environments or when working on the go.
+  </p>
+  
+  <p>
+    DataFrog is used by developers converting API responses for quick inspection, analysts preparing data for database imports, finance teams processing QIF bank files, DevOps engineers working with YAML configs, and business users cleaning exports without writing code. No matter your background, if you work with data, there is a DataFrog tool for your task.
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT — Search + Filter
+═══════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  const searchInput  = document.getElementById('toolSearch');
+  const filterTabs   = document.querySelectorAll('.filter-tab');
+  const catBlocks    = document.querySelectorAll('.cat-block');
+  const toolCards    = document.querySelectorAll('.tool-card');
+  const noResults    = document.getElementById('noResults');
+  const searchQuery  = document.getElementById('searchQuery');
+
+  let activeFilter = 'all';
+
+  /* ── Category filter ── */
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', function () {
+      filterTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      activeFilter = this.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  /* ── Search ── */
+  searchInput.addEventListener('input', function () {
+    applyFilters();
+  });
+
+  /* ── Apply both filters ── */
+  function applyFilters () {
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    catBlocks.forEach(block => {
+      const cat      = block.dataset.category;
+      const catMatch = (activeFilter === 'all') || (activeFilter === cat);
+      let   blockHasVisible = false;
+
+      const cards = block.querySelectorAll('.tool-card');
+      cards.forEach(card => {
+        const title = card.querySelector('.tool-card-title').textContent.toLowerCase();
+        const desc  = card.querySelector('.tool-card-desc').textContent.toLowerCase();
+        const tags  = (card.dataset.tags || '').toLowerCase();
+        const textMatch = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
+        const show  = catMatch && textMatch;
+
+        card.style.display = show ? '' : 'none';
+        if (show) { blockHasVisible = true; visibleCount++; }
+      });
+
+      block.style.display = (catMatch && blockHasVisible) ? '' : 'none';
+    });
+
+    /* No results */
+    if (visibleCount === 0 && query) {
+      noResults.hidden = false;
+      searchQuery.textContent = query;
+    } else {
+      noResults.hidden = true;
+    }
+  }
+
+  /* ── URL search param support (?q=bmi) ── */
+  const urlParams = new URLSearchParams(window.location.search);
+  const qParam    = urlParams.get('q');
+  if (qParam) {
+    searchInput.value = qParam;
+    applyFilters();
+  }
+
+})();
+</script>

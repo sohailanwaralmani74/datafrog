@@ -3,12 +3,12 @@ layout: main
 title: "Convert XLSX to CSV Online – Free Excel to CSV Converter | DataFrog"
 description: "Free online XLSX to CSV converter. Convert Excel spreadsheets to CSV format instantly. Browser‑based, no signup, private."
 keywords: "convert xlsx to csv online free, excel to csv converter, xlsx to csv without upload, convert excel to csv, free xlsx to csv tool, excel to csv browser based"
+category: excel
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>Convert XLSX to CSV Online – Free Excel to CSV Converter</h1>
 
   <p id="intro" style="font-size:14px;color:#333;">
@@ -175,7 +175,7 @@ keywords: "convert xlsx to csv online free, excel to csv converter, xlsx to csv 
 
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 <script src="/assets/js/xlsx-to-csv.js"></script>
 <script type="application/ld+json">

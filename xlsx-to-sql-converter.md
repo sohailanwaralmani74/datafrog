@@ -3,13 +3,13 @@ layout: main
 title: "XLSX to SQL Converter – Free Online"
 description: "Free online XLSX to SQL converter. Convert Excel spreadsheets (XLSX, XLS) to SQL INSERT statements. Browser‑based, no signup."
 keywords: "xlsx to sql online free, convert excel to sql insert, xlsx to sql converter, excel to mysql, excel to postgresql, bulk insert from excel, xlsx to sql without upload"
+category: excel
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <!-- JSONView (depends on jQuery) -->
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>XLSX to SQL Converter – Turn Excel into INSERT Statements Instantly</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert Excel to SQL online in seconds – completely free, no signup. This browser‑based tool turns any XLSX or XLS file into standard SQL INSERT statements, ready for MySQL, PostgreSQL, SQL Server, and other relational databases. Preview and edit your data before generating the script – perfect for database seeding, data migration, and backend development.
@@ -157,7 +157,7 @@ keywords: "xlsx to sql online free, convert excel to sql insert, xlsx to sql con
 
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 <script src="/assets/js/xlsx-to-sql.js"></script>
 <script type="application/ld+json">

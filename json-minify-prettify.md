@@ -3,6 +3,7 @@ layout: main
 title: "Minify and Prettify JSON – JSON Beautifier & Minifier Online"
 description: "Minify, prettify, beautify, and format JSON online. Clean, validate, and optimize JSON data for APIs, apps, databases, and AI workflows."
 keywords: "minify and prettify JSON, JSON formatter, JSON beautifier, JSON minifier, format JSON online, beautify JSON, compress JSON, JSON validator, JSON parser, structured data formatter, API JSON formatter, developer JSON tool, readable JSON, compact JSON, JSON editor, JSON cleaner, AI data formatting, web developer tools, JSON utility, online JSON formatter"
+category: formatter
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.0/ace.js"></script>
 
@@ -146,7 +147,8 @@ keywords: "minify and prettify JSON, JSON formatter, JSON beautifier, JSON minif
     </div>
   </div>  
  <div id="toast-container" class="toast-container"></div>
- <article id="json-tool-content" itemscope itemtype="https://schema.org/TechArticle">
+ 
+ <article id="json-tool-content" style="margin-left: 3rem;" itemscope itemtype="https://schema.org/TechArticle">
   <meta itemprop="about" content="JSON formatting tool for developers" />
   <meta itemprop="accessibilityControl" content="fullKeyboardControl" />
   <meta itemprop="accessibilityFeature" content="syntaxHighlighting" />

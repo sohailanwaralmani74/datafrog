@@ -1,8 +1,9 @@
 ---
 layout: main
 title: "JSON to Dart Converter Online – Model Generator | DataFrog"
-description: "Free online JSON to Dart converter. Generate Flutter model classes with null safety, fromJson/toJson."
+description: "Free online JSON to Dart converter. Generate Flutter model classes with null safety, fromJson/toJson. All processing is done locally."
 keywords: "json to dart converter online, json to dart model generator, json to dart null safety, flutter json to dart, json to dart class, json to dart freezed, json to dart quicktype, convert json to dart class, json to dart flutter, json serializable dart"
+category: coding
 ---
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.js"></script>
@@ -122,8 +123,7 @@ keywords: "json to dart converter online, json to dart model generator, json to 
 
 
 <div style="display: flex; flex-direction: row">
-<div style="width: 20%"></div>
-<div style="width: 58%">
+<div style="width:98%;" style="margin-left: 2rem;">
 <article itemscope itemtype="https://schema.org/TechArticle">
 <section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
@@ -227,7 +227,6 @@ keywords: "json to dart converter online, json to dart model generator, json to 
 </section>
 </article>
 </div>
-<div style="width: 20%"></div>
 </div>
 
 <script src="/assets/js/json-to-dart.js"></script>

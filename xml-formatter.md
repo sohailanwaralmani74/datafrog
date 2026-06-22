@@ -3,6 +3,7 @@ layout: main
 title: "XML Formatter Online – Pretty Print, Minify XML"
 description: "Free XML formatter and beautifier online. Pretty‑print, minify, and syntax‑highlight XML instantly – no data upload. 100% client‑side."
 keywords: "xml formatter, xml beautifier, xml pretty print, xml minify, format xml online, xml prettifier, xml editor, xml syntax highlighter, client-side xml tool, free xml formatter, xml tidy, xml indent, xml compress, secure xml formatting"
+category: formatter
 ---
 <!-- CodeMirror 5 (MIT) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.17/codemirror.min.css">

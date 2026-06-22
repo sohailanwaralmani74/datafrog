@@ -3,6 +3,7 @@ layout: main
 title: "JSON to HTML Table Converter Online – Free & Private | DataFrog"
 description: "Free online JSON to HTML converter. Convert JSON arrays or objects to clean HTML tables instantly. Browser‑based, no signup."
 keywords: "json to html online free, convert json to html table, json to html converter, json to html table generator, nested json to html, browser based json to html"
+category: coding
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -30,7 +31,7 @@ keywords: "json to html online free, convert json to html table, json to html co
         <div class="jsonx-header" style="justify-content: space-between;">
           <div class="jsonx-title"></div>
           <label class="jsonx-btn jsonx-upload-label" id="uploadBtnJson">
-            📂 Upload JSON File
+            📂 Upload JSON 
             <input id="fileInputJson" type="file" accept=".json,application/json">
           </label>
         </div>
@@ -74,9 +75,6 @@ keywords: "json to html online free, convert json to html table, json to html co
 
 
 <div style="display: flex; flex-direction: row">
-<div style="width: 20%"></div>
-<div style="width: 58%">
-
 <article itemscope itemtype="https://schema.org/TechArticle">
 <section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
@@ -163,18 +161,7 @@ keywords: "json to html online free, convert json to html table, json to html co
   <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks. DataFrog believes essential tools should be accessible to everyone.</p>
 
 </section>
-<section aria-label="Related tools">
-  <h2>Related Tools</h2>
-  <ul>
-    <li><a href="/convert-csv-to-html">CSV to HTML Converter</a> – convert CSV files into HTML tables</li>
-    <li><a href="/excel-to-html">Excel to HTML Converter</a> – transform spreadsheets into web tables</li>
-    <li><a href="/json-to-csv">JSON to CSV Converter</a> – export JSON as a spreadsheet instead</li>
-    <li><a href="/json-to-pdf">JSON to PDF Converter</a> – generate a printable PDF from JSON data</li>
-  </ul>
-</section>
 </article>
-</div>
-<div style="width: 20%"></div>
 </div>
 
 

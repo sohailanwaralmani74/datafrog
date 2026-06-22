@@ -3,6 +3,7 @@ layout: main
 title: "YAML to JSON Converter Online – Free, Fast & Private | DataFrog"
 description: "Free online YAML to JSON converter. Convert YAML to JSON instantly in your browser. No upload, no signup. Preserves nested structures."
 keywords: "yaml to json online free, convert yaml to json, yaml to json converter, yaml to json without upload, browser based yaml to json, free yaml to json tool, yaml to json config"
+category: others
 ---
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -13,8 +14,7 @@ keywords: "yaml to json online free, convert yaml to json, yaml to json converte
 
 <section style="display: flex; justify-content: center">
 
-<div style="width: 15%;"></div>
-<div style="width: 69%;">
+<div style="width:98%;" style="margin-left: 2rem;">
   <h1>Convert YAML to JSON Online – Free, Fast & Secure</h1> 
   <p id="intro" style="font-size:14px;color:#333;">
     Convert YAML to JSON online in seconds – completely free, no signup, no uploads. This browser‑based tool transforms any YAML document (config files, Kubernetes manifests, Docker Compose, etc.) into clean, structured JSON. Perfect for API integration, frontend development, or migrating DevOps configurations – all securely in your browser with no data leaving your device.
@@ -171,8 +171,6 @@ keywords: "yaml to json online free, convert yaml to json, yaml to json converte
 
 </article>
 
-</div>
-<div style="width: 15%;">
 </div>
 </section>
 <script src="/assets/js/yaml-to-json.js"></script>

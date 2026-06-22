@@ -3,6 +3,7 @@ layout: main
 title: "How to Convert Excel to JSON – Step-by-Step Guide"
 description: "Learn how to convert Excel to JSON online in seconds. This free browser-based XLS and XLSX to JSON converter requires no signup, no uploads."
 keywords: "excel to json, convert xls to json, xlsx to json, xls to json converter, excel to json converter, convert excel to json online, xls to json online, export excel to json, convert excel into json, convert from excel to json"
+category: excel
 ---
 
 <style>
@@ -99,13 +100,11 @@ p{
 }
 </style>
 
-<div style="display: flex; justify-content: center; margin-top: 1.5rem;">
-<div style="width:20%"></div>
-<div style="width:55%">
+<div style= "margin: 1.5rem;">
 
-<h1 id="intro-heading">How to Convert Excel to JSON</h1>
+<h1 id="intro-heading">How to Convert Excel to JSON | DataFrog</h1>
 
-<section class="blog-intro" aria-labelledby="intro-heading">
+<div class="blog-intro" aria-labelledby="intro-heading">
   <p>
     Converting Excel to JSON is one of those tasks that sounds complicated but is actually straightforward once you know the right approach. Whether you're a developer preparing data for an API, a data analyst migrating spreadsheets to a NoSQL database, or just someone trying to get their Excel data into a web app, this guide will walk you through everything you need to know.
   </p>
@@ -359,15 +358,6 @@ p{
 
 </section>
 
-</div>
-<div style="width:20%">
-<label style="margin: 3rem;">You May Also Like</label>
-  <ul style="margin-left: 2rem;">
-   <li><a href="how-to-open-json-file-in-excel" class="link">Open JSON Into Excel</a></li>
-   <li><a href="how-to-convert-json-to-xml" class="link">Convert JSON to XML</a></li>
-   <li><a href="how-to-convert-json-to-csv" class="link">Convert JSON to CSV</a></li>
-  </ul>
-</div>
 </div>
 
 <script type="application/ld+json">

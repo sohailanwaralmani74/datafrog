@@ -3,6 +3,7 @@ layout: main
 title: "Base64 Encoder/Decoder - Text and Files | DataFrog"
 description: "Free online Base64 tool: encode/decode text, images, files. Client-side, private, no upload. upload file or input any text to encode and decode."
 keywords: "base64 encoder, base64 decoder, base64 to text, text to base64, encode file to base64, decode base64 to file, online base64 tool, base64 image, base64 converter"
+category: utilities
 ---
   <style>
     .csvx-container {
@@ -101,8 +102,7 @@ keywords: "base64 encoder, base64 decoder, base64 to text, text to base64, encod
   </style>
 
 <section style="display: flex; justify-content: center">
- <div style="width: 15%;"></div>
- <div style="width: 69%;">
+ <div style="padding-left: 2rem;">
    <section class="intro">
     <h1>Base64 Encoder / Decoder Online: Text, Images & Files Supported</h1>
     <p><strong>Base64 encoding</strong> converts binary data (text, images, PDFs, or any file) into an ASCII string format using a set of 64 characters. Our <strong>free, client‑side Base64 tool</strong> lets you encode or decode instantly – no file upload to any server, 100% private and secure.</p>
@@ -269,7 +269,6 @@ keywords: "base64 encoder, base64 decoder, base64 to text, text to base64, encod
 </article>
 
  </div>
- <div style="width: 15%;"></div>
 
 </section>
 

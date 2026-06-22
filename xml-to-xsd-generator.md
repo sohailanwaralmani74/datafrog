@@ -3,16 +3,16 @@ layout: main
 title: "XML to XSD Generator Online – Free XML Schema Creator | DataFrog"
 description: "Free online XML to XSD generator. Convert any XML file to XML Schema Definition (XSD) instantly. Browser‑based, no upload, no signup."
 keywords: "xml to xsd generator online, xml to xsd converter free, generate xsd from xml online, xml schema generator free, xml to xsd tool, xml to xsd large files, free online xml to xsd"
+category: xml
 ---
 <section style="display: flex; justify-content: center">
 
-<div style="width: 15%;"></div>
-<div style="width: 69%;">
+<div style="width:98%;" style="margin-left: 2rem;">
   <h1>Generate XSD from XML – Free, Fast & Private XML Schema Creator</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Generate XSD (XML Schema Definition) from any XML document instantly – completely free, no signup, no uploads. This browser‑based tool analyzes your XML structure, infers data types (string, integer, date, boolean, etc.), and creates a complete XSD schema that defines elements, attributes, nesting, and cardinality. Perfect for API contract validation, data integration, or understanding complex XML structures – all securely in your browser.
   </p>
-<div class="jsonx-container">
+<div class="jsonx-container" >
   <div class="csvx-panel" id="csvPanelXsd">
     <div class="panel-header">
       <div>
@@ -163,8 +163,7 @@ keywords: "xml to xsd generator online, xml to xsd converter free, generate xsd 
 
 </div>
 
-<div style="width: 15%;">
-</div>
+
 </section>
 <script src="/assets/js/xml-to-xsd-generator.js"></script>
 <script type="application/ld+json">

@@ -3,12 +3,12 @@ layout: main
 title: "Convert Excel to JSON Online – Free & Secure | DataFrog"
 description: "Free online Excel to JSON converter. Transform XLSX or XLS files into clean JSON instantly. Browser‑based, no signup. Copy or download .json file."
 keywords: "convert excel to json online free, excel to json converter, xlsx to json, xls to json, excel to json without upload, free excel to json tool, browser based excel to json"
+category: excel
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>Convert Excel to JSON – Generate API‑Ready JSON from Spreadsheets</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert Excel to JSON online in seconds – completely free, no signup. This browser‑based tool turns any Excel spreadsheet (.xlsx or .xls) into clean, structured JSON format. The first row becomes JSON keys, and each subsequent row becomes an object in an array. Perfect for APIs, web applications, backend systems, and data migration.
@@ -156,7 +156,7 @@ keywords: "convert excel to json online free, excel to json converter, xlsx to j
 </article>
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 <script src="/assets/js/xlsx-to-json.js"></script>
 

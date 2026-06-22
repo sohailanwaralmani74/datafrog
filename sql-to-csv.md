@@ -3,11 +3,11 @@ layout: main
 title: "Convert SQL to CSV Online – Free & Secure | DataFrog"
 description: "Free online SQL to CSV converter. Convert SQL query results, INSERT statements, and database exports into CSV instantly. No signup required."
 keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, postgresql to csv, sqlite to csv, export sql to csv, sql dump to csv, sql query to csv"
+category: sql
 ---
 <section style="display: flex; justify-content: center">
 
-<div style="width: 15%;"></div>
-<div style="width: 69%;">
+<div style="width:98%;" style="margin-left: 2rem;">
 
 <h1>SQL to CSV Converter – Extract INSERT Data</h1>
 <section id="introSection">
@@ -219,7 +219,6 @@ keywords: "convert sql to csv online free, sql to csv converter, mysql to csv, p
 </section>
 </article>
 </div>
-<div style="width: 15%;"></div>
 
 </section>
 <script src="/assets/js/sql-to-csv.js"></script>

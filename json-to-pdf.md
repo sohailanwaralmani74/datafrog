@@ -3,6 +3,7 @@ layout: main
 title: "JSON to PDF Converter Online – Free, Secure & Offline | DataFrog"
 description: "Free online JSON to PDF converter. Convert JSON arrays or objects to formatted PDF documents instantly. Browser‑based, no signup. Download PDF file."
 keywords: "json to pdf online free, convert json to pdf, json to pdf generator, json to pdf report, browser based json to pdf, json to pdf without upload, printable json to pdf"
+category: json
 ---
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -32,7 +33,7 @@ keywords: "json to pdf online free, convert json to pdf, json to pdf generator, 
         <div class="jsonx-header" style="justify-content: space-between;">
           <div class="jsonx-title"></div>
           <label class="jsonx-btn jsonx-upload-label" id="uploadBtnJson">
-            📂 Upload JSON File
+            📂 Upload JSON 
             <input id="fileInputJson" type="file" accept=".json,application/json">
           </label>
         </div>
@@ -63,8 +64,6 @@ keywords: "json to pdf online free, convert json to pdf, json to pdf generator, 
 
 
 <div style="display: flex; flex-direction: row">
-<div style="width: 20%"></div>
-<div style="width: 58%">
 <article itemscope itemtype="https://schema.org/TechArticle">
 <section id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
@@ -162,8 +161,7 @@ keywords: "json to pdf online free, convert json to pdf, json to pdf generator, 
 </section>
 </article>
 </div>
-<div style="width: 20%"></div>
-</div>
+
 
 <script src="/assets/js/json-to-pdf.js"></script>
 

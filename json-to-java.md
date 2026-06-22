@@ -3,6 +3,7 @@ layout: main
 title: "JSON to Java - Convert JSON to Java POJOs with Lombok & Jackson"
 description: "Advanced JSON to Java converter: generate Java classes with Lombok, Jackson annotations, validation, and nested types. Export as ZIP. 100% client-side."
 keywords: "json to java, json to pojo, java code generator, lombok, jackson annotations, json to java online, generate java classes from json"
+category: coding
 ---
 
 <!-- Ace Editor & JSZip -->
@@ -15,9 +16,10 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
     background: #1f2833;
     border-radius: 10px;
     padding: 1rem;
-    margin: 1rem 0;
+    margin: 1rem;
     border: 1px solid #45a29e;
   }
+
   #json-tool-wrapper {
     display: flex;
     justify-content: space-between;
@@ -26,24 +28,31 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
     width: 100%;
     margin-top: 1rem;
   }
-  #json-editor-container, #json-viewer-wrapper {
+
+  #json-editor-container,
+  #json-viewer-wrapper {
     flex: 1;
     height: 75vh;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
   }
-  #json-editor-container, #json-viewer-wrapper {
-    background: #1f2833; /* inner panes same background, but they have borders */
+
+  #json-editor-container,
+  #json-viewer-wrapper {
+    background: #1f2833;
+    /* inner panes same background, but they have borders */
     border: 1px solid #45a29e;
     border-radius: 10px;
     padding: 0.5rem;
   }
+
   .editor {
     height: 100%;
     width: 100%;
     border-radius: 10px;
   }
+
   .toolbar {
     display: flex;
     flex-wrap: wrap;
@@ -52,16 +61,20 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
     gap: 0.5rem;
     margin-bottom: 1rem;
     padding: 0.5rem;
-    background: #1f2833; /* same as container */
+    background: #1f2833;
+    /* same as container */
     border-radius: 10px;
     border: 1px solid #45a29e;
   }
-  .toolbar-left, .toolbar-right {
+
+  .toolbar-left,
+  .toolbar-right {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     align-items: center;
   }
+
   .csvx-btn {
     background: #1e293b;
     border: none;
@@ -78,14 +91,17 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
     transition: 0.2s;
     white-space: nowrap;
   }
+
   .csvx-btn.primary {
     background: #0f3b3f;
     border-color: #2dd4bf;
     color: #ccfbf1;
   }
+
   .csvx-btn.primary:hover {
     background: #115e59;
   }
+
   .icon-btn {
     background: transparent;
     border: none;
@@ -96,10 +112,12 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
     color: #9ca3af;
     transition: 0.2s;
   }
+
   .icon-btn:hover {
     background: #2d3a4e;
     color: #e2e8f0;
   }
+
   .checkbox-label {
     color: #e2e8f0;
     background: #1e293b;
@@ -113,6 +131,7 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
     cursor: pointer;
     font-size: 0.85rem;
   }
+
   .toast-container {
     position: fixed;
     bottom: 30px;
@@ -123,6 +142,7 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
     gap: 12px;
     pointer-events: none;
   }
+
   .toast {
     background: #1e293b;
     backdrop-filter: blur(16px);
@@ -133,16 +153,25 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
     border-left: 4px solid #2dd4bf;
     animation: slideIn 0.2s ease;
   }
+
   @keyframes slideIn {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 </style>
 
 <article id="intro" style="margin-left: 5rem; margin-right: 5rem;">
-<section>
-  <h1>JSON to Java Converter – Generate POJOs with Lombok and Jackson</h1>
-  <p><strong>Convert any JSON into production‑ready Java classes</strong>. Choose Lombok annotations, Jackson property mapping, Bean Validation, and more. All code is generated client‑side – no upload, no server, 100% private.</p>
+  <section>
+    <h1>JSON to Java Converter – Generate POJOs with Lombok and Jackson</h1>
+    <p><strong>Convert any JSON into production‑ready Java classes</strong>. Choose Lombok annotations, Jackson property
+      mapping, Bean Validation, and more. All code is generated client‑side – no upload, no server, 100% private.</p>
   </section>
 </article>
 
@@ -178,7 +207,8 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
   <!-- Two panes side by side -->
   <div id="json-tool-wrapper">
     <div id="json-editor-container">
-      <div id="input-editor" class="editor">{\n  "name": "DataFrog",\n  "tools": ["JSON", "Java"],\n  "active": true,\n  "version": 1.0\n}</div>
+      <div id="input-editor" class="editor">{\n "name": "DataFrog",\n "tools": ["JSON", "Java"],\n "active": true,\n
+        "version": 1.0\n}</div>
     </div>
     <div id="json-viewer-wrapper">
       <div id="output-editor" class="editor"></div>
@@ -189,33 +219,38 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
 <div id="toast-container" class="toast-container"></div>
 
 <!-- Microdata‑enriched content (place below the tool) -->
-<article id="json-to-java-content" itemscope itemtype="https://schema.org/TechArticle" style="margin : 2rem;">
+<div> 
+ <article id="json-to-java-content" itemscope itemtype="https://schema.org/TechArticle" style="margin:2rem;">
   <meta itemprop="about" content="Convert JSON to Java POJOs with Lombok, Jackson & validation" />
   <meta itemprop="accessibilityControl" content="fullKeyboardControl" />
   <meta itemprop="accessibilityFeature" content="syntaxHighlighting" />
-
   <!-- Main software application microdata -->
   <div itemscope itemtype="https://schema.org/SoftwareApplication" itemprop="mainEntity">
     <meta itemprop="name" content="JSON to Java Converter – DataFrog" />
     <meta itemprop="operatingSystem" content="All" />
     <meta itemprop="applicationCategory" content="DeveloperTool" />
     <meta itemprop="offers" content="Free" />
-    <meta itemprop="description" content="Free online tool to convert JSON to Java POJOs with Lombok, Jackson, and validation annotations. Auto‑prettify, duplicate‑free types, ZIP export. 100% client‑side, no upload." />
+    <meta itemprop="description"
+      content="Free online tool to convert JSON to Java POJOs with Lombok, Jackson, and validation annotations. Auto‑prettify, duplicate‑free types, ZIP export. 100% client‑side, no upload." />
   </div>
-
   <!-- Features with ItemList -->
   <section id="java-features" itemscope itemtype="https://schema.org/ItemList">
     <h2 itemprop="name">✨ Why Developers Choose This JSON → Java Generator</h2>
     <ul>
-      <li itemprop="itemListElement"><strong>🚀 Instant conversion</strong> – Paste JSON, click Convert, get production‑ready Java classes (POJOs).</li>
-      <li itemprop="itemListElement"><strong>🧠 No duplicate types</strong> – Nested objects are detected and reused; each unique structure becomes a separate Java class.</li>
-      <li itemprop="itemListElement"><strong>📦 ZIP export (model folder)</strong> – Download all generated classes as separate `.java` files inside a `model/` folder.</li>
-      <li itemprop="itemListElement"><strong>🎨 Ace editor with syntax highlighting</strong> – Edit JSON and Java with full highlighting (VS Code style).</li>
-      <li itemprop="itemListElement"><strong>🔒 100% client‑side</strong> – No data leaves your browser. Perfect for API specs, configs, or secret payloads.</li>
-      <li itemprop="itemListElement"><strong>📂 Upload JSON file</strong> – Load any `.json` file directly; auto‑prettified and ready.</li>
+      <li itemprop="itemListElement"><strong>🚀 Instant conversion</strong> – Paste JSON, click Convert, get
+        production‑ready Java classes (POJOs).</li>
+      <li itemprop="itemListElement"><strong>🧠 No duplicate types</strong> – Nested objects are detected and reused;
+        each unique structure becomes a separate Java class.</li>
+      <li itemprop="itemListElement"><strong>📦 ZIP export (model folder)</strong> – Download all generated classes as
+        separate `.java` files inside a `model/` folder.</li>
+      <li itemprop="itemListElement"><strong>🎨 Ace editor with syntax highlighting</strong> – Edit JSON and Java with
+        full highlighting (VS Code style).</li>
+      <li itemprop="itemListElement"><strong>🔒 100% client‑side</strong> – No data leaves your browser. Perfect for API
+        specs, configs, or secret payloads.</li>
+      <li itemprop="itemListElement"><strong>📂 Upload JSON </strong> – Load any `.json` file directly; auto‑prettified
+        and ready.</li>
     </ul>
   </section>
-
   <!-- HowTo with structured steps -->
   <section id="how-to-use" itemscope itemtype="https://schema.org/HowTo">
     <h2 itemprop="name">📖 How to Convert JSON to Java (POJOs with Lombok & Jackson)</h2>
@@ -223,79 +258,99 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
     <div itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
       <meta itemprop="position" content="1" />
       <h3 itemprop="name">1. Enter your JSON</h3>
-      <p itemprop="text">Paste JSON into the left editor, or click “Upload JSON” to load a file. The tool auto‑prettifies it for readability.</p>
+      <p itemprop="text">Paste JSON into the left editor, or click “Upload JSON” to load a file. The tool
+        auto‑prettifies it for readability.</p>
     </div>
     <div itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
       <meta itemprop="position" content="2" />
       <h3 itemprop="name">2. Choose annotations</h3>
-      <p itemprop="text">Select options: <strong>Lombok @Data</strong>, <strong>@Builder</strong>, <strong>Jackson annotations</strong> (@JsonProperty, @JsonIgnoreProperties), and <strong>Bean Validation</strong> (@NotBlank, @NotNull).</p>
+      <p itemprop="text">Select options: <strong>Lombok @Data</strong>, <strong>@Builder</strong>, <strong>Jackson
+          annotations</strong> (@JsonProperty, @JsonIgnoreProperties), and <strong>Bean Validation</strong> (@NotBlank,
+        @NotNull).</p>
     </div>
     <div itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
       <meta itemprop="position" content="3" />
       <h3 itemprop="name">3. Convert & export</h3>
-      <p itemprop="text">Click <strong>Convert to Java</strong> – the right panel shows your Java classes. Use <strong>Copy</strong> to copy all code, or <strong>Export ZIP</strong> to download a `model/` folder with one `.java` file per class.</p>
+      <p itemprop="text">Click <strong>Convert to Java</strong> – the right panel shows your Java classes. Use
+        <strong>Copy</strong> to copy all code, or <strong>Export ZIP</strong> to download a `model/` folder with one
+        `.java` file per class.
+      </p>
     </div>
   </section>
-
   <!-- Use Cases -->
   <section id="use-cases" itemscope itemtype="https://schema.org/ItemList">
     <h2 itemprop="name">🎯 Common Use Cases for JSON to Java Conversion</h2>
     <ul>
-      <li itemprop="itemListElement"><strong>API integration</strong> – Convert API response JSON into Java DTOs with Jackson annotations for seamless deserialization.</li>
-      <li itemprop="itemListElement"><strong>Backend development</strong> – Generate entity or model classes from JSON schemas for Spring Boot applications.</li>
-      <li itemprop="itemListElement"><strong>Microservices contracts</strong> – Create Java POJOs from OpenAPI or Swagger JSON definitions.</li>
-      <li itemprop="itemListElement"><strong>Legacy migration</strong> – Transform plain JSON exports from old systems into type‑safe Java objects.</li>
-      <li itemprop="itemListElement"><strong>Testing & mocking</strong> – Quickly generate Java classes from mock JSON data for unit tests.</li>
+      <li itemprop="itemListElement"><strong>API integration</strong> – Convert API response JSON into Java DTOs with
+        Jackson annotations for seamless deserialization.</li>
+      <li itemprop="itemListElement"><strong>Backend development</strong> – Generate entity or model classes from JSON
+        schemas for Spring Boot applications.</li>
+      <li itemprop="itemListElement"><strong>Microservices contracts</strong> – Create Java POJOs from OpenAPI or
+        Swagger JSON definitions.</li>
+      <li itemprop="itemListElement"><strong>Legacy migration</strong> – Transform plain JSON exports from old systems
+        into type‑safe Java objects.</li>
+      <li itemprop="itemListElement"><strong>Testing & mocking</strong> – Quickly generate Java classes from mock JSON
+        data for unit tests.</li>
     </ul>
   </section>
-
   <!-- FAQ with Question/Answer microdata -->
+  
   <section id="faq" itemscope itemtype="https://schema.org/FAQPage">
     <h2>❓ Frequently Asked Questions About JSON to Java Conversion</h2>
-
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">Does this tool handle nested objects and arrays?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <div itemprop="text"><p>Yes. The converter recursively traverses your JSON and creates a separate Java class for each unique nested object. Arrays of objects produce correct `List<Type>` fields with the appropriate generic type.</p></div>
+        <div itemprop="text">
+          <p>Yes. The converter recursively traverses your JSON and creates a separate Java class for each unique nested object. Arrays of objects produce correct <code>List&lt;Type&gt;</code> fields with the appropriate generic type.</p>
+        </div>
       </div>
     </div>
-
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What Lombok annotations are supported?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <div itemprop="text"><p>You can choose <strong>@Data</strong> (includes getters, setters, toString, equals, hashCode) and optionally <strong>@Builder</strong> for the builder pattern. If Lombok is off, the tool generates plain getters/setters.</p></div>
+        <div itemprop="text">
+          <p>You can choose <strong>@Data</strong> (includes getters, setters, toString, equals, hashCode) and
+            optionally <strong>@Builder</strong> for the builder pattern. If Lombok is off, the tool generates plain getters/setters.</p>
+        </div>
       </div>
     </div>
-
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What Jackson annotations are generated?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <div itemprop="text"><p>When enabled, the tool adds <code>@JsonIgnoreProperties(ignoreUnknown = true)</code> to each class and <code>@JsonProperty("fieldName")</code> on each field, ensuring correct JSON mapping.</p></div>
+        <div itemprop="text">
+          <p>When enabled, the tool adds <code>@JsonIgnoreProperties(ignoreUnknown = true)</code> to each class and <code>@JsonProperty("fieldName")</code> on each field, ensuring correct JSON mapping.
+          </p>
+        </div>
       </div>
     </div>
-
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">Is my JSON data sent to any server?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <div itemprop="text"><p>Never. Everything runs locally in your browser using Ace Editor and JavaScript. No upload, no tracking – your data stays private.</p></div>
+        <div itemprop="text">
+          <p>Never. Everything runs locally in your browser using Ace Editor and JavaScript. No upload, no tracking –
+            your data stays private.</p>
+        </div>
       </div>
     </div>
-
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">Can I export all classes as separate files?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <div itemprop="text"><p>Yes. Use the <strong>Export ZIP</strong> button – it creates a `model/` folder containing each generated Java class as a separate `.java` file (e.g., `Root.java`, `Address.java`, `Department.java`).</p></div>
+        <div itemprop="text">
+          <p>Yes. Use the <strong>Export ZIP</strong> button – it creates a `model/` folder containing each generated
+            Java class as a separate `.java` file (e.g., `Root.java`, `Address.java`, `Department.java`).</p>
+        </div>
       </div>
     </div>
-
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What JSON standard is supported?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <div itemprop="text"><p>We strictly adhere to <strong>RFC 8259</strong> – no trailing commas, no comments, full UTF‑8 support. Invalid JSON will show an error.</p></div>
+        <div itemprop="text">
+          <p>We strictly adhere to <strong>RFC 8259</strong> – no trailing commas, no comments, full UTF‑8 support.
+            Invalid JSON will show an error.</p>
+        </div>
       </div>
     </div>
   </section>
-
   <section id="technical-standards" itemprop="articleBody">
     <h2>⚙️ Technical Standards & Compliance</h2>
     <ul>
@@ -309,12 +364,12 @@ keywords: "json to java, json to pojo, java code generator, lombok, jackson anno
       <li><strong>ZIP export:</strong> JSZip creates a compliant `model.zip` with nested `.java` files</li>
     </ul>
   </section>
-
   <section id="cta" itemprop="articleBody">
     <h2>🚀 Start Converting JSON to Java Now – Free & Private</h2>
     <p>Use the tool above – no signup, no limits. Paste your JSON, choose your annotations, click Convert, and get production‑ready Java POJOs instantly.</p>
   </section>
-</article>
+ </article>
+</div>
 
 <script src="/assets/js/json-to-java.js"></script>
 

@@ -3,14 +3,14 @@ layout: main
 title: "Convert CSV to Excel Online – Free XLSX / XLS Converter | DataFrog"
 description: "Free online CSV to Excel converter. No upload – 100% browser‑based. Convert CSV to XLSX or XLS instantly. Preserve data."
 keywords: "convert csv to excel online, csv to xlsx free, csv to xls converter, browser based csv to excel, no upload csv converter, free excel converter offline, csv to excel without email"
+category: csv
 ---
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <!-- JSONView (depends on jQuery) -->
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
  <h1>Convert CSV to Excel Online – Free & Secure (No Upload)</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert CSV to Excel online in seconds – completely free, no signup, no file uploads. This tool runs entirely in your browser using SheetJS. 
@@ -149,8 +149,6 @@ keywords: "convert csv to excel online, csv to xlsx free, csv to xls converter, 
 </section>
 </article>
 </div>
-
-<div style="width: 10%;"></div>
 </section>
 
 <script src="/assets/js/csv-to-excel.js"></script>

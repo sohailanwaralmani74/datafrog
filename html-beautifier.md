@@ -3,6 +3,7 @@ layout: main
 title: "HTML Beautifier & Minifier Online | DataFrog"
 description: "Free HTML beautifier and Formatter online. Format, minify, beautify html and preview HTML instantly – no data upload. 100% client‑side."
 keywords: "html beautifier, html formatter, html minifier, pretty print html, format html online, html prettifier, html tidy, html editor, minify html, compress html, client-side html tool, free html beautifier, html code formatter, preview html, secure html formatting"
+category: utilities
 ---
 <!-- CodeMirror 5 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.17/codemirror.min.css">

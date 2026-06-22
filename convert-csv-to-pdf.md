@@ -3,6 +3,7 @@ layout: main
 title: "Convert CSV to PDF Online – Free, Secure & No Upload | DataFrog"
 description: "Free online CSV to PDF converter. No upload – 100% browser‑based. Convert any CSV file to a professional PDF table instantly."
 keywords: "convert csv to pdf online free, csv to pdf converter no upload, csv to pdf table, browser based csv to pdf, free csv to pdf without email, csv to pdf offline, csv to pdf secure"
+category: csv
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -10,8 +11,7 @@ keywords: "convert csv to pdf online free, csv to pdf converter no upload, csv t
 
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>Convert CSV to PDF Online – Free & Secure (No Upload)</h1>
   <p id="intro" style="font-size:14px;">
     Convert CSV to PDF online in seconds – completely free, no signup, no file uploads. This tool runs entirely in your browser using jsPDF with autoTable. 
@@ -169,8 +169,6 @@ keywords: "convert csv to pdf online free, csv to pdf converter no upload, csv t
 </article>
 
 </div>
-
-<div style="width: 10%;"></div>
 </section>
 <script src="/assets/js/csv-to-pdf.js"></script>
 <script type="application/ld+json">

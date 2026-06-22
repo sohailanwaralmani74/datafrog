@@ -3,6 +3,7 @@ layout: main
 title: "Unix Timestamp Converter - Epoch to Date, Browser-Based & Private"
 description: "Free online Unix timestamp converter. Convert epoch time to human-readable date and back. Batch conversion supported. No data leaves your device."
 keywords: "unix timestamp converter, epoch converter, epoch to date, timestamp to date, convert epoch time, unix time converter, epoch time converter, current unix timestamp, date to epoch, datetime to unix timestamp, online epoch converter, timestamp converter online, unix epoch time now, batch timestamp converter, epoch to human readable date"
+category: utilities
 ---
 <script type="application/ld+json">
 [
@@ -127,7 +128,7 @@ keywords: "unix timestamp converter, epoch converter, epoch to date, timestamp t
 ]
 </script>
 <style>
-.epoch-wrap{background:#1e1e1e;border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:16px;min-height:100px}
+.epoch-wrap{background:#1e1e1e;border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:16px;min-height:100px; min-width: 100%;}
 .panel-card{background:#252526;border-radius:8px;border:1px solid #3c3c3c;overflow:hidden}
 .panel-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#2d2d2d;border-bottom:1px solid #3c3c3c;flex-wrap:wrap;gap:8px}
 .panel-title{font-size:13px;font-weight:500;color:#cccccc;letter-spacing:.3px}
@@ -285,8 +286,7 @@ details[open] .faq-chevron { transform: rotate(90deg); }
 </div>
 
 <section id="epoch-converter-tool" aria-label="Unix Timestamp Converter Tool" style="display: flex; justify-content: center" itemscope itemtype="https://schema.org/WebPage">
-<div style="width: 15%;"></div>
-<div style="width: 69%;">
+<div style="width:98%;" style="margin-left: 2rem;">
 
 <div class="epoch-wrap">
 
@@ -502,6 +502,8 @@ details[open] .faq-chevron { transform: rotate(90deg); }
 
 </article>
 
+</div>
+</section>
 <script>
 (function(){
   function pad(n){ return String(n).padStart(2,'0'); }
@@ -630,7 +632,4 @@ details[open] .faq-chevron { transform: rotate(90deg); }
 })();
 </script>
 
-</div>
-<div style="width: 16%;"></div>
-</section>
 

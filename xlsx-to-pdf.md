@@ -3,14 +3,14 @@ layout: main
 title: "XLSX to PDF Converter – Free Excel to PDF Online | DataFrog"
 description: "Free online XLSX to PDF converter. Convert Excel spreadsheets (XLSX, XLS) to PDF instantly. Preserve tables, rows, columns."
 keywords: "xlsx to pdf online free, convert excel to pdf, xlsx to pdf converter, excel to pdf without email, browser based excel to pdf, free xlsx to pdf tool, excel to pdf print ready"
+category: excel
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.26/jspdf.plugin.autotable.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>XLSX to PDF Converter – Convert Excel Spreadsheets to PDF Instantly</h1>
 
   <p id="intro" style="font-size:14px;color:#333;">
@@ -150,7 +150,7 @@ keywords: "xlsx to pdf online free, convert excel to pdf, xlsx to pdf converter,
 
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 <script src="/assets/js/xlsx-to-pdf.js"></script>
 

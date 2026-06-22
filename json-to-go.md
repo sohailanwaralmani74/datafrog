@@ -3,6 +3,7 @@ layout: main
 title: "JSON to Go - Convert JSON to Go Structs with JSON Tags"
 description: "Advanced JSON to Go converter: generate Go structs with json tags, omitempty, pointer types, and nested types. Export as ZIP. 100% client-side."
 keywords: "json to go, json to golang, go struct generator, json to go struct, golang json tags, convert json to go, go code generator"
+category: coding
 ---
 
 <!-- Ace Editor & JSZip -->
@@ -217,7 +218,7 @@ keywords: "json to go, json to golang, go struct generator, json to go struct, g
       <li itemprop="itemListElement"><strong>📦 ZIP export (models folder)</strong> – Download all generated structs as separate `.go` files inside a `models/` folder.</li>
       <li itemprop="itemListElement"><strong>🎨 Ace editor with syntax highlighting</strong> – Edit JSON and Go with full highlighting.</li>
       <li itemprop="itemListElement"><strong>🔒 100% client‑side</strong> – No data leaves your browser. Perfect for API specs or configs.</li>
-      <li itemprop="itemListElement"><strong>📂 Upload JSON file</strong> – Load any `.json` file directly; auto‑prettified and ready.</li>
+      <li itemprop="itemListElement"><strong>📂 Upload JSON </strong> – Load any `.json` file directly; auto‑prettified and ready.</li>
     </ul>
   </section>
 

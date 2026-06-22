@@ -3,12 +3,12 @@ layout: main
 title: "Convert Excel to TXT Online – Free & Secure | DataFrog"
 description: "Free online Excel to TXT converter. Transform XLSX or XLS files into clean plain text. Browser‑based, no signup. Copy or download .txt file."
 keywords: "convert excel to txt online free, excel to text converter, xlsx to txt, xls to txt, excel to plain text, free excel to txt tool, browser based excel to text"
+category: excel
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 
 <h1>Convert Excel to TXT – Export Spreadsheets as Plain Text</h1>
 
@@ -156,7 +156,7 @@ keywords: "convert excel to txt online free, excel to text converter, xlsx to tx
 </article>
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 <script src="/assets/js/xlsx-to-txt.js"></script>
 <script type="application/ld+json">

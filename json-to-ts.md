@@ -3,6 +3,7 @@ layout: main
 title: "JSON to TypeScript - Convert JSON to TS Interfaces and Classes"
 description: "Free online JSON to TypeScript converter. Generate interfaces or classes from JSON, avoid duplicates, export as ZIP. 100% client-side."
 keywords: "json to typescript, json to ts, convert json to typescript interface, json to class, typescript generator, json to ts online, json to interface, ts code generator"
+category: coding
 ---
   <!-- Ace Editor -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.0/ace.js"></script>
@@ -175,7 +176,7 @@ keywords: "json to typescript, json to ts, convert json to typescript interface,
       <li itemprop="itemListElement"><strong>📦 ZIP export (model folder)</strong> – Download all generated types as separate `.ts` files inside a `model/` folder.</li>
       <li itemprop="itemListElement"><strong>🎨 Ace editor with syntax highlighting</strong> – Edit JSON and TypeScript with full highlighting (VS Code style).</li>
       <li itemprop="itemListElement"><strong>🔒 100% client‑side</strong> – No data leaves your browser. Perfect for API specs, configs, or secret payloads.</li>
-      <li itemprop="itemListElement"><strong>📂 Upload JSON file</strong> – Load any `.json` file directly; auto‑prettified and ready.</li>
+      <li itemprop="itemListElement"><strong>📂 Upload JSON </strong> – Load any `.json` file directly; auto‑prettified and ready.</li>
     </ul>
   </section>
 

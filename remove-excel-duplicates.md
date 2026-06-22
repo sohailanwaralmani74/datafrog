@@ -3,12 +3,12 @@ layout: main
 title: "Remove Duplicates in Excel – Duplicate Remover Tool | DataFrog"
 description: "Tool to remove duplicates in Excel. Find and delete duplicate rows in XLSX or XLS files instantly. No Signup! No Server Processing. No Uploads."
 keywords: "excel duplicate remove, excel find duplicates, eliminate duplicate excel, eliminate repeats in excel, excel search duplicates, excel select duplicates, excel show duplicates, in excel how to remove duplicates, xls find duplicates, xls remove duplicates, excel delete duplicates, check duplicate in excel, clear duplicate excel, deduplicate excel"
+category: validator
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 15%;"></div>
-<div style="width: 69%;">
+<div style="width:98%;" style="margin-left: 2rem;">
 
 <h1>Remove Excel Duplicates – Eliminate Repeats in Excel Fast</h1>
   <p id="excel-duplicate-remover-intro">
@@ -56,7 +56,7 @@ keywords: "excel duplicate remove, excel find duplicates, eliminate duplicate ex
   <table class="dfx-table" id="dfx-table"></table>
 
 </div>
-<article id="remove-excel-duplicates-tool">
+<article id="remove-excel-duplicates-tool" style="margin: 3rem;">
 
   <section id="how-to-remove-duplicates-from-excel">
 
@@ -304,7 +304,6 @@ keywords: "excel duplicate remove, excel find duplicates, eliminate duplicate ex
 
 </div>
 
-<div style="width: 15%;"></div>
 </section>
 <script src="/assets/js/excel-duplicate-remover.js"></script>
 

@@ -3,6 +3,7 @@ layout: main
 title: "JSON to XML Converter Online – Free, Secure & Offline | DataFrog"
 description: "Free online JSON to XML converter. Transform JSON arrays or objects to clean XML instantly. Browser‑based, no signup. Download .xml file. Supports nested JSON."
 keywords: "json to xml online free, convert json to xml, json to xml converter, nested json to xml, json to xml without upload, browser based json to xml, json to xml file"
+category: json
 ---
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -22,7 +23,7 @@ keywords: "json to xml online free, convert json to xml, json to xml converter, 
         <div class="jsonx-header" style="justify-content: space-between;">
           <div class="jsonx-title">JSON Input</div>
           <label class="jsonx-btn jsonx-upload-label" id="uploadBtnJson">
-            📂 Upload JSON File
+            📂 Upload JSON 
             <input id="fileInputJson" type="file" accept=".json,application/json">
           </label>
         </div>
@@ -64,8 +65,7 @@ keywords: "json to xml online free, convert json to xml, json to xml converter, 
 <div id="toastJson" class="jsonx-toast">✅ XML ready – copy or download below</div>
 
 <div style="display: flex; flex-direction: row">
-<div style="width: 20%"></div>
-<div style="width: 58%">
+<div style="width:98%;" style="margin-left: 2rem;">
 
 <article id="json-to-xml-content" itemscope itemtype="https://schema.org/TechArticle">
 
@@ -281,7 +281,6 @@ keywords: "json to xml online free, convert json to xml, json to xml converter, 
 
 </article>
 </div>
-<div style="width: 20%"></div>
 </div>
 
 <script src="/assets/js/json-to-xml.js"></script>

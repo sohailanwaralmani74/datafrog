@@ -3,12 +3,12 @@ layout: main
 title: "Convert CSV to XML Online – Free, Fast & Secure | DataFrog"
 description: "Free online CSV to XML converter. Convert any CSV file to well-formed XML instantly. Browser‑based, no signup, private."
 keywords: "convert csv to xml online free, csv to xml converter, csv to xml file, csv to xml with headers, browser based csv to xml, free csv to xml tool, csv to xml without upload"
+category: csv
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
   <h1>Convert CSV to XML Online – Free, Fast & Private</h1>
 
   <p id="intro" style="font-size:14px;color:#333;">
@@ -158,7 +158,7 @@ keywords: "convert csv to xml online free, csv to xml converter, csv to xml file
 
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 <script src="/assets/js/csv-to-xml.js"></script>
 

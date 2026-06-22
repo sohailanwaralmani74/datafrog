@@ -3,6 +3,7 @@ layout: main
 title: How to Convert JSON to PDF - Simple Step-by-Step Guide
 description: Discover the easiest methods to convert JSON to PDF using online tools, code libraries, and built-in utilities. Ideal for all users.
 keywords: Convert JSON to PDF, JSON to PDF, Online JSON to PDF Converter, JSON Converter, Data Conversion Tools, Export JSON to PDF
+category: json
 ---
 <style>
 .blog-post-meta {
@@ -100,8 +101,7 @@ p{
 </style>
 
 <div style="display:flex; justify-content:center; margin-top:1.5rem;">
-  <div style="width:20%"></div>
-  <div style="width:55%; font-family:Georgia, serif;">
+  <div style="width:99%; font-family:Georgia, serif; margin-left: 3rem;">
   <h1 id="how-to-convert-pdf-to-json">How To Convert JSON To PDF - The Best Methods</h1>
   <section class="blog-intro" aria-labelledby="convert-json-to-pdf">
   <p>JSON data can be a little complex for non-technical users. Converting it to PDF makes it more readable, shareable, and easy to understand.</p>
@@ -609,14 +609,6 @@ p{
   </details>
 </section>
 
-  </div>
-  <div style="width:20%">
-  <label style="margin: 3rem;">Related Articles</label>
-  <ul style="margin-left: 2rem;">
-   <li><a href ="how-to-convert-json-to-csv" class="link">Convert JSON To CSV</a></li>
-   <li><a href ="how-to-open-json-file-in-excel" class="link">Open JSON In Excel</a></li>
-   <li><a href ="how-to-convert-json-to-xml" class="link">Convert JSON To XML</a></li>
-  </ul>
   </div>
 </div>
 

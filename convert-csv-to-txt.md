@@ -3,12 +3,12 @@ layout: main
 title: "Convert CSV to TXT Online – Free, Secure & No Upload | DataFrog"
 description: "Free online CSV to TXT converter. No upload – 100% browser‑based. Convert any CSV file to clean plain text with aligned columns."
 keywords: "convert csv to txt online free, csv to plain text converter, csv to txt no upload, convert csv to text file, browser based csv to txt, csv to txt column alignment, free txt converter offline"
+category: csv
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>Convert CSV to TXT – Free & Secure Plain Text Converter</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert CSV to TXT online in seconds – completely free, no signup, no file uploads. This tool runs entirely in your browser. 
@@ -175,7 +175,7 @@ keywords: "convert csv to txt online free, csv to plain text converter, csv to t
 
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 <script src="/assets/js/csv-to-txt.js"></script>
 

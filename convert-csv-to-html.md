@@ -3,14 +3,14 @@ layout: main
 title: "Convert CSV to HTML Table – Free & Secure| DataFrog"
 description: "Free online CSV to HTML table converter. No upload – 100% browser‑based. Convert CSV to clean HTML table code instantly. "
 keywords: "convert csv to html table online, csv to html free, csv to html table code, browser based csv to html, no upload csv converter, generate html from csv, csv to html without email"
+category: csv
 ---
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <!-- JSONView (depends on jQuery) -->
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>Convert CSV to HTML Table Online - No Signup Required</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert CSV to HTML table online in seconds – completely free, no signup, no file uploads. This tool runs entirely in your browser. 
@@ -178,8 +178,6 @@ keywords: "convert csv to html table online, csv to html free, csv to html table
 </article>
 
 </div>
-
-<div style="width: 10%;"></div>
 </section>
 
 <script src="/assets/js/csv-to-html.js"></script>

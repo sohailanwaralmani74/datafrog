@@ -3,12 +3,12 @@ layout: main
 title: "Convert CSV to JSON Online – Instant Preview | DataFrog"
 description: "Free online CSV to JSON converter. No upload – 100% browser‑based. Convert CSV to JSON with headers."
 keywords: "convert csv to json online, csv to json free, csv to json converter, convert csv to json file, csv to json with headers, csv to json online no upload, csv to json array, browser based csv to json"
+category: csv
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>Convert CSV to JSON Online – Free & Secure (No Upload)</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert CSV to JSON online in seconds – completely free, no signup, no file uploads. This tool runs entirely in your browser. 
@@ -177,8 +177,6 @@ keywords: "convert csv to json online, csv to json free, csv to json converter, 
 
 </article>
 </div>
-
-<div style="width: 10%;"></div>
 </section>
 
 <script src="/assets/js/csv-to-json.js"></script>

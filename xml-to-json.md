@@ -3,6 +3,7 @@ layout: main
 title: "XML to JSON Converter Online – Free, Browser‑Based & Secure | DataFrog"
 description: "Free online XML to JSON converter. No upload, no signup. Convert XML to JSON instantly in your browser. Preserves attributes."
 keywords: "xml to json, convert xml to json online, free xml to json converter, browser based xml to json, xml to json no upload, xml to json javascript, nested xml to json, xml to json with attributes"
+category: xml
 ---
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -11,8 +12,7 @@ keywords: "xml to json, convert xml to json online, free xml to json converter, 
 
 <section style="display: flex; justify-content: center">
 
-<div style="width: 15%;"></div>
-<div style="width: 69%;">
+<div style="width:98%;" style="margin-left: 2rem;">
   <h1>Convert XML to JSON Online – Free, Secure & Private</h1> 
   <p id="intro" style="font-size:14px;color:#333;">
     Convert XML to JSON online in seconds – completely free, no signup. This browser‑based tool transforms any valid XML document into clean, structured JSON format. Perfect for working with legacy XML data, SOAP APIs, enterprise systems, or RSS feeds – all without uploading your files to any server.
@@ -170,8 +170,7 @@ keywords: "xml to json, convert xml to json online, free xml to json converter, 
 
 </div>
 
-<div style="width: 15%;">
-</div>
+
 </section>
 
 <script src="/assets/js/xml-to-json.js"></script>

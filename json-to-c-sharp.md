@@ -3,6 +3,7 @@ layout: main
 title: "JSON to C# - Convert JSON to C# Classes with JSON Annotations"
 description: "Advanced JSON to C# converter: generate C# classes with System.Text.Json or Newtonsoft.Json annotations, records, nullable types."
 keywords: "json to c#, json to csharp, c# code generator, json to class, json to record, system.text.json, newtonsoft.json, json to c# online"
+category: coding
 ---
 
 <!-- Ace Editor & JSZip -->
@@ -209,7 +210,7 @@ keywords: "json to c#, json to csharp, c# code generator, json to class, json to
       <li itemprop="itemListElement"><strong>📦 ZIP export (model folder)</strong> – Download all generated classes as separate `.cs` files inside a `model/` folder.</li>
       <li itemprop="itemListElement"><strong>🎨 Ace editor with syntax highlighting</strong> – Edit JSON and C# with full highlighting.</li>
       <li itemprop="itemListElement"><strong>🔒 100% client‑side</strong> – No data leaves your browser. Perfect for API specs or configs.</li>
-      <li itemprop="itemListElement"><strong>📂 Upload JSON file</strong> – Load any `.json` file directly; auto‑prettified and ready.</li>
+      <li itemprop="itemListElement"><strong>📂 Upload JSON </strong> – Load any `.json` file directly; auto‑prettified and ready.</li>
     </ul>
   </section>
 
@@ -248,7 +249,7 @@ keywords: "json to c#, json to csharp, c# code generator, json to class, json to
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">Does this tool handle nested objects and arrays?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <div itemprop="text"><p>Yes. The converter recursively creates a separate C# class for each unique nested object. Arrays of objects become `List<Type>`.</p></div>
+        <div itemprop="text"><p>Yes. The converter recursively creates a separate C# class for each unique nested object. Arrays of objects become <code>List&lt;Type&gt;</code>.</p></div>
       </div>
     </div>
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">

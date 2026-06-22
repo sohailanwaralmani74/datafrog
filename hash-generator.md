@@ -3,6 +3,7 @@ layout: main
 title: "Hash Generator – MD5, SHA‑1, SHA‑256, SHA‑512, SHA‑3 | DataFrog"
 description: "Free online hash generator: compute MD5, SHA‑1, SHA‑256, SHA‑512, SHA‑3 from text or files. Fast, client‑side, private."
 keywords: "hash generator, md5 generator, sha1 generator, sha256 generator, sha512 generator, sha3 hash, online hash tool, file hash, checksum, cryptographic hash"
+category: utilities
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 
@@ -68,9 +69,8 @@ keywords: "hash generator, md5 generator, sha1 generator, sha256 generator, sha5
   </style>
 
 <div style="display: flex; justify-content: center">
- <div style="width: 15%;"></div>
-
- <div style="width: 69%;">
+ 
+ <div style="width:98%;" style="margin-left: 2rem;">
    <section id="intro">
     <h1>Online Hash Generator: MD5, SHA‑1, SHA‑256, SHA‑512, SHA‑3</h1>
     <p><strong>Generate cryptographic hashes instantly</strong> from any text or file. Our free <strong>online hash generator</strong> supports <strong>MD5, SHA‑1, SHA‑256, SHA‑512, and SHA‑3 (256/512)</strong> – all running locally in your browser. No upload, no server, completely private.</p>
@@ -108,7 +108,7 @@ keywords: "hash generator, md5 generator, sha1 generator, sha256 generator, sha5
 </div>
 <div id="toast-container" class="toast-container"></div>
 
-
+<div id="content" style="margin: 3rem;">
 <!-- Microdata‑enriched content (place below the tool) -->
 <article id="hash-tool-content" itemscope itemtype="https://schema.org/SoftwareApplication">
   <meta itemprop="name" content="Hash Generator – MD5, SHA‑1, SHA‑256, SHA‑512, SHA‑3" />
@@ -254,11 +254,10 @@ keywords: "hash generator, md5 generator, sha1 generator, sha256 generator, sha5
     <p>Use the tool above to generate MD5, SHA‑1, SHA‑256, SHA‑512, or SHA‑3 hashes from any text or file. Bookmark this page – it’s the only online hash generator you’ll ever need.</p>
   </section>
 </article>
-
+ </div>
  </div>
 
- <div style="width: 15%;"></div>
-</div> 
+ </div> 
 <script src="/assets/js/hash-engine.js"></script>
 <!-- JSON‑LD Structured Data (place in <head> or at end of <body>) -->
 <script type="application/ld+json">

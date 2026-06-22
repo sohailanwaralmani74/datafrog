@@ -3,12 +3,14 @@ layout: main
 title: "JSON to CSV Converter Online – Free, Fast & Offline | DataFrog"
 description: "Free online JSON to CSV converter. Flatten nested JSON with dot notation. Open directly in Excel or Google Sheets. Copy or download .csv file."
 keywords: "json to csv online free, convert json to csv, json to csv converter, flatten json to csv, json array to csv, browser based json to csv, json to csv without upload"
+category: json
 ---
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.css" rel="stylesheet">
-<section>  <h1>JSON to CSV Converter Online – Flatten Nested JSON Instantly</h1> 
+<section>  
+<h1>JSON to CSV Converter Online – Flatten Nested JSON Instantly</h1> 
   <p id="intro">
     <strong>CSV (Comma-Separated Values)</strong> is the most universally compatible format 
     for tabular data — directly openable in Excel, Google Sheets, Apple Numbers, and 
@@ -28,7 +30,7 @@ keywords: "json to csv online free, convert json to csv, json to csv converter, 
         <div class="jsonx-header" style="justify-content: space-between;">
           <div class="jsonx-title"></div>
           <label class="jsonx-btn jsonx-upload-label" id="uploadBtnJson">
-            📂 Upload JSON File
+            📂 Upload JSON 
             <input id="fileInputJson" type="file" accept=".json,application/json">
           </label>
         </div>
@@ -69,8 +71,6 @@ keywords: "json to csv online free, convert json to csv, json to csv converter, 
 <!-- Toast -->
 <div id="toastJson" class="jsonx-toast">✅ CSV ready – copy or download below</div>
 <div style="display: flex; flex-direction: row">
-<div style="width: 20%"></div>
-<div style="width: 58%">
 <article id="tool-content" style="max-width:900px;margin:40px auto;padding:10px 20px;line-height:1.7;font-family:Arial,sans-serif;">
 
 
@@ -195,20 +195,8 @@ keywords: "json to csv online free, convert json to csv, json to csv converter, 
 
   </section>
 
-  <section aria-labelledby="related-tools">
-    <h2 id="related-tools">Related Tools</h2>
-    <ul>
-      <li><a href="/convert-csv-to-json">CSV to JSON Converter</a> – convert CSV files back into JSON format</li>
-      <li><a href="/json-to-excel">JSON to Excel Converter</a> – export JSON directly to an Excel XLSX file</li>
-      <li><a href="/convert-csv-to-excel">CSV to Excel Converter</a> – open your CSV directly in Excel format</li>
-      <li><a href="/remove-csv-duplicates">Remove CSV Duplicates</a> – clean duplicate rows from your converted CSV</li>
-    </ul>
-  </section>
-
 </article>
  <div>
- <div style="width: 20%"></div>
-</div>
 <script src="/assets/js/json-to-csv.js"></script>
 <script type="application/ld+json">
 [

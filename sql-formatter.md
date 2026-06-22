@@ -3,6 +3,7 @@ layout: main
 title: "SQL Formatter & Beautifier Online – Pretty Print, Minify SQL Queries"
 description: "Free SQL formatter and beautifier online. Format, minify, and pretty-print SQL queries in your browser – no data upload, 100% client-side."
 keywords: "sql formatter, sql beautifier, sql query formatter, sql formatter online, pretty print sql, sql beautify, sql minifier, mysql formatter, postgresql formatter, sql server formatter, oracle sql formatter, client-side sql formatter, no data upload, browser-based sql tool, secure sql formatting"
+category: formatter
 ---
 <!-- CodeMirror 5 (MIT) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.17/codemirror.min.css">

@@ -3,6 +3,7 @@ layout: main
 title: "JSON to TXT Converter Online – Free, Private & Instant | DataFrog"
 description: "Convert JSON to plain text in four modes — flattened key-value, readable indented, values only, or raw. Browser-based, no signup."
 keywords: "json to txt online free, convert json to text, json to plain text, flatten json to text, extract json values, json to readable text, browser based json to txt"
+category: json
 ---
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -26,7 +27,7 @@ keywords: "json to txt online free, convert json to text, json to plain text, fl
         <div class="jsonx-header" style="justify-content: space-between;">
           <div class="jsonx-title">JSON Input</div>
           <label class="jsonx-btn jsonx-upload-label" id="uploadBtnJson">
-            📂 Upload JSON File
+            📂 Upload JSON 
             <input id="fileInputJson" type="file" accept=".json,application/json">
           </label>
         </div>
@@ -77,8 +78,7 @@ keywords: "json to txt online free, convert json to text, json to plain text, fl
 
 <article itemscope itemtype="https://schema.org/TechArticle">
 <div style="display: flex; flex-direction: row">
-<div style="width: 20%"></div>
-<div style="width: 58%">
+<div style="width:98%;" style="margin-left: 2rem;">
 <section aria-label="Output modes">
   <h2>Four output modes for different needs</h2>
 
@@ -212,7 +212,6 @@ user.age = 30</code></pre>
 </section>
 </article>
 </div>
-<div style="width: 20%"></div>
 </div>
 
 <script src="/assets/js/json-to-txt.js"></script>

@@ -3,14 +3,14 @@ layout: main
 title: "Convert XLSX to XML Online – Free Excel to XML Converter | DataFrog"
 description: "Free online XLSX to XML converter. Transform Excel spreadsheets into structured XML instantly. Browser‑based, no signup, private."
 keywords: "convert xlsx to xml online free, excel to xml converter, xlsx to xml without upload, convert excel to xml, free xlsx to xml tool, excel to xml browser based"
+category: excel
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
 <h1>Convert XLSX to XML Online – Free Excel to XML Converter</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert XLSX to XML online in seconds – completely free, no signup. This browser‑based tool turns any Excel spreadsheet (.xlsx or .xls) into a clean, hierarchical XML document. 
@@ -176,7 +176,7 @@ keywords: "convert xlsx to xml online free, excel to xml converter, xlsx to xml 
 
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 <script src="/assets/js/xlsx-to-xml.js"></script>
 <script type="application/ld+json">

@@ -3,16 +3,16 @@ layout: main
 title: "UUID Generator – GUID, KSUID, NanoID, ULID, CUID"
 description: "Create UUID v1/v4/v7, GUID, KSUID, ULID, NanoID, CUID, CUID2. Generate up to 1000 IDs. Export to CSV, Excel, JSON, SQL, XML. "
 keywords: "uuid generator online, guid generator, ksuid generator, nanoid generator, ulid generator, cuid generator, bulk id generator, unique identifier generator, free uuid v4"
+category: utilities
 ---
 
 <section style="display: flex; justify-content: center">
-  <div style="width: 15%;"></div>
-  <div style="width: 69%;">
+    <div style="width:99%;" style="margin-left: 2rem;">
     <h1>UUID Generator Online – Generate UUID, GUID, KSUID, and More</h1>
       <p id="intro" style="font-size:14px;color:#333;">
     Generate universally unique identifiers (UUID, GUID, KSUID, ULID, NanoID, CUID) instantly in your browser – no uploads, no signups. Choose from nine identifier formats, generate up to 1000 IDs at once, and export as CSV, Excel, JSON, SQL, or XML. Perfect for database keys, API tokens, distributed systems, and testing – all processed locally with cryptographic randomness.
   </p>
-    <div class="csvx-container" style="min-height: 450px; border-radius: 20px; max-width:99%;">
+    <div class="csvx-container" style="min-height: 450px; border-radius: 20px;">
       <div class="csvx-panel" id="csvPanelXsd" style="min-height: 450px;">
         <div class="panel-header">
           <div class="controls">
@@ -42,7 +42,7 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
           <span class="csvx-btn small" style="color: white; cursor: pointer;" id="exportSQLBtn">💾 SQL</span>
           <span class="csvx-btn small" style="color: white; cursor: pointer;" id="exportXMLBtn">💾 XML</span>
         </div>
-        <textarea id="uuid-output" class="csvx-preview" style="min-height:19.8rem; max-height:19.8rem; background:#1b1b1b; color:#eee; font-family:monospace; padding:20px; border:1px solid orange; width:100%; border-radius:8px;"></textarea>
+        <textarea id="uuid-output" class="csvx-preview" style="min-height:19.8rem; max-height:19.8rem; background:#1b1b1b; color:#eee; font-family:monospace; padding:20px; border:1px solid orange; width:100%; border-radius:8px; margin-top: 1rem;"></textarea>
       </div>
     </div>
     <div id="toastUUID" class="jsonx-toast" style="background: #1e293b; backdrop-filter: blur(16px);  color: #e0f2fe; padding: 12px 22px; border-radius: 60px; font-size: 0.85rem; border-left: 4px solid #2dd4bf; animation: slideIn 0.2s ease;">✅ IDs generated successfully</div>
@@ -155,8 +155,7 @@ keywords: "uuid generator online, guid generator, ksuid generator, nanoid genera
   </div>
 
 
-  <div style="width: 15%;"></div>
-</section>
+  </section>
 
 <script src="/assets/js/uuid-generator.js"></script>
 <script type="application/ld+json">

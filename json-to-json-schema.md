@@ -3,6 +3,7 @@ layout: main
 title: "JSON to JSON Schema Converter – Generate Draft-07 Schema"
 description: "Free online JSON to JSON Schema converter. Generate valid Draft-07 schema from any JSON instantly. Browser‑based."
 keywords: "json to json schema online free, generate json schema from json, json schema generator, json to schema draft 07, json validator schema generator, browser based json schema"
+category: json
 ---
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsonview@1.2.0/dist/jquery.jsonview.min.js"></script>
@@ -165,8 +166,7 @@ p{
 </style>
 
 <div style="display: flex; flex-direction: row">
-<div style="width: 15%"></div>
-<div style="width: 69%">
+<div style="width: 98%">
 
 <div style="display:flex;">
   <div class="blog-post-meta">
@@ -342,20 +342,8 @@ p{
     <p>Yes, completely free. No hidden fees, no premium tiers, no watermarks. DataFrog believes essential developer tools should be accessible to everyone.</p>
 
   </section>
-
-  <section aria-labelledby="related-tools">
-    <h2 id="related-tools">Related Tools</h2>
-    <ul>
-      <li><a href="/xml-to-xsd-generator">XML to XSD Generator</a> – generate an XML Schema Definition from any XML document</li>
-      <li><a href="/json-string-to-json-object">JSON String to Object</a> – parse and validate JSON before generating schema</li>
-      <li><a href="/json-to-csv">JSON to CSV Converter</a> – export JSON data as a flat CSV file</li>
-      <li><a href="/yaml-to-json">YAML to JSON Converter</a> – convert YAML to JSON before generating schema</li>
-    </ul>
-  </section>
-
 </article>
 </div>
-<div style="width: 15%"></div>
 </div>
 
 <script src="assets/js/json-to-json-schema.js"></script>

@@ -3,13 +3,13 @@ layout: main
 title: "Convert CSV to SQL Online – Free & Secure | DataFrog"
 description: "Free online CSV to SQL converter. Generate INSERT statements instantly from CSV. Browser‑based, no signup. Compatible with MySQL, PostgreSQL, SQLite."
 keywords: "convert csv to sql online free, csv to sql insert, csv to mysql, csv to postgresql, csv to sqlite, generate sql from csv, csv to sql without upload"
+category: csv
 ---
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <!-- JSONView (depends on jQuery) -->
 <section style="display: flex; justify-content: center">
 
-<div style="width: 10%;"></div>
-<div style="width: 69%;">
+<div style="width: 98%;">
   <h1>Convert CSV to SQL – Generate Database INSERT Statements Instantly</h1>
   <p id="intro" style="font-size:14px;color:#333;">
     Convert CSV to SQL online in seconds – completely free, no signup. This browser‑based tool turns any CSV file into standard SQL INSERT statements, ready for MySQL, PostgreSQL, SQLite, and other relational databases. Perfect for database seeding, data migration, and backend development.
@@ -174,7 +174,7 @@ keywords: "convert csv to sql online free, csv to sql insert, csv to mysql, csv 
 
 </div>
 
-<div style="width: 10%;"></div>
+
 </section>
 
 <script src="/assets/js/csv-to-sql.js"></script>

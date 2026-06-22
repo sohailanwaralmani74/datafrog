@@ -3,12 +3,13 @@ layout: main
 title: "SQL to XML Converter – Free SQL to XML Export Online | DataFrog"
 description: "Free online SQL to XML converter. Convert SQL INSERT statements into structured XML format instantly. Browser-based, no signup."
 keywords: "sql to xml online free, convert sql to xml, sql insert to xml converter, sql dump to xml, database to xml export, sql to xml nested structure"
+category: sql
 ---
 <script src="https://unpkg.com/xml-formatter@3.6.7/dist/browser/xml-formatter.js"></script>
 <section style="display: flex; justify-content: center">
-  <div style="width: 10%;"></div>
+  
 
-  <div style="width: 69%;">
+  <div style="width:98%;" style="margin-left: 2rem;">
 
     <h1>SQL to XML – Convert SQL Statements into Structured XML</h1>
       <p class="intro" style>Convert SQL <code>INSERT</code> statements, query results, or delimiter‑separated data into well‑formed XML files instantly. <strong>100% client‑side – your data never leaves your browser.</strong> Ideal for developers, data analysts, and system integrators who need XML exports from SQL dumps.</p>
@@ -176,7 +177,7 @@ INSERT INTO employees VALUES (102, 'Ben', 'Developer');</code></pre>
 
   </div>
 
-  <div style="width: 10%;"></div>
+  
 </section>
 
 <script src="/assets/js/sql-to-xml.js"></script>
