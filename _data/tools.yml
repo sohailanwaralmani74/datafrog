@@ -274,3 +274,133 @@
 - title: "How To Generate UUID Online"
   url: /how-to-generate-uuid
   category: datageneration 
+
+# ------- finance tools ------
+- title: "MT940 to Excel"
+  url: /mt940-to-excel
+  category: mt940Finance
+
+- title: "MT940 to CSV"
+  url: /mt940-to-csv
+  category: mt940Finance
+
+- title: "MT940 to QIF"
+  url: /mt940-to-qif
+  category: mt940Finance
+
+- title: "MT940 to QBO"
+  url: /mt940-to-qbo
+  category: mt940Finance
+
+- title: "MT940 to QFX"
+  url: /mt940-to-qfx
+  category: mt940Finance
+
+- title: "QIF to CSV"
+  url: /qif-to-csv
+  category: qifFinance
+
+- title: "QIF to Excel"
+  url: /qif-to-excel
+  category: qifFinance
+
+- title: "QIF to QBO"
+  url: /qif-to-qbo
+  category: qifFinance
+
+- title: "QIF to MT940"
+  url: /qif-to-mt940
+  category: qifFinance
+
+- title: "QIF to QFX"
+  url: /qif-to-qfx
+  category: qifFinance
+
+- title: "CSV to QIF"
+  url: /csv-to-qif
+  category: csvFinance
+
+- title: "CSV to QBO"
+  url: /csv-to-qbo
+  category: csvFinance
+
+- title: "CSV to QFX"
+  url: /csv-to-qfx
+  category: csvFinance
+
+- title: "CSV to MT940"
+  url: /csv-to-mt940
+  category: csvFinance
+
+- title: "Excel to QIF"
+  url: /excel-to-qif
+  category: excelFinance
+
+- title: "Excel to QBO"
+  url: /excel-to-qbo
+  category: excelFinance
+
+- title: "Excel to QFX"
+  url: /excel-to-qfx
+  category: excelFinance
+
+- title: "Excel to MT940"
+  url: /excel-to-mt940
+  category: excelFinance
+
+- title: "QBO to CSV"
+  url: /qbo-to-csv
+  category: qboFinance
+
+- title: "QBO to QIF"
+  url: /qbo-to-qif
+  category: qboFinance
+
+- title: "QBO to Excel"
+  url: /qbo-to-excel
+  category: qboFinance
+
+- title: "QBO to QFX"
+  url: /qbo-to-qfx
+  category: qboFinance
+
+- title: "QBO to MT940"
+  url: /qbo-to-mt940
+  category: qboFinance
+
+- title: "MT942 to CSV"
+  url: /mt942-to-csv
+  category: mt942Finance
+
+- title: "MT942 to Excel"
+  url: /mt942-to-excel
+  category: mt942Finance
+
+- title: "QFX to CSV"
+  url: /qfx-to-csv
+  category: qfxFinance
+
+- title: "QFX to QIF"
+  url: /qfx-to-qif
+  category: qfxFinance
+
+- title: "QFX to Excel"
+  url: /qfx-to-excel
+  category: qfxFinance
+
+- title: "QFX to MT940"
+  url: /qfx-to-mt940
+  category: qfxFinance
+
+- title: "SQLite Viewer Online"
+  url: /sqlite-viewer-online
+  category: queryTools
+
+- title: "Query CSV"
+  url: /query-csv-online
+  category: queryTools
+
+- title: "Query Excel"
+  url: /query-excel-online
+  category: queryTools  
+  

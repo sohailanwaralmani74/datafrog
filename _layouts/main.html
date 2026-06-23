@@ -14,18 +14,26 @@ layout: default
 
     <!-- Desktop Navigation -->
     <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
-      <span class="nav-item" data-popup="converters" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Converter</span>
-      <span class="nav-item" data-popup="formatters" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Formatter</span>
-      <span class="nav-item" data-popup="cleaners" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Validator</span>
-      <span class="nav-item" data-popup="utilitiesTools" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Utilities</span>
-      <span class="nav-item" data-popup="blogPosts" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">Blog</span>
+      <span class="nav-item" data-popup="converters" tabindex="0" role="button" aria-haspopup="true"
+        aria-expanded="false">Converter</span>
+      <span class="nav-item" data-popup="formatters" tabindex="0" role="button" aria-haspopup="true"
+        aria-expanded="false">Formatter</span>
+      <span class="nav-item" data-popup="cleaners" tabindex="0" role="button" aria-haspopup="true"
+        aria-expanded="false">Validator</span>
+      <span class="nav-item" data-popup="utilitiesTools" tabindex="0" role="button" aria-haspopup="true"
+        aria-expanded="false">Utilities</span>
+      <span class="nav-item" data-popup="financeTools" tabindex="0" role="button" aria-haspopup="true"
+        aria-expanded="false">Finanace</span>
+      <span class="nav-item" data-popup="blogPosts" tabindex="0" role="button" aria-haspopup="true"
+        aria-expanded="false">Blog</span>
     </nav>
 
     <!-- Right side actions -->
     <div class="desktop-actions"></div>
 
     <!-- Hamburger (mobile only) -->
-    <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
+    <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false"
+      aria-controls="mobileDrawer">
       <span></span><span></span><span></span>
     </button>
 
@@ -125,6 +133,10 @@ layout: default
           <a href="/remove-excel-duplicates">Remove Excel Duplicates</a>
           <span class="mobile-subcat-label">Analyses</span>
           <a href="/analyze-excel">Analyze Excel</a>
+          <span class="mobile-subcat-label">Query</span>
+          <a href="/query-csv-online">Query CSV</a>
+          <a href="/query-excel-online">Query Excel</a>
+          <a href="/sqlite-viewer-online">SQLite Viewer</a>
         </div>
 
       </li>
@@ -155,6 +167,64 @@ layout: default
 
           <span class="mobile-subcat-label">Writing &amp; Editing</span>
           <a href="/word-counter">Word Counter</a>
+
+        </div>
+      </li>
+
+      <!-- ── Finance ── -->
+      <li class="mobile-nav-item">
+        <div class="mobile-nav-trigger" data-target="mobileFinance" aria-expanded="false">Finance</div>
+        <div class="mobile-submenu" id="mobileFinance">
+
+          <!-- MT940 -->
+          <span class="mobile-subcat-label">MT940</span>
+          <a href="/mt940-to-excel">MT940 to Excel</a>
+          <a href="/mt940-to-csv">MT940 to CSV</a>
+          <a href="/mt940-to-qif">MT940 to QIF</a>
+          <a href="/mt940-to-qbo">MT940 to QBO</a>
+          <a href="/mt940-to-qfx">MT940 to QFX</a>
+
+          <!-- QIF -->
+          <span class="mobile-subcat-label">QIF</span>
+          <a href="/qif-to-csv">QIF to CSV</a>
+          <a href="/qif-to-excel">QIF to Excel</a>
+          <a href="/qif-to-qbo">QIF to QBO</a>
+          <a href="/qif-to-mt940">QIF to MT940</a>
+          <a href="/qif-to-qfx">QIF to QFX</a>
+
+          <!-- CSV -->
+          <span class="mobile-subcat-label">CSV</span>
+          <a href="/csv-to-qif">CSV to QIF</a>
+          <a href="/csv-to-qbo">CSV to QBO</a>
+          <a href="/csv-to-qfx">CSV to QFX</a>
+          <a href="/csv-to-mt940">CSV to MT940</a>
+
+          <!-- Excel -->
+          <span class="mobile-subcat-label">Excel</span>
+          <a href="/excel-to-qif">Excel to QIF</a>
+          <a href="/excel-to-qbo">Excel to QBO</a>
+          <a href="/excel-to-qfx">Excel to QFX</a>
+          <a href="/excel-to-mt940">Excel to MT940</a>
+
+          <!-- QBO -->
+          <span class="mobile-subcat-label">QBO</span>
+          <a href="/qbo-to-csv">QBO to CSV</a>
+          <a href="/qbo-to-qif">QBO to QIF</a>
+          <a href="/qbo-to-excel">QBO to Excel</a>
+          <a href="/qbo-to-qfx">QBO to QFX</a>
+          <a href="/qbo-to-mt940">QBO to MT940</a>
+
+          <!-- MT942 -->
+          <span class="mobile-subcat-label">MT942</span>
+          <a href="/mt942-to-csv">MT942 to CSV</a>
+          <a href="/mt942-to-excel">MT942 to Excel</a>
+
+          <!-- QFX -->
+          <span class="mobile-subcat-label">QFX</span>
+          <a href="/qfx-to-csv">QFX to CSV</a>
+          <a href="/qfx-to-qif">QFX to QIF</a>
+          <a href="/qfx-to-excel">QFX to Excel</a>
+          <a href="/qfx-to-mt940">QFX to MT940</a>
 
         </div>
       </li>
@@ -239,12 +309,6 @@ layout: default
       <a href="/sql-to-xml">SQL to XML</a>
     </div>
     <div class="popup-column">
-      <h3>QIF Converter</h3>
-      <a href="qif-to-csv">QIF to CSV</a>
-      <a href="qif-to-excel">QIF to Excel</a>
-      <a href="qif-to-qbo">QIF to QBO</a>
-    </div>
-    <div class="popup-column">
       <h3>PDF</h3>
       <a href="pptx-to-pdf">PPTX to PDF</a>
       <a href="pdf-to-powerpoint">PDF to PPTX</a>
@@ -283,6 +347,12 @@ layout: default
     <div class="popup-column">
       <h3>Analyze</h3>
       <a href="/analyze-excel">Analyze Excel</a>
+    </div>
+    <div class="popup-column">
+      <h3>Query Tools</h3>
+      <a href="/query-csv-online">Query CSV</a>
+      <a href="/query-excel-online">Query Excel</a>
+      <a href="/sqlite-viewer-online">SQLite Viewer</a>
     </div>
     <div class="popup-column">
       <h3>Remove Duplicates</h3>
@@ -329,6 +399,75 @@ layout: default
   </div>
 
   <!-- Blog -->
+  <div class="popup-grid" id="financeTools" role="region" aria-label="Finanace Tools">
+
+    <!-- MT940 -->
+    <div class="popup-column">
+      <h3>MT940</h3>
+      <a href="/mt940-to-excel">MT940 to Excel</a>
+      <a href="/mt940-to-csv">MT940 to CSV</a>
+      <a href="/mt940-to-qif">MT940 to QIF</a>
+      <a href="/mt940-to-qbo">MT940 to QBO</a>
+      <a href="/mt940-to-qfx">MT940 to QFX</a>
+    </div>
+
+    <!-- QIF -->
+    <div class="popup-column">
+      <h3>QIF</h3>
+      <a href="/qif-to-csv">QIF to CSV</a>
+      <a href="/qif-to-excel">QIF to Excel</a>
+      <a href="/qif-to-qbo">QIF to QBO</a>
+      <a href="/qif-to-mt940">QIF to MT940</a>
+      <a href="/qif-to-qfx">QIF to QFX</a>
+    </div>
+
+    <!-- CSV -->
+    <div class="popup-column">
+      <h3>CSV</h3>
+      <a href="/csv-to-qif">CSV to QIF</a>
+      <a href="/csv-to-qbo">CSV to QBO</a>
+      <a href="/csv-to-qfx">CSV to QFX</a>
+      <a href="/csv-to-mt940">CSV to MT940</a>
+    </div>
+
+    <!-- Excel -->
+    <div class="popup-column">
+      <h3>Excel</h3>
+      <a href="/excel-to-qif">Excel to QIF</a>
+      <a href="/excel-to-qbo">Excel to QBO</a>
+      <a href="/excel-to-qfx">Excel to QFX</a>
+      <a href="/excel-to-mt940">Excel to MT940</a>
+    </div>
+
+    <!-- QBO -->
+    <div class="popup-column">
+      <h3>QBO</h3>
+      <a href="/qbo-to-csv">QBO to CSV</a>
+      <a href="/qbo-to-qif">QBO to QIF</a>
+      <a href="/qbo-to-excel">QBO to Excel</a>
+      <a href="/qbo-to-qfx">QBO to QFX</a>
+      <a href="/qbo-to-mt940">QBO to MT940</a>
+    </div>
+
+    <!-- MT942 -->
+    <div class="popup-column">
+      <h3>MT942</h3>
+      <a href="/mt942-to-csv">MT942 to CSV</a>
+      <a href="/mt942-to-excel">MT942 to Excel</a>
+    </div>
+
+    <!-- QFX -->
+    <div class="popup-column">
+      <h3>QFX</h3>
+      <a href="/qfx-to-csv">QFX to CSV</a>
+      <a href="/qfx-to-qif">QFX to QIF</a>
+      <a href="/qfx-to-excel">QFX to Excel</a>
+      <a href="/qfx-to-mt940">QFX to MT940</a>
+    </div>
+
+  </div>
+
+  <!-- Blog -->
   <div class="popup-grid" id="blogPosts" role="region" aria-label="Blog posts">
 
     <div class="popup-column">
@@ -355,48 +494,47 @@ layout: default
 
 {% if page.is_homepage %}
 
-  <!-- Homepage: no tool-grid, just render content full width -->
-  <main id="content" role="main">
-    {{ content }}
-  </main>
+<!-- Homepage: no tool-grid, just render content full width -->
+<main id="content" role="main">
+  {{ content }}
+</main>
 
 {% else %}
 
-  <div class="tool-grid">
+<div class="tool-grid">
 
-    <div class="tool-main">
-      <main id="content" role="main">
-         {{ content }}
-      </main>
+  <div class="tool-main">
+    <main id="content" role="main">
+      {{ content }}
+    </main>
+  </div>
+
+  <div class="tool-sidebar">
+
+    <div class="sidebar-ad">
+
     </div>
-
-    <div class="tool-sidebar">
-
-      <div class="sidebar-ad">
-
-      </div>
-      <div class="sidebar-card">
-        <h4>🔗 Related Tools</h4>
-        {% assign related_tools = site.data.tools | where: "category", page.category %}
-        {% assign count = 0 %}
-        {% for tool in related_tools %}
-          {% if tool.url != page.url and count < 5 %}
-            <a href="{{ tool.url }}">{{ tool.title }}</a>
-            {% assign count = count | plus: 1 %}
-          {% endif %}
+    <div class="sidebar-card">
+      <h4>🔗 Related Tools</h4>
+      {% assign related_tools = site.data.tools | where: "category", page.category %}
+      {% assign count = 0 %}
+      {% for tool in related_tools %}
+      {% if tool.url != page.url and count < 5 %} <a href="{{ tool.url }}">{{ tool.title }}</a>
+        {% assign count = count | plus: 1 %}
+        {% endif %}
         {% endfor %}
-      </div>
     </div>
   </div>
+</div>
 
 {% endif %}
 
 <script>
-  (function() {
+  (function () {
     const hamburger = document.getElementById('hamburger');
     const drawer = document.getElementById('mobileDrawer');
     const overlay = document.getElementById('overlay');
-    
+
     function closeDrawer() {
       hamburger.classList.remove('active');
       drawer.classList.remove('active');
@@ -409,14 +547,14 @@ layout: default
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
-    
+
     hamburger.addEventListener('click', (e) => {
       e.stopPropagation();
       if (drawer.classList.contains('active')) closeDrawer();
       else openDrawer();
     });
     overlay.addEventListener('click', closeDrawer);
-    
+
     // Mobile accordion (tap to expand)
     const mobTriggers = document.querySelectorAll('.mobile-nav-trigger');
     mobTriggers.forEach(trigger => {
@@ -430,11 +568,11 @@ layout: default
         }
       });
     });
-    
+
     // ----- DESKTOP MEGA MENU (click to toggle) -----
     const desktopTriggers = document.querySelectorAll('.desktop-nav .nav-item');
     const popups = document.querySelectorAll('.popup-grid');
-    
+
     function hideAllPopups(exceptId = null) {
       popups.forEach(popup => {
         if (exceptId === null || popup.id !== exceptId) {
@@ -444,7 +582,7 @@ layout: default
         }
       });
     }
-    
+
     function positionPopup(trigger, popup) {
       popup.style.display = 'grid';
       popup.style.visibility = 'hidden';
@@ -456,18 +594,18 @@ layout: default
       popup.style.top = (rect.bottom + 5) + 'px';
       popup.style.visibility = 'visible';
     }
-    
+
     // Click handler for each nav item
     desktopTriggers.forEach(trigger => {
       const popupId = trigger.dataset.popup;
       const popup = document.getElementById(popupId);
       if (!popup) return;
-      
+
       trigger.addEventListener('click', (e) => {
         e.stopPropagation();
         const isOpen = popup.style.display === 'grid';
         hideAllPopups(isOpen ? null : popupId);
-        
+
         if (!isOpen) {
           positionPopup(trigger, popup);
           trigger.setAttribute('aria-expanded', 'true');
@@ -490,7 +628,7 @@ layout: default
         hideAllPopups();
       }
     });
-    
+
     // Reposition on resize (only for visible popups)
     window.addEventListener('resize', () => {
       popups.forEach(popup => {

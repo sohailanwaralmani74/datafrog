@@ -6,7 +6,7 @@ keywords: "jwt decoder, jwt token decode, decode jwt, decodejwt, jwt token decry
 ---
 
 <style>
-.jwt-wrap{background:#1e1e1e;border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:16px;min-height:100px}
+.jwt-wrap{background:#1e1e1e;border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:16px;min-height:100px; margin: 2rem;}
 .panel-card{background:#252526;border-radius:8px;border:1px solid #3c3c3c;overflow:hidden}
 .panel-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#2d2d2d;border-bottom:1px solid #3c3c3c}
 .panel-title{font-size:13px;font-weight:500;color:#cccccc;letter-spacing:.3px}
