@@ -1,0 +1,932 @@
+---
+layout: main
+title: "Data Dictionary Generator & Metadata Analyzer – Free Dataset Documentation | DataFrog"
+short_name: "Data Dictionary Generator"
+description: "Generate comprehensive data dictionaries and analyze metadata from CSV, Excel, JSON, XML, and YAML datasets. Auto-detect physical & semantic data types, column statistics, schema metadata, and key candidates. 100% private in-browser tool."
+keywords: "data dictionary generator, metadata analyzer, metadata analysis, analyze metadata, metadata inspector, dataset metadata analyzer, data dictionary, dataset documentation, column documentation, metadata generator, metadata documentation, column metadata, schema documentation, data catalog, field documentation"
+category: "Inspect"
+permalink: /inspect/data-dictionary-generator/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     JSON-LD STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Data Dictionary Generator & Metadata Analyzer – DataFrog.tools",
+  "url": "https://datafrog.tools/inspect/data-dictionary-generator/",
+  "description": "Browser-based data dictionary generator and metadata analyzer. Automatically inspect structured datasets, analyze schema and column metadata, detect physical and semantic data types, evaluate nullability and value distributions, and export documentation in Markdown, HTML, JSON, CSV, and Excel formats.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "featureList": "Automatic column profiling, metadata analysis, physical data type detection, semantic business type inference, nullability and uniqueness audit, key candidate identification, multi-format documentation export",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools/" },
+    { "@type": "ListItem", "position": 2, "name": "Inspect", "item": "https://datafrog.tools/inspect" },
+    { "@type": "ListItem", "position": 3, "name": "Data Dictionary Generator", "item": "https://datafrog.tools/inspect/data-dictionary-generator/" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a data dictionary and how does this tool work as a metadata analyzer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A data dictionary is a centralized reference document that describes the structure, columns, data types, semantic meanings, nullability constraints, and quality characteristics of a dataset. As an automated metadata analyzer, this tool inspects dataset-level properties, schema hierarchy, and column-level distributions to generate human-readable documentation instantly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does automatic data type, metadata, and semantic type detection work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool inspects the values within each column alongside the column header names using pattern heuristics, regex matching, and statistical profiling. It identifies physical data types (e.g., Integer, Decimal, Boolean, Date, Email, IP Address) and infers business semantic meanings (e.g., Customer ID, Order Total, Postal Code, Country) when clear patterns exist."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my dataset uploaded to any external server during metadata analysis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All file reading, column profiling, metadata analysis, and dictionary generation run 100% locally inside your web browser using client-side JavaScript. Your file data never leaves your device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which file formats does the Data Dictionary Generator support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports CSV, TSV, PSV, semicolon-delimited text, Excel workbooks (.xlsx and .xls), OpenDocument Spreadsheets (.ods), JSON arrays, JSON Lines (JSONL/NDJSON), XML, YAML, and pasted text tables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What export formats are available for the data dictionary and metadata reports?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can export generated data dictionaries and metadata reports in Markdown (.md), HTML Report, JSON metadata schema, Excel (.xlsx), or CSV format."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & HERO BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom:1.5rem;">
+  <span style="display:inline-block;padding:0.25rem 0.75rem;background:#f0fdf4;color:#16a34a;font-weight:700;font-size:0.8rem;border-radius:9999px;margin-bottom:0.5rem;">
+    🔍 Inspect Module
+  </span>
+  <h1 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:0.5rem;">
+    Data Dictionary Generator &amp; Metadata Analyzer
+  </h1>
+  <p style="color:#475569;font-size:1.05rem;max-width:870px;line-height:1.6;margin-bottom:1.5rem;">
+    Upload or paste any structured dataset to automatically analyze metadata, inspect every column, detect physical and semantic data types, calculate value distributions, identify key candidates, and generate complete data dictionary documentation in Markdown, HTML, JSON, or Excel — 100% in-browser.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INPUT ZONE
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom:1.75rem;border:2px dashed #cbd5e1;border-radius:14px;background:#fff;padding:1.75rem;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">📖</span>
+  <span style="font-weight:800;color:#0f172a;font-size:1.15rem;display:block;margin-bottom:0.25rem;">Drag &amp; Drop dataset file to analyze metadata and document</span>
+  <span style="color:#64748b;font-size:0.9rem;display:block;margin-bottom:1.25rem;">CSV, TSV, PSV, Excel (.xlsx/.xls), JSON, JSONL, XML, YAML — or paste dataset below</span>
+  <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;" onclick="event.stopPropagation();">
+    <label style="padding:0.6rem 1.25rem;background:#0f172a;color:#fff;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;display:inline-flex;align-items:center;gap:0.4rem;">
+      📁 Browse File
+      <input type="file" id="file-input" accept=".csv,.tsv,.psv,.txt,.xlsx,.xls,.ods,.json,.jsonl,.ndjson,.xml,.yaml,.yml" style="display:none;">
+    </label>
+    <button id="btn-sample" style="padding:0.6rem 1.25rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">⚡ Load Sample Dataset</button>
+    <button id="btn-clear" style="padding:0.6rem 1.25rem;background:#fff;color:#dc2626;border:1px solid #fca5a5;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">🗑️ Clear</button>
+  </div>
+</div>
+
+<!-- PASTE TEXTAREA -->
+<div style="margin-bottom:1.5rem;">
+  <label for="data-input" style="display:block;font-weight:700;font-size:0.95rem;color:#0f172a;margin-bottom:0.5rem;">Paste Raw Dataset (CSV, JSON, TSV, or tabular text)</label>
+  <textarea id="data-input" placeholder="Paste your dataset here to analyze metadata and generate a data dictionary..." style="width:100%;height:150px;padding:1rem;font-family:consolas,monaco,monospace;font-size:0.85rem;line-height:1.5;border:1px solid #cbd5e1;border-radius:12px;outline:none;background:#fff;resize:vertical;box-sizing:border-box;"></textarea>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;padding:1rem 1.25rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;">
+  <button id="btn-gen" style="padding:0.65rem 1.4rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem;">⚡ Analyze &amp; Generate Dictionary</button>
+  <button id="btn-copy" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📋 Copy Metadata Summary</button>
+  <button id="btn-export-md" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📝 Markdown (.md)</button>
+  <button id="btn-export-html" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📄 HTML Report</button>
+  <button id="btn-export-json" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📦 JSON Schema</button>
+  <button id="btn-export-excel" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📗 Excel (.xlsx)</button>
+  <button id="btn-export-csv" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">✅ CSV Summary</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SUMMARY CARDS
+═══════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.85rem;margin-bottom:2rem;">
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Total Rows</span>
+    <span id="c-rows" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#0f172a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Total Columns</span>
+    <span id="c-cols" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#2563eb;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Metadata Completeness</span>
+    <span id="c-completeness" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#16a34a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Primary Key Candidate</span>
+    <span id="c-pk" style="display:block;margin-top:0.35rem;font-weight:800;font-size:0.9rem;color:#9333ea;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">File Format</span>
+    <span id="c-format" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1rem;color:#0f172a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Metadata Quality</span>
+    <span id="c-health" style="display:inline-block;margin-top:0.25rem;font-weight:800;font-size:0.9rem;padding:0.15rem 0.6rem;border-radius:9999px;background:#f0fdf4;color:#16a34a;">—</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DICTIONARY TABLE & FILTERS
+═══════════════════════════════════════════════════ -->
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.75rem;">
+    <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin:0;">📋 Metadata &amp; Data Dictionary Register</h3>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
+      <input type="text" id="filter-search" placeholder="Search column..." style="padding:0.35rem 0.75rem;border-radius:8px;border:1px solid #cbd5e1;font-size:0.8rem;width:150px;">
+      <select id="filter-ptype" onchange="applyFilters()" style="padding:0.35rem 0.6rem;border-radius:8px;border:1px solid #cbd5e1;font-size:0.8rem;">
+        <option value="all">All Physical Types</option>
+      </select>
+      <select id="filter-stype" onchange="applyFilters()" style="padding:0.35rem 0.6rem;border-radius:8px;border:1px solid #cbd5e1;font-size:0.8rem;">
+        <option value="all">All Semantic Types</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.82rem;text-align:left;min-width:750px;">
+      <thead>
+        <tr style="background:#0f172a;color:#fff;">
+          <th style="padding:0.65rem 0.75rem;">#</th>
+          <th style="padding:0.65rem 0.75rem;">Column Name</th>
+          <th style="padding:0.65rem 0.75rem;">Friendly Label</th>
+          <th style="padding:0.65rem 0.75rem;">Physical Type</th>
+          <th style="padding:0.65rem 0.75rem;">Semantic Type</th>
+          <th style="padding:0.65rem 0.75rem;">Nullability</th>
+          <th style="padding:0.65rem 0.75rem;">Distinct / Unique</th>
+          <th style="padding:0.65rem 0.75rem;">Metadata Attributes &amp; Stats</th>
+        </tr>
+      </thead>
+      <tbody id="dict-tbody">
+        <tr><td colspan="8" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">Load a dataset and click Analyze &amp; Generate Dictionary to see metadata register</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="dict-footer" style="margin-top:0.75rem;font-size:0.8rem;color:#64748b;text-align:right;"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INFORMATIONAL CONTENT SECTIONS
+═══════════════════════════════════════════════════ -->
+<section style="margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:0.75rem;">What is a Data Dictionary and Metadata Analyzer?</h2>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    A data dictionary and metadata analyzer is a unified data inspection tool that extracts, profiles, and documents information about structured datasets. Metadata is "data about data" — detailing dataset-level properties, schema relationships, column definitions, physical data types, and semantic business meanings.
+  </p>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    Without clear metadata analysis, team members spend substantial time guessing field meanings, deciphering technical column acronyms, or running custom SQL queries to figure out whether a column contains null values or unique identifiers. Combining metadata inspection with automatic data dictionary creation bridges technical storage schemas with business domain understanding.
+  </p>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;">
+    By performing all profiling in your browser, this tool extracts both physical data types (Integer, Decimal, Date, Email) and business semantic categories (Customer ID, Order Total, Postal Code) to output clean, exportable documentation.
+  </p>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Why Metadata Analysis &amp; Data Dictionaries Matter</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#1d4ed8;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Accelerated Onboarding</strong>
+      <p style="color:#1e40af;font-size:0.825rem;line-height:1.55;margin:0;">Equip data analysts and engineers with clear column definitions and metadata summaries from day one.</p>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#15803d;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Consistent Business Definitions</strong>
+      <p style="color:#166534;font-size:0.825rem;line-height:1.55;margin:0;">Standardize semantic business types across departments to prevent conflicting metric calculations and reporting discrepancies.</p>
+    </div>
+    <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#c2410c;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Schema Integrity &amp; Validation</strong>
+      <p style="color:#9a3412;font-size:0.825rem;line-height:1.55;margin:0;">Identify null risks, unexpected data types, and missing constraints before loading raw data into production databases.</p>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#7c3aed;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Data Governance &amp; Compliance</strong>
+      <p style="color:#6d28d9;font-size:0.825rem;line-height:1.55;margin:0;">Maintain a searchable inventory of sensitive fields (emails, phone numbers, customer identifiers) for privacy compliance.</p>
+    </div>
+    <div style="background:#fef9c3;border:1px solid #fde047;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#854d0e;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Streamlined Pipeline Building</strong>
+      <p style="color:#713f12;font-size:0.825rem;line-height:1.55;margin:0;">Know exact column nullabilities, cardinalities, and key candidates before designing ETL pipelines or relational joins.</p>
+    </div>
+    <div style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#0f766e;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Zero-Trust Privacy</strong>
+      <p style="color:#115e59;font-size:0.825rem;line-height:1.55;margin:0;">Analyze metadata and document internal datasets locally without uploading proprietary schemas to external servers.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:0.5rem;">Key Metadata &amp; Dictionary Features</h2>
+  <p style="color:#475569;font-size:1rem;margin-bottom:1.5rem;max-width:820px;line-height:1.6;">Designed for data architects, analytics engineers, and documentation maintainers.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;">
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔬</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Physical Type Detection</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Distinguishes Integers, Decimals, Dates, Booleans, Emails, URLs, IP addresses, UUIDs, and Text strings automatically.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🧠</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Semantic Business Inference</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Heuristically identifies business concepts (Customer ID, Product SKU, Postal Code, Order Total) without guessing falsely.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔑</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Key Candidate Flagging</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Detects 100% unique non-null columns as Primary Key candidates and flags high/low cardinality attributes.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📊</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Column Statistical Metrics</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Calculates min, max, mean, median, standard deviation, null percentages, and sample value previews per field.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📝</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Markdown &amp; HTML Exports</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Generate ready-to-commit Markdown (`README.md`) dictionary tables or standalone HTML documentation pages.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🛡️</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Private In-Browser Execution</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">100% client-side JavaScript processing. Your data never leaves your device or touches external cloud APIs.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Supported Dataset Formats</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📄</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">CSV / TSV / PSV</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Comma, tab, pipe, and semicolon delimited files with automatic separator detection.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📗</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">Excel (.xlsx / .xls)</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Excel workbooks parsed seamlessly in-browser via SheetJS integration.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">🔧</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">JSON &amp; JSON Lines</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">JSON object arrays and line-delimited JSONL/NDJSON datasets with nested object flattening.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📜</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">XML &amp; YAML</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Structured XML documents and YAML mapping sequences converted into tabular schema tables.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">How to Generate a Data Dictionary &amp; Analyze Metadata</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Upload or Paste</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Drag and drop your dataset file or paste raw tabular text directly into the input area.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Analyze &amp; Profile</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click Analyze Metadata to trigger automated column profiling, type inference, and metadata extraction.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Review Metadata</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Examine physical types, inferred business meanings, nullability %, and primary key candidates.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Filter &amp; Search</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Filter column metadata by physical data type or semantic category as needed.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Export Reports</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Download generated metadata documentation in Markdown, HTML, JSON, Excel, or CSV format.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+  <div style="display:flex;flex-direction:column;gap:1rem;max-width:860px;">
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What is a data dictionary and how does this tool work as a metadata analyzer?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">A data dictionary is a metadata reference that details column names, data types, business meanings, nullability constraints, and value distributions for a dataset. This tool serves as a metadata analyzer by automatically inspecting schemas and profiling columns in your browser.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">How does automatic data type and semantic type detection work?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">The generator analyzes row values alongside header names using regex pattern matching, statistical distributions, and heuristics to infer physical types (Integer, Decimal, Date, Email) and business semantic categories (Customer ID, Total, Postal Code).</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Is my dataset uploaded to any external server during metadata analysis?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">No. All profiling, metadata extraction, and documentation generation run 100% locally inside your web browser session.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What export formats are available for the data dictionary and metadata reports?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">You can export data dictionaries and metadata reports in Markdown (.md), HTML Report, JSON metadata schema, Excel (.xlsx), or CSV format.</p>
+    </details>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;background:#0f172a;color:#fff;border-radius:16px;padding:2.5rem;text-align:center;">
+  <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">📖</span>
+  <h2 style="font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:0.75rem;">Analyze Metadata &amp; Document Your Dataset Now</h2>
+  <p style="color:#94a3b8;font-size:1.05rem;max-width:600px;margin:0 auto 1.75rem;line-height:1.6;">Upload your data file and generate complete, exportable metadata analysis and data dictionary documentation in seconds — with total privacy.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="#drop-zone" style="padding:0.85rem 1.75rem;background:#16a34a;color:#fff;font-weight:700;border-radius:8px;text-decoration:none;font-size:0.95rem;">📖 Start Data Dictionary &amp; Metadata Analyzer</a>
+    <a href="/inspect/csv-viewer/" style="padding:0.85rem 1.75rem;background:rgba(255,255,255,0.1);color:#fff;font-weight:600;border-radius:8px;text-decoration:none;font-size:0.95rem;border:1px solid rgba(255,255,255,0.2);">📊 CSV Viewer</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT — DATA DICTIONARY & METADATA ENGINE
+═══════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+{% raw %}
+<script>
+(function() {
+  'use strict';
+
+  let rawRows = [];
+  let headers = [];
+  let columnProfiles = [];
+  let filteredProfiles = [];
+  let detectedFormat = '';
+
+  const SAMPLE_DATA = [
+    { customer_id: 'CUST-1001', full_name: 'Alice Johnson', email: 'alice.j@example.com', phone_number: '555-0101', registration_date: '2025-01-15', is_active: 'true', balance_usd: '1450.50', country_code: 'US', postal_code: '10001', ip_address: '192.168.1.1', product_sku: 'SKU-8842' },
+    { customer_id: 'CUST-1002', full_name: 'Bob Smith', email: 'bob.smith@example.com', phone_number: '555-0102', registration_date: '2025-02-01', is_active: 'true', balance_usd: '890.00', country_code: 'US', postal_code: '60601', ip_address: '192.168.1.2', product_sku: 'SKU-9921' },
+    { customer_id: 'CUST-1003', full_name: 'Carol White', email: 'carol.w@example.org', phone_number: '555-0103', registration_date: '2025-02-14', is_active: 'false', balance_usd: '0.00', country_code: 'CA', postal_code: 'M5V2T6', ip_address: '192.168.1.3', product_sku: 'SKU-8842' },
+    { customer_id: 'CUST-1004', full_name: 'David Lee', email: 'david.l@domain.net', phone_number: '555-0104', registration_date: '2025-03-05', is_active: 'true', balance_usd: '3200.75', country_code: 'UK', postal_code: 'SW1A1AA', ip_address: '192.168.1.4', product_sku: 'SKU-1102' },
+    { customer_id: 'CUST-1005', full_name: 'Eve Martinez', email: 'eve.m@example.com', phone_number: '555-0105', registration_date: '2025-03-20', is_active: 'true', balance_usd: '450.25', country_code: 'US', postal_code: '90210', ip_address: '192.168.1.5', product_sku: 'SKU-5543' }
+  ];
+
+  const dropZone  = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const dataInput = document.getElementById('data-input');
+
+  dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.style.borderColor = '#16a34a'; dropZone.style.background = '#f0fdf4'; });
+  dropZone.addEventListener('dragleave', function() { dropZone.style.borderColor = '#cbd5e1'; dropZone.style.background = '#fff'; });
+  dropZone.addEventListener('drop', function(e) { e.preventDefault(); resetDropStyle(); var f = e.dataTransfer.files[0]; if (f) handleFile(f); });
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  fileInput.addEventListener('change', function() { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+  document.getElementById('btn-sample').addEventListener('click', function() {
+    headers = Object.keys(SAMPLE_DATA[0]);
+    rawRows = SAMPLE_DATA;
+    detectedFormat = 'Sample CSV Dataset';
+    dataInput.value = rowsToCSV(headers, rawRows);
+    generateDictionary();
+    showStatus('Loaded sample dataset (' + rawRows.length + ' rows, ' + headers.length + ' columns).');
+  });
+
+  document.getElementById('btn-clear').addEventListener('click', resetAll);
+  document.getElementById('btn-gen').addEventListener('click', generateDictionary);
+  document.getElementById('btn-copy').addEventListener('click', copySummary);
+  document.getElementById('btn-export-md').addEventListener('click', function() { exportData('md'); });
+  document.getElementById('btn-export-html').addEventListener('click', function() { exportData('html'); });
+  document.getElementById('btn-export-json').addEventListener('click', function() { exportData('json'); });
+  document.getElementById('btn-export-excel').addEventListener('click', function() { exportData('excel'); });
+  document.getElementById('btn-export-csv').addEventListener('click', function() { exportData('csv'); });
+  document.getElementById('filter-search').addEventListener('input', applyFilters);
+
+  function handleFile(file) {
+    var ext = file.name.split('.').pop().toLowerCase();
+    resetDropStyle();
+    if (ext === 'xlsx' || ext === 'xls' || ext === 'ods') {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+        var ws = wb.Sheets[wb.SheetNames[0]];
+        var data = XLSX.utils.sheet_to_json(ws, { defval: '' });
+        if (!data.length) { alert('No rows found in spreadsheet.'); return; }
+        headers = Object.keys(data[0]);
+        rawRows = data;
+        detectedFormat = 'Excel (' + ext.toUpperCase() + ')';
+        postLoad(file.name);
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      var reader2 = new FileReader();
+      reader2.onload = function(e) {
+        var text = e.target.result;
+        dataInput.value = text.substring(0, 800) + (text.length > 800 ? '\n...' : '');
+        parseText(text, ext, file.name);
+      };
+      reader2.readAsText(file);
+    }
+  }
+
+  function parseText(text, ext, name) {
+    try {
+      var trimmed = text.trim();
+      if (ext === 'json' || (!ext && trimmed[0] === '[')) {
+        var parsed = JSON.parse(trimmed);
+        var rows = Array.isArray(parsed) ? parsed : [parsed];
+        headers = Object.keys(rows[0] || {});
+        rawRows = rows.map(flattenOne);
+        detectedFormat = 'JSON';
+      } else if (ext === 'jsonl' || ext === 'ndjson') {
+        var lines = trimmed.split(/\r?\n/).filter(function(l) { return l.trim(); });
+        var rows2 = lines.map(function(l) { return JSON.parse(l); });
+        headers = Object.keys(rows2[0] || {});
+        rawRows = rows2.map(flattenOne);
+        detectedFormat = 'JSONL';
+      } else if (ext === 'xml' || trimmed[0] === '<') {
+        var dom = new DOMParser().parseFromString(trimmed, 'text/xml');
+        var root = dom.documentElement;
+        var kids = Array.from(root.children);
+        if (!kids.length) { alert('No child elements found in XML.'); return; }
+        rawRows = kids.map(function(el) {
+          var obj = {};
+          Array.from(el.children).forEach(function(c) { obj[c.tagName] = c.textContent; });
+          Array.from(el.attributes).forEach(function(a) { obj[a.name] = a.value; });
+          return obj;
+        });
+        headers = Object.keys(rawRows[0] || {});
+        detectedFormat = 'XML';
+      } else if (ext === 'yaml' || ext === 'yml') {
+        rawRows = parseYAML(trimmed);
+        headers = rawRows.length ? Object.keys(rawRows[0]) : [];
+        detectedFormat = 'YAML';
+      } else {
+        var delim = detectDelimiter(trimmed);
+        var p = parseCSV(trimmed, delim);
+        headers = p.headers;
+        rawRows = p.rows;
+        detectedFormat = delim === ',' ? 'CSV' : delim === '\t' ? 'TSV' : delim === '|' ? 'PSV' : 'CSV';
+      }
+      postLoad(name || 'pasted dataset');
+    } catch(e) {
+      alert('Could not parse dataset: ' + e.message);
+    }
+  }
+
+  function postLoad(name) {
+    showStatus('Loaded "' + name + '" — ' + rawRows.length + ' rows, ' + headers.length + ' columns.');
+    generateDictionary();
+  }
+
+  function parseCSV(text, delim) {
+    var lines = text.split(/\r?\n/);
+    var hdrs = splitLine(lines[0], delim).map(function(h) { return h.trim().replace(/^"|"$/g, ''); });
+    var rows = [];
+    for (var i = 1; i < lines.length; i++) {
+      if (!lines[i].trim()) continue;
+      var vals = splitLine(lines[i], delim);
+      var obj = {};
+      hdrs.forEach(function(h, idx) { obj[h] = (vals[idx] || '').trim().replace(/^"|"$/g, ''); });
+      rows.push(obj);
+    }
+    return { headers: hdrs, rows: rows };
+  }
+
+  function splitLine(line, delim) {
+    var res = [], cur = '', inQ = false;
+    for (var i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; }
+      else if (line[i] === delim && !inQ) { res.push(cur); cur = ''; }
+      else { cur += line[i]; }
+    }
+    res.push(cur);
+    return res;
+  }
+
+  function detectDelimiter(text) {
+    var line = text.split('\n')[0];
+    var counts = { ',': 0, '\t': 0, '|': 0, ';': 0 };
+    for (var i = 0; i < line.length; i++) {
+      if (counts[line[i]] !== undefined) counts[line[i]]++;
+    }
+    return Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; })[0][0];
+  }
+
+  function flattenOne(obj, prefix) {
+    var out = {};
+    for (var k in obj) {
+      var key = prefix ? prefix + '.' + k : k;
+      if (obj[k] && typeof obj[k] === 'object' && !Array.isArray(obj[k])) {
+        Object.assign(out, flattenOne(obj[k], key));
+      } else {
+        out[key] = obj[k] == null ? '' : String(obj[k]);
+      }
+    }
+    return out;
+  }
+
+  function parseYAML(text) {
+    var rows = [], items = text.split(/^- /m).filter(function(s) { return s.trim(); });
+    for (var i = 0; i < items.length; i++) {
+      var obj = {}, lines = items[i].split('\n');
+      for (var j = 0; j < lines.length; j++) {
+        var m = lines[j].match(/^\s*([\w\s]+?)\s*:\s*(.*)$/);
+        if (m) obj[m[1].trim()] = m[2].trim().replace(/^['"]|['"]$/g, '');
+      }
+      if (Object.keys(obj).length) rows.push(obj);
+    }
+    return rows;
+  }
+
+  // ── Physical & Semantic Type Inference Engine ────────────────────────
+  function detectPhysicalType(vals) {
+    if (!vals.length) return 'Text';
+
+    var isBool = vals.every(function(v) { return ['true','false','1','0','yes','no'].includes(v.toLowerCase()); });
+    if (isBool) return 'Boolean';
+
+    var isInt = vals.every(function(v) { return /^-?\d+$/.test(v); });
+    if (isInt) return 'Integer';
+
+    var isDec = vals.every(function(v) { return /^-?\d*\.\d+$/.test(v); });
+    if (isDec) return 'Decimal';
+
+    var isCurr = vals.every(function(v) { return /^[\$€£]\s*-?\d+([\.,]\d+)?$/.test(v); });
+    if (isCurr) return 'Currency';
+
+    var isEmail = vals.every(function(v) { return /^\S+@\S+\.\S+$/.test(v); });
+    if (isEmail) return 'Email';
+
+    var isUrl = vals.every(function(v) { return /^https?:\/\//i.test(v); });
+    if (isUrl) return 'URL';
+
+    var isIp = vals.every(function(v) { return /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(v); });
+    if (isIp) return 'IP Address';
+
+    var isDate = vals.every(function(v) { return !isNaN(Date.parse(v)) && (v.includes('-') || v.includes('/')); });
+    if (isDate) return 'Date / DateTime';
+
+    return 'Text';
+  }
+
+  function inferSemanticType(colName, pType, vals) {
+    var c = colName.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    if (c.includes('customer') && c.includes('id')) return 'Customer ID';
+    if (c.includes('order') && c.includes('id')) return 'Order ID';
+    if (c.includes('product') && c.includes('id')) return 'Product ID';
+    if (c.includes('transaction') && c.includes('id')) return 'Transaction ID';
+    if (c.includes('invoice') && c.includes('id')) return 'Invoice Number';
+    if (c.includes('employee') && c.includes('id')) return 'Employee ID';
+    if (c.includes('sku') || c.includes('barcode')) return 'Product SKU / Barcode';
+
+    if (c.includes('email') || pType === 'Email') return 'Email';
+    if (c.includes('phone') || c.includes('mobile')) return 'Phone Number';
+    if (c.includes('name') || c.includes('full_name')) return 'Customer Name';
+    if (c.includes('postal') || c.includes('zip')) return 'Postal Code';
+    if (c.includes('country')) return 'Country Code';
+    if (c.includes('city')) return 'City';
+    if (c.includes('state')) return 'State';
+    if (c.includes('address')) return 'Address';
+    if (c.includes('price') || c.includes('cost') || c.includes('balance') || c.includes('amount') || c.includes('total') || c.includes('currency') || pType === 'Currency') return 'Currency / Amount';
+    if (c.includes('status') || c.includes('category') || c.includes('type')) return 'Category / Status';
+    if (c.includes('date') || c.includes('time') || c.includes('created') || pType === 'Date / DateTime') return 'Timestamp / Date';
+    if (c.includes('ip') || pType === 'IP Address') return 'IP Address';
+
+    return 'Unknown / Custom Field';
+  }
+
+  function toFriendlyName(col) {
+    return col
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/[_\-.]+/g, ' ')
+      .replace(/\b\w/g, function(l) { return l.toUpperCase(); })
+      .trim();
+  }
+
+  function generateDictionary() {
+    if (!rawRows.length) {
+      if (dataInput.value.trim()) parseText(dataInput.value, 'csv', 'pasted dataset');
+      else { alert('Please upload or paste a dataset first.'); return; }
+    }
+
+    var totalRows = rawRows.length;
+    columnProfiles = [];
+    var pkCandidates = [];
+
+    headers.forEach(function(col, idx) {
+      var allVals = rawRows.map(function(r) { return r[col] == null ? '' : String(r[col]).trim(); });
+      var nonNulls = allVals.filter(function(v) { return v !== ''; });
+      var nullCount = totalRows - nonNulls.length;
+      var nullPct = totalRows ? ((nullCount / totalRows) * 100).toFixed(1) : '0.0';
+
+      var distinctSet = new Set(nonNulls);
+      var distinctCount = distinctSet.size;
+
+      var pType = detectPhysicalType(nonNulls);
+      var sType = inferSemanticType(col, pType, nonNulls);
+
+      var isPk = (nullCount === 0 && distinctCount === totalRows && totalRows > 0);
+      if (isPk) pkCandidates.push(col);
+
+      var minVal = '—', maxVal = '—', meanVal = '—';
+      if (pType === 'Integer' || pType === 'Decimal' || pType === 'Currency') {
+        var nums = nonNulls.map(function(v) { return parseFloat(v.replace(/[\$,%]/g, '')); }).filter(function(n) { return !isNaN(n); });
+        if (nums.length) {
+          minVal = Math.min.apply(null, nums).toFixed(2);
+          maxVal = Math.max.apply(null, nums).toFixed(2);
+          var sum = nums.reduce(function(a, b) { return a + b; }, 0);
+          meanVal = (sum / nums.length).toFixed(2);
+        }
+      }
+
+      var samples = Array.from(distinctSet).slice(0, 3);
+
+      columnProfiles.push({
+        position: idx + 1,
+        name: col,
+        friendlyName: toFriendlyName(col),
+        pType: pType,
+        sType: sType,
+        nullable: nullCount > 0,
+        nullCount: nullCount,
+        nullPct: nullPct,
+        distinctCount: distinctCount,
+        isPk: isPk,
+        isHighCardinality: distinctCount / (totalRows || 1) > 0.8,
+        isLowCardinality: distinctCount <= 10 && distinctCount > 0,
+        min: minVal,
+        max: maxVal,
+        mean: meanVal,
+        samples: samples
+      });
+    });
+
+    var pTypesSet = new Set(columnProfiles.map(function(p) { return p.pType; }));
+    var sTypesSet = new Set(columnProfiles.map(function(p) { return p.sType; }));
+
+    var pSel = document.getElementById('filter-ptype');
+    pSel.innerHTML = '<option value="all">All Physical Types</option>' + Array.from(pTypesSet).map(function(t) { return '<option value="' + esc(t) + '">' + esc(t) + '</option>'; }).join('');
+
+    var sSel = document.getElementById('filter-stype');
+    sSel.innerHTML = '<option value="all">All Semantic Types</option>' + Array.from(sTypesSet).map(function(t) { return '<option value="' + esc(t) + '">' + esc(t) + '</option>'; }).join('');
+
+    var totalCells = totalRows * headers.length;
+    var filledCells = columnProfiles.reduce(function(sum, p) { return sum + (totalRows - p.nullCount); }, 0);
+    var completeness = totalCells ? ((filledCells / totalCells) * 100).toFixed(1) : '0.0';
+
+    document.getElementById('c-rows').textContent = totalRows.toLocaleString();
+    document.getElementById('c-cols').textContent = headers.length.toLocaleString();
+    document.getElementById('c-completeness').textContent = completeness + '%';
+    document.getElementById('c-pk').textContent = pkCandidates.length ? pkCandidates.join(', ') : 'None detected';
+    document.getElementById('c-format').textContent = detectedFormat || 'CSV';
+
+    var compNum = parseFloat(completeness);
+    var healthEl = document.getElementById('c-health');
+    var grade, hbg, hcol;
+    if (compNum >= 98)      { grade = 'A — Pristine'; hbg = '#f0fdf4'; hcol = '#16a34a'; }
+    else if (compNum >= 90) { grade = 'B — Good';     hbg = '#eff6ff'; hcol = '#2563eb'; }
+    else if (compNum >= 75) { grade = 'C — Fair';     hbg = '#fefce8'; hcol = '#ca8a04'; }
+    else if (compNum >= 50) { grade = 'D — Incomplete'; hbg = '#fff7ed'; hcol = '#ea580c'; }
+    else                    { grade = 'F — Critical Nulls'; hbg = '#fef2f2'; hcol = '#dc2626'; }
+
+    healthEl.textContent = grade;
+    healthEl.style.background = hbg;
+    healthEl.style.color = hcol;
+
+    applyFilters();
+  }
+
+  function applyFilters() {
+    var q = document.getElementById('filter-search').value.toLowerCase();
+    var pF = document.getElementById('filter-ptype').value;
+    var sF = document.getElementById('filter-stype').value;
+
+    filteredProfiles = columnProfiles.filter(function(p) {
+      if (q && !p.name.toLowerCase().includes(q) && !p.friendlyName.toLowerCase().includes(q)) return false;
+      if (pF !== 'all' && p.pType !== pF) return false;
+      if (sF !== 'all' && p.sType !== sF) return false;
+      return true;
+    });
+
+    renderTable();
+  }
+
+  function renderTable() {
+    var tbody = document.getElementById('dict-tbody');
+    var footer = document.getElementById('dict-footer');
+
+    if (!filteredProfiles.length) {
+      tbody.innerHTML = '<tr><td colspan="8" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">No matching column metadata found.</td></tr>';
+      footer.textContent = '';
+      return;
+    }
+
+    tbody.innerHTML = filteredProfiles.map(function(p) {
+      var badges = [];
+      if (p.isPk) badges.push('<span style="padding:0.1rem 0.4rem;background:#faf5ff;color:#7c3aed;border-radius:9999px;font-size:0.68rem;font-weight:700;">Primary Key Candidate</span>');
+      if (p.isLowCardinality) badges.push('<span style="padding:0.1rem 0.4rem;background:#eff6ff;color:#2563eb;border-radius:9999px;font-size:0.68rem;font-weight:700;">Enum / Low Card</span>');
+      if (p.isHighCardinality && !p.isPk) badges.push('<span style="padding:0.1rem 0.4rem;background:#fefce8;color:#ca8a04;border-radius:9999px;font-size:0.68rem;font-weight:700;">High Card</span>');
+
+      var statsStr = '';
+      if (p.min !== '—') statsStr = 'Min: ' + p.min + ' | Max: ' + p.max + ' | Mean: ' + p.mean;
+      else if (p.samples.length) statsStr = 'Samples: ' + p.samples.map(function(s) { return '"' + esc(s) + '"'; }).join(', ');
+
+      return '<tr style="border-bottom:1px solid #f1f5f9;">'
+        + '<td style="padding:0.55rem 0.75rem;color:#64748b;font-size:0.8rem;">' + p.position + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;font-weight:700;color:#0f172a;font-family:consolas,monospace;font-size:0.82rem;">' + esc(p.name) + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;color:#334155;font-weight:600;font-size:0.82rem;">' + esc(p.friendlyName) + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;"><span style="padding:0.15rem 0.5rem;background:#e0e7ff;color:#4338ca;border-radius:9999px;font-size:0.7rem;font-weight:700;">' + esc(p.pType) + '</span></td>'
+        + '<td style="padding:0.55rem 0.75rem;"><span style="padding:0.15rem 0.5rem;background:#f0fdf4;color:#16a34a;border-radius:9999px;font-size:0.7rem;font-weight:700;">' + esc(p.sType) + '</span></td>'
+        + '<td style="padding:0.55rem 0.75rem;font-size:0.8rem;color:' + (p.nullable ? '#ea580c' : '#16a34a') + ';font-weight:600;">' + (p.nullable ? 'Nullable (' + p.nullPct + '% null)' : 'Required (0% null)') + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;font-size:0.8rem;color:#475569;">' + p.distinctCount.toLocaleString() + ' distinct</td>'
+        + '<td style="padding:0.55rem 0.75rem;font-size:0.78rem;color:#64748b;">' + (badges.join(' ') || '') + '<div style="margin-top:0.2rem;">' + statsStr + '</div></td>'
+        + '</tr>';
+    }).join('');
+
+    footer.textContent = 'Showing ' + filteredProfiles.length + ' of ' + columnProfiles.length + ' columns documented';
+  }
+
+  function exportData(fmt) {
+    if (!columnProfiles.length) { alert('Generate dictionary first.'); return; }
+
+    if (fmt === 'md') {
+      var md = '# Data Dictionary & Metadata Analysis Report\n\n'
+        + '**Dataset Format:** ' + detectedFormat + '\n'
+        + '**Total Rows:** ' + rawRows.length + '\n'
+        + '**Total Columns:** ' + columnProfiles.length + '\n\n'
+        + '| # | Column Name | Friendly Label | Physical Type | Semantic Type | Nullable | Distinct Count |\n'
+        + '|---|---|---|---|---|---|---|\n'
+        + columnProfiles.map(function(p) {
+            return '| ' + p.position + ' | `' + p.name + '` | ' + p.friendlyName + ' | ' + p.pType + ' | ' + p.sType + ' | ' + (p.nullable ? 'Yes' : 'No') + ' | ' + p.distinctCount + ' |';
+          }).join('\n');
+      dlFile('data-dictionary-metadata.md', md, 'text/markdown');
+    } else if (fmt === 'json') {
+      var jsonObj = {
+        metadata: { format: detectedFormat, totalRows: rawRows.length, totalColumns: columnProfiles.length },
+        columns: columnProfiles.map(function(p) {
+          return {
+            position: p.position,
+            columnName: p.name,
+            friendlyLabel: p.friendlyName,
+            physicalType: p.pType,
+            semanticType: p.sType,
+            nullable: p.nullable,
+            nullCount: p.nullCount,
+            distinctCount: p.distinctCount,
+            isPrimaryKeyCandidate: p.isPk,
+            samples: p.samples
+          };
+        })
+      };
+      dlFile('data-dictionary-metadata.json', JSON.stringify(jsonObj, null, 2), 'application/json');
+    } else if (fmt === 'excel') {
+      var rows = columnProfiles.map(function(p) {
+        return {
+          'Position': p.position,
+          'Column Name': p.name,
+          'Friendly Label': p.friendlyName,
+          'Physical Type': p.pType,
+          'Semantic Type': p.sType,
+          'Nullable': p.nullable ? 'Yes' : 'No',
+          'Null Count': p.nullCount,
+          'Null %': p.nullPct + '%',
+          'Distinct Count': p.distinctCount,
+          'Primary Key Candidate': p.isPk ? 'Yes' : 'No'
+        };
+      });
+      var ws = XLSX.utils.json_to_sheet(rows);
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'DataDictionary');
+      var out = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+      dlFile('data-dictionary-metadata.xlsx', out, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    } else if (fmt === 'csv') {
+      var csvRows = columnProfiles.map(function(p) {
+        return {
+          'Position': p.position,
+          'Column Name': p.name,
+          'Friendly Label': p.friendlyName,
+          'Physical Type': p.pType,
+          'Semantic Type': p.sType,
+          'Nullable': p.nullable ? 'Yes' : 'No',
+          'Distinct Count': p.distinctCount
+        };
+      });
+      var hdrs = Object.keys(csvRows[0]);
+      dlFile('data-dictionary-metadata.csv', rowsToCSV(hdrs, csvRows), 'text/csv');
+    } else if (fmt === 'html') {
+      downloadReport();
+    }
+  }
+
+  function downloadReport() {
+    var parts = [
+      '<!DOCTYPE html><html>',
+      '<head><meta charset="utf-8"><title>Data Dictionary & Metadata Report<\/title>',
+      '<style>body{font-family:sans-serif;padding:2rem;color:#0f172a;max-width:1000px;margin:0 auto}',
+      'h1{font-size:1.6rem}h2{font-size:1.2rem;margin-top:2rem}',
+      'table{border-collapse:collapse;width:100%;font-size:0.85rem;margin-top:1rem}',
+      'th,td{border:1px solid #e2e8f0;padding:0.55rem 0.75rem;text-align:left}',
+      'th{background:#0f172a;color:#fff}<\/style><\/head><body>',
+      '<h1>Data Dictionary & Metadata Analysis Report<\/h1><p>Generated: ' + new Date().toLocaleString() + '<\/p>',
+      '<h2>Dataset Summary<\/h2><p>Total Rows: <b>' + rawRows.length + '<\/b> | Total Columns: <b>' + columnProfiles.length + '<\/b> | Format: <b>' + detectedFormat + '<\/b><\/p>',
+      '<h2>Column Metadata Register<\/h2><table><thead><tr><th>#<\/th><th>Column Name<\/th><th>Friendly Label<\/th><th>Physical Type<\/th><th>Semantic Type<\/th><th>Nullable<\/th><th>Distinct<\/th><\/tr><\/thead><tbody>',
+      columnProfiles.map(function(p) {
+        return '<tr><td>' + p.position + '<\/td><td><code>' + esc(p.name) + '<\/code><\/td><td>' + esc(p.friendlyName) + '<\/td><td>' + esc(p.pType) + '<\/td><td>' + esc(p.sType) + '<\/td><td>' + (p.nullable ? 'Yes' : 'No') + '<\/td><td>' + p.distinctCount + '<\/td><\/tr>';
+      }).join(''),
+      '<\/tbody><\/table><\/body><\/html>'
+    ];
+    dlFile('data-dictionary-metadata-report.html', parts.join(''), 'text/html');
+  }
+
+  function copySummary() {
+    if (!columnProfiles.length) { alert('Generate dictionary first.'); return; }
+    var txt = 'DATA DICTIONARY & METADATA SUMMARY\n====================================\n'
+      + 'Total Rows: ' + rawRows.length + '\n'
+      + 'Total Columns: ' + columnProfiles.length + '\n'
+      + 'Format: ' + detectedFormat + '\n\n'
+      + columnProfiles.map(function(p) { return p.position + '. ' + p.name + ' (' + p.pType + ' -> ' + p.sType + ')'; }).join('\n');
+    navigator.clipboard.writeText(txt).then(function() { alert('Summary copied!'); }).catch(function() { alert('Copy failed.'); });
+  }
+
+  function rowsToCSV(hdrs, rows) {
+    var e = function(v) { return '"' + String(v != null ? v : '').replace(/"/g, '""') + '"'; };
+    return [hdrs.map(e).join(',')].concat(rows.map(function(r) { return hdrs.map(function(h) { return e(r[h]); }).join(','); })).join('\n');
+  }
+
+  function dlFile(name, content, type) {
+    var blob = content instanceof Uint8Array ? new Blob([content], { type: type }) : new Blob([content], { type: type });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function esc(s) {
+    return String(s != null ? s : '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function showStatus(msg) {
+    var ex = document.getElementById('status-msg');
+    if (ex) ex.remove();
+    var el = document.createElement('div');
+    el.id = 'status-msg';
+    el.style.cssText = 'padding:0.65rem 1rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;color:#166534;font-size:0.875rem;margin-bottom:1rem;';
+    el.textContent = msg;
+    document.getElementById('drop-zone').insertAdjacentElement('afterend', el);
+  }
+
+  function resetAll() {
+    rawRows = []; headers = []; columnProfiles = []; filteredProfiles = []; detectedFormat = '';
+    dataInput.value = ''; fileInput.value = '';
+    ['c-rows', 'c-cols', 'c-completeness', 'c-pk', 'c-format'].forEach(function(id) { document.getElementById(id).textContent = '—'; });
+    var h = document.getElementById('c-health');
+    h.textContent = '—'; h.style.background = '#f0fdf4'; h.style.color = '#16a34a';
+    var sm = document.getElementById('status-msg');
+    if (sm) sm.remove();
+    document.getElementById('dict-tbody').innerHTML = '<tr><td colspan="8" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">Load a dataset and click Analyze &amp; Generate Dictionary to see metadata register</td></tr>';
+    resetDropStyle();
+  }
+
+  function resetDropStyle() {
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.background = '#fff';
+  }
+})();
+</script>
+{% endraw %}

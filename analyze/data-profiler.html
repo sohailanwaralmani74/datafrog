@@ -1,0 +1,960 @@
+---
+layout: main
+title: "Data Profiler – Profile Dataset Online Free | DataFrog"
+short_name: "Data Profiler"
+description: "Free online data profiler tool. Upload CSV, Excel, JSON, or XML datasets and instantly generate column statistics, data quality scores, missing value analysis, duplicate detection, and actionable insights."
+keywords: "data profiler, data profiling, dataset profiler, column profiling, data quality profiling, automated data profiling, missing value analysis, dataset statistics, data profiling tool, free data profiling"
+category: "Analyze"
+permalink: /analyze/data-profiler/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO STRUCTURED DATA — JSON-LD
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Data Profiler – DataFrog.tools",
+  "url": "https://datafrog.tools/analyze/data-profiler/",
+  "description": "Browser-based data profiler that automatically examines CSV, Excel, JSON, and XML datasets to generate column statistics, quality scores, duplicate detection, missing value ratios, and dataset insights.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools/" },
+    { "@type": "ListItem", "position": 2, "name": "Analyze", "item": "https://datafrog.tools/analyze" },
+    { "@type": "ListItem", "position": 3, "name": "Data Profiler", "item": "https://datafrog.tools/analyze/data-profiler/" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is data profiling and why is it important?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Data profiling is the process of examining a dataset to collect statistics and summary metadata about its structure, content, and quality. It helps analysts understand what's in a dataset before cleaning, transforming, or modeling it, revealing hidden issues like missing values, duplicates, mixed data types, and outliers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which file formats does the Data Profiler support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The profiler supports CSV (with automatic delimiter detection), Excel workbooks (.xlsx, .xls), JSON arrays and objects, and XML files with tabular row structures. You can also paste raw CSV or JSON text directly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my dataset uploaded to any server during profiling?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The entire data profiling process runs inside your browser's JavaScript engine. Your file is read into local browser memory and never transmitted to any external server, API, or cloud storage. Complete privacy is guaranteed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What column statistics does the profiler compute?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For every column the profiler computes: data type, null count and percentage, empty value count, distinct value count, duplicate count, minimum, maximum, mean, median, mode, standard deviation, string length stats, and the top most frequent values."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a data quality score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The data quality score is a percentage grade (0–100) that measures the overall health of your dataset based on completeness (missing values), consistency (duplicate records, mixed types), and validity (empty columns, outliers). A higher score indicates a cleaner, more reliable dataset."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export the profiling results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can download a full HTML report, export a machine-readable JSON report with all column statistics, or export a CSV file of column metrics for use in spreadsheets and notebooks."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    🔬 Analyze Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    Data Profiler – Automated Dataset Profiling & Quality Analysis
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 860px; line-height: 1.55; margin-bottom: 1.5rem;">
+    Instantly understand any dataset. Upload CSV, Excel, JSON, or XML files and receive a comprehensive profile — column statistics, data type detection, missing value ratios, duplicate records, quality scoring, and actionable improvement insights — all computed locally in your browser.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (DIRECTLY BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🔬</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your dataset here to profile it</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports CSV, Excel (.xlsx/.xls), JSON, XML — or paste data below</span>
+
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse File
+      <input type="file" id="file-input" accept=".csv,.tsv,.xlsx,.xls,.json,.xml,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample Dataset
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- INPUT TEXTAREA -->
+<div style="margin-bottom: 1.5rem;">
+  <label for="data-input" style="display: block; font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 0.5rem;">Paste Raw Data (CSV or JSON)</label>
+  <textarea id="data-input" placeholder="Paste your CSV or JSON dataset here to profile it..." style="width: 100%; height: 160px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 12px; outline: none; background: #ffffff; resize: vertical; box-sizing: border-box;"></textarea>
+</div>
+
+<!-- ACTION TOOLBAR -->
+<div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; padding: 1rem 1.25rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
+  <button id="btn-profile" style="padding: 0.65rem 1.4rem; background: #16a34a; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem;">
+    🔬 Profile Dataset
+  </button>
+  <button id="btn-copy-summary" style="padding: 0.65rem 1.2rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+    📋 Copy Summary
+  </button>
+  <button id="btn-download-html" style="padding: 0.65rem 1.2rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+    📄 HTML Report
+  </button>
+  <button id="btn-download-json" style="padding: 0.65rem 1.2rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+    📦 JSON Report
+  </button>
+  <button id="btn-export-csv" style="padding: 0.65rem 1.2rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+    📊 Export Stats CSV
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DATASET OVERVIEW CARDS
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.85rem; margin-bottom: 2rem;">
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Rows</span>
+    <span id="card-rows" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#0f172a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Columns</span>
+    <span id="card-cols" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#2563eb;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">File Size</span>
+    <span id="card-size" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.05rem;color:#0f172a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Format</span>
+    <span id="card-format" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.05rem;color:#16a34a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Missing</span>
+    <span id="card-missing" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.1rem;color:#dc2626;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Duplicates</span>
+    <span id="card-dupes" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.1rem;color:#ea580c;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Quality Score</span>
+    <span id="card-quality" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.25rem;color:#16a34a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Health Grade</span>
+    <span id="card-grade" style="display:inline-block;margin-top:0.25rem;font-weight:800;font-size:1rem;padding:0.15rem 0.6rem;border-radius:9999px;background:#f0fdf4;color:#16a34a;">—</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DATASET PREVIEW TABLE
+═══════════════════════════════════════════════════ -->
+<div id="preview-section" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);display:none;">
+  <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">👁️ Dataset Preview (First 10 Rows)</h3>
+  <div style="overflow-x:auto;">
+    <table id="preview-table" style="width:100%;border-collapse:collapse;font-size:0.82rem;text-align:left;"></table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     COLUMN PROFILING TABLE
+═══════════════════════════════════════════════════ -->
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem;">
+    <h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin:0;">📊 Column-by-Column Profile</h3>
+    <span id="col-count-label" style="font-size:0.85rem;color:#64748b;">Load a dataset to generate column profiles</span>
+  </div>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.82rem;text-align:left;min-width:900px;">
+      <thead>
+        <tr style="background:#0f172a;color:#fff;">
+          <th style="padding:0.7rem 0.85rem;border-radius:6px 0 0 0;">Column</th>
+          <th style="padding:0.7rem 0.85rem;">Type</th>
+          <th style="padding:0.7rem 0.85rem;text-align:right;">Count</th>
+          <th style="padding:0.7rem 0.85rem;text-align:right;">Nulls</th>
+          <th style="padding:0.7rem 0.85rem;text-align:right;">Null %</th>
+          <th style="padding:0.7rem 0.85rem;text-align:right;">Distinct</th>
+          <th style="padding:0.7rem 0.85rem;">Min</th>
+          <th style="padding:0.7rem 0.85rem;">Max</th>
+          <th style="padding:0.7rem 0.85rem;">Mean</th>
+          <th style="padding:0.7rem 0.85rem;">Median</th>
+          <th style="padding:0.7rem 0.85rem;">Std Dev</th>
+          <th style="padding:0.7rem 0.85rem;border-radius:0 6px 0 0;">Top Values</th>
+        </tr>
+      </thead>
+      <tbody id="col-profile-tbody">
+        <tr><td colspan="12" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">Upload or paste a dataset to generate column profiling statistics</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     QUALITY AUDIT + INSIGHTS — TWO COLUMN GRID
+═══════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
+
+  <!-- Data Quality Audit -->
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">🛡️ Data Quality Audit</h3>
+    <div id="quality-list" style="display:flex;flex-direction:column;gap:0.65rem;font-size:0.875rem;">
+      <div style="color:#64748b;font-style:italic;text-align:center;padding:2rem 0;">Load a dataset to run quality audits</div>
+    </div>
+  </div>
+
+  <!-- Automated Insights -->
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">💡 Automated Insights</h3>
+    <div id="insights-list" style="display:flex;flex-direction:column;gap:0.65rem;font-size:0.875rem;">
+      <div style="color:#64748b;font-style:italic;text-align:center;padding:2rem 0;">Insights will appear after profiling</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     VISUALIZATIONS — COMPLETENESS + DISTRIBUTION
+═══════════════════════════════════════════════════ -->
+<div id="charts-section" style="display:none;margin-bottom:2rem;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+      <h3 style="font-size:1.05rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">📉 Column Completeness</h3>
+      <canvas id="chart-completeness" height="260"></canvas>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+      <h3 style="font-size:1.05rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">🔢 Data Type Distribution</h3>
+      <canvas id="chart-types" height="260"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     QUALITY RECOMMENDATIONS BOX
+═══════════════════════════════════════════════════ -->
+<div id="recommendations-box" style="background: linear-gradient(135deg, #f0fdf4, #eff6ff); border: 1px solid #bbf7d0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; display:none;">
+  <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:0.85rem;">✅ Quality Recommendations</h3>
+  <ul id="recommendations-list" style="padding-left:1.5rem;font-size:0.9rem;color:#1e293b;line-height:1.8;margin:0;"></ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES SECTION
+═══════════════════════════════════════════════════ -->
+<section style="margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid #e2e8f0;">
+  <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Data Profiler Features</h2>
+  <p style="color: #475569; font-size: 1rem; margin-bottom: 2rem; max-width: 800px; line-height: 1.6;">
+    A complete data profiling toolkit designed for analysts, engineers, and researchers who need to understand their datasets thoroughly before beginning any transformation, modeling, or reporting workflow.
+  </p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📋</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Dataset Overview</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Instantly surfaces the dataset name, row and column counts, file size, detected format, delimiter, and encoding. Gives you a 30-second snapshot of what you are working with.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📊</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Column-Level Profiling</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Profiles every column independently: data type detection, null count, null percentage, distinct values, duplicates, minimum, maximum, mean, median, mode, and standard deviation.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🛡️</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Data Quality Scoring</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Produces a 0–100 quality score and health grade (A–F) based on completeness, duplicate record rates, empty column detection, and mixed type consistency across the dataset.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔍</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Missing Value Analysis</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Detects null, empty, and whitespace-only cells at both row and column level. Highlights columns with the highest missing value ratios so you can prioritize imputation or removal.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📑</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Duplicate Detection</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Identifies exact duplicate rows across the full dataset and reports the duplicate count and percentage, helping you remove redundant records before analysis or model training.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">💡</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Automated Insights</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Generates plain-language observations about the dataset's structural characteristics, potential problems, and suggested improvement steps without requiring any manual configuration.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📈</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Visual Charts</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Renders column completeness bar charts and data type distribution pie charts so you can visually scan your dataset's shape and identify imbalances faster than reading raw numbers.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📤</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Exportable Reports</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Download a styled HTML report for sharing with stakeholders, a machine-readable JSON report for pipeline automation, or a column statistics CSV for spreadsheet analysis.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SUPPORTED FORMATS SECTION
+═══════════════════════════════════════════════════ -->
+<section style="margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+  <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem;">Supported Dataset Formats</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;align-items:flex-start;gap:0.85rem;">
+      <span style="font-size:1.75rem;">📄</span>
+      <div>
+        <strong style="font-size:0.95rem;color:#0f172a;display:block;margin-bottom:0.25rem;">CSV / TSV</strong>
+        <p style="color:#475569;font-size:0.825rem;line-height:1.5;margin:0;">Automatic delimiter detection (comma, tab, semicolon, pipe). Handles quoted fields, multi-line cells, and custom separators.</p>
+      </div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;align-items:flex-start;gap:0.85rem;">
+      <span style="font-size:1.75rem;">📗</span>
+      <div>
+        <strong style="font-size:0.95rem;color:#0f172a;display:block;margin-bottom:0.25rem;">Excel (.xlsx / .xls)</strong>
+        <p style="color:#475569;font-size:0.825rem;line-height:1.5;margin:0;">Reads the first worksheet from Excel workbooks using SheetJS. Automatically converts numeric and date cells to typed values for accurate profiling.</p>
+      </div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;align-items:flex-start;gap:0.85rem;">
+      <span style="font-size:1.75rem;">🔧</span>
+      <div>
+        <strong style="font-size:0.95rem;color:#0f172a;display:block;margin-bottom:0.25rem;">JSON</strong>
+        <p style="color:#475569;font-size:0.825rem;line-height:1.5;margin:0;">Profiles arrays of objects (rows × columns) and flat key-value objects. Flattens one level of nested objects for column extraction.</p>
+      </div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;align-items:flex-start;gap:0.85rem;">
+      <span style="font-size:1.75rem;">📜</span>
+      <div>
+        <strong style="font-size:0.95rem;color:#0f172a;display:block;margin-bottom:0.25rem;">XML</strong>
+        <p style="color:#475569;font-size:0.825rem;line-height:1.5;margin:0;">Parses tabular XML where repeating child elements represent rows. Extracts attributes and text nodes as columns for profiling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+  <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem;">How to Profile a Dataset</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Upload or Paste</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Drag and drop a CSV, Excel, JSON, or XML file onto the upload zone — or paste raw text directly into the input area.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Choose Format</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">The profiler automatically detects the file format, delimiter (for CSV), and encoding. No manual configuration required.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Run Profiler</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click the Profile Dataset button to trigger the analysis engine. All processing happens instantly inside your browser with no data leaving your device.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Review Results</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Examine the overview cards, column profile table, quality audit panel, automated insights, and visual charts for a complete picture of your data.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Export Report</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Download an HTML report for presentations, a JSON report for pipeline use, or export column statistics as a CSV file.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     BENEFITS SECTION
+═══════════════════════════════════════════════════ -->
+<section style="margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+  <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Why Data Profiling Matters</h2>
+  <p style="color: #475569; font-size: 1rem; margin-bottom: 1.75rem; max-width: 800px; line-height: 1.6;">
+    Before any analysis, machine learning pipeline, or reporting workflow begins, you need to understand what your data actually contains. Data profiling activities reveal the true characteristics of a dataset — often exposing quality issues invisible to a casual scroll of raw rows.
+  </p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#1d4ed8;font-size:0.9rem;">Schema Discovery</strong>
+      <p style="color:#1e40af;font-size:0.825rem;line-height:1.55;margin:0.4rem 0 0;">Reveals column names, inferred data types, and structural patterns in an unknown dataset without writing a single query or script.</p>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#15803d;font-size:0.9rem;">Faster Data Cleaning</strong>
+      <p style="color:#166534;font-size:0.825rem;line-height:1.55;margin:0.4rem 0 0;">Knowing exact missing value ratios and duplicate counts before cleaning means you spend time fixing real problems instead of manually hunting for them.</p>
+    </div>
+    <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#c2410c;font-size:0.9rem;">Reliable Data Pipelines</strong>
+      <p style="color:#9a3412;font-size:0.825rem;line-height:1.55;margin:0.4rem 0 0;">Profiling datasets before ingestion into downstream systems prevents silent corruption from mistyped columns, unexpected nulls, or encoding issues.</p>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#7c3aed;font-size:0.9rem;">Model Readiness Assessment</strong>
+      <p style="color:#6d28d9;font-size:0.825rem;line-height:1.55;margin:0.4rem 0 0;">Verify that training datasets meet quality thresholds — adequate completeness, no extreme class imbalances, and numeric column distributions suitable for the selected algorithm.</p>
+    </div>
+    <div style="background:#fef9c3;border:1px solid #fde047;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#854d0e;font-size:0.9rem;">Metadata Documentation</strong>
+      <p style="color:#713f12;font-size:0.825rem;line-height:1.55;margin:0.4rem 0 0;">Automatically generate metadata documentation for internal data dictionaries, governance registers, or team onboarding without manual column-by-column writeups.</p>
+    </div>
+    <div style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#0f766e;font-size:0.9rem;">Privacy-First Analysis</strong>
+      <p style="color:#115e59;font-size:0.825rem;line-height:1.55;margin:0.4rem 0 0;">Sensitive datasets containing personal information can be profiled entirely in your browser without exposing the data to cloud services, third-party APIs, or logging systems.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FAQ SECTION
+═══════════════════════════════════════════════════ -->
+<section style="margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+  <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
+  <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 860px;">
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What is data profiling and why is it important?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">Data profiling is the systematic examination of a dataset to collect statistics and summary metadata about its structure, content, and quality. It is an essential first step in any data project because it reveals the actual state of your data — including hidden quality problems like missing values, inconsistent formatting, duplicate records, and unexpected data types — before they cause errors downstream. Profiling activities inform data cleaning strategies, schema design decisions, and analytical approach selection.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Which file formats does the profiler support?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">The Data Profiler supports CSV files (with automatic delimiter detection for comma, tab, semicolon, and pipe), Excel workbooks in .xlsx and .xls format, JSON arrays of objects, and XML files with repeating element structures. You can also paste raw CSV or JSON text directly into the input area for quick profiling without saving a file.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Is my data uploaded to any server?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">No. All profiling runs entirely inside your web browser using client-side JavaScript. Your file is loaded into local browser memory and never transmitted to any external server, cloud service, or analytics platform. This makes the tool safe for profiling datasets containing personally identifiable information, confidential business records, or regulated data.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What column statistics are generated?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">Each column receives a full statistical profile including: detected data type (numeric, text, boolean, date, mixed), total value count, null count, null percentage, empty value count, distinct value count, duplicate value count, minimum value, maximum value, mean, median, mode, standard deviation, and the top 5 most frequent values. String columns also receive average string length statistics.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">How is the quality score calculated?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">The quality score (0–100) combines three weighted metrics: completeness (penalizes missing and empty values), consistency (penalizes duplicate records and columns with mixed data types), and validity (penalizes entirely empty columns and outlier-heavy distributions). A grade of A (90–100), B (75–89), C (60–74), D (45–59), or F (below 45) is assigned based on the final score.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What export formats are available?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">You can download three types of reports: an HTML report with formatted tables and quality scores suitable for sharing with stakeholders, a JSON report containing the full machine-readable profile for use in automated pipelines, and a CSV export of per-column statistics for further analysis in spreadsheet applications or notebooks.</p>
+    </details>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT — DATA PROFILING ENGINE
+═══════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+{% raw %}
+<script>
+(function() {
+  'use strict';
+
+  // ── State ──────────────────────────────────────────────────────────
+  let profileData = null;
+  let completenessChart = null;
+  let typesChart = null;
+  const SAMPLE_CSV = `name,age,city,salary,joined_date,active
+Alice,29,New York,82000,2021-03-15,true
+Bob,34,Los Angeles,94500,2019-11-01,false
+Carol,,Chicago,71000,2020-07-22,true
+David,28,Houston,65000,,true
+Eve,31,Phoenix,88000,2022-01-10,false
+Frank,45,New York,112000,2018-05-30,true
+Grace,38,Los Angeles,97000,2020-09-14,
+Hank,29,Chicago,71000,2021-03-15,true
+Ivy,34,Houston,94500,2019-11-01,false
+Jack,28,Phoenix,65000,2023-02-28,true
+Alice,29,New York,82000,2021-03-15,true
+Bob,34,Los Angeles,94500,2019-11-01,false`;
+
+  // ── DOM refs ──────────────────────────────────────────────────────
+  const dropZone    = document.getElementById('drop-zone');
+  const fileInput   = document.getElementById('file-input');
+  const dataInput   = document.getElementById('data-input');
+  const btnProfile  = document.getElementById('btn-profile');
+  const btnSample   = document.getElementById('btn-load-sample');
+  const btnClear    = document.getElementById('btn-clear');
+  const btnCopySummary = document.getElementById('btn-copy-summary');
+  const btnDownloadHTML= document.getElementById('btn-download-html');
+  const btnDownloadJSON= document.getElementById('btn-download-json');
+  const btnExportCSV   = document.getElementById('btn-export-csv');
+
+  // ── Drop zone events ─────────────────────────────────────────────
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = '#16a34a'; dropZone.style.background = '#f0fdf4'; });
+  dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = '#cbd5e1'; dropZone.style.background = '#fff'; });
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.style.borderColor = '#cbd5e1'; dropZone.style.background = '#fff'; const f = e.dataTransfer.files[0]; if (f) handleFile(f); });
+  dropZone.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+  btnSample.addEventListener('click', () => { dataInput.value = SAMPLE_CSV; runProfile('Sample Dataset', SAMPLE_CSV.length, 'CSV'); });
+  btnClear.addEventListener('click', () => { dataInput.value = ''; profileData = null; resetUI(); fileInput.value = ''; });
+  btnProfile.addEventListener('click', () => { const txt = dataInput.value.trim(); if (!txt) { alert('Please load a file or paste data first.'); return; } const fmt = detectFormatFromText(txt); runProfileFromText(txt, 'Pasted Data', txt.length, fmt); });
+  btnCopySummary.addEventListener('click', copySummary);
+  btnDownloadHTML.addEventListener('click', downloadHTMLReport);
+  btnDownloadJSON.addEventListener('click', downloadJSONReport);
+  btnExportCSV.addEventListener('click', exportStatsCSV);
+
+  // ── File handler ──────────────────────────────────────────────────
+  function handleFile(file) {
+    const ext = file.name.split('.').pop().toLowerCase();
+    if (['xlsx','xls'].includes(ext)) {
+      const reader = new FileReader();
+      reader.onload = e => { const wb = XLSX.read(new Uint8Array(e.target.result), {type:'array'}); const ws = wb.Sheets[wb.SheetNames[0]]; const rows = XLSX.utils.sheet_to_json(ws, {defval:''}); parseRowsToProfile(rows, file.name, file.size, 'Excel'); };
+      reader.readAsArrayBuffer(file);
+    } else {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const text = e.target.result;
+        dataInput.value = text.substring(0, 5000) + (text.length > 5000 ? '\n...' : '');
+        const fmt = ext === 'json' ? 'JSON' : ext === 'xml' ? 'XML' : 'CSV';
+        runProfileFromText(text, file.name, file.size, fmt);
+      };
+      reader.readAsText(file);
+    }
+  }
+
+  function detectFormatFromText(text) {
+    const t = text.trim();
+    if (t.startsWith('{') || t.startsWith('[')) return 'JSON';
+    if (t.startsWith('<')) return 'XML';
+    return 'CSV';
+  }
+
+  // ── Text-based profiling router ───────────────────────────────────
+  function runProfileFromText(text, name, size, fmt) {
+    try {
+      if (fmt === 'JSON') {
+        const parsed = JSON.parse(text);
+        const rows = Array.isArray(parsed) ? parsed : [parsed];
+        parseRowsToProfile(rows, name, size, 'JSON');
+      } else if (fmt === 'XML') {
+        const dom = new DOMParser().parseFromString(text, 'text/xml');
+        const root = dom.documentElement;
+        const children = Array.from(root.children);
+        const rows = children.map(el => {
+          const obj = {};
+          Array.from(el.children).forEach(c => { obj[c.tagName] = c.textContent; });
+          Array.from(el.attributes).forEach(a => { obj[a.name] = a.value; });
+          if (!Object.keys(obj).length) obj['value'] = el.textContent;
+          return obj;
+        });
+        parseRowsToProfile(rows.length ? rows : [{'content': root.textContent}], name, size, 'XML');
+      } else {
+        const rows = parseCSV(text);
+        parseRowsToProfile(rows, name, size, detectDelimiterLabel(text));
+      }
+    } catch(e) {
+      alert('Could not parse the dataset: ' + e.message);
+    }
+  }
+
+  function runProfile(name, size, fmt) {
+    runProfileFromText(dataInput.value, name, size, fmt);
+  }
+
+  // ── CSV parser ────────────────────────────────────────────────────
+  function parseCSV(text) {
+    const delim = detectDelimiter(text);
+    const lines = text.split(/\r?\n/).filter(l => l.trim());
+    if (!lines.length) return [];
+    const headers = splitCSVLine(lines[0], delim);
+    const rows = [];
+    for (let i = 1; i < lines.length; i++) {
+      const vals = splitCSVLine(lines[i], delim);
+      const obj = {};
+      headers.forEach((h, idx) => { obj[h.trim()] = vals[idx] !== undefined ? vals[idx].trim() : ''; });
+      rows.push(obj);
+    }
+    return rows;
+  }
+
+  function splitCSVLine(line, delim) {
+    const result = []; let cur = ''; let inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; }
+      else if (line[i] === delim && !inQ) { result.push(cur); cur = ''; }
+      else { cur += line[i]; }
+    }
+    result.push(cur);
+    return result;
+  }
+
+  function detectDelimiter(text) {
+    const line = text.split('\n')[0];
+    const counts = { ',': 0, '\t': 0, ';': 0, '|': 0 };
+    for (const ch of line) if (counts[ch] !== undefined) counts[ch]++;
+    return Object.entries(counts).sort((a,b)=>b[1]-a[1])[0][0];
+  }
+
+  function detectDelimiterLabel(text) {
+    const d = detectDelimiter(text);
+    return { ',': 'CSV (comma)', '\t': 'TSV (tab)', ';': 'CSV (semicolon)', '|': 'CSV (pipe)' }[d] || 'CSV';
+  }
+
+  // ── Core profiling engine ─────────────────────────────────────────
+  function parseRowsToProfile(rows, name, size, fmt) {
+    if (!rows || !rows.length) { alert('No rows detected in the dataset.'); return; }
+    const columns = Object.keys(rows[0]);
+    const totalRows = rows.length;
+    const colProfiles = columns.map(col => profileColumn(col, rows.map(r => r[col]), totalRows));
+    const dupeCount = countDuplicates(rows);
+    const totalCells = totalRows * columns.length;
+    const totalMissing = colProfiles.reduce((s, c) => s + c.nullCount, 0);
+    const qualityScore = computeQualityScore(colProfiles, totalRows, dupeCount, totalCells);
+    const grade = scoreToGrade(qualityScore);
+
+    profileData = { name, size, fmt, totalRows, columns: columns.length, colProfiles, dupeCount, totalMissing, qualityScore, grade, rows };
+    renderUI(profileData, rows);
+  }
+
+  function profileColumn(name, values, totalRows) {
+    const nulls = values.filter(v => v === null || v === undefined || v === '' || (typeof v === 'string' && v.trim() === ''));
+    const nonNull = values.filter(v => v !== null && v !== undefined && v !== '' && !(typeof v === 'string' && v.trim() === ''));
+    const nums = nonNull.map(v => parseFloat(String(v).replace(/,/g,''))).filter(n => !isNaN(n));
+    const isNumeric = nums.length >= nonNull.length * 0.7;
+    const isBool = nonNull.every(v => ['true','false','yes','no','1','0'].includes(String(v).toLowerCase()));
+    const isDate = !isNumeric && nonNull.length > 0 && nonNull.filter(v => !isNaN(Date.parse(String(v)))).length >= nonNull.length * 0.7;
+    let type = 'text';
+    if (isBool) type = 'boolean';
+    else if (isNumeric) type = 'numeric';
+    else if (isDate) type = 'date';
+    else if (nums.length > 0 && nums.length < nonNull.length * 0.7) type = 'mixed';
+
+    const distinct = new Set(nonNull.map(v => String(v).toLowerCase())).size;
+    const freq = {};
+    nonNull.forEach(v => { const k = String(v); freq[k] = (freq[k] || 0) + 1; });
+    const topValues = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+    let min=null, max=null, mean=null, median=null, stddev=null;
+    if (nums.length) {
+      min = Math.min(...nums); max = Math.max(...nums);
+      mean = nums.reduce((s,n)=>s+n,0) / nums.length;
+      const sorted = [...nums].sort((a,b)=>a-b);
+      const mid = Math.floor(sorted.length/2);
+      median = sorted.length % 2 ? sorted[mid] : (sorted[mid-1]+sorted[mid])/2;
+      const variance = nums.reduce((s,n)=>s+Math.pow(n-mean,2),0)/nums.length;
+      stddev = Math.sqrt(variance);
+    }
+
+    const strLens = nonNull.map(v => String(v).length);
+    const avgLen = strLens.length ? strLens.reduce((s,n)=>s+n,0)/strLens.length : 0;
+
+    return { name, type, count: values.length, nullCount: nulls.length, nullPct: ((nulls.length/totalRows)*100).toFixed(1), distinct, topValues, min, max, mean: mean?.toFixed(2), median: median?.toFixed(2), stddev: stddev?.toFixed(2), avgLen: avgLen.toFixed(1), completeness: (((values.length - nulls.length)/totalRows)*100).toFixed(1) };
+  }
+
+  function countDuplicates(rows) {
+    const seen = new Set();
+    let dupes = 0;
+    rows.forEach(r => { const k = JSON.stringify(r); if (seen.has(k)) dupes++; else seen.add(k); });
+    return dupes;
+  }
+
+  function computeQualityScore(cols, totalRows, dupes, totalCells) {
+    const completeness = totalCells > 0 ? ((totalCells - cols.reduce((s,c)=>s+c.nullCount,0)) / totalCells) * 100 : 100;
+    const dupePenalty = totalRows > 0 ? (dupes / totalRows) * 100 : 0;
+    const mixedPenalty = cols.filter(c => c.type === 'mixed').length / cols.length * 20;
+    const emptyCols = cols.filter(c => c.nullCount === totalRows).length;
+    const emptyPenalty = emptyCols / cols.length * 30;
+    return Math.max(0, Math.min(100, completeness - dupePenalty - mixedPenalty - emptyPenalty)).toFixed(1);
+  }
+
+  function scoreToGrade(score) {
+    if (score >= 90) return 'A';
+    if (score >= 75) return 'B';
+    if (score >= 60) return 'C';
+    if (score >= 45) return 'D';
+    return 'F';
+  }
+
+  // ── Render UI ──────────────────────────────────────────────────────
+  function renderUI(p, rows) {
+    // Cards
+    document.getElementById('card-rows').textContent = p.totalRows.toLocaleString();
+    document.getElementById('card-cols').textContent = p.columns;
+    document.getElementById('card-size').textContent = formatSize(p.size);
+    document.getElementById('card-format').textContent = p.fmt;
+    document.getElementById('card-missing').textContent = `${p.totalMissing} (${((p.totalMissing/(p.totalRows*p.columns))*100).toFixed(1)}%)`;
+    document.getElementById('card-dupes').textContent = p.dupeCount;
+    document.getElementById('card-quality').textContent = p.qualityScore + '%';
+    const gradeEl = document.getElementById('card-grade');
+    gradeEl.textContent = 'Grade ' + p.grade;
+    const gradeColors = {A:'#f0fdf4,#16a34a',B:'#eff6ff,#2563eb',C:'#fefce8,#ca8a04',D:'#fff7ed,#ea580c',F:'#fef2f2,#dc2626'};
+    const [bg,col] = gradeColors[p.grade].split(',');
+    gradeEl.style.background = bg; gradeEl.style.color = col;
+
+    // Preview table
+    renderPreview(rows.slice(0,10), p.colProfiles.map(c=>c.name));
+
+    // Column profile
+    renderColumnProfile(p.colProfiles);
+
+    // Quality
+    renderQuality(p);
+
+    // Insights
+    renderInsights(p);
+
+    // Charts
+    renderCharts(p.colProfiles);
+
+    // Recommendations
+    renderRecommendations(p);
+
+    document.getElementById('col-count-label').textContent = `${p.columns} columns profiled`;
+  }
+
+  function renderPreview(rows, headers) {
+    const sec = document.getElementById('preview-section');
+    sec.style.display = 'block';
+    const tbl = document.getElementById('preview-table');
+    let html = `<thead><tr style="background:#0f172a;color:#fff;">`;
+    headers.forEach(h => { html += `<th style="padding:0.6rem 0.85rem;white-space:nowrap;">${esc(h)}</th>`; });
+    html += `</tr></thead><tbody>`;
+    rows.forEach((row, i) => {
+      html += `<tr style="background:${i%2?'#f8fafc':'#fff'};">`;
+      headers.forEach(h => { const v = row[h]; html += `<td style="padding:0.5rem 0.85rem;white-space:nowrap;font-size:0.82rem;color:${!v||v===''?'#94a3b8':'#0f172a'};">${esc(v===''||v===null||v===undefined?'∅':String(v))}</td>`; });
+      html += `</tr>`;
+    });
+    html += `</tbody>`;
+    tbl.innerHTML = html;
+  }
+
+  function renderColumnProfile(cols) {
+    const tbody = document.getElementById('col-profile-tbody');
+    const typeColors = {numeric:'#eff6ff,#2563eb',text:'#f0fdf4,#16a34a',boolean:'#faf5ff,#9333ea',date:'#fff7ed,#ea580c',mixed:'#fef9c3,#ca8a04'};
+    tbody.innerHTML = cols.map(c => {
+      const [bg,col] = (typeColors[c.type]||'#f1f5f9,#475569').split(',');
+      const topV = c.topValues.slice(0,3).map(([v,n])=>`${esc(v)} (${n})`).join(', ');
+      const nullColor = c.nullCount > 0 ? '#dc2626' : '#16a34a';
+      return `<tr style="border-bottom:1px solid #f1f5f9;">
+        <td style="padding:0.65rem 0.85rem;font-weight:700;color:#0f172a;white-space:nowrap;">${esc(c.name)}</td>
+        <td style="padding:0.65rem 0.85rem;"><span style="padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem;font-weight:700;background:${bg};color:${col};">${c.type}</span></td>
+        <td style="padding:0.65rem 0.85rem;text-align:right;">${c.count}</td>
+        <td style="padding:0.65rem 0.85rem;text-align:right;color:${nullColor};font-weight:700;">${c.nullCount}</td>
+        <td style="padding:0.65rem 0.85rem;text-align:right;color:${nullColor};">${c.nullPct}%</td>
+        <td style="padding:0.65rem 0.85rem;text-align:right;">${c.distinct}</td>
+        <td style="padding:0.65rem 0.85rem;font-family:monospace;font-size:0.8rem;">${c.min !== null ? fmt2(c.min) : '—'}</td>
+        <td style="padding:0.65rem 0.85rem;font-family:monospace;font-size:0.8rem;">${c.max !== null ? fmt2(c.max) : '—'}</td>
+        <td style="padding:0.65rem 0.85rem;font-family:monospace;font-size:0.8rem;">${c.mean ?? '—'}</td>
+        <td style="padding:0.65rem 0.85rem;font-family:monospace;font-size:0.8rem;">${c.median ?? '—'}</td>
+        <td style="padding:0.65rem 0.85rem;font-family:monospace;font-size:0.8rem;">${c.stddev ?? '—'}</td>
+        <td style="padding:0.65rem 0.85rem;font-size:0.78rem;color:#475569;max-width:200px;">${topV || '—'}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function renderQuality(p) {
+    const el = document.getElementById('quality-list');
+    const items = [
+      { ok: p.dupeCount === 0, label: 'Duplicate Records', val: p.dupeCount === 0 ? 'None detected' : `${p.dupeCount} duplicate rows found` },
+      { ok: p.totalMissing === 0, label: 'Missing Values', val: p.totalMissing === 0 ? 'Dataset complete' : `${p.totalMissing} missing cells detected` },
+      { ok: !p.colProfiles.some(c=>c.nullCount===p.totalRows), label: 'Empty Columns', val: p.colProfiles.filter(c=>c.nullCount===p.totalRows).length === 0 ? 'No empty columns' : `${p.colProfiles.filter(c=>c.nullCount===p.totalRows).length} fully empty column(s)` },
+      { ok: !p.colProfiles.some(c=>c.type==='mixed'), label: 'Mixed Data Types', val: p.colProfiles.filter(c=>c.type==='mixed').length === 0 ? 'All types consistent' : `${p.colProfiles.filter(c=>c.type==='mixed').length} mixed-type column(s)` },
+      { ok: parseFloat(p.qualityScore) >= 75, label: 'Completeness Score', val: p.qualityScore + '%' },
+    ];
+    el.innerHTML = items.map(i => `<div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0.85rem;background:${i.ok?'#f0fdf4':'#fef2f2'};border-radius:8px;border:1px solid ${i.ok?'#bbf7d0':'#fecaca'};">
+      <span style="font-weight:600;color:#0f172a;">${i.ok?'✅':'⚠️'} ${i.label}</span>
+      <span style="color:${i.ok?'#16a34a':'#dc2626'};font-weight:700;font-size:0.85rem;">${i.val}</span>
+    </div>`).join('');
+  }
+
+  function renderInsights(p) {
+    const el = document.getElementById('insights-list');
+    const insights = [];
+    insights.push(`Dataset contains <strong>${p.totalRows.toLocaleString()} rows</strong> and <strong>${p.columns} columns</strong>.`);
+    const nulliest = [...p.colProfiles].sort((a,b)=>b.nullCount-a.nullCount)[0];
+    if (nulliest.nullCount > 0) insights.push(`Column "<strong>${esc(nulliest.name)}</strong>" has the most missing values (${nulliest.nullPct}% null).`);
+    if (p.dupeCount > 0) insights.push(`Found <strong>${p.dupeCount} duplicate rows</strong> — consider deduplication before analysis.`);
+    const numCols = p.colProfiles.filter(c=>c.type==='numeric');
+    if (numCols.length) insights.push(`<strong>${numCols.length} numeric column(s)</strong> detected: ${numCols.map(c=>c.name).join(', ')}.`);
+    const dateCols = p.colProfiles.filter(c=>c.type==='date');
+    if (dateCols.length) insights.push(`<strong>${dateCols.length} date column(s)</strong> detected: ${dateCols.map(c=>c.name).join(', ')}.`);
+    const highCard = p.colProfiles.filter(c=>c.distinct > p.totalRows * 0.9 && c.type === 'text');
+    if (highCard.length) insights.push(`High-cardinality text columns (may be IDs or keys): <strong>${highCard.map(c=>c.name).join(', ')}</strong>.`);
+    if (parseFloat(p.qualityScore) >= 90) insights.push('Overall data quality is <strong>excellent</strong>. Dataset is ready for analysis.');
+    else if (parseFloat(p.qualityScore) >= 70) insights.push('Data quality is <strong>good</strong>. Minor cleaning may improve results.');
+    else insights.push('Data quality requires <strong>attention</strong>. Address missing values and duplicates before use.');
+    el.innerHTML = insights.map(i => `<div style="padding:0.55rem 0.85rem;background:#f8fafc;border-radius:8px;border-left:3px solid #2563eb;font-size:0.875rem;color:#0f172a;line-height:1.5;">• ${i}</div>`).join('');
+  }
+
+  function renderCharts(cols) {
+    const sec = document.getElementById('charts-section');
+    sec.style.display = 'block';
+    const labels = cols.map(c => c.name);
+    const completeness = cols.map(c => parseFloat(c.completeness));
+    const typeCounts = {};
+    cols.forEach(c => { typeCounts[c.type] = (typeCounts[c.type]||0)+1; });
+
+    if (completenessChart) completenessChart.destroy();
+    completenessChart = new Chart(document.getElementById('chart-completeness'), {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{ label: 'Completeness %', data: completeness, backgroundColor: completeness.map(v => v >= 90 ? '#16a34a' : v >= 60 ? '#f59e0b' : '#dc2626'), borderRadius: 6 }]
+      },
+      options: { responsive:true, plugins:{legend:{display:false}}, scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}}} }
+    });
+
+    if (typesChart) typesChart.destroy();
+    typesChart = new Chart(document.getElementById('chart-types'), {
+      type: 'doughnut',
+      data: {
+        labels: Object.keys(typeCounts),
+        datasets: [{ data: Object.values(typeCounts), backgroundColor: ['#2563eb','#16a34a','#9333ea','#ea580c','#ca8a04'], borderWidth: 2 }]
+      },
+      options: { responsive:true, plugins:{legend:{position:'bottom'}} }
+    });
+  }
+
+  function renderRecommendations(p) {
+    const box = document.getElementById('recommendations-box');
+    const list = document.getElementById('recommendations-list');
+    const recs = [];
+    if (p.dupeCount > 0) recs.push(`Remove ${p.dupeCount} duplicate rows to avoid skewed statistics and model bias.`);
+    p.colProfiles.filter(c=>c.nullCount>0).forEach(c => { recs.push(`Column "${c.name}" has ${c.nullPct}% missing values — consider imputation or removal.`); });
+    p.colProfiles.filter(c=>c.type==='mixed').forEach(c => { recs.push(`Column "${c.name}" contains mixed data types. Standardize the format before analysis.`); });
+    p.colProfiles.filter(c=>c.nullCount===p.totalRows).forEach(c => { recs.push(`Column "${c.name}" is entirely empty and can be dropped safely.`); });
+    if (!recs.length) recs.push('Dataset passes all quality checks. No immediate remediation required.');
+    list.innerHTML = recs.map(r => `<li>${esc(r)}</li>`).join('');
+    box.style.display = 'block';
+  }
+
+  function resetUI() {
+    ['card-rows','card-cols','card-size','card-format','card-missing','card-dupes','card-quality'].forEach(id => document.getElementById(id).textContent = '—');
+    document.getElementById('card-grade').textContent = '—';
+    document.getElementById('col-profile-tbody').innerHTML = '<tr><td colspan="12" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">Upload or paste a dataset to generate column profiling statistics</td></tr>';
+    document.getElementById('quality-list').innerHTML = '<div style="color:#64748b;font-style:italic;text-align:center;padding:2rem 0;">Load a dataset to run quality audits</div>';
+    document.getElementById('insights-list').innerHTML = '<div style="color:#64748b;font-style:italic;text-align:center;padding:2rem 0;">Insights will appear after profiling</div>';
+    document.getElementById('preview-section').style.display = 'none';
+    document.getElementById('charts-section').style.display = 'none';
+    document.getElementById('recommendations-box').style.display = 'none';
+    document.getElementById('col-count-label').textContent = 'Load a dataset to generate column profiles';
+    if (completenessChart) { completenessChart.destroy(); completenessChart = null; }
+    if (typesChart) { typesChart.destroy(); typesChart = null; }
+  }
+
+  // ── Exports ───────────────────────────────────────────────────────
+  function copySummary() {
+    if (!profileData) { alert('Profile a dataset first.'); return; }
+    const p = profileData;
+    const text = `DATA PROFILE SUMMARY\n${'='.repeat(40)}\nDataset: ${p.name}\nRows: ${p.totalRows} | Columns: ${p.columns}\nMissing Cells: ${p.totalMissing} | Duplicate Rows: ${p.dupeCount}\nQuality Score: ${p.qualityScore}% | Grade: ${p.grade}\n\nCOLUMN PROFILES\n${p.colProfiles.map(c=>`  ${c.name} [${c.type}] — Null: ${c.nullPct}% | Distinct: ${c.distinct}${c.mean?` | Mean: ${c.mean}`:''}${c.stddev?` | StdDev: ${c.stddev}`:''}`).join('\n')}`;
+    navigator.clipboard.writeText(text).then(()=>alert('Summary copied!')).catch(()=>alert('Copy failed — try manually.'));
+  }
+
+  function downloadHTMLReport() {
+    if (!profileData) { alert('Profile a dataset first.'); return; }
+    const p = profileData;
+    const rowsHtml = p.colProfiles.map(c =>
+      '<tr><td>' + esc(c.name) + '</td><td>' + c.type + '</td><td>' + c.count + '</td><td>' + c.nullCount +
+      '</td><td>' + c.nullPct + '%</td><td>' + c.distinct + '</td><td>' + (c.min ?? '\u2014') +
+      '</td><td>' + (c.max ?? '\u2014') + '</td><td>' + (c.mean ?? '\u2014') + '</td><td>' +
+      (c.median ?? '\u2014') + '</td><td>' + (c.stddev ?? '\u2014') + '<\/td><\/tr>'
+    ).join('');
+    const parts = [
+      '<!DOCTYPE html><html>',
+      '<head><meta charset="utf-8">',
+      '<title>Data Profile \u2014 ' + esc(p.name) + '<\/title>',
+      '<style>body{font-family:sans-serif;padding:2rem;color:#0f172a}',
+      'h1{font-size:1.5rem}',
+      'table{border-collapse:collapse;width:100%;font-size:0.85rem}',
+      'th,td{border:1px solid #e2e8f0;padding:0.5rem 0.75rem;text-align:left}',
+      'th{background:#0f172a;color:#fff}<\/style>',
+      '<\/head>',
+      '<body>',
+      '<h1>Data Profile Report: ' + esc(p.name) + '<\/h1>',
+      '<p>Generated: ' + new Date().toLocaleString() + '<\/p><hr>',
+      '<h2>Overview<\/h2>',
+      '<p>Rows: <b>' + p.totalRows + '<\/b> | Columns: <b>' + p.columns + '<\/b> | Format: <b>' + p.fmt + '<\/b>',
+      ' | Quality: <b>' + p.qualityScore + '%<\/b> | Grade: <b>' + p.grade + '<\/b>',
+      ' | Missing: <b>' + p.totalMissing + '<\/b> | Duplicates: <b>' + p.dupeCount + '<\/b><\/p>',
+      '<h2>Column Profiles<\/h2>',
+      '<table><thead><tr>',
+      '<th>Column<\/th><th>Type<\/th><th>Count<\/th><th>Nulls<\/th><th>Null%<\/th>',
+      '<th>Distinct<\/th><th>Min<\/th><th>Max<\/th><th>Mean<\/th><th>Median<\/th><th>StdDev<\/th>',
+      '<\/tr><\/thead><tbody>' + rowsHtml + '<\/tbody><\/table>',
+      '<\/body><\/html>'
+    ];
+    download('data-profile.html', parts.join(''), 'text/html');
+  }
+
+  function downloadJSONReport() {
+    if (!profileData) { alert('Profile a dataset first.'); return; }
+    const { rows: _, ...safe } = profileData;
+    download('data-profile.json', JSON.stringify(safe, null, 2), 'application/json');
+  }
+
+  function exportStatsCSV() {
+    if (!profileData) { alert('Profile a dataset first.'); return; }
+    const headers = 'column,type,count,nulls,null_pct,distinct,min,max,mean,median,stddev,completeness_pct';
+    const rows = profileData.colProfiles.map(c => [c.name,c.type,c.count,c.nullCount,c.nullPct,c.distinct,c.min??'',c.max??'',c.mean??'',c.median??'',c.stddev??'',c.completeness].join(','));
+    download('column-statistics.csv', [headers,...rows].join('\n'), 'text/csv');
+  }
+
+  function download(filename, content, type) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([content], {type}));
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────────
+  function esc(str) { return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fmt2(n) { return typeof n === 'number' ? (Number.isInteger(n) ? n : n.toFixed(2)) : n; }
+  function formatSize(bytes) {
+    if (!bytes) return '—';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/1048576).toFixed(1) + ' MB';
+  }
+})();
+</script>
+{% endraw %}

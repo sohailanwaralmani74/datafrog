@@ -1,0 +1,1021 @@
+---
+layout: main
+title: "Deduplicate Data Online – Remove Duplicate Rows & Records | DataFrog"
+short_name: "Deduplicate"
+description: "Deduplicate CSV, Excel, JSON, XML, YAML, and TSV datasets in your browser. Remove duplicate rows and records using configurable retention strategies (keep first, keep last, keep most complete). Free, private, local deduplication tool."
+keywords: "deduplicate, deduplicate data, data deduplication, duplicate remover, remove duplicate data, remove duplicate rows, remove duplicate records, clean duplicate data, duplicate removal tool"
+category: "Analyze"
+permalink: /analyze/deduplicate/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     JSON-LD STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Deduplicate – DataFrog.tools",
+  "url": "https://datafrog.tools/analyze/deduplicate/",
+  "description": "Browser-based data deduplication tool. Identify and remove duplicate records from CSV, Excel, JSON, XML, YAML, and TSV files with custom retention rules (keep first, keep last, keep most complete). Local and private.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "featureList": "Dataset deduplication, multi-column key comparison, retention strategy selection (keep first/last/most complete), whitespace normalization, grouped duplicate review, clean dataset export",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools/" },
+    { "@type": "ListItem", "position": 2, "name": "Analyze", "item": "https://datafrog.tools/analyze" },
+    { "@type": "ListItem", "position": 3, "name": "Deduplicate", "item": "https://datafrog.tools/analyze/deduplicate/" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is data deduplication and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Data deduplication is the process of identifying and removing redundant entries within a dataset while preserving a single representative record for each unique entity or business key. The tool groups matching records together based on chosen key columns and applies retention rules to keep the optimal record (e.g., the first occurrence, the last occurrence, or the most complete record) while removing the duplicates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What retention strategies can I use when deduplicating?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can select: 1) Keep First Occurrence (retains the earliest record in file order), 2) Keep Last Occurrence (retains the latest record in file order), or 3) Keep Most Complete Record (retains the row with the highest number of non-empty, populated fields)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which file formats can I deduplicate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports CSV, TSV, PSV (pipe-separated), semicolon-delimited, Excel workbooks (.xlsx and .xls), JSON arrays, JSON Lines (JSONL/NDJSON), XML with repeating elements, YAML sequences, and pasted clipboard tables. Format detection is fully automatic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data sent to a server for processing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All deduplication operations run locally inside your web browser using client-side JavaScript. Your file data never leaves your device or touches any server, ensuring complete privacy for sensitive customer, financial, or healthcare data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I preview the duplicate groups before exporting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The tool features a Grouped Duplicate Review section where you can visually inspect every cluster of duplicate records, see which row was marked for retention, and review the exact values of removed rows prior to exporting your clean dataset."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I deduplicate based on specific columns instead of whole rows?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can select specific key columns (such as email, ID, or phone number) to define what constitutes a duplicate. If no columns are selected, the tool compares all columns across the dataset."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & HERO BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom:1.5rem;">
+  <span style="display:inline-block;padding:0.25rem 0.75rem;background:#f0fdf4;color:#16a34a;font-weight:700;font-size:0.8rem;border-radius:9999px;margin-bottom:0.5rem;">
+    🧹 Analyze Module
+  </span>
+  <h1 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:0.5rem;">
+    Deduplicate Data – Clean &amp; Remove Duplicate Records
+  </h1>
+  <p style="color:#475569;font-size:1.05rem;max-width:870px;line-height:1.6;margin-bottom:1.5rem;">
+    Upload or paste any dataset, select your duplicate key columns, choose your retention strategy (keep first, keep last, or keep most complete), and instantly export a clean, deduplicated file — 100% in your browser, completely private.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INPUT ZONE
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom:1.75rem;border:2px dashed #cbd5e1;border-radius:14px;background:#fff;padding:1.75rem;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">🧹</span>
+  <span style="font-weight:800;color:#0f172a;font-size:1.15rem;display:block;margin-bottom:0.25rem;">Drag &amp; Drop dataset file to deduplicate</span>
+  <span style="color:#64748b;font-size:0.9rem;display:block;margin-bottom:1.25rem;">CSV, TSV, PSV, Excel (.xlsx/.xls), JSON, JSONL, XML, YAML — or paste data below</span>
+  <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;" onclick="event.stopPropagation();">
+    <label style="padding:0.6rem 1.25rem;background:#0f172a;color:#fff;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;display:inline-flex;align-items:center;gap:0.4rem;">
+      📁 Browse File
+      <input type="file" id="file-input" accept=".csv,.tsv,.psv,.txt,.xlsx,.xls,.json,.jsonl,.ndjson,.xml,.yaml,.yml" style="display:none;">
+    </label>
+    <button id="btn-sample" style="padding:0.6rem 1.25rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">⚡ Load Sample</button>
+    <button id="btn-clear" style="padding:0.6rem 1.25rem;background:#fff;color:#dc2626;border:1px solid #fca5a5;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">🗑️ Clear</button>
+  </div>
+</div>
+
+<!-- PASTE TEXTAREA -->
+<div style="margin-bottom:1.5rem;">
+  <label for="data-input" style="display:block;font-weight:700;font-size:0.95rem;color:#0f172a;margin-bottom:0.5rem;">Paste Raw Data (CSV, JSON, TSV, or delimiter-separated text)</label>
+  <textarea id="data-input" placeholder="Paste your dataset here to deduplicate..." style="width:100%;height:160px;padding:1rem;font-family:consolas,monaco,monospace;font-size:0.85rem;line-height:1.5;border:1px solid #cbd5e1;border-radius:12px;outline:none;background:#fff;resize:vertical;box-sizing:border-box;"></textarea>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DEDUPLICATION & MATCHING OPTIONS PANEL
+═══════════════════════════════════════════════════ -->
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
+  <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:1rem;">⚙️ Deduplication Settings</h3>
+
+  <div style="margin-bottom:1.25rem;">
+    <label style="font-size:0.875rem;font-weight:700;color:#0f172a;display:block;margin-bottom:0.5rem;">Retention Strategy <span style="font-weight:400;color:#64748b;">(which record to keep from each duplicate group)</span></label>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.875rem;cursor:pointer;color:#1e293b;background:#fff;padding:0.4rem 0.8rem;border:1px solid #cbd5e1;border-radius:8px;">
+        <input type="radio" name="retention" value="first" checked style="width:15px;height:15px;"> Keep First Occurrence
+      </label>
+      <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.875rem;cursor:pointer;color:#1e293b;background:#fff;padding:0.4rem 0.8rem;border:1px solid #cbd5e1;border-radius:8px;">
+        <input type="radio" name="retention" value="last" style="width:15px;height:15px;"> Keep Last Occurrence
+      </label>
+      <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.875rem;cursor:pointer;color:#1e293b;background:#fff;padding:0.4rem 0.8rem;border:1px solid #cbd5e1;border-radius:8px;">
+        <input type="radio" name="retention" value="most_complete" style="width:15px;height:15px;"> Keep Most Complete Record
+      </label>
+    </div>
+  </div>
+
+  <div style="margin-bottom:1rem;">
+    <label style="font-size:0.875rem;font-weight:700;color:#0f172a;display:block;margin-bottom:0.5rem;">Matching Normalization</label>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem 1.5rem;">
+      <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+        <input type="checkbox" id="opt-case" style="width:16px;height:16px;"> Ignore Case
+      </label>
+      <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+        <input type="checkbox" id="opt-trim" checked style="width:16px;height:16px;"> Trim Whitespace
+      </label>
+      <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+        <input type="checkbox" id="opt-ws" style="width:16px;height:16px;"> Normalize Whitespace
+      </label>
+      <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+        <input type="checkbox" id="opt-punct" style="width:16px;height:16px;"> Ignore Punctuation
+      </label>
+      <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+        <input type="checkbox" id="opt-empty" style="width:16px;height:16px;"> Skip Empty Values
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <label style="font-size:0.875rem;font-weight:700;color:#0f172a;display:block;margin-bottom:0.4rem;">Key Comparison Columns <span style="font-weight:400;color:#64748b;">(leave unselected to compare all columns)</span></label>
+    <div id="col-checkboxes" style="display:flex;flex-wrap:wrap;gap:0.5rem;min-height:32px;">
+      <span style="font-size:0.8rem;color:#94a3b8;font-style:italic;">Load a dataset to select key columns</span>
+    </div>
+  </div>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;padding:1rem 1.25rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;">
+  <button id="btn-dedupe" style="padding:0.65rem 1.4rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem;">🧹 Deduplicate Dataset</button>
+  <button id="btn-copy" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📋 Copy Summary</button>
+  <button id="btn-export-clean" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">✅ Export Clean CSV</button>
+  <button id="btn-export-excel" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📗 Export Clean Excel</button>
+  <button id="btn-export-json" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📦 Export Clean JSON</button>
+  <button id="btn-report" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📄 HTML Report</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SUMMARY CARDS
+═══════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.85rem;margin-bottom:2rem;">
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Original Rows</span>
+    <span id="c-total" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#0f172a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Retained Rows</span>
+    <span id="c-retained" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#16a34a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Removed Dupes</span>
+    <span id="c-removed" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#dc2626;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Duplicate %</span>
+    <span id="c-pct" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#ea580c;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Columns</span>
+    <span id="c-cols" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#2563eb;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Format</span>
+    <span id="c-format" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1rem;color:#0f172a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Dupe Groups</span>
+    <span id="c-groups" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#9333ea;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Data Health</span>
+    <span id="c-health" style="display:inline-block;margin-top:0.25rem;font-weight:800;font-size:0.9rem;padding:0.15rem 0.6rem;border-radius:9999px;background:#f0fdf4;color:#16a34a;">—</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     CHARTS SECTION
+═══════════════════════════════════════════════════ -->
+<div id="chart-section" style="display:none;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+  <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">📊 Deduplication Summary Visuals</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+    <div><canvas id="chart-dist" height="220"></canvas></div>
+    <div>
+      <h4 style="font-size:0.9rem;font-weight:700;color:#0f172a;margin-bottom:0.75rem;">🔁 Top Deduplicated Clusters</h4>
+      <div id="top-dupes-list" style="font-size:0.85rem;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     RESULTS TABLE
+═══════════════════════════════════════════════════ -->
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.75rem;">
+    <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin:0;">📋 Deduplicated Dataset Preview</h3>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+      <button id="filter-all" onclick="setFilter('all')" style="padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.8rem;font-weight:700;cursor:pointer;background:#0f172a;color:#fff;border:1px solid #0f172a;">All Rows</button>
+      <button id="filter-retained" onclick="setFilter('retained')" style="padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.8rem;font-weight:600;cursor:pointer;background:#fff;color:#16a34a;border:1px solid #bbf7d0;">Retained Only</button>
+      <button id="filter-removed" onclick="setFilter('removed')" style="padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.8rem;font-weight:600;cursor:pointer;background:#fff;color:#dc2626;border:1px solid #fca5a5;">Removed Dupes</button>
+    </div>
+  </div>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.82rem;text-align:left;min-width:600px;">
+      <thead id="result-thead"></thead>
+      <tbody id="result-tbody">
+        <tr><td style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">Load a dataset and click Deduplicate Dataset to see results</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="result-footer" style="margin-top:0.75rem;font-size:0.8rem;color:#64748b;text-align:right;"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     GROUPED DUPLICATES REVIEW
+═══════════════════════════════════════════════════ -->
+<div id="groups-section" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);display:none;">
+  <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">🗂️ Grouped Duplicate Clusters Review</h3>
+  <div id="groups-container"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INFORMATIONAL CONTENT SECTIONS
+═══════════════════════════════════════════════════ -->
+<section style="margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:0.75rem;">What is Data Deduplication?</h2>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    Data deduplication is a specialized data cleaning technique designed to identify, consolidate, and eliminate redundant records within structured datasets. In raw databases, spreadsheet exports, and software integrations, duplicate entries often arise from multiple data feeds, manual data entry errors, system retries, or merging datasets from disparate departments.
+  </p>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    Unlike basic filtering, effective deduplication lets you specify exact matching rules and select a smart retention strategy. For instance, when identical customer records appear multiple times, you can choose to retain the first submission, keep the most recently updated entry, or preserve the row containing the highest number of populated fields.
+  </p>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;">
+    By systematically purging duplicate records while preserving complete, single-source truths, data deduplication forms the bedrock of reliable analytics, database maintenance, and data governance.
+  </p>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Why Removing Duplicate Data Matters</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#1d4ed8;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Accurate Reporting &amp; KPIs</strong>
+      <p style="color:#1e40af;font-size:0.825rem;line-height:1.55;margin:0;">Duplicate rows skew aggregates like counts, sums, and averages, leading to overreported customer totals or inflated revenue metrics that misinform business decisions.</p>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#15803d;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Reduced Operational Costs</strong>
+      <p style="color:#166534;font-size:0.825rem;line-height:1.55;margin:0;">In marketing campaigns and SMS broadcasts, deduplicating contact lists prevents sending duplicate messages to the same person, cutting API and messaging costs.</p>
+    </div>
+    <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#c2410c;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Prevent Billing &amp; Order Errors</strong>
+      <p style="color:#9a3412;font-size:0.825rem;line-height:1.55;margin:0;">Double-processed invoices or repeated order entries trigger customer complaints, costly refund workflows, and accounting reconciliation challenges.</p>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#7c3aed;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Enhanced AI &amp; ML Model Training</strong>
+      <p style="color:#6d28d9;font-size:0.825rem;line-height:1.55;margin:0;">Deduplicating training datasets eliminates data leakage and overrepresentation of specific records, leading to fairer and more accurate predictive models.</p>
+    </div>
+    <div style="background:#fef9c3;border:1px solid #fde047;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#854d0e;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Database Health &amp; Storage Efficiency</strong>
+      <p style="color:#713f12;font-size:0.825rem;line-height:1.55;margin:0;">Clean datasets load faster, consume less memory, and reduce index size in downstream relational databases or data warehouses.</p>
+    </div>
+    <div style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#0f766e;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Strict Data Privacy &amp; Governance</strong>
+      <p style="color:#115e59;font-size:0.825rem;line-height:1.55;margin:0;">Consolidating duplicate records ensures user consent preferences and privacy requests are applied accurately across all customer touchpoints.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:0.5rem;">Key Deduplication Features</h2>
+  <p style="color:#475569;font-size:1rem;margin-bottom:1.5rem;max-width:820px;line-height:1.6;">Designed for data engineers, analysts, and business professionals who require fast, private, and precise data cleaning.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;">
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🎛️</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Flexible Retention Rules</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Choose to keep the first row, the last row, or the row with the most populated non-empty fields in every duplicate group.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔑</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Custom Key Column Selection</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Deduplicate using specific key columns (e.g. Email, Order ID, SKU) or compare full row content across all columns.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔤</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Value Normalization</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Ignore case differences, trim leading/trailing spaces, collapse internal whitespace, and strip punctuation to catch subtle duplicate variations.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔍</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Grouped Cluster Inspection</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Review each duplicate cluster in a dedicated grouped UI to verify which record was retained and inspect removed rows before exporting.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">💾</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Multi-Format Export</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Export your cleaned dataset to CSV, Excel (.xlsx), or JSON format, or download an HTML report containing full audit metrics.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🛡️</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">100% In-Browser Privacy</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Zero data uploads. All parsing, comparison, deduplication, and file generation happens entirely in local browser memory.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Supported Dataset Formats</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📄</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">CSV / TSV / PSV</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Delimited text files with automatic separator detection (comma, tab, pipe, semicolon).</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📗</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">Excel (.xlsx / .xls)</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Excel workbooks parsed seamlessly in-browser using SheetJS integration.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">🔧</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">JSON / JSON Lines</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">JSON object arrays and line-delimited JSONL/NDJSON datasets with nested object flattening.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📜</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">XML</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Tabular XML with repeating elements extracted as rows and attributes as columns.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📝</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">YAML</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">YAML mapping sequences converted into tabular rows for instant deduplication.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📋</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">Clipboard Tables</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Copy rows directly from Excel, Google Sheets, or web tables and paste into the input area.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">How to Deduplicate Data</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Upload or Paste</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Drag and drop your file into the input box or paste raw tabular text directly.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Set Retention Rule</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Select whether to keep the first row, last row, or the row with the most complete fields.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Select Key Columns</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Check the columns that define record identity (or leave unselected to check all columns).</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Run &amp; Review</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click Deduplicate. Inspect retained vs removed rows in the table and cluster views.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Export Clean File</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Download your cleaned dataset as CSV, Excel, or JSON for immediate use in production.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Common Types of Duplicate Records</h2>
+  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:820px;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;">
+      <strong style="color:#0f172a;font-size:0.95rem;">Customer &amp; Lead Lists</strong>
+      <p style="color:#475569;font-size:0.875rem;margin:0.3rem 0 0;line-height:1.55;">Repeated contact entries created from multiple webform submissions, trade show lead lists, or CRM synchronization errors.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;">
+      <strong style="color:#0f172a;font-size:0.95rem;">Product Catalogs &amp; Inventories</strong>
+      <p style="color:#475569;font-size:0.875rem;margin:0.3rem 0 0;line-height:1.55;">Duplicate SKUs or product items generated when merging supplier feeds or updating inventory spreadsheets.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;">
+      <strong style="color:#0f172a;font-size:0.95rem;">Transaction &amp; Order Files</strong>
+      <p style="color:#475569;font-size:0.875rem;margin:0.3rem 0 0;line-height:1.55;">Duplicate payments or transaction lines resulting from batch retry jobs or pipeline re-ingestions.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;">
+      <strong style="color:#0f172a;font-size:0.95rem;">Log &amp; Telemetry Streams</strong>
+      <p style="color:#475569;font-size:0.875rem;margin:0.3rem 0 0;line-height:1.55;">Repeated event records emitted by at-least-once message brokers or redundant server log collectors.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Best Practices for Data Deduplication</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;max-width:900px;">
+    <div style="padding:1rem;border-left:4px solid #2563eb;">
+      <strong style="color:#0f172a;font-size:0.9rem;">Define Business Identifiers</strong>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0.35rem 0 0;">Deduplicate based on true business keys (e.g. Email + Phone, SKU, National ID) rather than requiring every single column to match.</p>
+    </div>
+    <div style="padding:1rem;border-left:4px solid #16a34a;">
+      <strong style="color:#0f172a;font-size:0.9rem;">Use Most Complete Record Strategy</strong>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0.35rem 0 0;">When duplicate rows contain partial missing fields, choose "Keep Most Complete Record" to preserve maximum information density.</p>
+    </div>
+    <div style="padding:1rem;border-left:4px solid #ea580c;">
+      <strong style="color:#0f172a;font-size:0.9rem;">Normalize Formatting First</strong>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0.35rem 0 0;">Enable case-insensitivity and space normalization to catch duplicates hidden by inconsistent capitalizations or whitespace padding.</p>
+    </div>
+    <div style="padding:1rem;border-left:4px solid #9333ea;">
+      <strong style="color:#0f172a;font-size:0.9rem;">Review Group Clusters Before Production</strong>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0.35rem 0 0;">Always check the grouped duplicate review panel to confirm that records flagged for removal are true duplicates and not separate entities.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+  <div style="display:flex;flex-direction:column;gap:1rem;max-width:860px;">
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What is data deduplication and how does it work?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">Data deduplication identifies redundant rows in a dataset and removes duplicates while retaining a single representative record per duplicate cluster based on chosen retention rules.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What retention strategies can I use when deduplicating?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">You can choose to keep the first occurrence, the last occurrence, or the record with the most populated non-empty fields in each duplicate group.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Which file formats can I deduplicate?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">CSV, TSV, PSV, Excel (.xlsx/.xls), JSON, JSON Lines, XML, YAML, and clipboard text tables.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Is my data sent to a server for processing?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">No. All processing happens 100% locally in your web browser. No data is uploaded or logged anywhere.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Can I preview the duplicate groups before exporting?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">Yes, the tool displays a dedicated Grouped Duplicate Clusters Review section where you can inspect retained vs removed records prior to exporting.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Can I deduplicate based on specific columns instead of whole rows?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">Yes, you can select specific key comparison columns (like Email or ID) to define duplicates even if secondary columns differ.</p>
+    </details>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;background:#0f172a;color:#fff;border-radius:16px;padding:2.5rem;text-align:center;">
+  <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">🧹</span>
+  <h2 style="font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:0.75rem;">Deduplicate Your Dataset Now</h2>
+  <p style="color:#94a3b8;font-size:1.05rem;max-width:600px;margin:0 auto 1.75rem;line-height:1.6;">Upload your data, set your retention policy, and download clean, single-source records in seconds — fully private and in-browser.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="#drop-zone" style="padding:0.85rem 1.75rem;background:#16a34a;color:#fff;font-weight:700;border-radius:8px;text-decoration:none;font-size:0.95rem;">🧹 Start Deduplicating</a>
+    <a href="/analyze/duplicate-data-finder/" style="padding:0.85rem 1.75rem;background:rgba(255,255,255,0.1);color:#fff;font-weight:600;border-radius:8px;text-decoration:none;font-size:0.95rem;border:1px solid rgba(255,255,255,0.2);">🔎 Duplicate Data Finder</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT — DEDUPLICATION ENGINE
+═══════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+{% raw %}
+<script>
+(function() {
+  'use strict';
+
+  let allRows = [];
+  let headers = [];
+  let annotated = [];
+  let currentFilter = 'all';
+  let distChart = null;
+  let detectedFormat = '';
+
+  const SAMPLE = [
+    { customer_id: 'C101', name: 'Alice Johnson', email: 'alice@example.com', phone: '555-0101', score: '95', status: 'Active' },
+    { customer_id: 'C102', name: 'Bob Smith',     email: 'bob@example.com',   phone: '555-0102', score: '',   status: 'Pending' },
+    { customer_id: 'C101', name: 'alice johnson', email: 'alice@example.com', phone: '555-0101', score: '95', status: 'Active' },
+    { customer_id: 'C103', name: 'Carol White',   email: 'carol@example.com', phone: '555-0103', score: '88', status: 'Active' },
+    { customer_id: 'C102', name: 'Bob Smith',     email: 'bob@example.com',   phone: '555-0102', score: '90', status: 'Active' },
+    { customer_id: 'C104', name: 'David Lee',     email: 'david@example.com', phone: '555-0104', score: '92', status: 'Active' },
+    { customer_id: 'C103', name: 'Carol White',   email: 'carol@example.com', phone: '555-0103', score: '88', status: 'Active' },
+    { customer_id: 'C105', name: 'Eve Martinez',  email: 'eve@example.com',   phone: '555-0105', score: '85', status: 'Inactive' },
+    { customer_id: 'C104', name: 'David Lee',     email: 'david@example.com', phone: '555-0104', score: '92', status: 'Active' },
+    { customer_id: 'C106', name: 'Frank Brown',   email: 'frank@example.com', phone: '555-0106', score: '99', status: 'Active' }
+  ];
+
+  const dropZone  = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const dataInput = document.getElementById('data-input');
+
+  dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.style.borderColor = '#16a34a'; dropZone.style.background = '#f0fdf4'; });
+  dropZone.addEventListener('dragleave', function() { dropZone.style.borderColor = '#cbd5e1'; dropZone.style.background = '#fff'; });
+  dropZone.addEventListener('drop', function(e) { e.preventDefault(); resetDropStyle(); var f = e.dataTransfer.files[0]; if (f) handleFile(f); });
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  fileInput.addEventListener('change', function() { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+  document.getElementById('btn-sample').addEventListener('click', function() {
+    headers = Object.keys(SAMPLE[0]);
+    allRows = SAMPLE;
+    detectedFormat = 'Sample CSV';
+    dataInput.value = rowsToCSV(headers, allRows).substring(0, 650);
+    buildColCheckboxes(headers);
+    showStatus('Sample loaded (' + allRows.length + ' rows). Click Deduplicate Dataset.');
+  });
+
+  document.getElementById('btn-clear').addEventListener('click', resetAll);
+  document.getElementById('btn-dedupe').addEventListener('click', runDeduplication);
+  document.getElementById('btn-copy').addEventListener('click', copySummary);
+  document.getElementById('btn-export-clean').addEventListener('click', function() { exportClean('csv'); });
+  document.getElementById('btn-export-excel').addEventListener('click', function() { exportClean('excel'); });
+  document.getElementById('btn-export-json').addEventListener('click', function() { exportClean('json'); });
+  document.getElementById('btn-report').addEventListener('click', downloadReport);
+
+  window.setFilter = function(f) { currentFilter = f; renderTable(); updateFilterButtons(); };
+
+  function handleFile(file) {
+    var ext = file.name.split('.').pop().toLowerCase();
+    resetDropStyle();
+    if (ext === 'xlsx' || ext === 'xls') {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+        var ws = wb.Sheets[wb.SheetNames[0]];
+        var data = XLSX.utils.sheet_to_json(ws, { defval: '' });
+        if (!data.length) { alert('No rows found in Excel file.'); return; }
+        headers = Object.keys(data[0]);
+        allRows = data;
+        detectedFormat = 'Excel (' + ext.toUpperCase() + ')';
+        postLoad(file.name);
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      var reader2 = new FileReader();
+      reader2.onload = function(e) {
+        var text = e.target.result;
+        dataInput.value = text.substring(0, 800) + (text.length > 800 ? '\n...' : '');
+        parseText(text, ext, file.name);
+      };
+      reader2.readAsText(file);
+    }
+  }
+
+  function parseText(text, ext, name) {
+    try {
+      var trimmed = text.trim();
+      if (ext === 'json' || (!ext && trimmed[0] === '[') || (!ext && trimmed[0] === '{')) {
+        var parsed = JSON.parse(trimmed);
+        var rows = Array.isArray(parsed) ? parsed : [parsed];
+        headers = Object.keys(rows[0] || {});
+        allRows = rows.map(flattenOne);
+        detectedFormat = 'JSON';
+      } else if (ext === 'jsonl' || ext === 'ndjson') {
+        var lines = trimmed.split(/\r?\n/).filter(function(l) { return l.trim(); });
+        var rows2 = lines.map(function(l) { return JSON.parse(l); });
+        headers = Object.keys(rows2[0] || {});
+        allRows = rows2.map(flattenOne);
+        detectedFormat = 'JSONL';
+      } else if (ext === 'xml' || trimmed[0] === '<') {
+        var dom = new DOMParser().parseFromString(trimmed, 'text/xml');
+        var root = dom.documentElement;
+        var kids = Array.from(root.children);
+        if (!kids.length) { alert('No child elements found in XML.'); return; }
+        allRows = kids.map(function(el) {
+          var obj = {};
+          Array.from(el.children).forEach(function(c) { obj[c.tagName] = c.textContent; });
+          Array.from(el.attributes).forEach(function(a) { obj[a.name] = a.value; });
+          return obj;
+        });
+        headers = Object.keys(allRows[0] || {});
+        detectedFormat = 'XML';
+      } else if (ext === 'yaml' || ext === 'yml') {
+        allRows = parseYAML(trimmed);
+        headers = allRows.length ? Object.keys(allRows[0]) : [];
+        detectedFormat = 'YAML';
+      } else {
+        var delim = detectDelimiter(trimmed);
+        var parsed2 = parseCSV(trimmed, delim);
+        headers = parsed2.headers;
+        allRows = parsed2.rows;
+        detectedFormat = delim === ',' ? 'CSV' : delim === '\t' ? 'TSV' : delim === '|' ? 'PSV' : 'CSV';
+      }
+      postLoad(name || 'pasted data');
+    } catch(e) {
+      alert('Could not parse dataset: ' + e.message);
+    }
+  }
+
+  function postLoad(name) {
+    if (!allRows.length) { alert('No rows detected.'); return; }
+    buildColCheckboxes(headers);
+    showStatus('Loaded "' + name + '" — ' + allRows.length + ' rows, ' + headers.length + ' columns. Click Deduplicate Dataset.');
+    annotated = [];
+    renderTable();
+  }
+
+  function parseCSV(text, delim) {
+    var lines = text.split(/\r?\n/);
+    var hdrs = splitLine(lines[0], delim).map(function(h) { return h.trim().replace(/^"|"$/g, ''); });
+    var rows = [];
+    for (var i = 1; i < lines.length; i++) {
+      if (!lines[i].trim()) continue;
+      var vals = splitLine(lines[i], delim);
+      var obj = {};
+      hdrs.forEach(function(h, idx) { obj[h] = (vals[idx] || '').trim().replace(/^"|"$/g, ''); });
+      rows.push(obj);
+    }
+    return { headers: hdrs, rows: rows };
+  }
+
+  function splitLine(line, delim) {
+    var res = [], cur = '', inQ = false;
+    for (var i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; }
+      else if (line[i] === delim && !inQ) { res.push(cur); cur = ''; }
+      else { cur += line[i]; }
+    }
+    res.push(cur);
+    return res;
+  }
+
+  function detectDelimiter(text) {
+    var line = text.split('\n')[0];
+    var counts = { ',': 0, '\t': 0, '|': 0, ';': 0 };
+    for (var i = 0; i < line.length; i++) {
+      if (counts[line[i]] !== undefined) counts[line[i]]++;
+    }
+    return Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; })[0][0];
+  }
+
+  function flattenOne(obj, prefix) {
+    var out = {};
+    for (var k in obj) {
+      var key = prefix ? prefix + '.' + k : k;
+      if (obj[k] && typeof obj[k] === 'object' && !Array.isArray(obj[k])) {
+        Object.assign(out, flattenOne(obj[k], key));
+      } else {
+        out[key] = obj[k] == null ? '' : String(obj[k]);
+      }
+    }
+    return out;
+  }
+
+  function parseYAML(text) {
+    var rows = [], items = text.split(/^- /m).filter(function(s) { return s.trim(); });
+    for (var i = 0; i < items.length; i++) {
+      var obj = {}, lines = items[i].split('\n');
+      for (var j = 0; j < lines.length; j++) {
+        var m = lines[j].match(/^\s*([\w\s]+?)\s*:\s*(.*)$/);
+        if (m) obj[m[1].trim()] = m[2].trim().replace(/^['"]|['"]$/g, '');
+      }
+      if (Object.keys(obj).length) rows.push(obj);
+    }
+    return rows;
+  }
+
+  // ── Deduplication Core Engine ───────────────────────────────────────
+  function runDeduplication() {
+    if (!allRows.length) { alert('Please load a dataset first.'); return; }
+
+    var retention = document.querySelector('input[name="retention"]:checked').value;
+    var ignoreCase  = document.getElementById('opt-case').checked;
+    var doTrim      = document.getElementById('opt-trim').checked;
+    var normalizeWS = document.getElementById('opt-ws').checked;
+    var stripPunct  = document.getElementById('opt-punct').checked;
+    var skipEmpty   = document.getElementById('opt-empty').checked;
+
+    var checked = Array.from(document.querySelectorAll('.col-chk:checked')).map(function(cb) { return cb.value; });
+    var keyCols = checked.length ? checked : headers;
+
+    function normalize(val) {
+      var s = String(val == null ? '' : val);
+      if (doTrim)      s = s.trim();
+      if (normalizeWS) s = s.replace(/\s+/g, ' ').trim();
+      if (stripPunct)  s = s.replace(/[^\w\s]/g, '');
+      if (ignoreCase)  s = s.toLowerCase();
+      return s;
+    }
+
+    function makeKey(row) {
+      return keyCols.map(function(col) {
+        var v = normalize(row[col] || '');
+        if (skipEmpty && v === '') return null;
+        return v;
+      }).join('\x00');
+    }
+
+    function countNonEmpty(row) {
+      return Object.values(row).filter(function(v) { return v != null && String(v).trim() !== ''; }).length;
+    }
+
+    var keyMap = new Map();
+    allRows.forEach(function(row, idx) {
+      var k = makeKey(row);
+      if (!keyMap.has(k)) keyMap.set(k, []);
+      keyMap.get(k).push(idx);
+    });
+
+    annotated = allRows.map(function(row) { return { row: row, isRemoved: false, groupId: null, retainReason: 'Unique Record' }; });
+    var groupId = 0, removedCount = 0, groups = [];
+
+    keyMap.forEach(function(indices) {
+      if (indices.length > 1) {
+        groupId++;
+        var winnerIdx = indices[0];
+
+        if (retention === 'first') {
+          winnerIdx = indices[0];
+        } else if (retention === 'last') {
+          winnerIdx = indices[indices.length - 1];
+        } else if (retention === 'most_complete') {
+          var bestScore = -1;
+          indices.forEach(function(idx) {
+            var score = countNonEmpty(allRows[idx]);
+            if (score > bestScore) {
+              bestScore = score;
+              winnerIdx = idx;
+            }
+          });
+        }
+
+        groups.push({ groupId: groupId, indices: indices, winnerIdx: winnerIdx });
+
+        indices.forEach(function(idx) {
+          annotated[idx].groupId = groupId;
+          if (idx === winnerIdx) {
+            annotated[idx].isRemoved = false;
+            annotated[idx].retainReason = 'Retained (' + (retention === 'first' ? 'First' : retention === 'last' ? 'Last' : 'Most Complete') + ')';
+          } else {
+            annotated[idx].isRemoved = true;
+            annotated[idx].retainReason = 'Removed Duplicate';
+            removedCount++;
+          }
+        });
+      }
+    });
+
+    var totalRows = allRows.length;
+    var retainedCount = totalRows - removedCount;
+    var dupePct = totalRows ? ((removedCount / totalRows) * 100).toFixed(1) : '0.0';
+
+    document.getElementById('c-total').textContent    = totalRows.toLocaleString();
+    document.getElementById('c-retained').textContent = retainedCount.toLocaleString();
+    document.getElementById('c-removed').textContent  = removedCount.toLocaleString();
+    document.getElementById('c-pct').textContent      = dupePct + '%';
+    document.getElementById('c-cols').textContent     = headers.length;
+    document.getElementById('c-format').textContent   = detectedFormat || 'CSV';
+    document.getElementById('c-groups').textContent   = groups.length.toLocaleString();
+
+    var pctNum = parseFloat(dupePct);
+    var healthEl = document.getElementById('c-health');
+    var grade, hbg, hcol;
+    if (pctNum <= 2)       { grade = 'A — Excellent'; hbg = '#f0fdf4'; hcol = '#16a34a'; }
+    else if (pctNum <= 5)  { grade = 'B — Good';      hbg = '#eff6ff'; hcol = '#2563eb'; }
+    else if (pctNum <= 15) { grade = 'C — Fair';      hbg = '#fefce8'; hcol = '#ca8a04'; }
+    else if (pctNum <= 30) { grade = 'D — Poor';      hbg = '#fff7ed'; hcol = '#ea580c'; }
+    else                   { grade = 'F — Critical';  hbg = '#fef2f2'; hcol = '#dc2626'; }
+
+    healthEl.textContent = grade;
+    healthEl.style.background = hbg;
+    healthEl.style.color = hcol;
+
+    currentFilter = 'all';
+    updateFilterButtons();
+    renderTable();
+    renderGroups(groups);
+    renderChart(retainedCount, removedCount, groups);
+    renderTopDupes(groups);
+  }
+
+  function renderTable() {
+    var thead = document.getElementById('result-thead');
+    var tbody = document.getElementById('result-tbody');
+    var footer = document.getElementById('result-footer');
+
+    if (!annotated.length) {
+      thead.innerHTML = '';
+      tbody.innerHTML = '<tr><td style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">Load a dataset and click Deduplicate Dataset to see results</td></tr>';
+      footer.textContent = '';
+      return;
+    }
+
+    var rows = annotated;
+    if (currentFilter === 'retained') rows = annotated.filter(function(a) { return !a.isRemoved; });
+    if (currentFilter === 'removed')  rows = annotated.filter(function(a) { return a.isRemoved; });
+
+    thead.innerHTML = '<tr style="background:#0f172a;color:#fff;"><th style="padding:0.65rem 0.75rem;">#</th><th style="padding:0.65rem 0.75rem;">Action Status</th>' + headers.map(function(h) { return '<th style="padding:0.65rem 0.75rem;white-space:nowrap;">' + esc(h) + '</th>'; }).join('') + '</tr>';
+
+    tbody.innerHTML = rows.slice(0, 1000).map(function(a, i) {
+      var orig = annotated.indexOf(a);
+      var rowBg = i % 2 ? '#f8fafc' : '#fff';
+      var badge = '';
+      if (a.isRemoved) {
+        rowBg = '#fef2f2';
+        badge = '<span style="padding:0.15rem 0.5rem;background:#fecaca;color:#dc2626;border-radius:9999px;font-size:0.7rem;font-weight:700;">Removed</span>';
+      } else if (a.groupId) {
+        rowBg = '#f0fdf4';
+        badge = '<span style="padding:0.15rem 0.5rem;background:#bbf7d0;color:#15803d;border-radius:9999px;font-size:0.7rem;font-weight:700;">Retained</span>';
+      } else {
+        badge = '<span style="padding:0.15rem 0.5rem;background:#e0e7ff;color:#4338ca;border-radius:9999px;font-size:0.7rem;font-weight:700;">Unique</span>';
+      }
+      return '<tr style="background:' + rowBg + ';border-bottom:1px solid #f1f5f9;"><td style="padding:0.55rem 0.75rem;color:#64748b;font-size:0.8rem;">' + (orig + 1) + '</td><td style="padding:0.55rem 0.75rem;white-space:nowrap;">' + badge + (a.groupId ? ' <span style="font-size:0.7rem;color:#94a3b8;">G' + a.groupId + '</span>' : '') + '</td>' + headers.map(function(h) { return '<td style="padding:0.55rem 0.75rem;font-size:0.82rem;color:#0f172a;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + esc(String(a.row[h] != null ? a.row[h] : '')) + '</td>'; }).join('') + '</tr>';
+    }).join('');
+
+    var shown = Math.min(rows.length, 1000);
+    footer.textContent = 'Showing ' + shown.toLocaleString() + ' of ' + rows.length.toLocaleString() + ' rows' + (rows.length > 1000 ? ' (first 1,000 displayed)' : '');
+  }
+
+  function renderGroups(groups) {
+    var sec = document.getElementById('groups-section');
+    var container = document.getElementById('groups-container');
+    if (!groups.length) { sec.style.display = 'none'; return; }
+    sec.style.display = 'block';
+    container.innerHTML = groups.slice(0, 30).map(function(g) {
+      var rh = g.indices.map(function(idx) {
+        var isWinner = (idx === g.winnerIdx);
+        return '<tr style="background:' + (isWinner ? '#f0fdf4' : '#fef2f2') + ';"><td style="padding:0.4rem 0.6rem;font-size:0.75rem;color:#64748b;">' + (idx + 1) + '</td><td style="padding:0.4rem 0.6rem;">' + (isWinner ? '<span style="padding:0.1rem 0.4rem;background:#bbf7d0;color:#15803d;border-radius:9999px;font-size:0.68rem;font-weight:700;">Retained</span>' : '<span style="padding:0.1rem 0.4rem;background:#fecaca;color:#dc2626;border-radius:9999px;font-size:0.68rem;font-weight:700;">Removed</span>') + '</td>' + headers.map(function(h) { return '<td style="padding:0.4rem 0.6rem;font-size:0.78rem;white-space:nowrap;">' + esc(String(allRows[idx][h] != null ? allRows[idx][h] : '')) + '</td>'; }).join('') + '</tr>';
+      }).join('');
+      return '<div style="margin-bottom:1.25rem;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;"><div style="background:#f8fafc;padding:0.6rem 1rem;font-size:0.8rem;font-weight:700;color:#475569;border-bottom:1px solid #e2e8f0;">Group Cluster ' + g.groupId + ' — ' + g.indices.length + ' records</div><div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:#0f172a;color:#fff;"><th style="padding:0.4rem 0.6rem;font-size:0.75rem;">Row #</th><th style="padding:0.4rem 0.6rem;font-size:0.75rem;">Action</th>' + headers.map(function(h) { return '<th style="padding:0.4rem 0.6rem;font-size:0.75rem;white-space:nowrap;">' + esc(h) + '</th>'; }).join('') + '</tr></thead><tbody>' + rh + '</tbody></table></div></div>';
+    }).join('') + (groups.length > 30 ? '<p style="color:#64748b;font-size:0.85rem;text-align:center;padding:1rem;">Showing first 30 of ' + groups.length + ' clusters.</p>' : '');
+  }
+
+  function renderChart(retained, removed, groups) {
+    var sec = document.getElementById('chart-section'); sec.style.display = 'block';
+    if (distChart) distChart.destroy();
+    distChart = new Chart(document.getElementById('chart-dist'), {
+      type: 'doughnut',
+      data: { labels: ['Retained Records', 'Removed Duplicates'], datasets: [{ data: [retained, removed], backgroundColor: ['#16a34a', '#dc2626'], borderWidth: 3, borderColor: '#fff' }] },
+      options: { responsive: true, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: function(ctx) { return ' ' + ctx.label + ': ' + ctx.parsed.toLocaleString() + ' (' + (((ctx.parsed) / (retained + removed)) * 100).toFixed(1) + '%)'; } } } } }
+    });
+  }
+
+  function renderTopDupes(groups) {
+    var el = document.getElementById('top-dupes-list');
+    if (!groups.length) { el.innerHTML = '<p style="color:#94a3b8;font-size:0.85rem;">No duplicates found.</p>'; return; }
+    el.innerHTML = groups.slice(0, 8).map(function(g) {
+      var sample = allRows[g.winnerIdx];
+      var key = Object.values(sample).slice(0, 2).join(', ');
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0;border-bottom:1px dashed #e2e8f0;font-size:0.82rem;"><span style="color:#0f172a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px;" title="' + esc(key) + '">' + esc(key.length > 40 ? key.substring(0, 40) + '…' : key) + '</span><span style="font-weight:700;color:#dc2626;margin-left:0.5rem;flex-shrink:0;">' + g.indices.length + 'x</span></div>';
+    }).join('');
+  }
+
+  function buildColCheckboxes(cols) {
+    var container = document.getElementById('col-checkboxes');
+    container.innerHTML = cols.map(function(col) { return '<label style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.25rem 0.65rem;background:#fff;border:1px solid #cbd5e1;border-radius:9999px;font-size:0.8rem;cursor:pointer;color:#0f172a;"><input type="checkbox" class="col-chk" value="' + esc(col) + '" style="width:14px;height:14px;">' + esc(col) + '</label>'; }).join('');
+  }
+
+  function exportClean(fmt) {
+    if (!annotated.length) { alert('Run Deduplicate Dataset first.'); return; }
+    var cleanRows = annotated.filter(function(a) { return !a.isRemoved; }).map(function(a) { return a.row; });
+
+    if (fmt === 'csv') {
+      dlFile('deduplicated-data.csv', rowsToCSV(headers, cleanRows), 'text/csv');
+    } else if (fmt === 'excel') {
+      var ws = XLSX.utils.json_to_sheet(cleanRows);
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'CleanData');
+      var out = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+      dlFile('deduplicated-data.xlsx', out, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    } else if (fmt === 'json') {
+      dlFile('deduplicated-data.json', JSON.stringify(cleanRows, null, 2), 'application/json');
+    }
+  }
+
+  function downloadReport() {
+    if (!annotated.length) { alert('Run Deduplicate Dataset first.'); return; }
+    var total = allRows.length, removed = annotated.filter(function(a) { return a.isRemoved; }).length, retained = total - removed, pct = total ? ((removed / total) * 100).toFixed(1) : '0.0';
+    var parts = [
+      '<!DOCTYPE html><html>',
+      '<head><meta charset="utf-8"><title>Deduplication Audit Report<\/title>',
+      '<style>body{font-family:sans-serif;padding:2rem;color:#0f172a;max-width:900px;margin:0 auto}',
+      'h1{font-size:1.6rem}h2{font-size:1.2rem;margin-top:2rem}',
+      'table{border-collapse:collapse;width:100%;font-size:0.85rem;margin-top:1rem}',
+      'th,td{border:1px solid #e2e8f0;padding:0.5rem 0.75rem;text-align:left}',
+      'th{background:#0f172a;color:#fff}.removed{background:#fef2f2}.retained{background:#f0fdf4}<\/style><\/head><body>',
+      '<h1>Deduplication Audit Report<\/h1><p>Generated: ' + new Date().toLocaleString() + '<\/p>',
+      '<h2>Summary<\/h2><p>Original Total: <b>' + total + '<\/b> | Retained: <b>' + retained + '<\/b> | Removed: <b>' + removed + '<\/b> (' + pct + '%)<\/p>',
+      '<h2>Dataset Preview<\/h2><table><thead><tr><th>Row #<\/th><th>Action<\/th>' + headers.map(function(h) { return '<th>' + esc(h) + '<\/th>'; }).join('') + '<\/tr><\/thead><tbody>',
+      annotated.slice(0, 500).map(function(a, i) {
+        var cls = a.isRemoved ? 'removed' : 'retained';
+        var action = a.isRemoved ? 'Removed Duplicate' : 'Retained Record';
+        return '<tr class="' + cls + '"><td>' + (i + 1) + '<\/td><td>' + action + '<\/td>' + headers.map(function(h) { return '<td>' + esc(String(a.row[h] != null ? a.row[h] : '')) + '<\/td>'; }).join('') + '<\/tr>';
+      }).join(''),
+      '<\/tbody><\/table><\/body><\/html>'
+    ];
+    dlFile('deduplication-report.html', parts.join(''), 'text/html');
+  }
+
+  function copySummary() {
+    if (!annotated.length) { alert('Run Deduplicate Dataset first.'); return; }
+    var total = allRows.length, removed = annotated.filter(function(a) { return a.isRemoved; }).length;
+    var txt = 'DEDUPLICATION SUMMARY\n======================\nOriginal Rows: ' + total + '\nRetained Rows: ' + (total - removed) + '\nRemoved Duplicates: ' + removed + '\nDuplicate %: ' + (total ? ((removed / total) * 100).toFixed(1) : '0.0') + '%\nFormat: ' + detectedFormat;
+    navigator.clipboard.writeText(txt).then(function() { alert('Summary copied!'); }).catch(function() { alert('Copy failed.'); });
+  }
+
+  function rowsToCSV(hdrs, rows) {
+    var e = function(v) { return '"' + String(v != null ? v : '').replace(/"/g, '""') + '"'; };
+    return [hdrs.map(e).join(',')].concat(rows.map(function(r) { return hdrs.map(function(h) { return e(r[h]); }).join(','); })).join('\n');
+  }
+
+  function dlFile(name, content, type) {
+    var blob = content instanceof Uint8Array ? new Blob([content], { type: type }) : new Blob([content], { type: type });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function esc(s) {
+    return String(s != null ? s : '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function showStatus(msg) {
+    var ex = document.getElementById('status-msg');
+    if (ex) ex.remove();
+    var el = document.createElement('div');
+    el.id = 'status-msg';
+    el.style.cssText = 'padding:0.65rem 1rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;color:#166534;font-size:0.875rem;margin-bottom:1rem;';
+    el.textContent = msg;
+    document.getElementById('drop-zone').insertAdjacentElement('afterend', el);
+  }
+
+  function updateFilterButtons() {
+    var f = { all: 'filter-all', retained: 'filter-retained', removed: 'filter-removed' };
+    Object.entries(f).forEach(function(kv) {
+      var btn = document.getElementById(kv[1]);
+      if (kv[0] === currentFilter) {
+        btn.style.background = '#0f172a'; btn.style.color = '#fff'; btn.style.fontWeight = '700';
+      } else {
+        btn.style.background = '#fff'; btn.style.fontWeight = '600';
+        if (kv[0] === 'retained') btn.style.color = '#16a34a';
+        if (kv[0] === 'removed')  btn.style.color = '#dc2626';
+        if (kv[0] === 'all')      btn.style.color = '#0f172a';
+      }
+    });
+  }
+
+  function resetAll() {
+    allRows = []; headers = []; annotated = []; detectedFormat = '';
+    dataInput.value = ''; fileInput.value = '';
+    if (distChart) { distChart.destroy(); distChart = null; }
+    document.getElementById('chart-section').style.display = 'none';
+    document.getElementById('groups-section').style.display = 'none';
+    document.getElementById('col-checkboxes').innerHTML = '<span style="font-size:0.8rem;color:#94a3b8;font-style:italic;">Load a dataset to select key columns</span>';
+    ['c-total', 'c-retained', 'c-removed', 'c-pct', 'c-cols', 'c-format', 'c-groups'].forEach(function(id) { document.getElementById(id).textContent = '—'; });
+    var h = document.getElementById('c-health');
+    h.textContent = '—'; h.style.background = '#f0fdf4'; h.style.color = '#16a34a';
+    var sm = document.getElementById('status-msg');
+    if (sm) sm.remove();
+    currentFilter = 'all';
+    renderTable();
+    resetDropStyle();
+  }
+
+  function resetDropStyle() {
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.background = '#fff';
+  }
+})();
+</script>
+{% endraw %}

@@ -69,6 +69,17 @@
   date: "2026-06-15"
   updated: "2026-06-18"
 
+- title: "Data Dictionary Generator"
+  short_name: "Data Dictionary Generator"
+  url: "/inspect/data-dictionary-generator/"
+  category: "Inspect"
+  description: "Automatically analyze structured datasets (CSV, Excel, JSON, XML, YAML) and extract metadata to generate comprehensive data dictionaries with physical types, inferred semantic types, column quality stats, and multi-format exports."
+  keywords: ["data dictionary generator", "metadata analyzer", "metadata analysis", "data dictionary", "dataset documentation", "column documentation", "metadata generator", "metadata documentation", "schema documentation", "data catalog", "field documentation", "file metadata analyzer"]
+  icon: "📖"
+  featured: true
+  date: "2026-08-05"
+  updated: "2026-08-05"
+
 - title: "JSON Analyzer"
   short_name: "JSON Analyzer"
   url: "/analyze/json-analyzer/"
@@ -113,17 +124,49 @@
   date: "2026-06-26"
   updated: "2026-06-29"
 
-- title: "Log Analyzer"
-  short_name: "Log Analyzer"
-  url: "/analyze/log-analyzer/"
+- title: "Data Profiler"
+  short_name: "Data Profiler"
+  url: "/analyze/data-profiler/"
   category: "Analyze"
-  description: "Analyze web server (Nginx, Apache, IIS) and application log files locally in your browser with log level breakdowns, HTTP status codes, top IP profiling, and error audits."
-  keywords: ["Log Analyzer", "Analyze Log Files", "Log File Analyzer", "Online Log Analyzer", "Server Log Analyzer", "Apache Log Analyzer", "Nginx Log Analyzer", "Application Log Analyzer", "Log Analysis Tool"]
-  icon: "📄"
+  description: "Automatically profile CSV, Excel, JSON, and XML datasets in your browser. Generate column statistics, data quality scores, missing value analysis, duplicate detection, and insights."
+  keywords: ["Data Profiler", "Data Profiling", "Dataset Profiler", "Column Profiling", "Data Quality Profiling", "Missing Value Analysis", "Automated Data Profiling", "Dataset Statistics"]
+  icon: "🔬"
   featured: true
-  date: "2026-06-29"
-  updated: "2026-07-02"
+  date: "2026-08-05"
+  updated: "2026-08-05"
 
+- title: "Duplicate Data Finder"
+  short_name: "Duplicate Data Finder"
+  url: "/analyze/duplicate-data-finder/"
+  category: "Analyze"
+  description: "Find duplicate rows, records, and values in CSV, Excel, JSON, XML, YAML, and more. Detect repeated entries, group duplicates, calculate duplicate percentage, and export clean or duplicate-only datasets."
+  keywords: ["Duplicate Data Finder", "Find Duplicate Data", "Duplicate Row Finder", "Duplicate Record Finder", "Duplicate Checker", "Duplicate Detector", "Remove Duplicate Records", "Duplicate Data Analysis"]
+  icon: "🔎"
+  featured: true
+  date: "2026-08-05"
+  updated: "2026-08-05"
+
+- title: "Deduplicate"
+  short_name: "Deduplicate"
+  url: "/analyze/deduplicate/"
+  category: "Analyze"
+  description: "Deduplicate CSV, Excel, JSON, XML, and YAML datasets locally in your browser. Remove duplicate rows and records with custom retention rules (keep first, keep last, keep most complete)."
+  keywords: ["deduplicate", "deduplicate data", "data deduplication", "duplicate remover", "remove duplicate data", "remove duplicate rows", "remove duplicate records", "clean duplicate data"]
+  icon: "🧹"
+  featured: true
+  date: "2026-08-05"
+  updated: "2026-08-05"
+
+- title: "Bank Statement Analyzer"
+  short_name: "Bank Statement Analyzer"
+  url: "/analyze/bank-statement-analyzer/"
+  category: "Analyze"
+  description: "Analyze bank statements and transaction files locally in your browser. Automatic categorization, income vs expense analysis, cash flow trends, recurring payment detection, financial health scoring, and private reports."
+  keywords: ["bank statement analyzer", "analyze bank statement", "bank statement analysis", "bank transaction analysis", "spending analysis", "expense analysis", "income analysis", "financial analysis", "cash flow analysis", "recurring transactions"]
+  icon: "🏦"
+  featured: true
+  date: "2026-08-05"
+  updated: "2026-08-05"
 - title: "JSON Validator"
   short_name: "JSON Validator"
   url: "/validate/json-validator/"
@@ -168,16 +211,7 @@
   date: "2026-07-11"
   updated: "2026-07-14"
 
-- title: "JSON Schema Validator"
-  short_name: "JSON Schema Validator"
-  url: "/validate/json-schema-validator/"
-  category: "Validate"
-  description: "Validate JSON documents against JSON Schemas (Draft-04, Draft-07, 2020-12) with detailed property path error reporting and constraint checks."
-  keywords: ["JSON Schema Validator", "Validate JSON Schema", "JSON Schema Checker", "JSON Schema Validation", "Schema Validator", "JSON Schema Validator Online"]
-  icon: "🛡️"
-  featured: true
-  date: "2026-07-14"
-  updated: "2026-07-17"
+
 
 - title: "Text Compare"
   short_name: "Text Compare"

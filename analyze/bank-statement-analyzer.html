@@ -1,0 +1,1118 @@
+---
+layout: main
+title: "Bank Statement Analyzer – Free Financial & Transaction Analysis | DataFrog"
+short_name: "Bank Statement Analyzer"
+description: "Analyze bank statements and transaction exports in your browser. Automatic transaction categorization, income vs expense breakdowns, recurring payment detection, cash flow analysis, and financial health scoring. 100% private."
+keywords: "bank statement analyzer, analyze bank statement, bank statement analysis, bank transaction analysis, spending analysis, expense analysis, income analysis, financial analysis, cash flow analysis, recurring payments, transaction categorization"
+category: "Analyze"
+permalink: /analyze/bank-statement-analyzer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     JSON-LD STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Bank Statement Analyzer – DataFrog.tools",
+  "url": "https://datafrog.tools/analyze/bank-statement-analyzer/",
+  "description": "Browser-based bank statement analyzer. Parse transaction files, auto-categorize expenses, track income vs spending, detect recurring payments, analyze cash flow, and generate financial health reports. 100% in-browser processing.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "featureList": "Bank statement parsing, automatic expense categorization, income vs expense breakdown, recurring payment detection, cash flow timeline, running balance calculation, financial health scoring, private report exports",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools/" },
+    { "@type": "ListItem", "position": 2, "name": "Analyze", "item": "https://datafrog.tools/analyze" },
+    { "@type": "ListItem", "position": 3, "name": "Bank Statement Analyzer", "item": "https://datafrog.tools/analyze/bank-statement-analyzer/" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a bank statement analyzer and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A bank statement analyzer is a tool that processes transaction files exported from banking accounts to automatically summarize deposits, withdrawals, cash flow, spending patterns, and recurring bills. It parses raw transaction rows, auto-categorizes expenses, and calculates metrics such as net savings, top expense categories, and income stability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my financial data uploaded or stored anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All statement parsing, transaction categorization, metric calculations, and chart visualizations run 100% locally inside your web browser. Your financial information is never uploaded to any cloud server, third-party API, or external database."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which file formats can I upload for analysis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports financial exports including OFX, QFX, QIF, CSV, TSV, Excel (.xlsx and .xls), OpenDocument Spreadsheets (.ods), JSON arrays, XML, and pasted text tables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does automatic transaction categorization work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The analyzer uses a smart rule engine to match transaction descriptions and payees against financial patterns such as Salary, Groceries, Utilities, Rent, Restaurants, Subscriptions, Insurance, Transfers, and ATM Withdrawals. You can also manually adjust any category directly in the interactive transaction table."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are recurring payments and subscriptions detected?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool analyzes transaction descriptions, payees, and amounts over time to flag repeated charges such as streaming subscriptions, utility bills, rent payments, insurance premiums, and regular salary deposits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What reports and export options are available?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can export categorized transaction lists to CSV, Excel (.xlsx), or JSON format, copy a summary digest to your clipboard, or download a formatted HTML Financial Health Report."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & HERO BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom:1.5rem;">
+  <span style="display:inline-block;padding:0.25rem 0.75rem;background:#eff6ff;color:#1d4ed8;font-weight:700;font-size:0.8rem;border-radius:9999px;margin-bottom:0.5rem;">
+    🏦 Analyze Module
+  </span>
+  <h1 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:0.5rem;">
+    Bank Statement Analyzer – Private Financial Analysis
+  </h1>
+  <p style="color:#475569;font-size:1.05rem;max-width:870px;line-height:1.6;margin-bottom:1.5rem;">
+    Upload or paste any bank statement or transaction file for instant automatic categorization, income vs. expense tracking, cash flow trends, recurring payment detection, and financial health scoring. 100% private — all processing runs locally inside your browser.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INPUT ZONE
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom:1.75rem;border:2px dashed #cbd5e1;border-radius:14px;background:#fff;padding:1.75rem;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">🏦</span>
+  <span style="font-weight:800;color:#0f172a;font-size:1.15rem;display:block;margin-bottom:0.25rem;">Drag &amp; Drop bank statement or transaction file here</span>
+  <span style="color:#64748b;font-size:0.9rem;display:block;margin-bottom:1.25rem;">CSV, Excel (.xlsx/.xls), OFX, QFX, QIF, TSV, JSON, XML — or paste transactions below</span>
+  <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;" onclick="event.stopPropagation();">
+    <label style="padding:0.6rem 1.25rem;background:#0f172a;color:#fff;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;display:inline-flex;align-items:center;gap:0.4rem;">
+      📁 Browse File
+      <input type="file" id="file-input" accept=".csv,.tsv,.xlsx,.xls,.ods,.ofx,.qfx,.qif,.json,.xml,.txt" style="display:none;">
+    </label>
+    <button id="btn-sample" style="padding:0.6rem 1.25rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">⚡ Load Sample Statement</button>
+    <button id="btn-clear" style="padding:0.6rem 1.25rem;background:#fff;color:#dc2626;border:1px solid #fca5a5;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">🗑️ Clear</button>
+  </div>
+</div>
+
+<!-- PASTE TEXTAREA -->
+<div style="margin-bottom:1.5rem;">
+  <label for="data-input" style="display:block;font-weight:700;font-size:0.95rem;color:#0f172a;margin-bottom:0.5rem;">Paste Raw Transactions (CSV, TSV, or text table)</label>
+  <textarea id="data-input" placeholder="Paste bank statement rows here (Date, Description, Amount, etc.)..." style="width:100%;height:150px;padding:1rem;font-family:consolas,monaco,monospace;font-size:0.85rem;line-height:1.5;border:1px solid #cbd5e1;border-radius:12px;outline:none;background:#fff;resize:vertical;box-sizing:border-box;"></textarea>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     COLUMN MAPPING PANEL
+═══════════════════════════════════════════════════ -->
+<div id="mapping-panel" style="display:none;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
+  <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:0.75rem;">🧭 Column Mapping Configuration</h3>
+  <p style="color:#64748b;font-size:0.85rem;margin-bottom:1rem;">The tool automatically detects columns, but you can adjust mapping below if needed:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
+    <div>
+      <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:0.25rem;">Date Column *</label>
+      <select id="map-date" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.85rem;"></select>
+    </div>
+    <div>
+      <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:0.25rem;">Description / Payee *</label>
+      <select id="map-desc" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.85rem;"></select>
+    </div>
+    <div>
+      <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:0.25rem;">Amount (Single Column)</label>
+      <select id="map-amount" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.85rem;"></select>
+    </div>
+    <div>
+      <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:0.25rem;">Debit / Withdrawal</label>
+      <select id="map-debit" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.85rem;"></select>
+    </div>
+    <div>
+      <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:0.25rem;">Credit / Deposit</label>
+      <select id="map-credit" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.85rem;"></select>
+    </div>
+    <div>
+      <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:0.25rem;">Balance (Optional)</label>
+      <select id="map-balance" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.85rem;"></select>
+    </div>
+  </div>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;padding:1rem 1.25rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;">
+  <button id="btn-analyze" style="padding:0.65rem 1.4rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem;">⚡ Analyze Statement</button>
+  <button id="btn-copy" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📋 Copy Summary</button>
+  <button id="btn-export-csv" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">✅ Export CSV</button>
+  <button id="btn-export-excel" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📗 Export Excel</button>
+  <button id="btn-export-json" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📦 Export JSON</button>
+  <button id="btn-report" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📄 HTML Report</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SUMMARY CARDS
+═══════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.85rem;margin-bottom:2rem;">
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Statement Period</span>
+    <span id="c-period" style="display:block;margin-top:0.35rem;font-weight:800;font-size:0.85rem;color:#0f172a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Total Deposits</span>
+    <span id="c-income" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.25rem;color:#16a34a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Total Expenses</span>
+    <span id="c-expenses" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.25rem;color:#dc2626;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Net Cash Flow</span>
+    <span id="c-cashflow" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.25rem;color:#0f172a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Transactions</span>
+    <span id="c-count" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.25rem;color:#2563eb;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Recurring Payments</span>
+    <span id="c-recurring" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.25rem;color:#9333ea;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Savings Rate</span>
+    <span id="c-savings" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.25rem;color:#ea580c;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Financial Health</span>
+    <span id="c-health" style="display:inline-block;margin-top:0.25rem;font-weight:800;font-size:0.9rem;padding:0.15rem 0.6rem;border-radius:9999px;background:#f0fdf4;color:#16a34a;">—</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     CHARTS SECTION
+═══════════════════════════════════════════════════ -->
+<div id="chart-section" style="display:none;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+  <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">📊 Financial Visualizations &amp; Trends</h3>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
+    <div style="background:#f8fafc;padding:1rem;border-radius:10px;border:1px solid #e2e8f0;">
+      <h4 style="font-size:0.9rem;font-weight:700;color:#0f172a;margin-bottom:0.75rem;">Income vs Expenses</h4>
+      <canvas id="chart-income-expense" height="200"></canvas>
+    </div>
+    <div style="background:#f8fafc;padding:1rem;border-radius:10px;border:1px solid #e2e8f0;">
+      <h4 style="font-size:0.9rem;font-weight:700;color:#0f172a;margin-bottom:0.75rem;">Expense Category Breakdown</h4>
+      <canvas id="chart-categories" height="200"></canvas>
+    </div>
+  </div>
+
+  <div style="background:#f8fafc;padding:1rem;border-radius:10px;border:1px solid #e2e8f0;margin-bottom:1.5rem;">
+    <h4 style="font-size:0.9rem;font-weight:700;color:#0f172a;margin-bottom:0.75rem;">Running Account Balance Timeline</h4>
+    <canvas id="chart-balance" height="140"></canvas>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+    <div>
+      <h4 style="font-size:0.9rem;font-weight:700;color:#0f172a;margin-bottom:0.75rem;">🛍️ Top Spending Categories</h4>
+      <div id="top-categories-list" style="font-size:0.85rem;"></div>
+    </div>
+    <div>
+      <h4 style="font-size:0.9rem;font-weight:700;color:#0f172a;margin-bottom:0.75rem;">🔁 Detected Recurring Charges</h4>
+      <div id="recurring-list" style="font-size:0.85rem;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     TRANSACTIONS TABLE & FILTERS
+═══════════════════════════════════════════════════ -->
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.75rem;">
+    <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin:0;">📋 Categorized Transactions</h3>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
+      <input type="text" id="filter-search" placeholder="Search description..." style="padding:0.35rem 0.75rem;border-radius:8px;border:1px solid #cbd5e1;font-size:0.8rem;width:150px;">
+      <select id="filter-type" onchange="applyFilters()" style="padding:0.35rem 0.6rem;border-radius:8px;border:1px solid #cbd5e1;font-size:0.8rem;">
+        <option value="all">All Types</option>
+        <option value="income">Income Only</option>
+        <option value="expense">Expenses Only</option>
+        <option value="recurring">Recurring Only</option>
+        <option value="duplicate">Duplicates Only</option>
+      </select>
+      <select id="filter-cat" onchange="applyFilters()" style="padding:0.35rem 0.6rem;border-radius:8px;border:1px solid #cbd5e1;font-size:0.8rem;">
+        <option value="all">All Categories</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.82rem;text-align:left;min-width:650px;">
+      <thead>
+        <tr style="background:#0f172a;color:#fff;">
+          <th style="padding:0.65rem 0.75rem;">Date</th>
+          <th style="padding:0.65rem 0.75rem;">Description / Payee</th>
+          <th style="padding:0.65rem 0.75rem;">Type</th>
+          <th style="padding:0.65rem 0.75rem;">Amount</th>
+          <th style="padding:0.65rem 0.75rem;">Category</th>
+          <th style="padding:0.65rem 0.75rem;">Balance</th>
+          <th style="padding:0.65rem 0.75rem;">Flags</th>
+        </tr>
+      </thead>
+      <tbody id="tx-tbody">
+        <tr><td colspan="7" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">Load a bank statement and click Analyze Statement to see transactions</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tx-footer" style="margin-top:0.75rem;font-size:0.8rem;color:#64748b;text-align:right;"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INFORMATIONAL CONTENT SECTIONS
+═══════════════════════════════════════════════════ -->
+<section style="margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:0.75rem;">What is a Bank Statement Analyzer?</h2>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    A bank statement analyzer is a financial processing tool that examines bank account exports, transaction logs, and financial statements to automatically extract structured metrics, categorize spending, track income streams, and calculate cash flow health.
+  </p>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    Instead of manually scrolling through hundreds of transaction lines or building custom formulas in spreadsheets, an automated analyzer groups transactions into recognizable spending buckets — such as groceries, rent, utilities, insurance, and subscriptions. It highlights recurring payments, surfaces potential duplicate charges, and computes overall financial health scores.
+  </p>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;">
+    By performing all processing completely in the browser, you gain total clarity over your financial data without sharing private account details or credentials with third-party servers.
+  </p>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Why Analyze Bank Statements?</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#1d4ed8;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Identify Hidden Subscriptions</strong>
+      <p style="color:#1e40af;font-size:0.825rem;line-height:1.55;margin:0;">Spot forgotten recurring charges, streaming services, and automatic membership renewals that quietly drain monthly cash flow.</p>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#15803d;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Monitor Net Cash Flow</strong>
+      <p style="color:#166534;font-size:0.825rem;line-height:1.55;margin:0;">Track deposit velocity against total withdrawals to maintain positive net cash flow and prevent unintended overdrafts.</p>
+    </div>
+    <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#c2410c;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Audit Expense Categories</strong>
+      <p style="color:#9a3412;font-size:0.825rem;line-height:1.55;margin:0;">Categorize spending into essential vs non-essential categories to uncover major cost reduction opportunities.</p>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#7c3aed;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Detect Duplicate Transactions</strong>
+      <p style="color:#6d28d9;font-size:0.825rem;line-height:1.55;margin:0;">Flag double-processed payments or repeated charges caused by merchant processing retries or system errors.</p>
+    </div>
+    <div style="background:#fef9c3;border:1px solid #fde047;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#854d0e;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Tax &amp; Expense Preparation</strong>
+      <p style="color:#713f12;font-size:0.825rem;line-height:1.55;margin:0;">Export organized, categorized transaction summaries ready for annual tax filing or business expense reimbursements.</p>
+    </div>
+    <div style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#0f766e;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Assess Financial Health</strong>
+      <p style="color:#115e59;font-size:0.825rem;line-height:1.55;margin:0;">Evaluate savings ratios, income stability, and expense distribution to set realistic budgeting benchmarks.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:0.5rem;">Key Analyzer Features</h2>
+  <p style="color:#475569;font-size:1rem;margin-bottom:1.5rem;max-width:820px;line-height:1.6;">Built for personal financial tracking, small business statement reviews, and transaction audits.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;">
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🏷️</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Smart Auto-Categorization</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Matches payees and merchant descriptions to 20+ built-in financial categories with instant manual overrides.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔁</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Recurring Charge Detection</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Automatically flags monthly bills, memberships, insurance premiums, and salary deposits.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📈</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Cash Flow &amp; Balance Timeline</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Visualizes monthly income vs expenses, category shares, and running account balance over time.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🏥</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Financial Health Grading</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Generates an overall financial score (A through F) based on savings rate, cash flow stability, and spending distribution.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📤</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Export &amp; HTML Reports</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Export categorized transactions to CSV, Excel, or JSON, or download a printable HTML financial report.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔒</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Zero Cloud Uploads</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Your file is processed 100% inside your browser session. No data is stored, transmitted, or logged anywhere.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Supported Statement &amp; File Formats</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">🏦</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">OFX / QFX / QIF</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Standard financial data exchange files exported directly from online banking portals.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📄</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">CSV / TSV</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Comma and tab delimited transaction history files with auto-header detection.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📗</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">Excel (.xlsx / .xls)</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Spreadsheet workbooks containing transaction registers or account exports.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">🔧</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">JSON &amp; XML</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Structured API payloads or XML statement exports parsed into tabular rows.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">How to Analyze a Bank Statement</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Upload or Paste</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Drag and drop your statement file (CSV, Excel, OFX) or paste transaction rows into the text box.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Confirm Mapping</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Verify auto-detected columns (Date, Description, Amount, Debit/Credit) or map manually.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Run Engine</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click Analyze Statement. The tool categorizes transactions, detects recurring charges, and builds metrics.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Review Insights</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Inspect charts, category share, recurring bill list, cash flow health grade, and filterable tables.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Export Report</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Download your clean categorized dataset as CSV, Excel, or JSON, or save an HTML report.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+  <div style="display:flex;flex-direction:column;gap:1rem;max-width:860px;">
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What is a bank statement analyzer and how does it work?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">A bank statement analyzer processes raw transaction files to categorize spending, track income, detect recurring subscriptions, and evaluate cash flow stability.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Is my financial data uploaded or stored anywhere?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">No. All processing happens 100% inside your local web browser session. No data is uploaded to servers or stored in any cloud database.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Which file formats can I upload for analysis?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">OFX, QFX, QIF, CSV, TSV, Excel (.xlsx/.xls), OpenDocument (.ods), JSON, XML, and pasted text tables.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">How does automatic transaction categorization work?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">The analyzer matches merchant descriptions to 20+ spending categories (Groceries, Utilities, Rent, Salary, Restaurants, etc.). You can also manually edit categories in the transaction table.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">How are recurring payments detected?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">The engine scans payees and transaction amounts across time to flag monthly charges such as streaming subscriptions, utility bills, rent payments, and regular salary deposits.</p>
+    </details>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;background:#0f172a;color:#fff;border-radius:16px;padding:2.5rem;text-align:center;">
+  <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">🏦</span>
+  <h2 style="font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:0.75rem;">Analyze Your Statement Now</h2>
+  <p style="color:#94a3b8;font-size:1.05rem;max-width:600px;margin:0 auto 1.75rem;line-height:1.6;">Upload your transaction file and get complete financial insights, spending breakdowns, and cash flow trends in seconds — with total privacy.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="#drop-zone" style="padding:0.85rem 1.75rem;background:#16a34a;color:#fff;font-weight:700;border-radius:8px;text-decoration:none;font-size:0.95rem;">🏦 Start Statement Analysis</a>
+    <a href="/analyze/data-profiler/" style="padding:0.85rem 1.75rem;background:rgba(255,255,255,0.1);color:#fff;font-weight:600;border-radius:8px;text-decoration:none;font-size:0.95rem;border:1px solid rgba(255,255,255,0.2);">🔬 Data Profiler</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT — BANK STATEMENT ANALYSIS ENGINE
+═══════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+{% raw %}
+<script>
+(function() {
+  'use strict';
+
+  let rawRows = [];
+  let headers = [];
+  let transactions = [];
+  let filteredTx = [];
+  let chartIncomeExpense = null;
+  let chartCategories = null;
+  let chartBalance = null;
+  let detectedFormat = '';
+
+  const CATEGORIES = [
+    'Salary', 'Grocery', 'Restaurants', 'Shopping', 'Utilities', 'Transport',
+    'Fuel', 'Insurance', 'Rent', 'Mortgage', 'Medical', 'Pharmacy',
+    'Education', 'Entertainment', 'Subscription', 'Investment', 'Savings',
+    'Transfer', 'ATM Withdrawal', 'Fees', 'Taxes', 'Travel', 'Other'
+  ];
+
+  const SAMPLE_CSV = [
+    { Date: '2026-07-01', Description: 'EMPLOYER PAYROLL DIRECT DEPOSIT', Amount: '4500.00', Balance: '5850.00' },
+    { Date: '2026-07-02', Description: 'MAIN STREET APARTMENTS RENT', Amount: '-1650.00', Balance: '4200.00' },
+    { Date: '2026-07-03', Description: 'WHOLE FOODS MARKET GROCERY', Amount: '-142.50', Balance: '4057.50' },
+    { Date: '2026-07-05', Description: 'ELECTRIC UTILITY CORP BILL', Amount: '-85.20', Balance: '3972.30' },
+    { Date: '2026-07-07', Description: 'NETFLIX STREAMING SUBSCRIPTION', Amount: '-15.99', Balance: '3956.31' },
+    { Date: '2026-07-08', Description: 'SHELL OIL FUEL GAS STATION', Amount: '-45.00', Balance: '3911.31' },
+    { Date: '2026-07-10', Description: 'STARBUCKS COFFEE CAFE', Amount: '-6.75', Balance: '3904.56' },
+    { Date: '2026-07-12', Description: 'GEICO AUTO INSURANCE PREMIUM', Amount: '-120.00', Balance: '3784.56' },
+    { Date: '2026-07-15', Description: 'EMPLOYER PAYROLL DIRECT DEPOSIT', Amount: '4500.00', Balance: '8284.56' },
+    { Date: '2026-07-16', Description: 'TRADER JOES GROCERY STORE', Amount: '-98.40', Balance: '8186.16' },
+    { Date: '2026-07-18', Description: 'AMAZON.COM ONLINE SHOPPING', Amount: '-64.30', Balance: '8121.86' },
+    { Date: '2026-07-20', Description: 'ATM CASH WITHDRAWAL MAIN ST', Amount: '-100.00', Balance: '8021.86' },
+    { Date: '2026-07-22', Description: 'SPOTIFY MUSIC SUBSCRIPTION', Amount: '-9.99', Balance: '8011.87' },
+    { Date: '2026-07-25', Description: 'UBER EATS RESTAURANT DELIVERY', Amount: '-32.50', Balance: '7979.37' },
+    { Date: '2026-07-28', Description: 'CVS PHARMACY PRESCRIPTION', Amount: '-24.80', Balance: '7954.57' }
+  ];
+
+  const dropZone  = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const dataInput = document.getElementById('data-input');
+
+  dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.style.borderColor = '#16a34a'; dropZone.style.background = '#f0fdf4'; });
+  dropZone.addEventListener('dragleave', function() { dropZone.style.borderColor = '#cbd5e1'; dropZone.style.background = '#fff'; });
+  dropZone.addEventListener('drop', function(e) { e.preventDefault(); resetDropStyle(); var f = e.dataTransfer.files[0]; if (f) handleFile(f); });
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  fileInput.addEventListener('change', function() { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+  document.getElementById('btn-sample').addEventListener('click', function() {
+    headers = Object.keys(SAMPLE_CSV[0]);
+    rawRows = SAMPLE_CSV;
+    detectedFormat = 'Sample CSV Statement';
+    dataInput.value = rowsToCSV(headers, rawRows);
+    setupMappingOptions(headers);
+    autoAnalyze();
+    showStatus('Loaded sample statement (' + rawRows.length + ' transactions).');
+  });
+
+  document.getElementById('btn-clear').addEventListener('click', resetAll);
+  document.getElementById('btn-analyze').addEventListener('click', autoAnalyze);
+  document.getElementById('btn-copy').addEventListener('click', copySummary);
+  document.getElementById('btn-export-csv').addEventListener('click', function() { exportData('csv'); });
+  document.getElementById('btn-export-excel').addEventListener('click', function() { exportData('excel'); });
+  document.getElementById('btn-export-json').addEventListener('click', function() { exportData('json'); });
+  document.getElementById('btn-report').addEventListener('click', downloadReport);
+  document.getElementById('filter-search').addEventListener('input', applyFilters);
+
+  function handleFile(file) {
+    var ext = file.name.split('.').pop().toLowerCase();
+    resetDropStyle();
+    if (ext === 'xlsx' || ext === 'xls' || ext === 'ods') {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+        var ws = wb.Sheets[wb.SheetNames[0]];
+        var data = XLSX.utils.sheet_to_json(ws, { defval: '' });
+        if (!data.length) { alert('No rows found in spreadsheet.'); return; }
+        headers = Object.keys(data[0]);
+        rawRows = data;
+        detectedFormat = 'Excel (' + ext.toUpperCase() + ')';
+        setupMappingOptions(headers);
+        postLoad(file.name);
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      var reader2 = new FileReader();
+      reader2.onload = function(e) {
+        var text = e.target.result;
+        dataInput.value = text.substring(0, 800) + (text.length > 800 ? '\n...' : '');
+        parseText(text, ext, file.name);
+      };
+      reader2.readAsText(file);
+    }
+  }
+
+  function parseText(text, ext, name) {
+    try {
+      var trimmed = text.trim();
+      if (ext === 'ofx' || ext === 'qfx' || trimmed.includes('<OFX>')) {
+        parseOFX(trimmed);
+        detectedFormat = 'OFX / QFX';
+      } else if (ext === 'qif' || trimmed.startsWith('!Type:')) {
+        parseQIF(trimmed);
+        detectedFormat = 'QIF';
+      } else if (ext === 'json' || (!ext && trimmed[0] === '[')) {
+        var parsed = JSON.parse(trimmed);
+        var rows = Array.isArray(parsed) ? parsed : [parsed];
+        headers = Object.keys(rows[0] || {});
+        rawRows = rows;
+        detectedFormat = 'JSON';
+      } else {
+        var delim = detectDelimiter(trimmed);
+        var p = parseCSV(trimmed, delim);
+        headers = p.headers;
+        rawRows = p.rows;
+        detectedFormat = delim === ',' ? 'CSV' : delim === '\t' ? 'TSV' : 'CSV';
+      }
+      setupMappingOptions(headers);
+      postLoad(name || 'pasted statement');
+    } catch(e) {
+      alert('Could not parse statement: ' + e.message);
+    }
+  }
+
+  function parseOFX(ofxText) {
+    var txs = [];
+    var matches = ofxText.match(/<STMTTRN>[\s\S]*?<\/STMTTRN>/gi) || [];
+    matches.forEach(function(block) {
+      var dateMatch = block.match(/<DTPOSTED>(\d{8})/);
+      var amtMatch = block.match(/<TRNAMT>([\d\.\-]+)/);
+      var nameMatch = block.match(/<(NAME|MEMO)>(.*)/);
+      if (dateMatch && amtMatch) {
+        var d = dateMatch[1];
+        var dateStr = d.substring(0,4) + '-' + d.substring(4,6) + '-' + d.substring(6,8);
+        txs.push({
+          Date: dateStr,
+          Description: nameMatch ? nameMatch[2].trim() : 'Transaction',
+          Amount: amtMatch[1]
+        });
+      }
+    });
+    if (!txs.length) throw new Error('No valid transactions found in OFX block.');
+    headers = ['Date', 'Description', 'Amount'];
+    rawRows = txs;
+  }
+
+  function parseQIF(qifText) {
+    var txs = [];
+    var lines = qifText.split(/\r?\n/);
+    var cur = {};
+    lines.forEach(function(l) {
+      l = l.trim();
+      if (l.startsWith('D')) cur.Date = l.substring(1);
+      else if (l.startsWith('T')) cur.Amount = l.substring(1).replace(/,/g,'');
+      else if (l.startsWith('P')) cur.Description = l.substring(1);
+      else if (l === '^') {
+        if (cur.Date && cur.Amount) txs.push(cur);
+        cur = {};
+      }
+    });
+    if (!txs.length) throw new Error('No valid transactions found in QIF file.');
+    headers = ['Date', 'Description', 'Amount'];
+    rawRows = txs;
+  }
+
+  function postLoad(name) {
+    showStatus('Loaded "' + name + '" — ' + rawRows.length + ' transactions detected. Click Analyze Statement.');
+    autoAnalyze();
+  }
+
+  function parseCSV(text, delim) {
+    var lines = text.split(/\r?\n/);
+    var hdrs = splitLine(lines[0], delim).map(function(h) { return h.trim().replace(/^"|"$/g, ''); });
+    var rows = [];
+    for (var i = 1; i < lines.length; i++) {
+      if (!lines[i].trim()) continue;
+      var vals = splitLine(lines[i], delim);
+      var obj = {};
+      hdrs.forEach(function(h, idx) { obj[h] = (vals[idx] || '').trim().replace(/^"|"$/g, ''); });
+      rows.push(obj);
+    }
+    return { headers: hdrs, rows: rows };
+  }
+
+  function splitLine(line, delim) {
+    var res = [], cur = '', inQ = false;
+    for (var i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; }
+      else if (line[i] === delim && !inQ) { res.push(cur); cur = ''; }
+      else { cur += line[i]; }
+    }
+    res.push(cur);
+    return res;
+  }
+
+  function detectDelimiter(text) {
+    var line = text.split('\n')[0];
+    var counts = { ',': 0, '\t': 0, '|': 0, ';': 0 };
+    for (var i = 0; i < line.length; i++) {
+      if (counts[line[i]] !== undefined) counts[line[i]]++;
+    }
+    return Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; })[0][0];
+  }
+
+  function setupMappingOptions(cols) {
+    var panel = document.getElementById('mapping-panel');
+    panel.style.display = 'block';
+    ['map-date', 'map-desc', 'map-amount', 'map-debit', 'map-credit', 'map-balance'].forEach(function(id) {
+      var sel = document.getElementById(id);
+      sel.innerHTML = '<option value="">-- None --</option>' + cols.map(function(c) { return '<option value="' + esc(c) + '">' + esc(c) + '</option>'; }).join('');
+    });
+
+    // Auto select
+    cols.forEach(function(c) {
+      var lc = c.toLowerCase();
+      if (lc.includes('date')) document.getElementById('map-date').value = c;
+      if (lc.includes('desc') || lc.includes('payee') || lc.includes('name') || lc.includes('memo')) document.getElementById('map-desc').value = c;
+      if (lc === 'amount' || lc.includes('amt')) document.getElementById('map-amount').value = c;
+      if (lc.includes('debit') || lc.includes('withdrawal') || lc.includes('out')) document.getElementById('map-debit').value = c;
+      if (lc.includes('credit') || lc.includes('deposit') || lc.includes('in')) document.getElementById('map-credit').value = c;
+      if (lc.includes('balance') || lc.includes('bal')) document.getElementById('map-balance').value = c;
+    });
+
+    // Fallbacks if nothing selected
+    if (!document.getElementById('map-date').value && cols[0]) document.getElementById('map-date').value = cols[0];
+    if (!document.getElementById('map-desc').value && cols[1]) document.getElementById('map-desc').value = cols[1];
+    if (!document.getElementById('map-amount').value && cols[2]) document.getElementById('map-amount').value = cols[2];
+  }
+
+  // ── Auto-Categorization & Analysis Core Engine ───────────────────────
+  function categorize(desc, amt) {
+    var d = desc.toLowerCase();
+    if (d.includes('salary') || d.includes('payroll') || d.includes('direct deposit') || d.includes('wages')) return 'Salary';
+    if (d.includes('grocery') || d.includes('supermarket') || d.includes('walmart') || d.includes('trader') || d.includes('kroger') || d.includes('costco') || d.includes('whole foods') || d.includes('target') || d.includes('aldi')) return 'Grocery';
+    if (d.includes('restaurant') || d.includes('cafe') || d.includes('coffee') || d.includes('starbucks') || d.includes('mcdonald') || d.includes('uber eats') || d.includes('doordash') || d.includes('pizza') || d.includes('diner')) return 'Restaurants';
+    if (d.includes('utility') || d.includes('electric') || d.includes('water') || d.includes('power') || d.includes('gas corp') || d.includes('comcast') || d.includes('verizon') || d.includes('at&t') || d.includes('internet')) return 'Utilities';
+    if (d.includes('uber') || d.includes('lyft') || d.includes('taxi') || d.includes('transit') || d.includes('subway') || d.includes('airline')) return 'Transport';
+    if (d.includes('fuel') || d.includes('shell') || d.includes('chevron') || d.includes('exxon') || d.includes('bp ') || d.includes('mobil') || d.includes('gas station')) return 'Fuel';
+    if (d.includes('rent') || d.includes('lease') || d.includes('apartment')) return 'Rent';
+    if (d.includes('mortgage') || d.includes('home loan')) return 'Mortgage';
+    if (d.includes('insurance') || d.includes('geico') || d.includes('allstate') || d.includes('progressive')) return 'Insurance';
+    if (d.includes('medical') || d.includes('hospital') || d.includes('doctor') || d.includes('dental') || d.includes('clinic')) return 'Medical';
+    if (d.includes('pharmacy') || d.includes('cvs') || d.includes('walgreens')) return 'Pharmacy';
+    if (d.includes('netflix') || d.includes('spotify') || d.includes('hulu') || d.includes('disney') || d.includes('apple') || d.includes('youtube') || d.includes('subscription')) return 'Subscription';
+    if (d.includes('amazon') || d.includes('ebay') || d.includes('store') || d.includes('shop') || d.includes('retail')) return 'Shopping';
+    if (d.includes('atm') || d.includes('cash withdrawal')) return 'ATM Withdrawal';
+    if (d.includes('transfer') || d.includes('zelle') || d.includes('venmo') || d.includes('paypal') || d.includes('wire')) return 'Transfer';
+    if (d.includes('fee') || d.includes('charge') || d.includes('overdraft') || d.includes('interest')) return 'Fees';
+    if (d.includes('tax') || d.includes('irs')) return 'Taxes';
+
+    if (amt > 0) return 'Salary';
+    return 'Other';
+  }
+
+  function autoAnalyze() {
+    if (!rawRows.length) {
+      if (dataInput.value.trim()) parseText(dataInput.value, 'csv', 'pasted data');
+      else { alert('Please upload or paste a statement first.'); return; }
+    }
+
+    var dateCol   = document.getElementById('map-date').value;
+    var descCol   = document.getElementById('map-desc').value;
+    var amtCol    = document.getElementById('map-amount').value;
+    var debitCol  = document.getElementById('map-debit').value;
+    var creditCol = document.getElementById('map-credit').value;
+    var balCol    = document.getElementById('map-balance').value;
+
+    transactions = [];
+    var runningBal = 0;
+    var descCounts = {};
+
+    rawRows.forEach(function(r, idx) {
+      var dateStr = r[dateCol] || 'N/A';
+      var descStr = r[descCol] || 'Transaction ' + (idx + 1);
+
+      var amt = 0;
+      if (amtCol && r[amtCol] !== undefined && r[amtCol] !== '') {
+        amt = parseFloat(String(r[amtCol]).replace(/[\$,]/g, '')) || 0;
+      } else {
+        var dr = parseFloat(String(r[debitCol] || 0).replace(/[\$,]/g, '')) || 0;
+        var cr = parseFloat(String(r[creditCol] || 0).replace(/[\$,]/g, '')) || 0;
+        amt = cr - Math.abs(dr);
+      }
+
+      var bal = r[balCol] !== undefined && r[balCol] !== '' ? parseFloat(String(r[balCol]).replace(/[\$,]/g, '')) : null;
+      if (bal !== null) runningBal = bal;
+      else runningBal += amt;
+
+      var type = amt >= 0 ? 'income' : 'expense';
+      var cat = categorize(descStr, amt);
+
+      var key = descStr.toLowerCase().trim() + '|' + Math.abs(amt).toFixed(2);
+      descCounts[key] = (descCounts[key] || 0) + 1;
+
+      transactions.push({
+        idx: idx + 1,
+        date: dateStr,
+        desc: descStr,
+        amount: amt,
+        type: type,
+        category: cat,
+        balance: bal !== null ? bal : runningBal,
+        key: key,
+        isRecurring: false,
+        isDuplicate: false
+      });
+    });
+
+    // Mark recurring and duplicates
+    transactions.forEach(function(t) {
+      if (descCounts[t.key] > 1) {
+        t.isRecurring = true;
+        if (descCounts[t.key] > 2) t.isDuplicate = true;
+      }
+    });
+
+    // Populate category dropdown filter
+    var catSel = document.getElementById('filter-cat');
+    catSel.innerHTML = '<option value="all">All Categories</option>' + CATEGORIES.map(function(c) { return '<option value="' + esc(c) + '">' + esc(c) + '</option>'; }).join('');
+
+    computeMetrics();
+    applyFilters();
+    renderCharts();
+  }
+
+  function computeMetrics() {
+    if (!transactions.length) return;
+
+    var dates = transactions.map(function(t) { return t.date; }).filter(function(d) { return d !== 'N/A'; });
+    dates.sort();
+    var period = dates.length ? (dates[0] + ' to ' + dates[dates.length - 1]) : 'N/A';
+
+    var totalIncome = 0, totalExpense = 0, recurringCount = 0;
+    var catTotals = {};
+
+    transactions.forEach(function(t) {
+      if (t.amount >= 0) totalIncome += t.amount;
+      else {
+        totalExpense += Math.abs(t.amount);
+        catTotals[t.category] = (catTotals[t.category] || 0) + Math.abs(t.amount);
+      }
+      if (t.isRecurring) recurringCount++;
+    });
+
+    var netCashFlow = totalIncome - totalExpense;
+    var savingsRate = totalIncome > 0 ? ((netCashFlow / totalIncome) * 100).toFixed(1) : '0.0';
+
+    document.getElementById('c-period').textContent    = period;
+    document.getElementById('c-income').textContent    = '$' + totalIncome.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById('c-expenses').textContent  = '$' + totalExpense.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById('c-cashflow').textContent  = (netCashFlow >= 0 ? '+' : '') + '$' + netCashFlow.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById('c-cashflow').style.color  = netCashFlow >= 0 ? '#16a34a' : '#dc2626';
+    document.getElementById('c-count').textContent     = transactions.length.toLocaleString();
+    document.getElementById('c-recurring').textContent = recurringCount.toLocaleString();
+    document.getElementById('c-savings').textContent   = savingsRate + '%';
+
+    var srNum = parseFloat(savingsRate);
+    var healthEl = document.getElementById('c-health');
+    var grade, hbg, hcol;
+    if (srNum >= 25)      { grade = 'A — Outstanding'; hbg = '#f0fdf4'; hcol = '#16a34a'; }
+    else if (srNum >= 15) { grade = 'B — Healthy';     hbg = '#eff6ff'; hcol = '#2563eb'; }
+    else if (srNum >= 5)  { grade = 'C — Fair';        hbg = '#fefce8'; hcol = '#ca8a04'; }
+    else if (srNum >= 0)  { grade = 'D — Low Savings'; hbg = '#fff7ed'; hcol = '#ea580c'; }
+    else                  { grade = 'F — Deficit';     hbg = '#fef2f2'; hcol = '#dc2626'; }
+
+    healthEl.textContent = grade;
+    healthEl.style.background = hbg;
+    healthEl.style.color = hcol;
+
+    renderTopLists(catTotals);
+  }
+
+  function renderTopLists(catTotals) {
+    var catEl = document.getElementById('top-categories-list');
+    var recEl = document.getElementById('recurring-list');
+
+    var sortedCats = Object.entries(catTotals).sort(function(a, b) { return b[1] - a[1]; });
+    if (!sortedCats.length) catEl.innerHTML = '<p style="color:#94a3b8;">No expenses recorded.</p>';
+    else {
+      catEl.innerHTML = sortedCats.slice(0, 6).map(function(kv) {
+        return '<div style="display:flex;justify-content:space-between;padding:0.35rem 0;border-bottom:1px dashed #e2e8f0;">'
+          + '<span style="color:#0f172a;font-weight:600;">' + esc(kv[0]) + '</span>'
+          + '<span style="color:#dc2626;font-weight:700;">$' + kv[1].toFixed(2) + '</span>'
+          + '</div>';
+      }).join('');
+    }
+
+    var recurr = transactions.filter(function(t) { return t.isRecurring; });
+    var uniqueRec = {};
+    recurr.forEach(function(r) { uniqueRec[r.desc] = r.amount; });
+    var recItems = Object.entries(uniqueRec);
+    if (!recItems.length) recEl.innerHTML = '<p style="color:#94a3b8;">No recurring charges detected.</p>';
+    else {
+      recEl.innerHTML = recItems.slice(0, 6).map(function(kv) {
+        return '<div style="display:flex;justify-content:space-between;padding:0.35rem 0;border-bottom:1px dashed #e2e8f0;">'
+          + '<span style="color:#0f172a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px;" title="' + esc(kv[0]) + '">' + esc(kv[0]) + '</span>'
+          + '<span style="color:' + (kv[1] >= 0 ? '#16a34a' : '#dc2626') + ';font-weight:700;">' + (kv[1] >= 0 ? '+' : '') + '$' + Math.abs(kv[1]).toFixed(2) + '</span>'
+          + '</div>';
+      }).join('');
+    }
+  }
+
+  function applyFilters() {
+    var q = document.getElementById('filter-search').value.toLowerCase();
+    var typeF = document.getElementById('filter-type').value;
+    var catF = document.getElementById('filter-cat').value;
+
+    filteredTx = transactions.filter(function(t) {
+      if (q && !t.desc.toLowerCase().includes(q)) return false;
+      if (typeF === 'income' && t.type !== 'income') return false;
+      if (typeF === 'expense' && t.type !== 'expense') return false;
+      if (typeF === 'recurring' && !t.isRecurring) return false;
+      if (typeF === 'duplicate' && !t.isDuplicate) return false;
+      if (catF !== 'all' && t.category !== catF) return false;
+      return true;
+    });
+
+    renderTable();
+  }
+
+  function renderTable() {
+    var tbody = document.getElementById('tx-tbody');
+    var footer = document.getElementById('tx-footer');
+
+    if (!filteredTx.length) {
+      tbody.innerHTML = '<tr><td colspan="7" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">No matching transactions found.</td></tr>';
+      footer.textContent = '';
+      return;
+    }
+
+    tbody.innerHTML = filteredTx.slice(0, 500).map(function(t) {
+      var isInc = t.amount >= 0;
+      var amtStr = (isInc ? '+' : '-') + '$' + Math.abs(t.amount).toFixed(2);
+      var amtCol = isInc ? '#16a34a' : '#dc2626';
+
+      var flags = [];
+      if (t.isRecurring) flags.push('<span style="padding:0.1rem 0.4rem;background:#faf5ff;color:#7c3aed;border-radius:9999px;font-size:0.68rem;font-weight:700;">Recurring</span>');
+      if (t.isDuplicate) flags.push('<span style="padding:0.1rem 0.4rem;background:#fff7ed;color:#c2410c;border-radius:9999px;font-size:0.68rem;font-weight:700;">Duplicate</span>');
+
+      var catOptions = CATEGORIES.map(function(c) { return '<option value="' + esc(c) + '"' + (c === t.category ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('');
+
+      return '<tr style="border-bottom:1px solid #f1f5f9;">'
+        + '<td style="padding:0.55rem 0.75rem;color:#64748b;font-size:0.8rem;white-space:nowrap;">' + esc(t.date) + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;font-size:0.82rem;color:#0f172a;font-weight:600;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + esc(t.desc) + '">' + esc(t.desc) + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;"><span style="padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.7rem;font-weight:700;background:' + (isInc ? '#f0fdf4;color:#16a34a' : '#fef2f2;color:#dc2626') + ';">' + (isInc ? 'Deposit' : 'Expense') + '</span></td>'
+        + '<td style="padding:0.55rem 0.75rem;font-size:0.85rem;font-weight:700;color:' + amtCol + ';">' + amtStr + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;"><select onchange="updateRowCat(' + t.idx + ', this.value)" style="padding:0.2rem 0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.78rem;">' + catOptions + '</select></td>'
+        + '<td style="padding:0.55rem 0.75rem;font-size:0.8rem;color:#64748b;">$' + t.balance.toFixed(2) + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;white-space:nowrap;">' + (flags.join(' ') || '<span style="color:#cbd5e1;">—</span>') + '</td>'
+        + '</tr>';
+    }).join('');
+
+    var shown = Math.min(filteredTx.length, 500);
+    footer.textContent = 'Showing ' + shown.toLocaleString() + ' of ' + filteredTx.length.toLocaleString() + ' matching transactions' + (filteredTx.length > 500 ? ' (first 500 displayed)' : '');
+  }
+
+  window.updateRowCat = function(idx, newCat) {
+    var target = transactions.find(function(t) { return t.idx === idx; });
+    if (target) {
+      target.category = newCat;
+      computeMetrics();
+      renderCharts();
+    }
+  };
+
+  // ── Charts ───────────────────────────────────────────────────────────
+  function renderCharts() {
+    var sec = document.getElementById('chart-section');
+    sec.style.display = 'block';
+
+    // 1. Income vs Expense
+    var totalInc = 0, totalExp = 0;
+    transactions.forEach(function(t) { if (t.amount >= 0) totalInc += t.amount; else totalExp += Math.abs(t.amount); });
+
+    if (chartIncomeExpense) chartIncomeExpense.destroy();
+    chartIncomeExpense = new Chart(document.getElementById('chart-income-expense'), {
+      type: 'bar',
+      data: {
+        labels: ['Total Deposits', 'Total Expenses'],
+        datasets: [{ data: [totalInc, totalExp], backgroundColor: ['#16a34a', '#dc2626'], borderRadius: 6 }]
+      },
+      options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+
+    // 2. Categories Doughnut
+    var catMap = {};
+    transactions.forEach(function(t) {
+      if (t.amount < 0) catMap[t.category] = (catMap[t.category] || 0) + Math.abs(t.amount);
+    });
+
+    var labels = Object.keys(catMap);
+    var values = Object.values(catMap);
+    var palette = ['#2563eb', '#16a34a', '#dc2626', '#ea580c', '#9333ea', '#ca8a04', '#0f766e', '#475569', '#2563eb', '#d97706'];
+
+    if (chartCategories) chartCategories.destroy();
+    chartCategories = new Chart(document.getElementById('chart-categories'), {
+      type: 'doughnut',
+      data: { labels: labels, datasets: [{ data: values, backgroundColor: palette.slice(0, labels.length) }] },
+      options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    });
+
+    // 3. Balance Line Chart
+    var dates = transactions.map(function(t) { return t.date; });
+    var balances = transactions.map(function(t) { return t.balance; });
+
+    if (chartBalance) chartBalance.destroy();
+    chartBalance = new Chart(document.getElementById('chart-balance'), {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{ label: 'Running Balance ($)', data: balances, borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.08)', fill: true, tension: 0.2 }]
+      },
+      options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+  }
+
+  // ── Exports ───────────────────────────────────────────────────────────
+  function exportData(fmt) {
+    if (!transactions.length) { alert('Run Analyze Statement first.'); return; }
+    var clean = transactions.map(function(t) {
+      return {
+        Date: t.date,
+        Description: t.desc,
+        Type: t.type,
+        Amount: t.amount,
+        Category: t.category,
+        Balance: t.balance,
+        Recurring: t.isRecurring ? 'Yes' : 'No'
+      };
+    });
+
+    if (fmt === 'csv') {
+      var hdrs = Object.keys(clean[0]);
+      dlFile('bank-statement-analysis.csv', rowsToCSV(hdrs, clean), 'text/csv');
+    } else if (fmt === 'excel') {
+      var ws = XLSX.utils.json_to_sheet(clean);
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'BankAnalysis');
+      var out = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+      dlFile('bank-statement-analysis.xlsx', out, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    } else if (fmt === 'json') {
+      dlFile('bank-statement-analysis.json', JSON.stringify(clean, null, 2), 'application/json');
+    }
+  }
+
+  function downloadReport() {
+    if (!transactions.length) { alert('Run Analyze Statement first.'); return; }
+    var totalInc = 0, totalExp = 0;
+    transactions.forEach(function(t) { if (t.amount >= 0) totalInc += t.amount; else totalExp += Math.abs(t.amount); });
+    var net = totalInc - totalExp;
+
+    var parts = [
+      '<!DOCTYPE html><html>',
+      '<head><meta charset="utf-8"><title>Bank Statement Analysis Report<\/title>',
+      '<style>body{font-family:sans-serif;padding:2rem;color:#0f172a;max-width:900px;margin:0 auto}',
+      'h1{font-size:1.6rem}h2{font-size:1.2rem;margin-top:2rem}',
+      'table{border-collapse:collapse;width:100%;font-size:0.85rem;margin-top:1rem}',
+      'th,td{border:1px solid #e2e8f0;padding:0.5rem 0.75rem;text-align:left}',
+      'th{background:#0f172a;color:#fff}.inc{color:#16a34a}.exp{color:#dc2626}<\/style><\/head><body>',
+      '<h1>Bank Statement Financial Health Report<\/h1><p>Generated: ' + new Date().toLocaleString() + '<\/p>',
+      '<h2>Financial Executive Summary<\/h2>',
+      '<p>Total Deposits: <b class="inc">$' + totalInc.toFixed(2) + '<\/b> | Total Expenses: <b class="exp">$' + totalExp.toFixed(2) + '<\/b> | Net Cash Flow: <b>$' + net.toFixed(2) + '<\/b><\/p>',
+      '<h2>Categorized Transactions List<\/h2><table><thead><tr><th>Date<\/th><th>Description<\/th><th>Category<\/th><th>Amount<\/th><th>Balance<\/th><\/tr><\/thead><tbody>',
+      transactions.slice(0, 500).map(function(t) {
+        var cls = t.amount >= 0 ? 'inc' : 'exp';
+        return '<tr><td>' + esc(t.date) + '<\/td><td>' + esc(t.desc) + '<\/td><td>' + esc(t.category) + '<\/td><td class="' + cls + '">$' + t.amount.toFixed(2) + '<\/td><td>$' + t.balance.toFixed(2) + '<\/td><\/tr>';
+      }).join(''),
+      '<\/tbody><\/table><\/body><\/html>'
+    ];
+    dlFile('bank-statement-report.html', parts.join(''), 'text/html');
+  }
+
+  function copySummary() {
+    if (!transactions.length) { alert('Run Analyze Statement first.'); return; }
+    var totalInc = 0, totalExp = 0;
+    transactions.forEach(function(t) { if (t.amount >= 0) totalInc += t.amount; else totalExp += Math.abs(t.amount); });
+    var txt = 'BANK STATEMENT ANALYSIS SUMMARY\n==================================\n'
+      + 'Transactions: ' + transactions.length + '\n'
+      + 'Total Deposits: $' + totalInc.toFixed(2) + '\n'
+      + 'Total Expenses: $' + totalExp.toFixed(2) + '\n'
+      + 'Net Cash Flow: $' + (totalInc - totalExp).toFixed(2) + '\n'
+      + 'Format: ' + detectedFormat;
+    navigator.clipboard.writeText(txt).then(function() { alert('Summary copied!'); }).catch(function() { alert('Copy failed.'); });
+  }
+
+  function rowsToCSV(hdrs, rows) {
+    var e = function(v) { return '"' + String(v != null ? v : '').replace(/"/g, '""') + '"'; };
+    return [hdrs.map(e).join(',')].concat(rows.map(function(r) { return hdrs.map(function(h) { return e(r[h]); }).join(','); })).join('\n');
+  }
+
+  function dlFile(name, content, type) {
+    var blob = content instanceof Uint8Array ? new Blob([content], { type: type }) : new Blob([content], { type: type });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function esc(s) {
+    return String(s != null ? s : '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function showStatus(msg) {
+    var ex = document.getElementById('status-msg');
+    if (ex) ex.remove();
+    var el = document.createElement('div');
+    el.id = 'status-msg';
+    el.style.cssText = 'padding:0.65rem 1rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;color:#166534;font-size:0.875rem;margin-bottom:1rem;';
+    el.textContent = msg;
+    document.getElementById('drop-zone').insertAdjacentElement('afterend', el);
+  }
+
+  function resetAll() {
+    rawRows = []; headers = []; transactions = []; filteredTx = []; detectedFormat = '';
+    dataInput.value = ''; fileInput.value = '';
+    if (chartIncomeExpense) { chartIncomeExpense.destroy(); chartIncomeExpense = null; }
+    if (chartCategories) { chartCategories.destroy(); chartCategories = null; }
+    if (chartBalance) { chartBalance.destroy(); chartBalance = null; }
+    document.getElementById('chart-section').style.display = 'none';
+    document.getElementById('mapping-panel').style.display = 'none';
+    ['c-period', 'c-income', 'c-expenses', 'c-cashflow', 'c-count', 'c-recurring', 'c-savings'].forEach(function(id) { document.getElementById(id).textContent = '—'; });
+    var h = document.getElementById('c-health');
+    h.textContent = '—'; h.style.background = '#f0fdf4'; h.style.color = '#16a34a';
+    var sm = document.getElementById('status-msg');
+    if (sm) sm.remove();
+    document.getElementById('tx-tbody').innerHTML = '<tr><td colspan="7" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">Load a bank statement and click Analyze Statement to see transactions</td></tr>';
+    resetDropStyle();
+  }
+
+  function resetDropStyle() {
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.background = '#fff';
+  }
+})();
+</script>
+{% endraw %}
