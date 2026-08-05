@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "Terms of Service | DataFrog.tools"
+title: "Terms of Service DataFrog"
 description: "DataFrog.tools Terms of Service. Guidelines for using our browser-based data processing workspace."
 permalink: /terms-of-service
 keywords: "DataFrog terms of service, terms of use, privacy first terms, client side data tool terms"

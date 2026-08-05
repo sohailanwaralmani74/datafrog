@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "Data Intelligence Blog — Tutorials & Guides | DataFrog.tools"
+title: "Data Intelligence Blog — Tutorials & Guides DataFrog"
 description: "Read expert data engineering guides, JSON Schema tutorials, CSV profiling tips, XML tree analysis, and local browser data processing best practices."
 permalink: /blog
 sitemap: true

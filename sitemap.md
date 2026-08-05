@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "Sitemap | DataFrog.tools"
+title: "Sitemap DataFrog"
 description: "DataFrog.tools Sitemap. Comprehensive directory of all category modules, tools, and resource pages."
 permalink: /sitemap
 keywords: "DataFrog sitemap, site directory, all tools list"

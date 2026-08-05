@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "Privacy Policy | DataFrog.tools"
+title: "Privacy Policy DataFrog"
 description: "DataFrog.tools Privacy Policy. Learn about our 100% browser-based architecture, zero server-side data collection, cookie policy, and Google AdSense compliance."
 permalink: /privacy-policy
 keywords: "DataFrog privacy policy, browser based data security, client side data processing, AdSense privacy compliance, cookies policy"
