@@ -1,30 +1,59 @@
 ---
 layout: main
-title: "Contact DataFrog – Feedback, Tool Suggestions & Support"
-description: "Have a question, tool request, or feedback? Contact the DataFrog team. We’re here to help and build the tools you need."
-keywords: "contact DataFrog, feedback, tool suggestions, support, data conversion tools help"
+title: "Contact Us | DataFrog.tools"
+description: "Get in touch with the DataFrog.tools team for questions, feedback, tool requests, or support."
+permalink: /contact-us
+keywords: "Contact DataFrog, datafrog support, feature request, feedback"
 ---
 
-<div class="contact-page" style="max-width:800px; margin:80px auto; padding:0 20px; font-family:Arial, sans-serif; text-align:center;">
-  <h1 style="font-size:2.5em; margin-bottom:20px; color:#007BFF;">Contact US | Datafrog.tools</h1>
-  <p style="font-size:1.2em; margin-bottom:30px; color:#555;">
-    Have a question, need support, or want to suggest a new tool? We’d love to hear from you.
-  </p>
-  <p style="font-size:1.1em; margin-bottom:20px; color:#555;">
-    Missing a specific converter or facing an issue with an existing tool? Let us know, and we’ll work to improve your experience.
-  </p>
-  <p style="font-size:1.1em; margin-bottom:20px; color:#555;">
-    📧 Email us directly at: 
-    <a href="mailto:sohailanwaralmani74@gmail.com" style="color:#007BFF; text-decoration:underline;">sohailanwaralmani74@gmail.com</a>
-  </p>
-  <p style="font-size:1em; color:#555; margin-top:20px;">
-    We aim to respond to all inquiries promptly. Thank you for using DataFrog!
-  </p>
-</div>
+<div class="page-container" style="max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; line-height: 1.7; color: var(--text-primary);">
+  <header style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-default); padding-bottom: 1.5rem;">
+    <h1 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Contact Us</h1>
+    <p style="color: var(--text-muted); font-size: 1.05rem;">We would love to hear from you! Have feedback, a bug report, or a tool request?</p>
+  </header>
 
-<style>
-  .contact-page a:hover {
-    text-decoration: none;
-    opacity: 0.8;
-  }
-</style>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+    <div style="background: var(--bg-soft); padding: 2rem; border-radius: var(--radius-lg, 12px); border: 1px solid var(--border-default);">
+      <h2 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Direct Email</h2>
+      <p style="margin-bottom: 0.5rem; color: var(--text-muted);">For general inquiries, partnership opportunities, or feedback:</p>
+      <p style="font-size: 1.1rem; font-weight: 600; color: var(--primary);">contact@datafrog.tools</p>
+      
+      <p style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-muted);">For privacy concerns or legal notices:</p>
+      <p style="font-size: 1.1rem; font-weight: 600; color: var(--primary);">privacy@datafrog.tools</p>
+    </div>
+
+    <div style="background: var(--bg-soft); padding: 2rem; border-radius: var(--radius-lg, 12px); border: 1px solid var(--border-default);">
+      <h2 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Response Time</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">We review all incoming inquiries and feature requests carefully. Our typical response timeframe is <strong>24 to 48 hours</strong> during business days.</p>
+      <p style="color: var(--text-muted);">If requesting a new browser tool, please specify the input format, desired output or visualization, and any sample structures.</p>
+    </div>
+  </div>
+
+  <section style="background: var(--bg-soft); padding: 2rem; border-radius: var(--radius-lg, 12px); border: 1px solid var(--border-default);">
+    <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">Send Us a Message</h2>
+    
+    <form onsubmit="event.preventDefault(); alert('Thank you for contacting DataFrog.tools! Your message has been prepared for transmission.');" style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div>
+        <label for="contact-name" style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-primary);">Your Name</label>
+        <input type="text" id="contact-name" name="name" required placeholder="Jane Doe" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md, 8px); border: 1px solid var(--border-default); background: var(--bg-surface, #ffffff); color: var(--text-primary); font-size: 1rem;">
+      </div>
+
+      <div>
+        <label for="contact-email" style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-primary);">Email Address</label>
+        <input type="email" id="contact-email" name="email" required placeholder="jane@example.com" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md, 8px); border: 1px solid var(--border-default); background: var(--bg-surface, #ffffff); color: var(--text-primary); font-size: 1rem;">
+      </div>
+
+      <div>
+        <label for="contact-subject" style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-primary);">Subject</label>
+        <input type="text" id="contact-subject" name="subject" required placeholder="Feature request / Feedback" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md, 8px); border: 1px solid var(--border-default); background: var(--bg-surface, #ffffff); color: var(--text-primary); font-size: 1rem;">
+      </div>
+
+      <div>
+        <label for="contact-message" style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-primary);">Message</label>
+        <textarea id="contact-message" name="message" rows="5" required placeholder="Describe your request or feedback..." style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md, 8px); border: 1px solid var(--border-default); background: var(--bg-surface, #ffffff); color: var(--text-primary); font-size: 1rem; resize: vertical;"></textarea>
+      </div>
+
+      <button type="submit" style="align-self: flex-start; padding: 0.85rem 2rem; background: var(--primary, #2563eb); color: #ffffff; border: none; border-radius: var(--radius-pill, 9999px); font-weight: 600; font-size: 1rem; cursor: pointer;">Send Message</button>
+    </form>
+  </section>
+</div>

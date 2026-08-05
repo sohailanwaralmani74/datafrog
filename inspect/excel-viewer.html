@@ -1,0 +1,908 @@
+---
+layout: main
+title: "Excel Viewer – View Excel Files Online | DataFrog.tools"
+short_name: "Excel Viewer"
+description: "View Excel files online with a fast browser-based Excel Viewer. Open XLSX and XLS files, browse worksheets, search, filter, and inspect spreadsheet data locally without uploading your files."
+keywords: "Excel Viewer, View Excel Online, Excel File Viewer, Open Excel File, XLSX Viewer, XLS Viewer, Excel Spreadsheet Viewer, Online Excel Viewer, View XLSX File"
+category: "Inspect"
+permalink: /inspect/excel-viewer/
+---
+
+<!-- SheetJS (xlsx) for Browser Excel Parsing -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Excel Viewer – DataFrog.tools",
+  "url": "https://datafrog.tools/inspect/excel-viewer/",
+  "description": "Interactive browser-based Excel Viewer to open, inspect, search, filter, and explore XLSX, XLS, and XLSM workbooks locally without server uploads.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Inspect",
+      "item": "https://datafrog.tools/inspect"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Excel Viewer",
+      "item": "https://datafrog.tools/inspect/excel-viewer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is my Excel file safe when using this Excel Viewer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100%. Your Excel file (.xlsx, .xls, .xlsm) is parsed and rendered entirely inside your web browser's local memory using client-side JavaScript. Zero data or files are uploaded to any external server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which Excel file formats are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports .xlsx, .xls, .xlsm, .csv, and .tsv spreadsheet formats."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I switch between multiple worksheets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! The workbook sheet tabs appear at the top of the table, allowing you to seamlessly switch between worksheets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I view cell formulas and export data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, click 'Show Formulas' to toggle cell formulas, or click 'Export Sheet as CSV' to download active worksheet data."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #eff6ff; color: #2563eb; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    🔍 Inspect Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    Excel Viewer – View Excel Files Online Free
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Open, inspect, search, filter, and explore Excel workbooks (.xlsx, .xls, .xlsm) locally in your browser. Multi-sheet navigation, column sorting, and formula toggles with 100% privacy.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 2rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.75rem; display: block; margin-bottom: 0.5rem;">📈</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your Excel workbook file here</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .xlsx, .xls, .xlsm, and .csv files</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Excel File
+      <input type="file" id="file-input" accept=".xlsx,.xls,.xlsm,.csv" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample Workbook
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Reset
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     WORKBOOK STATISTICS PANEL (9 METRICS)
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.75rem;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">File Size</span>
+    <span id="stat-size" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1rem; color: #0f172a;">0 B</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Sheets</span>
+    <span id="stat-sheets-count" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #2563eb;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Active Sheet</span>
+    <span id="stat-active-sheet" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 0.9rem; color: #16a34a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">-</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Total Rows</span>
+    <span id="stat-rows" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Total Columns</span>
+    <span id="stat-cols" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Populated Cells</span>
+    <span id="stat-cells" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #9333ea;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Hidden Sheets</span>
+    <span id="stat-hidden-sheets" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #ea580c;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Merged Cells</span>
+    <span id="stat-merged-cells" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Formulas Count</span>
+    <span id="stat-formulas" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #0284c7;">0</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SEARCH, TOOLBAR & SHEET TABS
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+  
+  <!-- Sheet Navigation Tabs -->
+  <div style="display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.75rem; overflow-x: auto;" id="sheets-tab-container">
+    <span style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-right: 0.5rem;">Worksheets:</span>
+    <span style="font-size: 0.85rem; color: #94a3b8; font-style: italic;">No workbook loaded</span>
+  </div>
+
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+    <!-- Live Search -->
+    <div style="flex: 1; min-width: 280px; position: relative;">
+      <input type="text" id="table-search-input" placeholder="Search active worksheet..." 
+             style="width: 100%; padding: 0.65rem 1rem 0.65rem 2.25rem; font-size: 0.9rem; border-radius: 8px; border: 1px solid #cbd5e1; background: #ffffff;">
+      <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); opacity: 0.5; font-size: 0.9rem;">🔍</span>
+    </div>
+
+    <!-- Toggle Formulas & Page Size -->
+    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+      <label style="font-size: 0.85rem; font-weight: 600; color: #0f172a; display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+        <input type="checkbox" id="chk-show-formulas"> Show Formulas (Fx)
+      </label>
+
+      <div style="display: flex; align-items: center; gap: 0.4rem;">
+        <label for="page-size-select" style="font-size: 0.85rem; font-weight: 600; color: #475569;">Rows / Page:</label>
+        <select id="page-size-select" style="padding: 0.45rem 0.65rem; font-size: 0.875rem; border-radius: 6px; border: 1px solid #cbd5e1; background: #ffffff; cursor: pointer;">
+          <option value="25">25</option>
+          <option value="50" selected>50</option>
+          <option value="100">100</option>
+          <option value="all">All</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons Toolbar -->
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 0.75rem;">
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-copy-filtered" style="padding: 0.45rem 0.85rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy View
+      </button>
+      <button id="btn-export-csv" style="padding: 0.45rem 0.85rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Export Sheet as CSV
+      </button>
+      <button id="btn-toggle-columns" style="padding: 0.45rem 0.85rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        👁️ Hide / Show Columns
+      </button>
+    </div>
+
+    <!-- Jump to Row -->
+    <div style="display: flex; align-items: center; gap: 0.4rem;">
+      <span style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Jump to Row:</span>
+      <input type="number" id="jump-row-input" min="1" placeholder="Row #" style="width: 80px; padding: 0.35rem 0.5rem; font-size: 0.85rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+      <button id="btn-jump-row" style="padding: 0.35rem 0.65rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Go</button>
+    </div>
+  </div>
+
+  <!-- Column Visibility Modal Panel -->
+  <div id="column-visibility-panel" style="display: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.85rem; margin-top: 0.5rem;">
+    <span style="font-size: 0.8rem; font-weight: 700; color: #0f172a; display: block; margin-bottom: 0.5rem;">Toggle Column Visibility:</span>
+    <div id="column-checkboxes" style="display: flex; gap: 0.85rem; flex-wrap: wrap; max-height: 120px; overflow-y: auto;"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INTERACTIVE EXCEL TABLE WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 1.5rem;">
+  
+  <div id="table-scroll-container" style="max-height: 600px; overflow: auto; position: relative;">
+    
+    <div id="table-placeholder" style="display: flex; height: 320px; align-items: center; justify-content: center; color: #94a3b8; text-align: center; flex-direction: column; gap: 0.5rem;">
+      <span style="font-size: 2.5rem;">📊</span>
+      <span>Upload an Excel file or click "Load Sample Workbook" to inspect spreadsheet data</span>
+    </div>
+
+    <table id="excel-table" style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left; display: none;">
+      <thead style="position: sticky; top: 0; background: #0f172a; color: #ffffff; z-index: 10;">
+        <tr id="table-header-row"></tr>
+      </thead>
+      <tbody id="table-body-rows"></tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Bar -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1.25rem; background: #f8fafc; border-top: 1px solid #e2e8f0; flex-wrap: wrap; gap: 0.75rem;">
+    <span id="pagination-info" style="font-size: 0.85rem; font-weight: 600; color: #475569;">Showing 0 to 0 of 0 rows</span>
+    
+    <div style="display: flex; gap: 0.5rem; align-items: center;">
+      <button id="btn-prev-page" style="padding: 0.35rem 0.75rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.8rem; cursor: pointer;">← Previous</button>
+      <span id="page-number-display" style="font-size: 0.85rem; font-weight: 700; color: #0f172a;">Page 1</span>
+      <button id="btn-next-page" style="padding: 0.35rem 0.75rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.8rem; cursor: pointer;">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Excel Viewer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Browse worksheets, sort columns, and inspect formulas locally</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📑 Multi-Worksheet Tabs</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Switch between multiple sheets within the same workbook using responsive tab controls.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📌 Column Letters & Row Numbers</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Excel-style grid references (A, B, C... 1, 2, 3...) with sticky header freezing.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🧮 Formula Toggle (Fx)</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Toggle between calculated cell values and underlying Excel formulas (`=SUM(...)`).</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">↕️ Column Sorting & Filtering</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Sort any column numerically or alphabetically, and search active sheet content dynamically.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📊 Workbook Statistics</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Track sheet counts, populated cell metrics, formula counts, merged cells, and file size.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Workbooks are processed inside your browser RAM. Zero files are uploaded to any server.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use Excel Viewer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Open Excel File</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Browse Excel File</strong>, drag & drop a <code>.xlsx</code> or <code>.xls</code> workbook, or click <strong>Load Sample Workbook</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Browse Worksheets & Search</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click worksheet tabs at the top to navigate sheets. Search for data across cells or toggle formulas on/off.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Export Data</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Export Sheet as CSV</strong> to download your active sheet data or click <strong>Copy View</strong> to copy rows to your clipboard.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my Excel file safe when using this Excel Viewer?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, 100%. Your Excel file (.xlsx, .xls, .xlsm) is parsed and rendered entirely inside your web browser's local memory using client-side JavaScript. Zero data or files are uploaded to any external server.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Which Excel file formats are supported?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool supports <code>.xlsx</code>, <code>.xls</code>, <code>.xlsm</code>, <code>.csv</code>, and <code>.tsv</code> spreadsheet formats.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I switch between multiple worksheets?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! The workbook sheet tabs appear at the top of the table, allowing you to seamlessly switch between worksheets.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I view cell formulas and export data?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, click <strong>Show Formulas</strong> to toggle cell formulas, or click <strong>Export Sheet as CSV</strong> to download active worksheet data.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     INTERACTIVE JAVASCRIPT LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // Elements
+  const fileInput = document.getElementById('file-input');
+  const dropZone = document.getElementById('drop-zone');
+  const sheetsTabContainer = document.getElementById('sheets-tab-container');
+  const tableSearchInput = document.getElementById('table-search-input');
+  const chkShowFormulas = document.getElementById('chk-show-formulas');
+  const pageSizeSelect = document.getElementById('page-size-select');
+  
+  const tablePlaceholder = document.getElementById('table-placeholder');
+  const excelTable = document.getElementById('excel-table');
+  const tableHeaderRow = document.getElementById('table-header-row');
+  const tableBodyRows = document.getElementById('table-body-rows');
+
+  const paginationInfo = document.getElementById('pagination-info');
+  const btnPrevPage = document.getElementById('btn-prev-page');
+  const btnNextPage = document.getElementById('btn-next-page');
+  const pageNumberDisplay = document.getElementById('page-number-display');
+
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+  const btnCopyFiltered = document.getElementById('btn-copy-filtered');
+  const btnExportCsv = document.getElementById('btn-export-csv');
+  const btnToggleColumns = document.getElementById('btn-toggle-columns');
+  const columnVisibilityPanel = document.getElementById('column-visibility-panel');
+  const columnCheckboxes = document.getElementById('column-checkboxes');
+  const jumpRowInput = document.getElementById('jump-row-input');
+  const btnJumpRow = document.getElementById('btn-jump-row');
+
+  // Stats
+  const statSize = document.getElementById('stat-size');
+  const statSheetsCount = document.getElementById('stat-sheets-count');
+  const statActiveSheet = document.getElementById('stat-active-sheet');
+  const statRows = document.getElementById('stat-rows');
+  const statCols = document.getElementById('stat-cols');
+  const statCells = document.getElementById('stat-cells');
+  const statHiddenSheets = document.getElementById('stat-hidden-sheets');
+  const statMergedCells = document.getElementById('stat-merged-cells');
+  const statFormulas = document.getElementById('stat-formulas');
+
+  // Workbook State
+  let currentWorkbook = null;
+  let currentFileBytes = 0;
+  let activeSheetName = '';
+  let sheetDataValues = [];
+  let sheetDataFormulas = [];
+  let currentHeaders = [];
+  let filteredRows = [];
+  let hiddenColumns = new Set();
+
+  let currentSortCol = null;
+  let currentSortAsc = true;
+  let currentPage = 1;
+  let pageSize = 50;
+
+  // Drag & Drop & Click Dropzone
+  dropZone.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#2563eb';
+      dropZone.style.backgroundColor = '#eff6ff';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readExcelFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readExcelFile(e.target.files[0]);
+  });
+
+  function readExcelFile(file) {
+    currentFileBytes = file.size;
+    statSize.textContent = formatBytes(currentFileBytes);
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const data = new Uint8Array(e.target.result);
+      try {
+        if (typeof XLSX !== 'undefined') {
+          currentWorkbook = XLSX.read(data, { type: 'array', cellFormulas: true });
+          renderWorkbook();
+        } else {
+          showToast('Excel parser library loading...');
+        }
+      } catch (err) {
+        showToast('Error parsing Excel file');
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  // Load Sample Workbook
+  btnLoadSample.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const sampleCsv = `ID,Product Name,Category,Units Sold,Unit Price,Total Revenue,Region,Status
+P101,Data Analytics Pro,Inspect,1450,49.99,72485.50,North America,Active
+P102,JSON Tree Explorer,Inspect,2800,29.99,83972.00,Europe,Active
+P103,CSV Pipeline Studio,Analyze,950,99.99,94990.50,Asia Pacific,Active
+P104,XML Schema Validator,Validate,1200,39.99,47988.00,North America,Active
+P105,YAML Config Engine,Compare,880,19.99,17591.20,Europe,Active
+P106,Data Visualization Suite,Visualize,3100,79.99,247969.00,North America,Active`;
+
+    currentFileBytes = new Blob([sampleCsv]).size;
+    statSize.textContent = formatBytes(currentFileBytes);
+
+    if (typeof XLSX !== 'undefined') {
+      currentWorkbook = XLSX.read(sampleCsv, { type: 'string' });
+      renderWorkbook();
+    }
+  });
+
+  // Reset
+  btnClear.addEventListener('click', function(e) {
+    e.stopPropagation();
+    currentWorkbook = null;
+    showEmptyState();
+  });
+
+  function showEmptyState() {
+    sheetsTabContainer.innerHTML = '<span style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-right: 0.5rem;">Worksheets:</span><span style="font-size: 0.85rem; color: #94a3b8; font-style: italic;">No workbook loaded</span>';
+    tablePlaceholder.style.display = 'flex';
+    excelTable.style.display = 'none';
+    statSize.textContent = '0 B';
+    statSheetsCount.textContent = '0';
+    statActiveSheet.textContent = '-';
+    statRows.textContent = '0';
+    statCols.textContent = '0';
+    statCells.textContent = '0';
+    statHiddenSheets.textContent = '0';
+    statMergedCells.textContent = '0';
+    statFormulas.textContent = '0';
+    paginationInfo.textContent = 'Showing 0 to 0 of 0 rows';
+  }
+
+  function renderWorkbook() {
+    if (!currentWorkbook || !currentWorkbook.SheetNames || currentWorkbook.SheetNames.length === 0) {
+      showEmptyState();
+      return;
+    }
+
+    const sheetNames = currentWorkbook.SheetNames;
+    statSheetsCount.textContent = sheetNames.length;
+    
+    // Hidden sheets calculation
+    let hiddenCount = 0;
+    if (currentWorkbook.Workbook && currentWorkbook.Workbook.Sheets) {
+      currentWorkbook.Workbook.Sheets.forEach(s => {
+        if (s.Hidden) hiddenCount++;
+      });
+    }
+    statHiddenSheets.textContent = hiddenCount;
+
+    // Render Sheet Tabs
+    sheetsTabContainer.innerHTML = '<span style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-right: 0.5rem;">Worksheets:</span>';
+    
+    sheetNames.forEach((name, idx) => {
+      const btn = document.createElement('button');
+      btn.textContent = name;
+      btn.style.cssText = idx === 0 
+        ? 'padding: 0.4rem 0.85rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; white-space: nowrap;'
+        : 'padding: 0.4rem 0.85rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; white-space: nowrap;';
+      
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#sheets-tab-container button').forEach(b => {
+          b.style.background = '#ffffff';
+          b.style.color = '#0f172a';
+          b.style.border = '1px solid #cbd5e1';
+          b.style.fontWeight = '600';
+        });
+        btn.style.background = '#0f172a';
+        btn.style.color = '#ffffff';
+        btn.style.border = 'none';
+        btn.style.fontWeight = '700';
+
+        loadActiveSheet(name);
+      });
+
+      sheetsTabContainer.appendChild(btn);
+    });
+
+    loadActiveSheet(sheetNames[0]);
+  }
+
+  function loadActiveSheet(name) {
+    activeSheetName = name;
+    statActiveSheet.textContent = name;
+
+    const sheet = currentWorkbook.Sheets[name];
+    if (!sheet) return;
+
+    // Parse Sheet Cells Values & Formulas
+    sheetDataValues = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false, defval: '' });
+    sheetDataFormulas = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false, defval: '', f: true });
+
+    // Merged Cells & Formulas Stats
+    const merges = sheet['!merges'] ? sheet['!merges'].length : 0;
+    statMergedCells.textContent = merges;
+
+    let formulaCount = 0;
+    let populatedCells = 0;
+    Object.keys(sheet).forEach(k => {
+      if (k[0] !== '!') {
+        populatedCells++;
+        if (sheet[k].f) formulaCount++;
+      }
+    });
+    statCells.textContent = populatedCells.toLocaleString();
+    statFormulas.textContent = formulaCount.toLocaleString();
+
+    if (sheetDataValues.length === 0) {
+      showEmptyState();
+      return;
+    }
+
+    // Determine max columns
+    let maxCols = 0;
+    sheetDataValues.forEach(r => {
+      if (r.length > maxCols) maxCols = r.length;
+    });
+
+    // Build Column Letters Header (A, B, C...)
+    currentHeaders = [];
+    for (let c = 0; c < maxCols; c++) {
+      currentHeaders.push(getColLetter(c));
+    }
+
+    statRows.textContent = sheetDataValues.length.toLocaleString();
+    statCols.textContent = maxCols.toLocaleString();
+
+    applyFilterAndSort();
+    buildColumnCheckboxes();
+  }
+
+  function getColLetter(index) {
+    let col = '';
+    while (index >= 0) {
+      col = String.fromCharCode((index % 26) + 65) + col;
+      index = Math.floor(index / 26) - 1;
+    }
+    return col;
+  }
+
+  chkShowFormulas.addEventListener('change', applyFilterAndSort);
+  tableSearchInput.addEventListener('input', applyFilterAndSort);
+
+  pageSizeSelect.addEventListener('change', function() {
+    pageSize = pageSizeSelect.value === 'all' ? filteredRows.length : parseInt(pageSizeSelect.value, 10);
+    currentPage = 1;
+    renderTable();
+  });
+
+  function applyFilterAndSort() {
+    const query = tableSearchInput.value.trim().toLowerCase();
+    const useFormulas = chkShowFormulas.checked;
+    const sourceData = useFormulas && sheetDataFormulas.length > 0 ? sheetDataFormulas : sheetDataValues;
+
+    if (!query) {
+      filteredRows = [...sourceData];
+    } else {
+      filteredRows = sourceData.filter(row => {
+        return row.some((cell, idx) => {
+          if (hiddenColumns.has(idx)) return false;
+          return String(cell || '').toLowerCase().includes(query);
+        });
+      });
+    }
+
+    // Sort
+    if (currentSortCol !== null) {
+      filteredRows.sort((a, b) => {
+        const valA = String(a[currentSortCol] || '');
+        const valB = String(b[currentSortCol] || '');
+        const numA = Number(valA);
+        const numB = Number(valB);
+
+        if (!isNaN(numA) && !isNaN(numB) && valA !== '' && valB !== '') {
+          return currentSortAsc ? numA - numB : numB - numA;
+        }
+        return currentSortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      });
+    }
+
+    currentPage = 1;
+    renderTable();
+  }
+
+  function renderTable() {
+    if (sheetDataValues.length === 0) {
+      showEmptyState();
+      return;
+    }
+
+    tablePlaceholder.style.display = 'none';
+    excelTable.style.display = 'table';
+
+    // Header Row
+    tableHeaderRow.innerHTML = '';
+    
+    // Row # Header
+    const thNum = document.createElement('th');
+    thNum.style.cssText = 'padding: 0.75rem 1rem; border-bottom: 2px solid #334155; width: 60px; text-align: center; font-weight: 700; color: #94a3b8; user-select: none;';
+    thNum.textContent = '#';
+    tableHeaderRow.appendChild(thNum);
+
+    currentHeaders.forEach((h, colIdx) => {
+      if (hiddenColumns.has(colIdx)) return;
+
+      const th = document.createElement('th');
+      th.style.cssText = 'padding: 0.75rem 1rem; border-bottom: 2px solid #334155; font-weight: 700; cursor: pointer; user-select: none; white-space: nowrap;';
+      
+      let sortIndicator = '';
+      if (currentSortCol === colIdx) {
+        sortIndicator = currentSortAsc ? ' 🔼' : ' 🔽';
+      }
+
+      th.textContent = h + sortIndicator;
+      th.title = 'Click to sort column';
+
+      th.addEventListener('click', () => {
+        if (currentSortCol === colIdx) {
+          currentSortAsc = !currentSortAsc;
+        } else {
+          currentSortCol = colIdx;
+          currentSortAsc = true;
+        }
+        applyFilterAndSort();
+      });
+
+      tableHeaderRow.appendChild(th);
+    });
+
+    // Body Rows
+    tableBodyRows.innerHTML = '';
+
+    const effectivePageSize = pageSizeSelect.value === 'all' ? filteredRows.length : pageSize;
+    const startIdx = (currentPage - 1) * effectivePageSize;
+    const endIdx = Math.min(startIdx + effectivePageSize, filteredRows.length);
+    const pageRows = filteredRows.slice(startIdx, endIdx);
+
+    pageRows.forEach((row, rowOffset) => {
+      const globalRowIdx = startIdx + rowOffset + 1;
+      const tr = document.createElement('tr');
+      tr.style.cssText = rowOffset % 2 === 0 ? 'background: #ffffff;' : 'background: #f8fafc;';
+      tr.id = `table-row-${globalRowIdx}`;
+
+      // Row Number Cell
+      const tdNum = document.createElement('td');
+      tdNum.style.cssText = 'padding: 0.6rem 1rem; border-bottom: 1px solid #e2e8f0; color: #94a3b8; font-family: monospace; font-size: 0.8rem; text-align: center; font-weight: 600;';
+      tdNum.textContent = globalRowIdx;
+      tr.appendChild(tdNum);
+
+      currentHeaders.forEach((h, colIdx) => {
+        if (hiddenColumns.has(colIdx)) return;
+
+        const td = document.createElement('td');
+        td.style.cssText = 'padding: 0.6rem 1rem; border-bottom: 1px solid #e2e8f0; font-size: 0.875rem; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 280px;';
+        
+        const cellVal = row[colIdx] !== undefined ? String(row[colIdx]) : '';
+
+        if (!cellVal) {
+          td.innerHTML = '<span style="font-size: 0.75rem; color: #cbd5e1;">-</span>';
+        } else {
+          td.textContent = cellVal;
+        }
+
+        tr.appendChild(td);
+      });
+
+      tableBodyRows.appendChild(tr);
+    });
+
+    // Pagination Info
+    const totalPages = Math.ceil(filteredRows.length / (effectivePageSize || 1)) || 1;
+    paginationInfo.textContent = `Showing ${filteredRows.length > 0 ? startIdx + 1 : 0} to ${endIdx} of ${filteredRows.length.toLocaleString()} rows`;
+    pageNumberDisplay.textContent = `Page ${currentPage} of ${totalPages}`;
+
+    btnPrevPage.disabled = currentPage === 1;
+    btnNextPage.disabled = currentPage >= totalPages;
+    btnPrevPage.style.opacity = currentPage === 1 ? '0.5' : '1';
+    btnNextPage.style.opacity = currentPage >= totalPages ? '0.5' : '1';
+  }
+
+  // Pagination Handlers
+  btnPrevPage.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderTable();
+    }
+  });
+
+  btnNextPage.addEventListener('click', () => {
+    const effectivePageSize = pageSizeSelect.value === 'all' ? filteredRows.length : pageSize;
+    const totalPages = Math.ceil(filteredRows.length / (effectivePageSize || 1));
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderTable();
+    }
+  });
+
+  btnJumpRow.addEventListener('click', () => {
+    const targetRow = parseInt(jumpRowInput.value, 10);
+    if (isNaN(targetRow) || targetRow < 1 || targetRow > filteredRows.length) {
+      showToast('Invalid row number');
+      return;
+    }
+    const effectivePageSize = pageSizeSelect.value === 'all' ? filteredRows.length : pageSize;
+    currentPage = Math.ceil(targetRow / effectivePageSize);
+    renderTable();
+
+    setTimeout(() => {
+      const el = document.getElementById(`table-row-${targetRow}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.style.background = '#fef08a';
+      }
+    }, 100);
+  });
+
+  // Column Visibility Panel
+  btnToggleColumns.addEventListener('click', () => {
+    columnVisibilityPanel.style.display = columnVisibilityPanel.style.display === 'none' ? 'block' : 'none';
+  });
+
+  function buildColumnCheckboxes() {
+    columnCheckboxes.innerHTML = '';
+    currentHeaders.forEach((h, idx) => {
+      const label = document.createElement('label');
+      label.style.cssText = 'font-size: 0.85rem; color: #0f172a; display: flex; align-items: center; gap: 0.35rem; cursor: pointer;';
+      
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = !hiddenColumns.has(idx);
+
+      cb.addEventListener('change', () => {
+        if (cb.checked) hiddenColumns.delete(idx);
+        else hiddenColumns.add(idx);
+        renderTable();
+      });
+
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(`Column ${h}`));
+      columnCheckboxes.appendChild(label);
+    });
+  }
+
+  // Copy & Export Actions
+  btnCopyFiltered.addEventListener('click', () => {
+    if (filteredRows.length === 0) return;
+    const csvLines = filteredRows.map(r => r.join(','));
+    navigator.clipboard.writeText(csvLines.join('\n'));
+    showToast('Active sheet data copied to clipboard!');
+  });
+
+  btnExportCsv.addEventListener('click', () => {
+    if (filteredRows.length === 0) return;
+    const csvLines = filteredRows.map(r => r.join(','));
+    const blob = new Blob([csvLines.join('\n')], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${activeSheetName || 'workbook'}_data.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Worksheet exported as CSV!');
+  });
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+    }, 2200);
+  }
+
+  // Load Initial Sample
+  setTimeout(() => {
+    btnLoadSample.click();
+  }, 300);
+
+})();
+</script>

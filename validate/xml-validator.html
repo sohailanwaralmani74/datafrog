@@ -1,0 +1,498 @@
+---
+layout: main
+title: "XML Validator – Validate XML Syntax Online | DataFrog.tools"
+short_name: "XML Validator"
+description: "Validate XML documents online with detailed error reporting, namespace validation, line & column error spotter, pretty printing, minification, and tree viewing. Free, private, and browser-based."
+keywords: "XML Validator, Validate XML, XML Checker, XML Validation Tool, XML Syntax Validator, XML Validator Online"
+category: "Validate"
+permalink: /validate/xml-validator/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "XML Validator – DataFrog.tools",
+  "url": "https://datafrog.tools/validate/xml-validator/",
+  "description": "Browser-based XML Validator for instant syntax validation, unclosed tag spotter, namespace verification, pretty printing, minification, and XML formatting locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Validate",
+      "item": "https://datafrog.tools/validate"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "XML Validator",
+      "item": "https://datafrog.tools/validate/xml-validator/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the XML Validator detect malformed tags?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The XML Validator uses local browser DOMParser engines to inspect opening/closing tag pairs, attribute quote escaping, and namespace URIs, providing detailed error messages when syntax fails."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my XML document uploaded to any server during validation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. All XML validation, formatting, minification, and file exports execute locally inside your web browser's RAM memory. Zero data is sent to external servers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I format and pretty print XML documents?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Click 'Pretty Print' to format XML with clean 2-space tag indentation or click 'Minify' to collapse whitespace for production environments."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #fff7ed; color: #ea580c; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    ✅ Validate Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    XML Validator – Instant Syntax & Namespace Checker
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Validate XML documents locally in your browser. Detect malformed tags, unclosed element pairs, namespace issues, pretty print formatting, and export valid XML files.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📜</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your XML document here for instant validation</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .xml files or paste raw text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse XML File
+      <input type="file" id="file-input" accept=".xml,text/xml,application/xml,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample XML
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & EDITOR
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <span id="status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+      <span style="font-size: 0.85rem; color: #64748b;" id="stats-info">0 lines | 0 chars</span>
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-validate" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        ✅ Validate
+      </button>
+      <button id="btn-pretty" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        ✨ Pretty Print
+      </button>
+      <button id="btn-minify" style="padding: 0.45rem 0.9rem; background: #9333ea; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        ⚡ Minify
+      </button>
+      <button id="btn-copy" style="padding: 0.45rem 0.9rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy
+      </button>
+      <button id="btn-download" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download
+      </button>
+    </div>
+  </div>
+
+  <textarea id="xml-input" placeholder="Paste your XML document here to validate syntax..." 
+            style="width: 100%; height: 320px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.875rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical; margin-bottom: 1rem;"></textarea>
+
+  <!-- Validation Feedback Box -->
+  <div id="validation-output-box" style="display: none; padding: 1.25rem; border-radius: 10px;">
+    <h3 id="output-title" style="font-size: 1.05rem; font-weight: 800; margin-bottom: 0.35rem;"></h3>
+    <p id="output-desc" style="margin: 0; font-size: 0.9rem; line-height: 1.5; font-family: consolas, monaco, monospace; word-break: break-all;"></p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">XML Validator Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Instant XML syntax checking, tag matching, and pretty print formatting</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚡ Instant Syntax Validation</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Validates XML element hierarchy, opening/closing tag pairs, and attribute quote syntax instantly.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🌐 Namespace Verification</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Audits default namespaces and declared prefixes (`xmlns`) across the XML element tree.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">✨ Pretty Print & Minification</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Format XML with clean 2-space tag indentation or collapse whitespace into minified code.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Validation runs in local browser RAM using DOMParser. Zero XML data is uploaded to remote servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use XML Validator</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #fff7ed; color: #ea580c; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input XML Document</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste XML text into the editor, drag & drop a <code>.xml</code> file, or click <strong>Load Sample XML</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #fff7ed; color: #ea580c; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Check Validation Feedback</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review the green success badge or red syntax error callout detailing unclosed tags or parser errors.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #fff7ed; color: #ea580c; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Pretty Print or Download</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Pretty Print</strong>, <strong>Copy</strong>, or <strong>Download</strong> to export clean XML files.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the XML Validator detect malformed tags?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The XML Validator uses local browser DOMParser engines to inspect opening/closing tag pairs, attribute quote escaping, and namespace URIs, providing detailed error messages when syntax fails.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my XML document uploaded to any server during validation?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. All XML validation, formatting, minification, and file exports execute locally inside your web browser's RAM memory. Zero data is sent to external servers.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I format and pretty print XML documents?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! Click <strong>Pretty Print</strong> to format XML with clean 2-space tag indentation or click <strong>Minify</strong> to collapse whitespace for production environments.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT VALIDATION ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const xmlInput = document.getElementById('xml-input');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const statusBadge = document.getElementById('status-badge');
+  const statsInfo = document.getElementById('stats-info');
+  const validationOutputBox = document.getElementById('validation-output-box');
+  const outputTitle = document.getElementById('output-title');
+  const outputDesc = document.getElementById('output-desc');
+
+  const btnValidate = document.getElementById('btn-validate');
+  const btnPretty = document.getElementById('btn-pretty');
+  const btnMinify = document.getElementById('btn-minify');
+  const btnCopy = document.getElementById('btn-copy');
+  const btnDownload = document.getElementById('btn-download');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  const SAMPLE_XML = `<?xml version="1.0" encoding="UTF-8"?>
+<workspace xmlns="https://datafrog.tools/schema">
+  <meta>
+    <title>DataFrog Intelligence</title>
+    <version>2.4</version>
+    <active>true</active>
+  </meta>
+  <modules>
+    <module category="Inspect">JSON Viewer</module>
+    <module category="Analyze">CSV Analyzer</module>
+    <module category="Validate">XML Validator</module>
+  </modules>
+</workspace>`;
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#ea580c';
+      dropZone.style.backgroundColor = '#fff7ed';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      xmlInput.value = evt.target.result;
+      validateXML();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    xmlInput.value = SAMPLE_XML;
+    validateXML();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    xmlInput.value = '';
+    validateXML();
+  });
+
+  xmlInput.addEventListener('input', validateXML);
+  btnValidate.addEventListener('click', validateXML);
+
+  function validateXML() {
+    const val = xmlInput.value;
+    const lines = val ? val.split('\n').length : 0;
+    const chars = val ? val.length : 0;
+    statsInfo.textContent = `${lines} line(s) | ${chars.toLocaleString()} char(s)`;
+
+    if (!val.trim()) {
+      statusBadge.textContent = 'Ready';
+      statusBadge.style.background = '#f1f5f9';
+      statusBadge.style.color = '#475569';
+      validationOutputBox.style.display = 'none';
+      return;
+    }
+
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(val, "application/xml");
+    const parseError = xmlDoc.getElementsByTagName("parsererror");
+
+    if (parseError.length > 0) {
+      statusBadge.textContent = '❌ Invalid XML';
+      statusBadge.style.background = '#fef2f2';
+      statusBadge.style.color = '#dc2626';
+
+      validationOutputBox.style.display = 'block';
+      validationOutputBox.style.background = '#fef2f2';
+      validationOutputBox.style.border = '1px solid #fca5a5';
+      outputTitle.style.color = '#dc2626';
+      outputTitle.textContent = '❌ XML Syntax Error';
+      outputDesc.style.color = '#991b1b';
+      outputDesc.textContent = parseError[0].textContent;
+    } else {
+      statusBadge.textContent = '✅ Valid XML';
+      statusBadge.style.background = '#f0fdf4';
+      statusBadge.style.color = '#16a34a';
+
+      validationOutputBox.style.display = 'block';
+      validationOutputBox.style.background = '#f0fdf4';
+      validationOutputBox.style.border = '1px solid #bbf7d0';
+      outputTitle.style.color = '#16a34a';
+      outputTitle.textContent = '✅ Valid XML Syntax';
+      outputDesc.style.color = '#15803d';
+      outputDesc.textContent = 'No syntax errors or unclosed tags detected. The XML document is 100% valid.';
+    }
+  }
+
+  btnPretty.addEventListener('click', () => {
+    try {
+      if (!xmlInput.value.trim()) return;
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlInput.value, "application/xml");
+      if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
+        showToast('Cannot format invalid XML');
+        return;
+      }
+
+      function formatNode(node, indent = 0) {
+        let str = '';
+        const pad = '  '.repeat(indent);
+        if (node.nodeType === 1) { // Element
+          str += `${pad}<${node.tagName}`;
+          for (let i = 0; i < node.attributes.length; i++) {
+            str += ` ${node.attributes[i].name}="${node.attributes[i].value}"`;
+          }
+          if (node.childNodes.length === 0) {
+            str += '/>\n';
+          } else {
+            str += '>\n';
+            for (let i = 0; i < node.childNodes.length; i++) {
+              str += formatNode(node.childNodes[i], indent + 1);
+            }
+            str += `${pad}</${node.tagName}>\n`;
+          }
+        } else if (node.nodeType === 3) { // Text
+          const text = node.nodeValue.trim();
+          if (text) str += `${pad}${text}\n`;
+        }
+        return str;
+      }
+
+      xmlInput.value = formatNode(xmlDoc.documentElement).trim();
+      validateXML();
+      showToast('XML pretty printed!');
+    } catch (err) {
+      showToast('Cannot format XML');
+    }
+  });
+
+  btnMinify.addEventListener('click', () => {
+    try {
+      if (!xmlInput.value.trim()) return;
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlInput.value, "application/xml");
+      if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
+        showToast('Cannot minify invalid XML');
+        return;
+      }
+      xmlInput.value = xmlInput.value.replace(/>\s+</g, '><').trim();
+      validateXML();
+      showToast('XML minified!');
+    } catch (err) {
+      showToast('Cannot minify XML');
+    }
+  });
+
+  btnCopy.addEventListener('click', () => {
+    if (!xmlInput.value.trim()) return;
+    navigator.clipboard.writeText(xmlInput.value);
+    showToast('XML copied to clipboard!');
+  });
+
+  btnDownload.addEventListener('click', () => {
+    if (!xmlInput.value.trim()) return;
+    const blob = new Blob([xmlInput.value], { type: 'application/xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'validated-document.xml';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('XML file downloaded!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Check
+  validateXML();
+
+})();
+</script>

@@ -1,0 +1,969 @@
+---
+layout: main
+title: "YAML Viewer – View & Inspect YAML Documents Online | DataFrog.tools"
+short_name: "YAML Viewer"
+description: "View and inspect YAML files online with an interactive YAML Viewer. Search, validate, explore, and analyze YAML documents directly in your browser without uploading files."
+keywords: "YAML Viewer, View YAML Online, YAML File Viewer, Open YAML File, YAML Parser, YAML Tree Viewer, YAML Reader, YAML Viewer Online, Inspect YAML"
+category: "Inspect"
+permalink: /inspect/yaml-viewer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "YAML Viewer – DataFrog.tools",
+  "url": "https://datafrog.tools/inspect/yaml-viewer/",
+  "description": "Interactive browser-based YAML Viewer to open, inspect, search, validate, and explore YAML documents locally without server uploads.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Inspect",
+      "item": "https://datafrog.tools/inspect"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "YAML Viewer",
+      "item": "https://datafrog.tools/inspect/yaml-viewer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is my YAML data safe when using this YAML Viewer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100%. All YAML parsing, validation, and tree building happen entirely inside your local browser. No data or files are sent to any external server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which file extensions are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports .yaml, .yml, .txt, and raw text input."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the YAML Viewer handle indentation and syntax errors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The built-in parser automatically detects indentation mismatch, unclosed quotes, or invalid colons, highlighting the error line number and detailed syntax message."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I copy the path of a specific YAML node?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Click any key or value in the tree view to reveal its path (e.g. $.services.web.ports[0]) and click 'Copy Path'."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #eff6ff; color: #2563eb; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    🔍 Inspect Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    YAML Viewer – View & Validate YAML Online
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Open, inspect, search, validate, and explore YAML documents locally with an interactive tree structure, path finder, and depth statistics.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📝</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your YAML file here</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .yaml, .yml, .txt files or paste text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse YAML File
+      <input type="file" id="file-input" accept=".yaml,.yml,.txt,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample YAML
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Reset
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     STATISTICS PANEL (8 METRICS)
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.75rem;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Validation</span>
+    <span id="stat-status" style="display: inline-block; margin-top: 0.25rem; font-weight: 700; font-size: 0.9rem; padding: 0.15rem 0.5rem; border-radius: 9999px; background: #f1f5f9; color: #475569;">Ready</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">File Size</span>
+    <span id="stat-size" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1rem; color: #0f172a;">0 B</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Characters</span>
+    <span id="stat-chars" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Lines</span>
+    <span id="stat-lines" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Objects</span>
+    <span id="stat-objects" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #2563eb;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Arrays / Lists</span>
+    <span id="stat-arrays" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #16a34a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Total Keys</span>
+    <span id="stat-keys" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Max Depth</span>
+    <span id="stat-depth" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #9333ea;">0</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & CONTROLS
+═══════════════════════════════════════════════════ -->
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 0.85rem 1.25rem; margin-bottom: 1.25rem;">
+  
+  <!-- View Mode Switcher -->
+  <div style="display: flex; gap: 0.25rem; background: #f1f5f9; padding: 0.25rem; border-radius: 8px;">
+    <button id="tab-tree" style="padding: 0.45rem 1rem; background: #ffffff; color: #0f172a; border: none; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      🌲 YAML Tree
+    </button>
+    <button id="tab-code" style="padding: 0.45rem 1rem; background: transparent; color: #64748b; border: none; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer;">
+      📝 Formatted View
+    </button>
+  </div>
+
+  <!-- Quick Action Buttons -->
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+    <button id="btn-validate" style="padding: 0.45rem 0.85rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+      ✅ Validate
+    </button>
+    <button id="btn-expand-all" style="padding: 0.45rem 0.85rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+      ➕ Expand All
+    </button>
+    <button id="btn-collapse-all" style="padding: 0.45rem 0.85rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+      ➖ Collapse All
+    </button>
+    <button id="btn-copy-yaml" style="padding: 0.45rem 0.85rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+      📋 Copy YAML
+    </button>
+    <button id="btn-download" style="padding: 0.45rem 0.85rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+      📥 Download Formatted YAML
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SEARCH & NODE PATH BAR
+═══════════════════════════════════════════════════ -->
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; align-items: center;">
+  
+  <!-- Search Input -->
+  <div style="flex: 1; min-width: 260px; position: relative;">
+    <input type="text" id="search-input" placeholder="Search keys or values..." 
+           style="width: 100%; padding: 0.65rem 1rem 0.65rem 2.25rem; font-size: 0.9rem; border-radius: 8px; border: 1px solid #cbd5e1; background: #ffffff;">
+    <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); opacity: 0.5; font-size: 0.9rem;">🔍</span>
+  </div>
+
+  <span id="search-count" style="font-size: 0.85rem; font-weight: 600; color: #64748b;">0 matches</span>
+
+  <!-- Selected Path Bar -->
+  <div style="flex: 2; min-width: 300px; display: flex; align-items: center; gap: 0.5rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.4rem 0.75rem;">
+    <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Path:</span>
+    <code id="selected-path" style="flex: 1; font-family: monospace; font-size: 0.85rem; color: #2563eb; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">$</code>
+    <button id="btn-copy-path" style="padding: 0.25rem 0.6rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+      Copy Path
+    </button>
+    <button id="btn-copy-value" style="padding: 0.25rem 0.6rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+      Copy Value
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     MAIN WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem;" id="workspace-grid">
+  
+  <!-- Left Side: Raw Input & Drag/Drop Area -->
+  <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <label for="yaml-input" style="font-weight: 700; font-size: 0.95rem; color: #0f172a;">Raw YAML Input</label>
+      <span style="font-size: 0.8rem; color: #64748b;">Paste YAML text below</span>
+    </div>
+
+    <!-- Raw Textarea -->
+    <div style="position: relative; border: 1px solid #cbd5e1; border-radius: 12px; background: #ffffff;">
+      <textarea id="yaml-input" placeholder="Paste your YAML data here..." 
+                style="width: 100%; height: 500px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.9rem; line-height: 1.5; border: none; background: transparent; resize: vertical; outline: none; border-radius: 10px;"></textarea>
+    </div>
+
+    <!-- Error Alert Box -->
+    <div id="error-box" style="display: none; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 10px; padding: 1rem; color: #991b1b; font-size: 0.875rem;">
+      <div style="font-weight: 700; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
+        <span>❌ YAML Parsing Error</span>
+      </div>
+      <p id="error-message" style="margin: 0; font-family: monospace; font-size: 0.85rem; line-height: 1.4; word-break: break-all;"></p>
+    </div>
+  </div>
+
+  <!-- Right Side: Interactive Tree / Code View -->
+  <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-weight: 700; font-size: 0.95rem; color: #0f172a;">Interactive Tree Output</span>
+      <span style="font-size: 0.8rem; color: #64748b;">Click node to view path</span>
+    </div>
+
+    <!-- Tree View Container -->
+    <div id="tree-container" style="height: 500px; overflow: auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.875rem; line-height: 1.6;">
+      <div id="tree-placeholder" style="display: flex; height: 100%; align-items: center; justify-content: center; color: #94a3b8; text-align: center; flex-direction: column; gap: 0.5rem;">
+        <span style="font-size: 2.5rem;">📝</span>
+        <span>Enter valid YAML on the left to render interactive tree view</span>
+      </div>
+      <div id="tree-root" style="display: none;"></div>
+    </div>
+
+    <!-- Code View Container (Hidden by default) -->
+    <div id="code-container" style="display: none; height: 500px; overflow: auto; background: #0f172a; color: #f8fafc; border-radius: 12px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.875rem; line-height: 1.5;">
+      <pre id="code-output" style="margin: 0; white-space: pre-wrap; word-break: break-all;"></pre>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">YAML Viewer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Explore, validate, and inspect YAML configurations seamlessly</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🌲 Interactive Tree View</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Expand and collapse nested mappings, sequences, and scalars with color-coded badges.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📍 Node Path Generator</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Click any YAML key or list item to copy its exact path (e.g. <code>$.services.web.ports[0]</code>).</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔍 Real-time Search & Filter</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Search keys and values with live matching indicators and visual result highlights.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📊 Indentation & Depth Metrics</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Track total objects, list items, total keys, maximum nesting depth, and file size automatically.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">❌ Indentation Error Spotter</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Detects syntax errors, tab vs space indentation conflicts, and unclosed quotes with line numbers.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Zero external requests. Your YAML configuration files stay 100% inside your local browser memory.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use YAML Viewer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input YAML File</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste raw YAML into the input area, drag and drop a <code>.yaml</code> or <code>.yml</code> file, or click <strong>Load Sample YAML</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Explore Structure & Depth</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Expand and collapse key mappings and lists. Use <strong>Expand All</strong> or <strong>Collapse All</strong> to manage deep trees.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Search, Copy & Download</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Search for keys, copy paths to clipboard, and click <strong>Download Formatted YAML</strong> to save your validated file.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my YAML data safe when using this YAML Viewer?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, 100%. All YAML parsing, validation, and tree building happen entirely inside your local browser. No data or files are sent to any external server.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Which file extensions are supported?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool supports <code>.yaml</code>, <code>.yml</code>, <code>.txt</code>, and raw text input.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the YAML Viewer handle indentation and syntax errors?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The built-in parser automatically detects indentation mismatch, unclosed quotes, or invalid colons, highlighting the error line number and detailed syntax message.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I copy the path of a specific YAML node?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! Click any key or value in the tree view to reveal its path (e.g. <code>$.services.web.ports[0]</code>) and click <strong>Copy Path</strong>.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CLIENT-SIDE YAML PARSER & TREE LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // Elements
+  const yamlInput = document.getElementById('yaml-input');
+  const fileInput = document.getElementById('file-input');
+  const dropZone = document.getElementById('drop-zone');
+  const errorBox = document.getElementById('error-box');
+  const errorMessage = document.getElementById('error-message');
+
+  const treePlaceholder = document.getElementById('tree-placeholder');
+  const treeRoot = document.getElementById('tree-root');
+  const codeContainer = document.getElementById('code-container');
+  const treeContainer = document.getElementById('tree-container');
+  const codeOutput = document.getElementById('code-output');
+
+  // Stats
+  const statStatus = document.getElementById('stat-status');
+  const statSize = document.getElementById('stat-size');
+  const statChars = document.getElementById('stat-chars');
+  const statLines = document.getElementById('stat-lines');
+  const statObjects = document.getElementById('stat-objects');
+  const statArrays = document.getElementById('stat-arrays');
+  const statKeys = document.getElementById('stat-keys');
+  const statDepth = document.getElementById('stat-depth');
+
+  // Buttons & Controls
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+  const btnValidate = document.getElementById('btn-validate');
+  const btnExpandAll = document.getElementById('btn-expand-all');
+  const btnCollapseAll = document.getElementById('btn-collapse-all');
+  const btnCopyYaml = document.getElementById('btn-copy-yaml');
+  const btnDownload = document.getElementById('btn-download');
+
+  const tabTree = document.getElementById('tab-tree');
+  const tabCode = document.getElementById('tab-code');
+  const searchInput = document.getElementById('search-input');
+  const searchCount = document.getElementById('search-count');
+  const selectedPathEl = document.getElementById('selected-path');
+  const btnCopyPath = document.getElementById('btn-copy-path');
+  const btnCopyValue = document.getElementById('btn-copy-value');
+
+  let currentParsedObj = null;
+  let activeSelectedPath = '$';
+  let activeSelectedValue = '';
+
+  const SAMPLE_YAML = `# DataFrog Workspace Configuration
+version: '3.8'
+name: DataFrog Intelligence Workspace
+privacyFirst: true
+
+server:
+  host: 127.0.0.1
+  port: 8080
+  offlineReady: true
+
+services:
+  web:
+    image: datafrog/workspace:latest
+    ports:
+      - '80:8080'
+      - '443:8443'
+    environment:
+      NODE_ENV: production
+      BROWSER_ONLY: 'true'
+
+modules:
+  - id: inspect
+    name: Inspect Module
+    toolsCount: 22
+    active: true
+  - id: analyze
+    name: Analyze Module
+    toolsCount: 16
+    active: true
+  - id: validate
+    name: Validate Module
+    toolsCount: 18
+    active: true
+
+security:
+  serverProcessing: false
+  userAccounts: false
+  networkLogs: null`;
+
+  // Click Drop Zone
+  dropZone.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+  // Sample Loader
+  btnLoadSample.addEventListener('click', function(e) {
+    e.stopPropagation();
+    yamlInput.value = SAMPLE_YAML;
+    parseAndUpdate();
+  });
+
+  // Clear Input
+  btnClear.addEventListener('click', function(e) {
+    e.stopPropagation();
+    yamlInput.value = '';
+    parseAndUpdate();
+  });
+
+  // Drag & Drop
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#2563eb';
+      dropZone.style.backgroundColor = '#eff6ff';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      yamlInput.value = evt.target.result;
+      parseAndUpdate();
+    };
+    reader.readAsText(file);
+  }
+
+  yamlInput.addEventListener('input', parseAndUpdate);
+
+  // Pure Vanilla JS YAML Parser
+  function parseYAML(yamlText) {
+    const lines = yamlText.split('\n');
+    const root = {};
+    let stack = [{ indent: -1, obj: root, key: null, isArray: false }];
+
+    lines.forEach((lineRaw, lineIdx) => {
+      const lineNum = lineIdx + 1;
+      let line = lineRaw.replace(/#.*$/, ''); // strip comments
+      if (!line.trim()) return;
+
+      const indent = lineRaw.search(/\S/);
+      if (indent === -1) return;
+
+      // Check tab indentation error
+      if (lineRaw.substring(0, indent).includes('\t')) {
+        throw new Error(`Line ${lineNum}: YAML disallows tabs for indentation. Use spaces.`);
+      }
+
+      line = line.trim();
+
+      // Top parent in stack with indent < current indent
+      while (stack.length > 1 && stack[stack.length - 1].indent >= indent) {
+        stack.pop();
+      }
+
+      let parent = stack[stack.length - 1].obj;
+
+      if (line.startsWith('- ')) {
+        // List item
+        const valStr = line.substring(2).trim();
+        if (valStr.includes(': ')) {
+          const colonIdx = valStr.indexOf(': ');
+          const k = valStr.substring(0, colonIdx).trim();
+          const v = valStr.substring(colonIdx + 2).trim();
+          const newObj = {};
+          newObj[k] = parseValue(v);
+          if (Array.isArray(parent)) parent.push(newObj);
+          stack.push({ indent: indent, obj: newObj, key: k, isArray: false });
+        } else {
+          if (Array.isArray(parent)) {
+            parent.push(parseValue(valStr));
+          }
+        }
+      } else if (line.includes(':')) {
+        const colonIdx = line.indexOf(':');
+        const k = line.substring(0, colonIdx).trim();
+        const v = line.substring(colonIdx + 1).trim();
+
+        if (!k) {
+          throw new Error(`Line ${lineNum}: Empty key in mapping`);
+        }
+
+        if (v === '') {
+          // Parent object or array coming next
+          const newObj = {};
+          if (Array.isArray(parent)) {
+            parent.push({ [k]: newObj });
+          } else {
+            parent[k] = newObj;
+          }
+          stack.push({ indent: indent, obj: newObj, key: k, isArray: false });
+        } else {
+          const parsedVal = parseValue(v);
+          if (Array.isArray(parent)) {
+            parent.push({ [k]: parsedVal });
+          } else {
+            parent[k] = parsedVal;
+          }
+        }
+      }
+    });
+
+    return root;
+  }
+
+  function parseValue(val) {
+    if (!val) return null;
+    if (val === 'true' || val === 'true') return true;
+    if (val === 'false' || val === 'false') return false;
+    if (val === 'null' || val === '~') return null;
+    if (!isNaN(Number(val)) && val.trim() !== '') return Number(val);
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      return val.substring(1, val.length - 1);
+    }
+    return val;
+  }
+
+  function parseAndUpdate() {
+    const raw = yamlInput.value;
+    updateBasicStats(raw);
+
+    if (!raw.trim()) {
+      showEmptyState();
+      return;
+    }
+
+    try {
+      currentParsedObj = parseYAML(raw);
+      errorBox.style.display = 'none';
+      
+      statStatus.textContent = '✅ Valid';
+      statStatus.style.background = '#f0fdf4';
+      statStatus.style.color = '#16a34a';
+
+      computeAdvancedStats(currentParsedObj);
+      renderTree(currentParsedObj);
+      codeOutput.textContent = JSON.stringify(currentParsedObj, null, 2);
+
+    } catch (err) {
+      currentParsedObj = null;
+      statStatus.textContent = '❌ Invalid';
+      statStatus.style.background = '#fef2f2';
+      statStatus.style.color = '#dc2626';
+
+      errorBox.style.display = 'block';
+      errorMessage.textContent = err.message;
+
+      treePlaceholder.style.display = 'flex';
+      treeRoot.style.display = 'none';
+      codeOutput.textContent = raw;
+      resetAdvancedStats();
+    }
+  }
+
+  function updateBasicStats(raw) {
+    const bytes = new Blob([raw]).size;
+    statSize.textContent = formatBytes(bytes);
+    statChars.textContent = raw.length.toLocaleString();
+    statLines.textContent = raw.trim() ? raw.split('\n').length.toLocaleString() : '0';
+  }
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function showEmptyState() {
+    statStatus.textContent = 'Ready';
+    statStatus.style.background = '#f1f5f9';
+    statStatus.style.color = '#475569';
+    errorBox.style.display = 'none';
+    treePlaceholder.style.display = 'flex';
+    treeRoot.style.display = 'none';
+    codeOutput.textContent = '';
+    resetAdvancedStats();
+  }
+
+  function resetAdvancedStats() {
+    statObjects.textContent = '0';
+    statArrays.textContent = '0';
+    statKeys.textContent = '0';
+    statDepth.textContent = '0';
+  }
+
+  function computeAdvancedStats(obj) {
+    let objects = 0;
+    let arrays = 0;
+    let keys = 0;
+    let maxDepth = 0;
+
+    function traverse(val, depth) {
+      if (depth > maxDepth) maxDepth = depth;
+
+      if (val !== null && typeof val === 'object') {
+        if (Array.isArray(val)) {
+          arrays++;
+          val.forEach(item => traverse(item, depth + 1));
+        } else {
+          objects++;
+          Object.keys(val).forEach(k => {
+            keys++;
+            traverse(val[k], depth + 1);
+          });
+        }
+      }
+    }
+
+    traverse(obj, 1);
+
+    statObjects.textContent = objects.toLocaleString();
+    statArrays.textContent = arrays.toLocaleString();
+    statKeys.textContent = keys.toLocaleString();
+    statDepth.textContent = maxDepth;
+  }
+
+  // Tree Rendering Logic
+  function renderTree(data) {
+    treePlaceholder.style.display = 'none';
+    treeRoot.style.display = 'block';
+    treeRoot.innerHTML = '';
+    treeRoot.appendChild(buildTreeNode('$', data, true));
+  }
+
+  function buildTreeNode(key, value, isRoot = false, path = '$') {
+    const node = document.createElement('div');
+    node.style.marginLeft = isRoot ? '0' : '1.25rem';
+    node.style.marginTop = '0.2rem';
+    node.style.marginBottom = '0.2rem';
+
+    const currentPath = isRoot ? '$' : (path.endsWith(']') ? `${path}.${key}` : (Array.isArray(value) ? `${path}[${key}]` : `${path}.${key}`));
+    const type = getValueType(value);
+
+    if (type === 'object' || type === 'array') {
+      const isArr = type === 'array';
+      const count = isArr ? value.length : Object.keys(value).length;
+      
+      const header = document.createElement('div');
+      header.style.cssText = 'display: flex; align-items: center; gap: 0.4rem; cursor: pointer; user-select: none; border-radius: 4px; padding: 0.15rem 0.35rem;';
+      header.className = 'tree-header-row';
+
+      const toggle = document.createElement('span');
+      toggle.textContent = '▼';
+      toggle.style.cssText = 'font-size: 0.7rem; color: #64748b; transition: transform 0.2s; width: 14px;';
+
+      const keySpan = document.createElement('span');
+      keySpan.style.fontWeight = '700';
+      keySpan.style.color = '#0f172a';
+      keySpan.textContent = isRoot ? '$' : `${key}:`;
+
+      const typeBadge = document.createElement('span');
+      typeBadge.style.cssText = 'font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 9999px; font-weight: 600;';
+      if (isArr) {
+        typeBadge.style.background = '#f0fdf4';
+        typeBadge.style.color = '#16a34a';
+        typeBadge.textContent = `List[${count}]`;
+      } else {
+        typeBadge.style.background = '#eff6ff';
+        typeBadge.style.color = '#2563eb';
+        typeBadge.textContent = `Mapping{${count}}`;
+      }
+
+      header.appendChild(toggle);
+      header.appendChild(keySpan);
+      header.appendChild(typeBadge);
+
+      const childrenContainer = document.createElement('div');
+      childrenContainer.className = 'tree-children';
+
+      if (isArr) {
+        value.forEach((item, index) => {
+          childrenContainer.appendChild(buildTreeNode(index, item, false, currentPath));
+        });
+      } else {
+        Object.keys(value).forEach(k => {
+          childrenContainer.appendChild(buildTreeNode(k, value[k], false, currentPath));
+        });
+      }
+
+      let isExpanded = true;
+      header.addEventListener('click', (e) => {
+        e.stopPropagation();
+        isExpanded = !isExpanded;
+        childrenContainer.style.display = isExpanded ? 'block' : 'none';
+        toggle.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(-90deg)';
+        selectNode(currentPath, JSON.stringify(value));
+      });
+
+      node.appendChild(header);
+      node.appendChild(childrenContainer);
+
+    } else {
+      const row = document.createElement('div');
+      row.style.cssText = 'display: flex; align-items: center; gap: 0.4rem; padding: 0.15rem 0.35rem; border-radius: 4px; cursor: pointer;';
+      row.className = 'tree-header-row';
+
+      const keySpan = document.createElement('span');
+      keySpan.style.fontWeight = '600';
+      keySpan.style.color = '#475569';
+      keySpan.textContent = `${key}:`;
+
+      const valSpan = document.createElement('span');
+      if (type === 'string') {
+        valSpan.style.color = '#16a34a';
+        valSpan.textContent = `"${value}"`;
+      } else if (type === 'number') {
+        valSpan.style.color = '#ea580c';
+        valSpan.textContent = value;
+      } else if (type === 'boolean') {
+        valSpan.style.color = '#2563eb';
+        valSpan.textContent = value;
+      } else if (type === 'null') {
+        valSpan.style.color = '#9333ea';
+        valSpan.textContent = 'null';
+      }
+
+      row.appendChild(keySpan);
+      row.appendChild(valSpan);
+
+      row.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectNode(currentPath, String(value));
+      });
+
+      node.appendChild(row);
+    }
+
+    return node;
+  }
+
+  function getValueType(val) {
+    if (val === null) return 'null';
+    if (Array.isArray(val)) return 'array';
+    return typeof val;
+  }
+
+  function selectNode(path, valStr) {
+    activeSelectedPath = path;
+    activeSelectedValue = valStr;
+    selectedPathEl.textContent = path;
+  }
+
+  // Copy & Action Handlers
+  btnCopyPath.addEventListener('click', () => {
+    navigator.clipboard.writeText(activeSelectedPath);
+    showToast('YAML Path copied!');
+  });
+
+  btnCopyValue.addEventListener('click', () => {
+    navigator.clipboard.writeText(activeSelectedValue);
+    showToast('Node value copied!');
+  });
+
+  btnCopyYaml.addEventListener('click', () => {
+    if (yamlInput.value) {
+      navigator.clipboard.writeText(yamlInput.value);
+      showToast('YAML copied to clipboard!');
+    }
+  });
+
+  btnDownload.addEventListener('click', () => {
+    if (!yamlInput.value.trim()) return;
+    const blob = new Blob([yamlInput.value], { type: 'text/yaml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'datafrog-formatted.yaml';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  btnExpandAll.addEventListener('click', () => {
+    document.querySelectorAll('.tree-children').forEach(el => el.style.display = 'block');
+    showToast('Expanded all nodes');
+  });
+
+  btnCollapseAll.addEventListener('click', () => {
+    document.querySelectorAll('.tree-children').forEach(el => el.style.display = 'none');
+    showToast('Collapsed all nodes');
+  });
+
+  tabTree.addEventListener('click', () => {
+    tabTree.style.background = '#ffffff';
+    tabTree.style.color = '#0f172a';
+    tabTree.style.fontWeight = '700';
+    tabCode.style.background = 'transparent';
+    tabCode.style.color = '#64748b';
+
+    treeContainer.style.display = 'block';
+    codeContainer.style.display = 'none';
+  });
+
+  tabCode.addEventListener('click', () => {
+    tabCode.style.background = '#ffffff';
+    tabCode.style.color = '#0f172a';
+    tabCode.style.fontWeight = '700';
+    tabTree.style.background = 'transparent';
+    tabTree.style.color = '#64748b';
+
+    treeContainer.style.display = 'none';
+    codeContainer.style.display = 'block';
+  });
+
+  // Search Filter
+  searchInput.addEventListener('input', (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    if (!q) {
+      searchCount.textContent = '0 matches';
+      clearHighlights();
+      return;
+    }
+
+    let matchCount = 0;
+    const rows = document.querySelectorAll('.tree-header-row');
+    rows.forEach(row => {
+      const txt = row.textContent.toLowerCase();
+      if (txt.includes(q)) {
+        matchCount++;
+        row.style.background = '#fef08a';
+      } else {
+        row.style.background = 'transparent';
+      }
+    });
+
+    searchCount.textContent = `${matchCount} ${matchCount === 1 ? 'match' : 'matches'}`;
+  });
+
+  function clearHighlights() {
+    document.querySelectorAll('.tree-header-row').forEach(r => r.style.background = 'transparent');
+  }
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+    }, 2200);
+  }
+
+  // Initial Load
+  parseAndUpdate();
+
+})();
+</script>

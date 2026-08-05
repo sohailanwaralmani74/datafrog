@@ -1,406 +1,290 @@
-# ============================================
-# _data/tools.yml
-# Master list of all tools, used to render
-# dynamic "Related Tools" sidebar via Liquid.
-# Each tool needs: title, url, category
-# ============================================
-
-# ----- Excel Converter -----
-- title: "Excel to JSON"
-  url: /excel-to-json
-  category: excel
-
-- title: "Excel to HTML"
-  url: /excel-to-html
-  category: excel
-
-- title: "Excel to TXT"
-  url: /excel-to-txt
-  category: excel
-
-- title: "Excel to PDF"
-  url: /xlsx-to-pdf
-  category: excel
-
-- title: "Excel to SQL"
-  url: /xlsx-to-sql-converter
-  category: excel
-
-- title: "Excel to CSV"
-  url: /convert-xlsx-to-csv
-  category: excel
-
-- title: "Excel to XML"
-  url: /convert-xlsx-to-xml
-  category: excel
-
-# ----- CSV Converter -----
-- title: "CSV to Excel"
-  url: /convert-csv-to-excel
-  category: csv
-
-- title: "CSV to HTML"
-  url: /convert-csv-to-html
-  category: csv
-
-- title: "CSV to JSON"
-  url: /convert-csv-to-json
-  category: csv
-
-- title: "CSV to PDF"
-  url: /convert-csv-to-pdf
-  category: csv
-
-- title: "CSV to TXT"
-  url: /convert-csv-to-txt
-  category: csv
-
-- title: "CSV to XML"
-  url: /convert-csv-to-xml
-  category: csv
-
-- title: "CSV to SQL"
-  url: /csv-to-sql
-  category: csv
-
-# ----- JSON Converter -----
-- title: "JSON String to JSON Object"
-  url: /json-string-to-json-object
-  category: json
-
-- title: "JSON to CSV"
-  url: /json-to-csv
-  category: json
-
-- title: "JSON to Excel"
-  url: /json-to-excel
-  category: json
-
-- title: "JSON to JSON Schema"
-  url: /json-to-json-schema
-  category: json
-
-- title: "JSON to PDF"
-  url: /json-to-pdf
-  category: json
-
-- title: "JSON to SQL"
-  url: /json-to-sql
-  category: json
-
-- title: "JSON to TXT"
-  url: /json-to-txt
-  category: json
-
-- title: "JSON to XML"
-  url: /json-to-xml
-  category: json
-
-- title: "JSON to YAML"
-  url: /json-to-yaml
-  category: json
-
-# ----- XML Converter -----
-- title: "XML to JSON"
-  url: /xml-to-json
-  category: xml
-
-- title: "XML to XSD"
-  url: /xml-to-xsd-generator
-  category: xml
-
-# ----- SQL Converter -----
-- title: "SQL to CSV"
-  url: /sql-to-csv
-  category: sql
-
-- title: "SQL to Excel"
-  url: /sql-to-excel
-  category: sql
-
-- title: "SQL to XML"
-  url: /sql-to-xml
-  category: sql
-
-# ----- PDF -----
-- title: "PPTX to PDF"
-  url: /pptx-to-pdf
-  category: pdf
-
-- title: "PDF to PPTX"
-  url: /pdf-to-powerpoint
-  category: pdf
-
-# ----- Others -----
-- title: "Recordset Converter"
-  url: /recordset-converter
-  category: others
-
-# ----- YAML -----
-- title: "YAML to JSON"
-  url: /yaml-to-json
-  category: others
-
-# ----- QIF Converter -----
-- title: "QIF to CSV"
-  url: /qif-to-csv
-  category: qif
-
-- title: "QIF to Excel"
-  url: /qif-to-excel
-  category: qif
-
-- title: "QIF to QBO"
-  url: /qif-to-qbo
-  category: qif
-
-# ----- Data Formatter -----
-- title: "Minify and Prettify JSON"
-  url: /json-minify-prettify
-  category: formatter
-
-- title: "XML Formatter"
-  url: /xml-formatter
-  category: formatter
-
-- title: "HTML Beautifier"
-  url: /html-beautifier
-  category: formatter
-
-# ----- DB Formatter -----
-- title: "SQL Formatter"
-  url: /sql-formatter
-  category: formatter
-
-# ----- Validator: Analyze -----
-- title: "Analyze Excel"
-  url: /analyze-excel
-  category: validator
-
-# ----- Validator: Remove Duplicates -----
-- title: "Remove Duplicates in SQL"
-  url: /remove-duplicates-in-sql
-  category: validator
-
-- title: "Remove CSV Duplicates"
-  url: /remove-csv-duplicates
-  category: validator
-
-- title: "Remove Excel Duplicates"
-  url: /remove-excel-duplicates
-  category: validator
-
-# ----- Utilities: Code Generators -----
-- title: "JSON to Dart"
-  url: /json-to-dart
-  category: coding
-
-- title: "JSON to HTML"
-  url: /json-to-html
-  category: coding
-
-- title: "JSON to TypeScript"
-  url: /json-to-ts
-  category: coding
-
-- title: "JSON to Java"
-  url: /json-to-java
-  category: coding
-
-- title: "JSON to C#"
-  url: /json-to-c-sharp
-  category: coding
-
-- title: "JSON to Go Structs"
-  url: /json-to-go
-  category: coding
-
-# ----- Utilities: Data Generator -----
-- title: "UUID Generator"
-  url: /uuid-generator
-  category: utilities
-
-- title: "Epoch Converter"
-  url: /convert-epoch
-  category: utilities
-
-- title: "Case Converter"
-  url: /case-converter
-  category: utilities
-
-# ----- Utilities: Encoding | Hashing -----
-- title: "Base64 Encoder/Decoder"
-  url: /base64
-  category: utilities
-
-- title: "Hash Generator"
-  url: /hash-generator
-  category: utilities
-
-- title: "JWT Decoder"
-  url: /jwt-decoder
-  category: utilities
-
-- title: "Decode A URL"
-  url: /decode-a-url
-  category: utilities
-
-# ----- Utilities: Writing & Editing -----
-- title: "Word Counter"
-  url: /word-counter
-  category: 
-
-# ------- blog posts ------
-- title: "How to Convert Excel to JSON"
-  url: /how-to-convert-excel-to-json
-  category: excelblog
-
-- title: "How to Convert JSON to CSV"
-  url: /how-to-convert-json-to-csv
-  category: jsonblog
-
-- title: "How to Convert JSON to PDF"
-  url: /how-to-convert-json-to-pdf
-  category: jsonblog
-
-- title: "How to Convert JSON to XML"
-  url: /how-to-convert-json-to-xml
-  category: jsonblog
-
-- title: "How to Open JSON File in Excel"
-  url: /how-to-open-json-file-in-excel
-  category: jsonblog
-
-- title: "How To Generate UUID Online"
-  url: /how-to-generate-uuid
-  category: datageneration 
-
-# ------- finance tools ------
-- title: "MT940 to Excel"
-  url: /mt940-to-excel
-  category: mt940Finance
-
-- title: "MT940 to CSV"
-  url: /mt940-to-csv
-  category: mt940Finance
-
-- title: "MT940 to QIF"
-  url: /mt940-to-qif
-  category: mt940Finance
-
-- title: "MT940 to QBO"
-  url: /mt940-to-qbo
-  category: mt940Finance
-
-- title: "MT940 to QFX"
-  url: /mt940-to-qfx
-  category: mt940Finance
-
-- title: "QIF to CSV"
-  url: /qif-to-csv
-  category: qifFinance
-
-- title: "QIF to Excel"
-  url: /qif-to-excel
-  category: qifFinance
-
-- title: "QIF to QBO"
-  url: /qif-to-qbo
-  category: qifFinance
-
-- title: "QIF to MT940"
-  url: /qif-to-mt940
-  category: qifFinance
-
-- title: "QIF to QFX"
-  url: /qif-to-qfx
-  category: qifFinance
-
-- title: "CSV to QIF"
-  url: /csv-to-qif
-  category: csvFinance
-
-- title: "CSV to QBO"
-  url: /csv-to-qbo
-  category: csvFinance
-
-- title: "CSV to QFX"
-  url: /csv-to-qfx
-  category: csvFinance
-
-- title: "CSV to MT940"
-  url: /csv-to-mt940
-  category: csvFinance
-
-- title: "Excel to QIF"
-  url: /excel-to-qif
-  category: excelFinance
-
-- title: "Excel to QBO"
-  url: /excel-to-qbo
-  category: excelFinance
-
-- title: "Excel to QFX"
-  url: /excel-to-qfx
-  category: excelFinance
-
-- title: "Excel to MT940"
-  url: /excel-to-mt940
-  category: excelFinance
-
-- title: "QBO to CSV"
-  url: /qbo-to-csv
-  category: qboFinance
-
-- title: "QBO to QIF"
-  url: /qbo-to-qif
-  category: qboFinance
-
-- title: "QBO to Excel"
-  url: /qbo-to-excel
-  category: qboFinance
-
-- title: "QBO to QFX"
-  url: /qbo-to-qfx
-  category: qboFinance
-
-- title: "QBO to MT940"
-  url: /qbo-to-mt940
-  category: qboFinance
-
-- title: "MT942 to CSV"
-  url: /mt942-to-csv
-  category: mt942Finance
-
-- title: "MT942 to Excel"
-  url: /mt942-to-excel
-  category: mt942Finance
-
-- title: "QFX to CSV"
-  url: /qfx-to-csv
-  category: qfxFinance
-
-- title: "QFX to QIF"
-  url: /qfx-to-qif
-  category: qfxFinance
-
-- title: "QFX to Excel"
-  url: /qfx-to-excel
-  category: qfxFinance
-
-- title: "QFX to MT940"
-  url: /qfx-to-mt940
-  category: qfxFinance
-
-- title: "SQLite Viewer Online"
-  url: /sqlite-viewer-online
-  category: queryTools
-
-- title: "Query CSV"
-  url: /query-csv-online
-  category: queryTools
-
-- title: "Query Excel"
-  url: /query-excel-online
-  category: queryTools  
-  
+# =================================================
+# DataFrog.tools — Master Tool Registry
+# =================================================
+# Each tool must contain:
+#   - title: Tool Title
+#   - short_name: Short Tool Name (used for clean breadcrumbs & navigation)
+#   - url: /tool-permalink
+#   - category: Inspect | Analyze | Validate | Compare | Visualize
+#   - description: Short tool description
+#   - keywords: ["keyword1", "keyword2"]
+#   - icon: icon-name
+#   - featured: true | false
+#   - date: YYYY-MM-DD
+#   - updated: YYYY-MM-DD
+# =================================================
+
+- title: "JSON Viewer"
+  short_name: "JSON Viewer"
+  url: "/inspect/json-viewer/"
+  category: "Inspect"
+  description: "View, inspect, search, validate, and explore JSON data locally in your browser with an interactive tree view, depth metrics, and JSON path copy."
+  keywords: ["JSON Viewer", "View JSON", "JSON Tree Viewer", "JSON File Viewer", "JSON Inspector", "JSON Explorer", "View JSON Online", "JSON Viewer Online", "Open JSON File", "JSON Structure Viewer", "Interactive JSON Viewer"]
+  icon: "🔍"
+  featured: true
+  date: "2026-06-05"
+  updated: "2026-06-07"
+
+- title: "CSV Viewer"
+  short_name: "CSV Viewer"
+  url: "/inspect/csv-viewer/"
+  category: "Inspect"
+  description: "Open, inspect, search, filter, sort, and explore CSV files locally in your browser with interactive tables, auto delimiter detection, and column metrics."
+  keywords: ["CSV Viewer", "View CSV Online", "CSV File Viewer", "Open CSV File", "CSV Table Viewer", "CSV Reader", "Online CSV Viewer", "View CSV File", "CSV Viewer Online"]
+  icon: "📊"
+  featured: true
+  date: "2026-06-07"
+  updated: "2026-06-10"
+
+- title: "XML Viewer"
+  short_name: "XML Viewer"
+  url: "/inspect/xml-viewer/"
+  category: "Inspect"
+  description: "Open, inspect, search, validate, and explore XML documents locally in your browser using an interactive tree structure, XPath finder, and attribute inspector."
+  keywords: ["XML Viewer", "View XML Online", "XML File Viewer", "Open XML File", "XML Tree Viewer", "XML Reader", "Online XML Viewer", "View XML File", "XML Structure Viewer"]
+  icon: "📜"
+  featured: true
+  date: "2026-06-10"
+  updated: "2026-06-12"
+
+- title: "YAML Viewer"
+  short_name: "YAML Viewer"
+  url: "/inspect/yaml-viewer/"
+  category: "Inspect"
+  description: "View, inspect, search, validate, and explore YAML documents locally in your browser using an interactive tree view, path finder, and depth statistics."
+  keywords: ["YAML Viewer", "View YAML Online", "YAML File Viewer", "Open YAML File", "YAML Parser", "YAML Tree Viewer", "YAML Reader", "YAML Viewer Online", "Inspect YAML"]
+  icon: "📝"
+  featured: true
+  date: "2026-06-12"
+  updated: "2026-06-15"
+
+- title: "Excel Viewer"
+  short_name: "Excel Viewer"
+  url: "/inspect/excel-viewer/"
+  category: "Inspect"
+  description: "Open, inspect, search, filter, and explore Excel workbooks (.xlsx, .xls, .xlsm) locally in your browser with multi-sheet tabs, column sorting, and formula toggles."
+  keywords: ["Excel Viewer", "View Excel Online", "Excel File Viewer", "Open Excel File", "XLSX Viewer", "XLS Viewer", "Excel Spreadsheet Viewer", "Online Excel Viewer", "View XLSX File"]
+  icon: "📈"
+  featured: true
+  date: "2026-06-15"
+  updated: "2026-06-18"
+
+- title: "JSON Analyzer"
+  short_name: "JSON Analyzer"
+  url: "/analyze/json-analyzer/"
+  category: "Analyze"
+  description: "Analyze JSON structure, complexity metrics, data type distribution, key frequencies, and data quality insights locally in your browser."
+  keywords: ["JSON Analyzer", "Analyze JSON", "JSON Analysis", "JSON Structure Analyzer", "JSON Statistics", "JSON Analyzer Online", "JSON Data Analyzer", "JSON Insights", "JSON Structure Analysis"]
+  icon: "📈"
+  featured: true
+  date: "2026-06-18"
+  updated: "2026-06-20"
+
+- title: "CSV Analyzer"
+  short_name: "CSV Analyzer"
+  url: "/analyze/csv-analyzer/"
+  category: "Analyze"
+  description: "Analyze CSV datasets with column profiling, numeric summary stats (mean, median, min, max, sum), missing value detection, duplicate checks, and quality audits."
+  keywords: ["CSV Analyzer", "Analyze CSV", "CSV File Analyzer", "CSV Data Analyzer", "CSV Analysis Tool", "CSV Statistics", "CSV Profiler", "Analyze CSV Online"]
+  icon: "📊"
+  featured: true
+  date: "2026-06-20"
+  updated: "2026-06-23"
+
+- title: "Excel Analyzer"
+  short_name: "Excel Analyzer"
+  url: "/analyze/excel-analyzer/"
+  category: "Analyze"
+  description: "Analyze Excel workbooks (.xlsx, .xls, .xlsm) with multi-sheet statistics, formula audit, cell type breakdown, merged cell metrics, and data quality reports."
+  keywords: ["Excel Analyzer", "Analyze Excel", "Excel File Analyzer", "Excel Workbook Analyzer", "XLSX Analyzer", "Spreadsheet Analyzer", "Analyze Excel Online", "Excel Data Analysis"]
+  icon: "📈"
+  featured: true
+  date: "2026-06-23"
+  updated: "2026-06-26"
+
+- title: "XML Analyzer"
+  short_name: "XML Analyzer"
+  url: "/analyze/xml-analyzer/"
+  category: "Analyze"
+  description: "Analyze XML structure, hierarchy depth, element frequencies, namespace usage, attribute metrics, and data quality reports locally in your browser."
+  keywords: ["XML Analyzer", "Analyze XML", "XML File Analyzer", "XML Structure Analyzer", "XML Data Analyzer", "XML Analysis Tool", "Analyze XML Online", "XML Statistics"]
+  icon: "📜"
+  featured: true
+  date: "2026-06-26"
+  updated: "2026-06-29"
+
+- title: "Log Analyzer"
+  short_name: "Log Analyzer"
+  url: "/analyze/log-analyzer/"
+  category: "Analyze"
+  description: "Analyze web server (Nginx, Apache, IIS) and application log files locally in your browser with log level breakdowns, HTTP status codes, top IP profiling, and error audits."
+  keywords: ["Log Analyzer", "Analyze Log Files", "Log File Analyzer", "Online Log Analyzer", "Server Log Analyzer", "Apache Log Analyzer", "Nginx Log Analyzer", "Application Log Analyzer", "Log Analysis Tool"]
+  icon: "📄"
+  featured: true
+  date: "2026-06-29"
+  updated: "2026-07-02"
+
+- title: "JSON Validator"
+  short_name: "JSON Validator"
+  url: "/validate/json-validator/"
+  category: "Validate"
+  description: "Validate JSON syntax, detect parsing errors with line & column numbers, highlight syntax issues, pretty print, minify, and format JSON locally."
+  keywords: ["JSON Validator", "Validate JSON", "JSON Checker", "JSON Validation Tool", "JSON Syntax Validator", "JSON Validator Online"]
+  icon: "✅"
+  featured: true
+  date: "2026-07-02"
+  updated: "2026-07-05"
+
+- title: "XML Validator"
+  short_name: "XML Validator"
+  url: "/validate/xml-validator/"
+  category: "Validate"
+  description: "Validate XML documents, detect malformed syntax, unclosed tags, namespace issues, encoding errors, and format XML locally in your browser."
+  keywords: ["XML Validator", "Validate XML", "XML Checker", "XML Validation Tool", "XML Syntax Validator", "XML Validator Online"]
+  icon: "📜"
+  featured: true
+  date: "2026-07-05"
+  updated: "2026-07-08"
+
+- title: "CSV Validator"
+  short_name: "CSV Validator"
+  url: "/validate/csv-validator/"
+  category: "Validate"
+  description: "Validate CSV files for column count consistency, duplicate headers, empty rows, invalid quote escaping, missing values, and delimiter issues."
+  keywords: ["CSV Validator", "Validate CSV", "CSV Checker", "CSV Validation Tool", "CSV Syntax Checker", "CSV Validator Online"]
+  icon: "📊"
+  featured: true
+  date: "2026-07-08"
+  updated: "2026-07-11"
+
+- title: "YAML Validator"
+  short_name: "YAML Validator"
+  url: "/validate/yaml-validator/"
+  category: "Validate"
+  description: "Validate YAML syntax, indentation levels, duplicate keys, anchors, aliases, and structural integrity locally in your browser."
+  keywords: ["YAML Validator", "Validate YAML", "YAML Checker", "YAML Validation Tool", "YAML Syntax Validator", "YAML Validator Online"]
+  icon: "📝"
+  featured: true
+  date: "2026-07-11"
+  updated: "2026-07-14"
+
+- title: "JSON Schema Validator"
+  short_name: "JSON Schema Validator"
+  url: "/validate/json-schema-validator/"
+  category: "Validate"
+  description: "Validate JSON documents against JSON Schemas (Draft-04, Draft-07, 2020-12) with detailed property path error reporting and constraint checks."
+  keywords: ["JSON Schema Validator", "Validate JSON Schema", "JSON Schema Checker", "JSON Schema Validation", "Schema Validator", "JSON Schema Validator Online"]
+  icon: "🛡️"
+  featured: true
+  date: "2026-07-14"
+  updated: "2026-07-17"
+
+- title: "Text Compare"
+  short_name: "Text Compare"
+  url: "/compare/text-compare/"
+  category: "Compare"
+  description: "Compare two text blocks or code files side-by-side or inline. Highlight additions, deletions, modifications, line-by-line differences, and word changes."
+  keywords: ["Text Compare", "Compare Text", "Text Diff", "Compare Text Online", "Text Difference Checker", "Compare Two Text Files", "Online Text Compare"]
+  icon: "⚖️"
+  featured: true
+  date: "2026-07-17"
+  updated: "2026-07-20"
+
+- title: "JSON Compare"
+  short_name: "JSON Compare"
+  url: "/compare/json-compare/"
+  category: "Compare"
+  description: "Compare two JSON documents structurally. Highlight added keys, removed keys, modified values, nested array differences, and JSON paths."
+  keywords: ["JSON Compare", "JSON Diff", "Compare JSON", "Compare JSON Online", "JSON Difference Checker", "JSON Compare Tool", "JSON Diff Viewer"]
+  icon: "🔍"
+  featured: true
+  date: "2026-07-20"
+  updated: "2026-07-23"
+
+- title: "CSV Compare"
+  short_name: "CSV Compare"
+  url: "/compare/csv-compare/"
+  category: "Compare"
+  description: "Compare two CSV files or spreadsheet data. Highlight added rows, removed rows, modified cell values, and column mismatches with diff reports."
+  keywords: ["CSV Compare", "Compare CSV", "CSV Diff", "CSV Difference Checker", "CSV Compare Tool", "Compare CSV Files", "CSV Comparison"]
+  icon: "📊"
+  featured: true
+  date: "2026-07-23"
+  updated: "2026-07-25"
+
+- title: "XML Compare"
+  short_name: "XML Compare"
+  url: "/compare/xml-compare/"
+  category: "Compare"
+  description: "Compare two XML documents by analyzing element nodes, attributes, namespace URIs, text contents, and XML hierarchy differences."
+  keywords: ["XML Compare", "XML Diff", "Compare XML", "XML Difference Checker", "XML Compare Tool", "Compare XML Files", "XML Diff Viewer"]
+  icon: "📜"
+  featured: true
+  date: "2026-07-25"
+  updated: "2026-07-27"
+
+- title: "Excel Compare"
+  short_name: "Excel Compare"
+  url: "/compare/excel-compare/"
+  category: "Compare"
+  description: "Compare two Excel workbooks (.xlsx, .xls) cell-by-cell. Highlight modified values, formula changes, sheet mismatches, and row/column diffs."
+  keywords: ["Excel Compare", "Compare Excel Files", "Excel Difference Checker", "Excel Workbook Compare", "Spreadsheet Compare", "XLSX Compare", "Excel Compare Online"]
+  icon: "📈"
+  featured: true
+  date: "2026-07-27"
+  updated: "2026-07-29"
+
+- title: "JSON Visualizer"
+  short_name: "JSON Visualizer"
+  url: "/visualize/json-visualizer/"
+  category: "Visualize"
+  description: "Transform JSON documents into interactive visual trees. Expand/collapse branches, search nodes, display JSON paths, view statistics, and export diagrams."
+  keywords: ["JSON Visualizer", "Visualize JSON", "JSON Tree Viewer", "JSON Graph Viewer", "JSON Structure Visualizer", "JSON Hierarchy Viewer", "JSON Diagram"]
+  icon: "👁️"
+  featured: true
+  date: "2026-07-29"
+  updated: "2026-07-31"
+
+- title: "CSV Visualizer"
+  short_name: "CSV Visualizer"
+  url: "/visualize/csv-visualizer/"
+  category: "Visualize"
+  description: "Convert CSV datasets into interactive charts (Bar, Line, Area, Pie, Scatter, Doughnut). Auto-detect columns, filter metrics, and export high-res PNG/SVG charts."
+  keywords: ["CSV Visualizer", "CSV Chart Generator", "CSV Graph", "CSV Charts", "CSV Visualization", "Visualize CSV", "CSV Dashboard"]
+  icon: "📊"
+  featured: true
+  date: "2026-07-31"
+  updated: "2026-08-01"
+
+- title: "XML Visualizer"
+  short_name: "XML Visualizer"
+  url: "/visualize/xml-visualizer/"
+  category: "Visualize"
+  description: "Visualize XML documents as interactive element hierarchy trees. Inspect attributes, namespace URIs, XPath pointers, and export SVG/PNG structure diagrams."
+  keywords: ["XML Visualizer", "XML Tree Viewer", "Visualize XML", "XML Structure Viewer", "XML Hierarchy Viewer", "XML Diagram", "XML Graph"]
+  icon: "📜"
+  featured: true
+  date: "2026-08-01"
+  updated: "2026-08-03"
+
+- title: "Excel Visualizer"
+  short_name: "Excel Visualizer"
+  url: "/visualize/excel-visualizer/"
+  category: "Visualize"
+  description: "Convert Excel workbooks (.xlsx, .xls) into interactive dashboards and charts. Multi-sheet support, automatic column detection, and PNG/SVG export."
+  keywords: ["Excel Visualizer", "Excel Chart Generator", "Excel Dashboard", "Spreadsheet Charts", "Visualize Excel", "Excel Graph Generator", "Excel Data Visualization"]
+  icon: "📈"
+  featured: true
+  date: "2026-08-03"
+  updated: "2026-08-04"
+
+- title: "YAML Visualizer"
+  short_name: "YAML Visualizer"
+  url: "/visualize/yaml-visualizer/"
+  category: "Visualize"
+  description: "Transform YAML configuration files into interactive visual trees. Inspect nested mappings, sequences, node paths, statistics, and export diagrams."
+  keywords: ["YAML Visualizer", "Visualize YAML", "YAML Tree Viewer", "YAML Structure Viewer", "YAML Hierarchy Viewer", "YAML Diagram", "YAML Explorer"]
+  icon: "📝"
+  featured: true
+  date: "2026-08-04"
+  updated: "2026-08-05"

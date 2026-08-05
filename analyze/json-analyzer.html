@@ -1,0 +1,932 @@
+---
+layout: main
+title: "JSON Analyzer – Analyze JSON Structure Online | DataFrog.tools"
+short_name: "JSON Analyzer"
+description: "Analyze JSON online with detailed statistics, structure insights, complexity metrics, key analysis, and validation. Free, browser-based, and privacy-friendly."
+keywords: "JSON Analyzer, Analyze JSON, JSON Analysis, JSON Structure Analyzer, JSON Statistics, JSON Analyzer Online, JSON Data Analyzer, JSON Insights, JSON Structure Analysis"
+category: "Analyze"
+permalink: /analyze/json-analyzer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSON Analyzer – DataFrog.tools",
+  "url": "https://datafrog.tools/analyze/json-analyzer/",
+  "description": "Browser-based JSON Analyzer providing structural insights, data type distribution, complexity scoring, key frequency analysis, and quality audits locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Analyze",
+      "item": "https://datafrog.tools/analyze"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "JSON Analyzer",
+      "item": "https://datafrog.tools/analyze/json-analyzer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the JSON Analyzer differ from the JSON Viewer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While the JSON Viewer focuses on tree navigation and path inspection, the JSON Analyzer performs deep statistical profiling, data type distribution analysis, complexity scoring, key frequency tracking, and automated quality auditing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my JSON payload safe during analysis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100%. All parsing, metric calculations, and quality report generation happen entirely within your local browser memory. Zero data is transmitted to external servers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the JSON Complexity Score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Complexity Score (1-100) measures dataset structural intricacy based on maximum nesting depth, key cardinality, object/array density, and type heterogeneity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export the analysis report?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Click 'Copy Report' to copy the formatted text analysis or click 'Download Report' to save it as a text file."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    📊 Analyze Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    JSON Analyzer – Structure, Metrics & Complexity Insights
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Deep statistical analysis for JSON documents. Profile data type distributions, key frequencies, nesting depth, complexity scores, and data quality recommendations locally in your browser.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📈</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your JSON file here for analysis</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .json files or paste raw text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse JSON File
+      <input type="file" id="file-input" accept=".json,application/json,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample JSON
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INPUT AREA & PARSING ERROR
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 2rem;">
+  <label for="json-input" style="display: block; font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 0.5rem;">
+    Raw JSON Input
+  </label>
+  <textarea id="json-input" placeholder="Paste your JSON document here to analyze structure..." 
+            style="width: 100%; height: 220px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.9rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 12px; outline: none; background: #ffffff; resize: vertical; margin-bottom: 0.75rem;"></textarea>
+
+  <div id="error-box" style="display: none; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 10px; padding: 1rem; color: #991b1b; font-size: 0.875rem;">
+    <div style="font-weight: 700; margin-bottom: 0.25rem;">❌ Invalid JSON Syntax</div>
+    <p id="error-message" style="margin: 0; font-family: monospace; font-size: 0.85rem; line-height: 1.4; word-break: break-all;"></p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     OVERVIEW DASHBOARD CARDS (6 METRICS)
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Validation</span>
+    <span id="card-status" style="display: inline-block; margin-top: 0.35rem; font-weight: 700; font-size: 0.9rem; padding: 0.15rem 0.6rem; border-radius: 9999px; background: #f1f5f9; color: #475569;">Ready</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Root Type</span>
+    <span id="card-root-type" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.15rem; color: #0f172a;">-</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Total Keys</span>
+    <span id="card-total-keys" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #2563eb;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Max Depth</span>
+    <span id="card-max-depth" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #9333ea;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Complexity Score</span>
+    <span id="card-complexity" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #ea580c;">0 / 100</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Quality Score</span>
+    <span id="card-quality" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #16a34a;">100%</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DETAILED ANALYSIS PANELS (GRID)
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;" id="analysis-main-grid">
+  
+  <!-- Left Side: Data Type Distribution -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+      <span>📊 Data Type Breakdown</span>
+    </h3>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;" id="type-distribution-container">
+      
+      <!-- Strings -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #16a34a;">Strings</span>
+          <span id="count-strings">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-strings" style="background: #16a34a; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Numbers -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #ea580c;">Numbers</span>
+          <span id="count-numbers">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-numbers" style="background: #ea580c; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Booleans -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #2563eb;">Booleans</span>
+          <span id="count-booleans">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-booleans" style="background: #2563eb; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Nulls -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #9333ea;">Nulls</span>
+          <span id="count-nulls">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-nulls" style="background: #9333ea; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Objects -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #0f172a;">Objects ({})</span>
+          <span id="count-objects">0</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-objects" style="background: #0f172a; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Arrays -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #0284c7;">Arrays ([])</span>
+          <span id="count-arrays">0</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-arrays" style="background: #0284c7; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Right Side: Structural Metrics & Extrema -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem;">
+      🔬 Structural Extrema & Metrics
+    </h3>
+
+    <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.875rem;">
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Largest Object:</span>
+        <span id="metric-largest-object" style="font-weight: 700; color: #0f172a;">-</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Largest Array:</span>
+        <span id="metric-largest-array" style="font-weight: 700; color: #0f172a;">-</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Avg Object Size:</span>
+        <span id="metric-avg-obj-size" style="font-weight: 700; color: #0f172a;">0 keys</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Longest Key:</span>
+        <span id="metric-longest-key" style="font-weight: 700; color: #2563eb; font-family: monospace;">-</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Longest String Value:</span>
+        <span id="metric-longest-string" style="font-weight: 700; color: #16a34a; font-family: monospace;">-</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Empty Containers:</span>
+        <span id="metric-empty-containers" style="font-weight: 700; color: #dc2626;">0 ({}: 0, []: 0)</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     KEY FREQUENCY TABLE & QUALITY INSIGHTS
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+  
+  <!-- Key Frequency Table -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">🔑 Top Key Frequencies</h3>
+    <div style="max-height: 250px; overflow-y: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+        <thead>
+          <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569;">Key Name</th>
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569; text-align: right;">Occurrences</th>
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569; text-align: right;">% Frequency</th>
+          </tr>
+        </thead>
+        <tbody id="key-frequency-tbody">
+          <tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No JSON data analyzed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Quality Audit Insights & Recommendations -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">🛡️ Data Quality Audit</h3>
+    <div id="quality-audit-list" style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+      <div style="color: #64748b; font-style: italic; text-align: center; padding: 2rem 0;">Input valid JSON to run automated quality audit</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     EXECUTIVE SUMMARY REPORT BOX & BUTTONS
+═══════════════════════════════════════════════════ -->
+<div style="background: #0f172a; color: #f8fafc; border-radius: 14px; padding: 1.5rem; margin-bottom: 3rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0; color: #ffffff;">📋 Generated JSON Executive Summary Report</h3>
+    <div style="display: flex; gap: 0.5rem;">
+      <button id="btn-copy-report" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Report
+      </button>
+      <button id="btn-download-report" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Report
+      </button>
+    </div>
+  </div>
+
+  <pre id="summary-report-output" style="margin: 0; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; word-break: break-all; color: #cbd5e1; background: #1e293b; padding: 1rem; border-radius: 8px;">Analysis report will be generated here upon JSON input...</pre>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">JSON Analyzer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Deep statistical profiling and dataset quality auditing</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📊 Data Type Distribution</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Calculates exact counts and percentages for strings, numbers, booleans, nulls, objects, and arrays.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚡ Structure Complexity Score</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Computes an automated 1-100 complexity metric based on nesting depth, key cardinality, and object density.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔑 Key Frequency Analysis</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Identifies top recurring keys across nested objects and tracks key reuse frequencies.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🛡️ Data Quality Audit</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Flags data anomalies like high null density, excessive nesting depth, empty objects, and duplicate keys.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📋 Executive Summary Export</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Generates downloadable text/markdown reports summarizing dataset metrics for documentation.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Browser Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All data processing is executed in local browser JavaScript. Zero external network requests.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use JSON Analyzer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input JSON Document</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste your JSON text into the input box, drag & drop a <code>.json</code> file into the dropzone, or click <strong>Load Sample JSON</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Dashboard Metrics</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review the data type breakdown bars, nesting depth extrema, key frequencies, and automated quality audit recommendations.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong> or <strong>Download Report</strong> to save the generated analysis summary.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the JSON Analyzer differ from the JSON Viewer?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          While the JSON Viewer focuses on tree navigation and path inspection, the JSON Analyzer performs deep statistical profiling, data type distribution analysis, complexity scoring, key frequency tracking, and automated quality auditing.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my JSON payload safe during analysis?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, 100%. All parsing, metric calculations, and quality report generation happen entirely within your local browser memory. Zero data is transmitted to external servers.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">What is the JSON Complexity Score?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The Complexity Score (1-100) measures dataset structural intricacy based on maximum nesting depth, key cardinality, object/array density, and type heterogeneity.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I export the analysis report?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! Click <strong>Copy Report</strong> to copy the formatted text analysis or click <strong>Download Report</strong> to save it as a text file.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     INTERACTIVE JAVASCRIPT ANALYZER LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // Elements
+  const jsonInput = document.getElementById('json-input');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const errorBox = document.getElementById('error-box');
+  const errorMessage = document.getElementById('error-message');
+
+  // Overview Cards
+  const cardStatus = document.getElementById('card-status');
+  const cardRootType = document.getElementById('card-root-type');
+  const cardTotalKeys = document.getElementById('card-total-keys');
+  const cardMaxDepth = document.getElementById('card-max-depth');
+  const cardComplexity = document.getElementById('card-complexity');
+  const cardQuality = document.getElementById('card-quality');
+
+  // Distribution Bars
+  const countStrings = document.getElementById('count-strings');
+  const barStrings = document.getElementById('bar-strings');
+  const countNumbers = document.getElementById('count-numbers');
+  const barNumbers = document.getElementById('bar-numbers');
+  const countBooleans = document.getElementById('count-booleans');
+  const barBooleans = document.getElementById('bar-booleans');
+  const countNulls = document.getElementById('count-nulls');
+  const barNulls = document.getElementById('bar-nulls');
+  const countObjects = document.getElementById('count-objects');
+  const barObjects = document.getElementById('bar-objects');
+  const countArrays = document.getElementById('count-arrays');
+  const barArrays = document.getElementById('bar-arrays');
+
+  // Extrema Metrics
+  const metricLargestObject = document.getElementById('metric-largest-object');
+  const metricLargestArray = document.getElementById('metric-largest-array');
+  const metricAvgObjSize = document.getElementById('metric-avg-obj-size');
+  const metricLongestKey = document.getElementById('metric-longest-key');
+  const metricLongestString = document.getElementById('metric-longest-string');
+  const metricEmptyContainers = document.getElementById('metric-empty-containers');
+
+  // Tables & Audits
+  const keyFrequencyTbody = document.getElementById('key-frequency-tbody');
+  const qualityAuditList = document.getElementById('quality-audit-list');
+  const summaryReportOutput = document.getElementById('summary-report-output');
+
+  // Buttons
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+  const btnCopyReport = document.getElementById('btn-copy-report');
+  const btnDownloadReport = document.getElementById('btn-download-report');
+
+  let currentReportText = '';
+
+  const SAMPLE_JSON = {
+    "apiVersion": "v2.4",
+    "organization": "DataFrog Intelligence",
+    "active": true,
+    "timestamp": "2026-08-05T12:00:00Z",
+    "metadata": {
+      "executionMode": "browser-only",
+      "serverUploads": null,
+      "maxThreads": 8,
+      "config": {
+        "timeout": 3000,
+        "retryCount": 3,
+        "features": ["inspect", "analyze", "validate", "compare", "visualize", "reports"]
+      }
+    },
+    "users": [
+      { "id": 1, "username": "alex_dev", "role": "admin", "permissions": ["read", "write", "execute"], "lastLogin": null },
+      { "id": 2, "username": "maria_data", "role": "analyst", "permissions": ["read"], "lastLogin": "2026-08-04" },
+      { "id": 3, "username": "chen_lead", "role": "architect", "permissions": ["read", "write"], "lastLogin": "2026-08-05" }
+    ],
+    "emptyGroup": {},
+    "logs": []
+  };
+
+  // Drag & Drop & File Click
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      jsonInput.value = evt.target.result;
+      analyzeJSON();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    jsonInput.value = JSON.stringify(SAMPLE_JSON, null, 2);
+    analyzeJSON();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    jsonInput.value = '';
+    analyzeJSON();
+  });
+
+  jsonInput.addEventListener('input', analyzeJSON);
+
+  // Analysis Engine
+  function analyzeJSON() {
+    const raw = jsonInput.value;
+
+    if (!raw.trim()) {
+      showEmptyState();
+      return;
+    }
+
+    let parsed = null;
+    try {
+      parsed = JSON.parse(raw);
+      errorBox.style.display = 'none';
+    } catch (err) {
+      showErrorState(err.message);
+      return;
+    }
+
+    // Reset status to Valid
+    cardStatus.textContent = '✅ Valid';
+    cardStatus.style.background = '#f0fdf4';
+    cardStatus.style.color = '#16a34a';
+
+    // Metrics State
+    let rootType = Array.isArray(parsed) ? 'Array' : (parsed !== null && typeof parsed === 'object' ? 'Object' : typeof parsed);
+    cardRootType.textContent = rootType;
+
+    let stringCount = 0;
+    let numberCount = 0;
+    let booleanCount = 0;
+    let nullCount = 0;
+    let objectCount = 0;
+    let arrayCount = 0;
+    let totalKeys = 0;
+
+    let maxDepth = 0;
+    let largestObjSize = 0;
+    let largestObjPath = '-';
+    let largestArraySize = 0;
+    let largestArrayPath = '-';
+    
+    let longestKey = '';
+    let longestString = '';
+    
+    let emptyObjectsCount = 0;
+    let emptyArraysCount = 0;
+    let totalObjKeySum = 0;
+
+    const keyFrequencies = {};
+
+    function traverse(val, depth, path) {
+      if (depth > maxDepth) maxDepth = depth;
+
+      if (val === null) {
+        nullCount++;
+      } else if (Array.isArray(val)) {
+        arrayCount++;
+        if (val.length === 0) emptyArraysCount++;
+        if (val.length > largestArraySize) {
+          largestArraySize = val.length;
+          largestArrayPath = path;
+        }
+        val.forEach((item, idx) => traverse(item, depth + 1, `${path}[${idx}]`));
+      } else if (typeof val === 'object') {
+        objectCount++;
+        const keys = Object.keys(val);
+        if (keys.length === 0) emptyObjectsCount++;
+        if (keys.length > largestObjSize) {
+          largestObjSize = keys.length;
+          largestObjPath = path;
+        }
+        totalObjKeySum += keys.length;
+
+        keys.forEach(k => {
+          totalKeys++;
+          keyFrequencies[k] = (keyFrequencies[k] || 0) + 1;
+          if (k.length > longestKey.length) longestKey = k;
+          traverse(val[k], depth + 1, path === '$' ? `$.${k}` : `${path}.${k}`);
+        });
+      } else if (typeof val === 'string') {
+        stringCount++;
+        if (val.length > longestString.length) longestString = val;
+      } else if (typeof val === 'number') {
+        numberCount++;
+      } else if (typeof val === 'boolean') {
+        booleanCount++;
+      }
+    }
+
+    traverse(parsed, 1, '$');
+
+    const totalPrimitives = stringCount + numberCount + booleanCount + nullCount;
+    const totalNodes = totalPrimitives + objectCount + arrayCount;
+
+    // Display Top Cards
+    cardTotalKeys.textContent = totalKeys.toLocaleString();
+    cardMaxDepth.textContent = maxDepth;
+
+    // Complexity Score (1-100)
+    const complexityScore = Math.min(100, Math.round((maxDepth * 8) + (totalKeys * 0.5) + (objectCount * 2) + (arrayCount * 3)));
+    cardComplexity.textContent = `${complexityScore} / 100`;
+
+    // Quality Score Calculation
+    let qualityPenalty = 0;
+    if (nullCount > 0 && totalPrimitives > 0 && (nullCount / totalPrimitives) > 0.2) qualityPenalty += 15;
+    if (maxDepth > 6) qualityPenalty += 15;
+    if (emptyObjectsCount > 0) qualityPenalty += 10;
+    if (emptyArraysCount > 0) qualityPenalty += 10;
+    const qualityScore = Math.max(0, 100 - qualityPenalty);
+    cardQuality.textContent = `${qualityScore}%`;
+    cardQuality.style.color = qualityScore >= 80 ? '#16a34a' : (qualityScore >= 60 ? '#ea580c' : '#dc2626');
+
+    // Data Type Breakdown Bars
+    const calcPct = (cnt) => totalPrimitives > 0 ? ((cnt / totalPrimitives) * 100).toFixed(1) : '0';
+    
+    countStrings.textContent = `${stringCount.toLocaleString()} (${calcPct(stringCount)}%)`;
+    barStrings.style.width = `${calcPct(stringCount)}%`;
+
+    countNumbers.textContent = `${numberCount.toLocaleString()} (${calcPct(numberCount)}%)`;
+    barNumbers.style.width = `${calcPct(numberCount)}%`;
+
+    countBooleans.textContent = `${booleanCount.toLocaleString()} (${calcPct(booleanCount)}%)`;
+    barBooleans.style.width = `${calcPct(booleanCount)}%`;
+
+    countNulls.textContent = `${nullCount.toLocaleString()} (${calcPct(nullCount)}%)`;
+    barNulls.style.width = `${calcPct(nullCount)}%`;
+
+    countObjects.textContent = objectCount.toLocaleString();
+    barObjects.style.width = `${Math.min(100, (objectCount / (totalNodes || 1)) * 100)}%`;
+
+    countArrays.textContent = arrayCount.toLocaleString();
+    barArrays.style.width = `${Math.min(100, (arrayCount / (totalNodes || 1)) * 100)}%`;
+
+    // Extrema Metrics
+    metricLargestObject.textContent = largestObjSize > 0 ? `${largestObjSize} keys (${largestObjPath})` : 'None';
+    metricLargestArray.textContent = largestArraySize > 0 ? `${largestArraySize} items (${largestArrayPath})` : 'None';
+    
+    const avgKeysPerObj = objectCount > 0 ? (totalObjKeySum / objectCount).toFixed(1) : '0';
+    metricAvgObjSize.textContent = `${avgKeysPerObj} keys / object`;
+
+    metricLongestKey.textContent = longestKey ? `"${longestKey}" (${longestKey.length} chars)` : 'None';
+    metricLongestString.textContent = longestString ? `"${longestString.length > 25 ? longestString.substring(0, 25) + '...' : longestString}" (${longestString.length} chars)` : 'None';
+
+    metricEmptyContainers.textContent = `${emptyObjectsCount + emptyArraysCount} (${emptyObjectsCount} {}, ${emptyArraysCount} [])`;
+
+    // Key Frequencies Table
+    const sortedKeyFreqs = Object.keys(keyFrequencies)
+      .map(k => ({ key: k, count: keyFrequencies[k] }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
+
+    keyFrequencyTbody.innerHTML = '';
+    if (sortedKeyFreqs.length === 0) {
+      keyFrequencyTbody.innerHTML = '<tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No keys found</td></tr>';
+    } else {
+      sortedKeyFreqs.forEach(item => {
+        const pct = totalKeys > 0 ? ((item.count / totalKeys) * 100).toFixed(1) : '0';
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid #f1f5f9';
+        tr.innerHTML = `
+          <td style="padding: 0.5rem; font-family: monospace; font-weight: 700; color: #2563eb;">${escapeHTML(item.key)}</td>
+          <td style="padding: 0.5rem; text-align: right; font-weight: 700; color: #0f172a;">${item.count.toLocaleString()}</td>
+          <td style="padding: 0.5rem; text-align: right; color: #64748b;">${pct}%</td>
+        `;
+        keyFrequencyTbody.appendChild(tr);
+      });
+    }
+
+    // Quality Audit & Recommendations
+    qualityAuditList.innerHTML = '';
+    const auditItems = [];
+
+    if (nullCount > 0 && (nullCount / totalPrimitives) > 0.15) {
+      auditItems.push({ level: 'warn', msg: `High Null Ratio: ${nullCount} null fields detected (${calcPct(nullCount)}% of primitives). Consider stripping redundant nulls.` });
+    }
+    if (maxDepth > 5) {
+      auditItems.push({ level: 'warn', msg: `Deep Nesting: Maximum depth of ${maxDepth} levels detected. Flattening JSON hierarchy improves query performance.` });
+    }
+    if (emptyObjectsCount > 0 || emptyArraysCount > 0) {
+      auditItems.push({ level: 'info', msg: `Empty Containers: Found ${emptyObjectsCount} empty object(s) and ${emptyArraysCount} empty array(s).` });
+    }
+    if (longestKey.length > 30) {
+      auditItems.push({ level: 'info', msg: `Verbose Key Name: Longest key "${longestKey}" spans ${longestKey.length} characters.` });
+    }
+    if (auditItems.length === 0) {
+      auditItems.push({ level: 'pass', msg: `✅ Clean Structure: No structural anti-patterns, excessive nesting, or anomaly risks detected.` });
+    }
+
+    auditItems.forEach(item => {
+      const div = document.createElement('div');
+      div.style.cssText = 'padding: 0.75rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem;';
+      if (item.level === 'pass') {
+        div.style.background = '#f0fdf4';
+        div.style.color = '#16a34a';
+        div.style.border = '1px solid #bbf7d0';
+      } else if (item.level === 'warn') {
+        div.style.background = '#fff7ed';
+        div.style.color = '#ea580c';
+        div.style.border = '1px solid #fed7aa';
+      } else {
+        div.style.background = '#eff6ff';
+        div.style.color = '#2563eb';
+        div.style.border = '1px solid #bfdbfe';
+      }
+      div.textContent = item.msg;
+      qualityAuditList.appendChild(div);
+    });
+
+    // Executive Summary Text Report
+    const dateStr = new Date().toISOString().split('T')[0];
+    currentReportText = `==================================================
+DATAFROG.TOOLS — JSON STRUCTURE ANALYSIS REPORT
+Generated: ${dateStr} | Execution: 100% Client-Side Browser
+==================================================
+
+1. OVERVIEW & COMPLEXITY
+--------------------------------------------------
+- Validation Status:        VALID JSON
+- Root Data Type:           ${rootType}
+- Total Keys Count:         ${totalKeys}
+- Maximum Nesting Depth:    ${maxDepth} levels
+- Complexity Score:         ${complexityScore} / 100
+- Data Quality Score:       ${qualityScore}%
+
+2. DATA TYPE DISTRIBUTION
+--------------------------------------------------
+- Strings:                  ${stringCount} (${calcPct(stringCount)}%)
+- Numbers:                  ${numberCount} (${calcPct(numberCount)}%)
+- Booleans:                 ${booleanCount} (${calcPct(booleanCount)}%)
+- Nulls:                    ${nullCount} (${calcPct(nullCount)}%)
+- Objects:                  ${objectCount}
+- Arrays:                   ${arrayCount}
+
+3. STRUCTURAL EXTREMA
+--------------------------------------------------
+- Largest Object:           ${largestObjSize} keys (${largestObjPath})
+- Largest Array:            ${largestArraySize} items (${largestArrayPath})
+- Average Object Size:      ${avgKeysPerObj} keys/object
+- Longest Key Name:         ${longestKey ? `"${longestKey}" (${longestKey.length} chars)` : 'None'}
+- Longest String Length:    ${longestString ? `${longestString.length} chars` : 'None'}
+- Empty Containers:         ${emptyObjectsCount} objects, ${emptyArraysCount} arrays
+
+4. TOP RECURRING KEYS
+--------------------------------------------------
+${sortedKeyFreqs.map(k => `- ${k.key.padEnd(20)} : ${k.count} times (${((k.count/totalKeys)*100).toFixed(1)}%)`).join('\n')}
+
+5. QUALITY AUDIT FINDINGS
+--------------------------------------------------
+${auditItems.map(i => `[${i.level.toUpperCase()}] ${i.msg}`).join('\n')}
+
+==================================================
+DataFrog.tools — Privacy-First Data Intelligence`;
+
+    summaryReportOutput.textContent = currentReportText;
+  }
+
+  function showEmptyState() {
+    cardStatus.textContent = 'Ready';
+    cardStatus.style.background = '#f1f5f9';
+    cardStatus.style.color = '#475569';
+    cardRootType.textContent = '-';
+    cardTotalKeys.textContent = '0';
+    cardMaxDepth.textContent = '0';
+    cardComplexity.textContent = '0 / 100';
+    cardQuality.textContent = '100%';
+    errorBox.style.display = 'none';
+
+    countStrings.textContent = '0 (0%)'; barStrings.style.width = '0%';
+    countNumbers.textContent = '0 (0%)'; barNumbers.style.width = '0%';
+    countBooleans.textContent = '0 (0%)'; barBooleans.style.width = '0%';
+    countNulls.textContent = '0 (0%)'; barNulls.style.width = '0%';
+    countObjects.textContent = '0'; barObjects.style.width = '0%';
+    countArrays.textContent = '0'; barArrays.style.width = '0%';
+
+    metricLargestObject.textContent = '-';
+    metricLargestArray.textContent = '-';
+    metricAvgObjSize.textContent = '0 keys';
+    metricLongestKey.textContent = '-';
+    metricLongestString.textContent = '-';
+    metricEmptyContainers.textContent = '0';
+
+    keyFrequencyTbody.innerHTML = '<tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No JSON data analyzed</td></tr>';
+    qualityAuditList.innerHTML = '<div style="color: #64748b; font-style: italic; text-align: center; padding: 2rem 0;">Input valid JSON to run automated quality audit</div>';
+    summaryReportOutput.textContent = 'Analysis report will be generated here upon JSON input...';
+    currentReportText = '';
+  }
+
+  function showErrorState(msg) {
+    cardStatus.textContent = '❌ Invalid';
+    cardStatus.style.background = '#fef2f2';
+    cardStatus.style.color = '#dc2626';
+    errorBox.style.display = 'block';
+    errorMessage.textContent = msg;
+  }
+
+  function escapeHTML(str) {
+    return str.replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+  }
+
+  // Copy & Export Report
+  btnCopyReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    navigator.clipboard.writeText(currentReportText);
+    showToast('Executive report copied to clipboard!');
+  });
+
+  btnDownloadReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    const blob = new Blob([currentReportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'json-analysis-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Load
+  analyzeJSON();
+
+})();
+</script>

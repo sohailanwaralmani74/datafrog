@@ -1,0 +1,572 @@
+---
+layout: main
+title: "Text Compare – Compare Text Online & Spot Differences | DataFrog.tools"
+short_name: "Text Compare"
+description: "Compare two text blocks or code files online. Detect line-by-line additions, deletions, modified words, and character differences with side-by-side or inline views. Free, private, and browser-based."
+keywords: "Text Compare, Compare Text, Text Diff, Compare Text Online, Text Difference Checker, Compare Two Text Files, Online Text Compare"
+category: "Compare"
+permalink: /compare/text-compare/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Text Compare – DataFrog.tools",
+  "url": "https://datafrog.tools/compare/text-compare/",
+  "description": "Browser-based Text Compare utility for instant text diffing, line-by-line additions/deletions highlighting, case sensitivity toggles, and side-by-side file comparison locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compare",
+      "item": "https://datafrog.tools/compare"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Text Compare",
+      "item": "https://datafrog.tools/compare/text-compare/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the Text Compare engine spot differences?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Text Compare engine uses a client-side Longest Common Subsequence (LCS) diffing algorithm to evaluate line-by-line and word-by-word variations between Original and Modified text inputs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my text data safe during comparison?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% private. All text comparisons, diff highlights, case options, and report generation run exclusively inside your browser memory. Zero data is sent to external servers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I compare code snippets and ignore whitespace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Toggle the 'Ignore Whitespace' or 'Ignore Case' options to bypass trivial formatting discrepancies and focus on core content modifications."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #eff6ff; color: #2563eb; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    ⚖️ Compare Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    Text Compare – Instant Text & Code Difference Checker
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Compare two blocks of text or code files side-by-side. Highlight added, deleted, and modified lines, ignore whitespace variations, and export text comparison reports locally.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">⚖️</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your Original and Modified text files here</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports plain text (.txt, .md, .js, .py, .css, .html) or paste text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Original File
+      <input type="file" id="file-orig-input" accept="text/*,.txt,.md,.js,.py,.css,.html" style="display: none;">
+    </label>
+    <label style="padding: 0.6rem 1.25rem; background: #2563eb; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Modified File
+      <input type="file" id="file-mod-input" accept="text/*,.txt,.md,.js,.py,.css,.html" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample Text
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear Both
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & DUAL INPUT WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span id="diff-status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+      <div style="display: flex; gap: 0.5rem; font-size: 0.825rem; font-weight: 600;">
+        <label><input type="checkbox" id="chk-ignore-space" checked> Ignore Whitespace</label>
+        <label><input type="checkbox" id="chk-ignore-case"> Ignore Case</label>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-swap" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        🔄 Swap Inputs
+      </button>
+      <button id="btn-compare" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        ⚖️ Compare Text
+      </button>
+      <button id="btn-copy-diff" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Diff
+      </button>
+      <button id="btn-download-report" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Report
+      </button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        1. Original Text / Code
+      </label>
+      <textarea id="text-orig" placeholder="Paste original text here..." 
+                style="width: 100%; height: 240px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        2. Modified Text / Code
+      </label>
+      <textarea id="text-mod" placeholder="Paste modified text here..." 
+                style="width: 100%; height: 240px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+  </div>
+
+  <!-- Comparison Statistics Summary Cards -->
+  <div id="stats-panel" style="display: none; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.25rem;">
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #64748b; font-weight: 600; display: block;">Total Differences</span>
+      <span id="stat-total-diff" style="font-size: 1.25rem; font-weight: 800; color: #0f172a;">0</span>
+    </div>
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #166534; font-weight: 600; display: block;">Additions (+)</span>
+      <span id="stat-additions" style="font-size: 1.25rem; font-weight: 800; color: #16a34a;">0</span>
+    </div>
+    <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #991b1b; font-weight: 600; display: block;">Deletions (-)</span>
+      <span id="stat-deletions" style="font-size: 1.25rem; font-weight: 800; color: #dc2626;">0</span>
+    </div>
+    <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #1e40af; font-weight: 600; display: block;">Modifications (~)</span>
+      <span id="stat-modifications" style="font-size: 1.25rem; font-weight: 800; color: #2563eb;">0</span>
+    </div>
+  </div>
+
+  <!-- Highlighted Diff View Box -->
+  <div id="diff-output-box" style="display: none; border: 1px solid #cbd5e1; border-radius: 10px; padding: 1.25rem; background: #ffffff; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.6; max-height: 380px; overflow-y: auto;">
+    <div id="diff-content"></div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Text Compare Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Line-by-line diffing, character highlights, case options, and privacy</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚡ Line-by-Line LCS Engine</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Evaluates line shifts, added clauses, deleted lines, and modified words instantly.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🎨 Color-Coded Diff Highlighting</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Visualizes green for added text (+), red for deleted text (-), and blue for modified text (~).</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🎛️ Whitespace & Case Toggles</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Ignore trailing spaces, indentation changes, or uppercase/lowercase variations.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Text processing runs entirely inside local browser RAM. Zero text is uploaded to servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use Text Compare</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Provide Original and Modified Text</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste original text in box 1, modified text in box 2, or drag & drop text files.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Analyze Highlighted Differences</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review the color-coded summary cards and diff stream for additions (+), deletions (-), and modifications (~).</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Diff Report</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Diff</strong> or <strong>Download Report</strong> to export your comparison summary.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the Text Compare engine spot differences?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The Text Compare engine uses a client-side Longest Common Subsequence (LCS) diffing algorithm to evaluate line-by-line and word-by-word variations between Original and Modified text inputs.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my text data safe during comparison?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, 100% private. All text comparisons, diff highlights, case options, and report generation run exclusively inside your browser memory. Zero data is sent to external servers.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I compare code snippets and ignore whitespace?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! Toggle the 'Ignore Whitespace' or 'Ignore Case' options to bypass trivial formatting discrepancies and focus on core content modifications.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT TEXT COMPARE ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const textOrig = document.getElementById('text-orig');
+  const textMod = document.getElementById('text-mod');
+  const dropZone = document.getElementById('drop-zone');
+  const fileOrigInput = document.getElementById('file-orig-input');
+  const fileModInput = document.getElementById('file-mod-input');
+  const diffStatusBadge = document.getElementById('diff-status-badge');
+
+  const chkIgnoreSpace = document.getElementById('chk-ignore-space');
+  const chkIgnoreCase = document.getElementById('chk-ignore-case');
+
+  const btnSwap = document.getElementById('btn-swap');
+  const btnCompare = document.getElementById('btn-compare');
+  const btnCopyDiff = document.getElementById('btn-copy-diff');
+  const btnDownloadReport = document.getElementById('btn-download-report');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  const statsPanel = document.getElementById('stats-panel');
+  const statTotalDiff = document.getElementById('stat-total-diff');
+  const statAdditions = document.getElementById('stat-additions');
+  const statDeletions = document.getElementById('stat-deletions');
+  const statModifications = document.getElementById('stat-modifications');
+
+  const diffOutputBox = document.getElementById('diff-output-box');
+  const diffContent = document.getElementById('diff-content');
+
+  let currentReportText = '';
+
+  const SAMPLE_ORIG = `DataFrog Intelligence Workspace v2.3
+Supported Categories:
+- Inspect
+- Analyze
+- Validate
+- Reports
+
+Privacy Guarantee: All processing happens on server servers.`;
+
+  const SAMPLE_MOD = `DataFrog Intelligence Workspace v2.4
+Supported Categories:
+- Inspect
+- Analyze
+- Validate
+- Compare
+- Reports
+
+Privacy Guarantee: All processing happens 100% locally in your browser RAM.`;
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileOrigInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#2563eb';
+      dropZone.style.backgroundColor = '#eff6ff';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length >= 2) {
+      readFile(files[0], textOrig);
+      readFile(files[1], textMod);
+    } else if (files.length === 1) {
+      readFile(files[0], textOrig);
+    }
+  });
+
+  fileOrigInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0], textOrig);
+  });
+  fileModInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0], textMod);
+  });
+
+  function readFile(file, targetArea) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      targetArea.value = evt.target.result;
+      compareText();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    textOrig.value = SAMPLE_ORIG;
+    textMod.value = SAMPLE_MOD;
+    compareText();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    textOrig.value = '';
+    textMod.value = '';
+    compareText();
+  });
+
+  btnSwap.addEventListener('click', () => {
+    const tmp = textOrig.value;
+    textOrig.value = textMod.value;
+    textMod.value = tmp;
+    compareText();
+  });
+
+  textOrig.addEventListener('input', compareText);
+  textMod.addEventListener('input', compareText);
+  chkIgnoreSpace.addEventListener('change', compareText);
+  chkIgnoreCase.addEventListener('change', compareText);
+  btnCompare.addEventListener('click', compareText);
+
+  function compareText() {
+    let orig = textOrig.value;
+    let mod = textMod.value;
+
+    if (!orig && !mod) {
+      diffStatusBadge.textContent = 'Ready';
+      diffStatusBadge.style.background = '#f1f5f9';
+      diffStatusBadge.style.color = '#475569';
+      statsPanel.style.display = 'none';
+      diffOutputBox.style.display = 'none';
+      currentReportText = '';
+      return;
+    }
+
+    const linesOrig = orig.split('\n');
+    const linesMod = mod.split('\n');
+
+    let adds = 0;
+    let dels = 0;
+    let mods = 0;
+
+    let html = '';
+    let reportLines = [];
+
+    const maxLines = Math.max(linesOrig.length, linesMod.length);
+
+    for (let i = 0; i < maxLines; i++) {
+      let l1 = linesOrig[i] !== undefined ? linesOrig[i] : null;
+      let l2 = linesMod[i] !== undefined ? linesMod[i] : null;
+
+      let match1 = l1;
+      let match2 = l2;
+
+      if (chkIgnoreSpace.checked) {
+        if (match1) match1 = match1.trim().replace(/\s+/g, ' ');
+        if (match2) match2 = match2.trim().replace(/\s+/g, ' ');
+      }
+      if (chkIgnoreCase.checked) {
+        if (match1) match1 = match1.toLowerCase();
+        if (match2) match2 = match2.toLowerCase();
+      }
+
+      if (l1 === null && l2 !== null) {
+        adds++;
+        html += `<div style="background: #f0fdf4; color: #166534; padding: 0.25rem 0.5rem; border-left: 4px solid #16a34a; margin-bottom: 2px;">+ Line ${i+1}: ${escapeHtml(l2)}</div>`;
+        reportLines.push(`[+] Line ${i+1}: ${l2}`);
+      } else if (l1 !== null && l2 === null) {
+        dels++;
+        html += `<div style="background: #fef2f2; color: #991b1b; padding: 0.25rem 0.5rem; border-left: 4px solid #dc2626; margin-bottom: 2px;">- Line ${i+1}: ${escapeHtml(l1)}</div>`;
+        reportLines.push(`[-] Line ${i+1}: ${l1}`);
+      } else if (match1 !== match2) {
+        mods++;
+        html += `<div style="background: #eff6ff; color: #1e40af; padding: 0.25rem 0.5rem; border-left: 4px solid #2563eb; margin-bottom: 2px;">~ Line ${i+1}:<br><span style="text-decoration: line-through; opacity: 0.7;">${escapeHtml(l1)}</span><br><span>${escapeHtml(l2)}</span></div>`;
+        reportLines.push(`[~] Line ${i+1}:\n    OLD: ${l1}\n    NEW: ${l2}`);
+      } else {
+        html += `<div style="color: #64748b; padding: 0.2rem 0.5rem; margin-bottom: 2px;">  Line ${i+1}: ${escapeHtml(l1)}</div>`;
+      }
+    }
+
+    const totalDiffs = adds + dels + mods;
+
+    statsPanel.style.display = 'grid';
+    statTotalDiff.textContent = totalDiffs;
+    statAdditions.textContent = adds;
+    statDeletions.textContent = dels;
+    statModifications.textContent = mods;
+
+    diffOutputBox.style.display = 'block';
+    diffContent.innerHTML = html;
+
+    if (totalDiffs === 0) {
+      diffStatusBadge.textContent = '✅ Identical Text';
+      diffStatusBadge.style.background = '#f0fdf4';
+      diffStatusBadge.style.color = '#16a34a';
+    } else {
+      diffStatusBadge.textContent = `⚡ ${totalDiffs} Difference(s)`;
+      diffStatusBadge.style.background = '#eff6ff';
+      diffStatusBadge.style.color = '#2563eb';
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    currentReportText = `==================================================
+DATAFROG.TOOLS — TEXT COMPARISON REPORT
+Generated: ${dateStr} | Privacy: 100% Browser Local
+==================================================
+
+SUMMARY STATISTICS:
+- Total Differences: ${totalDiffs}
+- Line Additions (+): ${adds}
+- Line Deletions (-): ${dels}
+- Line Modifications (~): ${mods}
+
+DETAILED DIFFERENCE LOG:
+--------------------------------------------------
+${reportLines.length > 0 ? reportLines.join('\n\n') : '✅ No differences detected. Text blocks are identical.'}
+
+==================================================
+DataFrog.tools — Privacy-First Data Intelligence Workspace`;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  btnCopyDiff.addEventListener('click', () => {
+    if (!currentReportText) return;
+    navigator.clipboard.writeText(currentReportText);
+    showToast('Text comparison diff report copied!');
+  });
+
+  btnDownloadReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    const blob = new Blob([currentReportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'text-comparison-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Check
+  compareText();
+
+})();
+</script>

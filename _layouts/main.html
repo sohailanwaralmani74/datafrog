@@ -4,527 +4,143 @@ layout: default
 
 <a id="skip-to-content" href="#content" class="skip-link">Skip to the content.</a>
 
-<header class="site-header">
-  <div class="header-inner">
+<!-- ═══════════════════════════════════════
+     HEADER / CATEGORY-FIRST NAVIGATION
+═══════════════════════════════════════ -->
+<header class="site-header" style="background: #ffffff; border-bottom: 1px solid var(--border-default, #e2e8f0); position: sticky; top: 0; z-index: 100;">
+  <div class="header-inner" style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.5rem;">
 
-    <!-- Logo (keeping image) -->
-    <a href="/" class="logo" style="text-decoration: none; display: inline-block;" title="DataFrog">
-      <img src="assets/img/datafrog.png" alt="DataFrog" width="50px" height="50px" />
+    <!-- Logo -->
+    <a href="/" class="logo" style="text-decoration: none; display: flex; align-items: center; gap: 0.6rem; color: var(--text-primary, #0f172a); font-weight: 700; font-size: 1.25rem;" title="DataFrog.tools">
+      <img src="/assets/img/datafrog.png" alt="DataFrog Logo" width="36" height="36" style="display: block;" onerror="this.style.display='none'" />
     </a>
 
-    <!-- Desktop Navigation -->
-    <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
-      <span class="nav-item" data-popup="converters" tabindex="0" role="button" aria-haspopup="true"
-        aria-expanded="false">Converter</span>
-      <span class="nav-item" data-popup="formatters" tabindex="0" role="button" aria-haspopup="true"
-        aria-expanded="false">Formatter</span>
-      <span class="nav-item" data-popup="cleaners" tabindex="0" role="button" aria-haspopup="true"
-        aria-expanded="false">Validator</span>
-      <span class="nav-item" data-popup="utilitiesTools" tabindex="0" role="button" aria-haspopup="true"
-        aria-expanded="false">Utilities</span>
-      <span class="nav-item" data-popup="financeTools" tabindex="0" role="button" aria-haspopup="true"
-        aria-expanded="false">Finanace</span>
-      <span class="nav-item" data-popup="blogPosts" tabindex="0" role="button" aria-haspopup="true"
-        aria-expanded="false">Blog</span>
+    <!-- Desktop Direct Category Navigation -->
+    <nav class="desktop-nav" role="navigation" aria-label="Main navigation" style="display: flex; align-items: center; gap: 1.25rem;">
+      <a href="/" style="text-decoration: none; color: var(--text-primary, #0f172a); font-weight: 600; font-size: 0.95rem;">Home</a>
+      <a href="/inspect" style="text-decoration: none; color: var(--text-primary, #0f172a); font-weight: 600; font-size: 0.95rem;">Inspect</a>
+      <a href="/analyze" style="text-decoration: none; color: var(--text-primary, #0f172a); font-weight: 600; font-size: 0.95rem;">Analyze</a>
+      <a href="/validate" style="text-decoration: none; color: var(--text-primary, #0f172a); font-weight: 600; font-size: 0.95rem;">Validate</a>
+      <a href="/compare" style="text-decoration: none; color: var(--text-primary, #0f172a); font-weight: 600; font-size: 0.95rem;">Compare</a>
+      <a href="/visualize" style="text-decoration: none; color: var(--text-primary, #0f172a); font-weight: 600; font-size: 0.95rem;">Visualize</a>
     </nav>
 
-    <!-- Right side actions -->
-    <div class="desktop-actions"></div>
+    <!-- Right Side Actions: Search Button -->
+    <div class="desktop-actions" style="display: flex; align-items: center; gap: 1rem;">
+      <a href="/#site-search-input" style="padding: 0.45rem 1.15rem; background: var(--bg-soft, #f1f5f9); color: var(--text-primary, #0f172a); border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 0.875rem; border: 1px solid #cbd5e1;">
+        🔍 Search
+      </a>
+    </div>
 
-    <!-- Hamburger (mobile only) -->
-    <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false"
-      aria-controls="mobileDrawer">
+    <!-- Mobile Hamburger -->
+    <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
       <span></span><span></span><span></span>
     </button>
 
   </div>
 
-  <!-- ═══════════════════════════════════════
-       MOBILE DRAWER
-  ═══════════════════════════════════════ -->
+  <!-- Mobile Drawer Navigation -->
   <nav class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <ul class="mobile-nav-list">
-
-      <!-- ── Converter ── -->
-      <li class="mobile-nav-item">
-        <div class="mobile-nav-trigger" data-target="mobileConverters" aria-expanded="false">Converter</div>
-        <div class="mobile-submenu" id="mobileConverters">
-
-          <span class="mobile-subcat-label">Excel Converter</span>
-          <a href="excel-to-json">Excel to JSON</a>
-          <a href="excel-to-html">Excel to HTML</a>
-          <a href="excel-to-txt">Excel to TXT</a>
-          <a href="xlsx-to-pdf">Excel to PDF</a>
-          <a href="xlsx-to-sql-converter">Excel to SQL</a>
-          <a href="convert-xlsx-to-csv">Excel to CSV</a>
-          <a href="convert-xlsx-to-xml">Excel to XML</a>
-
-          <span class="mobile-subcat-label">CSV Converter</span>
-          <a href="convert-csv-to-excel">CSV to Excel</a>
-          <a href="convert-csv-to-html">CSV to HTML</a>
-          <a href="convert-csv-to-json">CSV to JSON</a>
-          <a href="convert-csv-to-pdf">CSV to PDF</a>
-          <a href="convert-csv-to-txt">CSV to TXT</a>
-          <a href="convert-csv-to-xml">CSV to XML</a>
-          <a href="csv-to-sql">CSV to SQL</a>
-
-          <span class="mobile-subcat-label">JSON Converter</span>
-          <a href="json-string-to-json-object">JSON String to JSON Object</a>
-          <a href="json-to-csv">JSON to CSV</a>
-          <a href="json-to-excel">JSON to Excel</a>
-          <a href="json-to-json-schema">JSON to JSON Schema</a>
-          <a href="json-to-pdf">JSON to PDF</a>
-          <a href="json-to-sql">JSON to SQL</a>
-          <a href="json-to-txt">JSON to TXT</a>
-          <a href="json-to-xml">JSON to XML</a>
-          <a href="json-to-yaml">JSON to YAML</a>
-
-          <span class="mobile-subcat-label">XML Converter</span>
-          <a href="xml-to-json">XML to JSON</a>
-          <a href="xml-to-xsd-generator">XML to XSD</a>
-
-          <span class="mobile-subcat-label">SQL Converter</span>
-          <a href="/sql-to-csv">SQL to CSV</a>
-          <a href="/sql-to-excel">SQL to Excel</a>
-          <a href="/sql-to-xml">SQL to XML</a>
-
-          <span class="mobile-subcat-label">PDF</span>
-          <a href="pptx-to-pdf">PPTX to PDF</a>
-          <a href="pdf-to-powerpoint">PDF to PPTX</a>
-
-          <span class="mobile-subcat-label">Others</span>
-          <a href="/recordset-converter">Recordset Converter</a>
-
-          <span class="mobile-subcat-label">YAML</span>
-          <a href="/yaml-to-json">YAML to JSON</a>
-
-          <span class="mobile-subcat-label">QIF Converter</span>
-          <a href="qif-to-csv">QIF to CSV</a>
-          <a href="qif-to-excel">QIF to Excel</a>
-          <a href="qif-to-qbo">QIF to QBO</a>
-
-        </div>
-      </li>
-
-      <!-- ── Formatter ── -->
-      <li class="mobile-nav-item">
-        <div class="mobile-nav-trigger" data-target="mobileFormatters" aria-expanded="false">Formatter</div>
-        <div class="mobile-submenu" id="mobileFormatters">
-
-          <span class="mobile-subcat-label">Data Formatter</span>
-          <a href="/json-minify-prettify">Minify and Prettify JSON</a>
-          <a href="/xml-formatter">XML Formatter</a>
-          <a href="/html-beautifier">HTML Beautifier</a>
-
-          <span class="mobile-subcat-label">DB Formatter</span>
-          <a href="/sql-formatter">SQL Formatter</a>
-
-        </div>
-      </li>
-
-      <!-- ── Validator ── -->
-      <li class="mobile-nav-item">
-        <div class="mobile-nav-trigger" data-target="mobileCleaners" aria-expanded="false">Validator</div>
-
-        <div class="mobile-submenu" id="mobileCleaners">
-          <span class="mobile-subcat-label">Remove Duplicates</span>
-          <a href="/remove-duplicates-in-sql">Remove Duplicates in SQL</a>
-          <a href="/remove-csv-duplicates">Remove CSV Duplicates</a>
-          <a href="/remove-excel-duplicates">Remove Excel Duplicates</a>
-          <span class="mobile-subcat-label">Analyses</span>
-          <a href="/analyze-excel">Analyze Excel</a>
-          <span class="mobile-subcat-label">Query</span>
-          <a href="/query-csv-online">Query CSV</a>
-          <a href="/query-excel-online">Query Excel</a>
-          <a href="/sqlite-viewer-online">SQLite Viewer</a>
-        </div>
-
-      </li>
-
-      <!-- ── Utilities ── -->
-      <li class="mobile-nav-item">
-        <div class="mobile-nav-trigger" data-target="mobileUtilities" aria-expanded="false">Utilities</div>
-        <div class="mobile-submenu" id="mobileUtilities">
-
-          <span class="mobile-subcat-label">Code Generators</span>
-          <a href="json-to-dart">JSON to Dart</a>
-          <a href="json-to-html">JSON to HTML</a>
-          <a href="json-to-ts">JSON to TypeScript</a>
-          <a href="json-to-java">JSON to Java</a>
-          <a href="json-to-c-sharp">JSON to C#</a>
-          <a href="json-to-go">JSON to Go Structs</a>
-
-          <span class="mobile-subcat-label">Data Generator</span>
-          <a href="/uuid-generator">UUID Generator</a>
-          <a href="/convert-epoch">Epoch Converter</a>
-          <a href="/case-converter">Case Converter</a>
-
-          <span class="mobile-subcat-label">Encoding | Hashing</span>
-          <a href="/base64">Base64 Encoder/Decoder</a>
-          <a href="/hash-generator">Hash Generator</a>
-          <a href="/jwt-decoder">JWT Decoder</a>
-          <a href="/decode-a-url">Decode A URL</a>
-
-          <span class="mobile-subcat-label">Writing &amp; Editing</span>
-          <a href="/word-counter">Word Counter</a>
-
-        </div>
-      </li>
-
-      <!-- ── Finance ── -->
-      <li class="mobile-nav-item">
-        <div class="mobile-nav-trigger" data-target="mobileFinance" aria-expanded="false">Finance</div>
-        <div class="mobile-submenu" id="mobileFinance">
-
-          <!-- MT940 -->
-          <span class="mobile-subcat-label">MT940</span>
-          <a href="/mt940-to-excel">MT940 to Excel</a>
-          <a href="/mt940-to-csv">MT940 to CSV</a>
-          <a href="/mt940-to-qif">MT940 to QIF</a>
-          <a href="/mt940-to-qbo">MT940 to QBO</a>
-          <a href="/mt940-to-qfx">MT940 to QFX</a>
-
-          <!-- QIF -->
-          <span class="mobile-subcat-label">QIF</span>
-          <a href="/qif-to-csv">QIF to CSV</a>
-          <a href="/qif-to-excel">QIF to Excel</a>
-          <a href="/qif-to-qbo">QIF to QBO</a>
-          <a href="/qif-to-mt940">QIF to MT940</a>
-          <a href="/qif-to-qfx">QIF to QFX</a>
-
-          <!-- CSV -->
-          <span class="mobile-subcat-label">CSV</span>
-          <a href="/csv-to-qif">CSV to QIF</a>
-          <a href="/csv-to-qbo">CSV to QBO</a>
-          <a href="/csv-to-qfx">CSV to QFX</a>
-          <a href="/csv-to-mt940">CSV to MT940</a>
-
-          <!-- Excel -->
-          <span class="mobile-subcat-label">Excel</span>
-          <a href="/excel-to-qif">Excel to QIF</a>
-          <a href="/excel-to-qbo">Excel to QBO</a>
-          <a href="/excel-to-qfx">Excel to QFX</a>
-          <a href="/excel-to-mt940">Excel to MT940</a>
-
-          <!-- QBO -->
-          <span class="mobile-subcat-label">QBO</span>
-          <a href="/qbo-to-csv">QBO to CSV</a>
-          <a href="/qbo-to-qif">QBO to QIF</a>
-          <a href="/qbo-to-excel">QBO to Excel</a>
-          <a href="/qbo-to-qfx">QBO to QFX</a>
-          <a href="/qbo-to-mt940">QBO to MT940</a>
-
-          <!-- MT942 -->
-          <span class="mobile-subcat-label">MT942</span>
-          <a href="/mt942-to-csv">MT942 to CSV</a>
-          <a href="/mt942-to-excel">MT942 to Excel</a>
-
-          <!-- QFX -->
-          <span class="mobile-subcat-label">QFX</span>
-          <a href="/qfx-to-csv">QFX to CSV</a>
-          <a href="/qfx-to-qif">QFX to QIF</a>
-          <a href="/qfx-to-excel">QFX to Excel</a>
-          <a href="/qfx-to-mt940">QFX to MT940</a>
-
-        </div>
-      </li>
-
-      <!-- ── Blog ── -->
-      <li class="mobile-nav-item">
-        <div class="mobile-nav-trigger" data-target="mobileBlog" aria-expanded="false">Blog</div>
-        <div class="mobile-submenu" id="mobileBlog">
-
-          <span class="mobile-subcat-label">Excel Data Conversion</span>
-          <a href="/how-to-convert-excel-to-json">How to Convert Excel to JSON</a>
-
-          <span class="mobile-subcat-label">JSON Data Conversion</span>
-          <a href="/how-to-convert-json-to-csv">How to Convert JSON to CSV</a>
-          <a href="/how-to-convert-json-to-pdf">How to Convert JSON to PDF</a>
-          <a href="/how-to-convert-json-to-xml">How to Convert JSON to XML</a>
-          <a href="/how-to-open-json-file-in-excel">How to Open JSON File in Excel</a>
-
-          <span class="mobile-subcat-label">Data Generation</span>
-          <a href="/how-to-generate-uuid">How To Generate UUID Online</a>
-
-        </div>
-      </li>
-
+    <ul class="mobile-nav-list" style="list-style: none; padding: 1.5rem; margin: 0; line-height: 2.2;">
+      <li><a href="/" style="font-weight: 600; font-size: 1.05rem; text-decoration: none; color: #0f172a;">Home</a></li>
+      <li><a href="/inspect" style="font-weight: 600; font-size: 1.05rem; text-decoration: none; color: #0f172a;">Inspect</a></li>
+      <li><a href="/analyze" style="font-weight: 600; font-size: 1.05rem; text-decoration: none; color: #0f172a;">Analyze</a></li>
+      <li><a href="/validate" style="font-weight: 600; font-size: 1.05rem; text-decoration: none; color: #0f172a;">Validate</a></li>
+      <li><a href="/compare" style="font-weight: 600; font-size: 1.05rem; text-decoration: none; color: #0f172a;">Compare</a></li>
+      <li><a href="/visualize" style="font-weight: 600; font-size: 1.05rem; text-decoration: none; color: #0f172a;">Visualize</a></li>
+      <li><a href="/#site-search-input" style="font-weight: 600; font-size: 1.05rem; text-decoration: none; color: #2563eb;">🔍 Search</a></li>
     </ul>
-    <div class="mobile-actions"></div>
   </nav>
   <div class="overlay" id="overlay"></div>
-
-  <!-- ═══════════════════════════════════════
-       DESKTOP MEGA MENUS
-  ═══════════════════════════════════════ -->
-
-  <!-- Converter -->
-  <div class="popup-grid" id="converters" role="region" aria-label="Converter tools">
-
-    <div class="popup-column">
-      <h3>Excel Converter</h3>
-      <a href="excel-to-json">Excel to JSON</a>
-      <a href="excel-to-html">Excel to HTML</a>
-      <a href="excel-to-txt">Excel to TXT</a>
-      <a href="xlsx-to-pdf">Excel to PDF</a>
-      <a href="xlsx-to-sql-converter">Excel to SQL</a>
-      <a href="convert-xlsx-to-csv">Excel to CSV</a>
-      <a href="convert-xlsx-to-xml">Excel to XML</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>CSV Converter</h3>
-      <a href="convert-csv-to-excel">CSV to Excel</a>
-      <a href="convert-csv-to-html">CSV to HTML</a>
-      <a href="convert-csv-to-json">CSV to JSON</a>
-      <a href="convert-csv-to-pdf">CSV to PDF</a>
-      <a href="convert-csv-to-txt">CSV to TXT</a>
-      <a href="convert-csv-to-xml">CSV to XML</a>
-      <a href="csv-to-sql">CSV to SQL</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>JSON Converter</h3>
-      <a href="json-string-to-json-object">JSON String to JSON Object</a>
-      <a href="json-to-csv">JSON to CSV</a>
-      <a href="json-to-excel">JSON to Excel</a>
-      <a href="json-to-json-schema">JSON to JSON Schema</a>
-      <a href="json-to-pdf">JSON to PDF</a>
-      <a href="json-to-sql">JSON to SQL</a>
-      <a href="json-to-txt">JSON to TXT</a>
-      <a href="json-to-xml">JSON to XML</a>
-      <a href="json-to-yaml">JSON to YAML</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>XML Converter</h3>
-      <a href="xml-to-json">XML to JSON</a>
-      <a href="xml-to-xsd-generator">XML to XSD</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>SQL Converter</h3>
-      <a href="/sql-to-csv">SQL to CSV</a>
-      <a href="/sql-to-excel">SQL to Excel</a>
-      <a href="/sql-to-xml">SQL to XML</a>
-    </div>
-    <div class="popup-column">
-      <h3>PDF</h3>
-      <a href="pptx-to-pdf">PPTX to PDF</a>
-      <a href="pdf-to-powerpoint">PDF to PPTX</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>Others</h3>
-      <a href="/recordset-converter">Recordset Converter</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>YAML</h3>
-      <a href="/yaml-to-json">YAML to JSON</a>
-    </div>
-  </div>
-
-  <!-- Formatter -->
-  <div class="popup-grid" id="formatters" role="region" aria-label="Formatter tools">
-
-    <div class="popup-column">
-      <h3>Data Formatter</h3>
-      <a href="/json-minify-prettify">Minify and Prettify JSON</a>
-      <a href="/xml-formatter">XML Formatter</a>
-      <a href="/html-beautifier">HTML Beautifier</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>DB Formatter</h3>
-      <a href="/sql-formatter">SQL Formatter</a>
-    </div>
-
-  </div>
-
-  <!-- Validator -->
-  <div class="popup-grid" id="cleaners" role="region" aria-label="Validator tools">
-    <div class="popup-column">
-      <h3>Analyze</h3>
-      <a href="/analyze-excel">Analyze Excel</a>
-    </div>
-    <div class="popup-column">
-      <h3>Query Tools</h3>
-      <a href="/query-csv-online">Query CSV</a>
-      <a href="/query-excel-online">Query Excel</a>
-      <a href="/sqlite-viewer-online">SQLite Viewer</a>
-    </div>
-    <div class="popup-column">
-      <h3>Remove Duplicates</h3>
-      <a href="/remove-duplicates-in-sql">Remove Duplicates in SQL</a>
-      <a href="/remove-csv-duplicates">Remove CSV Duplicates</a>
-      <a href="/remove-excel-duplicates">Remove Excel Duplicates</a>
-    </div>
-
-  </div>
-
-  <!-- Utilities -->
-  <div class="popup-grid" id="utilitiesTools" role="region" aria-label="Utilities tools">
-
-    <div class="popup-column">
-      <h3>Code Generators</h3>
-      <a href="json-to-dart">JSON to Dart</a>
-      <a href="json-to-html">JSON to HTML</a>
-      <a href="json-to-ts">JSON to TypeScript</a>
-      <a href="json-to-java">JSON to Java</a>
-      <a href="json-to-c-sharp">JSON to C#</a>
-      <a href="json-to-go">JSON to Go Structs</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>Data Generator</h3>
-      <a href="/uuid-generator">UUID Generator</a>
-      <a href="/convert-epoch">Epoch Converter</a>
-      <a href="/case-converter">Case Converter</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>Encoding | Hashing</h3>
-      <a href="/base64">Base64 Encoder/Decoder</a>
-      <a href="/hash-generator">Hash Generator</a>
-      <a href="/jwt-decoder">JWT Decoder</a>
-      <a href="/decode-a-url">Decode A URL</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>Writing &amp; Editing</h3>
-      <a href="/word-counter">Word Counter</a>
-    </div>
-
-  </div>
-
-  <!-- Blog -->
-  <div class="popup-grid" id="financeTools" role="region" aria-label="Finanace Tools">
-
-    <!-- MT940 -->
-    <div class="popup-column">
-      <h3>MT940</h3>
-      <a href="/mt940-to-excel">MT940 to Excel</a>
-      <a href="/mt940-to-csv">MT940 to CSV</a>
-      <a href="/mt940-to-qif">MT940 to QIF</a>
-      <a href="/mt940-to-qbo">MT940 to QBO</a>
-      <a href="/mt940-to-qfx">MT940 to QFX</a>
-    </div>
-
-    <!-- QIF -->
-    <div class="popup-column">
-      <h3>QIF</h3>
-      <a href="/qif-to-csv">QIF to CSV</a>
-      <a href="/qif-to-excel">QIF to Excel</a>
-      <a href="/qif-to-qbo">QIF to QBO</a>
-      <a href="/qif-to-mt940">QIF to MT940</a>
-      <a href="/qif-to-qfx">QIF to QFX</a>
-    </div>
-
-    <!-- CSV -->
-    <div class="popup-column">
-      <h3>CSV</h3>
-      <a href="/csv-to-qif">CSV to QIF</a>
-      <a href="/csv-to-qbo">CSV to QBO</a>
-      <a href="/csv-to-qfx">CSV to QFX</a>
-      <a href="/csv-to-mt940">CSV to MT940</a>
-    </div>
-
-    <!-- Excel -->
-    <div class="popup-column">
-      <h3>Excel</h3>
-      <a href="/excel-to-qif">Excel to QIF</a>
-      <a href="/excel-to-qbo">Excel to QBO</a>
-      <a href="/excel-to-qfx">Excel to QFX</a>
-      <a href="/excel-to-mt940">Excel to MT940</a>
-    </div>
-
-    <!-- QBO -->
-    <div class="popup-column">
-      <h3>QBO</h3>
-      <a href="/qbo-to-csv">QBO to CSV</a>
-      <a href="/qbo-to-qif">QBO to QIF</a>
-      <a href="/qbo-to-excel">QBO to Excel</a>
-      <a href="/qbo-to-qfx">QBO to QFX</a>
-      <a href="/qbo-to-mt940">QBO to MT940</a>
-    </div>
-
-    <!-- MT942 -->
-    <div class="popup-column">
-      <h3>MT942</h3>
-      <a href="/mt942-to-csv">MT942 to CSV</a>
-      <a href="/mt942-to-excel">MT942 to Excel</a>
-    </div>
-
-    <!-- QFX -->
-    <div class="popup-column">
-      <h3>QFX</h3>
-      <a href="/qfx-to-csv">QFX to CSV</a>
-      <a href="/qfx-to-qif">QFX to QIF</a>
-      <a href="/qfx-to-excel">QFX to Excel</a>
-      <a href="/qfx-to-mt940">QFX to MT940</a>
-    </div>
-
-  </div>
-
-  <!-- Blog -->
-  <div class="popup-grid" id="blogPosts" role="region" aria-label="Blog posts">
-
-    <div class="popup-column">
-      <h3>Excel Data Conversion</h3>
-      <a href="/how-to-convert-excel-to-json">How to Convert Excel to JSON</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>JSON Data Conversion</h3>
-      <a href="/how-to-convert-json-to-csv">How to Convert JSON to CSV</a>
-      <a href="/how-to-convert-json-to-pdf">How to Convert JSON to PDF</a>
-      <a href="/how-to-convert-json-to-xml">How to Convert JSON to XML</a>
-      <a href="/how-to-open-json-file-in-excel">How to Open JSON File in Excel</a>
-    </div>
-
-    <div class="popup-column">
-      <h3>Data Generation</h3>
-      <a href="/how-to-generate-uuid">How To Generate UUID Online</a>
-    </div>
-
-  </div>
-
 </header>
 
 {% if page.is_homepage %}
 
-<!-- Homepage: no tool-grid, just render content full width -->
+<!-- Homepage Content -->
+<main id="content" role="main">
+  {{ content }}
+</main>
+
+{% elsif page.is_category %}
+
+<!-- Category Page Container -->
 <main id="content" role="main">
   {{ content }}
 </main>
 
 {% else %}
 
-<div class="tool-grid">
+<!-- Standard Tool / Content Page Layout with Category Sidebar -->
+<div class="tool-grid" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; display: grid; grid-template-columns: 1fr 300px; gap: 2rem;">
 
   <div class="tool-main">
+    <!-- Breadcrumb Standard -->
+    {% assign matched_tool = site.data.tools | where: "url", page.url | first %}
+    {% assign tool_breadcrumb_name = page.short_name | default: matched_tool.short_name | default: matched_tool.title | default: page.title %}
+    <nav aria-label="Breadcrumb" style="margin-bottom: 1.25rem; font-size: 0.875rem; color: var(--text-muted, #64748b);">
+      <a href="/" style="color: inherit; text-decoration: none;">Home</a>
+      {% if page.category %}
+        <span> / </span>
+        <a href="/{{ page.category | lowercase }}" style="color: inherit; text-decoration: none;">{{ page.category }}</a>
+      {% endif %}
+      <span> / </span>
+      <span style="color: var(--text-primary, #0f172a); font-weight: 600;">{{ tool_breadcrumb_name }}</span>
+    </nav>
+
     <main id="content" role="main">
       {{ content }}
     </main>
   </div>
 
-  <div class="tool-sidebar">
-
-    <div class="sidebar-ad">
-
-    </div>
-    <div class="sidebar-card">
-      <h4>🔗 Related Tools</h4>
-      {% assign related_tools = site.data.tools | where: "category", page.category %}
-      {% assign count = 0 %}
-      {% for tool in related_tools %}
-      {% if tool.url != page.url and count < 5 %} <a href="{{ tool.url }}">{{ tool.title }}</a>
-        {% assign count = count | plus: 1 %}
-        {% endif %}
+  <!-- Sidebar: Dynamic Related Tools (Same Category Only) -->
+  <aside class="tool-sidebar">
+    <div style="background: var(--bg-soft, #f8fafc); border: 1px solid var(--border-default, #e2e8f0); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+      <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">
+        🔗 Related {{ page.category | default: "Category" }} Tools
+      </h4>
+      <ul style="list-style: none; padding: 0; margin: 0; line-height: 2; font-size: 0.9rem;">
+        {% assign category_tools = site.data.tools | where: "category", page.category %}
+        {% assign related_count = 0 %}
+        {% for tool in category_tools %}
+          {% if tool.url != page.url and related_count < 6 %}
+            <li>
+              <a href="{{ tool.url }}" style="color: var(--primary, #2563eb); text-decoration: none; font-weight: 500;">
+                {{ tool.icon | default: "⚡" }} {{ tool.title }}
+              </a>
+            </li>
+            {% assign related_count = related_count | plus: 1 %}
+          {% endif %}
         {% endfor %}
+        {% if related_count == 0 %}
+          <li style="color: var(--text-muted, #94a3b8); font-style: italic;">Explore tools in <a href="/{{ page.category | lowercase }}">{{ page.category | default: "this category" }}</a>.</li>
+        {% endif %}
+      </ul>
     </div>
-  </div>
+
+    <!-- Related Blog Articles -->
+    <div style="background: var(--bg-soft, #f8fafc); border: 1px solid var(--border-default, #e2e8f0); border-radius: 12px; padding: 1.5rem;">
+      <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">
+        📝 Related Articles
+      </h4>
+      <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8; font-size: 0.875rem;">
+        {% assign article_count = 0 %}
+        {% for post in site.posts %}
+          {% if post.url != page.url and article_count < 3 %}
+            <li style="margin-bottom: 0.75rem;">
+              <a href="{{ post.url }}" style="color: var(--text-primary, #0f172a); text-decoration: none; font-weight: 500;">
+                {{ post.title }}
+              </a>
+            </li>
+            {% assign article_count = article_count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+        {% if article_count == 0 %}
+          <li style="color: var(--text-muted, #94a3b8); font-style: italic;">Explore engineering guides on <a href="/blog">our blog</a>.</li>
+        {% endif %}
+      </ul>
+    </div>
+  </aside>
+
 </div>
 
 {% endif %}
@@ -536,107 +152,27 @@ layout: default
     const overlay = document.getElementById('overlay');
 
     function closeDrawer() {
+      if (!hamburger || !drawer || !overlay) return;
       hamburger.classList.remove('active');
       drawer.classList.remove('active');
       overlay.classList.remove('active');
       document.body.style.overflow = '';
     }
     function openDrawer() {
+      if (!hamburger || !drawer || !overlay) return;
       hamburger.classList.add('active');
       drawer.classList.add('active');
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
-    hamburger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (drawer.classList.contains('active')) closeDrawer();
-      else openDrawer();
-    });
-    overlay.addEventListener('click', closeDrawer);
-
-    // Mobile accordion (tap to expand)
-    const mobTriggers = document.querySelectorAll('.mobile-nav-trigger');
-    mobTriggers.forEach(trigger => {
-      trigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = trigger.dataset.target;
-        const submenu = document.getElementById(targetId);
-        if (submenu) {
-          trigger.classList.toggle('open');
-          submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-        }
-      });
-    });
-
-    // ----- DESKTOP MEGA MENU (click to toggle) -----
-    const desktopTriggers = document.querySelectorAll('.desktop-nav .nav-item');
-    const popups = document.querySelectorAll('.popup-grid');
-
-    function hideAllPopups(exceptId = null) {
-      popups.forEach(popup => {
-        if (exceptId === null || popup.id !== exceptId) {
-          popup.style.display = 'none';
-          const relatedTrigger = Array.from(desktopTriggers).find(t => t.dataset.popup === popup.id);
-          if (relatedTrigger) relatedTrigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-
-    function positionPopup(trigger, popup) {
-      popup.style.display = 'grid';
-      popup.style.visibility = 'hidden';
-      const rect = trigger.getBoundingClientRect();
-      const popupRect = popup.getBoundingClientRect();
-      let left = rect.left + (rect.width / 2) - (popupRect.width / 2);
-      left = Math.max(10, Math.min(left, window.innerWidth - popupRect.width - 10));
-      popup.style.left = left + 'px';
-      popup.style.top = (rect.bottom + 5) + 'px';
-      popup.style.visibility = 'visible';
-    }
-
-    // Click handler for each nav item
-    desktopTriggers.forEach(trigger => {
-      const popupId = trigger.dataset.popup;
-      const popup = document.getElementById(popupId);
-      if (!popup) return;
-
-      trigger.addEventListener('click', (e) => {
+    if (hamburger) {
+      hamburger.addEventListener('click', (e) => {
         e.stopPropagation();
-        const isOpen = popup.style.display === 'grid';
-        hideAllPopups(isOpen ? null : popupId);
-
-        if (!isOpen) {
-          positionPopup(trigger, popup);
-          trigger.setAttribute('aria-expanded', 'true');
-        } else {
-          trigger.setAttribute('aria-expanded', 'false');
-        }
+        if (drawer.classList.contains('active')) closeDrawer();
+        else openDrawer();
       });
-    });
-    desktopTriggers.forEach(trigger => {
-      trigger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          trigger.click();
-        }
-      });
-    });
-    // Click outside to close all popups
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.desktop-nav .nav-item') && !e.target.closest('.popup-grid')) {
-        hideAllPopups();
-      }
-    });
-
-    // Reposition on resize (only for visible popups)
-    window.addEventListener('resize', () => {
-      popups.forEach(popup => {
-        if (popup.style.display === 'grid') {
-          const activeTrigger = Array.from(desktopTriggers).find(t => t.dataset.popup === popup.id);
-          if (activeTrigger) positionPopup(activeTrigger, popup);
-        }
-      });
-    });
+    }
+    if (overlay) overlay.addEventListener('click', closeDrawer);
   })();
 </script>

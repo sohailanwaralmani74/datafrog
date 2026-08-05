@@ -1,55 +1,70 @@
-<footer class="site-footer" role="contentinfo">
-  <div class="footer-inner">
+<footer class="site-footer" role="contentinfo" style="background: var(--bg-soft, #f8fafc); border-top: 1px solid var(--border-default, #e2e8f0); padding: 3.5rem 1.5rem 2rem; color: var(--text-primary, #0f172a);">
+  <div class="footer-inner" style="max-width: 1240px; margin: 0 auto;">
 
-    <!-- Footer Navigation -->
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="/privacy-policy" title="Read DataFrog Privacy Policy">🔒 Privacy Policy</a>
-      <a href="/contact-us" title="Contact DataFrog">📞 Contact Us</a>
-      <a href="/about-us" title="About DataFrog">ℹ️ About Us</a>
-      <a href="/terms-of-service" title="Read DataFrog Terms of Service">⚖️ Terms of Service</a>
-      <a href="/sitemap" title="Browse all data conversion tools">🗺️ Sitemap</a>
-      <a href="/404" title="404 Test Page">🔍 404 Test Page</a>
-    </nav>
-
-    <div class="footer-bottom">
-
-      <section class="footer-brand" aria-labelledby="footer-brand-heading">
-        <h3 id="footer-brand-heading">
-          <a href="/" title="DataFrog Home">DataFrog</a>
-        </h3>
-
-        <p>
-          <strong>DataFrog</strong> offers <strong>100% free, browser-based data conversion tools</strong>
-          — no signup, no file uploads, no server processing. All conversions happen locally in your browser
-          for maximum privacy and security.
-        </p>
-
-        <p>
-          Convert between JSON, Excel, CSV, XML, QIF, SQL, PDF, and more formats instantly.
-          No account required, no software installation, no file uploads, and no usage limits.
-        </p>
-      </section>
-
-      <section class="footer-description" aria-labelledby="footer-description-heading">
-        <h3 id="footer-description-heading" class="visually-hidden">
-          About DataFrog Data Conversion Tools
-        </h3>
-
-        <p>
-          Popular tools include JSON to CSV, JSON to Excel, Excel to JSON, CSV to Excel,
-          XML to JSON, QIF to CSV, SQL to Excel, UUID Generator, Base64 Encoder/Decoder,
-          Hash Generator, and many other specialized data transformation and utility tools
-          for developers, analysts, and business users.
-        </p>
-      </section>
-
-      <div class="footer-copy">
-        <p>
-          &copy; {{ site.time | date: "%Y" }} DataFrog.
-          Free browser-based data conversion tools for developers, analysts, and data professionals.
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; margin-bottom: 3rem;">
+      
+      <!-- Column 1: Company -->
+      <div>
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">Company</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; line-height: 2.2;">
+          <li><a href="/about-us" style="color: var(--text-muted, #475569); text-decoration: none;">ℹ️ About</a></li>
+          <li><a href="/contact-us" style="color: var(--text-muted, #475569); text-decoration: none;">📞 Contact</a></li>
+        </ul>
+        <p style="font-size: 0.85rem; color: var(--text-muted, #64748b); margin-top: 1.25rem; line-height: 1.5;">
+          <strong>DataFrog.tools</strong> — Inspect • Analyze • Validate • Clean • Visualize Data 100% locally in your browser.
         </p>
       </div>
 
+      <!-- Column 2: Resources -->
+      <div>
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">Resources</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; line-height: 2.2;">
+          <li><a href="/blog" style="color: var(--text-muted, #475569); text-decoration: none;">📝 Blog</a></li>
+          <li><a href="/privacy-policy" style="color: var(--text-muted, #475569); text-decoration: none;">🔒 Privacy Policy</a></li>
+          <li><a href="/terms-of-service" style="color: var(--text-muted, #475569); text-decoration: none;">⚖️ Terms of Service</a></li>
+          <li><a href="/disclaimer" style="color: var(--text-muted, #475569); text-decoration: none;">⚠️ Disclaimer</a></li>
+          <li><a href="/sitemap" style="color: var(--text-muted, #475569); text-decoration: none;">🗺️ Sitemap</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Categories -->
+      <div>
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">Categories</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; line-height: 2.2;">
+          <li><a href="/inspect" style="color: var(--text-muted, #475569); text-decoration: none;">🔍 Inspect</a></li>
+          <li><a href="/analyze" style="color: var(--text-muted, #475569); text-decoration: none;">📊 Analyze</a></li>
+          <li><a href="/validate" style="color: var(--text-muted, #475569); text-decoration: none;">✅ Validate</a></li>
+          <li><a href="/compare" style="color: var(--text-muted, #475569); text-decoration: none;">⚖️ Compare</a></li>
+          <li><a href="/visualize" style="color: var(--text-muted, #475569); text-decoration: none;">📈 Visualize</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Featured Tools (6 featured tools) -->
+      <div>
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">Featured Tools</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; line-height: 2.2;">
+          {% assign popular_tools = site.data.tools | where: "featured", true %}
+          {% for tool in popular_tools limit:6 %}
+            <li><a href="{{ tool.url }}" style="color: var(--text-muted, #475569); text-decoration: none;">{{ tool.icon | default: "⚡" }} {{ tool.title }}</a></li>
+          {% else %}
+            <li style="color: var(--text-muted, #94a3b8); font-style: italic;">Featured tools will populate here automatically.</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Footer -->
+    <div style="border-top: 1px solid var(--border-default, #e2e8f0); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.875rem; color: var(--text-muted, #64748b);">
+      <div>
+        &copy; {{ site.time | date: "%Y" }} <strong>DataFrog.tools</strong>. All rights reserved.
+      </div>
+      <div>
+        🔒 Privacy-First Statement: All dataset processing occurs 100% locally in your client web browser. Zero server processing.
+      </div>
+      <div>
+        Made with ❤️ for data professionals
+      </div>
     </div>
 
   </div>

@@ -1,0 +1,604 @@
+---
+layout: main
+title: "JSON Compare – Structural JSON Diff & Key Inspector | DataFrog.tools"
+short_name: "JSON Compare"
+description: "Compare two JSON documents structurally. Highlight added keys, removed keys, modified values, nested array variations, and JSON paths online. Free, private, and browser-based."
+keywords: "JSON Compare, JSON Diff, Compare JSON, Compare JSON Online, JSON Difference Checker, JSON Compare Tool, JSON Diff Viewer"
+category: "Compare"
+permalink: /compare/json-compare/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSON Compare – DataFrog.tools",
+  "url": "https://datafrog.tools/compare/json-compare/",
+  "description": "Browser-based JSON Compare tool for structural diffing, nested key/value assertion, key order sorting, JSON path tracing, and offline comparison locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compare",
+      "item": "https://datafrog.tools/compare"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "JSON Compare",
+      "item": "https://datafrog.tools/compare/json-compare/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does structural JSON comparison differ from line diffing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Structural JSON comparison parses both payloads into object trees, normalizing key order and whitespace, so it highlights real data changes without false positives caused by key reordering."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my JSON payload transmitted to external servers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. All object tree parsing, JSON path tracing, key order normalization, and report generation run locally inside your browser memory."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I compare JSON payloads with different key orders?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Keep 'Ignore Key Order' enabled to automatically sort dictionary keys alphabetically before comparing object properties."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #eff6ff; color: #2563eb; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    ⚖️ Compare Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    JSON Compare – Structural Diff & Key Path Inspector
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Compare two JSON documents structurally. Detect added object keys, removed properties, modified primitive values, nested array variations, and exact JSON path pointers.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🔍</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your Original and Modified JSON files here</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .json files or paste raw JSON text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Original JSON
+      <input type="file" id="file-orig-input" accept=".json,application/json,text/plain" style="display: none;">
+    </label>
+    <label style="padding: 0.6rem 1.25rem; background: #2563eb; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Modified JSON
+      <input type="file" id="file-mod-input" accept=".json,application/json,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample JSON
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear Both
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & DUAL INPUT WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span id="diff-status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+      <label style="font-size: 0.825rem; font-weight: 600;"><input type="checkbox" id="chk-sort-keys" checked> Ignore Key Order (Alphabetical Sort)</label>
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-swap" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        🔄 Swap Inputs
+      </button>
+      <button id="btn-compare" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        🔍 Compare JSON
+      </button>
+      <button id="btn-copy-diff" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Diff
+      </button>
+      <button id="btn-download-report" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Report
+      </button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        1. Original JSON Payload
+      </label>
+      <textarea id="json-orig" placeholder="Paste original JSON here..." 
+                style="width: 100%; height: 250px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        2. Modified JSON Payload
+      </label>
+      <textarea id="json-mod" placeholder="Paste modified JSON here..." 
+                style="width: 100%; height: 250px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div id="stats-panel" style="display: none; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.25rem;">
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #64748b; font-weight: 600; display: block;">Total Diffs</span>
+      <span id="stat-total-diff" style="font-size: 1.25rem; font-weight: 800; color: #0f172a;">0</span>
+    </div>
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #166534; font-weight: 600; display: block;">Added Keys (+)</span>
+      <span id="stat-additions" style="font-size: 1.25rem; font-weight: 800; color: #16a34a;">0</span>
+    </div>
+    <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #991b1b; font-weight: 600; display: block;">Removed Keys (-)</span>
+      <span id="stat-deletions" style="font-size: 1.25rem; font-weight: 800; color: #dc2626;">0</span>
+    </div>
+    <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #1e40af; font-weight: 600; display: block;">Value Changes (~)</span>
+      <span id="stat-modifications" style="font-size: 1.25rem; font-weight: 800; color: #2563eb;">0</span>
+    </div>
+  </div>
+
+  <!-- Highlighted Structural JSON Diff View Box -->
+  <div id="diff-output-box" style="display: none; border: 1px solid #cbd5e1; border-radius: 10px; padding: 1.25rem; background: #ffffff; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.6; max-height: 380px; overflow-y: auto;">
+    <div id="diff-content"></div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">JSON Compare Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Object tree traversal, key path display, key sorting, and privacy</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🌳 Structural Object Traversal</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Evaluates nested dictionary nodes and arrays without relying on raw line positions.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📍 JSON Path Tracing</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Pinpoints exact property paths (e.g. `$.settings.executionMode`) where values differ.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔤 Key Order Normalization</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Optionally sorts object keys alphabetically to eliminate false positives caused by key order.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All JSON comparison runs locally in browser RAM. Zero payload data is transmitted to servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use JSON Compare</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input Original & Modified JSON</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste JSON payloads into boxes 1 and 2 or drag & drop <code>.json</code> files.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect JSON Path Differences</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review the structural diff stream detailing added keys (+), removed keys (-), and modified values (~).</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Download Report</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Diff</strong> or <strong>Download Report</strong> to export your JSON comparison log.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does structural JSON comparison differ from line diffing?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Structural JSON comparison parses both payloads into object trees, normalizing key order and whitespace, so it highlights real data changes without false positives caused by key reordering.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my JSON payload transmitted to external servers?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. All object tree parsing, JSON path tracing, key order normalization, and report generation run locally inside your browser memory.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I compare JSON payloads with different key orders?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! Keep 'Ignore Key Order' enabled to automatically sort dictionary keys alphabetically before comparing object properties.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT JSON COMPARE ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const jsonOrig = document.getElementById('json-orig');
+  const jsonMod = document.getElementById('json-mod');
+  const dropZone = document.getElementById('drop-zone');
+  const fileOrigInput = document.getElementById('file-orig-input');
+  const fileModInput = document.getElementById('file-mod-input');
+  const diffStatusBadge = document.getElementById('diff-status-badge');
+  const chkSortKeys = document.getElementById('chk-sort-keys');
+
+  const btnSwap = document.getElementById('btn-swap');
+  const btnCompare = document.getElementById('btn-compare');
+  const btnCopyDiff = document.getElementById('btn-copy-diff');
+  const btnDownloadReport = document.getElementById('btn-download-report');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  const statsPanel = document.getElementById('stats-panel');
+  const statTotalDiff = document.getElementById('stat-total-diff');
+  const statAdditions = document.getElementById('stat-additions');
+  const statDeletions = document.getElementById('stat-deletions');
+  const statModifications = document.getElementById('stat-modifications');
+
+  const diffOutputBox = document.getElementById('diff-output-box');
+  const diffContent = document.getElementById('diff-content');
+
+  let currentReportText = '';
+
+  const SAMPLE_ORIG = {
+    "title": "DataFrog Intelligence Workspace",
+    "version": 2.3,
+    "active": true,
+    "settings": {
+      "executionMode": "server",
+      "maxThreads": 4
+    },
+    "tools": ["inspect", "analyze"]
+  };
+
+  const SAMPLE_MOD = {
+    "title": "DataFrog Intelligence Workspace",
+    "version": 2.4,
+    "active": true,
+    "settings": {
+      "executionMode": "browser-local",
+      "maxThreads": 8
+    },
+    "tools": ["inspect", "analyze", "validate", "compare"]
+  };
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileOrigInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#2563eb';
+      dropZone.style.backgroundColor = '#eff6ff';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length >= 2) {
+      readFile(files[0], jsonOrig);
+      readFile(files[1], jsonMod);
+    } else if (files.length === 1) {
+      readFile(files[0], jsonOrig);
+    }
+  });
+
+  fileOrigInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0], jsonOrig);
+  });
+  fileModInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0], jsonMod);
+  });
+
+  function readFile(file, targetArea) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      targetArea.value = evt.target.result;
+      compareJSON();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    jsonOrig.value = JSON.stringify(SAMPLE_ORIG, null, 2);
+    jsonMod.value = JSON.stringify(SAMPLE_MOD, null, 2);
+    compareJSON();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    jsonOrig.value = '';
+    jsonMod.value = '';
+    compareJSON();
+  });
+
+  btnSwap.addEventListener('click', () => {
+    const tmp = jsonOrig.value;
+    jsonOrig.value = jsonMod.value;
+    jsonMod.value = tmp;
+    compareJSON();
+  });
+
+  jsonOrig.addEventListener('input', compareJSON);
+  jsonMod.addEventListener('input', compareJSON);
+  chkSortKeys.addEventListener('change', compareJSON);
+  btnCompare.addEventListener('click', compareJSON);
+
+  function compareJSON() {
+    const val1 = jsonOrig.value;
+    const val2 = jsonMod.value;
+
+    if (!val1.trim() && !val2.trim()) {
+      diffStatusBadge.textContent = 'Ready';
+      diffStatusBadge.style.background = '#f1f5f9';
+      diffStatusBadge.style.color = '#475569';
+      statsPanel.style.display = 'none';
+      diffOutputBox.style.display = 'none';
+      currentReportText = '';
+      return;
+    }
+
+    let obj1 = null;
+    let obj2 = null;
+
+    try { if (val1.trim()) obj1 = JSON.parse(val1); } catch(e) { showError('Original JSON Syntax Error: ' + e.message); return; }
+    try { if (val2.trim()) obj2 = JSON.parse(val2); } catch(e) { showError('Modified JSON Syntax Error: ' + e.message); return; }
+
+    const diffs = [];
+
+    function diffNodes(n1, n2, path) {
+      if (typeof n1 !== typeof n2) {
+        diffs.push({ type: 'mod', path, oldVal: JSON.stringify(n1), newVal: JSON.stringify(n2) });
+        return;
+      }
+
+      if (typeof n1 !== 'object' || n1 === null || n2 === null) {
+        if (n1 !== n2) {
+          diffs.push({ type: 'mod', path, oldVal: JSON.stringify(n1), newVal: JSON.stringify(n2) });
+        }
+        return;
+      }
+
+      if (Array.isArray(n1) && Array.isArray(n2)) {
+        const maxLen = Math.max(n1.length, n2.length);
+        for (let i = 0; i < maxLen; i++) {
+          const itemPath = `${path}[${i}]`;
+          if (i >= n1.length) {
+            diffs.push({ type: 'add', path: itemPath, newVal: JSON.stringify(n2[i]) });
+          } else if (i >= n2.length) {
+            diffs.push({ type: 'del', path: itemPath, oldVal: JSON.stringify(n1[i]) });
+          } else {
+            diffNodes(n1[i], n2[i], itemPath);
+          }
+        }
+        return;
+      }
+
+      // Objects
+      const keys1 = Object.keys(n1);
+      const keys2 = Object.keys(n2);
+      const allKeys = Array.from(new Set([...keys1, ...keys2]));
+
+      if (chkSortKeys.checked) allKeys.sort();
+
+      allKeys.forEach(k => {
+        const subPath = path === '$' ? `$.${k}` : `${path}.${k}`;
+        if (!(k in n1)) {
+          diffs.push({ type: 'add', path: subPath, newVal: JSON.stringify(n2[k]) });
+        } else if (!(k in n2)) {
+          diffs.push({ type: 'del', path: subPath, oldVal: JSON.stringify(n1[k]) });
+        } else {
+          diffNodes(n1[k], n2[k], subPath);
+        }
+      });
+    }
+
+    diffNodes(obj1, obj2, '$');
+
+    let adds = diffs.filter(d => d.type === 'add').length;
+    let dels = diffs.filter(d => d.type === 'del').length;
+    let mods = diffs.filter(d => d.type === 'mod').length;
+    let total = diffs.length;
+
+    statsPanel.style.display = 'grid';
+    statTotalDiff.textContent = total;
+    statAdditions.textContent = adds;
+    statDeletions.textContent = dels;
+    statModifications.textContent = mods;
+
+    diffOutputBox.style.display = 'block';
+
+    if (total === 0) {
+      diffStatusBadge.textContent = '✅ Identical JSON';
+      diffStatusBadge.style.background = '#f0fdf4';
+      diffStatusBadge.style.color = '#16a34a';
+      diffContent.innerHTML = '<div style="color: #15803d; font-weight: 700;">✅ Both JSON documents are structurally identical.</div>';
+    } else {
+      diffStatusBadge.textContent = `⚡ ${total} Difference(s)`;
+      diffStatusBadge.style.background = '#eff6ff';
+      diffStatusBadge.style.color = '#2563eb';
+
+      let html = '';
+      diffs.forEach(d => {
+        if (d.type === 'add') {
+          html += `<div style="background: #f0fdf4; color: #166534; padding: 0.35rem 0.6rem; border-left: 4px solid #16a34a; margin-bottom: 4px;">+ Added Path: <strong>${d.path}</strong> &rarr; ${escapeHtml(d.newVal)}</div>`;
+        } else if (d.type === 'del') {
+          html += `<div style="background: #fef2f2; color: #991b1b; padding: 0.35rem 0.6rem; border-left: 4px solid #dc2626; margin-bottom: 4px;">- Removed Path: <strong>${d.path}</strong> (was ${escapeHtml(d.oldVal)})</div>`;
+        } else {
+          html += `<div style="background: #eff6ff; color: #1e40af; padding: 0.35rem 0.6rem; border-left: 4px solid #2563eb; margin-bottom: 4px;">~ Modified Path: <strong>${d.path}</strong><br>&nbsp;&nbsp;OLD: ${escapeHtml(d.oldVal)}<br>&nbsp;&nbsp;NEW: ${escapeHtml(d.newVal)}</div>`;
+        }
+      });
+      diffContent.innerHTML = html;
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    currentReportText = `==================================================
+DATAFROG.TOOLS — JSON STRUCTURAL COMPARISON REPORT
+Generated: ${dateStr} | Key Sort: ${chkSortKeys.checked ? 'ENABLED' : 'DISABLED'}
+==================================================
+
+SUMMARY STATISTICS:
+- Total Structural Diffs: ${total}
+- Added Keys (+):         ${adds}
+- Removed Keys (-):       ${dels}
+- Modified Values (~):    ${mods}
+
+DETAILED PROPERTY PATH AUDIT:
+--------------------------------------------------
+${diffs.map(d => `[${d.type.toUpperCase()}] ${d.path} ${d.oldVal ? 'OLD: ' + d.oldVal : ''} ${d.newVal ? 'NEW: ' + d.newVal : ''}`).join('\n')}
+
+==================================================
+DataFrog.tools — Privacy-First Data Intelligence Workspace`;
+  }
+
+  function showError(msg) {
+    diffStatusBadge.textContent = '❌ JSON Syntax Error';
+    diffStatusBadge.style.background = '#fef2f2';
+    diffStatusBadge.style.color = '#dc2626';
+    diffOutputBox.style.display = 'block';
+    diffContent.innerHTML = `<div style="color: #991b1b; font-weight: 700;">${msg}</div>`;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  btnCopyDiff.addEventListener('click', () => {
+    if (!currentReportText) return;
+    navigator.clipboard.writeText(currentReportText);
+    showToast('JSON diff report copied!');
+  });
+
+  btnDownloadReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    const blob = new Blob([currentReportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'json-comparison-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Check
+  compareJSON();
+
+})();
+</script>

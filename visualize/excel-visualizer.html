@@ -1,0 +1,579 @@
+---
+layout: main
+title: "Excel Visualizer – Convert Excel Workbooks into Dashboards & Search Sheets | DataFrog.tools"
+short_name: "Excel Visualizer"
+description: "Convert Excel workbooks (.xlsx, .xls) into interactive dashboards, charts, and searchable spreadsheet tables. Multi-sheet support, column detection, and PNG exports. Free, private, and browser-based."
+keywords: "Excel Visualizer, Excel Chart Generator, Excel Dashboard, Spreadsheet Charts, Visualize Excel, Excel Graph Generator, Excel Data Visualization"
+category: "Visualize"
+permalink: /visualize/excel-visualizer/
+---
+
+<!-- Include SheetJS & Chart.js libraries -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Excel Visualizer – DataFrog.tools",
+  "url": "https://datafrog.tools/visualize/excel-visualizer/",
+  "description": "Browser-based Excel Visualizer tool for converting multi-sheet Excel workbooks (.xlsx, .xls) into searchable data tables and interactive bar, line, and pie charts with PNG exports locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Visualize",
+      "item": "https://datafrog.tools/visualize"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Excel Visualizer",
+      "item": "https://datafrog.tools/visualize/excel-visualizer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does Excel Visualizer support multi-sheet workbooks and live search?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Excel Visualizer parses binary `.xlsx` files with SheetJS, displaying a searchable interactive data table for the selected worksheet along with real-time Chart.js dashboards."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my Excel spreadsheets uploaded to remote servers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. All binary parsing, table rendering, sheet searching, and chart canvas rendering execute locally inside your web browser RAM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which Excel file formats are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports `.xlsx`, `.xls`, `.xlsm`, and `.csv` spreadsheet files."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    👁️ Visualize Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    Excel Visualizer – Searchable Sheet & Chart Dashboard
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Visualize Excel workbooks (.xlsx, .xls) with interactive charts and searchable data tables. Browse multi-sheet tabs, filter rows instantly, render Bar/Line/Pie charts, and export graphics.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📈</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your Excel file here to view & chart</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .xlsx, .xls, .xlsm, .csv files</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Excel File
+      <input type="file" id="file-input" accept=".xlsx,.xls,.xlsm,.csv" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample Workbook
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+      <span id="status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+
+      <label style="font-size: 0.825rem; font-weight: 600;">
+        Worksheet:
+        <select id="sheet-select" style="padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.825rem;"></select>
+      </label>
+
+      <input type="text" id="search-table" placeholder="🔎 Search sheet rows..." 
+             style="padding: 0.3rem 0.6rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.825rem; outline: none; width: 180px;">
+
+      <label style="font-size: 0.825rem; font-weight: 600;">
+        Chart Type:
+        <select id="chart-type" style="padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.825rem;">
+          <option value="bar">Bar Chart</option>
+          <option value="line">Line Chart</option>
+          <option value="pie">Pie Chart</option>
+          <option value="doughnut">Doughnut Chart</option>
+        </select>
+      </label>
+
+      <label style="font-size: 0.825rem; font-weight: 600;">
+        X-Axis:
+        <select id="xaxis-select" style="padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.825rem;"></select>
+      </label>
+
+      <label style="font-size: 0.825rem; font-weight: 600;">
+        Y-Axis:
+        <select id="yaxis-select" style="padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.825rem;"></select>
+      </label>
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-render-chart" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📈 Render Chart
+      </button>
+      <button id="btn-export-png" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Chart PNG
+      </button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    
+    <!-- Left Column: Searchable Interactive Sheet Table -->
+    <div>
+      <div id="file-info" style="font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        1. Searchable Data Sheet Preview
+      </div>
+      <div id="sheet-table-container" style="width: 100%; height: 340px; border: 1px solid #cbd5e1; border-radius: 10px; background: #ffffff; overflow: auto; padding: 0.5rem;">
+        <span style="color: #64748b; font-style: italic;">Searchable worksheet table will display here when file is loaded...</span>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Chart Canvas View -->
+    <div>
+      <div style="font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        2. Visual Chart Dashboard
+      </div>
+      <div style="width: 100%; height: 340px; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 10px; background: #ffffff; position: relative; display: flex; align-items: center; justify-content: center;">
+        <canvas id="chart-canvas"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Excel Visualizer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Searchable spreadsheet tables, multi-sheet tab navigation, interactive charts, and privacy</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔍 Live Searchable Sheet Table</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Search and filter rows in real-time across any loaded Excel worksheet tab.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📈 Multi-Sheet Tab Navigation</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Switch between worksheet tabs in multi-sheet Excel workbooks instantly.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🖼️ High-Res PNG Chart Download</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Export crisp chart graphics for presentations, reports, and slide decks.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All binary parsing and table rendering happen in browser RAM. Zero spreadsheets are uploaded to servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use Excel Visualizer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Upload Excel Workbook</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Browse or drag & drop an <code>.xlsx</code> file or click <strong>Load Sample Workbook</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Search Sheet & Pick Chart Axes</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Search table rows in real-time, pick X and Y axis columns, and select your chart type.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Export Chart Image</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Download Chart PNG</strong> to save your high-resolution spreadsheet chart.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does Excel Visualizer support multi-sheet workbooks and live search?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The Excel Visualizer parses binary `.xlsx` files with SheetJS, displaying a searchable interactive data table for the selected worksheet along with real-time Chart.js dashboards.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Are my Excel spreadsheets uploaded to remote servers?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. All binary parsing, table rendering, sheet searching, and chart canvas rendering execute locally inside your web browser RAM.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Which Excel file formats are supported?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool supports `.xlsx`, `.xls`, `.xlsm`, and `.csv` spreadsheet files.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT EXCEL VISUALIZER & TABLE ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const fileInfo = document.getElementById('file-info');
+  const statusBadge = document.getElementById('status-badge');
+  const sheetTableContainer = document.getElementById('sheet-table-container');
+  const searchTable = document.getElementById('search-table');
+
+  const sheetSelect = document.getElementById('sheet-select');
+  const chartTypeSelect = document.getElementById('chart-type');
+  const xaxisSelect = document.getElementById('xaxis-select');
+  const yaxisSelect = document.getElementById('yaxis-select');
+
+  const btnRenderChart = document.getElementById('btn-render-chart');
+  const btnExportPng = document.getElementById('btn-export-png');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  let currentWb = null;
+  let activeChart = null;
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readExcel(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readExcel(e.target.files[0]);
+  });
+
+  function readExcel(file) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      try {
+        const data = new Uint8Array(evt.target.result);
+        currentWb = XLSX.read(data, { type: 'array' });
+        fileInfo.textContent = `📁 ${file.name} (${currentWb.SheetNames.length} sheet(s))`;
+        populateSheets();
+      } catch (err) {
+        showError('Excel read error: ' + err.message);
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    const ws1 = XLSX.utils.json_to_sheet([
+      { Quarter: "Q1", Revenue: 45000, Profit: 12000, Region: "North America" },
+      { Quarter: "Q2", Revenue: 58000, Profit: 16500, Region: "Europe" },
+      { Quarter: "Q3", Revenue: 62000, Profit: 19000, Region: "Asia Pacific" },
+      { Quarter: "Q4", Revenue: 79000, Profit: 24500, Region: "Global" }
+    ]);
+    currentWb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(currentWb, ws1, "Financials");
+    fileInfo.textContent = "⚡ Sample_Financials.xlsx (1 sheet)";
+    populateSheets();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    currentWb = null;
+    sheetSelect.innerHTML = '';
+    xaxisSelect.innerHTML = '';
+    yaxisSelect.innerHTML = '';
+    searchTable.value = '';
+    sheetTableContainer.innerHTML = '<span style="color: #64748b; font-style: italic;">Searchable worksheet table will display here when file is loaded...</span>';
+    fileInfo.textContent = "Workbook Info: No file loaded";
+    if (activeChart) { activeChart.destroy(); activeChart = null; }
+    statusBadge.textContent = 'Ready';
+    statusBadge.style.background = '#f1f5f9';
+    statusBadge.style.color = '#475569';
+  });
+
+  sheetSelect.addEventListener('change', () => {
+    populateColumns();
+    renderSheetTable();
+  });
+  chartTypeSelect.addEventListener('change', renderChart);
+  xaxisSelect.addEventListener('change', renderChart);
+  yaxisSelect.addEventListener('change', renderChart);
+  searchTable.addEventListener('input', renderSheetTable);
+  btnRenderChart.addEventListener('click', () => {
+    if (!currentWb) btnLoadSample.click();
+    else renderChart();
+  });
+
+  function populateSheets() {
+    if (!currentWb) return;
+    sheetSelect.innerHTML = '';
+    currentWb.SheetNames.forEach(sName => {
+      const opt = document.createElement('option');
+      opt.value = sName; opt.textContent = sName;
+      sheetSelect.appendChild(opt);
+    });
+    populateColumns();
+    renderSheetTable();
+  }
+
+  function populateColumns() {
+    if (!currentWb || !sheetSelect.value) return;
+    const sheet = currentWb.Sheets[sheetSelect.value];
+    const jsonRows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+    if (jsonRows.length === 0) return;
+
+    const headers = jsonRows[0].map(h => String(h).trim());
+
+    xaxisSelect.innerHTML = '';
+    yaxisSelect.innerHTML = '';
+
+    headers.forEach((h, idx) => {
+      const optX = document.createElement('option');
+      optX.value = idx; optX.textContent = h;
+      xaxisSelect.appendChild(optX);
+
+      const optY = document.createElement('option');
+      optY.value = idx; optY.textContent = h;
+      if (idx === 1 || (headers.length > 1 && idx === 1)) optY.selected = true;
+      yaxisSelect.appendChild(optY);
+    });
+
+    renderChart();
+  }
+
+  function renderSheetTable() {
+    if (!currentWb || !sheetSelect.value) return;
+    const sheet = currentWb.Sheets[sheetSelect.value];
+    const jsonRows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+    if (jsonRows.length === 0) {
+      sheetTableContainer.innerHTML = '<span style="color: #64748b;">Sheet is empty.</span>';
+      return;
+    }
+
+    const filterText = searchTable.value.toLowerCase().trim();
+    const headers = jsonRows[0];
+    const dataRows = jsonRows.slice(1);
+
+    let html = `<table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; font-family: monospace;">`;
+    
+    // Table Header
+    html += `<thead style="background: #f8fafc; position: sticky; top: 0; outline: 1px solid #e2e8f0;"><tr>`;
+    headers.forEach(h => {
+      html += `<th style="padding: 0.4rem 0.6rem; text-align: left; font-weight: 700; border-bottom: 2px solid #cbd5e1; color: #0f172a;">${escapeHtml(String(h))}</th>`;
+    });
+    html += `</tr></thead><tbody>`;
+
+    // Table Rows
+    let matchCount = 0;
+    dataRows.forEach(row => {
+      const rowStr = row.map(c => String(c)).join(' ').toLowerCase();
+      if (!filterText || rowStr.includes(filterText)) {
+        matchCount++;
+        html += `<tr style="border-bottom: 1px solid #f1f5f9;">`;
+        headers.forEach((_, cIdx) => {
+          const val = row[cIdx] !== undefined ? String(row[cIdx]) : '';
+          html += `<style>tr:hover { background-color: #f8fafc; }</style><td style="padding: 0.35rem 0.6rem; color: #334155;">${escapeHtml(val)}</td>`;
+        });
+        html += `</tr>`;
+      }
+    });
+
+    html += `</tbody></table>`;
+    sheetTableContainer.innerHTML = html;
+  }
+
+  function renderChart() {
+    if (!currentWb || !sheetSelect.value) return;
+    const sheet = currentWb.Sheets[sheetSelect.value];
+    const jsonRows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+    if (jsonRows.length <= 1) return;
+
+    const dataRows = jsonRows.slice(1);
+    const xIdx = parseInt(xaxisSelect.value) || 0;
+    const yIdx = parseInt(yaxisSelect.value) || 1;
+
+    const labels = dataRows.map(r => r[xIdx] !== undefined ? String(r[xIdx]).trim() : '');
+    const dataVals = dataRows.map(r => r[yIdx] !== undefined ? parseFloat(r[yIdx]) || 0 : 0);
+
+    const chartType = chartTypeSelect.value;
+
+    const ctx = document.getElementById('chart-canvas').getContext('2d');
+    if (activeChart) activeChart.destroy();
+
+    activeChart = new Chart(ctx, {
+      type: chartType,
+      data: {
+        labels: labels,
+        datasets: [{
+          label: yaxisSelect.options[yaxisSelect.selectedIndex] ? yaxisSelect.options[yaxisSelect.selectedIndex].text : 'Metric',
+          data: dataVals,
+          backgroundColor: chartType === 'pie' || chartType === 'doughnut' 
+            ? ['#2563eb', '#16a34a', '#d97706', '#dc2626', '#9333ea', '#0891b2']
+            : 'rgba(37, 99, 235, 0.65)',
+          borderColor: '#2563eb',
+          borderWidth: 2,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        }
+      }
+    });
+
+    statusBadge.textContent = '✅ Sheet & Chart Loaded';
+    statusBadge.style.background = '#f0fdf4';
+    statusBadge.style.color = '#16a34a';
+  }
+
+  function showError(msg) {
+    statusBadge.textContent = '❌ Error';
+    statusBadge.style.background = '#fef2f2';
+    statusBadge.style.color = '#dc2626';
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  btnExportPng.addEventListener('click', () => {
+    if (!activeChart) return;
+    const url = activeChart.toBase64Image();
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'excel-chart.png';
+    a.click();
+    showToast('Chart PNG downloaded!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+})();
+</script>

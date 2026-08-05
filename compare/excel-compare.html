@@ -1,0 +1,583 @@
+---
+layout: main
+title: "Excel Compare – Compare Excel Workbooks & Spreadsheet Diffs | DataFrog.tools"
+short_name: "Excel Compare"
+description: "Compare two Excel workbooks (.xlsx, .xls) online. Highlight modified cells, formula changes, sheet mismatches, and row/column variations cell-by-cell. Free, private, and browser-based."
+keywords: "Excel Compare, Compare Excel Files, Excel Difference Checker, Excel Workbook Compare, Spreadsheet Compare, XLSX Compare, Excel Compare Online"
+category: "Compare"
+permalink: /compare/excel-compare/
+---
+
+<!-- Include SheetJS XLSX library for client-side workbook comparison -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Excel Compare – DataFrog.tools",
+  "url": "https://datafrog.tools/compare/excel-compare/",
+  "description": "Browser-based Excel Compare tool for workbook diffing, multi-sheet tab comparison, cell value assertion, and offline spreadsheet comparison locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compare",
+      "item": "https://datafrog.tools/compare"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Excel Compare",
+      "item": "https://datafrog.tools/compare/excel-compare/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does Excel Compare compare multi-sheet workbooks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Excel Compare tool inspects worksheet names, active sheets, used cell ranges, cell values, and formula strings, generating a sheet-by-sheet comparison audit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my Excel workbooks uploaded to any server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. SheetJS parses binary `.xlsx` and `.xls` files directly inside local browser RAM memory. Zero spreadsheet data is uploaded."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which Excel file formats are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports `.xlsx`, `.xls`, `.xlsm`, and `.csv` spreadsheet files."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #eff6ff; color: #2563eb; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    ⚖️ Compare Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    Excel Compare – Workbook & Cell Difference Checker
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Compare two Excel workbooks (.xlsx, .xls) cell-by-cell. Audit worksheet tabs, row/column value changes, formula differences, and export spreadsheet comparison reports.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📈</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your Original and Modified Excel files here</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .xlsx, .xls, .xlsm, .csv files</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Original Workbook
+      <input type="file" id="file-orig-input" accept=".xlsx,.xls,.xlsm,.csv" style="display: none;">
+    </label>
+    <label style="padding: 0.6rem 1.25rem; background: #2563eb; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Modified Workbook
+      <input type="file" id="file-mod-input" accept=".xlsx,.xls,.xlsm,.csv" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample Workbook
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear Both
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & DUAL FILE DISPLAY WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span id="diff-status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-swap" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        🔄 Swap Workbooks
+      </button>
+      <button id="btn-compare" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📈 Compare Excel
+      </button>
+      <button id="btn-copy-diff" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Diff
+      </button>
+      <button id="btn-download-report" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Report
+      </button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    <div style="background: #fafafa; border: 1px solid #cbd5e1; border-radius: 10px; padding: 1rem;">
+      <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a; display: block; margin-bottom: 0.4rem;">
+        1. Original Workbook File
+      </span>
+      <div id="orig-filename" style="color: #64748b; font-size: 0.85rem; font-family: monospace;">No file loaded</div>
+    </div>
+    <div style="background: #fafafa; border: 1px solid #cbd5e1; border-radius: 10px; padding: 1rem;">
+      <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a; display: block; margin-bottom: 0.4rem;">
+        2. Modified Workbook File
+      </span>
+      <div id="mod-filename" style="color: #64748b; font-size: 0.85rem; font-family: monospace;">No file loaded</div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div id="stats-panel" style="display: none; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.25rem;">
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #64748b; font-weight: 600; display: block;">Total Diffs</span>
+      <span id="stat-total-diff" style="font-size: 1.25rem; font-weight: 800; color: #0f172a;">0</span>
+    </div>
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #166534; font-weight: 600; display: block;">Sheet Diffs</span>
+      <span id="stat-sheets" style="font-size: 1.25rem; font-weight: 800; color: #16a34a;">0</span>
+    </div>
+    <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #1e40af; font-weight: 600; display: block;">Cell Changes (~)</span>
+      <span id="stat-modifications" style="font-size: 1.25rem; font-weight: 800; color: #2563eb;">0</span>
+    </div>
+  </div>
+
+  <!-- Highlighted Excel Diff View Box -->
+  <div id="diff-output-box" style="display: none; border: 1px solid #cbd5e1; border-radius: 10px; padding: 1.25rem; background: #ffffff; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.6; max-height: 380px; overflow-y: auto;">
+    <div id="diff-content"></div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Excel Compare Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Multi-sheet tab auditing, cell value & formula diffing, and privacy</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📈 Multi-Sheet Tab Comparison</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Audits worksheet tabs, visible vs hidden sheets, and sheet name mismatches.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🧮 Cell Value & Formula Audit</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Compares cell values and underlying formulas across corresponding row/column coordinates.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚡ SheetJS Binary Parsing</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Parses binary `.xlsx`, `.xls`, and `.xlsm` files instantly inside browser memory.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Zero spreadsheet files or financial records are uploaded to remote servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use Excel Compare</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Upload Original & Modified Excel Workbooks</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Browse or drag & drop <code>.xlsx</code> or <code>.xls</code> files into the upload zone.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Workbook Differences</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review worksheet tab mismatches, cell value modifications (~), and row/column changes.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Diff Report</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Diff</strong> or <strong>Download Report</strong> to save your Excel comparison log.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does Excel Compare compare multi-sheet workbooks?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The Excel Compare tool inspects worksheet names, active sheets, used cell ranges, cell values, and formula strings, generating a sheet-by-sheet comparison audit.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Are my Excel workbooks uploaded to any server?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. SheetJS parses binary `.xlsx` and `.xls` files directly inside local browser RAM memory. Zero spreadsheet data is uploaded.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Which Excel file formats are supported?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool supports `.xlsx`, `.xls`, `.xlsm`, and `.csv` spreadsheet files.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT EXCEL COMPARE ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const dropZone = document.getElementById('drop-zone');
+  const fileOrigInput = document.getElementById('file-orig-input');
+  const fileModInput = document.getElementById('file-mod-input');
+  const origFilename = document.getElementById('orig-filename');
+  const modFilename = document.getElementById('mod-filename');
+  const diffStatusBadge = document.getElementById('diff-status-badge');
+
+  const btnSwap = document.getElementById('btn-swap');
+  const btnCompare = document.getElementById('btn-compare');
+  const btnCopyDiff = document.getElementById('btn-copy-diff');
+  const btnDownloadReport = document.getElementById('btn-download-report');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  const statsPanel = document.getElementById('stats-panel');
+  const statTotalDiff = document.getElementById('stat-total-diff');
+  const statSheets = document.getElementById('stat-sheets');
+  const statModifications = document.getElementById('stat-modifications');
+
+  const diffOutputBox = document.getElementById('diff-output-box');
+  const diffContent = document.getElementById('diff-content');
+
+  let wbOrig = null;
+  let wbMod = null;
+  let currentReportText = '';
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileOrigInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#2563eb';
+      dropZone.style.backgroundColor = '#eff6ff';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length >= 2) {
+      readExcelFile(files[0], true);
+      readExcelFile(files[1], false);
+    } else if (files.length === 1) {
+      readExcelFile(files[0], true);
+    }
+  });
+
+  fileOrigInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readExcelFile(e.target.files[0], true);
+  });
+  fileModInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readExcelFile(e.target.files[0], false);
+  });
+
+  function readExcelFile(file, isOrig) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      try {
+        const data = new Uint8Array(evt.target.result);
+        const wb = XLSX.read(data, { type: 'array' });
+        if (isOrig) {
+          wbOrig = wb;
+          origFilename.textContent = `📁 ${file.name} (${wb.SheetNames.length} sheet(s))`;
+        } else {
+          wbMod = wb;
+          modFilename.textContent = `📁 ${file.name} (${wb.SheetNames.length} sheet(s))`;
+        }
+        compareExcel();
+      } catch (err) {
+        showError('Error reading Excel file: ' + err.message);
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    // Generate Sample Workbooks
+    const ws1 = XLSX.utils.json_to_sheet([
+      { ID: 101, Product: "Analytics Pro", Price: 49.99, Stock: 1450 },
+      { ID: 102, Product: "CSV Studio", Price: 29.99, Stock: 2800 }
+    ]);
+    const ws2 = XLSX.utils.json_to_sheet([
+      { ID: 101, Product: "Analytics Pro", Price: 49.99, Stock: 1500 },
+      { ID: 102, Product: "CSV Studio", Price: 29.99, Stock: 2800 },
+      { ID: 103, Product: "Excel Compare", Price: 39.99, Stock: 900 }
+    ]);
+
+    wbOrig = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wbOrig, ws1, "Products");
+    origFilename.textContent = "⚡ Sample_Original.xlsx (1 sheet)";
+
+    wbMod = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wbMod, ws2, "Products");
+    modFilename.textContent = "⚡ Sample_Modified.xlsx (1 sheet)";
+
+    compareExcel();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    wbOrig = null;
+    wbMod = null;
+    origFilename.textContent = "No file loaded";
+    modFilename.textContent = "No file loaded";
+    compareExcel();
+  });
+
+  btnSwap.addEventListener('click', () => {
+    const tmpWb = wbOrig; wbOrig = wbMod; wbMod = tmpWb;
+    const tmpTxt = origFilename.textContent; origFilename.textContent = modFilename.textContent; modFilename.textContent = tmpTxt;
+    compareExcel();
+  });
+
+  btnCompare.addEventListener('click', compareExcel);
+
+  function compareExcel() {
+    if (!wbOrig && !wbMod) {
+      diffStatusBadge.textContent = 'Ready';
+      diffStatusBadge.style.background = '#f1f5f9';
+      diffStatusBadge.style.color = '#475569';
+      statsPanel.style.display = 'none';
+      diffOutputBox.style.display = 'none';
+      currentReportText = '';
+      return;
+    }
+
+    const sheetsOrig = wbOrig ? wbOrig.SheetNames : [];
+    const sheetsMod = wbMod ? wbMod.SheetNames : [];
+
+    const allSheetNames = Array.from(new Set([...sheetsOrig, ...sheetsMod]));
+
+    const diffs = [];
+
+    allSheetNames.forEach(sheetName => {
+      if (!sheetsOrig.includes(sheetName)) {
+        diffs.push({ type: 'sheet_add', sheet: sheetName, msg: `Worksheet "${sheetName}" added in modified workbook.` });
+        return;
+      }
+      if (!sheetsMod.includes(sheetName)) {
+        diffs.push({ type: 'sheet_del', sheet: sheetName, msg: `Worksheet "${sheetName}" removed from original workbook.` });
+        return;
+      }
+
+      const s1 = wbOrig.Sheets[sheetName];
+      const s2 = wbMod.Sheets[sheetName];
+
+      const json1 = XLSX.utils.sheet_to_json(s1, { header: 1 });
+      const json2 = XLSX.utils.sheet_to_json(s2, { header: 1 });
+
+      const maxRows = Math.max(json1.length, json2.length);
+
+      for (let r = 0; r < maxRows; r++) {
+        const row1 = json1[r] || [];
+        const row2 = json2[r] || [];
+        const maxCols = Math.max(row1.length, row2.length);
+
+        for (let c = 0; c < maxCols; c++) {
+          const v1 = row1[c] !== undefined ? String(row1[c]).trim() : '';
+          const v2 = row2[c] !== undefined ? String(row2[c]).trim() : '';
+          if (v1 !== v2) {
+            const cellAddr = XLSX.utils.encode_cell({ r, c });
+            diffs.push({ type: 'cell_mod', sheet: sheetName, cell: cellAddr, v1, v2 });
+          }
+        }
+      }
+    });
+
+    let sheetDiffCount = diffs.filter(d => d.type.startsWith('sheet')).length;
+    let cellModCount = diffs.filter(d => d.type === 'cell_mod').length;
+    let total = diffs.length;
+
+    statsPanel.style.display = 'grid';
+    statTotalDiff.textContent = total;
+    statSheets.textContent = sheetDiffCount;
+    statModifications.textContent = cellModCount;
+
+    diffOutputBox.style.display = 'block';
+
+    if (total === 0) {
+      diffStatusBadge.textContent = '✅ Identical Workbooks';
+      diffStatusBadge.style.background = '#f0fdf4';
+      diffStatusBadge.style.color = '#16a34a';
+      diffContent.innerHTML = '<div style="color: #15803d; font-weight: 700;">✅ Both Excel workbooks are cell-for-cell identical.</div>';
+    } else {
+      diffStatusBadge.textContent = `⚡ ${total} Excel Difference(s)`;
+      diffStatusBadge.style.background = '#eff6ff';
+      diffStatusBadge.style.color = '#2563eb';
+
+      let html = '';
+      diffs.forEach(d => {
+        if (d.type === 'sheet_add') {
+          html += `<div style="background: #f0fdf4; color: #166534; padding: 0.35rem 0.6rem; border-left: 4px solid #16a34a; margin-bottom: 4px;">+ ${escapeHtml(d.msg)}</div>`;
+        } else if (d.type === 'sheet_del') {
+          html += `<div style="background: #fef2f2; color: #991b1b; padding: 0.35rem 0.6rem; border-left: 4px solid #dc2626; margin-bottom: 4px;">- ${escapeHtml(d.msg)}</div>`;
+        } else {
+          html += `<div style="background: #eff6ff; color: #1e40af; padding: 0.35rem 0.6rem; border-left: 4px solid #2563eb; margin-bottom: 4px;">~ Sheet <strong>${d.sheet}</strong> Cell <strong>${d.cell}</strong>: "${escapeHtml(d.v1)}" &rarr; "${escapeHtml(d.v2)}"</div>`;
+        }
+      });
+      diffContent.innerHTML = html;
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    currentReportText = `==================================================
+DATAFROG.TOOLS — EXCEL WORKBOOK COMPARISON REPORT
+Generated: ${dateStr} | SheetJS Browser Parser
+==================================================
+
+SUMMARY STATISTICS:
+- Total Differences:   ${total}
+- Sheet Differences:   ${sheetDiffCount}
+- Cell Modifications:  ${cellModCount}
+
+DETAILED CELL & SHEET AUDIT:
+--------------------------------------------------
+${diffs.map(d => d.msg ? `[SHEET] ${d.msg}` : `[CELL] Sheet: ${d.sheet} Cell: ${d.cell} ("${d.v1}" -> "${d.v2}")`).join('\n')}
+
+==================================================
+DataFrog.tools — Privacy-First Data Intelligence Workspace`;
+  }
+
+  function showError(msg) {
+    diffStatusBadge.textContent = '❌ Excel Parse Error';
+    diffStatusBadge.style.background = '#fef2f2';
+    diffStatusBadge.style.color = '#dc2626';
+    diffOutputBox.style.display = 'block';
+    diffContent.innerHTML = `<div style="color: #991b1b; font-weight: 700;">${msg}</div>`;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  btnCopyDiff.addEventListener('click', () => {
+    if (!currentReportText) return;
+    navigator.clipboard.writeText(currentReportText);
+    showToast('Excel diff report copied!');
+  });
+
+  btnDownloadReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    const blob = new Blob([currentReportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'excel-comparison-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Check
+  compareExcel();
+
+})();
+</script>

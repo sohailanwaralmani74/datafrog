@@ -1,31 +1,134 @@
 ---
-layout: main
-title: "DataFrog | 404 – Page Not Found"
-description: "The page you’re looking for doesn’t exist on DataFrog. Return to the homepage or contact support to find the right data conversion tool."
-keywords: "404, page not found, DataFrog, data conversion tools, broken link"
+layout: default
+title: "404 Page Not Found – DataFrog.tools"
+description: "The page or data tool you are looking for might have been moved, renamed, or does not exist."
+robots: "noindex, follow"
+permalink: /404.html
 ---
-<div class="error-page" style="text-align:center; padding:80px 20px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;">
-  <h1 style="font-size:3em; margin-bottom:0.5rem; color:#f97316;">404 – Page Not Found</h1>
-  <p style="font-size:1.2em; margin-bottom:30px; color:#4b5563;">
-    Oops! The page you are looking for does not exist or has been moved.
+
+<div style="max-width: 1000px; margin: 3rem auto; padding: 0 1.5rem; text-align: center;">
+
+  <!-- 404 BADGE & HERO -->
+  <div style="display: inline-flex; align-items: center; justify-content: center; width: 100px; height: 100px; background: #eff6ff; border-radius: 50%; margin-bottom: 1.5rem;">
+    <span style="font-size: 3rem;">🐸</span>
+  </div>
+
+  <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #0f172a; line-height: 1.1; margin-bottom: 0.75rem;">
+    404 – Page Not Found
+  </h1>
+
+  <p style="font-size: 1.15rem; color: #475569; max-width: 620px; margin: 0 auto 2.5rem; line-height: 1.6;">
+    Oops! The data tool or page you're searching for might have been moved, renamed, or does not exist. Try searching our workspace tools below.
   </p>
-  <a href="{{ site.baseurl }}/" style="display:inline-block; padding:12px 25px; background:#f97316; color:#fff; text-decoration:none; border-radius:8px; font-weight:600; margin-bottom:40px; transition: background 0.2s, transform 0.1s;">
-    ← Go Back to Home
-  </a>
-  <p style="font-size:1em; color:#4b5563; margin-top:20px;">
-    If you believe this is an error or need help finding a specific tool, contact us at:<br>
-    <a href="mailto:sohailanwaralmani74@gmail.com" style="color:#f97316; text-decoration:underline;">sohailanwaralmani74@gmail.com</a>
-  </p>
-  <p style="font-size:0.9em; color:#6b7280; margin-top:40px;">
-    All DataFrog tools are 100% browser‑based – no uploads, no sign‑up.
-  </p>
+
+  <!-- SEARCH BAR ON 404 PAGE -->
+  <div style="max-width: 620px; margin: 0 auto 2.5rem; position: relative;">
+    <input type="text" id="404-search-input" placeholder="Search 500+ data tools (JSON, CSV, XML, Excel)..." 
+           style="width: 100%; padding: 1rem 1.25rem 1rem 3rem; font-size: 1rem; border-radius: 12px; border: 2px solid #cbd5e1; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.04); outline: none; transition: border-color 0.2s;"
+           aria-label="Search tools">
+    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-size: 1.2rem; opacity: 0.5;">🔍</span>
+  </div>
+
+  <!-- SEARCH RESULTS OVERLAY CONTAINER -->
+  <div id="404-search-results" style="display: none; max-width: 750px; margin: 0 auto 3rem; text-align: left;">
+    <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Search Results:</h3>
+    <div id="404-results-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;"></div>
+    <p id="404-no-results" style="display: none; color: #64748b; font-style: italic; text-align: center;">No matching tools found. Browse our categories below.</p>
+  </div>
+
+  <!-- QUICK ACTION BUTTONS -->
+  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem;">
+    <a href="/" style="padding: 0.85rem 1.75rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      🏠 Go to Homepage
+    </a>
+    <a href="/inspect" style="padding: 0.85rem 1.75rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.95rem;">
+      🔍 Inspect Category
+    </a>
+    <a href="/analyze" style="padding: 0.85rem 1.75rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.95rem;">
+      📊 Analyze Category
+    </a>
+  </div>
+
+  <!-- POPULAR DATA TOOLS GRID -->
+  <section style="border-top: 1px solid #e2e8f0; padding-top: 3rem; text-align: left;">
+    <div style="margin-bottom: 1.5rem; text-align: center;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.25rem;">Popular Workspace Tools</h2>
+      <p style="color: #64748b; font-size: 0.9rem;">Inspect and analyze data locally in your browser</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+      {% for tool in site.data.tools limit:6 %}
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 1.5rem;">{{ tool.icon | default: "⚡" }}</span>
+            <span style="font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; background: #eff6ff; color: #2563eb; border-radius: 9999px;">
+              {{ tool.category }}
+            </span>
+          </div>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">
+            <a href="{{ tool.url }}" style="color: #0f172a; text-decoration: none;">{{ tool.title }}</a>
+          </h3>
+          <p style="color: #64748b; font-size: 0.85rem; line-height: 1.4; margin-bottom: 1rem; flex-grow: 1;">
+            {{ tool.description }}
+          </p>
+          <a href="{{ tool.url }}" style="font-size: 0.85rem; font-weight: 600; color: #2563eb; text-decoration: none;">Launch Tool →</a>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
 </div>
 
-<style>
-  .error-page a:hover {
-    transform: translateY(-2px);
-  }
-  .error-page a:active {
-    transform: translateY(0);
-  }
-</style>
+<!-- 404 SEARCH SCRIPT -->
+<script>
+(function() {
+  const toolsData = {{ site.data.tools | jsonify }};
+  const searchInput = document.getElementById('404-search-input');
+  const resultsContainer = document.getElementById('404-search-results');
+  const resultsGrid = document.getElementById('404-results-grid');
+  const noResults = document.getElementById('404-no-results');
+
+  if (!searchInput || !toolsData) return;
+
+  searchInput.addEventListener('input', function(e) {
+    const q = e.target.value.trim().toLowerCase();
+    
+    if (q.length < 2) {
+      resultsContainer.style.display = 'none';
+      return;
+    }
+
+    resultsContainer.style.display = 'block';
+
+    const matches = toolsData.filter(t => {
+      const title = (t.title || '').toLowerCase();
+      const desc = (t.description || '').toLowerCase();
+      const cat = (t.category || '').toLowerCase();
+      const kw = Array.isArray(t.keywords) ? t.keywords.join(' ').toLowerCase() : (t.keywords || '').toLowerCase();
+      return title.includes(q) || desc.includes(q) || cat.includes(q) || kw.includes(q);
+    });
+
+    resultsGrid.innerHTML = '';
+
+    if (matches.length === 0) {
+      noResults.style.display = 'block';
+    } else {
+      noResults.style.display = 'none';
+      matches.forEach(t => {
+        const card = document.createElement('div');
+        card.style.cssText = 'background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem;';
+        card.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem;">
+            <span style="font-size: 1.2rem;">${t.icon || '⚡'}</span>
+            <span style="font-size: 0.7rem; font-weight: 600; padding: 0.1rem 0.4rem; background: #f1f5f9; color: #475569; border-radius: 9999px;">${t.category}</span>
+          </div>
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem;"><a href="${t.url}" style="color: #0f172a; text-decoration: none;">${t.title}</a></h4>
+          <p style="color: #64748b; font-size: 0.8rem; line-height: 1.3; margin-bottom: 0.5rem;">${t.description || ''}</p>
+          <a href="${t.url}" style="font-size: 0.8rem; font-weight: 600; color: #2563eb; text-decoration: none;">Launch →</a>
+        `;
+        resultsGrid.appendChild(card);
+      });
+    }
+  });
+})();
+</script>

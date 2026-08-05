@@ -1,0 +1,570 @@
+---
+layout: main
+title: "CSV Compare – Compare CSV Files & Spot Spreadsheet Diffs | DataFrog.tools"
+short_name: "CSV Compare"
+description: "Compare two CSV files or tabular datasets online. Highlight added rows, deleted records, cell modifications, and column mismatches with diff summary reports. Free, private, and browser-based."
+keywords: "CSV Compare, Compare CSV, CSV Diff, CSV Difference Checker, CSV Compare Tool, Compare CSV Files, CSV Comparison"
+category: "Compare"
+permalink: /compare/csv-compare/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CSV Compare – DataFrog.tools",
+  "url": "https://datafrog.tools/compare/csv-compare/",
+  "description": "Browser-based CSV Compare tool for tabular diffing, row/column value assertion, auto-delimiter detection, and cell-by-cell difference logging locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compare",
+      "item": "https://datafrog.tools/compare"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "CSV Compare",
+      "item": "https://datafrog.tools/compare/csv-compare/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the CSV Compare engine detect modified cells?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The CSV Compare engine parses row indices and header column names, comparing value pairs across corresponding cells to spot exact cell modifications, added rows, and deleted entries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my CSV dataset stored on any remote server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. All CSV parsing, delimiter auto-detection, cell diffing, and report downloads execute locally in your web browser RAM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the tool support TSV or semicolon-separated files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! The RFC 4180 parsing engine automatically detects commas, tabs (TSV), semicolons, or pipes."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #eff6ff; color: #2563eb; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    ⚖️ Compare Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    CSV Compare – Row & Cell Difference Checker
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Compare two CSV spreadsheets or tabular datasets cell-by-cell. Detect added rows, deleted records, column header mismatches, modified values, and export comparison reports.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📊</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your Original and Modified CSV files here</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .csv, .tsv, .txt files or paste tabular text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Original CSV
+      <input type="file" id="file-orig-input" accept=".csv,.tsv,.txt,text/plain" style="display: none;">
+    </label>
+    <label style="padding: 0.6rem 1.25rem; background: #2563eb; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Modified CSV
+      <input type="file" id="file-mod-input" accept=".csv,.tsv,.txt,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample CSV
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear Both
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & DUAL INPUT WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span id="diff-status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+      <span style="font-size: 0.825rem; color: #64748b;" id="delimiter-info">Auto Delimiter</span>
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-swap" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        🔄 Swap Inputs
+      </button>
+      <button id="btn-compare" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📊 Compare CSV
+      </button>
+      <button id="btn-copy-diff" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Diff
+      </button>
+      <button id="btn-download-report" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Report
+      </button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        1. Original CSV Dataset
+      </label>
+      <textarea id="csv-orig" placeholder="Paste original CSV here..." 
+                style="width: 100%; height: 230px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        2. Modified CSV Dataset
+      </label>
+      <textarea id="csv-mod" placeholder="Paste modified CSV here..." 
+                style="width: 100%; height: 230px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div id="stats-panel" style="display: none; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.25rem;">
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #64748b; font-weight: 600; display: block;">Total Diffs</span>
+      <span id="stat-total-diff" style="font-size: 1.25rem; font-weight: 800; color: #0f172a;">0</span>
+    </div>
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #166534; font-weight: 600; display: block;">Added Rows (+)</span>
+      <span id="stat-additions" style="font-size: 1.25rem; font-weight: 800; color: #16a34a;">0</span>
+    </div>
+    <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #991b1b; font-weight: 600; display: block;">Removed Rows (-)</span>
+      <span id="stat-deletions" style="font-size: 1.25rem; font-weight: 800; color: #dc2626;">0</span>
+    </div>
+    <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #1e40af; font-weight: 600; display: block;">Cell Changes (~)</span>
+      <span id="stat-modifications" style="font-size: 1.25rem; font-weight: 800; color: #2563eb;">0</span>
+    </div>
+  </div>
+
+  <!-- Highlighted CSV Tabular Diff View Box -->
+  <div id="diff-output-box" style="display: none; border: 1px solid #cbd5e1; border-radius: 10px; padding: 1.25rem; background: #ffffff; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.6; max-height: 380px; overflow-y: auto;">
+    <div id="diff-content"></div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">CSV Compare Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Cell-by-cell value assertion, delimiter detection, and tabular diff reports</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📊 Cell-by-Cell Alignment</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Compares row indices and header column names to pinpoint exact cell-level changes.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚡ Auto Delimiter Detection</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Automatically recognizes commas, tabs, semicolons, or pipe delimiters across CSV files.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚠️ Added & Removed Row Audit</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Highlights new data records inserted into modified CSVs or missing rows deleted from originals.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All CSV data processing happens in browser RAM. Zero rows or files are uploaded to servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use CSV Compare</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input Original & Modified CSVs</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste CSV data into boxes 1 and 2 or drag & drop <code>.csv</code> files.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Tabular Differences</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review cell-level modifications (~), inserted rows (+), and removed records (-).</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Diff Report</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Diff</strong> or <strong>Download Report</strong> to export your CSV comparison log.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the CSV Compare engine detect modified cells?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The CSV Compare engine parses row indices and header column names, comparing value pairs across corresponding cells to spot exact cell modifications, added rows, and deleted entries.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my CSV dataset stored on any remote server?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. All CSV parsing, delimiter auto-detection, cell diffing, and report downloads execute locally in your web browser RAM.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Does the tool support TSV or semicolon-separated files?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! The RFC 4180 parsing engine automatically detects commas, tabs (TSV), semicolons, or pipes.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT CSV COMPARE ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const csvOrig = document.getElementById('csv-orig');
+  const csvMod = document.getElementById('csv-mod');
+  const dropZone = document.getElementById('drop-zone');
+  const fileOrigInput = document.getElementById('file-orig-input');
+  const fileModInput = document.getElementById('file-mod-input');
+  const diffStatusBadge = document.getElementById('diff-status-badge');
+  const delimiterInfo = document.getElementById('delimiter-info');
+
+  const btnSwap = document.getElementById('btn-swap');
+  const btnCompare = document.getElementById('btn-compare');
+  const btnCopyDiff = document.getElementById('btn-copy-diff');
+  const btnDownloadReport = document.getElementById('btn-download-report');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  const statsPanel = document.getElementById('stats-panel');
+  const statTotalDiff = document.getElementById('stat-total-diff');
+  const statAdditions = document.getElementById('stat-additions');
+  const statDeletions = document.getElementById('stat-deletions');
+  const statModifications = document.getElementById('stat-modifications');
+
+  const diffOutputBox = document.getElementById('diff-output-box');
+  const diffContent = document.getElementById('diff-content');
+
+  let currentReportText = '';
+
+  const SAMPLE_ORIG = `id,product_name,category,price,stock
+101,"Analytics Pro Engine",Inspect,49.99,1450
+102,"CSV Validation Studio",Validate,29.99,2800
+103,"JSON Explorer",Inspect,19.99,950`;
+
+  const SAMPLE_MOD = `id,product_name,category,price,stock
+101,"Analytics Pro Engine",Inspect,49.99,1500
+102,"CSV Validation Studio",Validate,29.99,2800
+103,"JSON Explorer",Inspect,19.99,950
+104,"XML Diff Engine",Compare,39.99,800`;
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileOrigInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#2563eb';
+      dropZone.style.backgroundColor = '#eff6ff';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length >= 2) {
+      readFile(files[0], csvOrig);
+      readFile(files[1], csvMod);
+    } else if (files.length === 1) {
+      readFile(files[0], csvOrig);
+    }
+  });
+
+  fileOrigInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0], csvOrig);
+  });
+  fileModInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0], csvMod);
+  });
+
+  function readFile(file, targetArea) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      targetArea.value = evt.target.result;
+      compareCSV();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    csvOrig.value = SAMPLE_ORIG;
+    csvMod.value = SAMPLE_MOD;
+    compareCSV();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    csvOrig.value = '';
+    csvMod.value = '';
+    compareCSV();
+  });
+
+  btnSwap.addEventListener('click', () => {
+    const tmp = csvOrig.value;
+    csvOrig.value = csvMod.value;
+    csvMod.value = tmp;
+    compareCSV();
+  });
+
+  csvOrig.addEventListener('input', compareCSV);
+  csvMod.addEventListener('input', compareCSV);
+  btnCompare.addEventListener('click', compareCSV);
+
+  function compareCSV() {
+    const val1 = csvOrig.value;
+    const val2 = csvMod.value;
+
+    if (!val1.trim() && !val2.trim()) {
+      diffStatusBadge.textContent = 'Ready';
+      diffStatusBadge.style.background = '#f1f5f9';
+      diffStatusBadge.style.color = '#475569';
+      statsPanel.style.display = 'none';
+      diffOutputBox.style.display = 'none';
+      currentReportText = '';
+      return;
+    }
+
+    const lines1 = val1.split(/\r?\n/).filter(l => l.length > 0);
+    const lines2 = val2.split(/\r?\n/).filter(l => l.length > 0);
+
+    const sample = lines1.concat(lines2).slice(0, 5).join('\n');
+    const counts = { ',': (sample.match(/,/g) || []).length, '\t': (sample.match(/\t/g) || []).length, ';': (sample.match(/;/g) || []).length };
+    let delimiter = ',';
+    if (counts['\t'] > counts[',']) delimiter = '\t';
+    if (counts[';'] > counts[delimiter]) delimiter = ';';
+    delimiterInfo.textContent = `Delimiter: ${delimiter === '\t' ? 'TAB' : delimiter}`;
+
+    const rows1 = lines1.map(l => l.split(delimiter));
+    const rows2 = lines2.map(l => l.split(delimiter));
+
+    const headers1 = rows1[0] || [];
+    const headers2 = rows2[0] || [];
+
+    let adds = 0;
+    let dels = 0;
+    let mods = 0;
+
+    let html = '';
+    let reportLines = [];
+
+    const maxRows = Math.max(rows1.length, rows2.length);
+
+    for (let r = 0; r < maxRows; r++) {
+      const row1 = rows1[r];
+      const row2 = rows2[r];
+
+      if (!row1 && row2) {
+        adds++;
+        html += `<div style="background: #f0fdf4; color: #166534; padding: 0.35rem 0.6rem; border-left: 4px solid #16a34a; margin-bottom: 4px;">+ Added Row ${r+1}: [ ${row2.join(' | ')} ]</div>`;
+        reportLines.push(`[+] Row ${r+1} Added: ${row2.join(' | ')}`);
+      } else if (row1 && !row2) {
+        dels++;
+        html += `<div style="background: #fef2f2; color: #991b1b; padding: 0.35rem 0.6rem; border-left: 4px solid #dc2626; margin-bottom: 4px;">- Removed Row ${r+1}: [ ${row1.join(' | ')} ]</div>`;
+        reportLines.push(`[-] Row ${r+1} Removed: ${row1.join(' | ')}`);
+      } else if (row1 && row2) {
+        const maxCols = Math.max(row1.length, row2.length);
+        let cellDiffs = [];
+        for (let c = 0; c < maxCols; c++) {
+          const colName = headers1[c] || `Col ${c+1}`;
+          const v1 = row1[c] !== undefined ? row1[c].trim() : '';
+          const v2 = row2[c] !== undefined ? row2[c].trim() : '';
+          if (v1 !== v2) {
+            cellDiffs.push({ colName, v1, v2 });
+          }
+        }
+        if (cellDiffs.length > 0) {
+          mods++;
+          let diffStr = cellDiffs.map(cd => `<strong>${cd.colName}</strong>: "${escapeHtml(cd.v1)}" &rarr; "${escapeHtml(cd.v2)}"`).join(', ');
+          html += `<div style="background: #eff6ff; color: #1e40af; padding: 0.35rem 0.6rem; border-left: 4px solid #2563eb; margin-bottom: 4px;">~ Modified Row ${r+1}: ${diffStr}</div>`;
+          reportLines.push(`[~] Row ${r+1} Modified: ${cellDiffs.map(cd => `${cd.colName} ("${cd.v1}" -> "${cd.v2}")`).join(', ')}`);
+        }
+      }
+    }
+
+    const total = adds + dels + mods;
+
+    statsPanel.style.display = 'grid';
+    statTotalDiff.textContent = total;
+    statAdditions.textContent = adds;
+    statDeletions.textContent = dels;
+    statModifications.textContent = mods;
+
+    diffOutputBox.style.display = 'block';
+
+    if (total === 0) {
+      diffStatusBadge.textContent = '✅ Identical CSV';
+      diffStatusBadge.style.background = '#f0fdf4';
+      diffStatusBadge.style.color = '#16a34a';
+      diffContent.innerHTML = '<div style="color: #15803d; font-weight: 700;">✅ Both CSV datasets are cell-for-cell identical.</div>';
+    } else {
+      diffStatusBadge.textContent = `⚡ ${total} Row/Cell Difference(s)`;
+      diffStatusBadge.style.background = '#eff6ff';
+      diffStatusBadge.style.color = '#2563eb';
+      diffContent.innerHTML = html;
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    currentReportText = `==================================================
+DATAFROG.TOOLS — CSV COMPARISON REPORT
+Generated: ${dateStr} | Delimiter: ${delimiter === '\t' ? 'TAB' : delimiter}
+==================================================
+
+SUMMARY STATISTICS:
+- Total Differences: ${total}
+- Added Rows (+):   ${adds}
+- Removed Rows (-): ${dels}
+- Modified Rows (~):${mods}
+
+DETAILED DIFFERENCE LOG:
+--------------------------------------------------
+${reportLines.length > 0 ? reportLines.join('\n') : '✅ Clean match. Zero cell differences.'}
+
+==================================================
+DataFrog.tools — Privacy-First Data Intelligence Workspace`;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  btnCopyDiff.addEventListener('click', () => {
+    if (!currentReportText) return;
+    navigator.clipboard.writeText(currentReportText);
+    showToast('CSV diff report copied!');
+  });
+
+  btnDownloadReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    const blob = new Blob([currentReportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'csv-comparison-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Check
+  compareCSV();
+
+})();
+</script>

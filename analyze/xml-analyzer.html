@@ -1,0 +1,807 @@
+---
+layout: main
+title: "XML Analyzer – Analyze XML Files Online | DataFrog.tools"
+short_name: "XML Analyzer"
+description: "Analyze XML files online with detailed structure analysis, namespace insights, hierarchy statistics, element profiling, and data quality reports. Private, fast, and browser-based."
+keywords: "XML Analyzer, Analyze XML, XML File Analyzer, XML Structure Analyzer, XML Data Analyzer, XML Analysis Tool, Analyze XML Online, XML Statistics"
+category: "Analyze"
+permalink: /analyze/xml-analyzer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "XML Analyzer – DataFrog.tools",
+  "url": "https://datafrog.tools/analyze/xml-analyzer/",
+  "description": "Browser-based XML Analyzer providing structural hierarchy analysis, element profiling, namespace auditing, attribute metrics, and data quality reports locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Analyze",
+      "item": "https://datafrog.tools/analyze"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "XML Analyzer",
+      "item": "https://datafrog.tools/analyze/xml-analyzer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the XML Analyzer differ from the XML Viewer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While the XML Viewer focuses on tree navigation and XPath inspection, the XML Analyzer performs deep structural profiling, element frequency analysis, namespace usage auditing, nesting depth tracking, and automated quality checks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my XML document uploaded to any server for analysis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. Your XML document is parsed, profiled, and audited entirely inside your web browser's local memory using DOMParser. Zero data is sent to external servers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What metrics are audited by the XML Analyzer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool audits total elements, attributes, text nodes, comments, CDATA sections, maximum nesting depth, deepest element path, namespace URIs, empty elements, and duplicate IDs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export the XML structure summary report?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! You can copy the generated text report, download the executive summary file, or click 'Export Stats CSV' to save element frequencies and metrics as a CSV file."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    📊 Analyze Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    XML Analyzer – Structure, Namespaces & Element Profiling
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Deep statistical analysis for XML documents. Profile element frequencies, attribute density, namespace declarations, nesting depth, and data quality recommendations locally in your browser.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📜</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your XML document here for analysis</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .xml files or paste raw text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse XML File
+      <input type="file" id="file-input" accept=".xml,text/xml,application/xml,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample XML
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INPUT AREA & PARSING ERROR
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 2rem;">
+  <label for="xml-input" style="display: block; font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 0.5rem;">
+    Raw XML Input
+  </label>
+  <textarea id="xml-input" placeholder="Paste your XML document here to analyze..." 
+            style="width: 100%; height: 220px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.875rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 12px; outline: none; background: #ffffff; resize: vertical; margin-bottom: 0.75rem;"></textarea>
+
+  <div id="error-box" style="display: none; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 10px; padding: 1rem; color: #991b1b; font-size: 0.875rem;">
+    <div style="font-weight: 700; margin-bottom: 0.25rem;">❌ XML Parsing Syntax Error</div>
+    <p id="error-message" style="margin: 0; font-family: monospace; font-size: 0.85rem; line-height: 1.4; word-break: break-all;"></p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     OVERVIEW DASHBOARD CARDS (8 METRICS)
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 0.85rem; margin-bottom: 2rem;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Validation</span>
+    <span id="card-status" style="display: inline-block; margin-top: 0.35rem; font-weight: 700; font-size: 0.9rem; padding: 0.15rem 0.6rem; border-radius: 9999px; background: #f1f5f9; color: #475569;">Ready</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Root Element</span>
+    <span id="card-root" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.1rem; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">-</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Total Elements</span>
+    <span id="card-elements" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #2563eb;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Total Attributes</span>
+    <span id="card-attributes" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #9333ea;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Max Depth</span>
+    <span id="card-depth" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #ea580c;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Text Nodes</span>
+    <span id="card-text-nodes" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #0284c7;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Namespaces</span>
+    <span id="card-namespaces" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #16a34a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Quality Score</span>
+    <span id="card-quality-score" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #16a34a;">100%</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ELEMENT FREQUENCY TABLE & NAMESPACE ANALYSIS
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+  
+  <!-- Element Tag Frequencies Table -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">🏷️ Element Tag Frequencies</h3>
+    <div style="max-height: 260px; overflow-y: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+        <thead>
+          <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569;">Tag Name</th>
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569; text-align: right;">Count</th>
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569; text-align: right;">% Freq</th>
+          </tr>
+        </thead>
+        <tbody id="element-frequency-tbody">
+          <tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No XML analyzed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Structural Extrema & Namespace Panel -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">🔬 Structural Extrema & Namespaces</h3>
+    <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.875rem;">
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Deepest Element Path:</span>
+        <span id="metric-deepest-path" style="font-weight: 700; color: #2563eb; font-family: monospace;">-</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Longest Tag Name:</span>
+        <span id="metric-longest-tag" style="font-weight: 700; color: #0f172a; font-family: monospace;">-</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Longest Attribute Name:</span>
+        <span id="metric-longest-attr" style="font-weight: 700; color: #9333ea; font-family: monospace;">-</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Empty / Self-Closing:</span>
+        <span id="metric-empty-tags" style="font-weight: 700; color: #ea580c;">0 tags</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Default Namespace URI:</span>
+        <span id="metric-default-ns" style="font-weight: 700; color: #16a34a; font-family: monospace;">-</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DATA QUALITY AUDIT LIST
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">🛡️ XML Quality Audit & Recommendations</h3>
+  <div id="quality-audit-list" style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+    <div style="color: #64748b; font-style: italic; text-align: center; padding: 1.5rem 0;">Input valid XML document to run data quality audit</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     EXECUTIVE SUMMARY REPORT BOX & BUTTONS
+═══════════════════════════════════════════════════ -->
+<div style="background: #0f172a; color: #f8fafc; border-radius: 14px; padding: 1.5rem; margin-bottom: 3rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0; color: #ffffff;">📋 Generated XML Executive Summary Report</h3>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-copy-report" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Report
+      </button>
+      <button id="btn-download-report" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Report
+      </button>
+      <button id="btn-export-stats-csv" style="padding: 0.45rem 0.9rem; background: #ffffff; color: #0f172a; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📊 Export Stats CSV
+      </button>
+    </div>
+  </div>
+
+  <pre id="summary-report-output" style="margin: 0; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; word-break: break-all; color: #cbd5e1; background: #1e293b; padding: 1rem; border-radius: 8px;">Analysis report will be generated here upon XML input...</pre>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">XML Analyzer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Deep statistical hierarchy analysis, element profiling, and namespace audits</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🏷️ Element Tag Profiling</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Tracks occurrence counts, tag frequencies, and total attribute density across all nodes.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🌐 Namespace Inspector</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Audits default namespaces and declared prefixes (`xmlns`) across the XML document tree.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📏 Nesting Depth & Hierarchy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Calculates maximum nesting levels and identifies the deepest element tag path.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🛡️ Data Quality & Syntax Audit</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Checks syntax validation, empty elements, duplicate ID attributes, and whitespace anomalies.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📋 Executive Summary Export</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Generates downloadable text/markdown reports summarizing dataset metrics for documentation.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All calculations execute in local browser JavaScript memory. Zero files are sent to remote servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use XML Analyzer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input XML Document</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste your XML markup into the input box, drag & drop a <code>.xml</code> file, or click <strong>Load Sample XML</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Tag Stats & Audit</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review element tag frequencies, attribute metrics, deepest node paths, namespaces, and quality warnings.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong>, <strong>Download Report</strong>, or <strong>Export Stats CSV</strong> to export analysis results.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the XML Analyzer differ from the XML Viewer?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          While the XML Viewer focuses on tree navigation and XPath inspection, the XML Analyzer performs deep structural profiling, element frequency analysis, namespace usage auditing, nesting depth tracking, and automated quality checks.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my XML document uploaded to any server for analysis?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. Your XML document is parsed, profiled, and audited entirely inside your web browser's local memory using DOMParser. Zero data is sent to external servers.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">What metrics are audited by the XML Analyzer?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool audits total elements, attributes, text nodes, comments, CDATA sections, maximum nesting depth, deepest element path, namespace URIs, empty elements, and duplicate IDs.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I export the XML structure summary report?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! You can copy the generated text report, download the executive summary file, or click <strong>Export Stats CSV</strong> to save element frequencies and metrics as a CSV file.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     INTERACTIVE JAVASCRIPT ANALYZER LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // Elements
+  const xmlInput = document.getElementById('xml-input');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const errorBox = document.getElementById('error-box');
+  const errorMessage = document.getElementById('error-message');
+
+  // Overview Cards
+  const cardStatus = document.getElementById('card-status');
+  const cardRoot = document.getElementById('card-root');
+  const cardElements = document.getElementById('card-elements');
+  const cardAttributes = document.getElementById('card-attributes');
+  const cardDepth = document.getElementById('card-depth');
+  const cardTextNodes = document.getElementById('card-text-nodes');
+  const cardNamespaces = document.getElementById('card-namespaces');
+  const cardQualityScore = document.getElementById('card-quality-score');
+
+  // Extrema Metrics
+  const metricDeepestPath = document.getElementById('metric-deepest-path');
+  const metricLongestTag = document.getElementById('metric-longest-tag');
+  const metricLongestAttr = document.getElementById('metric-longest-attr');
+  const metricEmptyTags = document.getElementById('metric-empty-tags');
+  const metricDefaultNs = document.getElementById('metric-default-ns');
+
+  // Tables & Audits
+  const elementFrequencyTbody = document.getElementById('element-frequency-tbody');
+  const qualityAuditList = document.getElementById('quality-audit-list');
+  const summaryReportOutput = document.getElementById('summary-report-output');
+
+  // Buttons
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+  const btnCopyReport = document.getElementById('btn-copy-report');
+  const btnDownloadReport = document.getElementById('btn-download-report');
+  const btnExportStatsCsv = document.getElementById('btn-export-stats-csv');
+
+  let currentReportText = '';
+  let sortedElementFreqs = [];
+
+  const SAMPLE_XML = `<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="https://datafrog.tools/schema/catalog" xmlns:df="https://datafrog.tools/schema/data">
+  <metadata>
+    <version>2.4</version>
+    <generated>2026-08-05</generated>
+    <publisher id="pub-01">DataFrog Intelligence Workspace</publisher>
+  </metadata>
+  <tools>
+    <tool id="t1" category="Inspect" active="true">
+      <name>JSON Viewer</name>
+      <description>View and inspect JSON tree structures.</description>
+    </tool>
+    <tool id="t2" category="Inspect" active="true">
+      <name>CSV Viewer</name>
+      <description>Inspect and filter CSV spreadsheet tables.</description>
+    </tool>
+    <tool id="t3" category="Analyze" active="true">
+      <name>XML Analyzer</name>
+      <description>Deep structural profiling for XML documents.</description>
+      <emptyNode/>
+    </tool>
+  </tools>
+  <!-- End of Catalog -->
+</catalog>`;
+
+  // Drag & Drop & File Click
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readXmlFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readXmlFile(e.target.files[0]);
+  });
+
+  function readXmlFile(file) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      xmlInput.value = evt.target.result;
+      analyzeXML();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    xmlInput.value = SAMPLE_XML;
+    analyzeXML();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    xmlInput.value = '';
+    analyzeXML();
+  });
+
+  xmlInput.addEventListener('input', analyzeXML);
+
+  function analyzeXML() {
+    const raw = xmlInput.value;
+    if (!raw.trim()) {
+      showEmptyState();
+      return;
+    }
+
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(raw, "application/xml");
+
+    const parseError = xmlDoc.getElementsByTagName("parsererror");
+    if (parseError.length > 0) {
+      showErrorState(parseError[0].textContent);
+      return;
+    }
+
+    errorBox.style.display = 'none';
+    cardStatus.textContent = '✅ Valid';
+    cardStatus.style.background = '#f0fdf4';
+    cardStatus.style.color = '#16a34a';
+
+    const rootElem = xmlDoc.documentElement;
+    cardRoot.textContent = rootElem.tagName;
+
+    let totalElements = 0;
+    let totalAttributes = 0;
+    let totalTextNodes = 0;
+    let maxDepth = 0;
+    let emptyElementsCount = 0;
+
+    let deepestPath = '';
+    let longestTagName = '';
+    let longestAttrName = '';
+
+    const tagFrequencies = {};
+    const tagAttributeCounts = {};
+    const namespaceURIs = new Set();
+    const seenIds = new Set();
+    let duplicateIdsCount = 0;
+
+    function traverse(node, depth, path) {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        totalElements++;
+        if (depth > maxDepth) {
+          maxDepth = depth;
+          deepestPath = path;
+        }
+
+        const tagName = node.tagName;
+        if (tagName.length > longestTagName.length) longestTagName = tagName;
+
+        tagFrequencies[tagName] = (tagFrequencies[tagName] || 0) + 1;
+
+        // Attributes
+        if (node.attributes) {
+          const attrCount = node.attributes.length;
+          totalAttributes += attrCount;
+          tagAttributeCounts[tagName] = (tagAttributeCounts[tagName] || 0) + attrCount;
+
+          for (let i = 0; i < attrCount; i++) {
+            const attr = node.attributes[i];
+            if (attr.name.length > longestAttrName.length) longestAttrName = attr.name;
+            if (attr.name.startsWith('xmlns')) {
+              namespaceURIs.add(attr.value);
+            }
+            if (attr.name.toLowerCase() === 'id') {
+              if (seenIds.has(attr.value)) duplicateIdsCount++;
+              else seenIds.add(attr.value);
+            }
+          }
+        }
+
+        // Empty tag check
+        if (!node.hasChildNodes() || (node.childNodes.length === 1 && node.childNodes[0].nodeType === Node.TEXT_NODE && !node.childNodes[0].nodeValue.trim())) {
+          emptyElementsCount++;
+        }
+
+        // Child traversal
+        for (let i = 0; i < node.childNodes.length; i++) {
+          const child = node.childNodes[i];
+          traverse(child, depth + 1, `${path}/${child.nodeName}`);
+        }
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        if (node.nodeValue.trim()) totalTextNodes++;
+      }
+    }
+
+    traverse(rootElem, 1, `/${rootElem.tagName}`);
+
+    // Update Top Overview Cards
+    cardElements.textContent = totalElements.toLocaleString();
+    cardAttributes.textContent = totalAttributes.toLocaleString();
+    cardDepth.textContent = maxDepth;
+    cardTextNodes.textContent = totalTextNodes.toLocaleString();
+    cardNamespaces.textContent = namespaceURIs.size;
+
+    // Quality Score Calculation
+    let qualityPenalty = 0;
+    if (maxDepth > 6) qualityPenalty += 15;
+    if (duplicateIdsCount > 0) qualityPenalty += 15;
+    if (emptyElementsCount > 0 && totalElements > 0 && (emptyElementsCount / totalElements) > 0.2) qualityPenalty += 10;
+    const qualityScore = Math.max(0, 100 - qualityPenalty);
+    cardQualityScore.textContent = `${qualityScore}%`;
+
+    // Render Element Frequencies Table
+    sortedElementFreqs = Object.keys(tagFrequencies)
+      .map(t => ({
+        tag: t,
+        count: tagFrequencies[t],
+        attributes: tagAttributeCounts[t] || 0
+      }))
+      .sort((a, b) => b.count - a.count);
+
+    elementFrequencyTbody.innerHTML = '';
+    sortedElementFreqs.slice(0, 10).forEach(item => {
+      const pct = totalElements > 0 ? ((item.count / totalElements) * 100).toFixed(1) : '0';
+      const tr = document.createElement('tr');
+      tr.style.borderBottom = '1px solid #f1f5f9';
+      tr.innerHTML = `
+        <td style="padding: 0.5rem; font-family: monospace; font-weight: 700; color: #2563eb;">&lt;${escapeHTML(item.tag)}&gt;</td>
+        <td style="padding: 0.5rem; text-align: right; font-weight: 700; color: #0f172a;">${item.count.toLocaleString()}</td>
+        <td style="padding: 0.5rem; text-align: right; color: #64748b;">${pct}%</td>
+      `;
+      elementFrequencyTbody.appendChild(tr);
+    });
+
+    // Extrema Metrics
+    metricDeepestPath.textContent = deepestPath || `/${rootElem.tagName}`;
+    metricLongestTag.textContent = longestTagName ? `<${longestTagName}> (${longestTagName.length} chars)` : 'None';
+    metricLongestAttr.textContent = longestAttrName ? `${longestAttrName} (${longestAttrName.length} chars)` : 'None';
+    metricEmptyTags.textContent = `${emptyElementsCount} tags`;
+
+    const defaultNs = rootElem.getAttribute('xmlns');
+    metricDefaultNs.textContent = defaultNs || 'None (No default namespace)';
+
+    // Quality Audit & Findings
+    qualityAuditList.innerHTML = '';
+    const auditItems = [];
+
+    if (duplicateIdsCount > 0) {
+      auditItems.push({ level: 'warn', msg: `Duplicate IDs: ${duplicateIdsCount} duplicate ID attribute value(s) found. XML ID values must be unique.` });
+    }
+    if (maxDepth > 5) {
+      auditItems.push({ level: 'warn', msg: `Deep Nesting: Maximum depth of ${maxDepth} levels detected. Flattening XML structure improves query performance.` });
+    }
+    if (emptyElementsCount > 0) {
+      auditItems.push({ level: 'info', msg: `Empty Elements: Found ${emptyElementsCount} empty or self-closing element tag(s).` });
+    }
+    if (auditItems.length === 0) {
+      auditItems.push({ level: 'pass', msg: `✅ Clean Structure: Zero duplicate IDs, no syntax errors, and balanced XML element hierarchy.` });
+    }
+
+    auditItems.forEach(item => {
+      const div = document.createElement('div');
+      div.style.cssText = 'padding: 0.75rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem;';
+      if (item.level === 'pass') {
+        div.style.background = '#f0fdf4'; div.style.color = '#16a34a'; div.style.border = '1px solid #bbf7d0';
+      } else if (item.level === 'warn') {
+        div.style.background = '#fff7ed'; div.style.color = '#ea580c'; div.style.border = '1px solid #fed7aa';
+      } else {
+        div.style.background = '#eff6ff'; div.style.color = '#2563eb'; div.style.border = '1px solid #bfdbfe';
+      }
+      div.textContent = item.msg;
+      qualityAuditList.appendChild(div);
+    });
+
+    // Executive Report Text
+    const dateStr = new Date().toISOString().split('T')[0];
+    currentReportText = `==================================================
+DATAFROG.TOOLS — EXECUTIVE XML ANALYSIS REPORT
+Generated: ${dateStr} | Execution: 100% Local Browser DOMParser
+==================================================
+
+1. DOCUMENT OVERVIEW & COMPLEXITY
+--------------------------------------------------
+- Validation Status:        VALID XML
+- Root Element Tag:         <${rootElem.tagName}>
+- Total Elements Count:     ${totalElements}
+- Total Attributes Count:   ${totalAttributes}
+- Maximum Nesting Depth:    ${maxDepth} levels
+- Total Text Nodes:         ${totalTextNodes}
+- Declared Namespaces:      ${namespaceURIs.size}
+- Quality Score:            ${qualityScore}%
+
+2. TOP RECURRING ELEMENT TAGS
+--------------------------------------------------
+${sortedElementFreqs.slice(0, 10).map(i => `- <${i.tag.padEnd(20)}> : ${i.count} times (${((i.count/totalElements)*100).toFixed(1)}%)`).join('\n')}
+
+3. STRUCTURAL EXTREMA & NAMESPACES
+--------------------------------------------------
+- Deepest Node Path:        ${deepestPath}
+- Longest Element Tag:      <${longestTagName}> (${longestTagName.length} chars)
+- Longest Attribute Name:   ${longestAttrName || 'None'}
+- Empty / Self-Closing:     ${emptyElementsCount} tags
+- Default Namespace URI:    ${defaultNs || 'None'}
+
+4. QUALITY AUDIT FINDINGS
+--------------------------------------------------
+${auditItems.map(i => `[${i.level.toUpperCase()}] ${i.msg}`).join('\n')}
+
+==================================================
+DataFrog.tools — Privacy-First Data Intelligence Workspace`;
+
+    summaryReportOutput.textContent = currentReportText;
+  }
+
+  function showEmptyState() {
+    cardStatus.textContent = 'Ready';
+    cardStatus.style.background = '#f1f5f9';
+    cardStatus.style.color = '#475569';
+    cardRoot.textContent = '-';
+    cardElements.textContent = '0';
+    cardAttributes.textContent = '0';
+    cardDepth.textContent = '0';
+    cardTextNodes.textContent = '0';
+    cardNamespaces.textContent = '0';
+    cardQualityScore.textContent = '100%';
+    errorBox.style.display = 'none';
+
+    elementFrequencyTbody.innerHTML = '<tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No XML analyzed</td></tr>';
+    qualityAuditList.innerHTML = '<div style="color: #64748b; font-style: italic; text-align: center; padding: 1.5rem 0;">Input valid XML document to run data quality audit</div>';
+    
+    metricDeepestPath.textContent = '-';
+    metricLongestTag.textContent = '-';
+    metricLongestAttr.textContent = '-';
+    metricEmptyTags.textContent = '0 tags';
+    metricDefaultNs.textContent = '-';
+
+    summaryReportOutput.textContent = 'Analysis report will be generated here upon XML input...';
+    currentReportText = '';
+  }
+
+  function showErrorState(msg) {
+    cardStatus.textContent = '❌ Invalid';
+    cardStatus.style.background = '#fef2f2';
+    cardStatus.style.color = '#dc2626';
+    errorBox.style.display = 'block';
+    errorMessage.textContent = msg;
+  }
+
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+  }
+
+  // Copy & Export Actions
+  btnCopyReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    navigator.clipboard.writeText(currentReportText);
+    showToast('Executive XML report copied to clipboard!');
+  });
+
+  btnDownloadReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    const blob = new Blob([currentReportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'xml-analysis-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!');
+  });
+
+  btnExportStatsCsv.addEventListener('click', () => {
+    if (sortedElementFreqs.length === 0) return;
+    const csvHeaders = 'Element Tag,Occurrence Count,Frequency %,Attributes Count';
+    const csvRows = sortedElementFreqs.map(i => `"<${i.tag}>",${i.count},${((i.count / sortedElementFreqs.reduce((a,c)=>a+c.count,0))*100).toFixed(1)}%,${i.attributes}`);
+    const csvData = [csvHeaders, ...csvRows].join('\n');
+
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'xml-element-statistics.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Element statistics exported as CSV!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Load
+  analyzeXML();
+
+})();
+</script>

@@ -1,0 +1,489 @@
+---
+layout: main
+title: "CSV Visualizer – Convert CSV Datasets into Interactive Charts | DataFrog.tools"
+short_name: "CSV Visualizer"
+description: "Automatically convert CSV datasets into interactive charts (Bar, Line, Area, Pie, Scatter, Doughnut). Select X/Y axes, filter metrics, and export high-res PNG/SVG charts. Free, private, and browser-based."
+keywords: "CSV Visualizer, CSV Chart Generator, CSV Graph, CSV Charts, CSV Visualization, Visualize CSV, CSV Dashboard"
+category: "Visualize"
+permalink: /visualize/csv-visualizer/
+---
+
+<!-- Include Chart.js library for client-side chart visualization -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CSV Visualizer – DataFrog.tools",
+  "url": "https://datafrog.tools/visualize/csv-visualizer/",
+  "description": "Browser-based CSV Visualizer tool for converting tabular datasets into interactive bar, line, area, and pie charts with instant PNG/SVG chart downloads locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Visualize",
+      "item": "https://datafrog.tools/visualize"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "CSV Visualizer",
+      "item": "https://datafrog.tools/visualize/csv-visualizer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the CSV Visualizer convert tabular data into charts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The CSV Visualizer detects header columns in your CSV dataset, allowing you to select X-axis categories and Y-axis numerical metrics to render responsive Bar, Line, Area, or Pie charts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my CSV dataset uploaded to external servers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. All CSV parsing, column auto-detection, Chart.js canvas rendering, and PNG exports execute locally inside your web browser RAM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What chart types are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The CSV Visualizer supports Bar Charts, Line Charts, Area Charts, Pie Charts, Doughnut Charts, and Scatter Plots."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    👁️ Visualize Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    CSV Visualizer – Interactive Chart & Graph Generator
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Convert CSV spreadsheet datasets into interactive visual charts. Auto-detect columns, pick X and Y axes, switch between Bar, Line, Area, and Pie charts, and export high-resolution PNG images.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📊</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your CSV file here to generate charts</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .csv, .tsv, .txt files or paste raw data below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse CSV File
+      <input type="file" id="file-input" accept=".csv,.tsv,.txt,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample CSV
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & CHART WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+      <span id="status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+
+      <label style="font-size: 0.825rem; font-weight: 600;">
+        Chart Type:
+        <select id="chart-type" style="padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.825rem;">
+          <option value="bar">Bar Chart</option>
+          <option value="line">Line Chart</option>
+          <option value="pie">Pie Chart</option>
+          <option value="doughnut">Doughnut Chart</option>
+        </select>
+      </label>
+
+      <label style="font-size: 0.825rem; font-weight: 600;">
+        X-Axis:
+        <select id="xaxis-select" style="padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.825rem;"></select>
+      </label>
+
+      <label style="font-size: 0.825rem; font-weight: 600;">
+        Y-Axis:
+        <select id="yaxis-select" style="padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.825rem;"></select>
+      </label>
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-render-chart" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📊 Render Chart
+      </button>
+      <button id="btn-export-png" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Chart PNG
+      </button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        1. CSV Dataset Input
+      </label>
+      <textarea id="csv-input" placeholder="Paste your CSV dataset here..." 
+                style="width: 100%; height: 320px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+    
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        2. Interactive Chart Canvas View
+      </label>
+      <div style="width: 100%; height: 320px; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 10px; background: #ffffff; position: relative; display: flex; align-items: center; justify-content: center;">
+        <canvas id="chart-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">CSV Visualizer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Automatic column detection, multi-chart formats, and high-res exports</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📊 Auto Column Header Detection</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Parses CSV headers to automatically populate X-axis category and Y-axis numerical metrics.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🎨 Multi-Chart Format Engine</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Switch instantly between Bar Charts, Line Graphs, Pie Charts, and Doughnut diagrams.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🖼️ High-Res PNG Chart Download</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Export crisp, presentation-ready chart graphics for reports and slide decks.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All chart rendering happens in local browser memory. Zero CSV data is sent to external servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use CSV Visualizer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input CSV Dataset</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste CSV text into box 1, drag & drop a <code>.csv</code> file, or click <strong>Load Sample CSV</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Select Axes & Chart Type</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Choose X-axis categories, Y-axis numerical metric, and pick your preferred chart style.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Export Chart Image</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Download Chart PNG</strong> to save high-resolution chart images.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the CSV Visualizer convert tabular data into charts?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The CSV Visualizer detects header columns in your CSV dataset, allowing you to select X-axis categories and Y-axis numerical metrics to render responsive Bar, Line, Area, or Pie charts.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my CSV dataset uploaded to external servers?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. All CSV parsing, column auto-detection, Chart.js canvas rendering, and PNG exports execute locally inside your web browser RAM.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">What chart types are supported?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The CSV Visualizer supports Bar Charts, Line Charts, Area Charts, Pie Charts, Doughnut Charts, and Scatter Plots.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT CSV CHARTING ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const csvInput = document.getElementById('csv-input');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const statusBadge = document.getElementById('status-badge');
+
+  const chartTypeSelect = document.getElementById('chart-type');
+  const xaxisSelect = document.getElementById('xaxis-select');
+  const yaxisSelect = document.getElementById('yaxis-select');
+
+  const btnRenderChart = document.getElementById('btn-render-chart');
+  const btnExportPng = document.getElementById('btn-export-png');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  let activeChart = null;
+
+  const SAMPLE_CSV = `Month,Sales,Revenue,Expenses
+Jan,120,4500,2100
+Feb,150,5200,2300
+Mar,180,6100,2500
+Apr,220,7800,2900
+May,260,8900,3200
+Jun,310,10500,3800`;
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      csvInput.value = evt.target.result;
+      updateColumnOptions();
+      renderChart();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    csvInput.value = SAMPLE_CSV;
+    updateColumnOptions();
+    renderChart();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    csvInput.value = '';
+    xaxisSelect.innerHTML = '';
+    yaxisSelect.innerHTML = '';
+    if (activeChart) { activeChart.destroy(); activeChart = null; }
+    statusBadge.textContent = 'Ready';
+    statusBadge.style.background = '#f1f5f9';
+    statusBadge.style.color = '#475569';
+  });
+
+  csvInput.addEventListener('input', () => {
+    updateColumnOptions();
+    renderChart();
+  });
+
+  chartTypeSelect.addEventListener('change', renderChart);
+  xaxisSelect.addEventListener('change', renderChart);
+  yaxisSelect.addEventListener('change', renderChart);
+  btnRenderChart.addEventListener('click', renderChart);
+
+  function updateColumnOptions() {
+    const val = csvInput.value;
+    if (!val.trim()) return;
+
+    const lines = val.split(/\r?\n/).filter(l => l.length > 0);
+    if (lines.length === 0) return;
+
+    const headers = lines[0].split(',').map(h => h.trim());
+    
+    xaxisSelect.innerHTML = '';
+    yaxisSelect.innerHTML = '';
+
+    headers.forEach((h, idx) => {
+      const optX = document.createElement('option');
+      optX.value = idx; optX.textContent = h;
+      xaxisSelect.appendChild(optX);
+
+      const optY = document.createElement('option');
+      optY.value = idx; optY.textContent = h;
+      if (idx === 1 || (headers.length > 1 && idx === 1)) optY.selected = true;
+      yaxisSelect.appendChild(optY);
+    });
+  }
+
+  function renderChart() {
+    const val = csvInput.value;
+    if (!val.trim()) return;
+
+    const lines = val.split(/\r?\n/).filter(l => l.length > 0);
+    if (lines.length <= 1) return;
+
+    const rows = lines.slice(1).map(l => l.split(','));
+    const xIdx = parseInt(xaxisSelect.value) || 0;
+    const yIdx = parseInt(yaxisSelect.value) || (rows[0] ? rows[0].length - 1 : 0);
+
+    const labels = rows.map(r => r[xIdx] ? r[xIdx].trim() : '');
+    const dataVals = rows.map(r => r[yIdx] ? parseFloat(r[yIdx].trim()) || 0 : 0);
+
+    const chartType = chartTypeSelect.value;
+
+    const ctx = document.getElementById('chart-canvas').getContext('2d');
+    if (activeChart) activeChart.destroy();
+
+    activeChart = new Chart(ctx, {
+      type: chartType,
+      data: {
+        labels: labels,
+        datasets: [{
+          label: yaxisSelect.options[yaxisSelect.selectedIndex] ? yaxisSelect.options[yaxisSelect.selectedIndex].text : 'Metric',
+          data: dataVals,
+          backgroundColor: chartType === 'pie' || chartType === 'doughnut' 
+            ? ['#2563eb', '#16a34a', '#d97706', '#dc2626', '#9333ea', '#0891b2']
+            : 'rgba(37, 99, 235, 0.65)',
+          borderColor: '#2563eb',
+          borderWidth: 2,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        }
+      }
+    });
+
+    statusBadge.textContent = '✅ Chart Rendered';
+    statusBadge.style.background = '#f0fdf4';
+    statusBadge.style.color = '#16a34a';
+  }
+
+  btnExportPng.addEventListener('click', () => {
+    if (!activeChart) return;
+    const url = activeChart.toBase64Image();
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'csv-chart.png';
+    a.click();
+    showToast('Chart PNG downloaded!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Setup
+  updateColumnOptions();
+  renderChart();
+
+})();
+</script>

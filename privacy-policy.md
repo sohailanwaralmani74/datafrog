@@ -1,135 +1,65 @@
 ---
 layout: main
-title: "DataFrog Privacy Policy – 100% Local Processing"
-description: "DataFrog Privacy Policy: Your files never leave your device. No tracking, no cookies, no data collection. Fully GDPR and CCPA compliant browser‑based tools."
-keywords: "privacy policy, GDPR, CCPA, data protection, local file processing, no file upload, browser-based tools, secure converter, DataFrog privacy"
+title: "Privacy Policy | DataFrog.tools"
+description: "DataFrog.tools Privacy Policy. Learn about our 100% browser-based architecture, zero server-side data collection, cookie policy, and Google AdSense compliance."
+permalink: /privacy-policy
+keywords: "DataFrog privacy policy, browser based data security, client side data processing, AdSense privacy compliance, cookies policy"
 ---
 
-<article class="tool-page" style="margin: 4rem;">
-  <h1>Privacy Policy – How DataFrog Protects Your Data</h1>
-  <p>
-    Welcome to <strong>DataFrog.tools</strong>. Your privacy is our top priority. All our tools are designed to operate entirely in your browser – <strong>no file uploads, no servers, no tracking</strong>. This Privacy Policy explains exactly how your data is handled and your rights under privacy regulations like GDPR, CCPA, and others.
-  </p>
+<div class="page-container" style="max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; line-height: 1.7; color: var(--text-primary);">
+  <header style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-default); padding-bottom: 1.5rem;">
+    <h1 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Privacy Policy</h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">Last Updated: August 4, 2026</p>
+  </header>
 
-  <section id="how-datafrog-works">
-    <h2>1. How DataFrog Works – 100% Browser‑Based</h2>
-    <p>
-      Every tool on DataFrog runs locally using JavaScript. This means:
-    </p>
-    <ul>
-      <li><strong>No file uploads:</strong> Your files never leave your computer.</li>
-      <li><strong>Local processing:</strong> All conversions, edits, and previews happen inside your browser.</li>
-      <li><strong>No data storage:</strong> Temporary data is cleared when you close or refresh the page.</li>
-    </ul>
-    <p>
-      <strong>We cannot see, access, or share your files – because they never reach our servers.</strong>
-    </p>
+  <section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">1. Our Privacy Commitment</h2>
+    <p>At <strong>DataFrog.tools</strong>, we take your privacy extremely seriously. Our fundamental design principle is <strong>Privacy-First, Browser-Based Processing</strong>. When you inspect, analyze, validate, compare, clean, or visualize datasets on DataFrog.tools, <strong>your data never leaves your device</strong>.</p>
+    <p>All data transformations, file parses, and utility computations happen entirely within your web browser using client-side JavaScript. We do not operate back-end processing servers for data manipulation, nor do we store, log, or transmit your uploaded files or pasted text.</p>
   </section>
 
-  <section id="data-collection">
-    <h2>2. What Data We Collect (Minimal & Anonymous)</h2>
-    <p>
-      We collect <strong>no personal data</strong>. The only technical information we may process (anonymously) includes:
-    </p>
-    <ul>
-      <li>Browser type and screen size (for responsive design).</li>
-      <li>Anonymous usage counts (no IP addresses, no user IDs).</li>
-    </ul>
-    <p>
-      We do <strong>not</strong> collect IP addresses, email addresses, names, or any personally identifiable information.
-    </p>
-  </section>
-
-  <section id="cookies-tracking">
-    <h2>3. Cookies and Tracking – None Used</h2>
-    <p>
-      DataFrog does <strong>not</strong> use cookies, fingerprinting, or any tracking technologies for advertising or analytics. Any future analytics will be fully anonymous, cookieless, and compliant with GDPR/CCPA.
-    </p>
-  </section>
-
-  <section id="third-party">
-    <h2>4. Third‑Party Services and Advertising</h2>
-    <p>
-      If we ever integrate third‑party ads or services, they may place independent cookies. You can opt out via:
-    </p>
-    <ul>
-      <li><a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" class="link">Google Ad Settings</a></li>
-      <li><a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer" class="link">YourAdChoices</a></li>
-    </ul>
-    <p>
-      Any integrated service follows recognised privacy standards such as the EU–US Data Privacy Framework.
-    </p>
-  </section>
-
-  <section id="compliance">
-    <h2>5. Compliance with Global Privacy Regulations</h2>
-    <p>
-      DataFrog respects and follows major privacy laws:
-    </p>
-    <ul>
-      <li><strong>GDPR (EU):</strong> No personal data collection, no cross‑border transfers.</li>
-      <li><strong>CCPA (California):</strong> We do not sell or monetise user data.</li>
-      <li><strong>PIPEDA (Canada), LGPD (Brazil), PDPA (Singapore):</strong> All respected where applicable.</li>
+  <section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">2. Information We Do Not Collect</h2>
+    <ul style="padding-left: 1.5rem; margin-bottom: 1rem;">
+      <li><strong>No File Uploads to Server:</strong> Files uploaded to our tools are processed locally in your browser memory (RAM) and discarded when you close or refresh the page.</li>
+      <li><strong>No Account Creation:</strong> DataFrog.tools does not offer or require user registration or logins. We store no user profile data.</li>
+      <li><strong>No Data Retention:</strong> We do not keep copies of input text, CSVs, JSON data, XML schemas, or generated output.</li>
     </ul>
   </section>
 
-  <section id="children-privacy">
-    <h2>6. Children’s Privacy</h2>
-    <p>
-      Our tools are general‑purpose and not directed at children under 13 (or the local age of consent). We do not knowingly collect data from children.
-    </p>
+  <section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">3. Cookies & Advertising (Google AdSense)</h2>
+    <p>DataFrog.tools uses third-party advertising partners, including <strong>Google AdSense</strong>, to serve advertisements when you visit our website. These partners may collect and use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.</p>
+
+    <h3 style="font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--text-primary);">Google DoubleClick DART Cookie</h3>
+    <ul style="padding-left: 1.5rem; margin-bottom: 1rem;">
+      <li>Google, as a third-party vendor, uses cookies to serve ads on DataFrog.tools.</li>
+      <li>Google's use of the DART cookie enables it to serve ads to users based on their visit to DataFrog.tools and other sites on the Internet.</li>
+      <li>Users may opt out of the use of the DART cookie by visiting the <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Google Ad and Content Network Privacy Policy</a>.</li>
+    </ul>
+
+    <h3 style="font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--text-primary);">Third-Party Ad Networks</h3>
+    <p>Third-party ad servers or ad networks use technology in their advertisements and links that appear on DataFrog.tools, which are sent directly to your browser. They automatically receive your IP address when this occurs. Other technologies (such as cookies, JavaScript, or Web Beacons) may also be used by third-party ad networks to measure the effectiveness of their advertisements and/or to personalize the advertising content that you see.</p>
+    <p>DataFrog.tools has no access to or control over these cookies that are used by third-party advertisers.</p>
   </section>
 
-  <section id="user-rights">
-    <h2>7. Your Rights Over Your Data</h2>
-    <p>
-      Because we store <strong>no personal data</strong>, there is nothing to access, correct, or delete. If you have concerns about third‑party links on our site, please contact us.
-    </p>
+  <section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">4. Analytics & Log Files</h2>
+    <p>Like most websites, DataFrog.tools may use standard web analytics tools to analyze site performance, traffic trends, and user experience. Standard log files collect non-personally identifiable information such as IP addresses, browser types, Internet Service Providers (ISP), referring/exit pages, platform type, date/time stamps, and number of clicks. This data is used solely to administer the site, track movement in the aggregate, and gather broad demographic information for site optimization.</p>
   </section>
 
-  <section id="security">
-    <h2>8. Data Security – Local Only, No Risk</h2>
-    <p>
-      All processing is done locally in your browser. No backend servers, databases, or external endpoints are used, eliminating the risk of data breaches, leaks, or unauthorised access.
-    </p>
+  <section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">5. GDPR & CCPA Compliance</h2>
+    <p>Under the European General Data Protection Regulation (GDPR) and California Consumer Privacy Act (CCPA), users have rights regarding their personal data:</p>
+    <ul style="padding-left: 1.5rem; margin-bottom: 1rem;">
+      <li><strong>Right to Know / Access:</strong> Since we do not collect or store personal data, no personal data profiles exist for request or export.</li>
+      <li><strong>Right to Deletion:</strong> Because all data processing occurs strictly in your browser and is never transmitted to us, closing your browser session automatically clears all transient memory data.</li>
+      <li><strong>Opt-Out of Interest-Based Ads:</strong> You can opt out of personalized advertising by managing your browser cookie settings or visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">aboutads.info</a>.</li>
+    </ul>
   </section>
 
-  <section id="external-links">
-    <h2>9. External Links</h2>
-    <p>
-      For convenience, we may link to other websites. DataFrog is not responsible for the privacy practices or content of those external sites.
-    </p>
+  <section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">6. Contacting Us</h2>
+    <p>If you have any questions or concerns regarding this Privacy Policy, please contact us via our <a href="/contact-us" style="color: var(--primary);">Contact Page</a> or email us at <code>privacy@datafrog.tools</code>.</p>
   </section>
-
-  <section id="policy-updates">
-    <h2>10. Updates to This Policy</h2>
-    <p>
-      We may update this Privacy Policy to reflect new features, legal requirements, or best practices. The latest version will always be available on this page.
-    </p>
-  </section>
-
-  <section id="contact">
-    <h2>11. Contact Us</h2>
-    <p>
-      For privacy questions or concerns, reach out to us at:<br />
-      📧 <strong>sohailanwaralmani74@gmail.com</strong>
-    </p>
-  </section>
-
-  <p>
-    <strong>Last Updated:</strong> <time datetime="{{ site.time | date: '%Y-%m-%d' }}">{{ site.time | date: "%B %d, %Y" }}</time>
-  </p>
-</article>
-
-<style>
-  .link {
-    color: #2563eb;
-    text-decoration: underline;
-  }
-  h3 {
-    font-size: 1.2rem;
-  }
-  section {
-    margin-bottom: 2rem;
-  }
-</style>
+</div>

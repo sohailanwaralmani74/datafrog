@@ -1,0 +1,850 @@
+---
+layout: main
+title: "Excel Analyzer – Analyze Excel Files Online | DataFrog.tools"
+short_name: "Excel Analyzer"
+description: "Analyze Excel files online with workbook statistics, worksheet insights, formula analysis, duplicate detection, missing value reports, and data quality analysis. Fast, private, and browser-based."
+keywords: "Excel Analyzer, Analyze Excel, Excel File Analyzer, Excel Workbook Analyzer, XLSX Analyzer, Spreadsheet Analyzer, Analyze Excel Online, Excel Data Analysis"
+category: "Analyze"
+permalink: /analyze/excel-analyzer/
+---
+
+<!-- SheetJS (xlsx) for Browser Excel Parsing -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Excel Analyzer – DataFrog.tools",
+  "url": "https://datafrog.tools/analyze/excel-analyzer/",
+  "description": "Interactive browser-based Excel Analyzer providing workbook statistics, worksheet profiling, formula auditing, cell type breakdown, and data quality insights locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Analyze",
+      "item": "https://datafrog.tools/analyze"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Excel Analyzer",
+      "item": "https://datafrog.tools/analyze/excel-analyzer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is my Excel workbook safe during analysis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100%. Your Excel file (.xlsx, .xls, .xlsm) is parsed, profiled, and audited entirely inside your web browser's local memory using client-side JavaScript. Zero data or files are uploaded to any external server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which workbook metrics are audited by the Excel Analyzer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool audits total worksheets, visible vs hidden sheets, row and column counts per sheet, formula counts, formula error detection (#N/A, #REF!), cell data type distribution, merged cells, and missing value ratios."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which Excel file formats are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports .xlsx, .xls, .xlsm, and .csv spreadsheet formats."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export the workbook analysis report?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! You can copy the generated text report, download the executive summary file, or click 'Export Stats CSV' to save worksheet and column statistics as a CSV file."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    📊 Analyze Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    Excel Analyzer – Workbook Profiling, Formulas & Quality Audit
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Analyze Excel workbooks (.xlsx, .xls, .xlsm) locally in your browser. Audit multi-worksheet statistics, formula counts, error cells (#REF!, #VALUE!), cell type distributions, and data quality metrics.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📈</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your Excel workbook file here for analysis</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .xlsx, .xls, .xlsm, and .csv files</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Excel File
+      <input type="file" id="file-input" accept=".xlsx,.xls,.xlsm,.csv" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample Workbook
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Reset
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     OVERVIEW DASHBOARD CARDS (8 METRICS)
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 0.85rem; margin-bottom: 2rem;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Workbook Size</span>
+    <span id="card-size" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.05rem; color: #0f172a;">0 B</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Total Sheets</span>
+    <span id="card-sheets" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.2rem; color: #2563eb;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Active Sheet</span>
+    <span id="card-active-sheet" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 0.95rem; color: #16a34a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">-</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Total Rows</span>
+    <span id="card-rows" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.2rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Populated Cells</span>
+    <span id="card-cells" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.2rem; color: #9333ea;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Formulas Count</span>
+    <span id="card-formulas" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.2rem; color: #0284c7;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Formula Errors</span>
+    <span id="card-formula-errors" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.2rem; color: #dc2626;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Workbook Health</span>
+    <span id="card-health-grade" style="display: inline-block; margin-top: 0.25rem; font-weight: 800; font-size: 1rem; padding: 0.15rem 0.6rem; border-radius: 9999px; background: #f0fdf4; color: #16a34a;">Grade A</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     WORKSHEETS OVERVIEW TABLE & SWITCHER
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+    <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">
+      📑 Workbook Worksheets Summary
+    </h3>
+    <span style="font-size: 0.85rem; color: #64748b;" id="sheets-count-info">0 sheets detected</span>
+  </div>
+
+  <div style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+      <thead>
+        <tr style="background: #0f172a; color: #ffffff;">
+          <th style="padding: 0.75rem; border-radius: 6px 0 0 0;">Worksheet Name</th>
+          <th style="padding: 0.75rem;">Visibility</th>
+          <th style="padding: 0.75rem; text-align: right;">Total Rows</th>
+          <th style="padding: 0.75rem; text-align: right;">Total Columns</th>
+          <th style="padding: 0.75rem; text-align: right;">Populated Cells</th>
+          <th style="padding: 0.75rem; text-align: right;">Formulas</th>
+          <th style="padding: 0.75rem; text-align: right; border-radius: 0 6px 0 0;">Merged Cells</th>
+        </tr>
+      </thead>
+      <tbody id="worksheets-summary-tbody">
+        <tr><td colspan="7" style="padding: 1.5rem; text-align: center; color: #94a3b8; font-style: italic;">Upload an Excel file or load sample workbook to inspect worksheet statistics</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTIVE WORKSHEET CELL TYPES & COLUMN PROFILER
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+  
+  <!-- Active Sheet Cell Types Breakdown -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem;">
+      📊 Active Sheet Cell Types
+    </h3>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <!-- Text Cells -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #2563eb;">Text Cells</span>
+          <span id="count-text-cells">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-text-cells" style="background: #2563eb; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Numeric Cells -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #ea580c;">Numeric Cells</span>
+          <span id="count-numeric-cells">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-numeric-cells" style="background: #ea580c; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Formula Cells -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #0284c7;">Formula Cells (Fx)</span>
+          <span id="count-formula-cells">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-formula-cells" style="background: #0284c7; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Date/Boolean Cells -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #16a34a;">Date & Boolean Cells</span>
+          <span id="count-other-cells">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-other-cells" style="background: #16a34a; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Error Cells -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #dc2626;">Formula Error Cells</span>
+          <span id="count-error-cells">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-error-cells" style="background: #dc2626; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formula & Quality Audit Findings -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem;">
+      🛡️ Formula & Quality Audit Findings
+    </h3>
+    <div id="quality-audit-list" style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+      <div style="color: #64748b; font-style: italic; text-align: center; padding: 2rem 0;">Input valid Excel file to run formula & quality audit</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     EXECUTIVE SUMMARY REPORT BOX & EXPORTS
+═══════════════════════════════════════════════════ -->
+<div style="background: #0f172a; color: #f8fafc; border-radius: 14px; padding: 1.5rem; margin-bottom: 3rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0; color: #ffffff;">📋 Executive Excel Analysis & Formula Audit Report</h3>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-copy-report" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Report
+      </button>
+      <button id="btn-download-report" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Report
+      </button>
+      <button id="btn-export-stats-csv" style="padding: 0.45rem 0.9rem; background: #ffffff; color: #0f172a; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📊 Export Stats CSV
+      </button>
+    </div>
+  </div>
+
+  <pre id="summary-report-output" style="margin: 0; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; word-break: break-all; color: #cbd5e1; background: #1e293b; padding: 1rem; border-radius: 8px;">Analysis report will be generated here upon Excel file input...</pre>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Excel Analyzer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Complete workbook statistics, formula audits, and multi-sheet profiling</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📑 Multi-Worksheet Profiling</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Audits all visible and hidden sheets within a workbook, comparing row counts, cell counts, and formulas.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🧮 Formula & Error Audit</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Tracks formula counts and highlights broken formula references (`#N/A`, `#REF!`, `#VALUE!`, `#DIV/0!`).</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📌 Merged Cell & Structure Detector</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Detects merged cell ranges (`!merges`) across sheets that may impair data export or pivot table creation.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📊 Cell Data Type Breakdown</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Provides visual distribution progress bars for text, numeric, formula, boolean/date, and blank cells.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📋 Executive Summary Export</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Generates downloadable text/markdown reports summarizing workbook health and statistical insights.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All calculations execute in local browser JavaScript. Your Excel files are never uploaded to remote servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use Excel Analyzer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Open Excel Workbook</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Browse Excel File</strong>, drag & drop a <code>.xlsx</code> or <code>.xls</code> workbook, or click <strong>Load Sample Workbook</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Worksheet Metrics & Formula Audit</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review sheet-by-sheet statistics, cell type breakdowns, formula counts, merged cells, and broken formula warnings.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Summary</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong>, <strong>Download Report</strong>, or <strong>Export Stats CSV</strong> to export analysis results.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my Excel workbook safe during analysis?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, 100%. Your Excel file (.xlsx, .xls, .xlsm) is parsed, profiled, and audited entirely inside your web browser's local memory using client-side JavaScript. Zero data or files are uploaded to any external server.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Which workbook metrics are audited by the Excel Analyzer?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool audits total worksheets, visible vs hidden sheets, row and column counts per sheet, formula counts, formula error detection (#N/A, #REF!), cell data type distribution, merged cells, and missing value ratios.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Which Excel file formats are supported?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool supports <code>.xlsx</code>, <code>.xls</code>, <code>.xlsm</code>, and <code>.csv</code> spreadsheet formats.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I export the workbook analysis report?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! You can copy the generated text report, download the executive summary file, or click <strong>Export Stats CSV</strong> to save worksheet and column statistics as a CSV file.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     INTERACTIVE JAVASCRIPT ANALYZER LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // Elements
+  const fileInput = document.getElementById('file-input');
+  const dropZone = document.getElementById('drop-zone');
+
+  // Overview Cards
+  const cardSize = document.getElementById('card-size');
+  const cardSheets = document.getElementById('card-sheets');
+  const cardActiveSheet = document.getElementById('card-active-sheet');
+  const cardRows = document.getElementById('card-rows');
+  const cardCells = document.getElementById('card-cells');
+  const cardFormulas = document.getElementById('card-formulas');
+  const cardFormulaErrors = document.getElementById('card-formula-errors');
+  const cardHealthGrade = document.getElementById('card-health-grade');
+
+  // Tables & Audits
+  const sheetsCountInfo = document.getElementById('sheets-count-info');
+  const worksheetsSummaryTbody = document.getElementById('worksheets-summary-tbody');
+  const qualityAuditList = document.getElementById('quality-audit-list');
+
+  // Cell Type Bars
+  const countTextCells = document.getElementById('count-text-cells');
+  const barTextCells = document.getElementById('bar-text-cells');
+  const countNumericCells = document.getElementById('count-numeric-cells');
+  const barNumericCells = document.getElementById('bar-numeric-cells');
+  const countFormulaCells = document.getElementById('count-formula-cells');
+  const barFormulaCells = document.getElementById('bar-formula-cells');
+  const countOtherCells = document.getElementById('count-other-cells');
+  const barOtherCells = document.getElementById('bar-other-cells');
+  const countErrorCells = document.getElementById('count-error-cells');
+  const barErrorCells = document.getElementById('bar-error-cells');
+
+  const summaryReportOutput = document.getElementById('summary-report-output');
+
+  // Buttons
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+  const btnCopyReport = document.getElementById('btn-copy-report');
+  const btnDownloadReport = document.getElementById('btn-download-report');
+  const btnExportStatsCsv = document.getElementById('btn-export-stats-csv');
+
+  let currentWorkbook = null;
+  let currentFileByteSize = 0;
+  let currentReportText = '';
+  let sheetStatsList = [];
+
+  // Drag & Drop & Click File
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readExcelFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readExcelFile(e.target.files[0]);
+  });
+
+  function readExcelFile(file) {
+    currentFileByteSize = file.size;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const data = new Uint8Array(e.target.result);
+      try {
+        if (typeof XLSX !== 'undefined') {
+          currentWorkbook = XLSX.read(data, { type: 'array', cellFormulas: true });
+          analyzeWorkbook();
+        } else {
+          showToast('Excel parser library loading...');
+        }
+      } catch (err) {
+        showToast('Error parsing Excel file');
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  // Sample Workbook Loader
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    const sampleCsv = `ID,Product Name,Category,Units Sold,Unit Price,Total Revenue,Formula Field,Status
+P101,Data Analytics Pro,Inspect,1450,49.99,72485.50,=SUM(D2:E2),Active
+P102,JSON Tree Explorer,Inspect,2800,29.99,83972.00,=AVERAGE(D3:E3),Active
+P103,CSV Pipeline Studio,Analyze,950,99.99,94990.50,=SUM(D4:E4),Active
+P104,XML Schema Validator,Validate,1200,39.99,47988.00,#REF!,Active
+P105,YAML Config Engine,Compare,880,19.99,17591.20,=SUM(D6:E6),Active
+P106,Data Visualization Suite,Visualize,3100,79.99,247969.00,=SUM(D7:E7),Active`;
+
+    currentFileByteSize = new Blob([sampleCsv]).size;
+    if (typeof XLSX !== 'undefined') {
+      currentWorkbook = XLSX.read(sampleCsv, { type: 'string', cellFormulas: true });
+      analyzeWorkbook();
+    }
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    currentWorkbook = null;
+    showEmptyState();
+  });
+
+  function analyzeWorkbook() {
+    if (!currentWorkbook || !currentWorkbook.SheetNames || currentWorkbook.SheetNames.length === 0) {
+      showEmptyState();
+      return;
+    }
+
+    const sheetNames = currentWorkbook.SheetNames;
+    cardSize.textContent = formatBytes(currentFileByteSize);
+    cardSheets.textContent = sheetNames.length;
+    cardActiveSheet.textContent = sheetNames[0];
+
+    let totalWorkbookRows = 0;
+    let totalWorkbookCells = 0;
+    let totalWorkbookFormulas = 0;
+    let totalWorkbookFormulaErrors = 0;
+    let totalWorkbookMergedCells = 0;
+
+    sheetStatsList = [];
+
+    // Audit Every Worksheet
+    sheetNames.forEach((sName, sIdx) => {
+      const sheet = currentWorkbook.Sheets[sName];
+      if (!sheet) return;
+
+      const dataValues = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false, defval: '' });
+      const rowCount = dataValues.length;
+      let colCount = 0;
+      dataValues.forEach(r => { if (r.length > colCount) colCount = r.length; });
+
+      let populatedCells = 0;
+      let formulaCount = 0;
+      let formulaErrors = 0;
+
+      let textCellCount = 0;
+      let numericCellCount = 0;
+      let otherCellCount = 0;
+
+      Object.keys(sheet).forEach(k => {
+        if (k[0] !== '!') {
+          populatedCells++;
+          const cell = sheet[k];
+          
+          if (cell.f) formulaCount++;
+          
+          const valStr = String(cell.v || '');
+          if (valStr.startsWith('#')) {
+            formulaErrors++;
+          }
+
+          if (cell.t === 's') textCellCount++;
+          else if (cell.t === 'n') numericCellCount++;
+          else otherCellCount++;
+        }
+      });
+
+      const mergesCount = sheet['!merges'] ? sheet['!merges'].length : 0;
+
+      totalWorkbookRows += rowCount;
+      totalWorkbookCells += populatedCells;
+      totalWorkbookFormulas += formulaCount;
+      totalWorkbookFormulaErrors += formulaErrors;
+      totalWorkbookMergedCells += mergesCount;
+
+      const isHidden = currentWorkbook.Workbook && currentWorkbook.Workbook.Sheets && currentWorkbook.Workbook.Sheets[sIdx] && currentWorkbook.Workbook.Sheets[sIdx].Hidden;
+
+      sheetStatsList.push({
+        sName,
+        isHidden: !!isHidden,
+        rowCount,
+        colCount,
+        populatedCells,
+        formulaCount,
+        formulaErrors,
+        mergesCount,
+        textCellCount,
+        numericCellCount,
+        otherCellCount
+      });
+    });
+
+    // Update Top Overview Cards
+    cardRows.textContent = totalWorkbookRows.toLocaleString();
+    cardCells.textContent = totalWorkbookCells.toLocaleString();
+    cardFormulas.textContent = totalWorkbookFormulas.toLocaleString();
+    cardFormulaErrors.textContent = totalWorkbookFormulaErrors.toLocaleString();
+
+    // Quality Score Calculation
+    let qualityPenalty = 0;
+    if (totalWorkbookFormulaErrors > 0) qualityPenalty += 20;
+    if (totalWorkbookMergedCells > 0) qualityPenalty += 10;
+    const qualityScore = Math.max(0, 100 - qualityPenalty);
+    
+    let grade = 'Grade A';
+    let gradeColor = '#16a34a';
+    if (qualityScore < 70) { grade = 'Grade D'; gradeColor = '#dc2626'; }
+    else if (qualityScore < 85) { grade = 'Grade C'; gradeColor = '#ea580c'; }
+    else if (qualityScore < 95) { grade = 'Grade B'; gradeColor = '#2563eb'; }
+
+    cardHealthGrade.textContent = grade;
+    cardHealthGrade.style.color = gradeColor;
+
+    // Render Worksheets Summary Table
+    sheetsCountInfo.textContent = `${sheetNames.length} sheet(s) audited`;
+    worksheetsSummaryTbody.innerHTML = '';
+
+    sheetStatsList.forEach(s => {
+      const tr = document.createElement('tr');
+      tr.style.borderBottom = '1px solid #f1f5f9';
+      tr.innerHTML = `
+        <td style="padding: 0.75rem; font-weight: 700; color: #0f172a;">${escapeHTML(s.sName)}</td>
+        <td style="padding: 0.75rem;">
+          <span style="font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px; ${s.isHidden ? 'background: #fff7ed; color: #ea580c;' : 'background: #f0fdf4; color: #16a34a;'}">
+            ${s.isHidden ? 'Hidden' : 'Visible'}
+          </span>
+        </td>
+        <td style="padding: 0.75rem; text-align: right; font-weight: 700;">${s.rowCount.toLocaleString()}</td>
+        <td style="padding: 0.75rem; text-align: right; font-weight: 700;">${s.colCount.toLocaleString()}</td>
+        <td style="padding: 0.75rem; text-align: right; color: #2563eb; font-weight: 700;">${s.populatedCells.toLocaleString()}</td>
+        <td style="padding: 0.75rem; text-align: right; color: #0284c7; font-weight: 700;">${s.formulaCount.toLocaleString()}</td>
+        <td style="padding: 0.75rem; text-align: right; color: #9333ea; font-weight: 700;">${s.mergesCount.toLocaleString()}</td>
+      `;
+      worksheetsSummaryTbody.appendChild(tr);
+    });
+
+    // Active Sheet Breakdown Bars (First Sheet)
+    const activeStats = sheetStatsList[0];
+    if (activeStats) {
+      const totalActiveCells = activeStats.populatedCells || 1;
+      const calcPct = cnt => ((cnt / totalActiveCells) * 100).toFixed(1);
+
+      countTextCells.textContent = `${activeStats.textCellCount} (${calcPct(activeStats.textCellCount)}%)`;
+      barTextCells.style.width = `${calcPct(activeStats.textCellCount)}%`;
+
+      countNumericCells.textContent = `${activeStats.numericCellCount} (${calcPct(activeStats.numericCellCount)}%)`;
+      barNumericCells.style.width = `${calcPct(activeStats.numericCellCount)}%`;
+
+      countFormulaCells.textContent = `${activeStats.formulaCount} (${calcPct(activeStats.formulaCount)}%)`;
+      barFormulaCells.style.width = `${calcPct(activeStats.formulaCount)}%`;
+
+      countOtherCells.textContent = `${activeStats.otherCellCount} (${calcPct(activeStats.otherCellCount)}%)`;
+      barOtherCells.style.width = `${calcPct(activeStats.otherCellCount)}%`;
+
+      countErrorCells.textContent = `${activeStats.formulaErrors} (${calcPct(activeStats.formulaErrors)}%)`;
+      barErrorCells.style.width = `${calcPct(activeStats.formulaErrors)}%`;
+    }
+
+    // Quality Audit & Findings
+    qualityAuditList.innerHTML = '';
+    const auditItems = [];
+
+    if (totalWorkbookFormulaErrors > 0) {
+      auditItems.push({ level: 'warn', msg: `Formula Reference Errors: ${totalWorkbookFormulaErrors} formula cell(s) return evaluation errors (#REF!, #N/A, #VALUE!).` });
+    }
+    if (totalWorkbookMergedCells > 0) {
+      auditItems.push({ level: 'info', msg: `Merged Cells Range: Detected ${totalWorkbookMergedCells} merged cell region(s) across workbook.` });
+    }
+    if (sheetStatsList.some(s => s.isHidden)) {
+      auditItems.push({ level: 'info', msg: `Hidden Worksheets: One or more worksheets are marked hidden.` });
+    }
+    if (auditItems.length === 0) {
+      auditItems.push({ level: 'pass', msg: `✅ Clean Workbook: Zero formula errors, zero broken cell references, and clean worksheet formatting.` });
+    }
+
+    auditItems.forEach(item => {
+      const div = document.createElement('div');
+      div.style.cssText = 'padding: 0.75rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem;';
+      if (item.level === 'pass') {
+        div.style.background = '#f0fdf4'; div.style.color = '#16a34a'; div.style.border = '1px solid #bbf7d0';
+      } else if (item.level === 'warn') {
+        div.style.background = '#fff7ed'; div.style.color = '#ea580c'; div.style.border = '1px solid #fed7aa';
+      } else {
+        div.style.background = '#eff6ff'; div.style.color = '#2563eb'; div.style.border = '1px solid #bfdbfe';
+      }
+      div.textContent = item.msg;
+      qualityAuditList.appendChild(div);
+    });
+
+    // Executive Report Generation
+    const dateStr = new Date().toISOString().split('T')[0];
+    currentReportText = `==================================================
+DATAFROG.TOOLS — EXECUTIVE EXCEL WORKBOOK ANALYSIS REPORT
+Generated: ${dateStr} | Engine: 100% Client-Side Browser Memory
+==================================================
+
+1. WORKBOOK OVERVIEW & HEALTH
+--------------------------------------------------
+- Workbook File Size:        ${formatBytes(currentFileByteSize)}
+- Total Worksheets Count:    ${sheetNames.length}
+- Active Sheet Name:         ${sheetNames[0]}
+- Total Populated Rows:      ${totalWorkbookRows}
+- Total Populated Cells:     ${totalWorkbookCells}
+- Total Formulas (Fx):       ${totalWorkbookFormulas}
+- Formula Errors (#REF!):    ${totalWorkbookFormulaErrors}
+- Merged Cells Regions:      ${totalWorkbookMergedCells}
+- Workbook Quality Score:    ${qualityScore}% (${grade})
+
+2. WORKSHEETS SUMMARY BREAKDOWN
+--------------------------------------------------
+${sheetStatsList.map(s => `- ${s.sName.padEnd(22)} | Status: ${s.isHidden ? 'Hidden ' : 'Visible'} | Rows: ${s.rowCount} | Cols: ${s.colCount} | Cells: ${s.populatedCells} | Formulas: ${s.formulaCount}`).join('\n')}
+
+3. FORMULA & DATA QUALITY AUDIT FINDINGS
+--------------------------------------------------
+${auditItems.map(i => `[${i.level.toUpperCase()}] ${i.msg}`).join('\n')}
+
+==================================================
+DataFrog.tools — Privacy-First Data Intelligence Workspace`;
+
+    summaryReportOutput.textContent = currentReportText;
+  }
+
+  function showEmptyState() {
+    cardSize.textContent = '0 B';
+    cardSheets.textContent = '0';
+    cardActiveSheet.textContent = '-';
+    cardRows.textContent = '0';
+    cardCells.textContent = '0';
+    cardFormulas.textContent = '0';
+    cardFormulaErrors.textContent = '0';
+    cardHealthGrade.textContent = 'Grade A';
+    cardHealthGrade.style.color = '#16a34a';
+
+    sheetsCountInfo.textContent = '0 sheets detected';
+    worksheetsSummaryTbody.innerHTML = '<tr><td colspan="7" style="padding: 1.5rem; text-align: center; color: #94a3b8; font-style: italic;">Upload an Excel file or load sample workbook to inspect worksheet statistics</td></tr>';
+    qualityAuditList.innerHTML = '<div style="color: #64748b; font-style: italic; text-align: center; padding: 2rem 0;">Input valid Excel file to run formula & quality audit</div>';
+
+    countTextCells.textContent = '0 (0%)'; barTextCells.style.width = '0%';
+    countNumericCells.textContent = '0 (0%)'; barNumericCells.style.width = '0%';
+    countFormulaCells.textContent = '0 (0%)'; barFormulaCells.style.width = '0%';
+    countOtherCells.textContent = '0 (0%)'; barOtherCells.style.width = '0%';
+    countErrorCells.textContent = '0 (0%)'; barErrorCells.style.width = '0%';
+
+    summaryReportOutput.textContent = 'Analysis report will be generated here upon Excel file input...';
+    currentReportText = '';
+    sheetStatsList = [];
+  }
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+  }
+
+  // Copy & Export Actions
+  btnCopyReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    navigator.clipboard.writeText(currentReportText);
+    showToast('Executive Excel report copied to clipboard!');
+  });
+
+  btnDownloadReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    const blob = new Blob([currentReportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'excel-analysis-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!');
+  });
+
+  btnExportStatsCsv.addEventListener('click', () => {
+    if (sheetStatsList.length === 0) return;
+    const csvHeaders = 'Worksheet Name,Visibility,Total Rows,Total Columns,Populated Cells,Formula Count,Formula Errors,Merged Cells';
+    const csvRows = sheetStatsList.map(s => `"${s.sName}",${s.isHidden ? 'Hidden' : 'Visible'},${s.rowCount},${s.colCount},${s.populatedCells},${s.formulaCount},${s.formulaErrors},${s.mergesCount}`);
+    const csvData = [csvHeaders, ...csvRows].join('\n');
+
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'excel-worksheets-statistics.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Worksheet statistics exported as CSV!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Sample Auto Load
+  setTimeout(() => {
+    btnLoadSample.click();
+  }, 300);
+
+})();
+</script>

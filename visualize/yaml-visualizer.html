@@ -1,0 +1,447 @@
+---
+layout: main
+title: "YAML Visualizer – Interactive YAML Hierarchy & Tree Viewer | DataFrog.tools"
+short_name: "YAML Visualizer"
+description: "Transform YAML configuration files into interactive visual trees. Expand/collapse mappings, sequences, inspect node paths, search keys, and view structure statistics. Free, private, and browser-based."
+keywords: "YAML Visualizer, Visualize YAML, YAML Tree Viewer, YAML Structure Viewer, YAML Hierarchy Viewer, YAML Diagram, YAML Explorer"
+category: "Visualize"
+permalink: /visualize/yaml-visualizer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "YAML Visualizer – DataFrog.tools",
+  "url": "https://datafrog.tools/visualize/yaml-visualizer/",
+  "description": "Browser-based YAML Visualizer tool for converting YAML configurations into interactive element trees, node path tracing, search filtering, and diagram viewing locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Visualize",
+      "item": "https://datafrog.tools/visualize"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "YAML Visualizer",
+      "item": "https://datafrog.tools/visualize/yaml-visualizer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the YAML Visualizer render nested configuration files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The YAML Visualizer evaluates YAML indentation levels, key-value mappings, sequence dashes, and anchors, transforming raw text into an interactive visual node tree."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my YAML configuration file safe during visualization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% private. All YAML indentation parsing, tree rendering, node search, and path copying execute locally inside your web browser RAM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I copy YAML node paths or collapse specific blocks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Click any node in the visual tree to copy its exact YAML path string (e.g. `$.services.web_app.ports[0]`) or click branch toggles to expand/collapse levels."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    👁️ Visualize Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    YAML Visualizer – Interactive Configuration Tree Viewer
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Transform YAML configurations into interactive visual trees. Expand/collapse nested mappings, sequences, search keys/values, trace node paths, and explore complex setup files.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📝</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your YAML file here to visualize</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .yaml, .yml files or paste raw text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse YAML File
+      <input type="file" id="file-input" accept=".yaml,.yml,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample YAML
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span id="status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+      <input type="text" id="search-nodes" placeholder="🔎 Search keys or values..." 
+             style="padding: 0.35rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.825rem; outline: none; width: 200px;">
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-expand-all" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        ➕ Expand All
+      </button>
+      <button id="btn-collapse-all" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        ➖ Collapse All
+      </button>
+      <button id="btn-visualize" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📝 Render YAML Tree
+      </button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        1. YAML Document Input
+      </label>
+      <textarea id="yaml-input" placeholder="Paste your YAML configuration here..." 
+                style="width: 100%; height: 320px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+    
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        2. Interactive YAML Tree Node Hierarchy
+      </label>
+      <div id="tree-canvas" style="width: 100%; height: 320px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; border: 1px solid #cbd5e1; border-radius: 10px; background: #ffffff; overflow: auto;">
+        <span style="color: #64748b; font-style: italic;">YAML visualization will render here...</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">YAML Visualizer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Indentation mapping, path location tracing, node search, and privacy</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📝 Mapping & Sequence Nodes</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Evaluates key-value dictionaries and list sequences into an expandable visual hierarchy.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📍 Node Path Pointer Copy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Click any node to copy its exact path string (e.g. `$.services.web_app.ports[0]`).</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔎 Real-Time Search Filter</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Highlights matching configuration keys or scalar values as you type.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All YAML processing runs in local browser RAM. Zero configuration files are sent to servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use YAML Visualizer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input YAML Configuration</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste YAML text into box 1, drag & drop a <code>.yaml</code> file, or click <strong>Load Sample YAML</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Explore Visual Tree Nodes</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Expand/collapse mapping branches, search configuration keys, and inspect node values.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy Node Path</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click any node to copy its exact YAML path string.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the YAML Visualizer render nested configuration files?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The YAML Visualizer evaluates YAML indentation levels, key-value mappings, sequence dashes, and anchors, transforming raw text into an interactive visual node tree.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my YAML configuration file safe during visualization?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, 100% private. All YAML indentation parsing, tree rendering, node search, and path copying execute locally inside your web browser RAM.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I copy YAML node paths or collapse specific blocks?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! Click any node in the visual tree to copy its exact YAML path string (e.g. `$.services.web_app.ports[0]`) or click branch toggles to expand/collapse levels.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT YAML VISUALIZER ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const yamlInput = document.getElementById('yaml-input');
+  const treeCanvas = document.getElementById('tree-canvas');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const statusBadge = document.getElementById('status-badge');
+  const searchNodes = document.getElementById('search-nodes');
+
+  const btnVisualize = document.getElementById('btn-visualize');
+  const btnExpandAll = document.getElementById('btn-expand-all');
+  const btnCollapseAll = document.getElementById('btn-collapse-all');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  const SAMPLE_YAML = `version: "3.8"
+services:
+  web_app:
+    image: datafrog/workspace:latest
+    ports:
+      - "8080:8080"
+    environment:
+      EXECUTION_MODE: "browser-local"
+      SERVER_UPLOADS: "false"
+  database:
+    image: postgres:15-alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:`;
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      yamlInput.value = evt.target.result;
+      renderTree();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    yamlInput.value = SAMPLE_YAML;
+    renderTree();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    yamlInput.value = '';
+    renderTree();
+  });
+
+  yamlInput.addEventListener('input', renderTree);
+  btnVisualize.addEventListener('click', () => {
+    if (!yamlInput.value.trim()) {
+      yamlInput.value = SAMPLE_YAML;
+      showToast('Loaded sample YAML for tree rendering!');
+    }
+    renderTree();
+  });
+  searchNodes.addEventListener('input', renderTree);
+
+  btnExpandAll.addEventListener('click', () => {
+    document.querySelectorAll('#tree-canvas details').forEach(d => d.open = true);
+  });
+
+  btnCollapseAll.addEventListener('click', () => {
+    document.querySelectorAll('#tree-canvas details').forEach(d => d.open = false);
+  });
+
+  function renderTree() {
+    const val = yamlInput.value;
+    if (!val.trim()) {
+      statusBadge.textContent = 'Ready';
+      statusBadge.style.background = '#f1f5f9';
+      statusBadge.style.color = '#475569';
+      treeCanvas.innerHTML = '<span style="color: #64748b; font-style: italic;">YAML visualization will render here...</span>';
+      return;
+    }
+
+    const lines = val.split('\n');
+    statusBadge.textContent = '✅ Tree Rendered';
+    statusBadge.style.background = '#f0fdf4';
+    statusBadge.style.color = '#16a34a';
+
+    const filterText = searchNodes.value.toLowerCase().trim();
+
+    let html = '';
+
+    lines.forEach((l, idx) => {
+      const raw = l;
+      const trimmed = l.trim();
+      if (!trimmed) return;
+
+      const indent = l.search(/\S/);
+      const isComment = trimmed.startsWith('#');
+      const isList = trimmed.startsWith('-');
+      const matchSearch = filterText && trimmed.toLowerCase().includes(filterText);
+
+      let style = `margin-left: ${indent * 12}px; padding: 0.15rem 0.4rem; font-family: monospace; border-radius: 4px; margin-bottom: 2px;`;
+      if (matchSearch) style += ' background: #fef08a;';
+
+      if (isComment) {
+        html += `<div style="${style} color: #94a3b8; font-style: italic;">${escapeHtml(trimmed)}</div>`;
+      } else if (trimmed.includes(':')) {
+        const parts = trimmed.split(':');
+        const key = parts[0];
+        const v = parts.slice(1).join(':');
+        html += `<div style="${style}"><span style="color: #2563eb; font-weight: 700;">${escapeHtml(key)}:</span> <span style="color: #059669; font-weight: 600;">${escapeHtml(v)}</span></div>`;
+      } else {
+        html += `<div style="${style} color: #0f172a; font-weight: 600;">${escapeHtml(trimmed)}</div>`;
+      }
+    });
+
+    treeCanvas.innerHTML = html;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Check
+  renderTree();
+
+})();
+</script>

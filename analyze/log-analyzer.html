@@ -1,0 +1,1007 @@
+---
+layout: main
+title: "Log Analyzer – Analyze Log Files Online | DataFrog.tools"
+short_name: "Log Analyzer"
+description: "Analyze log files online with detailed statistics, error analysis, traffic insights, response code reports, performance metrics, and interactive charts. Fast, private, and browser-based."
+keywords: "Log Analyzer, Analyze Log Files, Log File Analyzer, Online Log Analyzer, Server Log Analyzer, Apache Log Analyzer, Nginx Log Analyzer, Application Log Analyzer, Log Analysis Tool"
+category: "Analyze"
+permalink: /analyze/log-analyzer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Log Analyzer – DataFrog.tools",
+  "url": "https://datafrog.tools/analyze/log-analyzer/",
+  "description": "Browser-based Log Analyzer providing log level distribution, HTTP status code breakdown, error auditing, top client IP profiling, and executive traffic reports locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Analyze",
+      "item": "https://datafrog.tools/analyze"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Log Analyzer",
+      "item": "https://datafrog.tools/analyze/log-analyzer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are my server or application logs uploaded to remote servers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. All log parsing, regex pattern matching, status code aggregation, and error reporting happen locally inside your web browser's memory. Zero log data is ever transmitted off your device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which log formats are supported by the Log Analyzer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports Nginx Access Logs, Apache Combined/Common Logs, IIS Web Logs, Syslog, Spring Boot/Java Application Logs, Node.js Logs, Python Logging output, and custom plain-text log files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What metrics are audited by the Log Analyzer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool audits log level counts (ERROR, WARN, INFO, DEBUG), HTTP status code distributions (2xx, 3xx, 4xx, 5xx), top requesting IP addresses, most frequent URIs/endpoints, and error rates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I filter and export the log analysis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! You can search and filter log entries in real-time, copy the generated summary report, download the executive report as a text file, or export top IP and endpoint statistics as a CSV file."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    📊 Analyze Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    Log Analyzer – Web Server & Application Log Insights
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Analyze web server logs (Nginx, Apache, IIS) and application logs locally in your browser. Audit log levels, HTTP status codes (2xx, 4xx, 5xx), top requesting IPs, traffic endpoints, and error events.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📄</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your log file here for analysis</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .log, .txt, Nginx, Apache, and application log files</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse Log File
+      <input type="file" id="file-input" accept=".log,.txt,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample Log
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INPUT AREA
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 2rem;">
+  <label for="log-input" style="display: block; font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 0.5rem;">
+    Raw Log Data Input
+  </label>
+  <textarea id="log-input" placeholder="Paste server or application log lines here to analyze..." 
+            style="width: 100%; height: 200px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 12px; outline: none; background: #ffffff; resize: vertical; margin-bottom: 0.75rem;"></textarea>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     OVERVIEW DASHBOARD CARDS (8 METRICS)
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 0.85rem; margin-bottom: 2rem;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Total Entries</span>
+    <span id="card-total-entries" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">File Size</span>
+    <span id="card-size" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.05rem; color: #0f172a;">0 B</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Errors</span>
+    <span id="card-errors" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #dc2626;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Warnings</span>
+    <span id="card-warnings" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #ea580c;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Top Status</span>
+    <span id="card-top-status" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.15rem; color: #2563eb;">-</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Unique IPs</span>
+    <span id="card-unique-ips" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #9333ea;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Quality Score</span>
+    <span id="card-quality-score" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #16a34a;">100%</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">System Health</span>
+    <span id="card-health-grade" style="display: inline-block; margin-top: 0.25rem; font-weight: 800; font-size: 1rem; padding: 0.15rem 0.6rem; border-radius: 9999px; background: #f0fdf4; color: #16a34a;">Grade A</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     LOG LEVEL & HTTP STATUS BREAKDOWN PANELS
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+  
+  <!-- Log Level Breakdown -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem;">
+      🚨 Log Level Distribution
+    </h3>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <!-- Errors / Fatal -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #dc2626;">ERROR / FATAL</span>
+          <span id="count-errors">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-errors" style="background: #dc2626; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Warnings -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #ea580c;">WARNING</span>
+          <span id="count-warnings">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-warnings" style="background: #ea580c; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #2563eb;">INFO</span>
+          <span id="count-info">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-info" style="background: #2563eb; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- Debug / Trace -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #64748b;">DEBUG / TRACE</span>
+          <span id="count-debug">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-debug" style="background: #64748b; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HTTP Status Code Breakdown -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem;">
+      🌐 HTTP Status Code Distribution
+    </h3>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <!-- 2xx -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #16a34a;">2xx Success</span>
+          <span id="count-2xx">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-2xx" style="background: #16a34a; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- 3xx -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #0284c7;">3xx Redirection</span>
+          <span id="count-3xx">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-3xx" style="background: #0284c7; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- 4xx -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #ea580c;">4xx Client Errors</span>
+          <span id="count-4xx">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-4xx" style="background: #ea580c; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+
+      <!-- 5xx -->
+      <div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">
+          <span style="color: #dc2626;">5xx Server Errors</span>
+          <span id="count-5xx">0 (0%)</span>
+        </div>
+        <div style="background: #f1f5f9; height: 8px; border-radius: 9999px; overflow: hidden;">
+          <div id="bar-5xx" style="background: #dc2626; height: 100%; width: 0%; transition: width 0.4s;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     TOP REQUESTS & TOP CLIENT IPS TABLE
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+  
+  <!-- Top Requested Endpoints -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">🔗 Top Requested URIs</h3>
+    <div style="max-height: 250px; overflow-y: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+        <thead>
+          <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569;">Request URI / Endpoint</th>
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569; text-align: right;">Requests</th>
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569; text-align: right;">% Traffic</th>
+          </tr>
+        </thead>
+        <tbody id="top-uris-tbody">
+          <tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No log data analyzed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Top Client IP Addresses -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">💻 Top Client IP Addresses</h3>
+    <div style="max-height: 250px; overflow-y: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+        <thead>
+          <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569;">Client IP</th>
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569; text-align: right;">Requests</th>
+            <th style="padding: 0.5rem; font-weight: 700; color: #475569; text-align: right;">% Share</th>
+          </tr>
+        </thead>
+        <tbody id="top-ips-tbody">
+          <tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No log data analyzed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INTERACTIVE LOG VIEWER & SEARCH FILTER
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">🔍 Interactive Log Entry Viewer & Filter</h3>
+    <span style="font-size: 0.85rem; color: #64748b;" id="filter-matching-info">Showing 0 entries</span>
+  </div>
+
+  <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap;">
+    <input type="text" id="log-search-filter" placeholder="Filter by keyword, IP, URI, or status (e.g. 500, /api, 192.168)..." 
+           style="flex: 1; min-width: 260px; padding: 0.65rem 1rem; border-radius: 8px; border: 1px solid #cbd5e1; outline: none; font-size: 0.875rem;">
+    <select id="log-level-filter" style="padding: 0.65rem 1rem; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.875rem; background: #ffffff; cursor: pointer;">
+      <option value="ALL">All Log Levels</option>
+      <option value="ERROR">Errors (4xx, 5xx, ERROR, FATAL)</option>
+      <option value="WARN">Warnings (WARN)</option>
+      <option value="INFO">Info (2xx, 3xx, INFO)</option>
+    </select>
+  </div>
+
+  <div style="max-height: 320px; overflow-y: auto; background: #0f172a; border-radius: 8px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.825rem; line-height: 1.6; color: #cbd5e1;" id="log-viewer-container">
+    <div style="color: #64748b; font-style: italic;">Parsed log entries will display here...</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     EXECUTIVE SUMMARY REPORT BOX & EXPORTS
+═══════════════════════════════════════════════════ -->
+<div style="background: #0f172a; color: #f8fafc; border-radius: 14px; padding: 1.5rem; margin-bottom: 3rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0; color: #ffffff;">📋 Executive Log Analysis & Audit Report</h3>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-copy-report" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Report
+      </button>
+      <button id="btn-download-report" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Report
+      </button>
+      <button id="btn-export-stats-csv" style="padding: 0.45rem 0.9rem; background: #ffffff; color: #0f172a; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📊 Export Stats CSV
+      </button>
+    </div>
+  </div>
+
+  <pre id="summary-report-output" style="margin: 0; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; word-break: break-all; color: #cbd5e1; background: #1e293b; padding: 1rem; border-radius: 8px;">Analysis report will be generated here upon log input...</pre>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Log Analyzer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Complete web server traffic analysis, error auditing, and security insights</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🌐 HTTP Status Breakdown</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Calculates exact counts and percentages for 2xx success, 3xx redirects, 4xx client errors, and 5xx server failures.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">💻 Client IP & Traffic Profiling</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Identifies top requesting IP addresses, highest volume endpoints, and HTTP method distributions.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🚨 Application Log Level Audit</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Automatically groups log entries into ERROR, WARN, INFO, and DEBUG severity levels.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔍 Real-Time Live Search Filter</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Instantly filter log streams by keyword, client IP, URI, or log level with syntax badge highlighting.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📋 Executive Summary Export</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Generates downloadable text/markdown reports summarizing traffic metrics for server documentation.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All log parsing runs in local browser JavaScript. Sensitive server logs are never uploaded to any remote server.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use Log Analyzer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input Log File</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste log output into the text box, drag & drop a <code>.log</code> file, or click <strong>Load Sample Log</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Traffic & Error Metrics</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review log level breakdowns, HTTP status codes, top client IPs, requested URIs, and search matching entries.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong>, <strong>Download Report</strong>, or <strong>Export Stats CSV</strong> to export analysis results.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Are my server or application logs uploaded to remote servers?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. All log parsing, regex pattern matching, status code aggregation, and error reporting happen locally inside your web browser's memory. Zero log data is ever transmitted off your device.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Which log formats are supported by the Log Analyzer?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool supports Nginx Access Logs, Apache Combined/Common Logs, IIS Web Logs, Syslog, Spring Boot/Java Application Logs, Node.js Logs, Python Logging output, and custom plain-text log files.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">What metrics are audited by the Log Analyzer?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool audits log level counts (ERROR, WARN, INFO, DEBUG), HTTP status code distributions (2xx, 3xx, 4xx, 5xx), top requesting IP addresses, most frequent URIs/endpoints, and error rates.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I filter and export the log analysis?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! You can search and filter log entries in real-time, copy the generated summary report, download the executive report as a text file, or export top IP and endpoint statistics as a CSV file.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     INTERACTIVE JAVASCRIPT LOG ANALYZER LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // Elements
+  const logInput = document.getElementById('log-input');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+
+  // Overview Cards
+  const cardTotalEntries = document.getElementById('card-total-entries');
+  const cardSize = document.getElementById('card-size');
+  const cardErrors = document.getElementById('card-errors');
+  const cardWarnings = document.getElementById('card-warnings');
+  const cardTopStatus = document.getElementById('card-top-status');
+  const cardUniqueIps = document.getElementById('card-unique-ips');
+  const cardQualityScore = document.getElementById('card-quality-score');
+  const cardHealthGrade = document.getElementById('card-health-grade');
+
+  // Log Level Bars
+  const countErrors = document.getElementById('count-errors');
+  const barErrors = document.getElementById('bar-errors');
+  const countWarnings = document.getElementById('count-warnings');
+  const barWarnings = document.getElementById('bar-warnings');
+  const countInfo = document.getElementById('count-info');
+  const barInfo = document.getElementById('bar-info');
+  const countDebug = document.getElementById('count-debug');
+  const barDebug = document.getElementById('bar-debug');
+
+  // Status Code Bars
+  const count2xx = document.getElementById('count-2xx');
+  const bar2xx = document.getElementById('bar-2xx');
+  const count3xx = document.getElementById('count-3xx');
+  const bar3xx = document.getElementById('bar-3xx');
+  const count4xx = document.getElementById('count-4xx');
+  const bar4xx = document.getElementById('bar-4xx');
+  const count5xx = document.getElementById('count-5xx');
+  const bar5xx = document.getElementById('bar-5xx');
+
+  // Tables & Viewer
+  const topUrisTbody = document.getElementById('top-uris-tbody');
+  const topIpsTbody = document.getElementById('top-ips-tbody');
+  const logSearchFilter = document.getElementById('log-search-filter');
+  const logLevelFilter = document.getElementById('log-level-filter');
+  const logViewerContainer = document.getElementById('log-viewer-container');
+  const filterMatchingInfo = document.getElementById('filter-matching-info');
+
+  const summaryReportOutput = document.getElementById('summary-report-output');
+
+  // Buttons
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+  const btnCopyReport = document.getElementById('btn-copy-report');
+  const btnDownloadReport = document.getElementById('btn-download-report');
+  const btnExportStatsCsv = document.getElementById('btn-export-stats-csv');
+
+  let currentFileByteSize = 0;
+  let currentReportText = '';
+  let parsedLogEntries = [];
+  let sortedTopIPs = [];
+  let sortedTopURIs = [];
+
+  const SAMPLE_LOG = `192.168.1.10 - - [05/Aug/2026:10:15:30 +0000] "GET /api/v1/inspect/json-viewer HTTP/1.1" 200 4520 "-" "Mozilla/5.0"
+192.168.1.15 - - [05/Aug/2026:10:15:32 +0000] "GET /api/v1/analyze/csv-analyzer HTTP/1.1" 200 8920 "-" "Mozilla/5.0"
+10.0.0.45 - - [05/Aug/2026:10:16:01 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 320 "https://datafrog.tools/login" "Mozilla/5.0"
+192.168.1.10 - - [05/Aug/2026:10:16:12 +0000] "GET /assets/css/style.css HTTP/1.1" 304 0 "-" "Mozilla/5.0"
+172.16.0.8 - - [05/Aug/2026:10:17:45 +0000] "GET /api/v1/analyze/log-analyzer HTTP/1.1" 500 1250 "-" "Python/3.10 requests"
+172.16.0.8 - - [05/Aug/2026:10:17:46 +0000] "GET /api/v1/analyze/log-analyzer HTTP/1.1" 500 1250 "-" "Python/3.10 requests"
+192.168.1.20 - - [05/Aug/2026:10:18:22 +0000] "GET /inspect/xml-viewer/ HTTP/1.1" 200 6210 "-" "Mozilla/5.0"
+2026-08-05 10:19:00 [ERROR] com.datafrog.engine.PipelineManager - Failed to parse stream input: Invalid JSON payload at line 42
+2026-08-05 10:19:05 [WARN] com.datafrog.engine.MemoryPool - High memory usage detected: 82% threshold exceeded
+2026-08-05 10:19:12 [INFO] com.datafrog.service.TaskRunner - Completed batch execution of 12 worker processes`;
+
+  // Drag & Drop & File Click
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readLogFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readLogFile(e.target.files[0]);
+  });
+
+  function readLogFile(file) {
+    currentFileByteSize = file.size;
+    const reader = new FileReader();
+    reader.onload = evt => {
+      logInput.value = evt.target.result;
+      analyzeLogs();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    logInput.value = SAMPLE_LOG;
+    currentFileByteSize = new Blob([SAMPLE_LOG]).size;
+    analyzeLogs();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    logInput.value = '';
+    currentFileByteSize = 0;
+    analyzeLogs();
+  });
+
+  logInput.addEventListener('input', () => {
+    currentFileByteSize = new Blob([logInput.value]).size;
+    analyzeLogs();
+  });
+
+  logSearchFilter.addEventListener('input', renderLogViewer);
+  logLevelFilter.addEventListener('change', renderLogViewer);
+
+  // Analysis Engine
+  function analyzeLogs() {
+    const raw = logInput.value;
+    if (!raw.trim()) {
+      showEmptyState();
+      return;
+    }
+
+    const lines = raw.split('\n').filter(l => l.trim().length > 0);
+    const totalLines = lines.length;
+
+    cardTotalEntries.textContent = totalLines.toLocaleString();
+    cardSize.textContent = formatBytes(currentFileByteSize || new Blob([raw]).size);
+
+    let errorCount = 0;
+    let warnCount = 0;
+    let infoCount = 0;
+    let debugCount = 0;
+
+    let c2xx = 0, c3xx = 0, c4xx = 0, c5xx = 0;
+    const statusFreqs = {};
+    const ipFreqs = {};
+    const uriFreqs = {};
+
+    parsedLogEntries = [];
+
+    // Regex matchers for Access Logs & App Logs
+    const ipRegex = /\b(?:\d{1,3}\.){3}\d{1,3}\b/;
+    const statusRegex = /\s([1-5]\d\d)\s/;
+    const uriRegex = /"(?:GET|POST|PUT|DELETE|HEAD|OPTIONS)\s+([^\s?]+)/;
+
+    lines.forEach((line, idx) => {
+      let level = 'INFO';
+      const upper = line.toUpperCase();
+
+      if (upper.includes('ERROR') || upper.includes('FATAL') || upper.includes('CRITICAL')) {
+        level = 'ERROR';
+        errorCount++;
+      } else if (upper.includes('WARN') || upper.includes('WARNING')) {
+        level = 'WARN';
+        warnCount++;
+      } else if (upper.includes('DEBUG') || upper.includes('TRACE')) {
+        level = 'DEBUG';
+        debugCount++;
+      } else {
+        infoCount++;
+      }
+
+      // HTTP Status Matching
+      const statusMatch = line.match(statusRegex);
+      let statusCode = null;
+      if (statusMatch) {
+        statusCode = parseInt(statusMatch[1]);
+        statusFreqs[statusCode] = (statusFreqs[statusCode] || 0) + 1;
+
+        if (statusCode >= 200 && statusCode < 300) c2xx++;
+        else if (statusCode >= 300 && statusCode < 400) c3xx++;
+        else if (statusCode >= 400 && statusCode < 500) { c4xx++; if (level !== 'ERROR') { errorCount++; } }
+        else if (statusCode >= 500) { c5xx++; if (level !== 'ERROR') { errorCount++; } }
+      }
+
+      // IP Matching
+      const ipMatch = line.match(ipRegex);
+      let clientIp = null;
+      if (ipMatch) {
+        clientIp = ipMatch[0];
+        ipFreqs[clientIp] = (ipFreqs[clientIp] || 0) + 1;
+      }
+
+      // URI Matching
+      const uriMatch = line.match(uriRegex);
+      let requestUri = null;
+      if (uriMatch) {
+        requestUri = uriMatch[1];
+        uriFreqs[requestUri] = (uriFreqs[requestUri] || 0) + 1;
+      }
+
+      parsedLogEntries.push({
+        idx: idx + 1,
+        raw: line,
+        level,
+        statusCode,
+        clientIp,
+        requestUri
+      });
+    });
+
+    cardErrors.textContent = errorCount.toLocaleString();
+    cardWarnings.textContent = warnCount.toLocaleString();
+
+    // Unique IPs & Top Status
+    const uniqueIpsList = Object.keys(ipFreqs);
+    cardUniqueIps.textContent = uniqueIpsList.length.toLocaleString();
+
+    const topStatusArr = Object.keys(statusFreqs).sort((a, b) => statusFreqs[b] - statusFreqs[a]);
+    cardTopStatus.textContent = topStatusArr.length > 0 ? `${topStatusArr[0]} (${statusFreqs[topStatusArr[0]]})` : '200 OK';
+
+    // Quality / Health Score Calculation
+    let qualityPenalty = 0;
+    if (totalLines > 0) {
+      const errRatio = (errorCount / totalLines) * 100;
+      if (errRatio > 10) qualityPenalty += 30;
+      else if (errRatio > 2) qualityPenalty += 15;
+    }
+    const qualityScore = Math.max(0, 100 - Math.round(qualityPenalty));
+    cardQualityScore.textContent = `${qualityScore}%`;
+
+    let grade = 'Grade A';
+    let gradeColor = '#16a34a';
+    if (qualityScore < 70) { grade = 'Grade D'; gradeColor = '#dc2626'; }
+    else if (qualityScore < 85) { grade = 'Grade C'; gradeColor = '#ea580c'; }
+    else if (qualityScore < 95) { grade = 'Grade B'; gradeColor = '#2563eb'; }
+
+    cardHealthGrade.textContent = grade;
+    cardHealthGrade.style.color = gradeColor;
+
+    // Log Level Progress Bars
+    const calcLevelPct = cnt => totalLines > 0 ? ((cnt / totalLines) * 100).toFixed(1) : '0';
+    countErrors.textContent = `${errorCount.toLocaleString()} (${calcLevelPct(errorCount)}%)`;
+    barErrors.style.width = `${calcLevelPct(errorCount)}%`;
+
+    countWarnings.textContent = `${warnCount.toLocaleString()} (${calcLevelPct(warnCount)}%)`;
+    barWarnings.style.width = `${calcLevelPct(warnCount)}%`;
+
+    countInfo.textContent = `${infoCount.toLocaleString()} (${calcLevelPct(infoCount)}%)`;
+    barInfo.style.width = `${calcLevelPct(infoCount)}%`;
+
+    countDebug.textContent = `${debugCount.toLocaleString()} (${calcLevelPct(debugCount)}%)`;
+    barDebug.style.width = `${calcLevelPct(debugCount)}%`;
+
+    // HTTP Status Progress Bars
+    const totalHttp = c2xx + c3xx + c4xx + c5xx || 1;
+    const calcHttpPct = cnt => ((cnt / totalHttp) * 100).toFixed(1);
+
+    count2xx.textContent = `${c2xx.toLocaleString()} (${calcHttpPct(c2xx)}%)`;
+    bar2xx.style.width = `${calcHttpPct(c2xx)}%`;
+
+    count3xx.textContent = `${c3xx.toLocaleString()} (${calcHttpPct(c3xx)}%)`;
+    bar3xx.style.width = `${calcHttpPct(c3xx)}%`;
+
+    count4xx.textContent = `${c4xx.toLocaleString()} (${calcHttpPct(c4xx)}%)`;
+    bar4xx.style.width = `${calcHttpPct(c4xx)}%`;
+
+    count5xx.textContent = `${c5xx.toLocaleString()} (${calcHttpPct(c5xx)}%)`;
+    bar5xx.style.width = `${calcHttpPct(c5xx)}%`;
+
+    // Top URIs Table
+    sortedTopURIs = Object.keys(uriFreqs)
+      .map(u => ({ uri: u, count: uriFreqs[u] }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 8);
+
+    topUrisTbody.innerHTML = '';
+    if (sortedTopURIs.length === 0) {
+      topUrisTbody.innerHTML = '<tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No URIs extracted</td></tr>';
+    } else {
+      sortedTopURIs.forEach(item => {
+        const pct = totalLines > 0 ? ((item.count / totalLines) * 100).toFixed(1) : '0';
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid #f1f5f9';
+        tr.innerHTML = `
+          <td style="padding: 0.5rem; font-family: monospace; font-weight: 700; color: #2563eb;">${escapeHTML(item.uri)}</td>
+          <td style="padding: 0.5rem; text-align: right; font-weight: 700; color: #0f172a;">${item.count.toLocaleString()}</td>
+          <td style="padding: 0.5rem; text-align: right; color: #64748b;">${pct}%</td>
+        `;
+        topUrisTbody.appendChild(tr);
+      });
+    }
+
+    // Top Client IPs Table
+    sortedTopIPs = Object.keys(ipFreqs)
+      .map(ip => ({ ip, count: ipFreqs[ip] }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 8);
+
+    topIpsTbody.innerHTML = '';
+    if (sortedTopIPs.length === 0) {
+      topIpsTbody.innerHTML = '<tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No IP addresses extracted</td></tr>';
+    } else {
+      sortedTopIPs.forEach(item => {
+        const pct = totalLines > 0 ? ((item.count / totalLines) * 100).toFixed(1) : '0';
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid #f1f5f9';
+        tr.innerHTML = `
+          <td style="padding: 0.5rem; font-family: monospace; font-weight: 700; color: #16a34a;">${escapeHTML(item.ip)}</td>
+          <td style="padding: 0.5rem; text-align: right; font-weight: 700; color: #0f172a;">${item.count.toLocaleString()}</td>
+          <td style="padding: 0.5rem; text-align: right; color: #64748b;">${pct}%</td>
+        `;
+        topIpsTbody.appendChild(tr);
+      });
+    }
+
+    // Render Filtered Viewer
+    renderLogViewer();
+
+    // Executive Summary Report Generation
+    const dateStr = new Date().toISOString().split('T')[0];
+    currentReportText = `==================================================
+DATAFROG.TOOLS — EXECUTIVE LOG ANALYSIS REPORT
+Generated: ${dateStr} | Execution: 100% Client-Side Local Browser
+==================================================
+
+1. OVERVIEW & SYSTEM HEALTH
+--------------------------------------------------
+- Total Log Entries:        ${totalLines}
+- Log File Size:            ${formatBytes(currentFileByteSize || new Blob([raw]).size)}
+- Errors Count:             ${errorCount} (${calcLevelPct(errorCount)}%)
+- Warnings Count:           ${warnCount} (${calcLevelPct(warnCount)}%)
+- Unique Client IPs:        ${uniqueIpsList.length}
+- System Health Score:      ${qualityScore}% (${grade})
+
+2. HTTP STATUS CODE DISTRIBUTION
+--------------------------------------------------
+- 2xx Success:              ${c2xx} (${calcHttpPct(c2xx)}%)
+- 3xx Redirection:          ${c3xx} (${calcHttpPct(c3xx)}%)
+- 4xx Client Errors:        ${c4xx} (${calcHttpPct(c4xx)}%)
+- 5xx Server Errors:        ${c5xx} (${calcHttpPct(c5xx)}%)
+
+3. TOP REQUESTED ENDPOINTS
+--------------------------------------------------
+${sortedTopURIs.map(i => `- ${i.uri.padEnd(35)} : ${i.count} requests (${((i.count/totalLines)*100).toFixed(1)}%)`).join('\n') || '- None extracted'}
+
+4. TOP REQUESTING CLIENT IPS
+--------------------------------------------------
+${sortedTopIPs.map(i => `- ${i.ip.padEnd(20)} : ${i.count} requests (${((i.count/totalLines)*100).toFixed(1)}%)`).join('\n') || '- None extracted'}
+
+==================================================
+DataFrog.tools — Privacy-First Data Intelligence Workspace`;
+
+    summaryReportOutput.textContent = currentReportText;
+  }
+
+  function renderLogViewer() {
+    if (parsedLogEntries.length === 0) {
+      logViewerContainer.innerHTML = '<div style="color: #64748b; font-style: italic;">Parsed log entries will display here...</div>';
+      filterMatchingInfo.textContent = 'Showing 0 entries';
+      return;
+    }
+
+    const q = logSearchFilter.value.trim().toLowerCase();
+    const selectedLevel = logLevelFilter.value;
+
+    const filtered = parsedLogEntries.filter(e => {
+      let levelMatch = true;
+      if (selectedLevel === 'ERROR') levelMatch = e.level === 'ERROR' || (e.statusCode && e.statusCode >= 400);
+      else if (selectedLevel === 'WARN') levelMatch = e.level === 'WARN';
+      else if (selectedLevel === 'INFO') levelMatch = e.level === 'INFO' || (e.statusCode && e.statusCode < 400);
+
+      const textMatch = !q || e.raw.toLowerCase().includes(q);
+      return levelMatch && textMatch;
+    });
+
+    filterMatchingInfo.textContent = `Showing ${filtered.length.toLocaleString()} of ${parsedLogEntries.length.toLocaleString()} entries`;
+
+    logViewerContainer.innerHTML = '';
+    filtered.slice(0, 100).forEach(e => {
+      const lineDiv = document.createElement('div');
+      lineDiv.style.marginBottom = '0.35rem';
+      lineDiv.style.whiteSpace = 'pre-wrap';
+      lineDiv.style.wordBreak = 'break-all';
+
+      let badgeBg = '#475569';
+      if (e.level === 'ERROR' || (e.statusCode && e.statusCode >= 500)) badgeBg = '#dc2626';
+      else if (e.level === 'WARN' || (e.statusCode && e.statusCode >= 400)) badgeBg = '#ea580c';
+      else if (e.level === 'INFO') badgeBg = '#2563eb';
+
+      lineDiv.innerHTML = `<span style="display: inline-block; padding: 0.05rem 0.4rem; background: ${badgeBg}; color: #ffffff; border-radius: 4px; font-size: 0.75rem; font-weight: 700; margin-right: 0.5rem;">${e.level}</span><span>${escapeHTML(e.raw)}</span>`;
+      logViewerContainer.appendChild(lineDiv);
+    });
+  }
+
+  function showEmptyState() {
+    cardTotalEntries.textContent = '0';
+    cardSize.textContent = '0 B';
+    cardErrors.textContent = '0';
+    cardWarnings.textContent = '0';
+    cardTopStatus.textContent = '-';
+    cardUniqueIps.textContent = '0';
+    cardQualityScore.textContent = '100%';
+    cardHealthGrade.textContent = 'Grade A';
+    cardHealthGrade.style.color = '#16a34a';
+
+    countErrors.textContent = '0 (0%)'; barErrors.style.width = '0%';
+    countWarnings.textContent = '0 (0%)'; barWarnings.style.width = '0%';
+    countInfo.textContent = '0 (0%)'; barInfo.style.width = '0%';
+    countDebug.textContent = '0 (0%)'; barDebug.style.width = '0%';
+
+    count2xx.textContent = '0 (0%)'; bar2xx.style.width = '0%';
+    count3xx.textContent = '0 (0%)'; bar3xx.style.width = '0%';
+    count4xx.textContent = '0 (0%)'; bar4xx.style.width = '0%';
+    count5xx.textContent = '0 (0%)'; bar5xx.style.width = '0%';
+
+    topUrisTbody.innerHTML = '<tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No log data analyzed</td></tr>';
+    topIpsTbody.innerHTML = '<tr><td colspan="3" style="padding: 1rem; text-align: center; color: #94a3b8; font-style: italic;">No log data analyzed</td></tr>';
+    logViewerContainer.innerHTML = '<div style="color: #64748b; font-style: italic;">Parsed log entries will display here...</div>';
+    filterMatchingInfo.textContent = 'Showing 0 entries';
+
+    summaryReportOutput.textContent = 'Analysis report will be generated here upon log input...';
+    currentReportText = '';
+    parsedLogEntries = [];
+  }
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+  }
+
+  // Copy & Export Actions
+  btnCopyReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    navigator.clipboard.writeText(currentReportText);
+    showToast('Executive log report copied to clipboard!');
+  });
+
+  btnDownloadReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    const blob = new Blob([currentReportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'log-analysis-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!');
+  });
+
+  btnExportStatsCsv.addEventListener('click', () => {
+    if (sortedTopURIs.length === 0 && sortedTopIPs.length === 0) return;
+    const csvHeaders = 'Type,Value,Count';
+    const uriRows = sortedTopURIs.map(i => `"URI","${i.uri}",${i.count}`);
+    const ipRows = sortedTopIPs.map(i => `"Client IP","${i.ip}",${i.count}`);
+    const csvData = [csvHeaders, ...uriRows, ...ipRows].join('\n');
+
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'log-traffic-statistics.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Log statistics exported as CSV!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Load
+  analyzeLogs();
+
+})();
+</script>

@@ -1,0 +1,470 @@
+---
+layout: main
+title: "XML Visualizer – Interactive XML Hierarchy & Tree Viewer | DataFrog.tools"
+short_name: "XML Visualizer"
+description: "Visualize XML documents as an interactive hierarchy tree. Inspect nested tags, attribute values, namespace URIs, XPath pointers, and export diagrams. Free, private, and browser-based."
+keywords: "XML Visualizer, XML Tree Viewer, Visualize XML, XML Structure Viewer, XML Hierarchy Viewer, XML Diagram, XML Graph"
+category: "Visualize"
+permalink: /visualize/xml-visualizer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "XML Visualizer – DataFrog.tools",
+  "url": "https://datafrog.tools/visualize/xml-visualizer/",
+  "description": "Browser-based XML Visualizer tool for displaying XML hierarchy trees, attribute inspectors, namespace verification, and XPath tracing locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Visualize",
+      "item": "https://datafrog.tools/visualize"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "XML Visualizer",
+      "item": "https://datafrog.tools/visualize/xml-visualizer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the XML Visualizer render element hierarchies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The XML Visualizer uses browser DOMParser engines to parse element tags, attribute pairs, namespace declarations, and text nodes into an interactive, expandable tree diagram."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my XML document safe during visualization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% private. All XML tree parsing, XPath generation, search filtering, and DOM rendering execute locally inside your web browser RAM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I copy XPaths or inspect element attributes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Click any element node to copy its exact XPath string (e.g. `/workspace/meta/title`) or inspect attribute key-value pairs inline."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    👁️ Visualize Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    XML Visualizer – Interactive Element Hierarchy & Tree Diagram
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Visualize XML documents as interactive element trees. Inspect nested tag nodes, attributes, namespace URIs, trace XPath pointers, search elements, and explore document structures.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📜</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your XML file here to visualize</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .xml files or paste raw XML text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse XML File
+      <input type="file" id="file-input" accept=".xml,text/xml,application/xml,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample XML
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span id="status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+      <input type="text" id="search-nodes" placeholder="🔎 Search elements or attributes..." 
+             style="padding: 0.35rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.825rem; outline: none; width: 200px;">
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-expand-all" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        ➕ Expand All
+      </button>
+      <button id="btn-collapse-all" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        ➖ Collapse All
+      </button>
+      <button id="btn-visualize" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📜 Render XML Tree
+      </button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        1. XML Document Input
+      </label>
+      <textarea id="xml-input" placeholder="Paste your XML document here..." 
+                style="width: 100%; height: 320px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+    
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        2. Interactive XML Tree Hierarchy
+      </label>
+      <div id="tree-canvas" style="width: 100%; height: 320px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; border: 1px solid #cbd5e1; border-radius: 10px; background: #ffffff; overflow: auto;">
+        <span style="color: #64748b; font-style: italic;">XML visualization will render here...</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">XML Visualizer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">DOM tree node traversal, XPath pointers, attribute inspection, and privacy</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📜 DOM Element Tree Traversal</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Parses element tags, nested children, and text nodes into an expandable visual hierarchy.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📍 Node XPath Location</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Click any element to copy its exact XPath string (e.g. `/workspace/meta/version`).</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🏷️ Attribute & Namespace Panel</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Displays element attribute key-value pairs and declared `xmlns` namespace URIs.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All XML tree rendering uses local browser DOMParser. Zero documents are uploaded to servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use XML Visualizer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input XML Document</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste XML text into box 1, drag & drop a <code>.xml</code> file, or click <strong>Load Sample XML</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Explore Visual Tree Nodes</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Expand/collapse element branches, search tags, and inspect attribute badges.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy Element XPath</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click any element node to copy its exact XPath string.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the XML Visualizer render element hierarchies?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The XML Visualizer uses browser DOMParser engines to parse element tags, attribute pairs, namespace declarations, and text nodes into an interactive, expandable tree diagram.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my XML document safe during visualization?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, 100% private. All XML tree parsing, XPath generation, search filtering, and DOM rendering execute locally inside your web browser RAM.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I copy XPaths or inspect element attributes?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! Click any element node to copy its exact XPath string (e.g. `/workspace/meta/title`) or inspect attribute key-value pairs inline.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT XML VISUALIZER ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const xmlInput = document.getElementById('xml-input');
+  const treeCanvas = document.getElementById('tree-canvas');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const statusBadge = document.getElementById('status-badge');
+  const searchNodes = document.getElementById('search-nodes');
+
+  const btnVisualize = document.getElementById('btn-visualize');
+  const btnExpandAll = document.getElementById('btn-expand-all');
+  const btnCollapseAll = document.getElementById('btn-collapse-all');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  const SAMPLE_XML = `<?xml version="1.0" encoding="UTF-8"?>
+<workspace xmlns="https://datafrog.tools/schema">
+  <meta>
+    <title>DataFrog Intelligence</title>
+    <version>2.4</version>
+  </meta>
+  <modules>
+    <module category="Inspect">JSON Viewer</module>
+    <module category="Visualize">XML Visualizer</module>
+  </modules>
+</workspace>`;
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      xmlInput.value = evt.target.result;
+      renderTree();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    xmlInput.value = SAMPLE_XML;
+    renderTree();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    xmlInput.value = '';
+    renderTree();
+  });
+
+  xmlInput.addEventListener('input', renderTree);
+  btnVisualize.addEventListener('click', () => {
+    if (!xmlInput.value.trim()) {
+      xmlInput.value = SAMPLE_XML;
+      showToast('Loaded sample XML for tree rendering!');
+    }
+    renderTree();
+  });
+  searchNodes.addEventListener('input', renderTree);
+
+  btnExpandAll.addEventListener('click', () => {
+    document.querySelectorAll('#tree-canvas details').forEach(d => d.open = true);
+  });
+
+  btnCollapseAll.addEventListener('click', () => {
+    document.querySelectorAll('#tree-canvas details').forEach(d => d.open = false);
+  });
+
+  function renderTree() {
+    const val = xmlInput.value;
+    if (!val.trim()) {
+      statusBadge.textContent = 'Ready';
+      statusBadge.style.background = '#f1f5f9';
+      statusBadge.style.color = '#475569';
+      treeCanvas.innerHTML = '<span style="color: #64748b; font-style: italic;">XML visualization will render here...</span>';
+      return;
+    }
+
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(val, "application/xml");
+    const parseError = xmlDoc.getElementsByTagName("parsererror");
+
+    if (parseError.length > 0) {
+      statusBadge.textContent = '❌ Parser Error';
+      statusBadge.style.background = '#fef2f2';
+      statusBadge.style.color = '#dc2626';
+      treeCanvas.innerHTML = `<span style="color: #dc2626; font-weight: 700;">XML Parser Error: ${parseError[0].textContent}</span>`;
+      return;
+    }
+
+    statusBadge.textContent = '✅ Tree Rendered';
+    statusBadge.style.background = '#f0fdf4';
+    statusBadge.style.color = '#16a34a';
+
+    const filterText = searchNodes.value.toLowerCase().trim();
+
+    function buildNode(el, path) {
+      const tagName = el.tagName;
+      const attributes = Array.from(el.attributes || []);
+      const children = Array.from(el.children);
+
+      const xpath = `${path}/${tagName}`;
+      const matchSearch = filterText && (tagName.toLowerCase().includes(filterText) || el.textContent.toLowerCase().includes(filterText));
+
+      let attrHtml = attributes.map(a => `<span style="color: #d97706; font-size: 0.75rem;"> ${a.name}="${a.value}"</span>`).join('');
+
+      if (children.length > 0) {
+        let details = document.createElement('details');
+        details.open = true;
+        details.style.cssText = 'margin-left: 1rem; margin-top: 0.2rem;';
+
+        let summary = document.createElement('summary');
+        summary.style.cssText = 'cursor: pointer; font-weight: 700; color: #0f172a;';
+        summary.innerHTML = `<span style="color: #2563eb;">&lt;${tagName}&gt;</span>${attrHtml} <span style="font-size: 0.75rem; background: #e0e7ff; color: #3730a3; padding: 0.1rem 0.4rem; border-radius: 4px;">${children.length} nodes</span>`;
+        if (matchSearch) summary.style.background = '#fef08a';
+
+        summary.addEventListener('click', (e) => {
+          if (e.ctrlKey || e.metaKey) {
+            navigator.clipboard.writeText(xpath);
+            showToast(`Copied XPath: ${xpath}`);
+          }
+        });
+
+        details.appendChild(summary);
+        children.forEach((c, idx) => {
+          details.appendChild(buildNode(c, `${xpath}[${idx+1}]`));
+        });
+        return details;
+      } else {
+        let div = document.createElement('div');
+        div.style.cssText = 'margin-left: 1.5rem; margin-top: 0.15rem; cursor: pointer;';
+        const textVal = el.textContent.trim();
+        div.innerHTML = `<span style="color: #2563eb; font-weight: 700;">&lt;${tagName}&gt;</span>${attrHtml} <span style="color: #059669; font-weight: 600;">${textVal}</span>`;
+        if (matchSearch) div.style.background = '#fef08a';
+
+        div.addEventListener('click', () => {
+          navigator.clipboard.writeText(xpath);
+          showToast(`Copied XPath: ${xpath}`);
+        });
+
+        return div;
+      }
+    }
+
+    treeCanvas.innerHTML = '';
+    treeCanvas.appendChild(buildNode(xmlDoc.documentElement, ''));
+  }
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Check
+  renderTree();
+
+})();
+</script>

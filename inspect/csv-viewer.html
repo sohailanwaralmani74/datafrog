@@ -1,0 +1,907 @@
+---
+layout: main
+title: "CSV Viewer – View & Filter CSV Files Online | DataFrog.tools"
+short_name: "CSV Viewer"
+description: "Open and inspect CSV files online with an interactive CSV Viewer. Filter, search, sort columns, freeze headers, and explore CSV spreadsheets locally in your browser."
+keywords: "CSV Viewer, View CSV Online, CSV File Viewer, Open CSV File, CSV Table Viewer, CSV Reader, Online CSV Viewer, View CSV File, CSV Viewer Online"
+category: "Inspect"
+permalink: /inspect/csv-viewer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CSV Viewer – DataFrog.tools",
+  "url": "https://datafrog.tools/inspect/csv-viewer/",
+  "description": "Interactive browser-based CSV Viewer to open, inspect, search, filter, and sort CSV datasets locally without server uploads.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Inspect",
+      "item": "https://datafrog.tools/inspect"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "CSV Viewer",
+      "item": "https://datafrog.tools/inspect/csv-viewer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is my CSV file uploaded to any server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. Your CSV file is read and rendered locally inside your browser using client-side JavaScript. No data is ever transmitted over the network."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which delimiters are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool automatically detects comma (,), tab (\\t), semicolon (;), and pipe (|) delimiters."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I sort and filter CSV columns?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Click any column header to sort ascending or descending, and use the search bar to filter rows dynamically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are quoted fields and empty cells handled?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The RFC 4180 parser accurately handles escaped quotes and highlights empty cells with distinct badges for fast data quality inspection."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #eff6ff; color: #2563eb; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    🔍 Inspect Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    CSV Viewer – Interactive Spreadsheet Inspector
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Open, search, filter, sort, and inspect CSV files locally in your browser. Auto-detects delimiters, preserves quoted fields, and highlights empty cells.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📊</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your CSV file here</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .csv, .tsv, .txt files or paste text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse CSV File
+      <input type="file" id="file-input" accept=".csv,.tsv,.txt,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample CSV
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     STATISTICS PANEL (9 METRICS)
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.75rem;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Delimiter</span>
+    <span id="stat-delimiter" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1rem; color: #2563eb;">Auto</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">File Size</span>
+    <span id="stat-size" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1rem; color: #0f172a;">0 B</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Rows</span>
+    <span id="stat-rows" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Columns</span>
+    <span id="stat-cols" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Empty Cells</span>
+    <span id="stat-empty" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #dc2626;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Populated</span>
+    <span id="stat-populated" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #16a34a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Characters</span>
+    <span id="stat-chars" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Encoding</span>
+    <span id="stat-encoding" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1rem; color: #0f172a;">UTF-8</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem; text-align: center;">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Quoted Fields</span>
+    <span id="stat-quoted" style="display: block; margin-top: 0.25rem; font-weight: 700; font-size: 1.1rem; color: #9333ea;">0</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SEARCH, FILTERS & CONTROLS TOOLBAR
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+  
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+    <!-- Search Bar -->
+    <div style="flex: 1; min-width: 280px; position: relative;">
+      <input type="text" id="table-search-input" placeholder="Search rows or columns..." 
+             style="width: 100%; padding: 0.65rem 1rem 0.65rem 2.25rem; font-size: 0.9rem; border-radius: 8px; border: 1px solid #cbd5e1; background: #ffffff;">
+      <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); opacity: 0.5; font-size: 0.9rem;">🔍</span>
+    </div>
+
+    <!-- Delimiter Override & Page Size -->
+    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 0.4rem;">
+        <label for="delimiter-select" style="font-size: 0.85rem; font-weight: 600; color: #475569;">Delimiter:</label>
+        <select id="delimiter-select" style="padding: 0.45rem 0.65rem; font-size: 0.875rem; border-radius: 6px; border: 1px solid #cbd5e1; background: #ffffff; cursor: pointer;">
+          <option value="auto" selected>Auto Detect</option>
+          <option value=",">Comma (,)</option>
+          <option value="	">Tab (\t)</option>
+          <option value=";">Semicolon (;)</option>
+          <option value="|">Pipe (|)</option>
+        </select>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.4rem;">
+        <label for="page-size-select" style="font-size: 0.85rem; font-weight: 600; color: #475569;">Rows / Page:</label>
+        <select id="page-size-select" style="padding: 0.45rem 0.65rem; font-size: 0.875rem; border-radius: 6px; border: 1px solid #cbd5e1; background: #ffffff; cursor: pointer;">
+          <option value="25">25</option>
+          <option value="50" selected>50</option>
+          <option value="100">100</option>
+          <option value="all">All</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Action Buttons -->
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 0.75rem;">
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-copy-filtered" style="padding: 0.45rem 0.85rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Filtered Rows
+      </button>
+      <button id="btn-export-csv" style="padding: 0.45rem 0.85rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Export CSV
+      </button>
+      <button id="btn-toggle-columns" style="padding: 0.45rem 0.85rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        👁️ Hide / Show Columns
+      </button>
+    </div>
+
+    <!-- Jump to Row -->
+    <div style="display: flex; align-items: center; gap: 0.4rem;">
+      <span style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Jump to Row:</span>
+      <input type="number" id="jump-row-input" min="1" placeholder="Row #" style="width: 80px; padding: 0.35rem 0.5rem; font-size: 0.85rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+      <button id="btn-jump-row" style="padding: 0.35rem 0.65rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Go</button>
+    </div>
+  </div>
+
+  <!-- Column Visibility Panel -->
+  <div id="column-visibility-panel" style="display: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.85rem; margin-top: 0.5rem;">
+    <span style="font-size: 0.8rem; font-weight: 700; color: #0f172a; display: block; margin-bottom: 0.5rem;">Toggle Column Visibility:</span>
+    <div id="column-checkboxes" style="display: flex; gap: 0.85rem; flex-wrap: wrap; max-height: 120px; overflow-y: auto;"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     TEXT INPUT & INTERACTIVE TABLE WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <textarea id="csv-input" placeholder="Paste your CSV text here..." 
+            style="width: 100%; height: 140px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; margin-bottom: 1.5rem; resize: vertical;"></textarea>
+
+  <!-- Interactive Table Container -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    
+    <div id="table-scroll-container" style="max-height: 550px; overflow: auto; position: relative;">
+      <div id="table-placeholder" style="display: flex; height: 280px; align-items: center; justify-content: center; color: #94a3b8; text-align: center; flex-direction: column; gap: 0.5rem;">
+        <span style="font-size: 2.5rem;">📊</span>
+        <span>Upload a CSV file or paste text above to render interactive table</span>
+      </div>
+
+      <table id="csv-table" style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left; display: none;">
+        <thead style="position: sticky; top: 0; background: #0f172a; color: #ffffff; z-index: 10;">
+          <tr id="table-header-row"></tr>
+        </thead>
+        <tbody id="table-body-rows"></tbody>
+      </table>
+    </div>
+
+    <!-- Pagination Bar -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1.25rem; background: #f8fafc; border-top: 1px solid #e2e8f0; flex-wrap: wrap; gap: 0.75rem;">
+      <span id="pagination-info" style="font-size: 0.85rem; font-weight: 600; color: #475569;">Showing 0 to 0 of 0 rows</span>
+      
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button id="btn-prev-page" style="padding: 0.35rem 0.75rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.8rem; cursor: pointer;">← Previous</button>
+        <span id="page-number-display" style="font-size: 0.85rem; font-weight: 700; color: #0f172a;">Page 1</span>
+        <button id="btn-next-page" style="padding: 0.35rem 0.75rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.8rem; cursor: pointer;">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">CSV Viewer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Powerful spreadsheet inspection tools without external uploads</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚡ Auto Delimiter Detection</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Automatically recognizes commas, tabs, semicolons, and pipes without manual setup.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📌 Sticky Header & Row Numbers</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Freeze table headers at top and display line numbers for effortless navigation.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">↕️ Interactive Column Sorting</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Click any column header to sort values numerically or alphabetically instantly.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔍 Global Row & Column Search</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Filter table rows dynamically across all fields with real-time feedback.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚠️ Empty Cell Quality Badges</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Highlights missing values with clear badges for rapid data quality assessment.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Offline & Private</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Your CSV data remains completely inside your local browser. Zero server processing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use CSV Viewer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Open CSV File</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Drag and drop your <code>.csv</code> file, click <strong>Browse CSV File</strong>, or click <strong>Load Sample CSV</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Sort, Filter & Inspect</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click headers to sort columns. Type search queries to filter rows or use column toggles to simplify views.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Filtered Rows</strong> to copy table data, or click <strong>Export CSV</strong> to save your filtered dataset.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my CSV file uploaded to any server?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. Your CSV file is read and rendered locally inside your browser using client-side JavaScript. No data is ever transmitted over the network.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Which delimiters are supported?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool automatically detects comma (,), tab (\t), semicolon (;), and pipe (|) delimiters.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I sort and filter CSV columns?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! Click any column header to sort ascending or descending, and use the search bar to filter rows dynamically.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How are quoted fields and empty cells handled?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The RFC 4180 parser accurately handles escaped quotes and highlights empty cells with distinct badges for fast data quality inspection.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     INTERACTIVE JAVASCRIPT LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // Elements
+  const csvInput = document.getElementById('csv-input');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  
+  const delimiterSelect = document.getElementById('delimiter-select');
+  const pageSizeSelect = document.getElementById('page-size-select');
+  const tableSearchInput = document.getElementById('table-search-input');
+  
+  const tablePlaceholder = document.getElementById('table-placeholder');
+  const csvTable = document.getElementById('csv-table');
+  const tableHeaderRow = document.getElementById('table-header-row');
+  const tableBodyRows = document.getElementById('table-body-rows');
+
+  const paginationInfo = document.getElementById('pagination-info');
+  const btnPrevPage = document.getElementById('btn-prev-page');
+  const btnNextPage = document.getElementById('btn-next-page');
+  const pageNumberDisplay = document.getElementById('page-number-display');
+
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+  const btnCopyFiltered = document.getElementById('btn-copy-filtered');
+  const btnExportCsv = document.getElementById('btn-export-csv');
+  const btnToggleColumns = document.getElementById('btn-toggle-columns');
+  const columnVisibilityPanel = document.getElementById('column-visibility-panel');
+  const columnCheckboxes = document.getElementById('column-checkboxes');
+  const jumpRowInput = document.getElementById('jump-row-input');
+  const btnJumpRow = document.getElementById('btn-jump-row');
+
+  // Stats Elements
+  const statDelimiter = document.getElementById('stat-delimiter');
+  const statSize = document.getElementById('stat-size');
+  const statRows = document.getElementById('stat-rows');
+  const statCols = document.getElementById('stat-cols');
+  const statEmpty = document.getElementById('stat-empty');
+  const statPopulated = document.getElementById('stat-populated');
+  const statChars = document.getElementById('stat-chars');
+  const statEncoding = document.getElementById('stat-encoding');
+  const statQuoted = document.getElementById('stat-quoted');
+
+  // State
+  let parsedHeaders = [];
+  let parsedRows = [];
+  let filteredRows = [];
+  let activeDelimiter = ',';
+  let currentSortCol = null;
+  let currentSortAsc = true;
+  let currentPage = 1;
+  let pageSize = 50;
+  let hiddenColumns = new Set();
+  let fileByteSize = 0;
+
+  const SAMPLE_CSV = `id,name,role,department,salary,status,email
+101,"Smith, John",Data Engineer,Engineering,95000,Active,john.smith@datafrog.tools
+102,"Alvarez, Maria",Senior Analyst,Analytics,88000,Active,maria.a@datafrog.tools
+103,"Chen, Wei",Lead Architect,Data Architecture,125000,Active,wei.chen@datafrog.tools
+104,"Patel, Priya",Quality Inspector,Validation,78000,,priya.p@datafrog.tools
+105,"Kim, Min-Jun",BI Developer,Visualization,92000,Active,minjun.k@datafrog.tools
+106,"O'Connor, Liam",Database Admin,Infrastructure,105000,Inactive,
+107,"Müller, Hannah",Data Scientist,Research,115000,Active,hannah.m@datafrog.tools`;
+
+  // Click Drop Zone
+  dropZone.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+  // Sample Loader
+  btnLoadSample.addEventListener('click', function(e) {
+    e.stopPropagation();
+    csvInput.value = SAMPLE_CSV;
+    fileByteSize = new Blob([SAMPLE_CSV]).size;
+    parseAndUpdate();
+  });
+
+  // Clear Input
+  btnClear.addEventListener('click', function(e) {
+    e.stopPropagation();
+    csvInput.value = '';
+    fileByteSize = 0;
+    parseAndUpdate();
+  });
+
+  // Drag & Drop
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#2563eb';
+      dropZone.style.backgroundColor = '#eff6ff';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    fileByteSize = file.size;
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      csvInput.value = evt.target.result;
+      parseAndUpdate();
+    };
+    reader.readAsText(file);
+  }
+
+  // Input Listeners
+  csvInput.addEventListener('input', () => {
+    fileByteSize = new Blob([csvInput.value]).size;
+    parseAndUpdate();
+  });
+
+  delimiterSelect.addEventListener('change', parseAndUpdate);
+  tableSearchInput.addEventListener('input', applyFilterAndSort);
+  pageSizeSelect.addEventListener('change', () => {
+    pageSize = pageSizeSelect.value === 'all' ? filteredRows.length : parseInt(pageSizeSelect.value, 10);
+    currentPage = 1;
+    renderTable();
+  });
+
+  // RFC 4180 Compliant CSV Parser
+  function parseCSVText(text, delimSetting) {
+    if (!text.trim()) return { headers: [], rows: [], delimiter: ',', emptyCount: 0, populatedCount: 0, quotedCount: 0 };
+
+    let delimiter = delimSetting;
+    if (delimSetting === 'auto') {
+      delimiter = detectDelimiter(text);
+    }
+
+    let emptyCount = 0;
+    let populatedCount = 0;
+    let quotedCount = 0;
+
+    const lines = [];
+    let curCell = '';
+    let curRow = [];
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      const nextC = text[i + 1];
+
+      if (inQuotes) {
+        if (c === '"') {
+          if (nextC === '"') {
+            curCell += '"';
+            i++;
+          } else {
+            inQuotes = false;
+          }
+        } else {
+          curCell += c;
+        }
+      } else {
+        if (c === '"') {
+          inQuotes = true;
+          quotedCount++;
+        } else if (c === delimiter) {
+          curRow.push(curCell.trim());
+          curCell = '';
+        } else if (c === '\r' || c === '\n') {
+          if (c === '\r' && nextC === '\n') i++;
+          curRow.push(curCell.trim());
+          if (curRow.some(cell => cell.length > 0)) {
+            lines.push(curRow);
+          }
+          curRow = [];
+          curCell = '';
+        } else {
+          curCell += c;
+        }
+      }
+    }
+    if (curCell || curRow.length > 0) {
+      curRow.push(curCell.trim());
+      lines.push(curRow);
+    }
+
+    if (lines.length === 0) return { headers: [], rows: [], delimiter, emptyCount: 0, populatedCount: 0, quotedCount: 0 };
+
+    const headers = lines[0];
+    const rows = lines.slice(1);
+
+    rows.forEach(r => {
+      headers.forEach((_, colIdx) => {
+        const val = r[colIdx] || '';
+        if (val === '') emptyCount++;
+        else populatedCount++;
+      });
+    });
+
+    return { headers, rows, delimiter, emptyCount, populatedCount, quotedCount };
+  }
+
+  function detectDelimiter(text) {
+    const sample = text.split('\n').slice(0, 10).join('\n');
+    const counts = {
+      ',': (sample.match(/,/g) || []).length,
+      '\t': (sample.match(/\t/g) || []).length,
+      ';': (sample.match(/;/g) || []).length,
+      '|': (sample.match(/\|/g) || []).length
+    };
+    let best = ',';
+    let max = -1;
+    Object.keys(counts).forEach(d => {
+      if (counts[d] > max) {
+        max = counts[d];
+        best = d;
+      }
+    });
+    return best;
+  }
+
+  function parseAndUpdate() {
+    const raw = csvInput.value;
+    if (!raw.trim()) {
+      showEmptyState();
+      return;
+    }
+
+    const parsed = parseCSVText(raw, delimiterSelect.value);
+    parsedHeaders = parsed.headers;
+    parsedRows = parsed.rows;
+    activeDelimiter = parsed.delimiter;
+
+    // Update Stats
+    statDelimiter.textContent = activeDelimiter === '\t' ? 'TAB' : activeDelimiter;
+    statSize.textContent = formatBytes(fileByteSize);
+    statRows.textContent = parsedRows.length.toLocaleString();
+    statCols.textContent = parsedHeaders.length.toLocaleString();
+    statEmpty.textContent = parsed.emptyCount.toLocaleString();
+    statPopulated.textContent = parsed.populatedCount.toLocaleString();
+    statChars.textContent = raw.length.toLocaleString();
+    statQuoted.textContent = parsed.quotedCount.toLocaleString();
+
+    buildColumnCheckboxes();
+    applyFilterAndSort();
+  }
+
+  function showEmptyState() {
+    tablePlaceholder.style.display = 'flex';
+    csvTable.style.display = 'none';
+    statDelimiter.textContent = 'Auto';
+    statSize.textContent = '0 B';
+    statRows.textContent = '0';
+    statCols.textContent = '0';
+    statEmpty.textContent = '0';
+    statPopulated.textContent = '0';
+    statChars.textContent = '0';
+    statQuoted.textContent = '0';
+    paginationInfo.textContent = 'Showing 0 to 0 of 0 rows';
+  }
+
+  function applyFilterAndSort() {
+    const query = tableSearchInput.value.trim().toLowerCase();
+    
+    if (!query) {
+      filteredRows = [...parsedRows];
+    } else {
+      filteredRows = parsedRows.filter(row => {
+        return row.some((cell, colIdx) => {
+          if (hiddenColumns.has(colIdx)) return false;
+          return cell.toLowerCase().includes(query);
+        });
+      });
+    }
+
+    // Apply Sorting
+    if (currentSortCol !== null) {
+      filteredRows.sort((a, b) => {
+        const valA = a[currentSortCol] || '';
+        const valB = b[currentSortCol] || '';
+        const numA = Number(valA);
+        const numB = Number(valB);
+
+        if (!isNaN(numA) && !isNaN(numB) && valA !== '' && valB !== '') {
+          return currentSortAsc ? numA - numB : numB - numA;
+        }
+        return currentSortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      });
+    }
+
+    currentPage = 1;
+    renderTable();
+  }
+
+  function renderTable() {
+    if (parsedRows.length === 0) {
+      showEmptyState();
+      return;
+    }
+
+    tablePlaceholder.style.display = 'none';
+    csvTable.style.display = 'table';
+
+    // Headers
+    tableHeaderRow.innerHTML = '';
+    
+    // Line Number Header
+    const thNum = document.createElement('th');
+    thNum.style.cssText = 'padding: 0.75rem 1rem; border-bottom: 2px solid #334155; width: 60px; text-align: center; font-weight: 700; color: #94a3b8; user-select: none;';
+    thNum.textContent = '#';
+    tableHeaderRow.appendChild(thNum);
+
+    parsedHeaders.forEach((h, colIdx) => {
+      if (hiddenColumns.has(colIdx)) return;
+
+      const th = document.createElement('th');
+      th.style.cssText = 'padding: 0.75rem 1rem; border-bottom: 2px solid #334155; font-weight: 700; cursor: pointer; user-select: none; white-space: nowrap;';
+      
+      let sortIndicator = '';
+      if (currentSortCol === colIdx) {
+        sortIndicator = currentSortAsc ? ' 🔼' : ' 🔽';
+      }
+
+      th.textContent = h + sortIndicator;
+      th.title = 'Click to sort column';
+
+      th.addEventListener('click', () => {
+        if (currentSortCol === colIdx) {
+          currentSortAsc = !currentSortAsc;
+        } else {
+          currentSortCol = colIdx;
+          currentSortAsc = true;
+        }
+        applyFilterAndSort();
+      });
+
+      tableHeaderRow.appendChild(th);
+    });
+
+    // Rows Rendering
+    tableBodyRows.innerHTML = '';
+
+    const effectivePageSize = pageSizeSelect.value === 'all' ? filteredRows.length : pageSize;
+    const startIdx = (currentPage - 1) * effectivePageSize;
+    const endIdx = Math.min(startIdx + effectivePageSize, filteredRows.length);
+    const pageRows = filteredRows.slice(startIdx, endIdx);
+
+    pageRows.forEach((row, rowOffset) => {
+      const globalRowIdx = startIdx + rowOffset + 1;
+      const tr = document.createElement('tr');
+      tr.style.cssText = rowOffset % 2 === 0 ? 'background: #ffffff;' : 'background: #f8fafc;';
+      tr.id = `table-row-${globalRowIdx}`;
+
+      // Row Number Cell
+      const tdNum = document.createElement('td');
+      tdNum.style.cssText = 'padding: 0.6rem 1rem; border-bottom: 1px solid #e2e8f0; color: #94a3b8; font-family: monospace; font-size: 0.8rem; text-align: center; font-weight: 600;';
+      tdNum.textContent = globalRowIdx;
+      tr.appendChild(tdNum);
+
+      parsedHeaders.forEach((_, colIdx) => {
+        if (hiddenColumns.has(colIdx)) return;
+
+        const td = document.createElement('td');
+        td.style.cssText = 'padding: 0.6rem 1rem; border-bottom: 1px solid #e2e8f0; font-size: 0.875rem; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px;';
+        
+        const cellVal = row[colIdx] || '';
+
+        if (!cellVal) {
+          td.innerHTML = '<span style="font-size: 0.7rem; background: #fef2f2; color: #dc2626; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 600;">EMPTY</span>';
+        } else {
+          td.textContent = cellVal;
+        }
+
+        tr.appendChild(td);
+      });
+
+      tableBodyRows.appendChild(tr);
+    });
+
+    // Update Pagination
+    const totalPages = Math.ceil(filteredRows.length / (effectivePageSize || 1)) || 1;
+    paginationInfo.textContent = `Showing ${filteredRows.length > 0 ? startIdx + 1 : 0} to ${endIdx} of ${filteredRows.length.toLocaleString()} rows`;
+    pageNumberDisplay.textContent = `Page ${currentPage} of ${totalPages}`;
+
+    btnPrevPage.disabled = currentPage === 1;
+    btnNextPage.disabled = currentPage >= totalPages;
+    btnPrevPage.style.opacity = currentPage === 1 ? '0.5' : '1';
+    btnNextPage.style.opacity = currentPage >= totalPages ? '0.5' : '1';
+  }
+
+  // Pagination Handlers
+  btnPrevPage.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderTable();
+    }
+  });
+
+  btnNextPage.addEventListener('click', () => {
+    const effectivePageSize = pageSizeSelect.value === 'all' ? filteredRows.length : pageSize;
+    const totalPages = Math.ceil(filteredRows.length / (effectivePageSize || 1));
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderTable();
+    }
+  });
+
+  btnJumpRow.addEventListener('click', () => {
+    const targetRow = parseInt(jumpRowInput.value, 10);
+    if (isNaN(targetRow) || targetRow < 1 || targetRow > filteredRows.length) {
+      showToast('Invalid row number');
+      return;
+    }
+    const effectivePageSize = pageSizeSelect.value === 'all' ? filteredRows.length : pageSize;
+    currentPage = Math.ceil(targetRow / effectivePageSize);
+    renderTable();
+
+    setTimeout(() => {
+      const el = document.getElementById(`table-row-${targetRow}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.style.background = '#fef08a';
+      }
+    }, 100);
+  });
+
+  // Column Visibility Panel
+  btnToggleColumns.addEventListener('click', () => {
+    columnVisibilityPanel.style.display = columnVisibilityPanel.style.display === 'none' ? 'block' : 'none';
+  });
+
+  function buildColumnCheckboxes() {
+    columnCheckboxes.innerHTML = '';
+    parsedHeaders.forEach((h, idx) => {
+      const label = document.createElement('label');
+      label.style.cssText = 'font-size: 0.85rem; color: #0f172a; display: flex; align-items: center; gap: 0.35rem; cursor: pointer;';
+      
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = !hiddenColumns.has(idx);
+
+      cb.addEventListener('change', () => {
+        if (cb.checked) hiddenColumns.delete(idx);
+        else hiddenColumns.add(idx);
+        renderTable();
+      });
+
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(h));
+      columnCheckboxes.appendChild(label);
+    });
+  }
+
+  // Copy & Export Actions
+  btnCopyFiltered.addEventListener('click', () => {
+    if (filteredRows.length === 0) return;
+    const csvContent = [parsedHeaders.join(activeDelimiter), ...filteredRows.map(r => r.join(activeDelimiter))].join('\n');
+    navigator.clipboard.writeText(csvContent);
+    showToast('Filtered CSV copied to clipboard!');
+  });
+
+  btnExportCsv.addEventListener('click', () => {
+    if (filteredRows.length === 0) return;
+    const csvContent = [parsedHeaders.join(activeDelimiter), ...filteredRows.map(r => r.join(activeDelimiter))].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'datafrog-filtered-export.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported CSV file successfully!');
+  });
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+    }, 2200);
+  }
+
+  // Initial Auto Parse
+  parseAndUpdate();
+
+})();
+</script>

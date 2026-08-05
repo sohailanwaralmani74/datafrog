@@ -1,669 +1,459 @@
 ---
 layout: main
-title: "DataFrog — Free Online Data Conversion Tools"
-description: "DataFrog offers 100% free, browser-based data conversion tools. No sign-up, no file uploads. Convert JSON, Excel, CSV, XML, QIF, and more."
-keywords: "free online data conversion tools, JSON to CSV, Excel to JSON, CSV to XML, XML to JSON, QIF to CSV, browser-based tools, private data converter"
+title: "DataFrog.tools | Inspect • Analyze • Validate • Clean • Visualize Data"
+description: "A browser-based data intelligence workspace where users can inspect, analyze, validate, compare, clean, and visualize datasets locally. 100% private, no server processing."
+keywords: "browser based data tools, inspect data, analyze dataset, validate json xml, compare data diff, visualize dataset, privacy first data tools"
 is_homepage: true
 ---
 
 <!-- ═══════════════════════════════════════════════════
-     JSON-LD — WebSite + SearchAction Schema
+     1. HERO & SEARCH SECTION (Full Width Top)
 ═══════════════════════════════════════════════════ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "DataFrog",
-  "url": "https://datafrog.tools",
-  "alternateName": "DataFrog Tools | Free Online Data Conversion",
-  "description": "Free, private, offline-first data conversion tools. Convert between JSON, CSV, Excel, XML, YAML, SQL, QIF, PDF and more in your browser. No uploads, no signup required.",
-  "inLanguage": "en",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://datafrog.tools/?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
+<section style="background: var(--bg-soft, #f8fafc); border-bottom: 1px solid var(--border-default, #e2e8f0); padding: 3.5rem 1.5rem 2.5rem;">
+  <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+    <span style="display: inline-block; padding: 0.35rem 1.15rem; background: #eff6ff; color: #2563eb; font-weight: 600; font-size: 0.875rem; border-radius: 9999px; margin-bottom: 1.25rem;">
+      🔒 100% Browser-Based Data Intelligence Workspace
+    </span>
+    
+    <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem; color: #0f172a;">
+      Inspect • Analyze • Validate • Clean • Visualize Data
+    </h1>
+    
+    <p style="font-size: 1.15rem; color: #475569; max-width: 780px; margin: 0 auto 2.25rem; line-height: 1.6;">
+      Inspect, analyze, validate, compare, clean, and visualize datasets locally in your browser. Complete privacy — zero server uploads, no backend, no account required.
+    </p>
 
-<!-- ═══════════════════════════════════════════════════
-     SCHEMA — Organization
-═══════════════════════════════════════════════════ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "DataFrog",
-  "url": "https://datafrog.tools",
-  "logo": "https://datafrog.tools/assets/img/datafrog-logo.png",
-  "description": "DataFrog offers 40+ free, browser-based data conversion tools with 100% privacy. No signup, no uploads. Convert JSON, Excel, CSV, XML, YAML, SQL, QIF, PDF and more.",
-  "foundingDate": "2023",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "Customer Support",
-    "email": "support@datafrog.tools",
-    "availableLanguage": "English"
-  }
-}
-</script>
+    <!-- Search Box -->
+    <div style="max-width: 680px; margin: 0 auto 2rem; position: relative;">
+      <input type="text" id="site-search-input" placeholder="Search 500+ tools by title, category, keywords, or description..." 
+             style="width: 100%; padding: 1.1rem 1.25rem 1.1rem 3.25rem; font-size: 1.05rem; border-radius: 14px; border: 2px solid #cbd5e1; background: #ffffff; box-shadow: 0 4px 14px rgba(0,0,0,0.05); transition: border-color 0.2s;"
+             aria-label="Search tools">
+      <span style="position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); font-size: 1.25rem; opacity: 0.5;">🔍</span>
+    </div>
 
-<!-- ═══════════════════════════════════════════════════
-     SCHEMA — WebApplication
-═══════════════════════════════════════════════════ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "DataFrog — Free Data Conversion Tools",
-  "url": "https://datafrog.tools",
-  "description": "40+ free browser-based data conversion tools. No signup required. Convert JSON, Excel, CSV, XML, QIF, PDF and more.",
-  "applicationCategory": "UtilityApplication",
-  "operatingSystem": "All",
-  "browserRequirements": "Requires JavaScript. Works on Chrome, Firefox, Safari, Edge.",
-  "inLanguage": "en",
-  "isAccessibleForFree": true,
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
-  }
-}
-</script>
-
-<!-- ═══════════════════════════════════════════════════
-     SCHEMA — FAQPage
-═══════════════════════════════════════════════════ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Are DataFrog tools free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, all DataFrog tools are 100% free. No signup required, no account creation, no usage limits. Convert as many files as you want without any cost."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do my files get uploaded to a server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All processing happens entirely in your browser using JavaScript. Your files and data never leave your device. DataFrog is completely private and runs entirely offline after your first visit."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which data formats does DataFrog support?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "DataFrog supports conversion between JSON, CSV, Excel (XLSX/XLS), XML, YAML, SQL, QIF, PDF, HTML, TXT, and more. New converters are added regularly."
-      }
-    }
-  ]
-}
-</script>
-
-<!-- ═══════════════════════════════════════════════════
-     SCHEMA — ItemList
-═══════════════════════════════════════════════════ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "name": "DataFrog Data Conversion Tools",
-  "description": "Complete collection of 40+ free browser-based tools for converting and transforming data between JSON, CSV, Excel, XML, YAML, SQL, QIF, PDF, and HTML formats.",
-  "url": "https://datafrog.tools",
-  "numberOfItems": 42,
-  "itemListElement": [
-    {"@type":"ListItem","position":1,"name":"JSON to CSV","url":"https://datafrog.tools/json-to-csv"},
-    {"@type":"ListItem","position":2,"name":"JSON to Excel","url":"https://datafrog.tools/json-to-excel"},
-    {"@type":"ListItem","position":3,"name":"JSON to XML","url":"https://datafrog.tools/json-to-xml"},
-    {"@type":"ListItem","position":4,"name":"JSON to SQL","url":"https://datafrog.tools/json-to-sql"},
-    {"@type":"ListItem","position":5,"name":"JSON to HTML","url":"https://datafrog.tools/json-to-html"},
-    {"@type":"ListItem","position":6,"name":"JSON to PDF","url":"https://datafrog.tools/json-to-pdf"},
-    {"@type":"ListItem","position":7,"name":"JSON to YAML","url":"https://datafrog.tools/json-to-yaml"},
-    {"@type":"ListItem","position":8,"name":"JSON to Dart","url":"https://datafrog.tools/json-to-dart"},
-    {"@type":"ListItem","position":9,"name":"JSON to JSON Schema","url":"https://datafrog.tools/json-to-json-schema"},
-    {"@type":"ListItem","position":10,"name":"Excel to JSON","url":"https://datafrog.tools/excel-to-json"},
-    {"@type":"ListItem","position":11,"name":"Excel to CSV","url":"https://datafrog.tools/convert-xlsx-to-csv"},
-    {"@type":"ListItem","position":12,"name":"Excel to XML","url":"https://datafrog.tools/convert-xlsx-to-xml"},
-    {"@type":"ListItem","position":13,"name":"Excel to SQL","url":"https://datafrog.tools/xlsx-to-sql-converter"},
-    {"@type":"ListItem","position":14,"name":"Excel to PDF","url":"https://datafrog.tools/xlsx-to-pdf"},
-    {"@type":"ListItem","position":15,"name":"CSV to JSON","url":"https://datafrog.tools/convert-csv-to-json"},
-    {"@type":"ListItem","position":16,"name":"CSV to Excel","url":"https://datafrog.tools/convert-csv-to-excel"},
-    {"@type":"ListItem","position":17,"name":"CSV to XML","url":"https://datafrog.tools/convert-csv-to-xml"},
-    {"@type":"ListItem","position":18,"name":"CSV to SQL","url":"https://datafrog.tools/csv-to-sql"},
-    {"@type":"ListItem","position":19,"name":"XML to JSON","url":"https://datafrog.tools/xml-to-json"},
-    {"@type":"ListItem","position":20,"name":"XML to XSD","url":"https://datafrog.tools/xml-to-xsd-generator"},
-    {"@type":"ListItem","position":21,"name":"QIF to CSV","url":"https://datafrog.tools/qif-to-csv"},
-    {"@type":"ListItem","position":22,"name":"QIF to Excel","url":"https://datafrog.tools/qif-to-excel"},
-    {"@type":"ListItem","position":23,"name":"QIF to QBO","url":"https://datafrog.tools/qif-to-qbo"},
-    {"@type":"ListItem","position":24,"name":"SQL to CSV","url":"https://datafrog.tools/sql-to-csv"},
-    {"@type":"ListItem","position":25,"name":"SQL to Excel","url":"https://datafrog.tools/sql-to-excel"},
-    {"@type":"ListItem","position":26,"name":"SQL to XML","url":"https://datafrog.tools/sql-to-xml"},
-    {"@type":"ListItem","position":27,"name":"PPTX to PDF","url":"https://datafrog.tools/pptx-to-pdf"},
-    {"@type":"ListItem","position":28,"name":"PDF to PPTX","url":"https://datafrog.tools/pdf-to-powerpoint"},
-    {"@type":"ListItem","position":29,"name":"UUID Generator","url":"https://datafrog.tools/uuid-generator"},
-    {"@type":"ListItem","position":30,"name":"Base64 Encoder/Decoder","url":"https://datafrog.tools/base64"},
-    {"@type":"ListItem","position":31,"name":"Hash Generator","url":"https://datafrog.tools/hash-generator"},
-    {"@type":"ListItem","position":32,"name":"JWT Decoder","url":"https://datafrog.tools/jwt-decoder"},
-    {"@type":"ListItem","position":33,"name":"Epoch Converter","url":"https://datafrog.tools/convert-epoch"},
-    {"@type":"ListItem","position":34,"name":"URL Decoder","url":"https://datafrog.tools/decode-a-url"},
-    {"@type":"ListItem","position":35,"name":"Case Converter","url":"https://datafrog.tools/case-converter"},
-    {"@type":"ListItem","position":36,"name":"Word Counter","url":"https://datafrog.tools/word-counter"}
-  ]
-}
-</script>
-
-<!-- ═══════════════════════════════════════════════════
-     HERO
-═══════════════════════════════════════════════════ -->
-<section class="home-hero" aria-label="DataFrog — Free Data Conversion Tools">
-  <h1>Free, Private &amp; Offline‑First <span>Data Conversion</span> Tools</h1>
-  <p>100% browser‑based – no uploads, no sign‑up. Convert JSON, Excel, CSV, XML, QIF, PDF, and more instantly. Your data stays on your device.</p>
-
-  <!-- Trust badges -->
-  <div class="trust-badges" aria-label="Site trust indicators">
-    <span>✓ 100% Free</span>
-    <span>✓ No Signup</span>
-    <span>✓ No Uploads</span>
-    <span>✓ 100% Private</span>
-    <span>✓ Works Offline</span>
+    <!-- Quick Action Buttons -->
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="#latest-tools" style="padding: 0.85rem 2rem; background: #2563eb; color: #ffffff; border-radius: 9999px; font-weight: 600; text-decoration: none; display: inline-block;">
+        Latest Tools ↓
+      </a>
+      <a href="#categories-sidebar" style="padding: 0.85rem 2rem; background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 9999px; font-weight: 600; text-decoration: none; display: inline-block;">
+        Browse Categories 📁
+      </a>
+    </div>
   </div>
 </section>
 
+<!-- Live Search Results Overlay Section -->
+<section id="search-results-section" style="display: none; padding: 2.5rem 1.5rem; max-width: 1280px; margin: 0 auto;">
+  <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Search Results for "<span id="search-query-display"></span>"</h2>
+  <div id="search-results-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;"></div>
+  <p id="no-search-results" style="display: none; color: #64748b; font-size: 1.1rem;">No matching tools found. Try searching for "JSON", "CSV", "Validate", or "Inspect".</p>
+</section>
+
 <!-- ═══════════════════════════════════════════════════
-     SEARCH
+     2. 40% / 60% TWO COLUMN SECTION
 ═══════════════════════════════════════════════════ -->
-<div class="home-search" role="search">
- <section class="filter-section" aria-label="Search Tool by name and description">
+<style>
+  .home-layout-container {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+    gap: 2.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    align-items: start;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  @media (max-width: 1024px) {
+    .home-layout-container {
+      grid-template-columns: 1fr;
+      padding: 2rem 1rem;
+    }
+  }
+</style>
 
-    <input
-    type="search"
-    id="toolSearch"
-    name="q"
-    placeholder="Search data tools... (e.g. JSON to Excel, CSV to SQL)"
-    aria-label="Search all DataFrog tools"
-    autocomplete="off"
-    spellcheck="false"
-  />
-
- </section>   
-  
+<div class="home-layout-container">
 
   <!-- ═══════════════════════════════════════════════════
-     CATEGORY FILTER TABS
-═══════════════════════════════════════════════════ -->
-<section class="filter-section" aria-label="Filter tools by category">
-  <div class="filter-tabs" role="tablist" aria-label="Tool categories">
-    <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true" aria-controls="toolGrid">All Tools</button>
-    <button class="filter-tab" data-filter="json" role="tab" aria-selected="false" aria-controls="toolGrid">JSON</button>
-    <button class="filter-tab" data-filter="excel" role="tab" aria-selected="false" aria-controls="toolGrid">Excel</button>
-    <button class="filter-tab" data-filter="csv" role="tab" aria-selected="false" aria-controls="toolGrid">CSV</button>
-    <button class="filter-tab" data-filter="xml" role="tab" aria-selected="false" aria-controls="toolGrid">XML</button>
-    <button class="filter-tab" data-filter="qif" role="tab" aria-selected="false" aria-controls="toolGrid">QIF</button>
-    <button class="filter-tab" data-filter="sql" role="tab" aria-selected="false" aria-controls="toolGrid">SQL</button>
-    <button class="filter-tab" data-filter="pdf" role="tab" aria-selected="false" aria-controls="toolGrid">PDF</button>
-    <button class="filter-tab" data-filter="utilities" role="tab" aria-selected="false" aria-controls="toolGrid">Utilities</button>
-    <button class="filter-tab" data-filter="formatter" role="tab" aria-selected="false" aria-controls="toolGrid">Formatter</button>
+       LEFT COLUMN (40% Width): Latest Tools, Featured Tools, Recently Updated
+  ═══════════════════════════════════════════════════ -->
+  <div class="home-column" style="display: flex; flex-direction: column; gap: 2.5rem; min-width: 0;">
+
+    <!-- 1. LATEST TOOLS (On Left Column) -->
+    <section id="latest-tools">
+      <div style="margin-bottom: 1.25rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.2rem;">Latest Tools</h2>
+        <p style="color: #475569; font-size: 0.875rem;">Recently published data tools and modules</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        {% assign sorted_tools = site.data.tools | sort: 'date' | reverse %}
+        {% for tool in sorted_tools limit:2 %}
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.15rem; display: flex; flex-direction: column; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+              <span style="font-size: 1.3rem;">{{ tool.icon | default: "⚡" }}</span>
+              <span style="font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; background: #f1f5f9; color: #475569; border-radius: 9999px; text-transform: uppercase;">
+                {{ tool.category }}
+              </span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <a href="{{ tool.url }}" style="color: #0f172a; text-decoration: none;">{{ tool.title }}</a>
+            </h3>
+            <p style="color: #64748b; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.75rem; flex-grow: 1;">
+              {{ tool.description }}
+            </p>
+            <a href="{{ tool.url }}" style="font-size: 0.85rem; font-weight: 600; color: #2563eb; text-decoration: none;">Launch Tool →</a>
+          </div>
+        {% else %}
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; text-align: center;">
+            <p style="color: #64748b; font-style: italic; font-size: 0.9rem; margin: 0;">No tools registered in <code>_data/tools.yml</code> yet. New tools will automatically populate here.</p>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- 2. FEATURED TOOLS (On Left Column) -->
+    <section id="featured-tools">
+      <div style="margin-bottom: 1.25rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.2rem;">Featured Tools</h2>
+        <p style="color: #475569; font-size: 0.875rem;">Highlighted workspace utilities</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        {% assign featured_tools = site.data.tools | where: "featured", true %}
+        {% for tool in featured_tools limit:2 %}
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.15rem; display: flex; flex-direction: column; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+              <span style="font-size: 1.3rem;">{{ tool.icon | default: "⭐" }}</span>
+              <span style="font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; background: #fef3c7; color: #d97706; border-radius: 9999px;">
+                Featured
+              </span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <a href="{{ tool.url }}" style="color: #0f172a; text-decoration: none;">{{ tool.title }}</a>
+            </h3>
+            <p style="color: #64748b; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.75rem; flex-grow: 1;">
+              {{ tool.description }}
+            </p>
+            <a href="{{ tool.url }}" style="font-size: 0.85rem; font-weight: 600; color: #2563eb; text-decoration: none;">Launch Tool →</a>
+          </div>
+        {% else %}
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; text-align: center;">
+            <p style="color: #64748b; font-style: italic; font-size: 0.9rem; margin: 0;">Featured tools will display here automatically.</p>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- 3. RECENTLY UPDATED (On Left Column) -->
+    <section id="recently-updated">
+      <div style="margin-bottom: 1.25rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.2rem;">Recently Updated</h2>
+        <p style="color: #475569; font-size: 0.875rem;">Tools with recent feature and performance updates</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        {% assign updated_tools = site.data.tools | sort: 'updated' | reverse %}
+        {% for tool in updated_tools limit:2 %}
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.15rem; display: flex; flex-direction: column; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+              <span style="font-size: 1.3rem;">{{ tool.icon | default: "🔄" }}</span>
+              <span style="font-size: 0.7rem; color: #64748b;">
+                Updated: {{ tool.updated }}
+              </span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <a href="{{ tool.url }}" style="color: #0f172a; text-decoration: none;">{{ tool.title }}</a>
+            </h3>
+            <p style="color: #64748b; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.75rem; flex-grow: 1;">
+              {{ tool.description }}
+            </p>
+            <a href="{{ tool.url }}" style="font-size: 0.85rem; font-weight: 600; color: #2563eb; text-decoration: none;">Launch Tool →</a>
+          </div>
+        {% else %}
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; text-align: center;">
+            <p style="color: #64748b; font-style: italic; font-size: 0.9rem; margin: 0;">Recently updated tools will display here automatically.</p>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
   </div>
-</section>
+
+  <!-- ═══════════════════════════════════════════════════
+       RIGHT COLUMN (60% Width): Tool Categories Boxes
+  ═══════════════════════════════════════════════════ -->
+  <div class="home-column" style="display: flex; flex-direction: column; gap: 2.5rem; min-width: 0; width: 100%; box-sizing: border-box;">
+
+    <!-- TOOL CATEGORIES (6 Category Boxes Grid) -->
+    <section id="categories-sidebar">
+      <div style="margin-bottom: 1.25rem; border-bottom: 2px solid #2563eb; padding-bottom: 0.5rem;">
+        <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 0.2rem;">Data Intelligence Categories</h2>
+        <p style="font-size: 0.875rem; color: #64748b;">Select a category to view all tools, profilers, and visualizers</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+        
+        <!-- Inspect -->
+        {% assign inspect_tools = site.data.tools | where: "category", "Inspect" %}
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.85rem;">🔍</span>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: #0f172a;">Inspect</h3>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.65rem; background: #eff6ff; color: #2563eb; border-radius: 9999px;">
+              {{ inspect_tools.size | default: 0 }} Tools
+            </span>
+          </div>
+          <p style="color: #475569; font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Explore complex nested data structures with interactive tree viewers, raw decoders, JSON/XML/YAML path finders, multi-sheet spreadsheet tab inspectors, and depth metrics locally in your browser.
+          </p>
+          <div style="text-align: right;">
+            <a href="/inspect" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
+              Open Inspect Category →
+            </a>
+          </div>
+        </div>
+
+        <!-- Analyze -->
+        {% assign analyze_tools = site.data.tools | where: "category", "Analyze" %}
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.85rem;">📊</span>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: #0f172a;">Analyze</h3>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.65rem; background: #f0fdf4; color: #16a34a; border-radius: 9999px;">
+              {{ analyze_tools.size | default: 0 }} Tools
+            </span>
+          </div>
+          <p style="color: #475569; font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Run detailed dataset statistical analysis, numerical summary metrics (mean, median, min, max, sum), missing value ratios, data type distributions, column profiling, and web server log error audits.
+          </p>
+          <div style="text-align: right;">
+            <a href="/analyze" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
+              Open Analyze Category →
+            </a>
+          </div>
+        </div>
+
+        <!-- Validate -->
+        {% assign validate_tools = site.data.tools | where: "category", "Validate" %}
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.85rem;">✅</span>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: #0f172a;">Validate</h3>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.65rem; background: #fff7ed; color: #ea580c; border-radius: 9999px;">
+              {{ validate_tools.size | default: 0 }} Tools
+            </span>
+          </div>
+          <p style="color: #475569; font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Validate JSON, XML, CSV, and YAML syntax accuracy, detect exact line & column error pointers, verify JSON Schemas (Draft-04, Draft-07, 2020-12), and enforce data structural integrity.
+          </p>
+          <div style="text-align: right;">
+            <a href="/validate" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
+              Open Validate Category →
+            </a>
+          </div>
+        </div>
+
+        <!-- Compare -->
+        {% assign compare_tools = site.data.tools | where: "category", "Compare" %}
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.85rem;">⚖️</span>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: #0f172a;">Compare</h3>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.65rem; background: #faf5ff; color: #9333ea; border-radius: 9999px;">
+              {{ compare_tools.size | default: 0 }} Tools
+            </span>
+          </div>
+          <p style="color: #475569; font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Perform side-by-side and inline structural diffing for Text, JSON, CSV, XML, and Excel files with key path tracing, added/deleted row detection, cell value modification highlights, and report exports.
+          </p>
+          <div style="text-align: right;">
+            <a href="/compare" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
+              Open Compare Category →
+            </a>
+          </div>
+        </div>
+
+        <!-- Visualize -->
+        {% assign visualize_tools = site.data.tools | where: "category", "Visualize" %}
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.85rem;">📈</span>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: #0f172a;">Visualize</h3>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.65rem; background: #f0f9ff; color: #0284c7; border-radius: 9999px;">
+              {{ visualize_tools.size | default: 0 }} Tools
+            </span>
+          </div>
+          <p style="color: #475569; font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Transform JSON, CSV, XML, Excel, and YAML datasets into interactive visual node trees, multi-sheet dashboards, searchable spreadsheet tables, and high-resolution chart graphics (Bar, Line, Pie, Doughnut).
+          </p>
+          <div style="text-align: right;">
+            <a href="/visualize" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
+              Open Visualize Category →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
 </div>
 
-
 <!-- ═══════════════════════════════════════════════════
-     TOOL GRID
+     3. FULL-WIDTH SECTIONS BELOW COLUMNS
 ═══════════════════════════════════════════════════ -->
-<section id="toolGrid" class="tool-grid-section" aria-label="All DataFrog data conversion tools" aria-live="polite">
 
-  <!-- No results message -->
-  <div class="no-results" id="noResults" hidden aria-live="assertive">
-    <p>No tools found for "<span id="searchQuery"></span>". Try a different keyword.</p>
+<!-- LATEST BLOG POSTS (Full Width Below Columns with Side Margins) -->
+<section id="latest-blog-posts" style="padding: 3.5rem 3rem; max-width: 1200px; margin: 0 auto; border-top: 1px solid #e2e8f0;">
+  <div style="margin-bottom: 1.75rem; text-align: center;">
+    <h2 style="font-size: 1.85rem; font-weight: 800; color: #0f172a; margin-bottom: 0.25rem;">Latest Blog Posts</h2>
+    <p style="color: #475569; font-size: 1rem;">Articles, tutorials, and data engineering insights</p>
   </div>
 
-  <!-- ── JSON Tools ── -->
-  <div class="cat-block" data-category="json">
-    <h2 class="cat-block-title"><span class="cat-icon">📋</span> JSON Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="/json-to-excel" data-cat="json" data-tags="json excel xlsx export">
-        <div class="tool-card-title">JSON to Excel</div>
-        <div class="tool-card-desc">Convert JSON arrays or objects to XLSX/XLS files. Preserve nested structures.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-csv" data-cat="json" data-tags="json csv convert flatten">
-        <div class="tool-card-title">JSON to CSV</div>
-        <div class="tool-card-desc">Turn JSON data into CSV with automatic flattening of nested objects.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-pdf" data-cat="json" data-tags="json pdf report print">
-        <div class="tool-card-title">JSON to PDF</div>
-        <div class="tool-card-desc">Generate printable, formatted PDF reports from JSON data.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-html" data-cat="json" data-tags="json html table web">
-        <div class="tool-card-title">JSON to HTML</div>
-        <div class="tool-card-desc">Convert JSON to responsive HTML tables or nested lists.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-xml" data-cat="json" data-tags="json xml transform api">
-        <div class="tool-card-title">JSON to XML</div>
-        <div class="tool-card-desc">Transform JSON objects into well-formed XML documents.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-sql" data-cat="json" data-tags="json sql insert database">
-        <div class="tool-card-title">JSON to SQL</div>
-        <div class="tool-card-desc">Generate INSERT statements from JSON arrays – MySQL, PostgreSQL, SQLite.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-string-to-json-object" data-cat="json" data-tags="json string parse escape">
-        <div class="tool-card-title">JSON String to Object</div>
-        <div class="tool-card-desc">Parse escaped JSON strings into valid objects.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-json-schema" data-cat="json" data-tags="json schema generate draft">
-        <div class="tool-card-title">JSON to JSON Schema</div>
-        <div class="tool-card-desc">Auto‑generate JSON Schema Draft‑07 from sample JSON.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-dart" data-cat="json" data-tags="json dart flutter model class">
-        <div class="tool-card-title">JSON to Dart</div>
-        <div class="tool-card-desc">Create Flutter‑ready model classes with fromJson/toJson.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-yaml" data-cat="json" data-tags="json yaml kubernetes docker config">
-        <div class="tool-card-title">JSON to YAML</div>
-        <div class="tool-card-desc">Convert JSON to human‑readable YAML for Kubernetes, Docker Compose.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/yaml-to-json" data-cat="json" data-tags="yaml json config convert">
-        <div class="tool-card-title">YAML to JSON</div>
-        <div class="tool-card-desc">Convert YAML configuration files to JSON instantly.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-ts" data-cat="json" data-tags="json typescript interface class">
-        <div class="tool-card-title">JSON to TypeScript</div>
-        <div class="tool-card-desc">Convert JSON data to TypeScript interfaces or classes.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-java" data-cat="json" data-tags="json java pojo class generator">
-        <div class="tool-card-title">JSON to Java</div>
-        <div class="tool-card-desc">Generate Java POJO classes from JSON data.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-c-sharp" data-cat="json" data-tags="json csharp class property">
-        <div class="tool-card-title">JSON to C#</div>
-        <div class="tool-card-desc">Convert JSON data to C# classes with properties.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
-      <a class="tool-card" href="/json-to-go" data-cat="json" data-tags="json go structs generator">
-        <div class="tool-card-title">JSON to Go Structs</div>
-        <div class="tool-card-desc">Generate Go struct definitions from JSON data.</div>
-        <span class="tool-card-tag">JSON</span>
-      </a>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.75rem;">
+    {% for post in site.posts limit:3 %}
+      <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.02); display: flex; flex-direction: column;">
+        <span style="font-size: 0.8rem; color: #64748b;">{{ post.date | date: "%b %d, %Y" }}</span>
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0.4rem 0;">
+          <a href="{{ post.url }}" style="color: #0f172a; text-decoration: none;">{{ post.title }}</a>
+        </h3>
+        <p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin-bottom: 1rem; flex-grow: 1;">
+          {{ post.excerpt | strip_html | truncatewords: 25 }}
+        </p>
+        <a href="{{ post.url }}" style="font-size: 0.875rem; font-weight: 600; color: #2563eb; text-decoration: none;">Read Article →</a>
+      </article>
+    {% else %}
+      <p style="color: #64748b; grid-column: 1 / -1; text-align: center; font-style: italic; padding: 2rem; background: #f8fafc; border-radius: 12px;">
+        Blog guides will automatically appear here when published.
+      </p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- WHY CHOOSE DATAFROG (Full Width Below Columns) -->
+<section id="why-datafrog" style="padding: 4rem 1.5rem; background: var(--bg-soft, #f8fafc); border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Why Choose DataFrog?</h2>
+      <p style="color: #475569; font-size: 1.05rem;">Engineered for high performance, zero latency, and absolute privacy.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+      <div style="background: #ffffff; padding: 1.5rem; border-radius: 14px; border: 1px solid #e2e8f0;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">⚡ 100% Browser Based</h3>
+        <p style="color: #475569; font-size: 0.9rem; line-height: 1.55;">All code executes within your local browser JavaScript engine. No external server compute required.</p>
+      </div>
+
+      <div style="background: #ffffff; padding: 1.5rem; border-radius: 14px; border: 1px solid #e2e8f0;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">🔒 Privacy First</h3>
+        <p style="color: #475569; font-size: 0.9rem; line-height: 1.55;">Your datasets, API payloads, and files are never transmitted across the network or logged anywhere.</p>
+      </div>
+
+      <div style="background: #ffffff; padding: 1.5rem; border-radius: 14px; border: 1px solid #e2e8f0;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">📁 No Upload Required</h3>
+        <p style="color: #475569; font-size: 0.9rem; line-height: 1.55;">Files are read directly into browser memory. No remote file storage exists.</p>
+      </div>
+
+      <div style="background: #ffffff; padding: 1.5rem; border-radius: 14px; border: 1px solid #e2e8f0;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">✈️ Works Offline</h3>
+        <p style="color: #475569; font-size: 0.9rem; line-height: 1.55;">Once a tool page is loaded in your browser, client-side JavaScript remains functional offline.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- ── Excel Tools ── -->
-  <div class="cat-block" data-category="excel">
-    <h2 class="cat-block-title"><span class="cat-icon">📊</span> Excel Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="/excel-to-json" data-cat="excel" data-tags="excel json xlsx convert">
-        <div class="tool-card-title">Excel to JSON</div>
-        <div class="tool-card-desc">Convert XLSX/XLS files to clean JSON objects.</div>
-        <span class="tool-card-tag">Excel</span>
-      </a>
-      <a class="tool-card" href="/excel-to-txt" data-cat="excel" data-tags="excel txt text export">
-        <div class="tool-card-title">Excel to TXT</div>
-        <div class="tool-card-desc">Export spreadsheets as plain text with aligned columns.</div>
-        <span class="tool-card-tag">Excel</span>
-      </a>
-      <a class="tool-card" href="/xlsx-to-pdf" data-cat="excel" data-tags="excel pdf convert print">
-        <div class="tool-card-title">Excel to PDF</div>
-        <div class="tool-card-desc">Convert Excel tables to printable PDF documents.</div>
-        <span class="tool-card-tag">Excel</span>
-      </a>
-      <a class="tool-card" href="/excel-to-html" data-cat="excel" data-tags="excel html table web">
-        <div class="tool-card-title">Excel to HTML</div>
-        <div class="tool-card-desc">Generate ready‑to‑use HTML tables from Excel sheets.</div>
-        <span class="tool-card-tag">Excel</span>
-      </a>
-      <a class="tool-card" href="/convert-xlsx-to-xml" data-cat="excel" data-tags="excel xml transform hierarchy">
-        <div class="tool-card-title">Excel to XML</div>
-        <div class="tool-card-desc">Transform Excel data into hierarchical XML.</div>
-        <span class="tool-card-tag">Excel</span>
-      </a>
-      <a class="tool-card" href="/xlsx-to-sql-converter" data-cat="excel" data-tags="excel sql insert database">
-        <div class="tool-card-title">Excel to SQL</div>
-        <div class="tool-card-desc">Convert Excel rows to INSERT statements.</div>
-        <span class="tool-card-tag">Excel</span>
-      </a>
-      <a class="tool-card" href="/convert-xlsx-to-csv" data-cat="excel" data-tags="excel csv save convert">
-        <div class="tool-card-title">Excel to CSV</div>
-        <div class="tool-card-desc">Save Excel sheets as standard CSV files.</div>
-        <span class="tool-card-tag">Excel</span>
-      </a>
-      <a class="tool-card" href="/remove-excel-duplicates" data-cat="excel" data-tags="excel duplicates remove clean">
-        <div class="tool-card-title">Remove Excel Duplicates</div>
-        <div class="tool-card-desc">Remove duplicate rows and values from Excel spreadsheets quickly and easily.</div>
-        <span class="tool-card-tag">Excel</span>
-      </a>
-      <a class="tool-card" href="/analyze-excel" data-cat="excel" data-tags="analyze excel for detailed data preview">
-        <div class="tool-card-title">Analyze Excel</div>
-        <div class="tool-card-desc">Upload an Excel file (.xlsx, .xls, .csv) and get instant analysis.</div>
-        <span class="tool-card-tag">Excel</span>
-      </a>
-    </div>
+<!-- FREQUENTLY ASKED QUESTIONS (Full Width Below Columns) -->
+<section id="faq" style="padding: 4rem 1.5rem; max-width: 900px; margin: 0 auto;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Frequently Asked Questions</h2>
+    <p style="color: #475569; font-size: 1.05rem;">Everything you need to know about DataFrog browser tools</p>
   </div>
 
-  <!-- ── CSV Tools ── -->
-  <div class="cat-block" data-category="csv">
-    <h2 class="cat-block-title"><span class="cat-icon">📄</span> CSV Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="/convert-csv-to-excel" data-cat="csv" data-tags="csv excel xlsx convert">
-        <div class="tool-card-title">CSV to Excel</div>
-        <div class="tool-card-desc">Convert CSV files to XLSX/XLS. Preserve data types.</div>
-        <span class="tool-card-tag">CSV</span>
-      </a>
-      <a class="tool-card" href="/convert-csv-to-json" data-cat="csv" data-tags="csv json convert arrays">
-        <div class="tool-card-title">CSV to JSON</div>
-        <div class="tool-card-desc">Transform CSV rows into JSON arrays of objects.</div>
-        <span class="tool-card-tag">CSV</span>
-      </a>
-      <a class="tool-card" href="/convert-csv-to-xml" data-cat="csv" data-tags="csv xml convert elements">
-        <div class="tool-card-title">CSV to XML</div>
-        <div class="tool-card-desc">Convert CSV rows to XML elements.</div>
-        <span class="tool-card-tag">CSV</span>
-      </a>
-      <a class="tool-card" href="/convert-csv-to-pdf" data-cat="csv" data-tags="csv pdf table report">
-        <div class="tool-card-title">CSV to PDF</div>
-        <div class="tool-card-desc">Turn CSV data into professional PDF tables.</div>
-        <span class="tool-card-tag">CSV</span>
-      </a>
-      <a class="tool-card" href="/convert-csv-to-html" data-cat="csv" data-tags="csv html table web">
-        <div class="tool-card-title">CSV to HTML</div>
-        <div class="tool-card-desc">Generate HTML tables from CSV.</div>
-        <span class="tool-card-tag">CSV</span>
-      </a>
-      <a class="tool-card" href="/csv-to-sql" data-cat="csv" data-tags="csv sql insert database">
-        <div class="tool-card-title">CSV to SQL</div>
-        <div class="tool-card-desc">Generate INSERT statements from CSV rows.</div>
-        <span class="tool-card-tag">CSV</span>
-      </a>
-      <a class="tool-card" href="/convert-csv-to-txt" data-cat="csv" data-tags="csv txt text convert">
-        <div class="tool-card-title">CSV to TXT</div>
-        <div class="tool-card-desc">Convert CSV to plain text with aligned columns.</div>
-        <span class="tool-card-tag">CSV</span>
-      </a>
-      <a class="tool-card" href="/remove-csv-duplicates" data-cat="csv" data-tags="csv duplicates remove clean">
-        <div class="tool-card-title">Remove CSV Duplicates</div>
-        <div class="tool-card-desc">Remove duplicate rows and values from CSV files quickly and easily.</div>
-        <span class="tool-card-tag">CSV</span>
-      </a>
-    </div>
-  </div>
+  <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+    <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+      <summary style="font-weight: 700; font-size: 1.05rem; color: #0f172a;">Is my data 100% private?</summary>
+      <p style="margin-top: 0.75rem; color: #475569; line-height: 1.6; font-size: 0.95rem;">
+        Yes. All transformations run locally inside your browser's JavaScript engine. Zero data is sent to external servers.
+      </p>
+    </details>
 
-  <!-- ── XML Tools ── -->
-  <div class="cat-block" data-category="xml">
-    <h2 class="cat-block-title"><span class="cat-icon">📝</span> XML Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="/xml-to-json" data-cat="xml" data-tags="xml json parse convert">
-        <div class="tool-card-title">XML to JSON</div>
-        <div class="tool-card-desc">Parse XML into clean JSON objects. Handles attributes and nested elements.</div>
-        <span class="tool-card-tag">XML</span>
-      </a>
-      <a class="tool-card" href="/xml-to-xsd-generator" data-cat="xml" data-tags="xml xsd schema generate">
-        <div class="tool-card-title">XML to XSD</div>
-        <div class="tool-card-desc">Automatically infer XML Schema Definition from any XML document.</div>
-        <span class="tool-card-tag">XML</span>
-      </a>
-    </div>
+    <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+      <summary style="font-weight: 700; font-size: 1.05rem; color: #0f172a;">Do I need an account?</summary>
+      <p style="margin-top: 0.75rem; color: #475569; line-height: 1.6; font-size: 0.95rem;">
+        No. DataFrog is completely free with zero sign-ups or paywalls.
+      </p>
+    </details>
   </div>
-
-  <!-- ── QIF Tools ── -->
-  <div class="cat-block" data-category="qif">
-    <h2 class="cat-block-title"><span class="cat-icon">🏦</span> QIF Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="/qif-to-excel" data-cat="qif" data-tags="qif excel finance bank">
-        <div class="tool-card-title">QIF to Excel</div>
-        <div class="tool-card-desc">Turn QIF bank transactions into XLSX spreadsheets.</div>
-        <span class="tool-card-tag">QIF</span>
-      </a>
-      <a class="tool-card" href="/qif-to-csv" data-cat="qif" data-tags="qif csv finance convert">
-        <div class="tool-card-title">QIF to CSV</div>
-        <div class="tool-card-desc">Convert QIF transactions to CSV for any spreadsheet.</div>
-        <span class="tool-card-tag">QIF</span>
-      </a>
-      <a class="tool-card" href="/qif-to-qbo" data-cat="qif" data-tags="qif qbo quickbooks convert">
-        <div class="tool-card-title">QIF to QBO</div>
-        <div class="tool-card-desc">Generate QuickBooks‑ready QBO files from Quicken exports.</div>
-        <span class="tool-card-tag">QIF</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- ── SQL Tools ── -->
-  <div class="cat-block" data-category="sql">
-    <h2 class="cat-block-title"><span class="cat-icon">🗄️</span> SQL Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="/sql-to-xml" data-cat="sql" data-tags="sql xml convert elements">
-        <div class="tool-card-title">SQL to XML</div>
-        <div class="tool-card-desc">Convert SQL INSERT statements to XML (elements, attributes, or flat).</div>
-        <span class="tool-card-tag">SQL</span>
-      </a>
-      <a class="tool-card" href="/sql-to-excel" data-cat="sql" data-tags="sql excel export sheet">
-        <div class="tool-card-title">SQL to Excel</div>
-        <div class="tool-card-desc">Transform SQL INSERT statements to multi‑sheet Excel files.</div>
-        <span class="tool-card-tag">SQL</span>
-      </a>
-      <a class="tool-card" href="/sql-to-csv" data-cat="sql" data-tags="sql csv export convert">
-        <div class="tool-card-title">SQL to CSV</div>
-        <div class="tool-card-desc">Convert SQL INSERT statements to CSV format.</div>
-        <span class="tool-card-tag">SQL</span>
-      </a>
-      <a class="tool-card" href="/remove-duplicates-in-sql" data-cat="sql" data-tags="sql duplicates remove query">
-        <div class="tool-card-title">Remove Duplicates in SQL</div>
-        <div class="tool-card-desc">Learn how to find and remove duplicate records in SQL databases using practical queries.</div>
-        <span class="tool-card-tag">SQL</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- ── PDF Tools ── -->
-  <div class="cat-block" data-category="pdf">
-    <h2 class="cat-block-title"><span class="cat-icon">📕</span> PDF Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="/pptx-to-pdf" data-cat="pdf" data-tags="pptx pdf powerpoint convert">
-        <div class="tool-card-title">PPTX to PDF</div>
-        <div class="tool-card-desc">Convert PowerPoint presentations to high‑quality PDF documents.</div>
-        <span class="tool-card-tag">PDF</span>
-      </a>
-      <a class="tool-card" href="/pdf-to-powerpoint" data-cat="pdf" data-tags="pdf pptx powerpoint convert">
-        <div class="tool-card-title">PDF to PPTX</div>
-        <div class="tool-card-desc">Convert PDF pages to editable PPTX slides.</div>
-        <span class="tool-card-tag">PDF</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- ── Utilities ── -->
-  <div class="cat-block" data-category="utilities">
-    <h2 class="cat-block-title"><span class="cat-icon">🔧</span> Utilities</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="/uuid-generator" data-cat="utilities" data-tags="uuid guid generate id">
-        <div class="tool-card-title">UUID Generator</div>
-        <div class="tool-card-desc">Generate UUID v4, v7, NanoID, ULID, and more – up to 1000 IDs.</div>
-        <span class="tool-card-tag">Utilities</span>
-      </a>
-      <a class="tool-card" href="/base64" data-cat="utilities" data-tags="base64 encode decode convert">
-        <div class="tool-card-title">Base64 Encoder/Decoder</div>
-        <div class="tool-card-desc">Encode and decode Base64 data instantly in your browser.</div>
-        <span class="tool-card-tag">Utilities</span>
-      </a>
-      <a class="tool-card" href="/hash-generator" data-cat="utilities" data-tags="hash md5 sha generate crypto">
-        <div class="tool-card-title">Hash Generator</div>
-        <div class="tool-card-desc">Generate cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) from any input string.</div>
-        <span class="tool-card-tag">Utilities</span>
-      </a>
-      <a class="tool-card" href="/jwt-decoder" data-cat="utilities" data-tags="jwt decode token inspect">
-        <div class="tool-card-title">JWT Decoder</div>
-        <div class="tool-card-desc">Decode JSON Web Tokens (JWT) to inspect header, payload, and signature.</div>
-        <span class="tool-card-tag">Utilities</span>
-      </a>
-      <a class="tool-card" href="/convert-epoch" data-cat="utilities" data-tags="epoch timestamp convert unix date">
-        <div class="tool-card-title">Epoch Converter</div>
-        <div class="tool-card-desc">Convert Unix timestamps to human-readable dates and vice versa.</div>
-        <span class="tool-card-tag">Utilities</span>
-      </a>
-      <a class="tool-card" href="/decode-a-url" data-cat="utilities" data-tags="url decode percent encode query">
-        <div class="tool-card-title">URL Decoder</div>
-        <div class="tool-card-desc">Decode percent-encoded URLs and query parameters instantly.</div>
-        <span class="tool-card-tag">Utilities</span>
-      </a>
-      <a class="tool-card" href="/case-converter" data-cat="utilities" data-tags="case converter camel snake pascal kebab">
-        <div class="tool-card-title">Case Converter</div>
-        <div class="tool-card-desc">Convert text between camelCase, PascalCase, snake_case, kebab-case, and more.</div>
-        <span class="tool-card-tag">Utilities</span>
-      </a>
-      <a class="tool-card" href="/word-counter" data-cat="utilities" data-tags="word count counter text analysis">
-        <div class="tool-card-title">Word Counter</div>
-        <div class="tool-card-desc">Count words, characters, sentences, readability scores, and keyword frequency.</div>
-        <span class="tool-card-tag">Utilities</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- ── Formatter Tools ── -->
-  <div class="cat-block" data-category="formatter">
-    <h2 class="cat-block-title"><span class="cat-icon">✨</span> Formatter Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="/json-minify-prettify" data-cat="formatter" data-tags="json minify prettify format">
-        <div class="tool-card-title">Minify and Prettify JSON</div>
-        <div class="tool-card-desc">Minify or prettify JSON data with a single click.</div>
-        <span class="tool-card-tag">Formatter</span>
-      </a>
-      <a class="tool-card" href="/xml-formatter" data-cat="formatter" data-tags="xml format indent beautify">
-        <div class="tool-card-title">XML Formatter</div>
-        <div class="tool-card-desc">Format and indent XML documents for better readability.</div>
-        <span class="tool-card-tag">Formatter</span>
-      </a>
-      <a class="tool-card" href="/html-beautifier" data-cat="formatter" data-tags="html format beautify minify">
-        <div class="tool-card-title">HTML Beautifier</div>
-        <div class="tool-card-desc">Format and minify HTML code instantly in your browser.</div>
-        <span class="tool-card-tag">Formatter</span>
-      </a>
-      <a class="tool-card" href="/sql-formatter" data-cat="formatter" data-tags="sql format beautify query">
-        <div class="tool-card-title">SQL Formatter</div>
-        <div class="tool-card-desc">Format SQL queries for better readability.</div>
-        <span class="tool-card-tag">Formatter</span>
-      </a>
-    </div>
-  </div>
-
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     SEO CONTENT BLOCK
-═══════════════════════════════════════════════════ -->
-<section class="seo-block" aria-labelledby="about-datafrog">
-  <h2 id="about-datafrog">Why DataFrog Data Conversion Tools</h2>
-  
-  <p>
-    DataFrog is a free collection of online data tools built for developers, analysts, and anyone who works with structured data. Every tool runs entirely in your browser — your files and data never leave your device, no account is needed, and there are no usage limits.
-  </p>
-  
-  <p>
-    Whether you need to convert JSON to CSV, transform an Excel spreadsheet into JSON for an API, export SQL data to Excel for reporting, or clean duplicate rows from a CSV — DataFrog handles it instantly without uploading anything to a server. Tools cover JSON, CSV, Excel (XLSX/XLS), XML, YAML, SQL, QIF, PDF, and more, with new converters added regularly.
-  </p>
-  
-  <p>
-    Unlike most online converters, DataFrog is fully client-side. All processing happens locally using JavaScript in your browser, which makes it safe for sensitive, confidential, or proprietary data. Most tools also work offline after your first visit — useful in restricted network environments or when working on the go.
-  </p>
-  
-  <p>
-    DataFrog is used by developers converting API responses for quick inspection, analysts preparing data for database imports, finance teams processing QIF bank files, DevOps engineers working with YAML configs, and business users cleaning exports without writing code. No matter your background, if you work with data, there is a DataFrog tool for your task.
-  </p>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     JAVASCRIPT — Search + Filter
+     SITE SEARCH SCRIPT
 ═══════════════════════════════════════════════════ -->
 <script>
-(function () {
-  'use strict';
+(function() {
+  const toolsData = {{ site.data.tools | jsonify }};
+  const searchInput = document.getElementById('site-search-input');
+  const resultsSection = document.getElementById('search-results-section');
+  const resultsGrid = document.getElementById('search-results-grid');
+  const queryDisplay = document.getElementById('search-query-display');
+  const noResults = document.getElementById('no-search-results');
 
-  const searchInput  = document.getElementById('toolSearch');
-  const filterTabs   = document.querySelectorAll('.filter-tab');
-  const catBlocks    = document.querySelectorAll('.cat-block');
-  const toolCards    = document.querySelectorAll('.tool-card');
-  const noResults    = document.getElementById('noResults');
-  const searchQuery  = document.getElementById('searchQuery');
+  if (!searchInput || !toolsData) return;
 
-  let activeFilter = 'all';
-
-  /* ── Category filter ── */
-  filterTabs.forEach(tab => {
-    tab.addEventListener('click', function () {
-      filterTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-      this.classList.add('active');
-      this.setAttribute('aria-selected', 'true');
-      activeFilter = this.dataset.filter;
-      applyFilters();
-    });
-  });
-
-  /* ── Search ── */
-  searchInput.addEventListener('input', function () {
-    applyFilters();
-  });
-
-  /* ── Apply both filters ── */
-  function applyFilters () {
-    const query = searchInput.value.trim().toLowerCase();
-    let visibleCount = 0;
-
-    catBlocks.forEach(block => {
-      const cat      = block.dataset.category;
-      const catMatch = (activeFilter === 'all') || (activeFilter === cat);
-      let   blockHasVisible = false;
-
-      const cards = block.querySelectorAll('.tool-card');
-      cards.forEach(card => {
-        const title = card.querySelector('.tool-card-title').textContent.toLowerCase();
-        const desc  = card.querySelector('.tool-card-desc').textContent.toLowerCase();
-        const tags  = (card.dataset.tags || '').toLowerCase();
-        const textMatch = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
-        const show  = catMatch && textMatch;
-
-        card.style.display = show ? '' : 'none';
-        if (show) { blockHasVisible = true; visibleCount++; }
-      });
-
-      block.style.display = (catMatch && blockHasVisible) ? '' : 'none';
-    });
-
-    /* No results */
-    if (visibleCount === 0 && query) {
-      noResults.hidden = false;
-      searchQuery.textContent = query;
-    } else {
-      noResults.hidden = true;
+  searchInput.addEventListener('input', function(e) {
+    const query = e.target.value.trim().toLowerCase();
+    
+    if (query.length < 2) {
+      resultsSection.style.display = 'none';
+      return;
     }
-  }
 
-  /* ── URL search param support (?q=bmi) ── */
-  const urlParams = new URLSearchParams(window.location.search);
-  const qParam    = urlParams.get('q');
-  if (qParam) {
-    searchInput.value = qParam;
-    applyFilters();
-  }
+    queryDisplay.textContent = query;
+    resultsSection.style.display = 'block';
 
+    const matches = toolsData.filter(tool => {
+      const title = (tool.title || '').toLowerCase();
+      const desc = (tool.description || '').toLowerCase();
+      const cat = (tool.category || '').toLowerCase();
+      const keywords = Array.isArray(tool.keywords) ? tool.keywords.join(' ').toLowerCase() : (tool.keywords || '').toLowerCase();
+      
+      return title.includes(query) || desc.includes(query) || cat.includes(query) || keywords.includes(query);
+    });
+
+    resultsGrid.innerHTML = '';
+    
+    if (matches.length === 0) {
+      noResults.style.display = 'block';
+    } else {
+      noResults.style.display = 'none';
+      matches.forEach(tool => {
+        const card = document.createElement('div');
+        card.style.cssText = 'background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.15rem;';
+        card.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+            <span style="font-size: 1.3rem;">${tool.icon || '⚡'}</span>
+            <span style="font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem; background: #f1f5f9; color: #475569; border-radius: 9999px;">${tool.category}</span>
+          </div>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;"><a href="${tool.url}" style="color: #0f172a; text-decoration: none;">${tool.title}</a></h3>
+          <p style="color: #64748b; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.75rem;">${tool.description || ''}</p>
+          <a href="${tool.url}" style="font-size: 0.85rem; font-weight: 600; color: #2563eb; text-decoration: none;">Launch Tool →</a>
+        `;
+        resultsGrid.appendChild(card);
+      });
+    }
+  });
 })();
 </script>

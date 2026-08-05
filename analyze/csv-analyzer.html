@@ -1,0 +1,914 @@
+---
+layout: main
+title: "CSV Analyzer – Analyze CSV Files Online | DataFrog.tools"
+short_name: "CSV Analyzer"
+description: "Analyze CSV files online with detailed statistics, data quality insights, missing value detection, duplicate analysis, column profiling, and interactive reports. Fast, private, and browser-based."
+keywords: "CSV Analyzer, Analyze CSV, CSV File Analyzer, CSV Data Analyzer, CSV Analysis Tool, CSV Statistics, CSV Profiler, Analyze CSV Online"
+category: "Analyze"
+permalink: /analyze/csv-analyzer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CSV Analyzer – DataFrog.tools",
+  "url": "https://datafrog.tools/analyze/csv-analyzer/",
+  "description": "Browser-based CSV Analyzer providing column profiling, numeric summary stats (mean, median, min, max, sum), missing value detection, duplicate checks, and quality audits locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Analyze",
+      "item": "https://datafrog.tools/analyze"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "CSV Analyzer",
+      "item": "https://datafrog.tools/analyze/csv-analyzer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is my CSV file uploaded to any server for analysis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, 100% private. Your CSV dataset is parsed, profiled, and audited entirely inside your web browser memory using client-side JavaScript. Zero data is sent to external servers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which column metrics are computed by the CSV Analyzer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool computes data types, unique value counts, missing value percentages, numeric minimum, maximum, mean/average, median, sum, outlier detection, and top frequent values."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the tool detect delimiters and data quality issues?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The built-in RFC 4180 parser automatically detects delimiters (comma, tab, semicolon, pipe) and checks for duplicate rows, empty columns, whitespace anomalies, and mixed type conflicts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export the column profiling statistics?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! You can copy the generated text report, download the executive summary file, or click 'Export Statistics' to save column-by-column metrics as a CSV file."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    📊 Analyze Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    CSV Analyzer – Column Profiling & Data Quality Audit
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Analyze CSV datasets locally in your browser. Generate column profiling stats (mean, median, min, max, sum), missing value ratios, duplicate row detection, and data quality reports.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📊</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your CSV file here for profiling</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .csv, .tsv, .txt files or paste text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse CSV File
+      <input type="file" id="file-input" accept=".csv,.tsv,.txt,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample CSV
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INPUT TEXTAREA AREA
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 2rem;">
+  <label for="csv-input" style="display: block; font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 0.5rem;">
+    Raw CSV Data Input
+  </label>
+  <textarea id="csv-input" placeholder="Paste your CSV dataset here to analyze..." 
+            style="width: 100%; height: 180px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.875rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 12px; outline: none; background: #ffffff; resize: vertical; margin-bottom: 0.75rem;"></textarea>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     OVERVIEW DASHBOARD CARDS (8 METRICS)
+═══════════════════════════════════════════════════ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 0.85rem; margin-bottom: 2rem;">
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Total Rows</span>
+    <span id="card-rows" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.2rem; color: #0f172a;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Columns</span>
+    <span id="card-cols" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.2rem; color: #2563eb;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">File Size</span>
+    <span id="card-size" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.05rem; color: #0f172a;">0 B</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Delimiter</span>
+    <span id="card-delimiter" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.1rem; color: #16a34a;">Auto</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Missing Values</span>
+    <span id="card-missing" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.15rem; color: #dc2626;">0 (0%)</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Duplicate Rows</span>
+    <span id="card-duplicates" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.15rem; color: #ea580c;">0</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Quality Score</span>
+    <span id="card-quality-score" style="display: block; margin-top: 0.35rem; font-weight: 800; font-size: 1.25rem; color: #16a34a;">100%</span>
+  </div>
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+    <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Dataset Health</span>
+    <span id="card-health-grade" style="display: inline-block; margin-top: 0.25rem; font-weight: 800; font-size: 1rem; padding: 0.15rem 0.6rem; border-radius: 9999px; background: #f0fdf4; color: #16a34a;">Grade A</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     COLUMN PROFILING TABLE SECTION
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+    <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">
+      📊 Interactive Column Profiler & Statistics
+    </h3>
+    <span style="font-size: 0.85rem; color: #64748b;" id="column-count-info">0 columns profiled</span>
+  </div>
+
+  <div style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+      <thead>
+        <tr style="background: #0f172a; color: #ffffff;">
+          <th style="padding: 0.75rem; border-radius: 6px 0 0 0;">Column Name</th>
+          <th style="padding: 0.75rem;">Data Type</th>
+          <th style="padding: 0.75rem; text-align: right;">Unique</th>
+          <th style="padding: 0.75rem; text-align: right;">Missing %</th>
+          <th style="padding: 0.75rem;">Numeric Stats (Min / Max / Mean / Sum)</th>
+          <th style="padding: 0.75rem; border-radius: 0 6px 0 0;">Top Frequent Values</th>
+        </tr>
+      </thead>
+      <tbody id="column-profiler-tbody">
+        <tr><td colspan="6" style="padding: 1.5rem; text-align: center; color: #94a3b8; font-style: italic;">Load or paste CSV data to generate column profiling statistics</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     QUALITY AUDIT & ANOMALIES SECTION
+═══════════════════════════════════════════════════ -->
+<div style="grid-template-columns: 1fr 1fr; display: grid; gap: 1.5rem; margin-bottom: 2rem;">
+  
+  <!-- Data Quality Audit -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">🛡️ Data Quality & Anomaly Audit</h3>
+    <div id="quality-audit-list" style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+      <div style="color: #64748b; font-style: italic; text-align: center; padding: 2rem 0;">Input valid CSV dataset to run data quality audit</div>
+    </div>
+  </div>
+
+  <!-- Structural Extremes -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">📏 Dataset Structural Extrema</h3>
+    <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.875rem;">
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Longest Text Cell:</span>
+        <span id="metric-longest-cell" style="font-weight: 700; color: #16a34a; font-family: monospace;">-</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Widest Column Name:</span>
+        <span id="metric-widest-col" style="font-weight: 700; color: #2563eb; font-family: monospace;">-</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Average Row Length:</span>
+        <span id="metric-avg-row-len" style="font-weight: 700; color: #0f172a;">0 chars</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Empty Rows Count:</span>
+        <span id="metric-empty-rows" style="font-weight: 700; color: #dc2626;">0</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px dashed #e2e8f0;">
+        <span style="color: #64748b; font-weight: 600;">Whitespace Anomalies:</span>
+        <span id="metric-whitespace" style="font-weight: 700; color: #ea580c;">0 cells</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     EXECUTIVE SUMMARY REPORT BOX & EXPORT BUTTONS
+═══════════════════════════════════════════════════ -->
+<div style="background: #0f172a; color: #f8fafc; border-radius: 14px; padding: 1.5rem; margin-bottom: 3rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0; color: #ffffff;">📋 Executive CSV Analysis & Profiling Report</h3>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-copy-report" style="padding: 0.45rem 0.9rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📋 Copy Report
+      </button>
+      <button id="btn-download-report" style="padding: 0.45rem 0.9rem; background: #16a34a; color: #ffffff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        📥 Download Report
+      </button>
+      <button id="btn-export-stats-csv" style="padding: 0.45rem 0.9rem; background: #ffffff; color: #0f172a; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        📊 Export Stats CSV
+      </button>
+    </div>
+  </div>
+
+  <pre id="summary-report-output" style="margin: 0; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; word-break: break-all; color: #cbd5e1; background: #1e293b; padding: 1rem; border-radius: 8px;">Analysis report will be generated here upon CSV input...</pre>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">CSV Analyzer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Complete spreadsheet statistics, column profiling, and quality auditing</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📊 Column-by-Column Profiling</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Calculates data types, unique values, missing ratios, min, max, mean, median, and sum per column.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🛡️ Data Quality & Health Grade</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Assigns an overall health score & letter grade (A/B/C/D) based on duplicate rows and missing cell ratios.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚠️ Anomaly & Outlier Spotter</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Detects duplicate rows, empty columns, whitespace anomalies, and numeric statistical outliers.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">⚡ Auto Delimiter Detection</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Automatically recognizes commas, tabs, semicolons, and pipe delimiters instantly.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📊 Exportable Statistics CSV</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Download a ready-to-use CSV file containing column profiling statistics and metric summaries.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Your CSV dataset stays in your browser memory. Zero files or data are uploaded to servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use CSV Analyzer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input CSV File</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste CSV text into the input box, drag and drop a <code>.csv</code> file, or click <strong>Load Sample CSV</strong>.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Column Stats & Audit</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review column profiling metrics (unique, missing %, min/max/mean), structural extrema, and health warnings.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong>, <strong>Download Report</strong>, or <strong>Export Stats CSV</strong> to export analysis results.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my CSV file uploaded to any server for analysis?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          No, 100% private. Your CSV dataset is parsed, profiled, and audited entirely inside your web browser memory using client-side JavaScript. Zero data is sent to external servers.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Which column metrics are computed by the CSV Analyzer?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The tool computes data types, unique value counts, missing value percentages, numeric minimum, maximum, mean/average, median, sum, outlier detection, and top frequent values.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the tool detect delimiters and data quality issues?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The built-in RFC 4180 parser automatically detects delimiters (comma, tab, semicolon, pipe) and checks for duplicate rows, empty columns, whitespace anomalies, and mixed type conflicts.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I export the column profiling statistics?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! You can copy the generated text report, download the executive summary file, or click <strong>Export Stats CSV</strong> to save column-by-column metrics as a CSV file.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CLIENT-SIDE CSV ANALYZER LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // Elements
+  const csvInput = document.getElementById('csv-input');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+
+  // Overview Cards
+  const cardRows = document.getElementById('card-rows');
+  const cardCols = document.getElementById('card-cols');
+  const cardSize = document.getElementById('card-size');
+  const cardDelimiter = document.getElementById('card-delimiter');
+  const cardMissing = document.getElementById('card-missing');
+  const cardDuplicates = document.getElementById('card-duplicates');
+  const cardQualityScore = document.getElementById('card-quality-score');
+  const cardHealthGrade = document.getElementById('card-health-grade');
+
+  // Tables & Audits
+  const columnCountInfo = document.getElementById('column-count-info');
+  const columnProfilerTbody = document.getElementById('column-profiler-tbody');
+  const qualityAuditList = document.getElementById('quality-audit-list');
+
+  // Extrema
+  const metricLongestCell = document.getElementById('metric-longest-cell');
+  const metricWidestCol = document.getElementById('metric-widest-col');
+  const metricAvgRowLen = document.getElementById('metric-avg-row-len');
+  const metricEmptyRows = document.getElementById('metric-empty-rows');
+  const metricWhitespace = document.getElementById('metric-whitespace');
+
+  const summaryReportOutput = document.getElementById('summary-report-output');
+
+  // Buttons
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+  const btnCopyReport = document.getElementById('btn-copy-report');
+  const btnDownloadReport = document.getElementById('btn-download-report');
+  const btnExportStatsCsv = document.getElementById('btn-export-stats-csv');
+
+  let currentFileByteSize = 0;
+  let currentReportText = '';
+  let currentColumnStats = [];
+
+  const SAMPLE_CSV = `id,name,category,units_sold,unit_price,total_revenue,region,status
+101,"Data Analytics Engine",Inspect,1450,49.99,72485.50,North America,Active
+102,"JSON Explorer",Inspect,2800,29.99,83972.00,Europe,Active
+103,"CSV Pipeline Studio",Analyze,950,99.99,94990.50,Asia Pacific,Active
+104,"XML Schema Inspector",Validate,1200,39.99,47988.00,North America,Active
+105,"YAML Config Engine",Compare,880,19.99,17591.20,Europe,Active
+106,"Data Visualization Suite",Visualize,3100,79.99,247969.00,North America,Active
+107,"Automated Reports Pro",Reports,620,149.99,92993.80,North America,
+107,"Automated Reports Pro",Reports,620,149.99,92993.80,North America,Active`;
+
+  // Drag & Drop & Click File
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    currentFileByteSize = file.size;
+    const reader = new FileReader();
+    reader.onload = evt => {
+      csvInput.value = evt.target.result;
+      analyzeCSV();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    csvInput.value = SAMPLE_CSV;
+    currentFileByteSize = new Blob([SAMPLE_CSV]).size;
+    analyzeCSV();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    csvInput.value = '';
+    currentFileByteSize = 0;
+    analyzeCSV();
+  });
+
+  csvInput.addEventListener('input', () => {
+    currentFileByteSize = new Blob([csvInput.value]).size;
+    analyzeCSV();
+  });
+
+  // RFC 4180 CSV Parser
+  function parseCSV(text) {
+    if (!text.trim()) return { headers: [], rows: [], delimiter: ',' };
+
+    const sample = text.split('\n').slice(0, 10).join('\n');
+    const counts = {
+      ',': (sample.match(/,/g) || []).length,
+      '\t': (sample.match(/\t/g) || []).length,
+      ';': (sample.match(/;/g) || []).length,
+      '|': (sample.match(/\|/g) || []).length
+    };
+    let delimiter = ',';
+    let max = -1;
+    Object.keys(counts).forEach(d => {
+      if (counts[d] > max) { max = counts[d]; delimiter = d; }
+    });
+
+    const lines = [];
+    let curCell = '';
+    let curRow = [];
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      const nextC = text[i + 1];
+
+      if (inQuotes) {
+        if (c === '"') {
+          if (nextC === '"') { curCell += '"'; i++; }
+          else { inQuotes = false; }
+        } else { curCell += c; }
+      } else {
+        if (c === '"') { inQuotes = true; }
+        else if (c === delimiter) { curRow.push(curCell.trim()); curCell = ''; }
+        else if (c === '\r' || c === '\n') {
+          if (c === '\r' && nextC === '\n') i++;
+          curRow.push(curCell.trim());
+          if (curRow.some(cell => cell.length > 0)) lines.push(curRow);
+          curRow = []; curCell = '';
+        } else { curCell += c; }
+      }
+    }
+    if (curCell || curRow.length > 0) {
+      curRow.push(curCell.trim());
+      lines.push(curRow);
+    }
+
+    if (lines.length === 0) return { headers: [], rows: [], delimiter };
+
+    const headers = lines[0];
+    const rows = lines.slice(1);
+    return { headers, rows, delimiter };
+  }
+
+  // Analysis Logic
+  function analyzeCSV() {
+    const raw = csvInput.value;
+    if (!raw.trim()) {
+      showEmptyState();
+      return;
+    }
+
+    const { headers, rows, delimiter } = parseCSV(raw);
+
+    if (headers.length === 0) {
+      showEmptyState();
+      return;
+    }
+
+    const rowCount = rows.length;
+    const colCount = headers.length;
+    const totalCells = rowCount * colCount;
+
+    cardRows.textContent = rowCount.toLocaleString();
+    cardCols.textContent = colCount.toLocaleString();
+    cardSize.textContent = formatBytes(currentFileByteSize || new Blob([raw]).size);
+    cardDelimiter.textContent = delimiter === '\t' ? 'TAB' : delimiter;
+
+    // Detect Duplicates & Empty Cells
+    let missingCells = 0;
+    let emptyRowsCount = 0;
+    let whitespaceAnomalies = 0;
+    let longestCellText = '';
+    let widestColName = '';
+
+    headers.forEach(h => {
+      if (h.length > widestColName.length) widestColName = h;
+    });
+
+    const rowStringsSet = new Set();
+    let duplicateRowsCount = 0;
+
+    rows.forEach(r => {
+      const rStr = r.join('|||');
+      if (rowStringsSet.has(rStr)) duplicateRowsCount++;
+      else rowStringsSet.add(rStr);
+
+      let isEmptyRow = true;
+      headers.forEach((_, colIdx) => {
+        const val = r[colIdx] || '';
+        if (val === '') {
+          missingCells++;
+        } else {
+          isEmptyRow = false;
+          if (val.length > longestCellText.length) longestCellText = val;
+          if (val !== val.trim()) whitespaceAnomalies++;
+        }
+      });
+      if (isEmptyRow) emptyRowsCount++;
+    });
+
+    const missingPct = totalCells > 0 ? ((missingCells / totalCells) * 100).toFixed(1) : '0';
+    cardMissing.textContent = `${missingCells.toLocaleString()} (${missingPct}%)`;
+    cardDuplicates.textContent = duplicateRowsCount.toLocaleString();
+
+    // Quality Score Calculation
+    let qualityPenalty = 0;
+    if (missingPct > 10) qualityPenalty += 15;
+    if (duplicateRowsCount > 0) qualityPenalty += 10;
+    if (emptyRowsCount > 0) qualityPenalty += 10;
+    const qualityScore = Math.max(0, 100 - Math.round(qualityPenalty));
+    cardQualityScore.textContent = `${qualityScore}%`;
+
+    let grade = 'Grade A';
+    let gradeColor = '#16a34a';
+    if (qualityScore < 70) { grade = 'Grade D'; gradeColor = '#dc2626'; }
+    else if (qualityScore < 85) { grade = 'Grade C'; gradeColor = '#ea580c'; }
+    else if (qualityScore < 95) { grade = 'Grade B'; gradeColor = '#2563eb'; }
+
+    cardHealthGrade.textContent = grade;
+    cardHealthGrade.style.color = gradeColor;
+
+    // Column Profiling Engine
+    currentColumnStats = headers.map((colName, colIdx) => {
+      const colValues = rows.map(r => r[colIdx] || '').filter(v => v !== '');
+      const missingCount = rowCount - colValues.length;
+      const missingRatio = rowCount > 0 ? (missingCount / rowCount) * 100 : 0;
+
+      // Unique Values & Frequencies
+      const valueFreqs = {};
+      colValues.forEach(v => { valueFreqs[v] = (valueFreqs[v] || 0) + 1; });
+      const uniqueCount = Object.keys(valueFreqs).length;
+
+      // Top Frequencies
+      const topFreqs = Object.keys(valueFreqs)
+        .map(k => ({ val: k, count: valueFreqs[k] }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 3);
+
+      // Data Type Inference (Numeric, Date, Text)
+      let numCount = 0;
+      let numericVals = [];
+
+      colValues.forEach(v => {
+        const num = Number(v);
+        if (!isNaN(num) && v.trim() !== '') {
+          numCount++;
+          numericVals.push(num);
+        }
+      });
+
+      let inferredType = 'Text';
+      if (colValues.length > 0 && numCount / colValues.length > 0.8) {
+        inferredType = 'Numeric';
+      }
+
+      // Numeric Stats
+      let minVal = null;
+      let maxVal = null;
+      let meanVal = null;
+      let medianVal = null;
+      let sumVal = null;
+
+      if (inferredType === 'Numeric' && numericVals.length > 0) {
+        numericVals.sort((a, b) => a - b);
+        minVal = numericVals[0];
+        maxVal = numericVals[numericVals.length - 1];
+        sumVal = numericVals.reduce((acc, curr) => acc + curr, 0);
+        meanVal = sumVal / numericVals.length;
+
+        const mid = Math.floor(numericVals.length / 2);
+        medianVal = numericVals.length % 2 !== 0 ? numericVals[mid] : (numericVals[mid - 1] + numericVals[mid]) / 2;
+      }
+
+      return {
+        colName,
+        colIdx,
+        inferredType,
+        uniqueCount,
+        missingCount,
+        missingRatio: missingRatio.toFixed(1),
+        minVal,
+        maxVal,
+        meanVal,
+        medianVal,
+        sumVal,
+        topFreqs
+      };
+    });
+
+    // Render Column Profiler Table
+    columnCountInfo.textContent = `${headers.length} columns profiled`;
+    columnProfilerTbody.innerHTML = '';
+
+    currentColumnStats.forEach(stat => {
+      const tr = document.createElement('tr');
+      tr.style.borderBottom = '1px solid #f1f5f9';
+
+      let numStatsStr = '<span style="color: #94a3b8;">N/A (Text Column)</span>';
+      if (stat.inferredType === 'Numeric' && stat.meanVal !== null) {
+        numStatsStr = `
+          <div style="font-size: 0.8rem; line-height: 1.4;">
+            <strong>Min:</strong> ${stat.minVal.toLocaleString()} | <strong>Max:</strong> ${stat.maxVal.toLocaleString()}<br>
+            <strong>Mean:</strong> ${stat.meanVal.toFixed(2)} | <strong>Sum:</strong> ${stat.sumVal.toLocaleString()}
+          </div>
+        `;
+      }
+
+      const topValsStr = stat.topFreqs.map(f => `"${escapeHTML(f.val)}" (${f.count})`).join(', ') || '-';
+
+      tr.innerHTML = `
+        <td style="padding: 0.75rem; font-weight: 700; color: #0f172a;">${escapeHTML(stat.colName)}</td>
+        <td style="padding: 0.75rem;">
+          <span style="font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px; ${stat.inferredType === 'Numeric' ? 'background: #fff7ed; color: #ea580c;' : 'background: #eff6ff; color: #2563eb;'}">
+            ${stat.inferredType}
+          </span>
+        </td>
+        <td style="padding: 0.75rem; text-align: right; font-weight: 700; color: #0f172a;">${stat.uniqueCount.toLocaleString()}</td>
+        <td style="padding: 0.75rem; text-align: right; color: ${stat.missingCount > 0 ? '#dc2626' : '#16a34a'}; font-weight: 700;">${stat.missingRatio}%</td>
+        <td style="padding: 0.75rem;">${numStatsStr}</td>
+        <td style="padding: 0.75rem; font-size: 0.8rem; color: #475569;">${topValsStr}</td>
+      `;
+      columnProfilerTbody.appendChild(tr);
+    });
+
+    // Extrema Metrics
+    metricLongestCell.textContent = longestCellText ? `"${longestCellText.length > 20 ? longestCellText.substring(0, 20) + '...' : longestCellText}" (${longestCellText.length} chars)` : 'None';
+    metricWidestCol.textContent = widestColName ? `"${widestColName}" (${widestColName.length} chars)` : 'None';
+    
+    const avgRowLen = rowCount > 0 ? (raw.length / rowCount).toFixed(0) : '0';
+    metricAvgRowLen.textContent = `${avgRowLen} chars / row`;
+    metricEmptyRows.textContent = emptyRowsCount.toString();
+    metricWhitespace.textContent = `${whitespaceAnomalies} cells`;
+
+    // Data Quality Audit Findings
+    qualityAuditList.innerHTML = '';
+    const auditItems = [];
+
+    if (duplicateRowsCount > 0) {
+      auditItems.push({ level: 'warn', msg: `Duplicate Rows: ${duplicateRowsCount} duplicate row(s) detected. Deduplicating rows will improve data integrity.` });
+    }
+    if (missingCells > 0) {
+      auditItems.push({ level: 'warn', msg: `Missing Values: ${missingCells} empty cell(s) detected (${missingPct}% missing data ratio).` });
+    }
+    if (emptyRowsCount > 0) {
+      auditItems.push({ level: 'warn', msg: `Empty Rows: ${emptyRowsCount} completely blank row(s) found.` });
+    }
+    if (whitespaceAnomalies > 0) {
+      auditItems.push({ level: 'info', msg: `Whitespace Anomalies: ${whitespaceAnomalies} cell(s) contain leading/trailing spaces.` });
+    }
+    if (auditItems.length === 0) {
+      auditItems.push({ level: 'pass', msg: `✅ Clean Dataset: Zero duplicate rows, zero missing cells, and no data quality anomalies found.` });
+    }
+
+    auditItems.forEach(item => {
+      const div = document.createElement('div');
+      div.style.cssText = 'padding: 0.75rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem;';
+      if (item.level === 'pass') {
+        div.style.background = '#f0fdf4'; div.style.color = '#16a34a'; div.style.border = '1px solid #bbf7d0';
+      } else if (item.level === 'warn') {
+        div.style.background = '#fff7ed'; div.style.color = '#ea580c'; div.style.border = '1px solid #fed7aa';
+      } else {
+        div.style.background = '#eff6ff'; div.style.color = '#2563eb'; div.style.border = '1px solid #bfdbfe';
+      }
+      div.textContent = item.msg;
+      qualityAuditList.appendChild(div);
+    });
+
+    // Executive Summary Text Report
+    const dateStr = new Date().toISOString().split('T')[0];
+    currentReportText = `==================================================
+DATAFROG.TOOLS — EXECUTIVE CSV ANALYSIS REPORT
+Generated: ${dateStr} | Processing: 100% Browser Local RAM
+==================================================
+
+1. DATASET OVERVIEW & HEALTH
+--------------------------------------------------
+- Total Rows:               ${rowCount}
+- Total Columns:            ${colCount}
+- File Size:                ${formatBytes(currentFileByteSize || new Blob([raw]).size)}
+- Auto Delimiter:           ${delimiter === '\t' ? 'TAB' : delimiter}
+- Duplicate Rows:           ${duplicateRowsCount}
+- Missing Cells:            ${missingCells} (${missingPct}%)
+- Data Quality Score:       ${qualityScore}% (${grade})
+
+2. COLUMN PROFILING STATISTICS
+--------------------------------------------------
+${currentColumnStats.map(s => `- ${s.colName.padEnd(20)} [${s.inferredType}] | Unique: ${s.uniqueCount} | Missing: ${s.missingRatio}% ${s.inferredType === 'Numeric' ? `| Mean: ${s.meanVal.toFixed(2)} | Min: ${s.minVal} | Max: ${s.maxVal}` : ''}`).join('\n')}
+
+3. STRUCTURAL EXTREMA
+--------------------------------------------------
+- Longest Text Cell:        ${longestCellText ? `"${longestCellText}" (${longestCellText.length} chars)` : 'None'}
+- Widest Column Name:       ${widestColName ? `"${widestColName}" (${widestColName.length} chars)` : 'None'}
+- Average Row Length:       ${avgRowLen} characters
+- Empty Rows Count:         ${emptyRowsCount}
+- Whitespace Anomalies:     ${whitespaceAnomalies} cells
+
+4. DATA QUALITY AUDIT FINDINGS
+--------------------------------------------------
+${auditItems.map(i => `[${i.level.toUpperCase()}] ${i.msg}`).join('\n')}
+
+==================================================
+DataFrog.tools — Privacy-First Data Intelligence`;
+
+    summaryReportOutput.textContent = currentReportText;
+  }
+
+  function showEmptyState() {
+    cardRows.textContent = '0';
+    cardCols.textContent = '0';
+    cardSize.textContent = '0 B';
+    cardDelimiter.textContent = 'Auto';
+    cardMissing.textContent = '0 (0%)';
+    cardDuplicates.textContent = '0';
+    cardQualityScore.textContent = '100%';
+    cardHealthGrade.textContent = 'Grade A';
+    cardHealthGrade.style.color = '#16a34a';
+
+    columnCountInfo.textContent = '0 columns profiled';
+    columnProfilerTbody.innerHTML = '<tr><td colspan="6" style="padding: 1.5rem; text-align: center; color: #94a3b8; font-style: italic;">Load or paste CSV data to generate column profiling statistics</td></tr>';
+    qualityAuditList.innerHTML = '<div style="color: #64748b; font-style: italic; text-align: center; padding: 2rem 0;">Input valid CSV dataset to run data quality audit</div>';
+    
+    metricLongestCell.textContent = '-';
+    metricWidestCol.textContent = '-';
+    metricAvgRowLen.textContent = '0 chars';
+    metricEmptyRows.textContent = '0';
+    metricWhitespace.textContent = '0 cells';
+
+    summaryReportOutput.textContent = 'Analysis report will be generated here upon CSV input...';
+    currentReportText = '';
+    currentColumnStats = [];
+  }
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+  }
+
+  // Copy & Export Actions
+  btnCopyReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    navigator.clipboard.writeText(currentReportText);
+    showToast('Executive CSV report copied to clipboard!');
+  });
+
+  btnDownloadReport.addEventListener('click', () => {
+    if (!currentReportText) return;
+    const blob = new Blob([currentReportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'csv-analysis-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!');
+  });
+
+  btnExportStatsCsv.addEventListener('click', () => {
+    if (currentColumnStats.length === 0) return;
+    const csvHeaders = 'Column Name,Data Type,Unique Values,Missing Count,Missing Ratio %,Numeric Min,Numeric Max,Numeric Mean,Numeric Sum';
+    const csvRows = currentColumnStats.map(s => `"${s.colName}",${s.inferredType},${s.uniqueCount},${s.missingCount},${s.missingRatio}%,${s.minVal !== null ? s.minVal : ''},${s.maxVal !== null ? s.maxVal : ''},${s.meanVal !== null ? s.meanVal.toFixed(2) : ''},${s.sumVal !== null ? s.sumVal : ''}`);
+    const csvData = [csvHeaders, ...csvRows].join('\n');
+
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'csv-column-statistics.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Column statistics exported as CSV!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Auto Initial Parse
+  analyzeCSV();
+
+})();
+</script>

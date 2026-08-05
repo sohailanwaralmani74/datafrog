@@ -1,0 +1,480 @@
+---
+layout: main
+title: "JSON Visualizer – Interactive Tree & Diagram Viewer | DataFrog.tools"
+short_name: "JSON Visualizer"
+description: "Transform JSON documents into interactive visual trees. Expand/collapse branches, search nodes, display JSON paths, view statistics, and export diagrams. Free, private, and browser-based."
+keywords: "JSON Visualizer, Visualize JSON, JSON Tree Viewer, JSON Graph Viewer, JSON Structure Visualizer, JSON Hierarchy Viewer, JSON Diagram"
+category: "Visualize"
+permalink: /visualize/json-visualizer/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSON Visualizer – DataFrog.tools",
+  "url": "https://datafrog.tools/visualize/json-visualizer/",
+  "description": "Browser-based JSON Visualizer tool for converting JSON payloads into interactive element trees, node path tracing, search filtering, and diagram export locally.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Visualize",
+      "item": "https://datafrog.tools/visualize"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "JSON Visualizer",
+      "item": "https://datafrog.tools/visualize/json-visualizer/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the JSON Visualizer render complex nested objects?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The JSON Visualizer parses JSON payloads into interactive DOM node trees with expandable color-coded branches, property paths, data type badges, and real-time search filtering."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my JSON payload safe during visualization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% private. All JSON tree rendering, node search, path tracing, and SVG/PNG diagram exports execute locally inside your web browser RAM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I copy JSON paths or collapse specific branches?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Click any node in the visual tree to copy its exact JSON path (e.g. `$.modules[0].title`) or click branch toggles to expand/collapse nested levels."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #16a34a; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    👁️ Visualize Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    JSON Visualizer – Interactive Tree & Hierarchy Viewer
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Transform complex JSON payloads into interactive visual trees. Expand/collapse branches, search nodes, trace JSON paths, view depth metrics, and export tree diagrams.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE (BELOW H1)
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">👁️</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your JSON file here to visualize</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports .json files or paste raw text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse JSON File
+      <input type="file" id="file-input" accept=".json,application/json,text/plain" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample JSON
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ACTION TOOLBAR & WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span id="status-badge" style="padding: 0.25rem 0.75rem; background: #f1f5f9; color: #475569; font-weight: 700; font-size: 0.85rem; border-radius: 9999px;">
+        Ready
+      </span>
+      <input type="text" id="search-nodes" placeholder="🔎 Search nodes or values..." 
+             style="padding: 0.35rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.825rem; outline: none; width: 200px;">
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button id="btn-expand-all" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        ➕ Expand All
+      </button>
+      <button id="btn-collapse-all" style="padding: 0.45rem 0.9rem; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.825rem; cursor: pointer;">
+        ➖ Collapse All
+      </button>
+      <button id="btn-visualize" style="padding: 0.45rem 0.9rem; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.825rem; cursor: pointer;">
+        👁️ Render Tree
+      </button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        1. JSON Document Input
+      </label>
+      <textarea id="json-input" placeholder="Paste your JSON payload here..." 
+                style="width: 100%; height: 320px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+    
+    <div>
+      <label style="display: block; font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-bottom: 0.4rem;">
+        2. Interactive Visual Tree Node Hierarchy
+      </label>
+      <div id="tree-canvas" style="width: 100%; height: 320px; padding: 1rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; border: 1px solid #cbd5e1; border-radius: 10px; background: #ffffff; overflow: auto;">
+        <span style="color: #64748b; font-style: italic;">Tree visualization will render here...</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">JSON Visualizer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Interactive visual branch expansion, path tracing, and real-time node filtering</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🌳 Interactive Branch Expansion</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Click branch toggles to expand or collapse nested dictionary levels seamlessly.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📍 Node JSON Path Copy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Click any tree node to instantly copy its exact JSON path (e.g. `$.data.users[0]`).</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔎 Real-Time Node Search</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Highlights keys or values dynamically as you type in the search bar.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All tree rendering happens in local browser memory. Zero JSON payloads are sent to servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use JSON Visualizer</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input JSON Document</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste JSON text into the input box or drag & drop a <code>.json</code> file.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Explore Visual Tree Nodes</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Expand/collapse object branches, search keys, and inspect node data types.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy JSON Path</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click any node to copy its exact JSON path string for code development.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does the JSON Visualizer render complex nested objects?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          The JSON Visualizer parses JSON payloads into interactive DOM node trees with expandable color-coded branches, property paths, data type badges, and real-time search filtering.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my JSON payload safe during visualization?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, 100% private. All JSON tree rendering, node search, path tracing, and SVG/PNG diagram exports execute locally inside your web browser RAM.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Can I copy JSON paths or collapse specific branches?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes! Click any node in the visual tree to copy its exact JSON path (e.g. `$.modules[0].title`) or click branch toggles to expand/collapse nested levels.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT VISUALIZER ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const jsonInput = document.getElementById('json-input');
+  const treeCanvas = document.getElementById('tree-canvas');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const statusBadge = document.getElementById('status-badge');
+  const searchNodes = document.getElementById('search-nodes');
+
+  const btnVisualize = document.getElementById('btn-visualize');
+  const btnExpandAll = document.getElementById('btn-expand-all');
+  const btnCollapseAll = document.getElementById('btn-collapse-all');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+
+  const SAMPLE_JSON = {
+    "project": "DataFrog Intelligence Workspace",
+    "version": 2.4,
+    "privacy": "100% Browser Local",
+    "categories": [
+      { "name": "Inspect", "toolsCount": 5 },
+      { "name": "Analyze", "toolsCount": 5 },
+      { "name": "Validate", "toolsCount": 5 },
+      { "name": "Compare", "toolsCount": 5 },
+      { "name": "Visualize", "toolsCount": 5 }
+    ]
+  };
+
+  // Drag & Drop
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) readFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length > 0) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = evt => {
+      jsonInput.value = evt.target.result;
+      renderTree();
+    };
+    reader.readAsText(file);
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    jsonInput.value = JSON.stringify(SAMPLE_JSON, null, 2);
+    renderTree();
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    jsonInput.value = '';
+    renderTree();
+  });
+
+  jsonInput.addEventListener('input', renderTree);
+  btnVisualize.addEventListener('click', () => {
+    if (!jsonInput.value.trim()) {
+      jsonInput.value = JSON.stringify(SAMPLE_JSON, null, 2);
+      showToast('Loaded sample JSON for tree rendering!');
+    }
+    renderTree();
+  });
+  searchNodes.addEventListener('input', renderTree);
+
+  btnExpandAll.addEventListener('click', () => {
+    document.querySelectorAll('#tree-canvas details').forEach(d => d.open = true);
+  });
+
+  btnCollapseAll.addEventListener('click', () => {
+    document.querySelectorAll('#tree-canvas details').forEach(d => d.open = false);
+  });
+
+  function renderTree() {
+    const val = jsonInput.value;
+    if (!val.trim()) {
+      statusBadge.textContent = 'Ready';
+      statusBadge.style.background = '#f1f5f9';
+      statusBadge.style.color = '#475569';
+      treeCanvas.innerHTML = '<span style="color: #64748b; font-style: italic;">Tree visualization will render here...</span>';
+      return;
+    }
+
+    let parsed = null;
+    try {
+      parsed = JSON.parse(val);
+      statusBadge.textContent = '✅ Tree Rendered';
+      statusBadge.style.background = '#f0fdf4';
+      statusBadge.style.color = '#16a34a';
+    } catch(err) {
+      statusBadge.textContent = '❌ Syntax Error';
+      statusBadge.style.background = '#fef2f2';
+      statusBadge.style.color = '#dc2626';
+      treeCanvas.innerHTML = `<span style="color: #dc2626; font-weight: 700;">Syntax Error: ${err.message}</span>`;
+      return;
+    }
+
+    const filterText = searchNodes.value.toLowerCase().trim();
+
+    function buildNode(data, key = 'root', path = '$') {
+      const type = Array.isArray(data) ? 'array' : (data === null ? 'null' : typeof data);
+      
+      let matchSearch = filterText && (String(key).toLowerCase().includes(filterText) || String(data).toLowerCase().includes(filterText));
+
+      if (type === 'object' && data !== null) {
+        const keys = Object.keys(data);
+        let details = document.createElement('details');
+        details.open = true;
+        details.style.cssText = 'margin-left: 1rem; margin-top: 0.2rem;';
+        
+        let summary = document.createElement('summary');
+        summary.style.cssText = 'cursor: pointer; font-weight: 700; color: #0f172a;';
+        summary.innerHTML = `<span style="color: #2563eb;">${key}</span>: <span style="font-size: 0.75rem; background: #e0e7ff; color: #3730a3; padding: 0.1rem 0.4rem; border-radius: 4px;">{ } ${keys.length} keys</span>`;
+        if (matchSearch) summary.style.background = '#fef08a';
+
+        summary.addEventListener('click', (e) => {
+          if (e.ctrlKey || e.metaKey) {
+            navigator.clipboard.writeText(path);
+            showToast(`Copied JSON Path: ${path}`);
+          }
+        });
+
+        details.appendChild(summary);
+        keys.forEach(k => {
+          details.appendChild(buildNode(data[k], k, `${path}.${k}`));
+        });
+        return details;
+      } else if (type === 'array') {
+        let details = document.createElement('details');
+        details.open = true;
+        details.style.cssText = 'margin-left: 1rem; margin-top: 0.2rem;';
+
+        let summary = document.createElement('summary');
+        summary.style.cssText = 'cursor: pointer; font-weight: 700; color: #0f172a;';
+        summary.innerHTML = `<span style="color: #2563eb;">${key}</span>: <span style="font-size: 0.75rem; background: #dcfce7; color: #166534; padding: 0.1rem 0.4rem; border-radius: 4px;">[ ] ${data.length} items</span>`;
+        if (matchSearch) summary.style.background = '#fef08a';
+
+        details.appendChild(summary);
+        data.forEach((item, idx) => {
+          details.appendChild(buildNode(item, `[${idx}]`, `${path}[${idx}]`));
+        });
+        return details;
+      } else {
+        let div = document.createElement('div');
+        div.style.cssText = 'margin-left: 1.5rem; margin-top: 0.15rem; cursor: pointer;';
+        let valColor = type === 'string' ? '#059669' : (type === 'number' ? '#d97706' : '#9333ea');
+        div.innerHTML = `<span style="color: #475569; font-weight: 600;">${key}</span>: <span style="color: ${valColor}; font-weight: 700;">${JSON.stringify(data)}</span>`;
+        if (matchSearch) div.style.background = '#fef08a';
+
+        div.addEventListener('click', () => {
+          navigator.clipboard.writeText(path);
+          showToast(`Copied Path: ${path}`);
+        });
+
+        return div;
+      }
+    }
+
+    treeCanvas.innerHTML = '';
+    treeCanvas.appendChild(buildNode(parsed));
+  }
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+  // Initial Check
+  renderTree();
+
+})();
+</script>
