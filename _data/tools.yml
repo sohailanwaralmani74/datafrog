@@ -393,7 +393,7 @@
   short_name: "Word Cloud Generator"
   url: "/visualize/word-cloud-generator/"
   category: "Visualize"
-  description: "Transform text documents and datasets into interactive word clouds, generate word frequency analysis, bigrams, trigrams, and export high-res PNG, SVG, CSV, Excel, or HTML reports."
+  description: "Transform text documents and datasets into interactive word clouds, generate word frequency analysis, bigrams, trigrams, and export high-res PNG, SVG, CSV, Excel, and HTML reports."
   keywords: ["word cloud generator", "word cloud maker", "online word cloud", "word frequency", "keyword cloud", "text visualization", "word frequency analyzer", "word visualization", "text analytics", "keyword visualization"]
   icon: "☁️"
   featured: true
