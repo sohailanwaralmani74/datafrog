@@ -58,6 +58,6 @@ keywords: "About DataFrog, browser based data tools, privacy first data workspac
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Get in Touch</h2>
-    <p>Have suggestions for new browser tools or features? We welcome feedback from data engineers, analysts, and developers. Reach out to us through our <a href="/contact-us" style="color: var(--primary);">Contact Page</a>.</p>
+    <p>Have suggestions for new browser tools or features? We welcome feedback from data engineers, analysts, and developers. Reach out to us through our <a href="/contact-us" style="color: var(--primary);">Contact US Page</a>.</p>
   </section>
 </div>
