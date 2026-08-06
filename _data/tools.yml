@@ -102,6 +102,17 @@
   date: "2026-08-06"
   updated: "2026-08-06"
 
+- title: "GeoJSON Viewer"
+  short_name: "GeoJSON Viewer"
+  url: "/inspect/geojson-viewer/"
+  category: "Inspect"
+  description: "Open, parse, validate, inspect, search, and visualize GeoJSON files (.geojson, .json) locally in your browser with interactive maps, attribute tables, feature trees, and exports."
+  keywords: ["geojson viewer", "geojson map viewer", "geojson file viewer", "geojson reader", "view geojson online", "open geojson", "geojson visualizer", "geojson explorer", "geojson map", "geojson parser", "geojson inspector", "browse geojson", "geojson feature viewer"]
+  icon: "🗺️"
+  featured: true
+  date: "2026-08-06"
+  updated: "2026-08-06"
+
 - title: "JSON Analyzer"
   short_name: "JSON Analyzer"
   url: "/analyze/json-analyzer/"

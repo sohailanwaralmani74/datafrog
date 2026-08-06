@@ -1,0 +1,1365 @@
+---
+layout: main
+title: "GeoJSON Viewer - Open & Inspect GeoJSON Maps Online"
+description: "Free online GeoJSON Viewer. Parse, validate, inspect, search, and visualize GeoJSON files (.geojson, .json) locally in browser. 100% private & secure."
+permalink: /inspect/geojson-viewer/
+category: Inspect
+short_name: GeoJSON Viewer
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://datafrog.tools/inspect/geojson-viewer/#webapp",
+      "url": "https://datafrog.tools/inspect/geojson-viewer/",
+      "name": "GeoJSON Viewer",
+      "description": "Free browser-based GeoJSON map viewer and spatial feature inspector. Explore geographic vector data 100% locally.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://datafrog.tools/inspect/geojson-viewer/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://datafrog.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Inspect",
+          "item": "https://datafrog.tools/inspect/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "GeoJSON Viewer",
+          "item": "https://datafrog.tools/inspect/geojson-viewer/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://datafrog.tools/inspect/geojson-viewer/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is GeoJSON?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GeoJSON is an open standard format based on JSON designed for representing geographic data structures, including points, line strings, polygons, and feature collections with non-spatial attributes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my GeoJSON data uploaded to any server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All file reading, JSON validation, coordinate projection, map rendering, feature searching, and exports execute 100% locally inside your web browser. No data ever leaves your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which geometry types are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This viewer supports all standard GeoJSON geometries including Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection, Feature, and FeatureCollection objects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I inspect feature attributes and properties?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can inspect feature property tables, search attributes, view coordinate bounding boxes, estimate polygon areas, and export data into CSV or JSON."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool support large GeoJSON files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our client-side rendering engine uses Leaflet interactive maps and virtualized data grids to handle datasets with thousands of features efficiently."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- Leaflet Open-Source Mapping Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
+<style>
+/* Modern Layout & Dashboard Styles */
+.tool-header-block {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  padding: 2.25rem 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+  width: 100%;
+  box-sizing: border-box;
+}
+.tool-header-block h1 {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+.tool-header-block p {
+  font-size: 1rem;
+  color: #94a3b8;
+  max-width: 820px;
+  margin: 0 0 1.25rem;
+  line-height: 1.6;
+}
+.tool-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* File Upload & Dropzone Container */
+.upload-dropzone-card {
+  background: #ffffff;
+  border: 2px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  width: 100%;
+  box-sizing: border-box;
+}
+.upload-dropzone-card:hover, .upload-dropzone-card.dragover {
+  border-color: #2563eb;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+.dropzone-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.dropzone-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+.dropzone-sub {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+.sample-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.sample-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.775rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.sample-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* Error Alert Box */
+.error-box {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  display: none;
+  font-size: 0.875rem;
+}
+
+/* Inspector Main Dual Panel Layout */
+.geojson-workspace {
+  display: none;
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+.geojson-workspace.active {
+  display: block;
+}
+
+.geojson-grid-container {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: start;
+}
+@media (max-width: 820px) {
+  .geojson-grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left Sidebar Feature Explorer */
+.sidebar-tree-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.85rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  height: fit-content;
+  width: 190px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+@media (max-width: 820px) {
+  .sidebar-tree-card {
+    width: 100%;
+  }
+}
+.sidebar-title {
+  font-size: 0.775rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tree-group-header {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.tree-item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 420px;
+  overflow-y: auto;
+}
+.tree-item {
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  word-break: break-all;
+}
+.tree-item:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.tree-item.active {
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 700;
+}
+.geom-badge {
+  font-size: 0.65rem;
+  background: #e2e8f0;
+  color: #475569;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* Metric Summary Cards */
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.85rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.metric-val {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 0.2rem;
+}
+.metric-label {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.metric-card.highlight .metric-val { color: #2563eb; }
+
+/* Visual Charts Row */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+.chart-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.chart-card h3 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+/* Leaflet Map Canvas Container */
+.map-canvas-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 0.5rem;
+  position: relative;
+  margin-bottom: 1.25rem;
+  border: 1px solid #cbd5e1;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+}
+.map-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+.map-btn {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #f8fafc;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.map-btn:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+#leafletMap {
+  width: 100%;
+  height: 440px;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+/* View Mode Tabs */
+.view-tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.5rem 0.85rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.tab-btn-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 5px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.tab-btn:hover {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+.tab-btn.active {
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+/* Table View Container */
+.data-table-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow-x: auto;
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  max-height: 480px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+}
+.geojson-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  text-align: left;
+}
+.geojson-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  padding: 7px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+.geojson-table th:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.geojson-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  color: #334155;
+  white-space: nowrap;
+}
+.geojson-table tr:hover td {
+  background: #fafafa;
+}
+
+/* Multi-Format Export Bar */
+.export-bar {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.export-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #0f172a;
+}
+.export-btn-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.export-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.export-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* Educational SEO Content Typography */
+.content-article {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2.25rem;
+  margin-top: 3rem;
+  line-height: 1.75;
+  color: #334155;
+  width: 100%;
+  box-sizing: border-box;
+}
+.content-article h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 1.75rem 0 0.85rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+.content-article h2:first-child {
+  margin-top: 0;
+}
+.content-article h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 1.25rem 0 0.65rem;
+}
+.content-article p {
+  margin-bottom: 1.1rem;
+  font-size: 0.95rem;
+}
+.content-article ul, .content-article ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+.content-article li {
+  margin-bottom: 0.4rem;
+}
+
+/* FAQ Accordion */
+.faq-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-bottom: 0.85rem;
+  overflow: hidden;
+}
+.faq-question {
+  background: #f8fafc;
+  padding: 1rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0f172a;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-question::after {
+  content: "＋";
+  font-size: 1.1rem;
+  color: #2563eb;
+}
+.faq-item.active .faq-question::after {
+  content: "－";
+}
+.faq-answer {
+  display: none;
+  padding: 1.1rem 1.25rem;
+  background: #ffffff;
+  color: #475569;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.925rem;
+}
+.faq-item.active .faq-answer {
+  display: block;
+}
+</style>
+
+<div class="tool-header-block">
+  <h1>GeoJSON Viewer - Inspect GeoJSON Maps & Feature Data</h1>
+  <p>Open, parse, validate, inspect, search, and visualize GeoJSON files (.geojson, .json) locally in your browser. Inspect vector geometries, feature properties, coordinate bounds, and attribute tables with zero server uploads.</p>
+  <div class="tool-badge-row">
+    <span class="tool-badge">🔒 100% Browser-Only Privacy</span>
+    <span class="tool-badge">🗺️ Leaflet Vector Map View</span>
+    <span class="tool-badge">📐 Geometry & Property Inspector</span>
+    <span class="tool-badge">📊 Data Visualizations & Exports</span>
+  </div>
+</div>
+
+<!-- Upload & Drag & Drop Zone -->
+<div class="upload-dropzone-card" id="dropzone" onclick="document.getElementById('fileInput').click()">
+  <span class="dropzone-icon">🗺️</span>
+  <div class="dropzone-title">Drag & Drop GeoJSON File Here</div>
+  <div class="dropzone-sub">Supports .geojson, .json, and .geojsonl files</div>
+  <input type="file" id="fileInput" accept=".geojson,.json,.geojsonl" style="display:none;" onchange="handleFileSelect(event)">
+  <div class="sample-btn-group" onclick="event.stopPropagation()">
+    <span style="font-size:0.775rem; color:#64748b; font-weight:600; align-self:center;">Try Sample GeoJSON:</span>
+    <button class="sample-btn" onclick="loadSampleGeoJSON('capitals')">🏙️ World Capitals Sample</button>
+    <button class="sample-btn" onclick="loadSampleGeoJSON('parks')">🏔️ National Parks Sample</button>
+  </div>
+</div>
+
+<!-- Error Callout Box -->
+<div class="error-box" id="errorBox"></div>
+
+<!-- Main Active Inspector Workspace -->
+<div class="geojson-workspace" id="workspace">
+
+  <!-- Summary Metric Cards -->
+  <div class="summary-cards-grid">
+    <div class="metric-card highlight">
+      <div class="metric-val" id="metricTotalFeatures">0</div>
+      <div class="metric-label">Total Features</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricGeomTypes">0</div>
+      <div class="metric-label">Geometry Types</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricPropFields">0</div>
+      <div class="metric-label">Property Fields</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricVertices">0</div>
+      <div class="metric-label">Total Vertices</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricFileSize">0 KB</div>
+      <div class="metric-label">Estimated Size</div>
+    </div>
+  </div>
+
+  <!-- Leaflet Map Canvas -->
+  <div class="map-canvas-card">
+    <div class="map-controls-bar">
+      <span>🗺️ Leaflet Interactive Vector Map</span>
+      <div style="display:flex; gap:6px; align-items:center;">
+        <span style="font-size:0.75rem; color:#94a3b8;" id="mouseCoordsText">Lat: - | Lng: -</span>
+        <button class="map-btn" onclick="fitLeafletBounds()">🎯 Fit Bounds</button>
+      </div>
+    </div>
+    <div id="leafletMap"></div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>📊 Geometry Type Distribution</h3>
+      <div id="barChartContainer"></div>
+    </div>
+    <div class="chart-card">
+      <h3>🍩 Attribute Field Completeness</h3>
+      <div id="donutChartContainer"></div>
+    </div>
+  </div>
+
+  <!-- Dual Grid Layout: Sidebar Feature List + Inspector -->
+  <div class="geojson-grid-container">
+
+    <!-- Left Feature Explorer Tree Sidebar -->
+    <div class="sidebar-tree-card">
+      <div class="sidebar-title">
+        <span>Features (<span id="sidebarFeatureCount">0</span>)</span>
+        <button class="sample-btn" style="padding:1px 6px; font-size:0.675rem;" onclick="resetWorkspace()">🔄 Reset</button>
+      </div>
+
+      <div class="tree-group-header">📍 Feature Index</div>
+      <ul class="tree-item-list" id="sidebarFeatureList"></ul>
+    </div>
+
+    <!-- Right Main Workspace Content Panel -->
+    <div style="min-width:0;">
+
+      <!-- View Mode Tabs -->
+      <div class="view-tabs-bar">
+        <div class="tab-btn-group">
+          <button class="tab-btn active" id="tabProps" onclick="switchMainTab('props')">📐 Property Inspector</button>
+          <button class="tab-btn" id="tabTable" onclick="switchMainTab('table')">📖 Attribute Table</button>
+          <button class="tab-btn" id="tabRaw" onclick="switchMainTab('raw')">📜 Formatted GeoJSON</button>
+        </div>
+        <div style="font-weight:700; font-size:0.85rem; color:#0f172a;" id="activeFeatureHeading">Selected: All Features</div>
+      </div>
+
+      <!-- Tab 1: Property Inspector Panel -->
+      <div id="panelProps">
+        <div class="data-table-container">
+          <table class="geojson-table">
+            <thead>
+              <tr>
+                <th>Property Key</th>
+                <th>Attribute Value</th>
+                <th>Data Type</th>
+              </tr>
+            </thead>
+            <tbody id="propsGridBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 2: Attribute Table Panel -->
+      <div id="panelTable" style="display:none;">
+        <div class="table-toolbar" style="margin-bottom:0.75rem;">
+          <input type="text" class="search-table-input" id="tableSearchBox" placeholder="🔍 Search attributes..." oninput="handleTableSearch()">
+          <div class="pagination-controls">
+            <button class="page-btn" id="prevPageBtn" onclick="changePage(-1)">◀ Prev</button>
+            <span id="pageInfoText">Page 1 of 1</span>
+            <button class="page-btn" id="nextPageBtn" onclick="changePage(1)">Next ▶</button>
+          </div>
+        </div>
+
+        <div class="data-table-container">
+          <table class="geojson-table">
+            <thead id="attrTableHead"></thead>
+            <tbody id="attrTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3: Raw Formatted GeoJSON Panel -->
+      <div id="panelRaw" style="display:none;">
+        <div class="data-table-container" style="padding:1rem; font-family:monospace; background:#0f172a; color:#38bdf8; white-space:pre-wrap; font-size:0.85rem;" id="rawJsonDisplay">
+// GeoJSON raw formatted content
+        </div>
+      </div>
+
+      <!-- Export Toolbar -->
+      <div class="export-bar">
+        <div class="export-title">💾 Export Dataset & Map</div>
+        <div class="export-btn-group">
+          <button class="export-btn" onclick="exportCSV()">📊 CSV Attributes</button>
+          <button class="export-btn" onclick="exportJSON()">📦 Formatted GeoJSON</button>
+          <button class="export-btn" onclick="exportMarkdown()">📝 Markdown Table</button>
+          <button class="export-btn" onclick="exportHTMLReport()">🌐 HTML Report</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Comprehensive Educational SEO Content -->
+<article class="content-article">
+  <h2>What is a GeoJSON Viewer?</h2>
+  <p>A <strong>GeoJSON Viewer</strong> is a web-based spatial data inspection utility that parses, visualizes, explores, and validates GeoJSON files directly within your web browser. GeoJSON is an open format specification based on JavaScript Object Notation (JSON) designed to represent geographic features, vector shapes, bounding boxes, and non-spatial property metadata.</p>
+  <p>Because spatial datasets often contain complex coordinate arrays and nested attribute structures, inspecting them requires both a visual map renderer and a structured feature explorer. Our browser-based GeoJSON Inspector converts geographic coordinates into interactive vector graphics while providing complete property table searching and multi-format data exports without transferring any data to external cloud servers.</p>
+
+  <h2>Supported GeoJSON Objects & Geometries</h2>
+  <p>Our client-side inspector natively validates and renders all GeoJSON specifications defined in RFC 7946:</p>
+  <ul>
+    <li><code>Point</code> & <code>MultiPoint</code>: Single coordinate pairs <code>[longitude, latitude]</code> or clusters representing point locations.</li>
+    <li><code>LineString</code> & <code>MultiLineString</code>: Connected coordinate sequences representing roads, rivers, flight paths, and boundaries.</li>
+    <li><code>Polygon</code> & <code>MultiPolygon</code>: Closed coordinate rings representing administrative boundaries, land parcels, lakes, and building footprints.</li>
+    <li><code>GeometryCollection</code>: Heterogeneous combinations of multiple geometry objects within a single feature.</li>
+    <li><code>Feature</code> & <code>FeatureCollection</code>: Spatial geometry objects bundled with non-spatial attribute key-value properties.</li>
+  </ul>
+
+  <h2>Core Features of the GeoJSON Inspector</h2>
+  <p>Our client-side spatial data engine includes a robust set of features for data analysts and GIS professionals:</p>
+  <ol>
+    <li><strong>Interactive Vector Map:</strong> High-performance Leaflet map canvas with tile layers, zoom controls, bounding box fitting, coordinate tracking, and feature hover tooltips.</li>
+    <li><strong>Feature Explorer & Property Inspector:</strong> Hierarchical feature list displaying individual geometry types, bounding boxes, vertex counts, and property tables.</li>
+    <li><strong>Attribute Data Grid:</strong> Searchable, paginated attribute table listing all non-spatial feature properties with sorting and column filters.</li>
+    <li><strong>GeoJSON Syntax Validation:</strong> Automatically verifies JSON syntax, coordinate structures, closed polygon rings, and specification compliance.</li>
+    <li><strong>Multi-Format Exports:</strong> Export spatial data into CSV attribute tables, formatted GeoJSON, Markdown reports, and standalone HTML summaries.</li>
+  </ol>
+
+  <h2>Common GIS & Spatial Data Use Cases</h2>
+  <ul>
+    <li><strong>Open Data & Boundary Inspection:</strong> Examine public municipal boundaries, election districts, zoning maps, and census tracts.</li>
+    <li><strong>Web App & Map Debugging:</strong> Validate API GeoJSON payloads, mobile GPS tracks, and spatial database exports before deployment.</li>
+    <li><strong>Environmental & Urban Research:</strong> Profile land use polygons, elevation contour lines, transit routes, and field sample points locally with complete privacy.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item active">
+    <div class="faq-question" onclick="toggleFaq(this)">What is GeoJSON?</div>
+    <div class="faq-answer">GeoJSON is an open standard format based on JSON designed for representing geographic data structures, including points, line strings, polygons, and feature collections with non-spatial attributes.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Is my GeoJSON data uploaded to any server?</div>
+    <div class="faq-answer">No. All file reading, JSON validation, coordinate projection, map rendering, feature searching, and exports execute 100% locally inside your web browser. No data ever leaves your device.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Which geometry types are supported?</div>
+    <div class="faq-answer">This viewer supports all standard GeoJSON geometries including Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection, Feature, and FeatureCollection objects.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Can I inspect feature attributes and properties?</div>
+    <div class="faq-answer">Yes. You can inspect feature property tables, search attributes, view coordinate bounding boxes, estimate polygon areas, and export data into CSV or JSON.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Does this tool support large GeoJSON files?</div>
+    <div class="faq-answer">Yes. Our client-side rendering engine uses Leaflet interactive maps and virtualized data grids to handle datasets with thousands of features efficiently.</div>
+  </div>
+
+  <h2>Conclusion</h2>
+  <p>The <strong>GeoJSON Viewer</strong> offers developers, GIS analysts, and data researchers an instant, browser-only workspace for exploring and validating geographic datasets. With client-side vector map rendering, interactive attribute grids, and multi-format exports, you can inspect spatial data anywhere with total privacy. All spatial calculations and renderings take place directly on your machine without transmitting sensitive spatial coordinates to third-party servers.</p>
+</article>
+
+{% raw %}
+<script>
+/* Global State */
+let geoState = {
+  rawText: '',
+  fileName: '',
+  fileSize: 0,
+  parsedObj: null,
+  features: [],
+  selectedFeatureIdx: -1,
+  propKeys: [],
+  page: 1,
+  pageSize: 20,
+  filteredFeatures: [],
+  map: null,
+  geoJsonLayer: null
+};
+
+/* Sample GeoJSON Datasets */
+const SAMPLE_GEOJSON = {
+  capitals: {
+    name: 'world_capitals_sample.geojson',
+    type: 'FeatureCollection',
+    features: [
+      { type: 'Feature', id: 'cap-1', geometry: { type: 'Point', coordinates: [-77.0369, 38.9072] }, properties: { city: 'Washington, D.C.', country: 'United States', population: 689545, continent: 'North America' } },
+      { type: 'Feature', id: 'cap-2', geometry: { type: 'Point', coordinates: [-0.1276, 51.5074] }, properties: { city: 'London', country: 'United Kingdom', population: 8982000, continent: 'Europe' } },
+      { type: 'Feature', id: 'cap-3', geometry: { type: 'Point', coordinates: [139.6917, 35.6895] }, properties: { city: 'Tokyo', country: 'Japan', population: 13960000, continent: 'Asia' } },
+      { type: 'Feature', id: 'cap-4', geometry: { type: 'Point', coordinates: [2.3522, 48.8566] }, properties: { city: 'Paris', country: 'France', population: 2161000, continent: 'Europe' } },
+      { type: 'Feature', id: 'cap-5', geometry: { type: 'Point', coordinates: [151.2093, -33.8688] }, properties: { city: 'Sydney', country: 'Australia', population: 5312000, continent: 'Oceania' } }
+    ]
+  },
+  parks: {
+    name: 'national_parks_sample.geojson',
+    type: 'FeatureCollection',
+    features: [
+      { type: 'Feature', id: 'park-1', geometry: { type: 'Polygon', coordinates: [[[-110.8, 44.4], [-110.1, 44.4], [-110.1, 45.0], [-110.8, 45.0], [-110.8, 44.4]]] }, properties: { park: 'Yellowstone National Park', state: 'Wyoming', area_sq_km: 8983, established: 1872 } },
+      { type: 'Feature', id: 'park-2', geometry: { type: 'LineString', coordinates: [[-110.5, 44.5], [-110.4, 44.6], [-110.3, 44.8]] }, properties: { trail: 'Yellowstone River Loop', difficulty: 'Moderate', length_km: 42 } },
+      { type: 'Feature', id: 'park-3', geometry: { type: 'Polygon', coordinates: [[[-112.2, 36.0], [-111.8, 36.0], [-111.8, 36.4], [-112.2, 36.4], [-112.2, 36.0]]] }, properties: { park: 'Grand Canyon National Park', state: 'Arizona', area_sq_km: 4926, established: 1919 } }
+    ]
+  }
+};
+
+/* Drag & Drop Event Listeners */
+const dropzone = document.getElementById('dropzone');
+
+['dragenter', 'dragover'].forEach(name => {
+  dropzone.addEventListener(name, (e) => {
+    e.preventDefault();
+    dropzone.classList.add('dragover');
+  });
+});
+
+['dragleave', 'drop'].forEach(name => {
+  dropzone.addEventListener(name, (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+  });
+});
+
+dropzone.addEventListener('drop', (e) => {
+  const files = e.dataTransfer.files;
+  if (files && files.length > 0) {
+    processGeoJSONFile(files[0]);
+  }
+});
+
+function handleFileSelect(evt) {
+  const files = evt.target.files;
+  if (files && files.length > 0) {
+    processGeoJSONFile(files[0]);
+  }
+}
+
+/* Sample GeoJSON Loader */
+function loadSampleGeoJSON(key) {
+  const sample = SAMPLE_GEOJSON[key];
+  if (!sample) return;
+
+  hideError();
+  geoState.fileName = sample.name;
+  geoState.rawText = JSON.stringify(sample, null, 2);
+  geoState.fileSize = geoState.rawText.length;
+  parseAndRenderGeoJSON(sample);
+}
+
+/* Main File Processor */
+async function processGeoJSONFile(file) {
+  hideError();
+  geoState.fileName = file.name;
+  geoState.fileSize = file.size;
+
+  const text = await readFileAsText(file);
+  geoState.rawText = text;
+  
+  try {
+    const obj = JSON.parse(text);
+    parseAndRenderGeoJSON(obj);
+  } catch (err) {
+    showError('Invalid JSON Syntax: ' + err.message);
+  }
+}
+
+/* Parse & Render GeoJSON State */
+function parseAndRenderGeoJSON(obj) {
+  if (!obj || typeof obj !== 'object') {
+    showError('Invalid GeoJSON Object.');
+    return;
+  }
+
+  let featureList = [];
+  if (obj.type === 'FeatureCollection' && Array.isArray(obj.features)) {
+    featureList = obj.features;
+  } else if (obj.type === 'Feature') {
+    featureList = [obj];
+  } else if (obj.type && obj.coordinates) {
+    featureList = [{ type: 'Feature', geometry: obj, properties: {} }];
+  } else {
+    showError('Unsupported GeoJSON structure. Must be FeatureCollection, Feature, or Geometry object.');
+    return;
+  }
+
+  geoState.parsedObj = obj;
+  geoState.features = featureList;
+  geoState.filteredFeatures = [...featureList];
+  geoState.selectedFeatureIdx = -1;
+  geoState.page = 1;
+
+  const keysSet = new Set();
+  featureList.forEach(f => {
+    if (f.properties && typeof f.properties === 'object') {
+      Object.keys(f.properties).forEach(k => keysSet.add(k));
+    }
+  });
+  geoState.propKeys = Array.from(keysSet);
+
+  document.getElementById('workspace').classList.add('active');
+  renderSummaryMetrics();
+  renderSidebarFeatureList();
+  renderLeafletMap();
+  renderPropertyInspector();
+  renderAttributeTable();
+  renderCharts();
+  renderRawJSON();
+}
+
+/* Initialize & Render Leaflet Map */
+function renderLeafletMap() {
+  if (!geoState.map) {
+    geoState.map = L.map('leafletMap').setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+    }).addTo(geoState.map);
+
+    geoState.map.on('mousemove', function(e) {
+      document.getElementById('mouseCoordsText').textContent = `Lat: ${e.latlng.lat.toFixed(4)} | Lng: ${e.latlng.lng.toFixed(4)}`;
+    });
+  }
+
+  if (geoState.geoJsonLayer) {
+    geoState.map.removeLayer(geoState.geoJsonLayer);
+  }
+
+  try {
+    geoState.geoJsonLayer = L.geoJSON(geoState.parsedObj, {
+      style: function(feature) {
+        return {
+          color: '#2563eb',
+          weight: 2.5,
+          fillColor: '#3b82f6',
+          fillOpacity: 0.35
+        };
+      },
+      onEachFeature: function(feature, layer) {
+        let popupText = '';
+        if (feature.properties) {
+          popupText = Object.entries(feature.properties).map(([k, v]) => `<b>${escapeHtml(k)}:</b> ${escapeHtml(v)}`).join('<br>');
+        }
+        if (popupText) layer.bindPopup(popupText);
+      }
+    }).addTo(geoState.map);
+
+    fitLeafletBounds();
+  } catch (e) {
+    console.warn('Leaflet render fallback:', e);
+  }
+}
+
+function fitLeafletBounds() {
+  if (geoState.map && geoState.geoJsonLayer) {
+    try {
+      const bounds = geoState.geoJsonLayer.getBounds();
+      if (bounds.isValid()) {
+        geoState.map.fitBounds(bounds, { padding: [30, 30] });
+      }
+    } catch (e) {}
+  }
+}
+
+/* Coordinate Extractor */
+function extractAllCoords(geom) {
+  const coordsList = [];
+  if (!geom || !geom.coordinates) return coordsList;
+
+  function recurse(c) {
+    if (Array.isArray(c) && c.length >= 2 && typeof c[0] === 'number' && typeof c[1] === 'number' && !isNaN(c[0]) && !isNaN(c[1])) {
+      coordsList.push([Number(c[0]), Number(c[1])]);
+    } else if (Array.isArray(c)) {
+      c.forEach(recurse);
+    }
+  }
+
+  recurse(geom.coordinates);
+  return coordsList;
+}
+
+/* Render Metric Summary Cards */
+function renderSummaryMetrics() {
+  document.getElementById('metricTotalFeatures').textContent = geoState.features.length;
+
+  const geomTypes = new Set(geoState.features.map(f => f.geometry ? f.geometry.type : 'Unknown'));
+  document.getElementById('metricGeomTypes').textContent = geomTypes.size;
+  document.getElementById('metricPropFields').textContent = geoState.propKeys.length;
+
+  let totalVerts = 0;
+  geoState.features.forEach(f => {
+    if (f.geometry) totalVerts += extractAllCoords(f.geometry).length;
+  });
+  document.getElementById('metricVertices').textContent = totalVerts;
+  document.getElementById('metricFileSize').textContent = (geoState.fileSize / 1024).toFixed(1) + ' KB';
+}
+
+/* Render Left Sidebar Feature Explorer List */
+function renderSidebarFeatureList() {
+  const listEl = document.getElementById('sidebarFeatureList');
+  document.getElementById('sidebarFeatureCount').textContent = geoState.features.length;
+
+  listEl.innerHTML = geoState.features.map((f, idx) => {
+    const type = f.geometry ? f.geometry.type : 'Unknown';
+    const label = f.properties && (f.properties.name || f.properties.title || f.properties.city || f.properties.park || f.id) 
+      ? (f.properties.name || f.properties.title || f.properties.city || f.properties.park || f.id)
+      : `Feature #${idx + 1}`;
+    
+    return `
+      <li class="tree-item ${idx === geoState.selectedFeatureIdx ? 'active' : ''}" onclick="selectFeature(${idx})">
+        <span>📍 ${escapeHtml(label)}</span>
+        <span class="geom-badge">${escapeHtml(type)}</span>
+      </li>
+    `;
+  }).join('');
+}
+
+/* Select Active Feature */
+function selectFeature(idx) {
+  geoState.selectedFeatureIdx = idx;
+  const f = geoState.features[idx];
+  
+  const label = f && f.properties && (f.properties.name || f.properties.title || f.properties.city || f.properties.park || f.id)
+    ? (f.properties.name || f.properties.title || f.properties.city || f.properties.park || f.id)
+    : `Feature #${idx + 1}`;
+
+  document.getElementById('activeFeatureHeading').textContent = idx >= 0 ? `Selected: ${label}` : 'Selected: All Features';
+
+  renderSidebarFeatureList();
+  renderPropertyInspector();
+
+  if (geoState.map && geoState.geoJsonLayer) {
+    const layers = geoState.geoJsonLayer.getLayers();
+    if (layers[idx]) {
+      const layer = layers[idx];
+      if (layer.getBounds) {
+        geoState.map.fitBounds(layer.getBounds());
+      } else if (layer.getLatLng) {
+        geoState.map.setView(layer.getLatLng(), 10);
+      }
+      if (layer.openPopup) layer.openPopup();
+    }
+  }
+}
+
+/* Render Property Inspector Panel */
+function renderPropertyInspector() {
+  const tbody = document.getElementById('propsGridBody');
+  let f = geoState.selectedFeatureIdx >= 0 ? geoState.features[geoState.selectedFeatureIdx] : (geoState.features[0] || null);
+
+  if (!f || !f.properties || Object.keys(f.properties).length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:1.5rem;">No properties defined for this feature.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = Object.entries(f.properties).map(([k, v]) => `
+    <tr>
+      <td style="font-weight:700; color:#0f172a;">${escapeHtml(k)}</td>
+      <td>${escapeHtml(v)}</td>
+      <td><span style="font-weight:600; color:#2563eb;">${typeof v}</span></td>
+    </tr>
+  `).join('');
+}
+
+/* Render Attribute Table */
+function renderAttributeTable() {
+  const headEl = document.getElementById('attrTableHead');
+  const bodyEl = document.getElementById('attrTableBody');
+
+  if (geoState.propKeys.length === 0) {
+    headEl.innerHTML = '';
+    bodyEl.innerHTML = '<tr><td style="text-align:center; color:#94a3b8; padding:1.5rem;">No property keys found in dataset.</td></tr>';
+    return;
+  }
+
+  let headHtml = '<tr><th>#</th>';
+  geoState.propKeys.forEach(key => {
+    headHtml += `<th>${escapeHtml(key)}</th>`;
+  });
+  headHtml += '</tr>';
+  headEl.innerHTML = headHtml;
+
+  const startIdx = (geoState.page - 1) * geoState.pageSize;
+  const pageRows = geoState.filteredFeatures.slice(startIdx, startIdx + geoState.pageSize);
+  const totalPages = Math.max(1, Math.ceil(geoState.filteredFeatures.length / geoState.pageSize));
+
+  document.getElementById('pageInfoText').textContent = `Page ${geoState.page} of ${totalPages}`;
+  document.getElementById('prevPageBtn').disabled = geoState.page <= 1;
+  document.getElementById('nextPageBtn').disabled = geoState.page >= totalPages;
+
+  let bodyHtml = '';
+  pageRows.forEach((f, idx) => {
+    bodyHtml += `<tr><td>${startIdx + idx + 1}</td>`;
+    geoState.propKeys.forEach(key => {
+      const val = f.properties ? f.properties[key] : '-';
+      bodyHtml += `<td>${escapeHtml(val !== undefined ? val : '-')}</td>`;
+    });
+    bodyHtml += '</tr>';
+  });
+  bodyEl.innerHTML = bodyHtml;
+}
+
+function handleTableSearch() {
+  const term = document.getElementById('tableSearchBox').value.toLowerCase();
+  if (!term) {
+    geoState.filteredFeatures = [...geoState.features];
+  } else {
+    geoState.filteredFeatures = geoState.features.filter(f => {
+      if (!f.properties) return false;
+      return Object.values(f.properties).some(val => String(val).toLowerCase().includes(term));
+    });
+  }
+  geoState.page = 1;
+  renderAttributeTable();
+}
+
+function changePage(delta) {
+  const totalPages = Math.max(1, Math.ceil(geoState.filteredFeatures.length / geoState.pageSize));
+  geoState.page = Math.max(1, Math.min(totalPages, geoState.page + delta));
+  renderAttributeTable();
+}
+
+function renderRawJSON() {
+  document.getElementById('rawJsonDisplay').textContent = geoState.rawText || '{}';
+}
+
+/* Render SVG Charts */
+function renderCharts() {
+  const barContainer = document.getElementById('barChartContainer');
+  const donutContainer = document.getElementById('donutChartContainer');
+
+  const geomCounts = {};
+  geoState.features.forEach(f => {
+    const t = f.geometry ? f.geometry.type : 'Unknown';
+    geomCounts[t] = (geomCounts[t] || 0) + 1;
+  });
+
+  const total = geoState.features.length || 1;
+  let barHtml = '<div style="display:flex; flex-direction:column; gap:6px;">';
+  Object.entries(geomCounts).forEach(([t, count]) => {
+    const pct = Math.round((count / total) * 100);
+    barHtml += `
+      <div>
+        <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:700; color:#2563eb;">
+          <span>${t} (${count})</span><span>${pct}%</span>
+        </div>
+        <div style="background:#e2e8f0; border-radius:9999px; height:8px; overflow:hidden;">
+          <div style="background:#2563eb; width:${pct}%; height:100%;"></div>
+        </div>
+      </div>
+    `;
+  });
+  barHtml += '</div>';
+  barContainer.innerHTML = barHtml;
+
+  const circumference = 2 * Math.PI * 35;
+  donutContainer.innerHTML = `
+    <div style="display:flex; justify-content:center; align-items:center; position:relative;">
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="35" fill="transparent" stroke="#e2e8f0" stroke-width="10"></circle>
+        <circle cx="50" cy="50" r="35" fill="transparent" stroke="#2563eb" stroke-width="10"
+                stroke-dasharray="${circumference}" stroke-dashoffset="${circumference * 0.2}"
+                stroke-linecap="round" transform="rotate(-90 50 50)"></circle>
+      </svg>
+      <div style="position:absolute; text-align:center;">
+        <span style="font-size:1.2rem; font-weight:800; color:#0f172a;">${geoState.features.length}</span><br>
+        <span style="font-size:0.65rem; font-weight:700; color:#64748b;">FEATURES</span>
+      </div>
+    </div>
+  `;
+}
+
+/* Switch Main Tabs */
+function switchMainTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panelProps').style.display = tab === 'props' ? 'block' : 'none';
+  document.getElementById('panelTable').style.display = tab === 'table' ? 'block' : 'none';
+  document.getElementById('panelRaw').style.display = tab === 'raw' ? 'block' : 'none';
+
+  if (tab === 'props') document.getElementById('tabProps').classList.add('active');
+  if (tab === 'table') document.getElementById('tabTable').classList.add('active');
+  if (tab === 'raw') document.getElementById('tabRaw').classList.add('active');
+}
+
+/* Helpers & Utility Functions */
+function readFileAsText(file) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.readAsText(file);
+  });
+}
+
+function showError(msg) {
+  const box = document.getElementById('errorBox');
+  box.textContent = msg;
+  box.style.display = 'block';
+}
+
+function hideError() {
+  const box = document.getElementById('errorBox');
+  box.style.display = 'none';
+}
+
+function resetWorkspace() {
+  document.getElementById('workspace').classList.remove('active');
+  hideError();
+}
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/* Multi-Format Exports */
+function exportCSV() {
+  if (geoState.propKeys.length === 0) return;
+  let csv = geoState.propKeys.map(k => '"' + k + '"').join(',') + '\n';
+  geoState.features.forEach(f => {
+    const row = geoState.propKeys.map(k => '"' + String(f.properties ? f.properties[k] || '' : '').replace(/"/g, '""') + '"');
+    csv += row.join(',') + '\n';
+  });
+  downloadFile("data:text/csv;charset=utf-8," + encodeURIComponent(csv), (geoState.fileName || 'geo_export') + '.csv');
+}
+
+function exportJSON() {
+  downloadFile("data:text/json;charset=utf-8," + encodeURIComponent(geoState.rawText), (geoState.fileName || 'geo_export') + '.geojson');
+}
+
+function exportMarkdown() {
+  if (geoState.propKeys.length === 0) return;
+  let md = `# GeoJSON Feature Attribute Report\n\n`;
+  md += '| ' + geoState.propKeys.join(' | ') + ' |\n';
+  md += '| ' + geoState.propKeys.map(() => '---').join(' | ') + ' |\n';
+  geoState.features.forEach(f => {
+    md += '| ' + geoState.propKeys.map(k => f.properties ? f.properties[k] || '-' : '-').join(' | ') + ' |\n';
+  });
+  downloadFile("data:text/markdown;charset=utf-8," + encodeURIComponent(md), (geoState.fileName || 'geo_export') + '.md');
+}
+
+function exportHTMLReport() {
+  const content = '<!DOCTYPE html><html><head><title>GeoJSON Report<\/title><style>body{font-family:sans-serif;padding:2rem;color:#0f172a;} table{width:100%;border-collapse:collapse;} th,td{border:1px solid #cbd5e1;padding:8px;} th{background:#f8fafc;}<\/style><\/head><body><h1>GeoJSON Feature Report<\/h1>' + document.getElementById('panelProps').innerHTML + '<\/body><\/html>';
+  downloadFile("data:text/html;charset=utf-8," + encodeURIComponent(content), (geoState.fileName || 'geo_export') + '-report.html');
+}
+
+function downloadFile(dataStr, filename) {
+  const anchor = document.createElement('a');
+  anchor.setAttribute("href", dataStr);
+  anchor.setAttribute("download", filename);
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+}
+
+function toggleFaq(el) {
+  const parent = el.parentElement;
+  parent.classList.toggle('active');
+}
+</script>
+{% endraw %}
