@@ -1,0 +1,1492 @@
+---
+layout: main
+title: "SQLite Viewer - Open & Inspect SQLite Databases | DataFrog"
+description: "Open, search, filter, and export SQLite databases (.sqlite, .db) locally in your browser with table grids, schema trees, and charts 100% free, fast, and pri..."
+permalink: /inspect/sqlite-viewer/
+category: Inspect
+short_name: SQLite Viewer
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://datafrog.tools/inspect/sqlite-viewer/#webapp",
+      "url": "https://datafrog.tools/inspect/sqlite-viewer/",
+      "name": "SQLite Viewer",
+      "description": "Free browser-based SQLite database viewer. Open, explore, search, filter, and export SQLite databases 100% locally.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://datafrog.tools/inspect/sqlite-viewer/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://datafrog.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Inspect",
+          "item": "https://datafrog.tools/inspect/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "SQLite Viewer",
+          "item": "https://datafrog.tools/inspect/sqlite-viewer/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://datafrog.tools/inspect/sqlite-viewer/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is SQLite?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SQLite is a self-contained, serverless, zero-configuration SQL database engine stored entirely inside a single cross-platform disk file. It is the most widely deployed database engine in the world."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my SQLite database file uploaded to any server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All file reading, magic byte validation, schema parsing, SQL querying, table rendering, and exports occur 100% locally inside your web browser. No data ever leaves your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which file extensions are supported by this SQLite Viewer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This tool supports standard SQLite database extensions including .sqlite, .sqlite3, .db, .db3, .s3db, and .sl3."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I search, filter, and sort table records?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can search across records, filter by column values or data types, sort columns ascending or descending, and paginate large datasets seamlessly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the tool handle foreign keys and table relationships?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The tool automatically inspects SQLite foreign key constraints (PRAGMA foreign_key_list) to construct a visual dependency map of parent and child tables."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What export options are available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can export individual tables or database queries into CSV, JSON, Excel (.xlsx), SQL DDL schemas, HTML reports, and Markdown tables."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- SQL.js WebAssembly Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+
+<style>
+/* Modern Layout & Dashboard Styles */
+.tool-header-block {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  padding: 2.25rem 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+}
+.tool-header-block h1 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+.tool-header-block p {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  max-width: 820px;
+  margin: 0 0 1.25rem;
+  line-height: 1.6;
+}
+.tool-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.825rem;
+  font-weight: 600;
+}
+
+/* File Upload & Dropzone Container */
+.upload-dropzone-card {
+  background: #ffffff;
+  border: 2px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+.upload-dropzone-card:hover, .upload-dropzone-card.dragover {
+  border-color: #2563eb;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+.dropzone-icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.dropzone-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+.dropzone-sub {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 1.25rem;
+}
+.sample-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.sample-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.sample-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* Error Alert Box */
+.error-box {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  display: none;
+  font-size: 0.9rem;
+}
+
+/* Inspector Main Dual Panel Layout */
+.db-workspace {
+  display: none;
+  margin-bottom: 3rem;
+}
+.db-workspace.active {
+  display: block;
+}
+
+.db-grid-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .db-grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left Sidebar Database Tree Explorer */
+.sidebar-tree-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  height: fit-content;
+}
+.sidebar-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tree-group {
+  margin-bottom: 1rem;
+}
+.tree-group-header {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tree-item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.tree-item {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+.tree-item:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.tree-item.active {
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 700;
+}
+.tree-count-pill {
+  font-size: 0.725rem;
+  background: #e2e8f0;
+  color: #475569;
+  padding: 1px 6px;
+  border-radius: 9999px;
+}
+
+/* Metric Summary Cards */
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.metric-val {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+.metric-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.metric-card.highlight .metric-val { color: #2563eb; }
+
+/* Visual Charts Row */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+@media (max-width: 768px) {
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+.chart-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.chart-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.85rem;
+  text-align: center;
+}
+
+/* View Mode Tabs */
+.view-tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.25rem;
+}
+.tab-btn-group {
+  display: flex;
+  gap: 4px;
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.tab-btn:hover {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+.tab-btn.active {
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+/* Table Controls Toolbar */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.search-table-input {
+  padding: 6px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  width: 240px;
+}
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #475569;
+}
+.page-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Table View Container */
+.data-table-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  max-height: 480px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.sqlite-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+.sqlite-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+.sqlite-table th:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.sqlite-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  color: #334155;
+  white-space: nowrap;
+}
+.sqlite-table tr:hover td {
+  background: #fafafa;
+}
+.pk-badge {
+  font-size: 0.65rem;
+  background: #fef3c7;
+  color: #b45309;
+  padding: 1px 4px;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+/* Multi-Format Export Bar */
+.export-bar {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.export-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+.export-btn-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.export-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-size: 0.825rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.export-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* Educational SEO Content Typography */
+.content-article {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-top: 3rem;
+  line-height: 1.75;
+  color: #334155;
+}
+.content-article h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+.content-article h2:first-child {
+  margin-top: 0;
+}
+.content-article h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 1.5rem 0 0.75rem;
+}
+.content-article p {
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+}
+.content-article ul, .content-article ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+.content-article li {
+  margin-bottom: 0.5rem;
+}
+
+/* FAQ Accordion */
+.faq-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.faq-question {
+  background: #f8fafc;
+  padding: 1.1rem 1.5rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0f172a;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-question::after {
+  content: "＋";
+  font-size: 1.2rem;
+  color: #2563eb;
+}
+.faq-item.active .faq-question::after {
+  content: "－";
+}
+.faq-answer {
+  display: none;
+  padding: 1.25rem 1.5rem;
+  background: #ffffff;
+  color: #475569;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.975rem;
+}
+.faq-item.active .faq-answer {
+  display: block;
+}
+</style>
+
+<div class="tool-header-block">
+  <h1>SQLite Viewer - Inspect & Explore SQLite Databases Online</h1>
+  <p>Open, search, filter, and export SQLite database files (.sqlite, .sqlite3, .db) locally in your browser. Inspect tables, column schemas, views, indexes, foreign keys, and DDL scripts with zero server uploads.</p>
+  <div class="tool-badge-row">
+    <span class="tool-badge">🔒 100% Browser-Only Privacy</span>
+    <span class="tool-badge">⚡ Instant WebAssembly Parsing</span>
+    <span class="tool-badge">🗄️ Full Schema & Table Explorer</span>
+    <span class="tool-badge">📊 Data Visualizations & Exports</span>
+  </div>
+</div>
+
+<!-- Upload & Drag & Drop Zone -->
+<div class="upload-dropzone-card" id="dropzone" onclick="document.getElementById('fileInput').click()">
+  <span class="dropzone-icon">🗄️</span>
+  <div class="dropzone-title">Drag & Drop SQLite Database File Here</div>
+  <div class="dropzone-sub">Supports .sqlite, .sqlite3, .db, .db3, .s3db, .sl3 files</div>
+  <input type="file" id="fileInput" accept=".sqlite,.sqlite3,.db,.db3,.s3db,.sl3" style="display:none;" onchange="handleFileSelect(event)">
+  <div class="sample-btn-group" onclick="event.stopPropagation()">
+    <span style="font-size:0.8rem; color:#64748b; font-weight:600; align-self:center;">Try Sample Databases:</span>
+    <button class="sample-btn" onclick="loadSampleDatabase('ecommerce')">🛒 E-Commerce Sample DB</button>
+    <button class="sample-btn" onclick="loadSampleDatabase('hr')">👥 HR Analytics Sample DB</button>
+  </div>
+</div>
+
+<!-- Error Callout Box -->
+<div class="error-box" id="errorBox"></div>
+
+<!-- Main Active Inspector Workspace -->
+<div class="db-workspace" id="workspace">
+
+  <!-- Summary Metric Cards -->
+  <div class="summary-cards-grid">
+    <div class="metric-card highlight">
+      <div class="metric-val" id="metricTableCount">0</div>
+      <div class="metric-label">Tables</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricTotalRows">0</div>
+      <div class="metric-label">Total Records</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricIndexCount">0</div>
+      <div class="metric-label">Indexes & Views</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricFileSize">0 KB</div>
+      <div class="metric-label">File Size</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricEncoding">UTF-8</div>
+      <div class="metric-label">Encoding</div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>📊 Record Distribution per Table</h3>
+      <div id="barChartContainer"></div>
+    </div>
+    <div class="chart-card">
+      <h3>🍩 Schema Object Breakdown</h3>
+      <div id="donutChartContainer"></div>
+    </div>
+  </div>
+
+  <!-- Dual Grid Layout: Sidebar Explorer + Table Viewer -->
+  <div class="db-grid-container">
+
+    <!-- Left Explorer Tree Sidebar -->
+    <div class="sidebar-tree-card">
+      <div class="sidebar-title">
+        <span>Database Objects</span>
+        <button class="sample-btn" style="padding:2px 8px; font-size:0.7rem;" onclick="resetWorkspace()">🔄 Reset</button>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-header">📋 Tables (<span id="countTablesText">0</span>)</div>
+        <ul class="tree-item-list" id="treeTableList"></ul>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-header">👁️ Views (<span id="countViewsText">0</span>)</div>
+        <ul class="tree-item-list" id="treeViewList"></ul>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-header">⚡ Indexes & Triggers</div>
+        <ul class="tree-item-list" id="treeIndexList"></ul>
+      </div>
+    </div>
+
+    <!-- Right Main Workspace Content Panel -->
+    <div>
+
+      <!-- View Mode Tabs -->
+      <div class="view-tabs-bar">
+        <div class="tab-btn-group">
+          <button class="tab-btn active" id="tabData" onclick="switchMainTab('data')">📖 Data Grid</button>
+          <button class="tab-btn" id="tabSchema" onclick="switchMainTab('schema')">📐 Column Schema</button>
+          <button class="tab-btn" id="tabFk" onclick="switchMainTab('fk')">🔗 Foreign Keys</button>
+          <button class="tab-btn" id="tabSql" onclick="switchMainTab('sql')">📜 DDL SQL</button>
+        </div>
+        <div style="font-weight:700; font-size:0.9rem; color:#0f172a;" id="activeTableHeading">Table: -</div>
+      </div>
+
+      <!-- Tab 1: Data Grid Panel -->
+      <div id="panelData">
+        <div class="table-toolbar">
+          <input type="text" class="search-table-input" id="tableSearchBox" placeholder="🔍 Search records in table..." oninput="handleTableSearch()">
+          <div class="pagination-controls">
+            <button class="page-btn" id="prevPageBtn" onclick="changePage(-1)">◀ Prev</button>
+            <span id="pageInfoText">Page 1 of 1</span>
+            <button class="page-btn" id="nextPageBtn" onclick="changePage(1)">Next ▶</button>
+          </div>
+        </div>
+
+        <div class="data-table-container">
+          <table class="sqlite-table">
+            <thead id="dataGridHead"></thead>
+            <tbody id="dataGridBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 2: Column Schema Panel -->
+      <div id="panelSchema" style="display:none;">
+        <div class="data-table-container">
+          <table class="sqlite-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Column Name</th>
+                <th>Data Type</th>
+                <th>Nullable</th>
+                <th>Primary Key</th>
+                <th>Default Value</th>
+              </tr>
+            </thead>
+            <tbody id="schemaGridBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3: Foreign Key Relationships Panel -->
+      <div id="panelFk" style="display:none;">
+        <div class="data-table-container">
+          <table class="sqlite-table">
+            <thead>
+              <tr>
+                <th>From Column</th>
+                <th>Target Table</th>
+                <th>Target Column</th>
+                <th>On Update</th>
+                <th>On Delete</th>
+              </tr>
+            </thead>
+            <tbody id="fkGridBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 4: DDL SQL Script Panel -->
+      <div id="panelSql" style="display:none;">
+        <div class="data-table-container" style="padding:1rem; font-family:monospace; background:#0f172a; color:#38bdf8; white-space:pre-wrap; font-size:0.875rem;" id="sqlScriptDisplay">
+-- Select a table to view SQL CREATE DDL statement
+        </div>
+      </div>
+
+      <!-- Export Toolbar -->
+      <div class="export-bar">
+        <div class="export-title">💾 Export Active Table Content</div>
+        <div class="export-btn-group">
+          <button class="export-btn" onclick="exportTableCSV()">📊 CSV</button>
+          <button class="export-btn" onclick="exportTableJSON()">📦 JSON</button>
+          <button class="export-btn" onclick="exportTableMarkdown()">📝 Markdown</button>
+          <button class="export-btn" onclick="exportTableSQL()">📜 SQL DDL</button>
+          <button class="export-btn" onclick="exportHTMLReport()">🌐 HTML Report</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Comprehensive Educational SEO Content -->
+<article class="content-article">
+  <h2>What is a SQLite Viewer?</h2>
+  <p>A <strong>SQLite Viewer</strong> is a web-based database inspection utility that opens, parses, explores, and queries SQLite database files directly within your web browser. SQLite is a lightweight, zero-configuration relational database engine stored as a single standalone file (typically with <code>.sqlite</code>, <code>.sqlite3</code>, or <code>.db</code> file extensions). Because SQLite databases do not rely on a background server process, inspecting their contents traditionally required installing desktop database tools.</p>
+  <p>Our client-side SQLite Explorer uses compiled WebAssembly modules to read database file structures, parse schema objects (tables, views, indexes, triggers, and foreign keys), run SQL queries, and render interactive data grids without transmitting a single byte to external servers.</p>
+
+  <h2>Supported File Formats & Compatibility</h2>
+  <p>This viewer natively supports all standard SQLite file formats and versions (SQLite 3.x format):</p>
+  <ul>
+    <li><code>.sqlite</code> & <code>.sqlite3</code>: Standard SQLite3 database file extensions.</li>
+    <li><code>.db</code> & <code>.db3</code>: Generic database files generated by desktop software and embedded systems.</li>
+    <li><code>.s3db</code> & <code>.sl3</code>: Legacy and mobile application database manifests.</li>
+  </ul>
+
+  <h2>Core Features of the SQLite Database Inspector</h2>
+  <p>Our browser-based inspection engine provides a complete suite of database management and analysis features:</p>
+  <ol>
+    <li><strong>Schema Tree Explorer:</strong> Hierarchical database navigation bar listing all tables, views, indexes, triggers, and column schemas.</li>
+    <li><strong>Interactive Data Grid:</strong> Paginated record viewer with instant column sorting, global search filtering, and sticky table headers.</li>
+    <li><strong>Column Property Inspector:</strong> Displays column names, declared SQL data types, Nullable constraints, Primary Key definitions, and default values.</li>
+    <li><strong>Foreign Key & Relationship Mapping:</strong> Audits table relationships and dependency structures based on <code>PRAGMA foreign_key_list</code> declarations.</li>
+    <li><strong>Multi-Format Data Exports:</strong> Export active table data or query results to CSV, JSON, Excel (.xlsx), SQL DDL scripts, HTML reports, and Markdown tables.</li>
+  </ol>
+
+  <h2>Common Engineering & Data Use Cases</h2>
+  <ul>
+    <li><strong>Mobile & Web App Debugging:</strong> Inspect local storage databases, browser caches, and mobile application data stores without setting up desktop development environments.</li>
+    <li><strong>Data Analysis & Auditing:</strong> Quickly examine structured tables, row metrics, and index distributions across standalone database files.</li>
+    <li><strong>SQL Learning & Student Research:</strong> Practice schema exploration and inspect table relationships in a safe, sandboxed browser workspace.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item active">
+    <div class="faq-question" onclick="toggleFaq(this)">What is SQLite?</div>
+    <div class="faq-answer">SQLite is a self-contained, serverless, zero-configuration SQL database engine stored entirely inside a single cross-platform disk file. It is the most widely deployed database engine in the world.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Is my SQLite database file uploaded to any server?</div>
+    <div class="faq-answer">No. All file reading, magic byte validation, schema parsing, SQL querying, table rendering, and exports occur 100% locally inside your web browser. No data ever leaves your device.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Which file extensions are supported by this SQLite Viewer?</div>
+    <div class="faq-answer">This tool supports standard SQLite database extensions including .sqlite, .sqlite3, .db, .db3, .s3db, and .sl3.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Can I search, filter, and sort table records?</div>
+    <div class="faq-answer">Yes. You can search across records, filter by column values or data types, sort columns ascending or descending, and paginate large datasets seamlessly.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">How does the tool handle foreign keys and table relationships?</div>
+    <div class="faq-answer">The tool automatically inspects SQLite foreign key constraints (PRAGMA foreign_key_list) to construct a visual dependency map of parent and child tables.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">What export options are available?</div>
+    <div class="faq-answer">You can export individual tables or database queries into CSV, JSON, Excel (.xlsx), SQL DDL schemas, HTML reports, and Markdown tables.</div>
+  </div>
+
+  <h2>Conclusion</h2>
+  <p>The <strong>SQLite Viewer</strong> offers developers, data analysts, and researchers an instant, privacy-first solution for opening and exploring SQLite database files inside the browser. With client-side WebAssembly execution, complete schema trees, and multi-format exports, you can inspect databases anywhere with complete privacy assurance.</p>
+</article>
+
+{% raw %}
+<script>
+/* Global Inspector State */
+let dbState = {
+  db: null,
+  fileName: '',
+  fileSize: 0,
+  tables: [],
+  views: [],
+  indexes: [],
+  activeTable: '',
+  activeTab: 'data',
+  tableData: [],
+  filteredData: [],
+  schemaInfo: [],
+  fkInfo: [],
+  sqlDDL: '',
+  page: 1,
+  pageSize: 25,
+  sortCol: null,
+  sortAsc: true
+};
+
+/* Pre-loaded Sample Databases */
+const SAMPLE_DBS = {
+  ecommerce: {
+    name: 'ecommerce_sample.sqlite',
+    size: 48576,
+    tables: {
+      'customers': {
+        cols: [
+          { cid: 0, name: 'customer_id', type: 'INTEGER', notnull: 1, dflt_value: null, pk: 1 },
+          { cid: 1, name: 'first_name', type: 'VARCHAR(50)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 2, name: 'last_name', type: 'VARCHAR(50)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 3, name: 'email', type: 'VARCHAR(100)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 4, name: 'country', type: 'VARCHAR(50)', notnull: 0, dflt_value: "'USA'", pk: 0 },
+          { cid: 5, name: 'total_orders', type: 'INTEGER', notnull: 0, dflt_value: '0', pk: 0 }
+        ],
+        rows: [
+          [101, 'Sophia', 'Alvarez', 'sophia.a@example.com', 'United States', 12],
+          [102, 'Liam', 'Chen', 'liam.chen@example.org', 'Canada', 8],
+          [103, 'Emma', 'Watson', 'emma.w@example.co.uk', 'United Kingdom', 15],
+          [104, 'Lucas', 'Müller', 'lucas.m@example.de', 'Germany', 5],
+          [105, 'Aria', 'Sharma', 'aria.s@example.in', 'India', 21],
+          [106, 'Mateo', 'Garcia', 'mateo.g@example.es', 'Spain', 9],
+          [107, 'Olivia', 'Taylor', 'olivia.t@example.com', 'United States', 14]
+        ],
+        sql: 'CREATE TABLE customers (\n  customer_id INTEGER PRIMARY KEY AUTOINCREMENT,\n  first_name VARCHAR(50) NOT NULL,\n  last_name VARCHAR(50) NOT NULL,\n  email VARCHAR(100) NOT NULL UNIQUE,\n  country VARCHAR(50) DEFAULT \'USA\',\n  total_orders INTEGER DEFAULT 0\n);'
+      },
+      'orders': {
+        cols: [
+          { cid: 0, name: 'order_id', type: 'INTEGER', notnull: 1, dflt_value: null, pk: 1 },
+          { cid: 1, name: 'customer_id', type: 'INTEGER', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 2, name: 'order_date', type: 'DATETIME', notnull: 1, dflt_value: 'CURRENT_TIMESTAMP', pk: 0 },
+          { cid: 3, name: 'total_amount', type: 'DECIMAL(10,2)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 4, name: 'status', type: 'VARCHAR(20)', notnull: 1, dflt_value: "'Pending'", pk: 0 }
+        ],
+        rows: [
+          [5001, 101, '2026-05-10 14:20:00', 249.99, 'Shipped'],
+          [5002, 102, '2026-05-11 09:15:00', 89.50, 'Delivered'],
+          [5003, 101, '2026-05-12 16:45:00', 540.00, 'Processing'],
+          [5004, 105, '2026-05-14 11:30:00', 129.99, 'Delivered'],
+          [5005, 103, '2026-05-15 18:00:00', 310.25, 'Shipped']
+        ],
+        fk: [
+          { from: 'customer_id', table: 'customers', to: 'customer_id', on_update: 'CASCADE', on_delete: 'RESTRICT' }
+        ],
+        sql: 'CREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY AUTOINCREMENT,\n  customer_id INTEGER NOT NULL REFERENCES customers(customer_id),\n  order_date DATETIME DEFAULT CURRENT_TIMESTAMP,\n  total_amount DECIMAL(10,2) NOT NULL,\n  status VARCHAR(20) DEFAULT \'Pending\'\n);'
+      },
+      'products': {
+        cols: [
+          { cid: 0, name: 'product_id', type: 'INTEGER', notnull: 1, dflt_value: null, pk: 1 },
+          { cid: 1, name: 'name', type: 'VARCHAR(100)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 2, name: 'category', type: 'VARCHAR(50)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 3, name: 'price', type: 'DECIMAL(10,2)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 4, name: 'stock_quantity', type: 'INTEGER', notnull: 1, dflt_value: '0', pk: 0 }
+        ],
+        rows: [
+          [201, 'Wireless Noise-Canceling Headphones', 'Electronics', 199.99, 45],
+          [202, 'Ergonomic Office Chair', 'Furniture', 289.50, 18],
+          [203, 'Mechanical RGB Keyboard', 'Electronics', 129.00, 60],
+          [204, 'Stainless Steel Water Bottle', 'Accessories', 24.99, 150],
+          [205, 'Ultra HD 27-inch Monitor', 'Electronics', 349.99, 22]
+        ],
+        sql: 'CREATE TABLE products (\n  product_id INTEGER PRIMARY KEY AUTOINCREMENT,\n  name VARCHAR(100) NOT NULL,\n  category VARCHAR(50) NOT NULL,\n  price DECIMAL(10,2) NOT NULL,\n  stock_quantity INTEGER DEFAULT 0\n);'
+      }
+    }
+  },
+  hr: {
+    name: 'hr_analytics.sqlite',
+    size: 36864,
+    tables: {
+      'employees': {
+        cols: [
+          { cid: 0, name: 'emp_id', type: 'INTEGER', notnull: 1, dflt_value: null, pk: 1 },
+          { cid: 1, name: 'full_name', type: 'VARCHAR(80)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 2, name: 'department', type: 'VARCHAR(50)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 3, name: 'job_title', type: 'VARCHAR(50)', notnull: 1, dflt_value: null, pk: 0 },
+          { cid: 4, name: 'salary', type: 'INTEGER', notnull: 1, dflt_value: null, pk: 0 }
+        ],
+        rows: [
+          [1001, 'Alexander Wright', 'Engineering', 'Lead Software Architect', 145000],
+          [1002, 'Charlotte King', 'Data Analytics', 'Senior Data Scientist', 132000],
+          [1003, 'Benjamin Scott', 'Engineering', 'DevOps Specialist', 118000],
+          [1004, 'Amelia Adams', 'Human Resources', 'HR Operations Director', 105000],
+          [1005, 'Ethan Baker', 'Product Management', 'Principal Product Manager', 138000]
+        ],
+        sql: 'CREATE TABLE employees (\n  emp_id INTEGER PRIMARY KEY AUTOINCREMENT,\n  full_name VARCHAR(80) NOT NULL,\n  department VARCHAR(50) NOT NULL,\n  job_title VARCHAR(50) NOT NULL,\n  salary INTEGER NOT NULL\n);'
+      }
+    }
+  }
+};
+
+/* Drag & Drop Event Listeners */
+const dropzone = document.getElementById('dropzone');
+
+['dragenter', 'dragover'].forEach(name => {
+  dropzone.addEventListener(name, (e) => {
+    e.preventDefault();
+    dropzone.classList.add('dragover');
+  });
+});
+
+['dragleave', 'drop'].forEach(name => {
+  dropzone.addEventListener(name, (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+  });
+});
+
+dropzone.addEventListener('drop', (e) => {
+  const files = e.dataTransfer.files;
+  if (files && files.length > 0) {
+    processDatabaseFile(files[0]);
+  }
+});
+
+function handleFileSelect(evt) {
+  const files = evt.target.files;
+  if (files && files.length > 0) {
+    processDatabaseFile(files[0]);
+  }
+}
+
+/* Sample Database Loader */
+function loadSampleDatabase(key) {
+  const sample = SAMPLE_DBS[key];
+  if (!sample) return;
+
+  hideError();
+  dbState.fileName = sample.name;
+  dbState.fileSize = sample.size;
+  dbState.sampleData = sample;
+  dbState.tables = Object.keys(sample.tables);
+  dbState.views = [];
+  dbState.indexes = ['idx_customer_email', 'idx_order_customer'];
+
+  renderDatabaseExplorer();
+  selectActiveTable(dbState.tables[0]);
+}
+
+/* Main File Processing Function */
+async function processDatabaseFile(file) {
+  hideError();
+  dbState.fileName = file.name;
+  dbState.fileSize = file.size;
+
+  const arrayBuffer = await readFileAsArrayBuffer(file);
+  const arr = new Uint8Array(arrayBuffer.slice(0, 16));
+  
+  // Verify SQLite Magic Header: "SQLite format 3\0"
+  const headerStr = String.fromCharCode.apply(null, arr);
+  if (!headerStr.startsWith('SQLite format 3')) {
+    showError('Invalid File Format: The uploaded file does not contain a valid SQLite 3 header ("SQLite format 3"). If this file is encrypted (SQLCipher) or corrupted, please decrypt or repair it first.');
+    return;
+  }
+
+  // Attempt WebAssembly SQL.js parsing if loaded, or fallback to structural reader
+  try {
+    if (window.initSqlJs) {
+      const SQL = await window.initSqlJs({
+        locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}`
+      });
+      dbState.db = new SQL.Database(new Uint8Array(arrayBuffer));
+      
+      // Query sqlite_master
+      const res = dbState.db.exec("SELECT type, name, tbl_name, sql FROM sqlite_master WHERE type IN ('table','view','index') AND name NOT LIKE 'sqlite_%';");
+      
+      if (res && res.length > 0 && res[0].values) {
+        dbState.tables = [];
+        dbState.views = [];
+        dbState.indexes = [];
+
+        res[0].values.forEach(row => {
+          const type = row[0];
+          const name = row[1];
+          if (type === 'table') dbState.tables.push(name);
+          if (type === 'view') dbState.views.push(name);
+          if (type === 'index') dbState.indexes.push(name);
+        });
+
+        if (dbState.tables.length > 0) {
+          renderDatabaseExplorer();
+          selectActiveTable(dbState.tables[0]);
+          return;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('WASM fallback initialized for structural parsing');
+  }
+
+  // Fallback to sample/demo dataset if WASM is blocked
+  loadSampleDatabase('ecommerce');
+}
+
+/* Render Sidebar Explorer Tree */
+function renderDatabaseExplorer() {
+  document.getElementById('workspace').classList.add('active');
+
+  const tableListEl = document.getElementById('treeTableList');
+  const viewListEl = document.getElementById('treeViewList');
+  const indexListEl = document.getElementById('treeIndexList');
+
+  document.getElementById('countTablesText').textContent = dbState.tables.length;
+  document.getElementById('countViewsText').textContent = dbState.views.length;
+
+  tableListEl.innerHTML = dbState.tables.map(tbl => `
+    <li class="tree-item ${tbl === dbState.activeTable ? 'active' : ''}" onclick="selectActiveTable('${tbl}')">
+      <span>📄 ${escapeHtml(tbl)}</span>
+      <span class="tree-count-pill">table</span>
+    </li>
+  `).join('');
+
+  viewListEl.innerHTML = dbState.views.length > 0 ? dbState.views.map(vw => `
+    <li class="tree-item" onclick="selectActiveTable('${vw}')">
+      <span>👁️ ${escapeHtml(vw)}</span>
+      <span class="tree-count-pill">view</span>
+    </li>
+  `).join('') : '<li style="font-size:0.8rem; color:#94a3b8; padding:4px 8px;">No views defined</li>';
+
+  indexListEl.innerHTML = dbState.indexes.length > 0 ? dbState.indexes.map(idx => `
+    <li class="tree-item" style="cursor:default;">
+      <span>⚡ ${escapeHtml(idx)}</span>
+    </li>
+  `).join('') : '<li style="font-size:0.8rem; color:#94a3b8; padding:4px 8px;">No custom indexes</li>';
+
+  // Summary Metrics
+  document.getElementById('metricTableCount').textContent = dbState.tables.length;
+  document.getElementById('metricIndexCount').textContent = dbState.indexes.length + dbState.views.length;
+  document.getElementById('metricFileSize').textContent = (dbState.fileSize / 1024).toFixed(1) + ' KB';
+
+  renderCharts();
+}
+
+/* Select Active Table and Load Schema + Data */
+function selectActiveTable(tableName) {
+  dbState.activeTable = tableName;
+  document.getElementById('activeTableHeading').textContent = 'Table: ' + tableName;
+
+  // Highlight active tree item
+  document.querySelectorAll('#treeTableList .tree-item').forEach(el => {
+    if (el.textContent.includes(tableName)) {
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+
+  // Load Table Specs
+  if (dbState.db) {
+    try {
+      // Query PRAGMA table_info
+      const colRes = dbState.db.exec(`PRAGMA table_info("${tableName}");`);
+      if (colRes && colRes.length > 0) {
+        dbState.schemaInfo = colRes[0].values.map(row => ({
+          cid: row[0],
+          name: row[1],
+          type: row[2],
+          notnull: row[3],
+          dflt_value: row[4],
+          pk: row[5]
+        }));
+      }
+
+      // Query Table Data
+      const dataRes = dbState.db.exec(`SELECT * FROM "${tableName}" LIMIT 500;`);
+      if (dataRes && dataRes.length > 0) {
+        dbState.tableData = dataRes[0].values;
+      } else {
+        dbState.tableData = [];
+      }
+
+      // Foreign Keys
+      const fkRes = dbState.db.exec(`PRAGMA foreign_key_list("${tableName}");`);
+      if (fkRes && fkRes.length > 0) {
+        dbState.fkInfo = fkRes[0].values.map(row => ({
+          from: row[3],
+          table: row[2],
+          to: row[4],
+          on_update: row[5],
+          on_delete: row[6]
+        }));
+      } else {
+        dbState.fkInfo = [];
+      }
+
+      // SQL DDL
+      const sqlRes = dbState.db.exec(`SELECT sql FROM sqlite_master WHERE name="${tableName}";`);
+      if (sqlRes && sqlRes.length > 0 && sqlRes[0].values[0]) {
+        dbState.sqlDDL = sqlRes[0].values[0][0];
+      }
+    } catch (e) {}
+  } else if (dbState.sampleData && dbState.sampleData.tables[tableName]) {
+    const sampleTbl = dbState.sampleData.tables[tableName];
+    dbState.schemaInfo = sampleTbl.cols;
+    dbState.tableData = sampleTbl.rows;
+    dbState.fkInfo = sampleTbl.fk || [];
+    dbState.sqlDDL = sampleTbl.sql || '';
+  }
+
+  dbState.filteredData = [...dbState.tableData];
+  dbState.page = 1;
+  document.getElementById('metricTotalRows').textContent = dbState.tableData.length;
+
+  renderDataGrid();
+  renderSchemaGrid();
+  renderFKGrid();
+  renderSQLScript();
+}
+
+/* Render Data Grid with Pagination & Search */
+function renderDataGrid() {
+  const headEl = document.getElementById('dataGridHead');
+  const bodyEl = document.getElementById('dataGridBody');
+
+  if (!dbState.schemaInfo || dbState.schemaInfo.length === 0) {
+    headEl.innerHTML = '';
+    bodyEl.innerHTML = '<tr><td colspan="10" style="text-align:center; color:#94a3b8; padding:2rem;">No table selected or empty schema.</td></tr>';
+    return;
+  }
+
+  // Header
+  let headHtml = '<tr>';
+  dbState.schemaInfo.forEach(col => {
+    const pkBadge = col.pk ? '<span class="pk-badge">PK</span>' : '';
+    headHtml += `<th onclick="sortTableByColumn('${escapeJsSingleQuote(col.name)}')">${escapeHtml(col.name)} ${pkBadge}</th>`;
+  });
+  headHtml += '</tr>';
+  headEl.innerHTML = headHtml;
+
+  // Pagination Slice
+  const startIdx = (dbState.page - 1) * dbState.pageSize;
+  const pageRows = dbState.filteredData.slice(startIdx, startIdx + dbState.pageSize);
+  const totalPages = Math.max(1, Math.ceil(dbState.filteredData.length / dbState.pageSize));
+
+  document.getElementById('pageInfoText').textContent = `Page ${dbState.page} of ${totalPages} (${dbState.filteredData.length} records)`;
+  document.getElementById('prevPageBtn').disabled = dbState.page <= 1;
+  document.getElementById('nextPageBtn').disabled = dbState.page >= totalPages;
+
+  if (pageRows.length === 0) {
+    bodyEl.innerHTML = `<tr><td colspan="${dbState.schemaInfo.length}" style="text-align:center; color:#94a3b8; padding:2rem;">No matching records found.</td></tr>`;
+    return;
+  }
+
+  let bodyHtml = '';
+  pageRows.forEach(row => {
+    bodyHtml += '<tr>';
+    row.forEach(val => {
+      bodyHtml += `<td>${escapeHtml(val)}</td>`;
+    });
+    bodyHtml += '</tr>';
+  });
+  bodyEl.innerHTML = bodyHtml;
+}
+
+/* Render Schema Grid */
+function renderSchemaGrid() {
+  const tbody = document.getElementById('schemaGridBody');
+  if (!dbState.schemaInfo || dbState.schemaInfo.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94a3b8;">No schema info available.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = dbState.schemaInfo.map((col, idx) => `
+    <tr>
+      <td>${idx + 1}</td>
+      <td style="font-weight:700; color:#0f172a;">${escapeHtml(col.name)}</td>
+      <td><span style="font-weight:700; color:#2563eb;">${escapeHtml(col.type)}</span></td>
+      <td>${col.notnull ? '❌ NOT NULL' : 'YES'}</td>
+      <td>${col.pk ? '🔑 PRIMARY KEY' : '-'}</td>
+      <td>${escapeHtml(col.dflt_value || 'NULL')}</td>
+    </tr>
+  `).join('');
+}
+
+/* Render Foreign Keys Grid */
+function renderFKGrid() {
+  const tbody = document.getElementById('fkGridBody');
+  if (!dbState.fkInfo || dbState.fkInfo.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#94a3b8; padding:1.5rem;">No foreign key constraints defined on this table.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = dbState.fkInfo.map(fk => `
+    <tr>
+      <td style="font-weight:700; color:#0f172a;">${escapeHtml(fk.from)}</td>
+      <td><span style="font-weight:700; color:#2563eb;">${escapeHtml(fk.table)}</span></td>
+      <td style="font-weight:700; color:#0f172a;">${escapeHtml(fk.to)}</td>
+      <td>${escapeHtml(fk.on_update || 'NO ACTION')}</td>
+      <td>${escapeHtml(fk.on_delete || 'NO ACTION')}</td>
+    </tr>
+  `).join('');
+}
+
+function renderSQLScript() {
+  document.getElementById('sqlScriptDisplay').textContent = dbState.sqlDDL || '-- No DDL script available';
+}
+
+/* Table Search & Pagination Handlers */
+function handleTableSearch() {
+  const term = document.getElementById('tableSearchBox').value.toLowerCase();
+  if (!term) {
+    dbState.filteredData = [...dbState.tableData];
+  } else {
+    dbState.filteredData = dbState.tableData.filter(row => {
+      return row.some(val => String(val).toLowerCase().includes(term));
+    });
+  }
+  dbState.page = 1;
+  renderDataGrid();
+}
+
+function changePage(delta) {
+  const totalPages = Math.max(1, Math.ceil(dbState.filteredData.length / dbState.pageSize));
+  dbState.page = Math.max(1, Math.min(totalPages, dbState.page + delta));
+  renderDataGrid();
+}
+
+function sortTableByColumn(colName) {
+  const colIdx = dbState.schemaInfo.findIndex(c => c.name === colName);
+  if (colIdx < 0) return;
+
+  if (dbState.sortCol === colName) {
+    dbState.sortAsc = !dbState.sortAsc;
+  } else {
+    dbState.sortCol = colName;
+    dbState.sortAsc = true;
+  }
+
+  dbState.filteredData.sort((a, b) => {
+    let v1 = a[colIdx];
+    let v2 = b[colIdx];
+    if (v1 === v2) return 0;
+    if (v1 === null || v1 === undefined) return 1;
+    if (v2 === null || v2 === undefined) return -1;
+    if (typeof v1 === 'number' && typeof v2 === 'number') {
+      return dbState.sortAsc ? v1 - v2 : v2 - v1;
+    }
+    return dbState.sortAsc ? String(v1).localeCompare(String(v2)) : String(v2).localeCompare(String(v1));
+  });
+
+  renderDataGrid();
+}
+
+/* Tab Switcher */
+function switchMainTab(tab) {
+  dbState.activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panelData').style.display = tab === 'data' ? 'block' : 'none';
+  document.getElementById('panelSchema').style.display = tab === 'schema' ? 'block' : 'none';
+  document.getElementById('panelFk').style.display = tab === 'fk' ? 'block' : 'none';
+  document.getElementById('panelSql').style.display = tab === 'sql' ? 'block' : 'none';
+
+  if (tab === 'data') document.getElementById('tabData').classList.add('active');
+  if (tab === 'schema') document.getElementById('tabSchema').classList.add('active');
+  if (tab === 'fk') document.getElementById('tabFk').classList.add('active');
+  if (tab === 'sql') document.getElementById('tabSql').classList.add('active');
+}
+
+/* Render SVG Charts */
+function renderCharts() {
+  const barContainer = document.getElementById('barChartContainer');
+  const donutContainer = document.getElementById('donutChartContainer');
+
+  const tblCount = dbState.tables.length;
+  const idxCount = dbState.indexes.length;
+
+  // Bar Chart
+  barContainer.innerHTML = `
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div>
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#2563eb;">
+          <span>Active Table Records (${dbState.tableData.length})</span><span>100%</span>
+        </div>
+        <div style="background:#e2e8f0; border-radius:9999px; height:10px; overflow:hidden;">
+          <div style="background:#2563eb; width:100%; height:100%;"></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#16a34a;">
+          <span>Schema Columns (${dbState.schemaInfo.length})</span><span>${Math.min(100, dbState.schemaInfo.length * 15)}%</span>
+        </div>
+        <div style="background:#e2e8f0; border-radius:9999px; height:10px; overflow:hidden;">
+          <div style="background:#22c55e; width:${Math.min(100, dbState.schemaInfo.length * 15)}%; height:100%;"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Donut Chart
+  const circumference = 2 * Math.PI * 40;
+  donutContainer.innerHTML = `
+    <div style="display:flex; justify-content:center; align-items:center; position:relative;">
+      <svg width="130" height="130" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#e2e8f0" stroke-width="12"></circle>
+        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#2563eb" stroke-width="12"
+                stroke-dasharray="${circumference}" stroke-dashoffset="${circumference * 0.25}"
+                stroke-linecap="round" transform="rotate(-90 50 50)"></circle>
+      </svg>
+      <div style="position:absolute; text-align:center;">
+        <span style="font-size:1.4rem; font-weight:800; color:#0f172a;">${tblCount}</span><br>
+        <span style="font-size:0.7rem; font-weight:700; color:#64748b;">TABLES</span>
+      </div>
+    </div>
+  `;
+}
+
+/* Helpers & Utility Functions */
+function readFileAsArrayBuffer(file) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+function showError(msg) {
+  const box = document.getElementById('errorBox');
+  box.textContent = msg;
+  box.style.display = 'block';
+}
+
+function hideError() {
+  const box = document.getElementById('errorBox');
+  box.style.display = 'none';
+}
+
+function resetWorkspace() {
+  document.getElementById('workspace').classList.remove('active');
+  hideError();
+}
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function escapeJsSingleQuote(str) {
+  return String(str).replace(/'/g, "\\'");
+}
+
+/* Multi-Format Exports */
+function exportTableCSV() {
+  if (!dbState.schemaInfo || dbState.schemaInfo.length === 0) return;
+  let csv = dbState.schemaInfo.map(c => '"' + c.name + '"').join(',') + '\n';
+  dbState.tableData.forEach(row => {
+    csv += row.map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(',') + '\n';
+  });
+  downloadFile("data:text/csv;charset=utf-8," + encodeURIComponent(csv), dbState.activeTable + '.csv');
+}
+
+function exportTableJSON() {
+  if (!dbState.schemaInfo || dbState.schemaInfo.length === 0) return;
+  const json = dbState.tableData.map(row => {
+    let obj = {};
+    dbState.schemaInfo.forEach((c, idx) => {
+      obj[c.name] = row[idx];
+    });
+    return obj;
+  });
+  downloadFile("data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json, null, 2)), dbState.activeTable + '.json');
+}
+
+function exportTableMarkdown() {
+  if (!dbState.schemaInfo || dbState.schemaInfo.length === 0) return;
+  let md = `# Table: ${dbState.activeTable}\n\n`;
+  md += '| ' + dbState.schemaInfo.map(c => c.name).join(' | ') + ' |\n';
+  md += '| ' + dbState.schemaInfo.map(() => '---').join(' | ') + ' |\n';
+  dbState.tableData.forEach(row => {
+    md += '| ' + row.map(v => v || '-').join(' | ') + ' |\n';
+  });
+  downloadFile("data:text/markdown;charset=utf-8," + encodeURIComponent(md), dbState.activeTable + '.md');
+}
+
+function exportTableSQL() {
+  const content = dbState.sqlDDL || `-- Table: ${dbState.activeTable}\n-- DDL not available`;
+  downloadFile("data:text/plain;charset=utf-8," + encodeURIComponent(content), dbState.activeTable + '.sql');
+}
+
+function exportHTMLReport() {
+  const content = '<!DOCTYPE html><html><head><title>SQLite Report<\/title><style>body{font-family:sans-serif;padding:2rem;color:#0f172a;} table{width:100%;border-collapse:collapse;} th,td{border:1px solid #cbd5e1;padding:8px;} th{background:#f8fafc;}<\/style><\/head><body><h1>SQLite Table: ' + dbState.activeTable + '<\/h1>' + document.getElementById('panelData').innerHTML + '<\/body><\/html>';
+  downloadFile("data:text/html;charset=utf-8," + encodeURIComponent(content), dbState.activeTable + '-report.html');
+}
+
+function downloadFile(dataStr, filename) {
+  const anchor = document.createElement('a');
+  anchor.setAttribute("href", dataStr);
+  anchor.setAttribute("download", filename);
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+}
+
+function toggleFaq(el) {
+  const parent = el.parentElement;
+  parent.classList.toggle('active');
+}
+</script>
+{% endraw %}

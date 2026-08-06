@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Contact Us DataFrog"
-description: "Get in touch with the DataFrog.tools team for questions, feedback, tool requests, or support."
+title: "Contact Us - Get in Touch with DataFrog.tools | DataFrog"
+description: "Get in touch with the DataFrog.tools team for questions, feedback, tool requests, and assistance with browser data intelligence tools 100% free, fast, and p..."
 permalink: /contact-us
 keywords: "Contact DataFrog, datafrog support, feature request, feedback"
 ---

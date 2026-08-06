@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "About Us DataFrog"
-description: "Learn about DataFrog.tools — the browser-based data intelligence workspace built for data professionals, developers, and analysts."
+title: "About Us - Browser-Based Data Intelligence Tools | DataFrog"
+description: "Learn about DataFrog.tools — the privacy-first browser data intelligence workspace built for instant, serverless dataset processing 100% free, fast, and pri..."
 permalink: /about-us
 keywords: "About DataFrog, browser based data tools, privacy first data workspace, client side data analysis"
 ---

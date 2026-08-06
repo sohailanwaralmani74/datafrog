@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Inspect Tools — Structure Viewers & Stream Analyzers | DataFrog"
-description: "Browse all browser-based Data Inspect tools on DataFrog. View JSON trees, inspect raw streams, decode encodings, and analyze schemas locally."
+title: "Inspect Tools - Explore Files, Schemas & Metadata | DataFrog"
+description: "Explore browser-based inspection tools for CSV, Excel, JSON, XML, YAML, SQLite, and file metadata. Open and inspect datasets locally 100% free, fast, and pr..."
 permalink: /inspect
 is_category: true
 category_name: "Inspect"

@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Visualize Tools — Interactive Charting & Data Mapping | DataFrog"
-description: "Browse all browser-based Data Visualize tools on DataFrog. Generate interactive charts, plot distributions, map hierarchies, and visualize datasets locally."
+title: "Visualize Tools - Interactive Charts & Heatmaps | DataFrog"
+description: "Explore browser-based visualization tools for CSV, Excel, JSON, XML, YAML, flowcharts, word clouds, and correlation heatmaps locally 100% free, fast, and pr..."
 permalink: /visualize
 is_category: true
 category_name: "Visualize"

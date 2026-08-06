@@ -91,6 +91,17 @@
   date: "2026-08-06"
   updated: "2026-08-06"
 
+- title: "SQLite Viewer"
+  short_name: "SQLite Viewer"
+  url: "/inspect/sqlite-viewer/"
+  category: "Inspect"
+  description: "Open, inspect, explore, search, filter, and export SQLite databases (.sqlite, .sqlite3, .db) locally in your browser with table data grids, schema trees, foreign key maps, and visual charts."
+  keywords: ["sqlite viewer", "sqlite database viewer", "sqlite file viewer", "sqlite browser online", "sqlite reader", "sqlite db viewer", "open sqlite database", "open sqlite file", "sqlite database browser", "sqlite explorer", "sqlite table viewer", "browse sqlite database", "inspect sqlite database", "sqlite schema viewer"]
+  icon: "🗄️"
+  featured: true
+  date: "2026-08-06"
+  updated: "2026-08-06"
+
 - title: "JSON Analyzer"
   short_name: "JSON Analyzer"
   url: "/analyze/json-analyzer/"

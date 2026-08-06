@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Validate Tools — Schema Validation & Syntax Checkers | DataFrog"
-description: "Browse all browser-based Data Validate tools on DataFrog. Validate JSON schemas, check XML syntax, assert data types, and check rules locally."
+title: "Validate Tools - Syntax, Schema & Data Audit | DataFrog"
+description: "Explore browser-based validation tools for CSV, JSON, XML, and YAML files. Detect syntax errors, missing values, and formatting bugs 100% free, fast, and pr..."
 permalink: /validate
 is_category: true
 category_name: "Validate"

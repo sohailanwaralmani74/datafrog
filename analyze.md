@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Analyze Tools — Dataset Profiling & Statistical Metrics | DataFrog"
-description: "Browse all browser-based Data Analyze tools on DataFrog. Profile datasets, calculate column statistics, analyze distributions, and summarize metrics locally."
+title: "Analyze Tools - Dataset Profiling & Statistics | DataFrog"
+description: "Explore browser-based dataset analysis tools for CSV, Excel, JSON, XML, YAML, and bank statements. Compute metrics and profile data 100% free, fast, and pri..."
 permalink: /analyze
 is_category: true
 category_name: "Analyze"

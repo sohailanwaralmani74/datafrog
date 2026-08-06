@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Compare Tools — Diff Engines & Dataset Comparators | DataFrog"
-description: "Browse all browser-based Data Compare tools on DataFrog. Compare files side-by-side, spot row deltas, match records, and compute structural differences locally."
+title: "Compare Tools - Side-by-Side File & Data Diffs | DataFrog"
+description: "Explore browser-based comparison tools for CSV, Excel, JSON, XML, YAML, SQL, and text files. Highlight cell, row, and key differences 100% free, fast, and p..."
 permalink: /compare
 is_category: true
 category_name: "Compare"
