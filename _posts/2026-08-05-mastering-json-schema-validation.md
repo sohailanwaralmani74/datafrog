@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "Mastering JSON Schema Validation: Complete Guide"
+title: "Mastering JSON Schema Validation - Complete Guide"
 description: "Learn JSON Schema validation (Draft-07 & 2020-12). Master property constraints, $ref composition, error debugging, and instant browser testing 100% free."
 excerpt: "Master JSON Schema validation from fundamentals to Draft 2020-12. Discover property constraints, array validation, schema composition ($ref, allOf, oneOf), and instant browser debugging."
 keywords: "JSON Schema Validation, Validate JSON Schema, JSON Schema Draft 2020-12, JSON Schema Checker, JSON Schema Best Practices, JSON Schema Tutorial"
