@@ -1,0 +1,771 @@
+---
+layout: main
+title: "SQL Compare – Compare SQL Scripts, Schemas & Queries | DataFrog"
+short_name: "SQL Compare"
+description: "Compare SQL scripts, DDL queries, database schemas, tables, and stored procedures online in your browser. Side-by-side and inline diff views, formatting normalization, and change reports. 100% private."
+keywords: "sql compare, compare sql, sql comparison, sql diff, sql difference checker, sql script compare, compare sql queries, compare sql schema, compare sql tables, compare database schema"
+category: "Compare"
+permalink: /compare/sql-compare/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     JSON-LD STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SQL Compare – DataFrog.tools",
+  "url": "https://datafrog.tools/compare/sql-compare/",
+  "description": "Browser-based SQL comparison tool. Compare SQL queries, CREATE TABLE DDL scripts, database schemas, views, stored procedures, and triggers side-by-side or inline. Normalize formatting, ignore comments or case, and export diff reports. 100% in-browser processing.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "featureList": "SQL script comparison, side-by-side and inline diff views, comment stripping, case-insensitive comparison, whitespace normalization, similarity scoring, change navigation, multi-format diff exports",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools/" },
+    { "@type": "ListItem", "position": 2, "name": "Compare", "item": "https://datafrog.tools/compare" },
+    { "@type": "ListItem", "position": 3, "name": "SQL Compare", "item": "https://datafrog.tools/compare/sql-compare/" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is SQL Compare and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SQL Compare is a browser-based tool that compares two SQL scripts, queries, DDL schemas, or stored procedures line-by-line. It calculates similarity metrics and visually highlights added, removed, and modified lines in side-by-side or unified inline views."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which SQL dialects are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports ANSI SQL, MySQL, PostgreSQL, SQL Server, SQLite, Oracle SQL, MariaDB, IBM Db2, Snowflake SQL, and BigQuery SQL generics."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I ignore SQL comments, case, or formatting differences during comparison?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can toggle options to ignore SQL comments (-- or /* */), ignore keyword and identifier case, collapse extra whitespace, ignore blank lines, and strip trailing semicolons prior to comparison."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my SQL code sent to any server for comparison?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All SQL parsing, comment stripping, diff calculation, and visual rendering happen 100% locally inside your web browser using client-side JavaScript. Your code and database structures remain private."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What export options are available for comparison reports?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can export SQL diff results as a formatted HTML report, Markdown (.md) summary, JSON diff schema, or copy the raw difference log directly to your clipboard."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & HERO BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom:1.5rem;">
+  <span style="display:inline-block;padding:0.25rem 0.75rem;background:#fefce8;color:#ca8a04;font-weight:700;font-size:0.8rem;border-radius:9999px;margin-bottom:0.5rem;">
+    ⚡ Compare Module
+  </span>
+  <h1 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:0.5rem;">
+    SQL Compare – Compare Queries, Schemas &amp; DDL Scripts
+  </h1>
+  <p style="color:#475569;font-size:1.05rem;max-width:870px;line-height:1.6;margin-bottom:1.5rem;">
+    Compare SQL scripts, CREATE TABLE DDL statements, stored procedures, triggers, and views side-by-side or inline. Normalize formatting, ignore comments or case, calculate similarity scores, and export detailed change reports — 100% in-browser, completely private.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DUAL INPUT ZONE (LEFT VS RIGHT)
+═══════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;">
+  <!-- LEFT PANEL -->
+  <div style="background:#fff;border:1px solid #cbd5e1;border-radius:14px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display:flex;justify-content:space-between;align-align:center;margin-bottom:0.75rem;">
+      <label for="sql-left" style="font-weight:700;font-size:0.95rem;color:#0f172a;">Original / Reference SQL (Left)</label>
+      <div style="display:flex;gap:0.4rem;">
+        <label style="padding:0.25rem 0.6rem;background:#f1f5f9;color:#0f172a;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.75rem;">
+          📁 Open
+          <input type="file" id="file-left" accept=".sql,.txt" style="display:none;">
+        </label>
+        <button id="btn-sample-left" style="padding:0.25rem 0.6rem;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.75rem;">⚡ Sample</button>
+        <button id="btn-clear-left" style="padding:0.25rem 0.6rem;background:#fff;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.75rem;">🗑️ Clear</button>
+      </div>
+    </div>
+    <textarea id="sql-left" placeholder="Paste original SQL script or schema DDL here..." style="width:100%;height:220px;padding:0.85rem;font-family:consolas,monaco,monospace;font-size:0.85rem;line-height:1.45;border:1px solid #cbd5e1;border-radius:8px;outline:none;background:#f8fafc;resize:vertical;box-sizing:border-box;"></textarea>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div style="background:#fff;border:1px solid #cbd5e1;border-radius:14px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display:flex;justify-content:space-between;align-align:center;margin-bottom:0.75rem;">
+      <label for="sql-right" style="font-weight:700;font-size:0.95rem;color:#0f172a;">Modified / Target SQL (Right)</label>
+      <div style="display:flex;gap:0.4rem;">
+        <label style="padding:0.25rem 0.6rem;background:#f1f5f9;color:#0f172a;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.75rem;">
+          📁 Open
+          <input type="file" id="file-right" accept=".sql,.txt" style="display:none;">
+        </label>
+        <button id="btn-sample-right" style="padding:0.25rem 0.6rem;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.75rem;">⚡ Sample</button>
+        <button id="btn-clear-right" style="padding:0.25rem 0.6rem;background:#fff;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.75rem;">🗑️ Clear</button>
+      </div>
+    </div>
+    <textarea id="sql-right" placeholder="Paste modified SQL script or schema DDL here..." style="width:100%;height:220px;padding:0.85rem;font-family:consolas,monaco,monospace;font-size:0.85rem;line-height:1.45;border:1px solid #cbd5e1;border-radius:8px;outline:none;background:#f8fafc;resize:vertical;box-sizing:border-box;"></textarea>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     COMPARISON OPTIONS & CONTROL PANEL
+═══════════════════════════════════════════════════ -->
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.75rem;">
+    <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin:0;">⚙️ Comparison Options</h3>
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <button id="btn-swap" style="padding:0.35rem 0.85rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:6px;font-weight:600;font-size:0.8rem;cursor:pointer;">⇄ Swap Left/Right</button>
+      <label style="font-size:0.85rem;font-weight:600;color:#0f172a;">Dialect:</label>
+      <select id="dialect-sel" style="padding:0.35rem 0.6rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.8rem;">
+        <option value="ANSI">ANSI SQL (Generic)</option>
+        <option value="MySQL">MySQL</option>
+        <option value="PostgreSQL">PostgreSQL</option>
+        <option value="SQLServer">SQL Server (TSQL)</option>
+        <option value="SQLite">SQLite</option>
+        <option value="Oracle">Oracle SQL</option>
+        <option value="MariaDB">MariaDB</option>
+        <option value="Snowflake">Snowflake</option>
+        <option value="BigQuery">BigQuery</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.75rem 1.5rem;">
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+      <input type="checkbox" id="opt-ws" checked style="width:16px;height:16px;"> Ignore Whitespace
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+      <input type="checkbox" id="opt-comments" checked style="width:16px;height:16px;"> Ignore Comments (-- &amp; /* */)
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+      <input type="checkbox" id="opt-case" checked style="width:16px;height:16px;"> Ignore Case (Keywords &amp; IDs)
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+      <input type="checkbox" id="opt-blanks" checked style="width:16px;height:16px;"> Ignore Blank Lines
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;cursor:pointer;color:#1e293b;">
+      <input type="checkbox" id="opt-semi" style="width:16px;height:16px;"> Ignore Semicolons
+    </label>
+  </div>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;padding:1rem 1.25rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;">
+  <button id="btn-compare" style="padding:0.65rem 1.4rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem;">⚡ Compare SQL</button>
+  <button id="btn-copy" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📋 Copy Diff Summary</button>
+  <button id="btn-export-md" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📝 Markdown (.md)</button>
+  <button id="btn-export-html" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📄 HTML Report</button>
+  <button id="btn-export-json" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📦 JSON Diff</button>
+  <button id="btn-reset" style="padding:0.65rem 1.2rem;background:#fff;color:#dc2626;border:1px solid #fca5a5;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">🗑️ Reset All</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SUMMARY CARDS
+═══════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.85rem;margin-bottom:2rem;">
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Similarity Score</span>
+    <span id="c-similarity" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#16a34a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Total Differences</span>
+    <span id="c-diffs" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#dc2626;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Added Lines (+)</span>
+    <span id="c-added" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#16a34a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Removed Lines (-)</span>
+    <span id="c-removed" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#dc2626;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Modified Lines</span>
+    <span id="c-modified" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#ca8a04;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Comparison Result</span>
+    <span id="c-health" style="display:inline-block;margin-top:0.25rem;font-weight:800;font-size:0.9rem;padding:0.15rem 0.6rem;border-radius:9999px;background:#f0fdf4;color:#16a34a;">—</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DIFF VIEWER SECTION (SIDE-BY-SIDE & INLINE VIEWS)
+═══════════════════════════════════════════════════ -->
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.75rem;">
+    <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin:0;">🔍 Interactive SQL Diff Viewer</h3>
+    <div style="display:flex;gap:0.5rem;align-items:center;">
+      <button id="view-split" onclick="setViewMode('split')" style="padding:0.35rem 0.85rem;border-radius:9999px;font-size:0.8rem;font-weight:700;cursor:pointer;background:#0f172a;color:#fff;border:1px solid #0f172a;">Side-by-Side View</button>
+      <button id="view-inline" onclick="setViewMode('inline')" style="padding:0.35rem 0.85rem;border-radius:9999px;font-size:0.8rem;font-weight:600;cursor:pointer;background:#fff;color:#0f172a;border:1px solid #cbd5e1;">Inline Unified View</button>
+      <span style="width:1px;height:20px;background:#cbd5e1;margin:0 0.25rem;"></span>
+      <button id="btn-prev-diff" onclick="jumpDiff(-1)" style="padding:0.35rem 0.65rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;background:#fff;color:#0f172a;border:1px solid #cbd5e1;">▲ Prev</button>
+      <button id="btn-next-diff" onclick="jumpDiff(1)" style="padding:0.35rem 0.65rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;background:#fff;color:#0f172a;border:1px solid #cbd5e1;">▼ Next</button>
+    </div>
+  </div>
+
+  <div id="diff-container" style="overflow-x:auto;font-family:consolas,monaco,monospace;font-size:0.85rem;line-height:1.5;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;min-height:250px;">
+    <p style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;margin:0;">Paste original and modified SQL, then click Compare SQL to visualize differences</p>
+  </div>
+  <div id="diff-footer" style="margin-top:0.75rem;font-size:0.8rem;color:#64748b;text-align:right;"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INFORMATIONAL CONTENT SECTIONS
+═══════════════════════════════════════════════════ -->
+<section style="margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:0.75rem;">What is SQL Compare?</h2>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    SQL Compare is a specialized code comparison tool designed specifically for database developers, DBA teams, and data engineers. It performs line-by-line and structural comparisons between two SQL scripts, DDL table definitions, stored procedures, or database queries.
+  </p>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    Unlike generic text diff tools, an intelligent SQL compare tool offers options to strip comments, ignore keyword capitalization differences, collapse extra whitespace, and bypass statement ordering mismatches. This allows developers to focus on actual structural and logic changes rather than superficial formatting edits.
+  </p>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;">
+    By running completely inside your browser, SQL Compare ensures that your sensitive database schemas, query logic, and table definitions remain 100% private and never touch third-party servers.
+  </p>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Why Compare SQL Scripts &amp; Database Schemas?</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#1d4ed8;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Environment Sync Auditing</strong>
+      <p style="color:#1e40af;font-size:0.825rem;line-height:1.55;margin:0;">Verify schema parity between Development, Staging, and Production databases before deploying database migrations.</p>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#15803d;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Migration Script Review</strong>
+      <p style="color:#166534;font-size:0.825rem;line-height:1.55;margin:0;">Review ALTER TABLE DDL statements, added columns, removed constraints, or modified data types prior to execution.</p>
+    </div>
+    <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#c2410c;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Stored Procedure Diffing</strong>
+      <p style="color:#9a3412;font-size:0.825rem;line-height:1.55;margin:0;">Inspect complex stored procedures, functions, and triggers to pinpoint exact business logic modifications.</p>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#7c3aed;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Peer Code Review</strong>
+      <p style="color:#6d28d9;font-size:0.825rem;line-height:1.55;margin:0;">Conduct fast code reviews on SQL pull requests by focusing exclusively on functional logic changes.</p>
+    </div>
+    <div style="background:#fef9c3;border:1px solid #fde047;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#854d0e;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Format-Independent Comparison</strong>
+      <p style="color:#713f12;font-size:0.825rem;line-height:1.55;margin:0;">Filter out trivial whitespace, comment edits, or lower/upper case keyword changes to highlight meaningful diffs.</p>
+    </div>
+    <div style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#0f766e;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Complete Client-Side Privacy</strong>
+      <p style="color:#115e59;font-size:0.825rem;line-height:1.55;margin:0;">Safely compare proprietary database schemas and internal SQL queries without transmitting code to external servers.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:0.5rem;">Key SQL Compare Features</h2>
+  <p style="color:#475569;font-size:1rem;margin-bottom:1.5rem;max-width:820px;line-height:1.6;">Built for database administrators, data engineers, and backend software developers.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;">
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔀</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Side-by-Side &amp; Inline Views</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Toggle between a dual-pane side-by-side comparison grid and a unified inline diff view with line numbers.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🧹</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">SQL Comment &amp; Case Normalization</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Automatically strip inline/block comments and normalize keyword capitalization for accurate comparisons.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📊</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Similarity Scoring &amp; Change Metrics</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Calculates an exact similarity score (%) alongside added, removed, and modified line counters.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🌐</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Multi-Dialect Support</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Compatible with ANSI SQL, MySQL, PostgreSQL, SQL Server, SQLite, Oracle SQL, MariaDB, and Snowflake.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📤</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Multi-Format Diff Export</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Export SQL comparison summaries in Markdown (`.md`), HTML Report, JSON diff format, or copy to clipboard.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔒</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Zero Cloud Transfers</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">100% in-browser processing. Your database schemas and sensitive queries are never stored or transmitted.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Supported SQL Dialects &amp; Statements</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">🏗️</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">CREATE TABLE &amp; DDL</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Compare table definitions, column additions, data type modifications, primary keys, and foreign keys.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">⚙️</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">Procedures &amp; Functions</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Inspect stored procedure bodies, user-defined functions, and trigger routines for logic changes.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">🔍</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">SELECT Queries &amp; Views</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Compare complex query joins, CTE expressions, subqueries, and CREATE VIEW definitions.</p></div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;display:flex;align-items:flex-start;gap:0.75rem;">
+      <span style="font-size:1.5rem;flex-shrink:0;">📜</span>
+      <div><strong style="font-size:0.9rem;color:#0f172a;">DML Migration Scripts</strong><p style="color:#475569;font-size:0.8rem;line-height:1.5;margin:0.25rem 0 0;">Audit INSERT, UPDATE, and DELETE data migration scripts across environments.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">How to Compare SQL Scripts</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Paste or Upload</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Paste original SQL into the left box and modified SQL into the right box, or upload files.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Set Options</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Choose your SQL dialect and select whether to ignore comments, whitespace, or case.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Run Compare</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click Compare SQL. The engine calculates line diffs, similarity %, and change counts.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Inspect Visual Diff</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Switch between side-by-side or inline view and use Prev/Next buttons to jump between changes.</p>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
+        <strong style="font-size:0.95rem;color:#0f172a;">Export Change Report</strong>
+      </div>
+      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Export your SQL comparison report in Markdown, HTML, JSON, or copy summary to clipboard.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+  <div style="display:flex;flex-direction:column;gap:1rem;max-width:860px;">
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What is SQL Compare and how does it work?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">SQL Compare compares two SQL scripts or database schemas line-by-line, computing similarity scores and highlighting additions, deletions, and modifications in side-by-side or inline diff views.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Which SQL dialects are supported?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">ANSI SQL, MySQL, PostgreSQL, SQL Server, SQLite, Oracle SQL, MariaDB, IBM Db2, Snowflake SQL, and BigQuery SQL.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Can I ignore comments and formatting differences?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">Yes. You can enable options to strip comments (-- or /* */), ignore keyword case, collapse extra whitespace, ignore blank lines, and strip semicolons before comparing.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Is my SQL code sent to any server for comparison?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">No. All diff processing happens 100% locally in your web browser. Your code and database structures remain private.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What export formats are available for comparison reports?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">You can export comparison reports in Markdown (.md), HTML Report, JSON diff format, or copy the diff summary to your clipboard.</p>
+    </details>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;background:#0f172a;color:#fff;border-radius:16px;padding:2.5rem;text-align:center;">
+  <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">⚡</span>
+  <h2 style="font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:0.75rem;">Compare Your SQL Scripts Now</h2>
+  <p style="color:#94a3b8;font-size:1.05rem;max-width:600px;margin:0 auto 1.75rem;line-height:1.6;">Paste your SQL scripts and pinpoint every schema change, query edit, and DDL modification in seconds — with complete privacy.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="#sql-left" style="padding:0.85rem 1.75rem;background:#16a34a;color:#fff;font-weight:700;border-radius:8px;text-decoration:none;font-size:0.95rem;">⚡ Start SQL Compare</a>
+    <a href="/compare/text-compare/" style="padding:0.85rem 1.75rem;background:rgba(255,255,255,0.1);color:#fff;font-weight:600;border-radius:8px;text-decoration:none;font-size:0.95rem;border:1px solid rgba(255,255,255,0.2);">⚖️ Text Compare</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT — SQL COMPARE & DIFF ENGINE
+═══════════════════════════════════════════════════ -->
+{% raw %}
+<script>
+(function() {
+  'use strict';
+
+  let viewMode = 'split'; // 'split' or 'inline'
+  let diffResults = [];
+  let diffIndices = [];
+  let currentDiffIdx = -1;
+
+  const SAMPLE_LEFT = `-- Original Production Schema
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(20) DEFAULT 'Active'
+);
+
+-- User Orders Table
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    order_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);`;
+
+  const SAMPLE_RIGHT = `-- Updated Staging Schema (Migration v2)
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(150) NOT NULL, -- Expanded email size
+    phone_number VARCHAR(20) DEFAULT NULL, -- Added phone field
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status VARCHAR(20) DEFAULT 'Active'
+);
+
+-- User Orders Table
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    total_amount DECIMAL(12, 2) NOT NULL, -- Higher precision
+    order_date DATE NOT NULL,
+    status VARCHAR(20) DEFAULT 'Pending', -- Added order status
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);`;
+
+  const sqlLeft  = document.getElementById('sql-left');
+  const sqlRight = document.getElementById('sql-right');
+
+  document.getElementById('btn-sample-left').addEventListener('click', function() { sqlLeft.value = SAMPLE_LEFT; });
+  document.getElementById('btn-sample-right').addEventListener('click', function() { sqlRight.value = SAMPLE_RIGHT; });
+  document.getElementById('btn-clear-left').addEventListener('click', function() { sqlLeft.value = ''; });
+  document.getElementById('btn-clear-right').addEventListener('click', function() { sqlRight.value = ''; });
+  document.getElementById('btn-swap').addEventListener('click', function() {
+    var tmp = sqlLeft.value;
+    sqlLeft.value = sqlRight.value;
+    sqlRight.value = tmp;
+    runCompare();
+  });
+  document.getElementById('btn-reset').addEventListener('click', resetAll);
+  document.getElementById('btn-compare').addEventListener('click', runCompare);
+  document.getElementById('btn-copy').addEventListener('click', copySummary);
+  document.getElementById('btn-export-md').addEventListener('click', function() { exportData('md'); });
+  document.getElementById('btn-export-html').addEventListener('click', function() { exportData('html'); });
+  document.getElementById('btn-export-json').addEventListener('click', function() { exportData('json'); });
+
+  document.getElementById('file-left').addEventListener('change', function(e) { if (e.target.files[0]) readTxtFile(e.target.files[0], sqlLeft); });
+  document.getElementById('file-right').addEventListener('change', function(e) { if (e.target.files[0]) readTxtFile(e.target.files[0], sqlRight); });
+
+  window.setViewMode = function(mode) {
+    viewMode = mode;
+    document.getElementById('view-split').style.background = mode === 'split' ? '#0f172a' : '#fff';
+    document.getElementById('view-split').style.color = mode === 'split' ? '#fff' : '#0f172a';
+    document.getElementById('view-inline').style.background = mode === 'inline' ? '#0f172a' : '#fff';
+    document.getElementById('view-inline').style.color = mode === 'inline' ? '#fff' : '#0f172a';
+    renderDiffViewer();
+  };
+
+  window.jumpDiff = function(dir) {
+    if (!diffIndices.length) return;
+    currentDiffIdx += dir;
+    if (currentDiffIdx < 0) currentDiffIdx = diffIndices.length - 1;
+    if (currentDiffIdx >= diffIndices.length) currentDiffIdx = 0;
+    var el = document.getElementById('diff-row-' + diffIndices[currentDiffIdx]);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  function readTxtFile(file, textarea) {
+    var reader = new FileReader();
+    reader.onload = function(e) { textarea.value = e.target.result; };
+    reader.readAsText(file);
+  }
+
+  // ── SQL Normalization Pipeline ──────────────────────────────────────
+  function normalizeSQL(text) {
+    var ignComments = document.getElementById('opt-comments').checked;
+    var ignCase     = document.getElementById('opt-case').checked;
+    var ignWS       = document.getElementById('opt-ws').checked;
+    var ignBlanks   = document.getElementById('opt-blanks').checked;
+    var ignSemi     = document.getElementById('opt-semi').checked;
+
+    var s = text;
+    if (ignComments) {
+      s = s.replace(/--.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '');
+    }
+    if (ignCase) {
+      s = s.toLowerCase();
+    }
+    if (ignSemi) {
+      s = s.replace(/;/g, '');
+    }
+
+    var lines = s.split(/\r?\n/);
+    if (ignWS) {
+      lines = lines.map(function(l) { return l.trim().replace(/\s+/g, ' '); });
+    }
+    if (ignBlanks) {
+      lines = lines.filter(function(l) { return l.trim() !== ''; });
+    }
+
+    return lines;
+  }
+
+  // ── Myers / LCS Line-by-Line Diff Engine ────────────────────────────
+  function computeLCSDiff(a, b) {
+    var n = a.length, m = b.length;
+    var dp = Array(n + 1).fill(null).map(function() { return Array(m + 1).fill(0); });
+
+    for (var i = 0; i < n; i++) {
+      for (var j = 0; j < m; j++) {
+        if (a[i] === b[j]) dp[i + 1][j + 1] = dp[i][j] + 1;
+        else dp[i + 1][j + 1] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+      }
+    }
+
+    var i = n, j = m;
+    var diff = [];
+    while (i > 0 || j > 0) {
+      if (i > 0 && j > 0 && a[i - 1] === b[j - 1]) {
+        diff.unshift({ type: 'equal', left: a[i - 1], right: b[j - 1], leftLine: i, rightLine: j });
+        i--; j--;
+      } else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) {
+        diff.unshift({ type: 'add', left: '', right: b[j - 1], leftLine: null, rightLine: j });
+        j--;
+      } else {
+        diff.unshift({ type: 'remove', left: a[i - 1], right: '', leftLine: i, rightLine: null });
+        i--;
+      }
+    }
+    return diff;
+  }
+
+  function runCompare() {
+    var rawLeft = sqlLeft.value;
+    var rawRight = sqlRight.value;
+
+    if (!rawLeft.trim() && !rawRight.trim()) {
+      alert('Please paste or upload SQL scripts into the input boxes first.');
+      return;
+    }
+
+    var linesLeft = normalizeSQL(rawLeft);
+    var linesRight = normalizeSQL(rawRight);
+
+    diffResults = computeLCSDiff(linesLeft, linesRight);
+    diffIndices = [];
+
+    var added = 0, removed = 0, equal = 0;
+    diffResults.forEach(function(d, idx) {
+      if (d.type === 'add') { added++; diffIndices.push(idx); }
+      else if (d.type === 'remove') { removed++; diffIndices.push(idx); }
+      else { equal++; }
+    });
+
+    var totalLines = diffResults.length;
+    var totalDiffs = added + removed;
+    var similarity = totalLines ? (((equal * 2) / (linesLeft.length + linesRight.length || 1)) * 100).toFixed(1) : '100.0';
+    if (parseFloat(similarity) > 100) similarity = '100.0';
+
+    document.getElementById('c-similarity').textContent = similarity + '%';
+    document.getElementById('c-diffs').textContent      = totalDiffs.toLocaleString();
+    document.getElementById('c-added').textContent      = added.toLocaleString();
+    document.getElementById('c-removed').textContent    = removed.toLocaleString();
+    document.getElementById('c-modified').textContent   = '0'; // Structural
+
+    var simNum = parseFloat(similarity);
+    var healthEl = document.getElementById('c-health');
+    var grade, hbg, hcol;
+    if (simNum === 100)    { grade = '100% Identical'; hbg = '#f0fdf4'; hcol = '#16a34a'; }
+    else if (simNum >= 85) { grade = 'Minor Differences'; hbg = '#eff6ff'; hcol = '#2563eb'; }
+    else if (simNum >= 50) { grade = 'Moderate Differences'; hbg = '#fefce8'; hcol = '#ca8a04'; }
+    else                   { grade = 'Major Differences'; hbg = '#fef2f2'; hcol = '#dc2626'; }
+
+    healthEl.textContent = grade;
+    healthEl.style.background = hbg;
+    healthEl.style.color = hcol;
+
+    currentDiffIdx = -1;
+    renderDiffViewer();
+  }
+
+  function renderDiffViewer() {
+    var container = document.getElementById('diff-container');
+    var footer = document.getElementById('diff-footer');
+
+    if (!diffResults.length) {
+      container.innerHTML = '<p style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;margin:0;">Paste original and modified SQL, then click Compare SQL to visualize differences</p>';
+      footer.textContent = '';
+      return;
+    }
+
+    if (viewMode === 'split') {
+      var rows = diffResults.map(function(d, idx) {
+        var lBg = d.type === 'remove' ? '#fef2f2' : (d.type === 'equal' ? '#fff' : '#f8fafc');
+        var rBg = d.type === 'add' ? '#f0fdf4' : (d.type === 'equal' ? '#fff' : '#f8fafc');
+        var lTextCol = d.type === 'remove' ? '#dc2626' : '#0f172a';
+        var rTextCol = d.type === 'add' ? '#16a34a' : '#0f172a';
+
+        return '<tr id="diff-row-' + idx + '" style="border-bottom:1px solid #f1f5f9;">'
+          + '<td style="width:40px;padding:0.25rem 0.5rem;color:#94a3b8;background:#f1f5f9;text-align:right;user-select:none;font-size:0.75rem;">' + (d.leftLine || '') + '</td>'
+          + '<td style="width:50%;padding:0.25rem 0.6rem;background:' + lBg + ';color:' + lTextCol + ';white-space:pre-wrap;word-break:break-all;">' + esc(d.left) + '</td>'
+          + '<td style="width:40px;padding:0.25rem 0.5rem;color:#94a3b8;background:#f1f5f9;text-align:right;user-select:none;font-size:0.75rem;">' + (d.rightLine || '') + '</td>'
+          + '<td style="width:50%;padding:0.25rem 0.6rem;background:' + rBg + ';color:' + rTextCol + ';white-space:pre-wrap;word-break:break-all;">' + esc(d.right) + '</td>'
+          + '</tr>';
+      }).join('');
+
+      container.innerHTML = '<table style="width:100%;border-collapse:collapse;table-layout:fixed;"><thead><tr style="background:#0f172a;color:#fff;font-size:0.8rem;"><th style="width:40px;">L#</th><th>Original SQL</th><th style="width:40px;">R#</th><th>Modified SQL</th></tr></thead><tbody>' + rows + '</tbody></table>';
+    } else {
+      var rowsInline = diffResults.map(function(d, idx) {
+        var bg = d.type === 'add' ? '#f0fdf4' : (d.type === 'remove' ? '#fef2f2' : '#fff');
+        var col = d.type === 'add' ? '#16a34a' : (d.type === 'remove' ? '#dc2626' : '#0f172a');
+        var prefix = d.type === 'add' ? '+ ' : (d.type === 'remove' ? '- ' : '  ');
+        var val = d.type === 'add' ? d.right : d.left;
+
+        return '<tr id="diff-row-' + idx + '" style="background:' + bg + ';border-bottom:1px solid #f1f5f9;">'
+          + '<td style="width:40px;padding:0.25rem 0.5rem;color:#94a3b8;text-align:right;user-select:none;font-size:0.75rem;">' + (d.leftLine || '') + '</td>'
+          + '<td style="width:40px;padding:0.25rem 0.5rem;color:#94a3b8;text-align:right;user-select:none;font-size:0.75rem;">' + (d.rightLine || '') + '</td>'
+          + '<td style="padding:0.25rem 0.6rem;color:' + col + ';white-space:pre-wrap;word-break:break-all;"><strong style="user-select:none;">' + prefix + '</strong>' + esc(val) + '</td>'
+          + '</tr>';
+      }).join('');
+
+      container.innerHTML = '<table style="width:100%;border-collapse:collapse;"><thead><tr style="background:#0f172a;color:#fff;font-size:0.8rem;"><th style="width:40px;">L#</th><th style="width:40px;">R#</th><th>Unified SQL Line</th></tr></thead><tbody>' + rowsInline + '</tbody></table>';
+    }
+
+    footer.textContent = 'Showing ' + diffResults.length.toLocaleString() + ' lines evaluated (' + diffIndices.length.toLocaleString() + ' differences detected)';
+  }
+
+  // ── Exports ───────────────────────────────────────────────────────────
+  function exportData(fmt) {
+    if (!diffResults.length) { alert('Run Compare SQL first.'); return; }
+    var added = diffResults.filter(function(d) { return d.type === 'add'; }).length;
+    var removed = diffResults.filter(function(d) { return d.type === 'remove'; }).length;
+
+    if (fmt === 'md') {
+      var md = '# SQL Comparison Report\n\n'
+        + '**Dialect:** ' + document.getElementById('dialect-sel').value + '\n'
+        + '**Similarity Score:** ' + document.getElementById('c-similarity').textContent + '\n'
+        + '**Differences:** ' + (added + removed) + ' (' + added + ' added, ' + removed + ' removed)\n\n'
+        + '```diff\n'
+        + diffResults.map(function(d) {
+            if (d.type === 'add') return '+ ' + d.right;
+            if (d.type === 'remove') return '- ' + d.left;
+            return '  ' + d.left;
+          }).join('\n')
+        + '\n```';
+      dlFile('sql-comparison-report.md', md, 'text/markdown');
+    } else if (fmt === 'json') {
+      var jsonObj = {
+        metadata: {
+          dialect: document.getElementById('dialect-sel').value,
+          similarity: document.getElementById('c-similarity').textContent,
+          addedLines: added,
+          removedLines: removed
+        },
+        diff: diffResults
+      };
+      dlFile('sql-comparison-report.json', JSON.stringify(jsonObj, null, 2), 'application/json');
+    } else if (fmt === 'html') {
+      downloadReport();
+    }
+  }
+
+  function downloadReport() {
+    var dialect = document.getElementById('dialect-sel').value;
+    var sim = document.getElementById('c-similarity').textContent;
+    var parts = [
+      '<!DOCTYPE html><html>',
+      '<head><meta charset="utf-8"><title>SQL Comparison Report<\/title>',
+      '<style>body{font-family:sans-serif;padding:2rem;color:#0f172a;max-width:1000px;margin:0 auto}',
+      'h1{font-size:1.6rem}h2{font-size:1.2rem;margin-top:2rem}',
+      'table{border-collapse:collapse;width:100%;font-size:0.85rem;margin-top:1rem}',
+      'th,td{border:1px solid #e2e8f0;padding:0.4rem 0.6rem;text-align:left;font-family:monospace}',
+      'th{background:#0f172a;color:#fff}.add{background:#f0fdf4;color:#16a34a}.rem{background:#fef2f2;color:#dc2626}<\/style><\/head><body>',
+      '<h1>SQL Comparison &amp; Change Report<\/h1><p>Generated: ' + new Date().toLocaleString() + '<\/p>',
+      '<h2>Summary<\/h2><p>Dialect: <b>' + esc(dialect) + '<\/b> | Similarity Score: <b>' + sim + '<\/b><\/p>',
+      '<h2>Line Differences Log<\/h2><table><thead><tr><th>Type<\/th><th>Original SQL<\/th><th>Modified SQL<\/th><\/tr><\/thead><tbody>',
+      diffResults.map(function(d) {
+        var cls = d.type === 'add' ? 'add' : (d.type === 'remove' ? 'rem' : '');
+        return '<tr class="' + cls + '"><td>' + d.type + '<\/td><td>' + esc(d.left) + '<\/td><td>' + esc(d.right) + '<\/td><\/tr>';
+      }).join(''),
+      '<\/tbody><\/table><\/body><\/html>'
+    ];
+    dlFile('sql-comparison-report.html', parts.join(''), 'text/html');
+  }
+
+  function copySummary() {
+    if (!diffResults.length) { alert('Run Compare SQL first.'); return; }
+    var txt = 'SQL COMPARISON SUMMARY\n======================\n'
+      + 'Dialect: ' + document.getElementById('dialect-sel').value + '\n'
+      + 'Similarity: ' + document.getElementById('c-similarity').textContent + '\n'
+      + 'Added Lines: ' + document.getElementById('c-added').textContent + '\n'
+      + 'Removed Lines: ' + document.getElementById('c-removed').textContent + '\n'
+      + 'Total Differences: ' + document.getElementById('c-diffs').textContent;
+    navigator.clipboard.writeText(txt).then(function() { alert('Summary copied!'); }).catch(function() { alert('Copy failed.'); });
+  }
+
+  function dlFile(name, content, type) {
+    var blob = new Blob([content], { type: type });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function esc(s) {
+    return String(s != null ? s : '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function resetAll() {
+    sqlLeft.value = ''; sqlRight.value = ''; diffResults = []; diffIndices = []; currentDiffIdx = -1;
+    ['c-similarity', 'c-diffs', 'c-added', 'c-removed', 'c-modified'].forEach(function(id) { document.getElementById(id).textContent = '—'; });
+    var h = document.getElementById('c-health');
+    h.textContent = '—'; h.style.background = '#f0fdf4'; h.style.color = '#16a34a';
+    renderDiffViewer();
+  }
+})();
+</script>
+{% endraw %}

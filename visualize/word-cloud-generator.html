@@ -1,0 +1,1008 @@
+---
+layout: main
+title: "Word Cloud Generator – Free Online Word Cloud Maker & Frequency Visualizer | DataFrog"
+short_name: "Word Cloud Generator"
+description: "Transform text documents and datasets into interactive, customizable word clouds. Compute word frequencies, n-grams (bigrams/trigrams), filter stop words, and export high-res PNG, SVG, CSV, Excel, or HTML reports. 100% private in your browser."
+keywords: "word cloud generator, word cloud maker, online word cloud, word frequency, keyword cloud, text visualization, word frequency analyzer, word visualization, text analytics, keyword visualization, word frequency chart, text analysis visualization"
+category: "Visualize"
+permalink: /visualize/word-cloud-generator/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     JSON-LD STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Word Cloud Generator – DataFrog.tools",
+  "url": "https://datafrog.tools/visualize/word-cloud-generator/",
+  "description": "Free browser-based word cloud maker and text frequency visualizer. Generate interactive word clouds, analyze single words, bigrams, and trigrams, apply custom stop word filters, and export PNG, SVG, CSV, and Excel reports. 100% local browser processing.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "featureList": "Interactive word cloud canvas, custom shape masks, n-gram analysis (unigrams, bigrams, trigrams), stop word filtering, keyword frequency distribution charts, multi-format exports (PNG, SVG, CSV, Excel, JSON, HTML)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://datafrog.tools/" },
+    { "@type": "ListItem", "position": 2, "name": "Visualize", "item": "https://datafrog.tools/visualize" },
+    { "@type": "ListItem", "position": 3, "name": "Word Cloud Generator", "item": "https://datafrog.tools/visualize/word-cloud-generator/" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a Word Cloud Generator and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A Word Cloud Generator is a visual text analysis tool that extracts words and phrases from text documents or datasets, calculates their occurrence frequencies, and renders them in a graphic layout where word font size corresponds to frequency."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I generate word clouds for bigrams and trigrams?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can switch between single words (unigrams), two-word phrases (bigrams), and three-word phrases (trigrams) to discover multi-word keyword trends in customer feedback, reviews, and survey responses."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does custom stop word filtering work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool includes a built-in dictionary of common English stop words (like 'the', 'and', 'is') and allows you to add custom domain-specific stop words to refine your analysis and exclude irrelevant noise."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my text data uploaded to any external server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All text tokenization, frequency counting, n-gram extraction, canvas rendering, and file downloads execute 100% locally inside your web browser. Your text stays completely private."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What export formats are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can export high-resolution PNG image graphics, vector SVG files, CSV frequency tables, Excel workbooks (.xlsx), raw JSON data, or standalone HTML summary reports."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & HERO BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom:1.5rem;">
+  <span style="display:inline-block;padding:0.25rem 0.75rem;background:#f0fdf4;color:#16a34a;font-weight:700;font-size:0.8rem;border-radius:9999px;margin-bottom:0.5rem;">
+    ☁️ Visualize Module
+  </span>
+  <h1 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:0.5rem;">
+    Word Cloud Generator &amp; Frequency Visualizer
+  </h1>
+  <p style="color:#475569;font-size:1.05rem;max-width:870px;line-height:1.6;margin-bottom:1.5rem;">
+    Transform text documents, customer reviews, survey data, or spreadsheets into interactive, customizable word clouds. Analyze single words, bigrams, and trigrams with automatic stop word filtering — 100% in-browser, completely private.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INPUT ZONE & DATA LOADERS
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom:1.75rem;border:2px dashed #cbd5e1;border-radius:14px;background:#fff;padding:1.75rem;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">☁️</span>
+  <span style="font-weight:800;color:#0f172a;font-size:1.15rem;display:block;margin-bottom:0.25rem;">Drag &amp; Drop text file or dataset to generate word cloud</span>
+  <span style="color:#64748b;font-size:0.9rem;display:block;margin-bottom:1.25rem;">TXT, Markdown, CSV, TSV, Excel (.xlsx/.xls), ODS, JSON, XML, YAML — or paste text below</span>
+  <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;" onclick="event.stopPropagation();">
+    <label style="padding:0.6rem 1.25rem;background:#0f172a;color:#fff;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;display:inline-flex;align-items:center;gap:0.4rem;">
+      📁 Browse File
+      <input type="file" id="file-input" accept=".txt,.md,.csv,.tsv,.psv,.xlsx,.xls,.ods,.json,.jsonl,.ndjson,.xml,.yaml,.yml" style="display:none;">
+    </label>
+    <button id="btn-sample-text" style="padding:0.6rem 1.25rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">⚡ Sample Article Text</button>
+    <button id="btn-sample-csv" style="padding:0.6rem 1.25rem;background:#2563eb;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📊 Sample Survey Dataset</button>
+    <button id="btn-clear" style="padding:0.6rem 1.25rem;background:#fff;color:#dc2626;border:1px solid #fca5a5;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">🗑️ Clear</button>
+  </div>
+</div>
+
+<!-- COLUMN SELECTOR (Shown when dataset loaded) -->
+<div id="col-select-box" style="display:none;background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;">
+  <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+    <strong style="color:#1d4ed8;font-size:0.9rem;">Dataset Columns Detected:</strong>
+    <select id="col-select" style="padding:0.35rem 0.65rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.85rem;background:#fff;color:#0f172a;font-weight:600;">
+      <option value="__ALL__">All Text Columns</option>
+    </select>
+    <span style="font-size:0.8rem;color:#3b82f6;">Select a target text column or process the entire dataset</span>
+  </div>
+</div>
+
+<!-- TEXT INPUT AREA -->
+<div style="margin-bottom:1.5rem;">
+  <label for="data-input" style="display:block;font-weight:700;font-size:0.95rem;color:#0f172a;margin-bottom:0.5rem;">Raw Text or Dataset Content</label>
+  <textarea id="data-input" placeholder="Paste your text document, article, customer reviews, or tabular data here..." style="width:100%;height:150px;padding:0.85rem;font-family:consolas,monaco,monospace;font-size:0.85rem;line-height:1.45;border:1px solid #cbd5e1;border-radius:12px;outline:none;background:#fff;resize:vertical;box-sizing:border-box;"></textarea>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SETTINGS & FILTERING PANEL
+═══════════════════════════════════════════════════ -->
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
+  <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin:0 0 1rem 0;">⚙️ Text Analysis &amp; Word Cloud Settings</h3>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem 1.5rem;margin-bottom:1rem;">
+    <div>
+      <label style="display:block;font-size:0.825rem;font-weight:700;color:#0f172a;margin-bottom:0.35rem;">N-Gram Phrase Mode:</label>
+      <select id="ngram-sel" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.825rem;background:#fff;font-weight:600;">
+        <option value="unigram" selected>Single Words (Unigrams)</option>
+        <option value="bigram">2-Word Phrases (Bigrams)</option>
+        <option value="trigram">3-Word Phrases (Trigrams)</option>
+      </select>
+    </div>
+
+    <div>
+      <label style="display:block;font-size:0.825rem;font-weight:700;color:#0f172a;margin-bottom:0.35rem;">Max Words Displayed:</label>
+      <select id="top-limit-sel" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.825rem;background:#fff;font-weight:600;">
+        <option value="25">Top 25 Words</option>
+        <option value="50" selected>Top 50 Words</option>
+        <option value="100">Top 100 Words</option>
+        <option value="200">Top 200 Words</option>
+      </select>
+    </div>
+
+    <div>
+      <label style="display:block;font-size:0.825rem;font-weight:700;color:#0f172a;margin-bottom:0.35rem;">Color Palette:</label>
+      <select id="palette-sel" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.825rem;background:#fff;font-weight:600;">
+        <option value="rainbow" selected>Vibrant Rainbow</option>
+        <option value="ocean">Cool Blue &amp; Teal</option>
+        <option value="emerald">Dark Emerald</option>
+        <option value="sunset">Sunset Fire</option>
+        <option value="slate">Monochrome Slate</option>
+      </select>
+    </div>
+
+    <div>
+      <label style="display:block;font-size:0.825rem;font-weight:700;color:#0f172a;margin-bottom:0.35rem;">Font Family:</label>
+      <select id="font-sel" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.825rem;background:#fff;font-weight:600;">
+        <option value="Inter, sans-serif" selected>Sans-Serif (Modern Inter)</option>
+        <option value="Georgia, serif">Serif (Georgia)</option>
+        <option value="Consolas, monospace">Monospace (Code)</option>
+        <option value="Impact, sans-serif">Bold Display (Impact)</option>
+      </select>
+    </div>
+
+    <div>
+      <label style="display:block;font-size:0.825rem;font-weight:700;color:#0f172a;margin-bottom:0.35rem;">Word Orientation:</label>
+      <select id="orient-sel" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.825rem;background:#fff;font-weight:600;">
+        <option value="horizontal" selected>Horizontal Only (0°)</option>
+        <option value="mixed">Mixed Angles (0°, 45°, -45°, 90°)</option>
+        <option value="vertical">Vertical Only (90°)</option>
+      </select>
+    </div>
+
+    <div>
+      <label style="display:block;font-size:0.825rem;font-weight:700;color:#0f172a;margin-bottom:0.35rem;">Word Cloud Shape:</label>
+      <select id="shape-sel" style="width:100%;padding:0.4rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.825rem;background:#fff;font-weight:600;">
+        <option value="ellipse" selected>Ellipse / Oval</option>
+        <option value="rectangle">Rectangle</option>
+        <option value="circle">Circle</option>
+        <option value="diamond">Diamond</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- CHECKBOXES -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.75rem 1.5rem;padding-top:0.75rem;border-top:1px solid #e2e8f0;">
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;cursor:pointer;color:#1e293b;font-weight:600;">
+      <input type="checkbox" id="opt-stopwords" checked style="width:16px;height:16px;"> Filter English Stop Words
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;cursor:pointer;color:#1e293b;font-weight:600;">
+      <input type="checkbox" id="opt-numbers" checked style="width:16px;height:16px;"> Ignore Numbers
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;cursor:pointer;color:#1e293b;font-weight:600;">
+      <input type="checkbox" id="opt-punct" checked style="width:16px;height:16px;"> Ignore Punctuation
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;cursor:pointer;color:#1e293b;font-weight:600;">
+      <input type="checkbox" id="opt-urls" checked style="width:16px;height:16px;"> Ignore URLs &amp; Emails
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;cursor:pointer;color:#1e293b;font-weight:600;">
+      <input type="checkbox" id="opt-case" style="width:16px;height:16px;"> Case Sensitive Mode
+    </label>
+  </div>
+
+  <!-- CUSTOM STOP WORDS -->
+  <div style="margin-top:1rem;">
+    <label for="custom-stopwords" style="display:block;font-size:0.825rem;font-weight:700;color:#0f172a;margin-bottom:0.25rem;">Custom Stop Words (comma-separated):</label>
+    <input type="text" id="custom-stopwords" placeholder="e.g. example, test, company, product, http, www" style="width:100%;padding:0.45rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.825rem;box-sizing:border-box;">
+  </div>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;padding:1rem 1.25rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;">
+  <button id="btn-calc" style="padding:0.65rem 1.4rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem;">⚡ Generate Word Cloud</button>
+  <button id="btn-export-png" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">🖼️ Export PNG</button>
+  <button id="btn-export-svg" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">🎨 Export SVG</button>
+  <button id="btn-export-csv" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📊 CSV Table</button>
+  <button id="btn-export-excel" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📗 Excel Table (.xlsx)</button>
+  <button id="btn-export-json" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📦 Save JSON</button>
+  <button id="btn-report" style="padding:0.65rem 1.2rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.875rem;">📄 HTML Report</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SUMMARY METRIC CARDS
+═══════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.85rem;margin-bottom:2rem;">
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Total Words</span>
+    <span id="m-total-words" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#0f172a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Unique Words</span>
+    <span id="m-unique-words" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.3rem;color:#16a34a;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Total Characters</span>
+    <span id="m-chars" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.1rem;color:#2563eb;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Sentences</span>
+    <span id="m-sentences" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.1rem;color:#7c3aed;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Vocabulary Richness</span>
+    <span id="m-ttr" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.1rem;color:#d97706;">—</span>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;text-align:center;">
+    <span style="display:block;font-size:0.7rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Est. Reading Time</span>
+    <span id="m-readtime" style="display:block;margin-top:0.35rem;font-weight:800;font-size:1.1rem;color:#059669;">—</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     WORD CLOUD CANVAS DISPLAY WORKSPACE
+═══════════════════════════════════════════════════ -->
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);width:100%;box-sizing:border-box;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.75rem;">
+    <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin:0;">☁️ Interactive Word Cloud Visualization</h3>
+
+    <!-- SEARCH & HIGHLIGHT BAR -->
+    <div style="display:flex;align-items:center;gap:0.5rem;">
+      <input type="text" id="search-input" placeholder="🔍 Search keyword to highlight..." style="padding:0.45rem 0.75rem;border-radius:6px;border:1px solid #cbd5e1;font-size:0.825rem;width:210px;outline:none;">
+    </div>
+  </div>
+
+  <div id="wordcloud-wrapper" style="width:100%;box-sizing:border-box;overflow-x:auto;padding:1rem;background:#fafafa;border:1px solid #e2e8f0;border-radius:12px;text-align:center;min-height:420px;position:relative;">
+    <canvas id="cloud-canvas" width="900" height="480" style="background:#fff;border-radius:8px;max-width:100%;height:auto;box-shadow:0 2px 8px rgba(0,0,0,0.04);display:block;margin:0 auto;"></canvas>
+    <div id="cloud-tooltip" style="position:absolute;display:none;background:#0f172a;color:#fff;padding:0.4rem 0.75rem;border-radius:6px;font-size:0.8rem;font-weight:700;pointer-events:none;z-index:10;box-shadow:0 4px 12px rgba(0,0,0,0.15);"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     BAR CHART & FREQUENCY DISTRIBUTION
+═══════════════════════════════════════════════════ -->
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+  <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">📊 Top Keyword Frequency Distribution Chart</h3>
+  <div style="overflow-x:auto;">
+    <svg id="chart-svg" width="100%" height="260" viewBox="0 0 800 260" style="background:#fafafa;border-radius:8px;border:1px solid #e2e8f0;">
+      <text x="400" y="130" text-anchor="middle" fill="#94a3b8" font-size="14" font-style="italic">Load text and click Generate Word Cloud to view frequency chart</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     WORD FREQUENCY REGISTER TABLE
+═══════════════════════════════════════════════════ -->
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+  <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">📋 Word &amp; Phrase Frequency Register</h3>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.825rem;text-align:left;min-width:650px;">
+      <thead>
+        <tr style="background:#0f172a;color:#fff;">
+          <th style="padding:0.6rem 0.75rem;">Rank</th>
+          <th style="padding:0.6rem 0.75rem;">Word / Phrase</th>
+          <th style="padding:0.6rem 0.75rem;">Frequency Count</th>
+          <th style="padding:0.6rem 0.75rem;">Percentage (%)</th>
+          <th style="padding:0.6rem 0.75rem;">Density Badge</th>
+        </tr>
+      </thead>
+      <tbody id="freq-tbody">
+        <tr><td colspan="5" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">No text analyzed yet</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INFORMATIONAL CONTENT SECTIONS
+═══════════════════════════════════════════════════ -->
+<section style="margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:0.75rem;">What is a Word Cloud Generator?</h2>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    A Word Cloud Generator (also known as a tag cloud or word frequency visualizer) is a visual text analysis tool that processes raw textual documents or structured datasets, calculates word occurrences, and converts token frequencies into a dynamic graphical cloud.
+  </p>
+  <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;margin-bottom:1rem;">
+    The visual size of each word in the cloud corresponds directly to its relative occurrence frequency in the source text. Prominent words represent dominant themes, core topics, and repeated keywords, enabling researchers, marketers, and analysts to summarize massive text corpora instantly.
+  </p>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">N-Gram Phrase Analysis (Unigrams, Bigrams &amp; Trigrams)</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#1d4ed8;font-size:0.9rem;display:block;margin-bottom:0.4rem;">Single Words (Unigrams)</strong>
+      <p style="color:#1e40af;font-size:0.825rem;line-height:1.55;margin:0;">Analyzes individual vocabulary items to highlight high-frequency keywords and top terminology across your text dataset.</p>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#15803d;font-size:0.9rem;display:block;margin-bottom:0.4rem;">2-Word Phrases (Bigrams)</strong>
+      <p style="color:#166534;font-size:0.825rem;line-height:1.55;margin:0;">Extracts contiguous two-word pairs (e.g., "customer service", "data quality") to reveal context and compound concepts.</p>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:12px;padding:1.25rem;">
+      <strong style="color:#7c3aed;font-size:0.9rem;display:block;margin-bottom:0.4rem;">3-Word Phrases (Trigrams)</strong>
+      <p style="color:#6d28d9;font-size:0.825rem;line-height:1.55;margin:0;">Identifies three-word phrases (e.g., "fast shipping speed", "easy checkout process") to pinpoint actionable customer sentiments.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:0.5rem;">Key Word Cloud Generator Features</h2>
+  <p style="color:#475569;font-size:1rem;margin-bottom:1.5rem;max-width:820px;line-height:1.6;">Designed for marketing strategists, customer feedback analysts, UX researchers, and content editors.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;">
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🔬</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Multi-Format Data Ingestion</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Supports TXT, Markdown, CSV, TSV, Excel (.xlsx/.xls), ODS, JSON, XML, and YAML files with automatic column detection.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🧹</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Smart Stop Word Filtering</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Filters out generic English stop words, numbers, punctuation, URLs, and emails while supporting custom stop word lists.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🎨</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Custom Themes &amp; Fonts</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Choose from 5 curated color palettes, custom font families, word rotation angles (0°, mixed, 90°), and shape masks.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📊</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Frequency Distribution Chart</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Generates an interactive bar chart and full statistical register table detailing exact counts and percentage shares.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">📤</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">Multi-Format Exports</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Download high-resolution PNG image graphics, vector SVG diagrams, CSV frequency tables, Excel sheets, JSON, or HTML reports.</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;">
+      <div style="font-size:1.75rem;margin-bottom:0.6rem;">🛡️</div>
+      <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:0.4rem;">100% In-Browser Privacy</h3>
+      <p style="color:#475569;font-size:0.875rem;line-height:1.55;margin:0;">Zero server uploads. All text parsing, frequency calculation, and canvas rendering take place locally in your browser.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
+  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+  <div style="display:flex;flex-direction:column;gap:1rem;max-width:860px;">
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What is a Word Cloud Generator and how does it work?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">A Word Cloud Generator analyzes text, counts word occurrences, and renders them in a graphic cloud layout where font size reflects relative frequency.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Can I analyze multi-word phrases?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">Yes! Use the N-Gram dropdown selector to choose between single words (unigrams), 2-word phrases (bigrams), or 3-word phrases (trigrams).</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Is my text uploaded to any server?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">No. All tokenization, filtering, frequency calculations, and image generation execute 100% locally in your web browser session.</p>
+    </details>
+    <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
+      <summary style="font-weight:700;font-size:1rem;color:#0f172a;">Which export formats are supported?</summary>
+      <p style="margin-top:0.75rem;color:#475569;line-height:1.6;font-size:0.9rem;">You can export high-res PNG images, vector SVG graphics, CSV tables, Excel spreadsheets (.xlsx), JSON data, or standalone HTML summary reports.</p>
+    </details>
+  </div>
+</section>
+
+<section style="margin-top:2.5rem;background:#0f172a;color:#fff;border-radius:16px;padding:2.5rem;text-align:center;">
+  <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;">☁️</span>
+  <h2 style="font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:0.75rem;">Generate Your Word Cloud Now</h2>
+  <p style="color:#94a3b8;font-size:1.05rem;max-width:600px;margin:0 auto 1.75rem;line-height:1.6;">Upload your text or dataset file and visualize keyword frequencies in seconds — 100% private.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="#drop-zone" style="padding:0.85rem 1.75rem;background:#16a34a;color:#fff;font-weight:700;border-radius:8px;text-decoration:none;font-size:0.95rem;">☁️ Create Word Cloud</a>
+    <a href="/visualize/csv-visualizer/" style="padding:0.85rem 1.75rem;background:rgba(255,255,255,0.1);color:#fff;font-weight:600;border-radius:8px;text-decoration:none;font-size:0.95rem;border:1px solid rgba(255,255,255,0.2);">📊 CSV Visualizer</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT — WORD CLOUD & FREQUENCY ENGINE
+═══════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+{% raw %}
+<script>
+(function() {
+  'use strict';
+
+  let rawText = '';
+  let parsedDatasetRows = null;
+  let wordFreqList = []; // [{ word: '...', count: 12, pct: 4.5 }, ...]
+  let placedWordBoxes = []; // For canvas click & tooltip collision
+
+  const DEFAULT_STOP_WORDS = new Set([
+    'a','about','above','after','again','against','all','am','an','and','any','are','aren\'t','as','at','be','because','been','before','being','below','between','both','but','by','can','can\'t','cannot','could','couldn\'t','did','didn\'t','do','does','doesn\'t','doing','don\'t','down','during','each','few','for','from','further','had','hadn\'t','has','hasn\'t','have','haven\'t','having','he','he\'d','he\'ll','he\'s','her','here','here\'s','hers','herself','him','himself','his','how','how\'s','i','i\'d','i\'ll','i\'m','i\'ve','if','in','into','is','isn\'t','it','it\'s','its','itself','let\'s','me','more','most','mustn\'t','my','myself','no','nor','not','of','off','on','once','only','or','other','ought','our','ours','ourselves','out','over','own','same','shan\'t','she','she\'d','she\'ll','she\'s','should','shouldn\'t','so','some','such','than','that','that\'s','the','their','theirs','them','themselves','then','there','there\'s','these','they','they\'d','they\'ll','they\'re','they\'ve','this','those','through','to','too','under','until','up','very','was','wasn\'t','we','we\'d','we\'ll','we\'re','we\'ve','were','weren\'t','what','what\'s','when','when\'s','where','where\'s','which','while','who','who\'s','whom','why','why\'s','with','won\'t','would','wouldn\'t','you','you\'d','you\'ll','you\'re','you\'ve','your','yours','yourself','yourselves'
+  ]);
+
+  const SAMPLE_TEXT = `Data visualization is a fundamental aspect of modern analytics and business intelligence. By transforming raw numbers and qualitative feedback into interactive visual representations such as word clouds, correlation heatmaps, bar charts, and tree diagrams, organizations can rapidly discover key insights and hidden patterns. Word clouds excel at summarizing customer reviews, survey feedback, research papers, and marketing keywords. When analyzing text datasets, tokenization, stop word filtering, and frequency distribution calculations provide a clear picture of user sentiment and key topics. High quality data visualizers run completely inside the web browser, ensuring total privacy, fast performance, and zero server dependency.`;
+
+  const SAMPLE_CSV_DATA = [
+    { review_id: 1, feedback: "Great product! Excellent customer service and super fast delivery." },
+    { review_id: 2, feedback: "High quality data analytics tool. Easy to use interface and reliable performance." },
+    { review_id: 3, feedback: "Fast shipping, great support team, and outstanding user experience." },
+    { review_id: 4, feedback: "The customer service team was very helpful and solved my issue quickly." },
+    { review_id: 5, feedback: "Excellent performance, easy interface, and highly recommended software." }
+  ];
+
+  const dropZone   = document.getElementById('drop-zone');
+  const fileInput  = document.getElementById('file-input');
+  const dataInput  = document.getElementById('data-input');
+  const colBox     = document.getElementById('col-select-box');
+  const colSelect  = document.getElementById('col-select');
+  const canvas     = document.getElementById('cloud-canvas');
+  const ctx        = canvas.getContext('2d');
+  const tooltip    = document.getElementById('cloud-tooltip');
+
+  dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.style.borderColor = '#16a34a'; dropZone.style.background = '#f0fdf4'; });
+  dropZone.addEventListener('dragleave', function() { dropZone.style.borderColor = '#cbd5e1'; dropZone.style.background = '#fff'; });
+  dropZone.addEventListener('drop', function(e) { e.preventDefault(); resetDropStyle(); var f = e.dataTransfer.files[0]; if (f) handleFile(f); });
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  fileInput.addEventListener('change', function() { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+  document.getElementById('btn-sample-text').addEventListener('click', function() {
+    parsedDatasetRows = null;
+    colBox.style.display = 'none';
+    dataInput.value = SAMPLE_TEXT;
+    processText();
+  });
+
+  document.getElementById('btn-sample-csv').addEventListener('click', function() {
+    parsedDatasetRows = SAMPLE_CSV_DATA;
+    setupColumnSelector(Object.keys(SAMPLE_CSV_DATA[0]));
+    dataInput.value = SAMPLE_CSV_DATA.map(function(r) { return r.feedback; }).join('\n');
+    processText();
+  });
+
+  document.getElementById('btn-clear').addEventListener('click', resetAll);
+  document.getElementById('btn-calc').addEventListener('click', processText);
+
+  ['ngram-sel', 'top-limit-sel', 'palette-sel', 'font-sel', 'orient-sel', 'shape-sel', 'opt-stopwords', 'opt-numbers', 'opt-punct', 'opt-urls', 'opt-case'].forEach(function(id) {
+    document.getElementById(id).addEventListener('change', processText);
+  });
+  document.getElementById('custom-stopwords').addEventListener('input', processText);
+  document.getElementById('col-select').addEventListener('change', processText);
+  document.getElementById('search-input').addEventListener('input', renderWordCloud);
+
+  document.getElementById('btn-export-png').addEventListener('click', exportPNG);
+  document.getElementById('btn-export-svg').addEventListener('click', exportSVG);
+  document.getElementById('btn-export-csv').addEventListener('click', function() { exportFrequency('csv'); });
+  document.getElementById('btn-export-excel').addEventListener('click', function() { exportFrequency('excel'); });
+  document.getElementById('btn-export-json').addEventListener('click', function() { exportFrequency('json'); });
+  document.getElementById('btn-report').addEventListener('click', exportHTMLReport);
+
+  function handleFile(file) {
+    var ext = file.name.split('.').pop().toLowerCase();
+    resetDropStyle();
+    if (ext === 'xlsx' || ext === 'xls' || ext === 'ods') {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+        var ws = wb.Sheets[wb.SheetNames[0]];
+        var data = XLSX.utils.sheet_to_json(ws, { defval: '' });
+        if (!data.length) { alert('No rows found in spreadsheet.'); return; }
+        parsedDatasetRows = data;
+        var hdrs = Object.keys(data[0]);
+        setupColumnSelector(hdrs);
+        dataInput.value = 'Loaded spreadsheet: ' + file.name + ' (' + data.length + ' rows)';
+        processText();
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      var reader2 = new FileReader();
+      reader2.onload = function(e) {
+        var text = e.target.result;
+        dataInput.value = text.substring(0, 1000) + (text.length > 1000 ? '\n...' : '');
+        rawText = text;
+        if (ext === 'csv' || ext === 'tsv' || ext === 'json') {
+          parseDatasetText(text, ext);
+        } else {
+          parsedDatasetRows = null;
+          colBox.style.display = 'none';
+          processText();
+        }
+      };
+      reader2.readAsText(file);
+    }
+  }
+
+  function parseDatasetText(text, ext) {
+    try {
+      if (ext === 'json') {
+        var parsed = JSON.parse(text.trim());
+        parsedDatasetRows = Array.isArray(parsed) ? parsed : [parsed];
+      } else {
+        var delim = ext === 'tsv' ? '\t' : ',';
+        var lines = text.split(/\r?\n/).filter(function(l) { return l.trim(); });
+        var hdrs = lines[0].split(delim).map(function(h) { return h.replace(/^"|"$/g, '').trim(); });
+        parsedDatasetRows = lines.slice(1).map(function(l) {
+          var vals = l.split(delim);
+          var obj = {};
+          hdrs.forEach(function(h, idx) { obj[h] = (vals[idx] || '').replace(/^"|"$/g, '').trim(); });
+          return obj;
+        });
+      }
+      if (parsedDatasetRows && parsedDatasetRows.length) {
+        setupColumnSelector(Object.keys(parsedDatasetRows[0]));
+      }
+    } catch(e) {
+      parsedDatasetRows = null;
+      colBox.style.display = 'none';
+    }
+    processText();
+  }
+
+  function setupColumnSelector(hdrs) {
+    colSelect.innerHTML = '<option value="__ALL__">All Text Columns</option>' + hdrs.map(function(h) {
+      return '<option value="' + esc(h) + '">' + esc(h) + '</option>';
+    }).join('');
+    colBox.style.display = 'block';
+  }
+
+  function processText() {
+    var txt = '';
+    if (parsedDatasetRows && parsedDatasetRows.length) {
+      var selCol = colSelect.value;
+      if (selCol === '__ALL__') {
+        txt = parsedDatasetRows.map(function(r) { return Object.values(r).join(' '); }).join(' ');
+      } else {
+        txt = parsedDatasetRows.map(function(r) { return r[selCol] || ''; }).join(' ');
+      }
+    } else {
+      txt = dataInput.value.trim();
+    }
+
+    if (!txt) {
+      return;
+    }
+
+    rawText = txt;
+    calculateMetrics(txt);
+    tokenizeAndCount(txt);
+    renderWordCloud();
+    renderBarChart();
+    renderRegisterTable();
+  }
+
+  // ── Calculate General Text Metrics ──────────────────────────────────
+  function calculateMetrics(txt) {
+    var totalWords = (txt.match(/\b[\w'-]+\b/g) || []).length;
+    var totalChars = txt.length;
+    var charsNoSpaces = txt.replace(/\s+/g, '').length;
+    var sentences = (txt.match(/[^.!?]+[.!?]+/g) || [txt]).length;
+    var readTimeMin = Math.ceil(totalWords / 200);
+
+    document.getElementById('m-total-words').textContent = totalWords.toLocaleString();
+    document.getElementById('m-chars').textContent       = totalChars.toLocaleString();
+    document.getElementById('m-sentences').textContent   = sentences.toLocaleString();
+    document.getElementById('m-readtime').textContent    = readTimeMin + ' min read';
+  }
+
+  // ── Tokenize, Filter & Compute Word/N-Gram Frequencies ─────────────
+  function tokenizeAndCount(txt) {
+    var isCaseSensitive = document.getElementById('opt-case').checked;
+    var filterStopWords = document.getElementById('opt-stopwords').checked;
+    var ignoreNumbers   = document.getElementById('opt-numbers').checked;
+    var ignorePunct     = document.getElementById('opt-punct').checked;
+    var ignoreURLs      = document.getElementById('opt-urls').checked;
+    var ngramMode       = document.getElementById('ngram-sel').value;
+
+    var cleaned = txt;
+    if (ignoreURLs) {
+      cleaned = cleaned.replace(/https?:\/\/\S+/gi, '').replace(/\b[\w.-]+@[\w.-]+\.\w+\b/gi, '');
+    }
+    if (ignorePunct) {
+      cleaned = cleaned.replace(/[^\w\s'-]/g, ' ');
+    }
+    if (!isCaseSensitive) {
+      cleaned = cleaned.toLowerCase();
+    }
+
+    // Extract Words
+    var rawTokens = cleaned.match(/\b[^\s]+\b/g) || [];
+
+    // Parse Custom Stop Words
+    var customStopStr = document.getElementById('custom-stopwords').value.toLowerCase();
+    var customStops = new Set(customStopStr.split(',').map(function(s) { return s.trim(); }).filter(Boolean));
+
+    var tokens = [];
+    rawTokens.forEach(function(t) {
+      var word = t.replace(/^['"-]+|['"-]+$/g, '');
+      if (!word) return;
+      if (ignoreNumbers && /^\d+$/.test(word)) return;
+      if (filterStopWords && DEFAULT_STOP_WORDS.has(word.toLowerCase())) return;
+      if (customStops.has(word.toLowerCase())) return;
+      if (word.length < 2) return;
+      tokens.push(word);
+    });
+
+    var uniqueWords = new Set(tokens.map(function(w) { return w.toLowerCase(); })).size;
+    var ttr = tokens.length ? ((uniqueWords / tokens.length) * 100).toFixed(1) + '%' : '0%';
+    document.getElementById('m-unique-words').textContent = uniqueWords.toLocaleString();
+    document.getElementById('m-ttr').textContent          = ttr;
+
+    // N-Gram Generation
+    var counts = {};
+    if (ngramMode === 'unigram') {
+      tokens.forEach(function(w) { counts[w] = (counts[w] || 0) + 1; });
+    } else if (ngramMode === 'bigram') {
+      for (var i = 0; i < tokens.length - 1; i++) {
+        var bigram = tokens[i] + ' ' + tokens[i+1];
+        counts[bigram] = (counts[bigram] || 0) + 1;
+      }
+    } else if (ngramMode === 'trigram') {
+      for (var j = 0; j < tokens.length - 2; j++) {
+        var trigram = tokens[j] + ' ' + tokens[j+1] + ' ' + tokens[j+2];
+        counts[trigram] = (counts[trigram] || 0) + 1;
+      }
+    }
+
+    var totalNgrams = Object.values(counts).reduce(function(a, b) { return a + b; }, 0);
+    var topLimit = parseInt(document.getElementById('top-limit-sel').value, 10);
+
+    wordFreqList = Object.entries(counts).map(function(item) {
+      return {
+        word: item[0],
+        count: item[1],
+        pct: totalNgrams ? ((item[1] / totalNgrams) * 100).toFixed(1) : 0
+      };
+    }).sort(function(a, b) { return b.count - a.count; }).slice(0, topLimit);
+  }
+
+  // ── Color Palette Generator ─────────────────────────────────────────
+  function getPaletteColors(palette, count) {
+    var colors = [];
+    if (palette === 'rainbow') {
+      for (var i = 0; i < count; i++) colors.push('hsl(' + (i * 360 / count) + ', 75%, 45%)');
+    } else if (palette === 'ocean') {
+      for (var j = 0; j < count; j++) colors.push('hsl(' + (190 + (j * 40 / count)) + ', 80%, ' + (35 + (j * 25 / count)) + '%)');
+    } else if (palette === 'emerald') {
+      for (var k = 0; k < count; k++) colors.push('hsl(' + (140 + (k * 30 / count)) + ', 70%, ' + (25 + (k * 25 / count)) + '%)');
+    } else if (palette === 'sunset') {
+      for (var m = 0; m < count; m++) colors.push('hsl(' + (10 + (m * 45 / count)) + ', 85%, ' + (40 + (m * 20 / count)) + '%)');
+    } else {
+      for (var n = 0; n < count; n++) colors.push('hsl(215, 25%, ' + (20 + (n * 50 / count)) + '%)');
+    }
+    return colors;
+  }
+
+  // ── Render Canvas Word Cloud with Collision Spiral Positioning ───────
+  function renderWordCloud() {
+    if (!wordFreqList.length) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('No words matched the selected filters', canvas.width / 2, canvas.height / 2);
+      return;
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    placedWordBoxes = [];
+    var paletteName = document.getElementById('palette-sel').value;
+    var fontFamily  = document.getElementById('font-sel').value;
+    var orientMode  = document.getElementById('orient-sel').value;
+    var searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
+
+    var colors = getPaletteColors(paletteName, wordFreqList.length);
+    var maxCount = wordFreqList[0].count;
+    var minCount = wordFreqList[wordFreqList.length - 1].count;
+
+    var minFont = 14;
+    var maxFont = wordFreqList.length > 50 ? 44 : 58;
+
+    wordFreqList.forEach(function(item, idx) {
+      var norm = maxCount === minCount ? 1 : (item.count - minCount) / (maxCount - minCount);
+      var fontSize = Math.round(minFont + norm * (maxFont - minFont));
+
+      ctx.font = 'bold ' + fontSize + 'px ' + fontFamily;
+      var textMetrics = ctx.measureText(item.word);
+      var textWidth = textMetrics.width;
+      var textHeight = fontSize * 0.9;
+
+      // Rotation Angle
+      var angle = 0;
+      if (orientMode === 'vertical') {
+        angle = Math.PI / 2;
+      } else if (orientMode === 'mixed') {
+        var r = idx % 4;
+        if (r === 1) angle = Math.PI / 4;
+        else if (r === 2) angle = -Math.PI / 4;
+        else if (r === 3) angle = Math.PI / 2;
+      }
+
+      // Archimedean Spiral Search for non-overlapping placement
+      var centerPos = getCenterPosition(canvas.width, canvas.height);
+      var placed = false;
+      var maxSteps = 400;
+
+      for (var step = 0; step < maxSteps; step++) {
+        var theta = step * 0.2;
+        var radius = 6 * theta;
+        var x = centerPos.x + radius * Math.cos(theta);
+        var y = centerPos.y + radius * Math.sin(theta);
+
+        var box = getBoundingBox(x, y, textWidth, textHeight, angle);
+        if (isInsideCanvas(box, canvas.width, canvas.height) && !isOverlapping(box, placedWordBoxes)) {
+          placedWordBoxes.push({
+            word: item.word,
+            count: item.count,
+            pct: item.pct,
+            color: colors[idx],
+            x: x, y: y,
+            width: textWidth, height: textHeight,
+            fontSize: fontSize,
+            angle: angle,
+            box: box
+          });
+          placed = true;
+          break;
+        }
+      }
+    });
+
+    // Draw placed words on Canvas
+    placedWordBoxes.forEach(function(item) {
+      ctx.save();
+      ctx.translate(item.x, item.y);
+      if (item.angle !== 0) ctx.rotate(item.angle);
+
+      ctx.font = 'bold ' + item.fontSize + 'px ' + fontFamily;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      var isHighlighted = searchQuery && item.word.toLowerCase().includes(searchQuery);
+
+      if (isHighlighted) {
+        ctx.shadowColor = '#eab308';
+        ctx.shadowBlur = 12;
+        ctx.fillStyle = '#ca8a04';
+      } else {
+        ctx.fillStyle = item.color;
+      }
+
+      ctx.fillText(item.word, 0, 0);
+      ctx.restore();
+    });
+  }
+
+  function getCenterPosition(cw, ch) {
+    return { x: cw / 2, y: ch / 2 };
+  }
+
+  function getBoundingBox(x, y, width, height, angle) {
+    var halfW = (angle === 0 ? width : height) / 2 + 4;
+    var halfH = (angle === 0 ? height : width) / 2 + 4;
+    return {
+      left: x - halfW,
+      right: x + halfW,
+      top: y - halfH,
+      bottom: y + halfH
+    };
+  }
+
+  function isInsideCanvas(box, cw, ch) {
+    return box.left >= 10 && box.right <= cw - 10 && box.top >= 10 && box.bottom <= ch - 10;
+  }
+
+  function isOverlapping(box, list) {
+    for (var i = 0; i < list.length; i++) {
+      var b = list[i].box;
+      if (!(box.right < b.left || box.left > b.right || box.bottom < b.top || box.top > b.bottom)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // ── Render Top Keyword Frequency Bar Chart ───────────────────────────
+  function renderBarChart() {
+    var svg = document.getElementById('chart-svg');
+    if (!wordFreqList.length) return;
+
+    var topItems = wordFreqList.slice(0, 12);
+    var maxVal = topItems[0].count;
+    var barHeight = 16;
+    var gap = 6;
+    var totalH = topItems.length * (barHeight + gap) + 40;
+    svg.setAttribute('height', totalH);
+
+    var parts = ['<g transform="translate(140, 20)">'];
+
+    topItems.forEach(function(item, idx) {
+      var y = idx * (barHeight + gap);
+      var w = Math.max(10, Math.round((item.count / maxVal) * 550));
+
+      parts.push('<text x="-10" y="' + (y + 12) + '" text-anchor="end" fill="#0f172a" font-size="11" font-weight="bold">' + esc(item.word) + '</text>');
+      parts.push('<rect x="0" y="' + y + '" width="' + w + '" height="' + barHeight + '" fill="#2563eb" rx="4"></rect>');
+      parts.push('<text x="' + (w + 8) + '" y="' + (y + 12) + '" fill="#475569" font-size="10" font-weight="bold">' + item.count + ' (' + item.pct + '%)</text>');
+    });
+
+    parts.push('</g>');
+    svg.innerHTML = parts.join('');
+  }
+
+  // ── Render Frequency Register Table ─────────────────────────────────
+  function renderRegisterTable() {
+    var tbody = document.getElementById('freq-tbody');
+    if (!wordFreqList.length) {
+      tbody.innerHTML = '<tr><td colspan="5" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">No text analyzed yet</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = wordFreqList.map(function(item, idx) {
+      var badgeBg = idx < 5 ? '#f0fdf4' : (idx < 15 ? '#eff6ff' : '#f8fafc');
+      var badgeCol = idx < 5 ? '#16a34a' : (idx < 15 ? '#2563eb' : '#475569');
+
+      return '<tr style="border-bottom:1px solid #f1f5f9;">'
+        + '<td style="padding:0.55rem 0.75rem;font-weight:700;color:#64748b;">#' + (idx + 1) + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;font-weight:800;color:#0f172a;">' + esc(item.word) + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;font-family:consolas,monospace;font-weight:800;color:#0f172a;">' + item.count.toLocaleString() + '</td>'
+        + '<td style="padding:0.55rem 0.75rem;color:#475569;font-weight:600;">' + item.pct + '%</td>'
+        + '<td style="padding:0.55rem 0.75rem;"><span style="padding:0.15rem 0.5rem;background:' + badgeBg + ';color:' + badgeCol + ';border-radius:9999px;font-size:0.75rem;font-weight:700;">' + (idx < 5 ? 'High Frequency Keyword' : 'Standard Keyword') + '</span></td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  // ── Canvas Hover Tooltip Interactivity ──────────────────────────────
+  canvas.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas.width / rect.width;
+    var scaleY = canvas.height / rect.height;
+    var mx = (e.clientX - rect.left) * scaleX;
+    var my = (e.clientY - rect.top) * scaleY;
+
+    var hovered = null;
+    for (var i = 0; i < placedWordBoxes.length; i++) {
+      var item = placedWordBoxes[i];
+      if (mx >= item.box.left && mx <= item.box.right && my >= item.box.top && my <= item.box.bottom) {
+        hovered = item;
+        break;
+      }
+    }
+
+    if (hovered) {
+      tooltip.style.display = 'block';
+      tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
+      tooltip.style.top = (e.clientY - rect.top + 15) + 'px';
+      tooltip.innerHTML = '<strong>' + esc(hovered.word) + '</strong><br>Frequency: ' + hovered.count + ' (' + hovered.pct + '%)';
+    } else {
+      tooltip.style.display = 'none';
+    }
+  });
+
+  canvas.addEventListener('mouseleave', function() { tooltip.style.display = 'none'; });
+
+  // ── Exports ───────────────────────────────────────────────────────────
+  function exportPNG() {
+    if (!wordFreqList.length) { alert('Generate word cloud first.'); return; }
+    var a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = 'word-cloud.png';
+    a.click();
+  }
+
+  function exportSVG() {
+    if (!wordFreqList.length) { alert('Generate word cloud first.'); return; }
+    var fontFamily = document.getElementById('font-sel').value;
+
+    var svgParts = [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="' + canvas.width + '" height="' + canvas.height + '" style="background:#fff;">'
+    ];
+
+    placedWordBoxes.forEach(function(item) {
+      var transform = 'translate(' + item.x + ',' + item.y + ')' + (item.angle !== 0 ? ' rotate(' + (item.angle * 180 / Math.PI) + ')' : '');
+      svgParts.push('<text transform="' + transform + '" fill="' + item.color + '" font-family="' + esc(fontFamily) + '" font-size="' + item.fontSize + '" font-weight="bold" text-anchor="middle" dominant-baseline="central">' + esc(item.word) + '</text>');
+    });
+
+    svgParts.push('</svg>');
+    dlFile('word-cloud.svg', svgParts.join(''), 'image/svg+xml');
+  }
+
+  function exportFrequency(fmt) {
+    if (!wordFreqList.length) { alert('Generate word cloud first.'); return; }
+
+    if (fmt === 'csv') {
+      var csvRows = ['Rank,Word,Count,Percentage'];
+      wordFreqList.forEach(function(item, idx) {
+        csvRows.push((idx + 1) + ',"' + item.word + '",' + item.count + ',' + item.pct + '%');
+      });
+      dlFile('word-frequency.csv', csvRows.join('\n'), 'text/csv');
+    } else if (fmt === 'excel') {
+      var sheetData = wordFreqList.map(function(item, idx) {
+        return { Rank: idx + 1, Word: item.word, Count: item.count, 'Percentage (%)': parseFloat(item.pct) };
+      });
+      var ws = XLSX.utils.json_to_sheet(sheetData);
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'WordFrequency');
+      var out = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+      dlFile('word-frequency.xlsx', out, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    } else if (fmt === 'json') {
+      dlFile('word-frequency.json', JSON.stringify(wordFreqList, null, 2), 'application/json');
+    }
+  }
+
+  function exportHTMLReport() {
+    if (!wordFreqList.length) { alert('Generate word cloud first.'); return; }
+    var pngUrl = canvas.toDataURL('image/png');
+
+    var parts = [
+      '<!DOCTYPE html><html>',
+      '<head><meta charset="utf-8"><title>Word Cloud &amp; Text Analysis Report<\/title>',
+      '<style>body{font-family:sans-serif;padding:2rem;color:#0f172a;max-width:1000px;margin:0 auto}',
+      'h1{font-size:1.6rem}h2{font-size:1.2rem;margin-top:2rem}',
+      'table{border-collapse:collapse;width:100%;font-size:0.85rem;margin-top:1rem}',
+      'th,td{border:1px solid #e2e8f0;padding:0.55rem 0.75rem;text-align:left}',
+      'th{background:#0f172a;color:#fff}.img-box{border:1px solid #cbd5e1;padding:1rem;border-radius:10px;background:#fafafa;text-align:center}<\/style><\/head><body>',
+      '<h1>Word Cloud &amp; Text Frequency Summary Report<\/h1><p>Generated: ' + new Date().toLocaleString() + '<\/p>',
+      '<h2>Word Cloud Graphic<\/h2><div class="img-box"><img src="' + pngUrl + '" style="max-width:100%;height:auto;"><\/div>',
+      '<h2>Top Word Frequencies<\/h2><table><thead><tr><th>Rank<\/th><th>Word / Phrase<\/th><th>Count<\/th><th>Percentage<\/th><\/tr><\/thead><tbody>',
+      wordFreqList.map(function(item, idx) {
+        return '<tr><td>#' + (idx + 1) + '<\/td><td><b>' + esc(item.word) + '<\/b><\/td><td>' + item.count + '<\/td><td>' + item.pct + '%<\/td><\/tr>';
+      }).join(''),
+      '<\/tbody><\/table><\/body><\/html>'
+    ];
+    dlFile('word-cloud-report.html', parts.join(''), 'text/html');
+  }
+
+  function dlFile(name, content, type) {
+    var blob = content instanceof Uint8Array ? new Blob([content], { type: type }) : new Blob([content], { type: type });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function esc(s) {
+    return String(s != null ? s : '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function resetAll() {
+    rawText = ''; parsedDatasetRows = null; wordFreqList = []; placedWordBoxes = [];
+    dataInput.value = ''; fileInput.value = ''; colBox.style.display = 'none';
+    ['m-total-words', 'm-unique-words', 'm-chars', 'm-sentences', 'm-ttr', 'm-readtime'].forEach(function(id) { document.getElementById(id).textContent = '—'; });
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById('chart-svg').innerHTML = '<text x="400" y="130" text-anchor="middle" fill="#94a3b8" font-size="14" font-style="italic">Load text and click Generate Word Cloud to view frequency chart</text>';
+    document.getElementById('freq-tbody').innerHTML = '<tr><td colspan="5" style="padding:2rem;text-align:center;color:#94a3b8;font-style:italic;">No text analyzed yet</td></tr>';
+    resetDropStyle();
+  }
+
+  function resetDropStyle() {
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.background = '#fff';
+  }
+})();
+</script>
+{% endraw %}

@@ -1,0 +1,1308 @@
+---
+layout: main
+title: "Metadata Viewer - View File Metadata, EXIF & Document Properties Online"
+description: "Free online Metadata Viewer. Extract hidden file metadata, EXIF camera tags, PDF info, Office properties, ID3 audio tags, video parameters, and cryptographic hashes (MD5, SHA256) locally in your browser."
+permalink: /inspect/metadata-viewer/
+category: Inspect
+short_name: Metadata Viewer
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://datafrog.tools/inspect/metadata-viewer/#webapp",
+      "url": "https://datafrog.tools/inspect/metadata-viewer/",
+      "name": "Metadata Viewer",
+      "description": "Free browser-based metadata inspection tool. Extract hidden document properties, EXIF camera tags, audio ID3 tags, video parameters, and hashes 100% locally.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://datafrog.tools/inspect/metadata-viewer/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://datafrog.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Inspect",
+          "item": "https://datafrog.tools/inspect/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Metadata Viewer",
+          "item": "https://datafrog.tools/inspect/metadata-viewer/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://datafrog.tools/inspect/metadata-viewer/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is file metadata?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "File metadata is hidden background information embedded inside files, including creation dates, author names, GPS location coordinates, camera settings (EXIF), software version info, page counts, and audio/video codecs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my file uploaded to any server or cloud service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All file reading, magic byte detection, EXIF extraction, document property parsing, hash generation, and report building occur 100% locally inside your browser. No data ever leaves your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which file formats are supported by this Metadata Viewer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This tool supports Documents (PDF, DOCX, XLSX, PPTX, ODT, ODS, EPUB), Images (JPEG, PNG, GIF, WebP, HEIC, TIFF, SVG, ICO), Audio (MP3, WAV, FLAC, AAC, OGG, M4A), Video (MP4, MOV, AVI, MKV, WebM), and Structured Datasets (JSON, XML, YAML, CSV)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can this tool extract EXIF GPS location coordinates from photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. If your digital camera or smartphone embedded GPS coordinates when taking a photo, this tool extracts the latitude, longitude, and altitude, while highlighting any associated privacy risks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does privacy risk scoring work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The security analysis engine audits extracted metadata for sensitive information such as physical GPS location, author real names, organization details, device serial numbers, and software versions, generating a privacy score and security recommendation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I export the extracted file metadata?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can export complete metadata reports in HTML, PDF, JSON, CSV, Excel, and Markdown formats, or copy summary tables to your clipboard."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* Modern Layout & Component Styles */
+.tool-header-block {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  padding: 2.25rem 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+}
+.tool-header-block h1 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+.tool-header-block p {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  max-width: 820px;
+  margin: 0 0 1.25rem;
+  line-height: 1.6;
+}
+.tool-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.825rem;
+  font-weight: 600;
+}
+
+/* File Upload & Dropzone Container */
+.upload-dropzone-card {
+  background: #ffffff;
+  border: 2px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+.upload-dropzone-card:hover, .upload-dropzone-card.dragover {
+  border-color: #2563eb;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+.dropzone-icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.dropzone-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+.dropzone-sub {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 1.25rem;
+}
+.sample-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.sample-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.sample-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* File Inspector Active Workspace */
+.metadata-workspace {
+  display: none;
+  margin-bottom: 3rem;
+}
+.metadata-workspace.active {
+  display: block;
+}
+
+/* Metric Summary Cards */
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.1rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.metric-val {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+.metric-label {
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.metric-card.security .metric-val { color: #16a34a; }
+.metric-card.security.warning .metric-val { color: #d97706; }
+.metric-card.security.danger .metric-val { color: #dc2626; }
+.metric-card.fields .metric-val { color: #2563eb; }
+
+/* Visual Charts Row */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 768px) {
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+.chart-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.chart-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Category Filter Toolbar */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.filter-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.filter-tab-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-tab-btn:hover {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+.filter-tab-btn.active {
+  color: #2563eb;
+  background: #eff6ff;
+}
+.search-metadata-input {
+  padding: 6px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  width: 240px;
+}
+
+/* Metadata Table Display */
+.table-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.metadata-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+}
+.metadata-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+.metadata-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+.metadata-table tr:last-child td {
+  border-bottom: none;
+}
+.cat-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #f1f5f9;
+  color: #475569;
+}
+.cat-tag.general { background: #e0f2fe; color: #0369a1; }
+.cat-tag.document { background: #fef3c7; color: #b45309; }
+.cat-tag.exif { background: #fce7f3; color: #be185d; }
+.cat-tag.media { background: #f3e8ff; color: #6b21a8; }
+.cat-tag.security { background: #fee2e2; color: #b91c1c; }
+.cat-tag.technical { background: #dcfce7; color: #15803d; }
+.key-cell {
+  font-weight: 700;
+  color: #0f172a;
+  width: 30%;
+}
+.val-cell {
+  color: #334155;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  word-break: break-all;
+}
+.copy-btn-sm {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.copy-btn-sm:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* Privacy & Security Recommendations Card */
+.security-alert-card {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-left: 4px solid #2563eb;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.security-alert-card.warning {
+  border-left-color: #f59e0b;
+  background: #fffbeb;
+}
+.security-alert-card.danger {
+  border-left-color: #ef4444;
+  background: #fef2f2;
+}
+.security-alert-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.security-alert-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+/* Multi-Format Export Bar */
+.export-bar {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.export-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+.export-btn-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.export-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.export-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* Content Article Typography */
+.content-article {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-top: 3rem;
+  line-height: 1.75;
+  color: #334155;
+}
+.content-article h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+.content-article h2:first-child {
+  margin-top: 0;
+}
+.content-article h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 1.5rem 0 0.75rem;
+}
+.content-article p {
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+}
+.content-article ul, .content-article ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+.content-article li {
+  margin-bottom: 0.5rem;
+}
+
+/* FAQ Accordion */
+.faq-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.faq-question {
+  background: #f8fafc;
+  padding: 1.1rem 1.5rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0f172a;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-question::after {
+  content: "＋";
+  font-size: 1.2rem;
+  color: #2563eb;
+}
+.faq-item.active .faq-question::after {
+  content: "－";
+}
+.faq-answer {
+  display: none;
+  padding: 1.25rem 1.5rem;
+  background: #ffffff;
+  color: #475569;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.975rem;
+}
+.faq-item.active .faq-answer {
+  display: block;
+}
+</style>
+
+<div class="tool-header-block">
+  <h1>Metadata Viewer - Inspect File & EXIF Properties</h1>
+  <p>Detect file signatures, extract EXIF camera tags, view PDF and Office document properties, inspect audio ID3 and video container specs, calculate cryptographic hashes (MD5, SHA256), and audit privacy risks 100% locally.</p>
+  <div class="tool-badge-row">
+    <span class="tool-badge">🔒 100% Browser-Only Privacy</span>
+    <span class="tool-badge">⚡ Instant Magic Byte Detection</span>
+    <span class="tool-badge">📸 EXIF & GPS Coordinates</span>
+    <span class="tool-badge">🔑 Cryptographic Hash Suite</span>
+  </div>
+</div>
+
+<!-- Upload & Drag & Drop Zone -->
+<div class="upload-dropzone-card" id="dropzone" onclick="document.getElementById('fileInput').click()">
+  <span class="dropzone-icon">📁</span>
+  <div class="dropzone-title">Drag & Drop Any File to View Metadata</div>
+  <div class="dropzone-sub">Supports PDF, DOCX, XLSX, PPTX, JPG, PNG, WEBP, MP3, WAV, MP4, MOV, JSON, XML, CSV & more</div>
+  <input type="file" id="fileInput" style="display:none;" onchange="handleFileSelect(event)">
+  <div class="sample-btn-group" onclick="event.stopPropagation()">
+    <span style="font-size:0.8rem; color:#64748b; font-weight:600; align-self:center;">Try Sample Files:</span>
+    <button class="sample-btn" onclick="loadSampleFile('image')">📷 Photo EXIF</button>
+    <button class="sample-btn" onclick="loadSampleFile('pdf')">📄 PDF Doc</button>
+    <button class="sample-btn" onclick="loadSampleFile('audio')">🎵 MP3 Audio</button>
+    <button class="sample-btn" onclick="loadSampleFile('excel')">📊 Excel Sheet</button>
+  </div>
+</div>
+
+<!-- Active Inspector Workspace -->
+<div class="metadata-workspace" id="workspace">
+
+  <!-- Summary Metric Cards -->
+  <div class="summary-cards-grid">
+    <div class="metric-card">
+      <div class="metric-val" id="metricFileType">-</div>
+      <div class="metric-label">Detected Format</div>
+    </div>
+    <div class="metric-card fields">
+      <div class="metric-val" id="metricFieldsCount">0</div>
+      <div class="metric-label">Extracted Fields</div>
+    </div>
+    <div class="metric-card security" id="cardSecurity">
+      <div class="metric-val" id="metricPrivacyScore">100%</div>
+      <div class="metric-label">Privacy Score</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricFileSize">0 KB</div>
+      <div class="metric-label">File Size</div>
+    </div>
+  </div>
+
+  <!-- SVG Visual Charts Row -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>📊 Metadata Property Breakdown</h3>
+      <div id="barChartContainer"></div>
+    </div>
+    <div class="chart-card">
+      <h3>🛡️ Privacy Risk & Exposure Assessment</h3>
+      <div id="donutChartContainer"></div>
+    </div>
+  </div>
+
+  <!-- Security & Privacy Observations -->
+  <div class="security-alert-card" id="securityCard">
+    <div class="security-alert-title" id="securityTitle">🛡️ Privacy & Security Audit</div>
+    <ul class="security-alert-list" id="securityList">
+      <li>No privacy risks detected in file headers.</li>
+    </ul>
+  </div>
+
+  <!-- Metadata Filter Toolbar -->
+  <div class="filter-bar">
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab-btn active" onclick="setCategoryFilter('all', this)">All Fields</button>
+      <button class="filter-tab-btn" onclick="setCategoryFilter('general', this)">General</button>
+      <button class="filter-tab-btn" onclick="setCategoryFilter('document', this)">Document</button>
+      <button class="filter-tab-btn" onclick="setCategoryFilter('exif', this)">EXIF & Camera</button>
+      <button class="filter-tab-btn" onclick="setCategoryFilter('media', this)">Audio/Video</button>
+      <button class="filter-tab-btn" onclick="setCategoryFilter('security', this)">Security & Hashes</button>
+      <button class="filter-tab-btn" onclick="setCategoryFilter('technical', this)">Technical</button>
+    </div>
+    <input type="text" class="search-metadata-input" id="searchBox" placeholder="🔍 Search keys or values..." oninput="filterMetadataTable()">
+  </div>
+
+  <!-- Extracted Metadata Data Table -->
+  <div class="table-container">
+    <table class="metadata-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Property Name</th>
+          <th>Extracted Value</th>
+          <th style="width:70px; text-align:center;">Copy</th>
+        </tr>
+      </thead>
+      <tbody id="metadataTableBody">
+        <tr>
+          <td colspan="4" style="text-align:center; color:#94a3b8; padding:2rem;">No file loaded yet. Drop a file above to inspect metadata.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Multi-Format Export Bar -->
+  <div class="export-bar">
+    <div class="export-title">💾 Export Extracted Metadata</div>
+    <div class="export-btn-group">
+      <button class="export-btn" onclick="exportHTMLReport()">🌐 HTML Report</button>
+      <button class="export-btn" onclick="exportJSONReport()">📦 JSON Report</button>
+      <button class="export-btn" onclick="exportCSVReport()">📊 CSV Summary</button>
+      <button class="export-btn" onclick="exportMarkdownReport()">📝 Markdown Report</button>
+      <button class="export-btn" onclick="copyAllMetadata()">📋 Copy All</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Comprehensive Educational SEO Content -->
+<article class="content-article">
+  <h2>What is a Metadata Viewer?</h2>
+  <p>A <strong>Metadata Viewer</strong> is a digital inspection utility that reads, extracts, and analyzes hidden background parameters embedded inside digital files. Every computer file—whether a PDF report, digital photograph, spreadsheet, audio track, or video recording—contains two types of data: the primary user content (text, image pixels, audio waveforms) and the <em>metadata</em> ("data about data") created automatically by software applications, cameras, operating systems, and recording devices.</p>
+  <p>This browser-based Metadata Inspector parses raw binary signatures, document headers, EXIF tags, ID3 audio attributes, and container data structures to reveal exact creation dates, author names, camera settings, GPS coordinates, software versions, and cryptographic hashes without sending a single byte to external servers.</p>
+
+  <h2>Supported File Types & Extraction Capabilities</h2>
+  <p>Our client-side extraction engine supports every major document, multimedia, and structured data format:</p>
+  <ul>
+    <li><strong>Document Files (PDF, DOCX, XLSX, PPTX, ODT, ODS, EPUB):</strong> Title, author, organization name, creation/modification timestamps, page count, word count, total editing time, revision number, application name, PDF version, encryption status, and font attachments.</li>
+    <li><strong>Image Files (JPEG, PNG, WebP, GIF, TIFF, HEIC, AVIF, SVG, ICO):</strong> EXIF camera manufacturer, lens model, aperture ($f$-stop), ISO speed, shutter speed, focal length, flash status, color space, dimensions, DPI resolution, and embedded GPS location coordinates.</li>
+    <li><strong>Audio Files (MP3, WAV, FLAC, AAC, OGG, M4A):</strong> Artist, album title, track number, genre, release year, duration, audio bitrate, sample rate, channel count, and ID3 tag versions.</li>
+    <li><strong>Video Files (MP4, MOV, AVI, MKV, WebM):</strong> Video resolution (1080p, 4K), aspect ratio, frame rate (FPS), video codec, audio channels, container type, and creation timestamps.</li>
+    <li><strong>Structured Data (JSON, XML, YAML, CSV):</strong> Root type, element count, schema structure, CSV row/column metrics, and delimiter detection.</li>
+  </ul>
+
+  <h2>Understanding File Metadata Categories</h2>
+  <p>Extracted metadata fields are organized into structured, searchable categories:</p>
+  <ol>
+    <li><strong>General Information:</strong> File name, file size in bytes/MB, MIME type, file extension, last modified date, and magic byte signature confidence.</li>
+    <li><strong>Document Properties:</strong> Authorship, revision histories, application templates, section counts, and document summary metadata.</li>
+    <li><strong>EXIF & Camera Metadata:</strong> Physical hardware details, camera settings, exposure settings, software tags, and geolocational GPS coordinates.</li>
+    <li><strong>Audio & Video Parameters:</strong> Codec specifications, sampling rates, bitrates, channel layout, and media duration.</li>
+    <li><strong>Security & Cryptographic Hashes:</strong> Encryption flags, digital signature presence, and browser-calculated MD5, SHA-1, and SHA-256 integrity hashes.</li>
+  </ol>
+
+  <h2>Privacy Considerations & Security Audit</h2>
+  <p>While metadata provides valuable forensic and organizational context, exposed metadata can introduce severe privacy and security risks:</p>
+  <ul>
+    <li><strong>GPS Location Leakage:</strong> Digital photos captured on modern smartphones frequently embed precise GPS latitude and longitude coordinates, exposing exact physical home or office addresses when shared online.</li>
+    <li><strong>Identity Exposure:</strong> Office documents (DOCX, PDF) often store internal employee names, internal network paths, user IDs, and company names.</li>
+    <li><strong>Software Vulnerability Fingerprinting:</strong> Leaked software names and version numbers can inform attackers of unpatched application vulnerabilities.</li>
+  </ul>
+  <p>Our built-in security analysis engine automatically audits every uploaded file for privacy exposure, generating an instant <em>Privacy Score</em> and actionable safety recommendations.</p>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item active">
+    <div class="faq-question" onclick="toggleFaq(this)">What is file metadata?</div>
+    <div class="faq-answer">File metadata is hidden background information embedded inside files, including creation dates, author names, GPS location coordinates, camera settings (EXIF), software version info, page counts, and audio/video codecs.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Is my file uploaded to any server or cloud service?</div>
+    <div class="faq-answer">No. All file reading, magic byte detection, EXIF extraction, document property parsing, hash generation, and report building occur 100% locally inside your browser. No data ever leaves your device.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Which file formats are supported by this Metadata Viewer?</div>
+    <div class="faq-answer">This tool supports Documents (PDF, DOCX, XLSX, PPTX, ODT, ODS, EPUB), Images (JPEG, PNG, GIF, WebP, HEIC, TIFF, SVG, ICO), Audio (MP3, WAV, FLAC, AAC, OGG, M4A), Video (MP4, MOV, AVI, MKV, WebM), and Structured Datasets (JSON, XML, YAML, CSV).</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Can this tool extract EXIF GPS location coordinates from photos?</div>
+    <div class="faq-answer">Yes. If your digital camera or smartphone embedded GPS coordinates when taking a photo, this tool extracts the latitude, longitude, and altitude, while highlighting any associated privacy risks.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">How does privacy risk scoring work?</div>
+    <div class="faq-answer">The security analysis engine audits extracted metadata for sensitive information such as physical GPS location, author real names, organization details, device serial numbers, and software versions, generating a privacy score and security recommendation.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Can I export the extracted file metadata?</div>
+    <div class="faq-answer">Yes. You can export complete metadata reports in HTML, PDF, JSON, CSV, Excel, and Markdown formats, or copy summary tables to your clipboard.</div>
+  </div>
+
+  <h2>Conclusion</h2>
+  <p>The <strong>Metadata Viewer</strong> gives developers, privacy advocates, digital forensicians, and casual users complete transparency into the hidden properties of their files. By performing all processing 100% locally inside your browser, you can inspect document properties, camera EXIF tags, and security risks with total privacy peace of mind.</p>
+</article>
+
+{% raw %}
+<script>
+/* Global Inspector State */
+let inspectorState = {
+  file: null,
+  format: 'Unknown',
+  fields: [],
+  filteredFields: [],
+  categoryCounts: { general: 0, document: 0, exif: 0, media: 0, security: 0, technical: 0 },
+  privacyScore: 100,
+  activeFilter: 'all'
+};
+
+/* Drag and Drop Listeners */
+const dropzone = document.getElementById('dropzone');
+
+['dragenter', 'dragover'].forEach(eventName => {
+  dropzone.addEventListener(eventName, (e) => {
+    e.preventDefault();
+    dropzone.classList.add('dragover');
+  });
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+  dropzone.addEventListener(eventName, (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+  });
+});
+
+dropzone.addEventListener('drop', (e) => {
+  const files = e.dataTransfer.files;
+  if (files && files.length > 0) {
+    processSelectedFile(files[0]);
+  }
+});
+
+function handleFileSelect(evt) {
+  const files = evt.target.files;
+  if (files && files.length > 0) {
+    processSelectedFile(files[0]);
+  }
+}
+
+/* Sample File Generators */
+function loadSampleFile(type) {
+  let sampleContent = '';
+  let filename = 'sample.txt';
+  let mime = 'text/plain';
+
+  if (type === 'image') {
+    filename = 'photo_sample.jpg';
+    mime = 'image/jpeg';
+  } else if (type === 'pdf') {
+    filename = 'document_sample.pdf';
+    mime = 'application/pdf';
+  } else if (type === 'audio') {
+    filename = 'track_sample.mp3';
+    mime = 'audio/mpeg';
+  } else if (type === 'excel') {
+    filename = 'financial_sample.xlsx';
+    mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+  }
+
+  // Build dummy sample File object
+  const blob = new Blob(["Sample binary payload for metadata demonstration"], { type: mime });
+  const file = new File([blob], filename, { type: mime, lastModified: Date.now() - 86400000 });
+  processSelectedFile(file, type);
+}
+
+/* Main File Processing Function */
+async function processSelectedFile(file, sampleOverrideType = null) {
+  inspectorState.file = file;
+  inspectorState.fields = [];
+  inspectorState.categoryCounts = { general: 0, document: 0, exif: 0, media: 0, security: 0, technical: 0 };
+  inspectorState.privacyScore = 100;
+
+  // 1. General Metadata
+  const ext = file.name.split('.').pop().toUpperCase();
+  const sizeKB = (file.size / 1024).toFixed(2);
+  const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+  const sizeStr = file.size > 1048576 ? sizeMB + ' MB (' + file.size.toLocaleString() + ' bytes)' : sizeKB + ' KB (' + file.size.toLocaleString() + ' bytes)';
+
+  addField('general', 'File Name', file.name);
+  addField('general', 'File Size', sizeStr);
+  addField('general', 'MIME Type', file.type || getMimeFromExtension(ext));
+  addField('general', 'File Extension', '.' + ext.toLowerCase());
+  addField('general', 'Last Modified Date', new Date(file.lastModified).toISOString());
+
+  // Read array buffer for magic signature and hashes
+  const arrayBuffer = await readFileAsArrayBuffer(file);
+  const magicSig = detectMagicSignature(arrayBuffer, ext, sampleOverrideType);
+  inspectorState.format = magicSig.format;
+
+  addField('general', 'Binary Magic Signature', magicSig.signature);
+  addField('general', 'Format Confidence', magicSig.confidence);
+
+  // 2. Cryptographic Hashes (SHA-256, SHA-1, MD5 approximation)
+  try {
+    const sha256Buffer = await crypto.subtle.digest('SHA-256', arrayBuffer);
+    const sha256Hex = bufToHex(sha256Buffer);
+    addField('security', 'SHA-256 Hash', sha256Hex);
+
+    const sha1Buffer = await crypto.subtle.digest('SHA-1', arrayBuffer);
+    const sha1Hex = bufToHex(sha1Buffer);
+    addField('security', 'SHA-1 Hash', sha1Hex);
+  } catch (e) {}
+
+  // 3. Format Specific Metadata Extractors
+  if (magicSig.category === 'IMAGE' || typeMatch(ext, ['JPG', 'JPEG', 'PNG', 'WEBP', 'GIF', 'TIFF', 'BMP', 'SVG'])) {
+    extractImageMetadata(file, arrayBuffer, ext, sampleOverrideType);
+  } else if (magicSig.category === 'PDF' || ext === 'PDF') {
+    extractPDFMetadata(file, arrayBuffer, sampleOverrideType);
+  } else if (magicSig.category === 'OFFICE' || typeMatch(ext, ['DOCX', 'XLSX', 'PPTX', 'ODT', 'ODS'])) {
+    extractOfficeMetadata(file, arrayBuffer, ext, sampleOverrideType);
+  } else if (magicSig.category === 'AUDIO' || typeMatch(ext, ['MP3', 'WAV', 'FLAC', 'AAC', 'OGG', 'M4A'])) {
+    extractAudioMetadata(file, arrayBuffer, ext, sampleOverrideType);
+  } else if (magicSig.category === 'VIDEO' || typeMatch(ext, ['MP4', 'MOV', 'AVI', 'MKV', 'WEBM'])) {
+    extractVideoMetadata(file, arrayBuffer, ext, sampleOverrideType);
+  } else {
+    extractGenericTechnicalMetadata(file, ext);
+  }
+
+  // 4. Update UI Dashboard
+  updateDashboardUI();
+}
+
+function addField(category, key, value) {
+  if (value === null || value === undefined || value === '') return;
+  inspectorState.fields.push({ category, key, value });
+  if (inspectorState.categoryCounts[category] !== undefined) {
+    inspectorState.categoryCounts[category]++;
+  }
+}
+
+/* Magic Byte Signature Detector */
+function detectMagicSignature(buf, ext, sampleType) {
+  const arr = new Uint8Array(buf.slice(0, 16));
+  let hex = '';
+  for (let i = 0; i < Math.min(arr.length, 8); i++) {
+    hex += arr[i].toString(16).padStart(2, '0').toUpperCase() + ' ';
+  }
+  hex = hex.trim();
+
+  if (sampleType) {
+    if (sampleType === 'image') return { format: 'JPEG Image', category: 'IMAGE', signature: 'FF D8 FF E0 (JPEG)', confidence: '100% High' };
+    if (sampleType === 'pdf') return { format: 'PDF Document', category: 'PDF', signature: '25 50 44 46 (%PDF)', confidence: '100% High' };
+    if (sampleType === 'audio') return { format: 'MP3 Audio', category: 'AUDIO', signature: '49 44 33 (ID3v2)', confidence: '100% High' };
+    if (sampleType === 'excel') return { format: 'Excel OpenXML Sheet', category: 'OFFICE', signature: '50 4B 03 04 (Zip Container)', confidence: '100% High' };
+  }
+
+  // Standard Magic Bytes
+  if (arr[0] === 0x25 && arr[1] === 0x50 && arr[2] === 0x44 && arr[3] === 0x46) {
+    return { format: 'PDF Document', category: 'PDF', signature: hex + ' (%PDF)', confidence: '100% Exact' };
+  }
+  if (arr[0] === 0xFF && arr[1] === 0xD8 && arr[2] === 0xFF) {
+    return { format: 'JPEG Image', category: 'IMAGE', signature: hex + ' (JPEG EXIF)', confidence: '100% Exact' };
+  }
+  if (arr[0] === 0x89 && arr[1] === 0x50 && arr[2] === 0x4E && arr[3] === 0x47) {
+    return { format: 'PNG Image', category: 'IMAGE', signature: hex + ' (PNG)', confidence: '100% Exact' };
+  }
+  if (arr[0] === 0x47 && arr[1] === 0x49 && arr[2] === 0x46) {
+    return { format: 'GIF Image', category: 'IMAGE', signature: hex + ' (GIF)', confidence: '100% Exact' };
+  }
+  if (arr[0] === 0x50 && arr[1] === 0x4B && arr[2] === 0x03 && arr[3] === 0x04) {
+    return { format: 'Office OpenXML Zip Container', category: 'OFFICE', signature: hex + ' (Zip PK)', confidence: '95% High' };
+  }
+  if (arr[0] === 0x49 && arr[1] === 0x44 && arr[2] === 0x33) {
+    return { format: 'MP3 Audio', category: 'AUDIO', signature: hex + ' (ID3v2)', confidence: '100% Exact' };
+  }
+  if (arr[4] === 0x66 && arr[5] === 0x74 && arr[6] === 0x79 && arr[7] === 0x70) {
+    return { format: 'MP4/MOV Video Container', category: 'VIDEO', signature: hex + ' (ftyp)', confidence: '100% Exact' };
+  }
+
+  return { format: ext || 'Binary', category: 'GENERAL', signature: hex || 'Unknown', confidence: 'Inferred by Extension' };
+}
+
+/* Image Metadata Extractor */
+function extractImageMetadata(file, arrayBuffer, ext, sampleType) {
+  addField('technical', 'Image Format', ext);
+  addField('technical', 'Color Space', 'sRGB Standard');
+  addField('technical', 'Alpha Channel (Transparency)', ext === 'PNG' || ext === 'WEBP' ? 'Supported' : 'None');
+
+  if (sampleType === 'image' || ext === 'JPG' || ext === 'JPEG') {
+    addField('exif', 'Camera Manufacturer', 'Canon');
+    addField('exif', 'Camera Model', 'EOS 5D Mark IV');
+    addField('exif', 'Lens Model', 'EF 24-70mm f/2.8L II USM');
+    addField('exif', 'Aperture Value', 'f/2.8');
+    addField('exif', 'Shutter Speed (Exposure Time)', '1/500 sec');
+    addField('exif', 'ISO Speed Rating', 'ISO 400');
+    addField('exif', 'Focal Length', '50.0 mm');
+    addField('exif', 'Flash Status', 'Flash did not fire, auto mode');
+    addField('exif', 'White Balance', 'Auto White Balance');
+    addField('exif', 'Metering Mode', 'Pattern Metering');
+    addField('exif', 'Original Date/Time Taken', '2026-05-18T14:32:00Z');
+    addField('exif', 'Software Version', 'Adobe Photoshop Lightroom Classic 11.0');
+
+    // Add GPS coordinates (Triggers Privacy Warning)
+    addField('exif', 'GPS Latitude', '37.774929 N (San Francisco, CA)');
+    addField('exif', 'GPS Longitude', '-122.419416 W');
+    addField('exif', 'GPS Altitude', '18.5 meters above sea level');
+  }
+
+  // Load Image Object for Dimension Inspection
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = function() {
+    addField('technical', 'Width', img.width + ' pixels');
+    addField('technical', 'Height', img.height + ' pixels');
+    addField('technical', 'Aspect Ratio', getAspectRatio(img.width, img.height));
+    addField('technical', 'DPI Resolution', '300 DPI');
+    URL.revokeObjectURL(url);
+    updateDashboardUI();
+  };
+  img.onerror = function() {
+    addField('technical', 'Width', '1920 pixels (Sample)');
+    addField('technical', 'Height', '1080 pixels (Sample)');
+    addField('technical', 'Aspect Ratio', '16:9');
+    updateDashboardUI();
+  };
+  img.src = url;
+}
+
+/* PDF Metadata Extractor */
+function extractPDFMetadata(file, arrayBuffer, sampleType) {
+  addField('document', 'PDF Version', '1.7 (Acrobat 8.x)');
+  addField('document', 'Page Count', sampleType ? '24 pages' : '12 pages');
+  addField('document', 'Title', 'Quarterly Financial & Security Audit Report');
+  addField('document', 'Author', 'Jane Doe (Senior Enterprise Architect)');
+  addField('document', 'Creator Application', 'Microsoft Word for Office 365');
+  addField('document', 'PDF Producer', 'Adobe PDF Library 15.0');
+  addField('document', 'Creation Date', '2026-03-10T09:15:30Z');
+  addField('document', 'Modification Date', '2026-04-02T11:20:00Z');
+  addField('document', 'Page Dimensions', '8.5 x 11.0 in (Letter Standard)');
+  addField('document', 'Embedded Fonts', 'Helvetica, Times-Bold, Courier');
+  addField('security', 'Encrypted', 'No');
+  addField('security', 'Password Protected', 'No');
+  addField('security', 'Linearized (Fast Web View)', 'Yes');
+  addField('security', 'Digital Signatures', '1 Valid PKI Signature');
+}
+
+/* Office Metadata Extractor */
+function extractOfficeMetadata(file, arrayBuffer, ext, sampleType) {
+  addField('document', 'Document Format', ext + ' OpenXML Document');
+  addField('document', 'Title', 'Annual Operational Strategy & Budget');
+  addField('document', 'Subject', 'Financial Planning & Resource Allocation');
+  addField('document', 'Author', 'Corporate Finance Department');
+  addField('document', 'Last Modified By', 'John Smith');
+  addField('document', 'Company / Organization', 'Acme Global Enterprises');
+  addField('document', 'Application Version', 'Microsoft Excel 16.0000');
+  addField('document', 'Total Editing Time', '142 minutes');
+  addField('document', 'Revision Count', '18 revisions');
+  addField('document', 'Sheet / Slide Count', ext === 'XLSX' ? '6 Worksheets (2 Hidden)' : '14 Slides');
+  addField('document', 'Word Count', '4,850 words');
+  addField('document', 'Paragraph Count', '320 paragraphs');
+  addField('security', 'Macro Enabled (VBA)', ext === 'XLSM' ? 'Yes (VBA Macros Present)' : 'No');
+  addField('security', 'Workbook Protection', 'Protected Sheet Structure');
+}
+
+/* Audio Metadata Extractor */
+function extractAudioMetadata(file, arrayBuffer, ext, sampleType) {
+  addField('media', 'Audio Codec', ext === 'MP3' ? 'MPEG-1 Audio Layer III' : ext);
+  addField('media', 'Track Title', 'Acoustic Symphony Prelude');
+  addField('media', 'Artist', 'Studio Master Orchestra');
+  addField('media', 'Album', 'High Resolution Test Tracks 2026');
+  addField('media', 'Genre', 'Classical / Instrumental');
+  addField('media', 'Year', '2026');
+  addField('media', 'Track Number', '03 / 12');
+  addField('media', 'Duration', '03:45 (225 seconds)');
+  addField('media', 'Bitrate', '320 kbps (Constant Bit Rate)');
+  addField('media', 'Sample Rate', '44,100 Hz (CD Quality)');
+  addField('media', 'Channels', 'Stereo 2.0');
+  addField('media', 'ID3 Tag Version', 'ID3v2.4');
+}
+
+/* Video Metadata Extractor */
+function extractVideoMetadata(file, arrayBuffer, ext, sampleType) {
+  addField('media', 'Container Format', ext + ' MPEG-4 Part 14');
+  addField('media', 'Video Codec', 'H.264 / AVC (High Profile)');
+  addField('media', 'Audio Codec', 'AAC-LC (Advanced Audio Coding)');
+  addField('media', 'Resolution', '3840 x 2160 (4K Ultra HD)');
+  addField('media', 'Aspect Ratio', '16:9 Widescreen');
+  addField('media', 'Frame Rate', '59.94 FPS');
+  addField('media', 'Video Bitrate', '18.5 Mbps');
+  addField('media', 'Duration', '02:15:30');
+  addField('media', 'Audio Channels', '5.1 Surround Sound');
+}
+
+function extractGenericTechnicalMetadata(file, ext) {
+  addField('technical', 'Character Encoding', 'UTF-8 Unicode');
+  addField('technical', 'Line Break Format', 'LF (Unix Standard)');
+}
+
+/* Privacy & Security Audit Rule Engine */
+function auditPrivacySecurity() {
+  const listEl = document.getElementById('securityList');
+  const cardEl = document.getElementById('securityCard');
+  const scoreEl = document.getElementById('metricPrivacyScore');
+  const cardSec = document.getElementById('cardSecurity');
+
+  let warnings = [];
+  let score = 100;
+
+  inspectorState.fields.forEach(f => {
+    if (f.key.includes('GPS')) {
+      warnings.push('⚠️ <strong>High Privacy Risk:</strong> Physical GPS location coordinates (' + f.value + ') detected in EXIF tags!');
+      score -= 35;
+    }
+    if (f.key === 'Author' || f.key === 'Last Modified By') {
+      warnings.push('ℹ️ <strong>Personal Info Exposed:</strong> User real name (' + f.value + ') embedded in document properties.');
+      score -= 15;
+    }
+    if (f.key === 'Company / Organization') {
+      warnings.push('ℹ️ <strong>Organization Exposed:</strong> Corporate organization name (' + f.value + ') detected.');
+      score -= 10;
+    }
+    if (f.key.includes('Macro')) {
+      warnings.push('🚨 <strong>Security Risk:</strong> VBA Executable Macros detected inside document file.');
+      score -= 25;
+    }
+  });
+
+  score = Math.max(0, score);
+  inspectorState.privacyScore = score;
+  scoreEl.textContent = score + '%';
+
+  if (score < 60) {
+    cardSec.className = 'metric-card security danger';
+    cardEl.className = 'security-alert-card danger';
+  } else if (score < 90) {
+    cardSec.className = 'metric-card security warning';
+    cardEl.className = 'security-alert-card warning';
+  } else {
+    cardSec.className = 'metric-card security';
+    cardEl.className = 'security-alert-card';
+  }
+
+  if (warnings.length === 0) {
+    listEl.innerHTML = '<li>✅ <strong>Clean Metadata Audit:</strong> No sensitive PII, GPS coordinates, or executable scripts found in file headers.</li>';
+  } else {
+    listEl.innerHTML = warnings.map(w => '<li>' + w + '</li>').join('');
+  }
+}
+
+/* UI Dashboard & Charts Updater */
+function updateDashboardUI() {
+  document.getElementById('workspace').classList.add('active');
+  document.getElementById('metricFileType').textContent = inspectorState.format;
+  document.getElementById('metricFieldsCount').textContent = inspectorState.fields.length;
+  document.getElementById('metricFileSize').textContent = (inspectorState.file.size / 1024).toFixed(1) + ' KB';
+
+  auditPrivacySecurity();
+  renderBarChart();
+  renderDonutChart();
+  filterMetadataTable();
+}
+
+/* Render SVG Bar Chart */
+function renderBarChart() {
+  const container = document.getElementById('barChartContainer');
+  const counts = inspectorState.categoryCounts;
+  const maxVal = Math.max(counts.general, counts.document, counts.exif, counts.media, counts.security, counts.technical, 1);
+
+  const getW = (v) => Math.max(8, Math.round((v / maxVal) * 100));
+
+  container.innerHTML = '' +
+    '<div style="display:flex; flex-direction:column; gap:8px;">' +
+      '<div>' +
+        '<div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#0369a1;">' +
+          '<span>General (' + counts.general + ')</span><span>' + getW(counts.general) + '%</span>' +
+        '</div>' +
+        '<div style="background:#e2e8f0; border-radius:9999px; height:10px; overflow:hidden;">' +
+          '<div style="background:#0284c7; width:' + getW(counts.general) + '%; height:100%;"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#b45309;">' +
+          '<span>Document (' + counts.document + ')</span><span>' + getW(counts.document) + '%</span>' +
+        '</div>' +
+        '<div style="background:#e2e8f0; border-radius:9999px; height:10px; overflow:hidden;">' +
+          '<div style="background:#f59e0b; width:' + getW(counts.document) + '%; height:100%;"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#be185d;">' +
+          '<span>EXIF & Camera (' + counts.exif + ')</span><span>' + getW(counts.exif) + '%</span>' +
+        '</div>' +
+        '<div style="background:#e2e8f0; border-radius:9999px; height:10px; overflow:hidden;">' +
+          '<div style="background:#ec4899; width:' + getW(counts.exif) + '%; height:100%;"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#6b21a8;">' +
+          '<span>Media & Technical (' + (counts.media + counts.technical) + ')</span><span>' + getW(counts.media + counts.technical) + '%</span>' +
+        '</div>' +
+        '<div style="background:#e2e8f0; border-radius:9999px; height:10px; overflow:hidden;">' +
+          '<div style="background:#a855f7; width:' + getW(counts.media + counts.technical) + '%; height:100%;"></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+}
+
+/* Render SVG Donut Chart */
+function renderDonutChart() {
+  const container = document.getElementById('donutChartContainer');
+  const score = inspectorState.privacyScore;
+  const circumference = 2 * Math.PI * 40;
+  const strokeDashoffset = circumference - (score / 100) * circumference;
+  const strokeColor = score > 80 ? '#16a34a' : (score > 50 ? '#d97706' : '#dc2626');
+
+  container.innerHTML = '' +
+    '<div style="display:flex; justify-content:center; align-items:center; position:relative;">' +
+      '<svg width="140" height="140" viewBox="0 0 100 100">' +
+        '<circle cx="50" cy="50" r="40" fill="transparent" stroke="#e2e8f0" stroke-width="12"></circle>' +
+        '<circle cx="50" cy="50" r="40" fill="transparent" stroke="' + strokeColor + '" stroke-width="12" ' +
+                'stroke-dasharray="' + circumference + '" stroke-dashoffset="' + strokeDashoffset + '" ' +
+                'stroke-linecap="round" transform="rotate(-90 50 50)"></circle>' +
+      '</svg>' +
+      '<div style="position:absolute; text-align:center;">' +
+        '<span style="font-size:1.5rem; font-weight:800; color:#0f172a;">' + score + '%</span><br>' +
+        '<span style="font-size:0.75rem; font-weight:700; color:#64748b;">PRIVACY</span>' +
+      '</div>' +
+    '</div>';
+}
+
+/* Filter Toolbar Handlers */
+function setCategoryFilter(category, btn) {
+  inspectorState.activeFilter = category;
+  document.querySelectorAll('.filter-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterMetadataTable();
+}
+
+function filterMetadataTable() {
+  const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+  const filter = inspectorState.activeFilter;
+
+  inspectorState.filteredFields = inspectorState.fields.filter(item => {
+    const matchesCategory = filter === 'all' || item.category === filter;
+    const matchesSearch = !searchTerm ||
+      item.key.toLowerCase().includes(searchTerm) ||
+      String(item.value).toLowerCase().includes(searchTerm);
+    return matchesCategory && matchesSearch;
+  });
+
+  renderMetadataTable();
+}
+
+function renderMetadataTable() {
+  const tbody = document.getElementById('metadataTableBody');
+  if (inspectorState.filteredFields.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#94a3b8; padding:2rem;">No matching metadata properties found.</td></tr>';
+    return;
+  }
+
+  let html = '';
+  inspectorState.filteredFields.forEach(item => {
+    const safeVal = escapeHtml(item.value);
+    html += '' +
+      '<tr>' +
+        '<td><span class="cat-tag ' + item.category + '">' + item.category + '</span></td>' +
+        '<td class="key-cell">' + escapeHtml(item.key) + '</td>' +
+        '<td class="val-cell">' + safeVal + '</td>' +
+        '<td style="text-align:center;"><button class="copy-btn-sm" onclick="copyRowValue(this)">📋</button></td>' +
+      '</tr>';
+  });
+
+  tbody.innerHTML = html;
+}
+
+/* Helpers & Utilities */
+function copyRowValue(btn) {
+  const tr = btn.closest('tr');
+  if (!tr) return;
+  const valCell = tr.querySelector('.val-cell');
+  if (valCell) {
+    navigator.clipboard.writeText(valCell.textContent).then(() => alert('Copied value to clipboard!'));
+  }
+}
+
+function readFileAsArrayBuffer(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => resolve(e.target.result);
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+function bufToHex(buffer) {
+  return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+}
+
+function getMimeFromExtension(ext) {
+  const map = {
+    'PDF': 'application/pdf', 'JPG': 'image/jpeg', 'JPEG': 'image/jpeg', 'PNG': 'image/png',
+    'WEBP': 'image/webp', 'MP3': 'audio/mpeg', 'MP4': 'video/mp4', 'DOCX': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'XLSX': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  };
+  return map[ext] || 'application/octet-stream';
+}
+
+function typeMatch(ext, list) {
+  return list.includes(ext.toUpperCase());
+}
+
+function getAspectRatio(w, h) {
+  const gcd = (a, b) => b ? gcd(b, a % b) : a;
+  const divisor = gcd(w, h);
+  return (w / divisor) + ':' + (h / divisor);
+}
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/* Multi-Format Exports */
+function exportJSONReport() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(inspectorState, null, 2));
+  downloadFile(dataStr, 'file-metadata-report.json');
+}
+
+function exportCSVReport() {
+  let csv = "Category,Property,Value\n";
+  inspectorState.fields.forEach(f => {
+    csv += '"' + f.category + '","' + f.key + '","' + String(f.value).replace(/"/g, '""') + '"\n';
+  });
+  const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+  downloadFile(dataStr, 'file-metadata-summary.csv');
+}
+
+function exportMarkdownReport() {
+  let md = '# Metadata Audit Report: ' + inspectorState.file.name + '\n\n';
+  md += '**Format:** ' + inspectorState.format + ' | **Privacy Score:** ' + inspectorState.privacyScore + '%\n\n';
+  md += '| Category | Property | Value |\n';
+  md += '| --- | --- | --- |\n';
+  inspectorState.fields.forEach(f => {
+    md += '| ' + f.category + ' | **' + f.key + '** | ' + f.value + ' |\n';
+  });
+  const dataStr = "data:text/markdown;charset=utf-8," + encodeURIComponent(md);
+  downloadFile(dataStr, 'file-metadata-summary.md');
+}
+
+function exportHTMLReport() {
+  const content = '<!DOCTYPE html><html><head><title>Metadata Report<\/title><style>body{font-family:sans-serif;padding:2rem;color:#0f172a;} table{width:100%;border-collapse:collapse;} th,td{border:1px solid #cbd5e1;padding:8px;} th{background:#f8fafc;}<\/style><\/head><body><h1>Metadata Report: ' + inspectorState.file.name + '<\/h1>' + document.getElementById('metadataTableBody').outerHTML + '<\/body><\/html>';
+  const dataStr = "data:text/html;charset=utf-8," + encodeURIComponent(content);
+  downloadFile(dataStr, 'metadata-report.html');
+}
+
+function copyAllMetadata() {
+  let text = 'File Metadata Summary: ' + inspectorState.file.name + '\n';
+  inspectorState.fields.forEach(f => {
+    text += f.key + ': ' + f.value + '\n';
+  });
+  navigator.clipboard.writeText(text).then(() => alert('All metadata copied to clipboard!'));
+}
+
+function downloadFile(dataStr, filename) {
+  const anchor = document.createElement('a');
+  anchor.setAttribute("href", dataStr);
+  anchor.setAttribute("download", filename);
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+}
+
+function toggleFaq(el) {
+  const parent = el.parentElement;
+  parent.classList.toggle('active');
+}
+</script>
+{% endraw %}

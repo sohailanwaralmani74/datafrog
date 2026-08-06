@@ -80,6 +80,17 @@
   date: "2026-08-05"
   updated: "2026-08-05"
 
+- title: "Metadata Viewer"
+  short_name: "Metadata Viewer"
+  url: "/inspect/metadata-viewer/"
+  category: "Inspect"
+  description: "Extract and inspect hidden file metadata, EXIF camera tags, document properties, ID3 audio tags, video containers, and cryptographic hashes locally in your browser."
+  keywords: ["metadata viewer", "meta data viewer", "file metadata viewer", "metadata reader", "metadata inspector", "metadata checker", "metadata explorer", "view metadata online", "metadata extractor", "file information viewer", "file properties viewer", "exif viewer", "pdf metadata viewer", "image metadata viewer", "exif reader"]
+  icon: "🔍"
+  featured: true
+  date: "2026-08-06"
+  updated: "2026-08-06"
+
 - title: "JSON Analyzer"
   short_name: "JSON Analyzer"
   url: "/analyze/json-analyzer/"
@@ -268,6 +279,28 @@
   date: "2026-07-27"
   updated: "2026-07-29"
 
+- title: "SQL Compare"
+  short_name: "SQL Compare"
+  url: "/compare/sql-compare/"
+  category: "Compare"
+  description: "Compare SQL scripts, DDL queries, schemas, stored procedures, and tables side-by-side or inline. Highlight differences, detect changes, normalize formatting, and export diff reports."
+  keywords: ["sql compare", "compare sql", "sql comparison", "sql diff", "sql difference checker", "sql script compare", "compare sql queries", "compare sql schema", "compare sql tables"]
+  icon: "⚡"
+  featured: true
+  date: "2026-08-06"
+  updated: "2026-08-06"
+
+- title: "YAML Compare"
+  short_name: "YAML Compare"
+  url: "/compare/yaml-compare/"
+  category: "Compare"
+  description: "Compare two YAML documents structurally or textually. Highlight added keys, removed keys, modified values, array changes, data types, and tree hierarchy differences."
+  keywords: ["yaml compare", "compare yaml", "yaml diff", "yaml difference checker", "yaml comparator", "yaml comparison", "compare yaml files", "yaml compare online", "yaml file compare", "yaml structure compare", "yaml document compare"]
+  icon: "⚖️"
+  featured: true
+  date: "2026-08-06"
+  updated: "2026-08-06"
+
 - title: "JSON Visualizer"
   short_name: "JSON Visualizer"
   url: "/visualize/json-visualizer/"
@@ -312,6 +345,28 @@
   date: "2026-08-03"
   updated: "2026-08-04"
 
+- title: "Flowchart Builder"
+  short_name: "Flowchart Builder"
+  url: "/visualize/flowchart-builder/"
+  category: "Visualize"
+  description: "Create, edit, organize, and export flowcharts, workflow diagrams, org charts, and process maps in your browser. Drag-and-drop shapes, auto-connectors, templates, and PNG/SVG/JSON exports."
+  keywords: ["flow chart builder", "flowchart builder", "online flowchart builder", "flowchart maker", "flow chart maker", "create flowchart online", "workflow builder", "workflow diagram", "process flow builder", "org chart builder"]
+  icon: "🔀"
+  featured: true
+  date: "2026-08-06"
+  updated: "2026-08-06"
+
+- title: "Correlation Heatmap"
+  short_name: "Correlation Heatmap"
+  url: "/visualize/correlation-heatmap/"
+  category: "Visualize"
+  description: "Calculate correlation matrices (Pearson, Spearman, Kendall) and visualize variable relationships with interactive heatmaps. Multi-format imports and PNG/SVG/CSV exports."
+  keywords: ["correlation heatmap", "correlation matrix", "correlation matrix generator", "correlation analysis", "Pearson correlation", "Spearman correlation", "Kendall correlation", "feature correlation"]
+  icon: "🔥"
+  featured: true
+  date: "2026-08-06"
+  updated: "2026-08-06"
+
 - title: "YAML Visualizer"
   short_name: "YAML Visualizer"
   url: "/visualize/yaml-visualizer/"
@@ -322,3 +377,15 @@
   featured: true
   date: "2026-08-04"
   updated: "2026-08-05"
+
+- title: "Word Cloud Generator"
+  short_name: "Word Cloud Generator"
+  url: "/visualize/word-cloud-generator/"
+  category: "Visualize"
+  description: "Transform text documents and datasets into interactive word clouds, generate word frequency analysis, bigrams, trigrams, and export high-res PNG, SVG, CSV, Excel, or HTML reports."
+  keywords: ["word cloud generator", "word cloud maker", "online word cloud", "word frequency", "keyword cloud", "text visualization", "word frequency analyzer", "word visualization", "text analytics", "keyword visualization"]
+  icon: "☁️"
+  featured: true
+  date: "2026-08-06"
+  updated: "2026-08-06"
+

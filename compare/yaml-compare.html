@@ -1,0 +1,1492 @@
+---
+layout: main
+title: "YAML Compare - Compare YAML Files Online with Structural & Text Diff"
+description: "Free online YAML compare tool. Compare two YAML files structurally or line-by-line. Highlight added keys, removed keys, modified values, array changes, data types, and tree hierarchy differences."
+permalink: /compare/yaml-compare/
+category: Compare
+short_name: YAML Compare
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://datafrog.tools/compare/yaml-compare/#webapp",
+      "url": "https://datafrog.tools/compare/yaml-compare/",
+      "name": "YAML Compare",
+      "description": "Free browser-based YAML comparison tool. Compare YAML files structurally or line-by-line, detect key additions, removals, value modifications, data type shifts, and array changes.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://datafrog.tools/compare/yaml-compare/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://datafrog.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compare",
+          "item": "https://datafrog.tools/compare/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "YAML Compare",
+          "item": "https://datafrog.tools/compare/yaml-compare/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://datafrog.tools/compare/yaml-compare/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does structural YAML comparison differ from text comparison?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Textual comparison compares raw characters and line numbers, which can create false positives if indentation, whitespace, comments, or key order change. Structural comparison parses both YAML documents into hierarchical data trees (maps, sequences, scalars) and evaluates key paths, data types, and values regardless of formatting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my YAML data sent to any server or cloud service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All YAML parsing, syntax validation, tree construction, diffing, visualization, and report generation occur 100% locally inside your web browser. Zero bytes are uploaded or processed by external backends."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool support YAML anchors, aliases, and merge keys?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The underlying parser resolves YAML anchors (&anchor), aliases (*alias), and merge keys (<<:) during object tree construction, allowing accurate structural comparison of inherited configuration values."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I compare YAML files with different key orders or array sequences?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can enable 'Ignore Key Order' to compare maps structurally regardless of key sequence, or enable 'Ignore Array Order' to compare sequence contents by element matching."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What export formats are available for YAML diff reports?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can export comparison results as printable HTML reports, PDF documents, structured JSON files, CSV summary sheets, Markdown tables, and unified YAML patch lists."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are invalid YAML syntax errors handled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Before comparing, both documents undergo automated syntax validation. If a document contains invalid YAML syntax, the tool highlights the exact line number, column offset, and error description so you can correct it before diffing."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- JS-YAML Client-side Parser Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+
+<style>
+/* Modern Professional Layout Styles */
+.tool-header-block {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #ffffff;
+  padding: 2.25rem 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+}
+.tool-header-block h1 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+.tool-header-block p {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  max-width: 820px;
+  margin: 0 0 1.25rem;
+  line-height: 1.6;
+}
+.tool-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.825rem;
+  font-weight: 600;
+}
+
+/* Control Toolbar & Options */
+.options-bar {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+}
+.options-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.85rem;
+}
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.85rem;
+}
+.option-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  user-select: none;
+}
+.option-checkbox-label input {
+  width: 16px;
+  height: 16px;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+/* Dual Input Workspace */
+.editor-workspace {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+@media (max-width: 860px) {
+  .editor-workspace {
+    grid-template-columns: 1fr;
+  }
+}
+.input-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+.input-card-header {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.input-card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.status-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.status-pill.valid {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+.status-pill.invalid {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+}
+.input-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.action-btn-sm {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.action-btn-sm:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+.yaml-textarea {
+  width: 100%;
+  height: 380px;
+  padding: 1rem;
+  border: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #0f172a;
+  background: #ffffff;
+  resize: vertical;
+  outline: none;
+}
+.yaml-textarea:focus {
+  background: #fafafa;
+}
+.validation-message-box {
+  padding: 0.65rem 1rem;
+  font-size: 0.8rem;
+  font-family: monospace;
+  display: none;
+}
+.validation-message-box.error {
+  display: block;
+  background: #fef2f2;
+  color: #991b1b;
+  border-top: 1px solid #fecaca;
+}
+
+/* Master Action Controls */
+.compare-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.btn-primary-lg {
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.85rem 2.25rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary-lg:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+.btn-secondary-lg {
+  background: #ffffff;
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-secondary-lg:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+/* Results Section */
+.results-wrapper {
+  display: none;
+  margin-bottom: 3rem;
+}
+.results-wrapper.active {
+  display: block;
+}
+
+/* Metrics Summary Cards */
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.1rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.metric-val {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+.metric-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.metric-card.similarity .metric-val { color: #2563eb; }
+.metric-card.added .metric-val { color: #16a34a; }
+.metric-card.removed .metric-val { color: #dc2626; }
+.metric-card.modified .metric-val { color: #d97706; }
+.metric-card.unchanged .metric-val { color: #475569; }
+
+/* Visual Charts Row */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 768px) {
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+.chart-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.chart-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* View Mode Tabs */
+.view-tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+}
+.view-tabs-group {
+  display: flex;
+  gap: 4px;
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 6px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.tab-btn:hover {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+.tab-btn.active {
+  color: #2563eb;
+  background: #eff6ff;
+}
+.filter-btn-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.filter-btn.active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+/* Search Box */
+.search-diff-input {
+  padding: 6px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  width: 220px;
+}
+
+/* Tree Difference View */
+.tree-view-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.5rem;
+  max-height: 520px;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.875rem;
+  margin-bottom: 1.75rem;
+}
+.tree-node-item {
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.5;
+}
+.tree-node-item.added {
+  background: #f0fdf4;
+  color: #15803d;
+  border-left: 3px solid #22c55e;
+}
+.tree-node-item.removed {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-left: 3px solid #ef4444;
+}
+.tree-node-item.modified {
+  background: #fffbeb;
+  color: #b45309;
+  border-left: 3px solid #f59e0b;
+}
+.tree-node-item.unchanged {
+  color: #475569;
+}
+.path-tag {
+  font-weight: 700;
+  color: #0f172a;
+}
+.val-tag {
+  color: #334155;
+  word-break: break-all;
+}
+.diff-type-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.diff-type-badge.added { background: #dcfce7; color: #166534; }
+.diff-type-badge.removed { background: #fee2e2; color: #991b1b; }
+.diff-type-badge.modified { background: #fef3c7; color: #92400e; }
+
+/* Text Side-by-Side Diff Table */
+.diff-table-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.825rem;
+  line-height: 1.5;
+}
+.diff-table th {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 700;
+  color: #475569;
+}
+.diff-table td {
+  padding: 4px 10px;
+  vertical-align: top;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.diff-table tr.line-added td.right-col {
+  background: #dcfce7;
+  color: #14532d;
+}
+.diff-table tr.line-removed td.left-col {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+.diff-table tr.line-modified td {
+  background: #fef3c7;
+  color: #78350f;
+}
+.line-num-cell {
+  width: 45px;
+  color: #94a3b8;
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid #f1f5f9;
+}
+
+/* Export Buttons Bar */
+.export-buttons-bar {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.export-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+.export-btn-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.export-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.export-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* Content Article Typography */
+.content-article {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-top: 3rem;
+  line-height: 1.75;
+  color: #334155;
+}
+.content-article h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+.content-article h2:first-child {
+  margin-top: 0;
+}
+.content-article h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 1.5rem 0 0.75rem;
+}
+.content-article p {
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+}
+.content-article ul, .content-article ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+.content-article li {
+  margin-bottom: 0.5rem;
+}
+
+/* FAQ Accordion */
+.faq-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.faq-question {
+  background: #f8fafc;
+  padding: 1.1rem 1.5rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0f172a;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-question::after {
+  content: "＋";
+  font-size: 1.2rem;
+  color: #2563eb;
+}
+.faq-item.active .faq-question::after {
+  content: "－";
+}
+.faq-answer {
+  display: none;
+  padding: 1.25rem 1.5rem;
+  background: #ffffff;
+  color: #475569;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.975rem;
+}
+.faq-item.active .faq-answer {
+  display: block;
+}
+</style>
+
+<div class="tool-header-block">
+  <h1>YAML Compare - Structural & Text Diff Generator</h1>
+  <p>Compare two YAML files or configuration blocks online. Parse hierarchy, maps, sequences, scalar types, anchors, and merge keys to highlight structural differences with instant visual charts and exports.</p>
+  <div class="tool-badge-row">
+    <span class="tool-badge">🔒 100% Client-Side Privacy</span>
+    <span class="tool-badge">⚡ Instant Structural Parsing</span>
+    <span class="tool-badge">🌿 Hierarchy & Path Diff</span>
+    <span class="tool-badge">📊 Visual Summary Charts</span>
+  </div>
+</div>
+
+<!-- Comparison Modes & Normalization Options -->
+<div class="options-bar">
+  <div class="options-title">⚙️ Comparison Settings & Normalization</div>
+  <div class="options-grid">
+    <label class="option-checkbox-label">
+      <input type="checkbox" id="optIgnoreKeyOrder" checked> Ignore Key Order
+    </label>
+    <label class="option-checkbox-label">
+      <input type="checkbox" id="optIgnoreWhitespace" checked> Ignore Whitespace Trimming
+    </label>
+    <label class="option-checkbox-label">
+      <input type="checkbox" id="optIgnoreComments" checked> Ignore Comments
+    </label>
+    <label class="option-checkbox-label">
+      <input type="checkbox" id="optIgnoreQuotes" checked> Ignore Quotation Style
+    </label>
+    <label class="option-checkbox-label">
+      <input type="checkbox" id="optIgnoreNulls"> Treat Null & Empty Equivalent
+    </label>
+    <label class="option-checkbox-label">
+      <input type="checkbox" id="optCaseInsensitive"> Case-Insensitive Values
+    </label>
+  </div>
+</div>
+
+<!-- Dual Input Editors Grid -->
+<div class="editor-workspace">
+  <!-- Left Panel: Document A -->
+  <div class="input-card">
+    <div class="input-card-header">
+      <div class="input-card-title">
+        📄 YAML Document A (Original)
+        <span class="status-pill valid" id="statusA">Valid</span>
+      </div>
+      <div class="input-actions-bar">
+        <button class="action-btn-sm" onclick="loadSample(1, 'A')">Sample 1</button>
+        <button class="action-btn-sm" onclick="loadSample(2, 'A')">Sample 2</button>
+        <button class="action-btn-sm" onclick="triggerFileUpload('fileA')">📁 Upload</button>
+        <button class="action-btn-sm" onclick="clearEditor('A')">🗑️ Clear</button>
+        <input type="file" id="fileA" accept=".yaml,.yml,.txt" style="display:none;" onchange="handleFileSelect(event, 'A')">
+      </div>
+    </div>
+    <textarea id="textA" class="yaml-textarea" placeholder="Paste or drag & drop YAML Document A here..." oninput="validateInput('A')"># Microservice Config A (Development)
+server:
+  host: "localhost"
+  port: 8080
+  debug: true
+database:
+  driver: "postgres"
+  host: "db.dev.internal"
+  pool_size: 10
+  credentials:
+    username: "dev_user"
+    password: "dev_password_secret"
+features:
+  analytics: true
+  caching: false
+services:
+  - name: "auth-service"
+    timeout_ms: 3000
+  - name: "payment-service"
+    timeout_ms: 5000</textarea>
+    <div class="validation-message-box" id="errMsgA"></div>
+  </div>
+
+  <!-- Right Panel: Document B -->
+  <div class="input-card">
+    <div class="input-card-header">
+      <div class="input-card-title">
+        📄 YAML Document B (Target)
+        <span class="status-pill valid" id="statusB">Valid</span>
+      </div>
+      <div class="input-actions-bar">
+        <button class="action-btn-sm" onclick="loadSample(1, 'B')">Sample 1</button>
+        <button class="action-btn-sm" onclick="loadSample(2, 'B')">Sample 2</button>
+        <button class="action-btn-sm" onclick="triggerFileUpload('fileB')">📁 Upload</button>
+        <button class="action-btn-sm" onclick="clearEditor('B')">🗑️ Clear</button>
+        <input type="file" id="fileB" accept=".yaml,.yml,.txt" style="display:none;" onchange="handleFileSelect(event, 'B')">
+      </div>
+    </div>
+    <textarea id="textB" class="yaml-textarea" placeholder="Paste or drag & drop YAML Document B here..." oninput="validateInput('B')"># Microservice Config B (Production)
+server:
+  host: "api.production.internal"
+  port: 8443
+  debug: false
+database:
+  driver: "postgres"
+  host: "db-cluster.prod.internal"
+  pool_size: 50
+  replica_count: 3
+  credentials:
+    username: "prod_admin"
+    password: "prod_secure_vault_pass"
+features:
+  analytics: true
+  caching: true
+  rate_limiting: true
+services:
+  - name: "auth-service"
+    timeout_ms: 1500
+  - name: "payment-service"
+    timeout_ms: 5000
+  - name: "notification-service"
+    timeout_ms: 2000</textarea>
+    <div class="validation-message-box" id="errMsgB"></div>
+  </div>
+</div>
+
+<!-- Main Action Buttons -->
+<div class="compare-actions-row">
+  <button class="btn-primary-lg" onclick="executeComparison()">⚖️ Compare YAML Documents</button>
+  <button class="btn-secondary-lg" onclick="swapDocuments()">🔀 Swap Left & Right</button>
+  <button class="btn-secondary-lg" onclick="resetAll()">🔄 Reset All</button>
+</div>
+
+<!-- Comparison Results Container -->
+<div class="results-wrapper" id="resultsWrapper">
+
+  <!-- Summary Metric Cards -->
+  <div class="summary-cards-grid">
+    <div class="metric-card similarity">
+      <div class="metric-val" id="metricSimilarity">0%</div>
+      <div class="metric-label">Similarity</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" id="metricTotalDiff">0</div>
+      <div class="metric-label">Total Diffs</div>
+    </div>
+    <div class="metric-card added">
+      <div class="metric-val" id="metricAdded">0</div>
+      <div class="metric-label">Added Keys</div>
+    </div>
+    <div class="metric-card removed">
+      <div class="metric-val" id="metricRemoved">0</div>
+      <div class="metric-label">Removed Keys</div>
+    </div>
+    <div class="metric-card modified">
+      <div class="metric-val" id="metricModified">0</div>
+      <div class="metric-label">Modified Values</div>
+    </div>
+    <div class="metric-card unchanged">
+      <div class="metric-val" id="metricUnchanged">0</div>
+      <div class="metric-label">Unchanged Nodes</div>
+    </div>
+  </div>
+
+  <!-- SVG Visual Charts -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>📊 Node Difference Distribution</h3>
+      <div id="barChartContainer"></div>
+    </div>
+    <div class="chart-card">
+      <h3>🍩 Structural Match Breakdown</h3>
+      <div id="donutChartContainer"></div>
+    </div>
+  </div>
+
+  <!-- View Mode Switcher & Filter Controls -->
+  <div class="view-tabs-bar">
+    <div class="view-tabs-group">
+      <button class="tab-btn active" id="tabTree" onclick="switchViewMode('tree')">🌿 Hierarchy Tree View</button>
+      <button class="tab-btn" id="tabSplit" onclick="switchViewMode('split')">📖 Side-by-Side Text Diff</button>
+      <button class="tab-btn" id="tabUnified" onclick="switchViewMode('unified')">📜 Unified Text Diff</button>
+    </div>
+    <div class="filter-btn-group">
+      <input type="text" id="diffSearchInput" class="search-diff-input" placeholder="🔍 Search keys or paths..." oninput="filterDiffResults()">
+      <button class="filter-btn active" onclick="setDiffFilter('all', this)">All</button>
+      <button class="filter-btn" onclick="setDiffFilter('added', this)">Added</button>
+      <button class="filter-btn" onclick="setDiffFilter('removed', this)">Removed</button>
+      <button class="filter-btn" onclick="setDiffFilter('modified', this)">Modified</button>
+      <button class="filter-btn" onclick="setDiffFilter('unchanged', this)">Unchanged</button>
+    </div>
+  </div>
+
+  <!-- Interactive Tree View Panel -->
+  <div class="tree-view-container" id="treeViewContainer"></div>
+
+  <!-- Side-by-Side Text Diff Panel -->
+  <div class="diff-table-container" id="splitDiffContainer" style="display:none;"></div>
+
+  <!-- Unified Text Diff Panel -->
+  <div class="diff-table-container" id="unifiedDiffContainer" style="display:none;"></div>
+
+  <!-- Multi-format Export Bar -->
+  <div class="export-buttons-bar">
+    <div class="export-title">💾 Export Comparison Report</div>
+    <div class="export-btn-group">
+      <button class="export-btn" onclick="exportHTMLReport()">🌐 HTML Report</button>
+      <button class="export-btn" onclick="exportJSONReport()">📦 JSON Report</button>
+      <button class="export-btn" onclick="exportCSVReport()">📊 CSV Summary</button>
+      <button class="export-btn" onclick="exportMarkdownReport()">📝 Markdown Report</button>
+      <button class="export-btn" onclick="exportYAMLDiffPatch()">⚙️ YAML Patch</button>
+      <button class="export-btn" onclick="copyDiffSummary()">📋 Copy Summary</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Comprehensive Educational SEO Content -->
+<article class="content-article">
+  <h2>What is YAML Compare?</h2>
+  <p><strong>YAML Compare</strong> is a browser-based developer utility designed to compare two YAML (YAML Ain't Markup Language) documents structurally and textually. Unlike basic line-by-line text diff tools, this tool parses raw YAML into hierarchical data structures (maps, sequences, scalars, anchors, and aliases) to evaluate structural integrity, path modifications, data type shifts, and value changes regardless of key order or whitespace formatting.</p>
+  <p>In modern software development and DevOps practices, YAML serves as the primary syntax for infrastructure-as-code manifests, Kubernetes deployment files, Docker Compose definitions, CI/CD pipelines, microservice configuration files, and OpenAPI specifications. Finding subtle changes between configuration files across environments (such as development vs production) is critical for preventing runtime outages and security vulnerabilities.</p>
+
+  <h2>Why Compare YAML Files Structurally?</h2>
+  <p>Line-by-line text comparison tools often generate misleading diff results when applied to YAML documents. Because YAML relies on significant indentation and allows arbitrary key ordering within mapping structures, a simple key reordering or line-wrap change can cause a text diff tool to flag dozens of false positives.</p>
+  <ul>
+    <li><strong>Key Order Independence:</strong> YAML maps represent unordered key-value pairs. Structural comparison evaluates matching keys regardless of line position.</li>
+    <li><strong>Whitespace & Indentation Normalization:</strong> Distinguishes actual scalar value modifications from trivial tab or space formatting shifts.</li>
+    <li><strong>Data Type Inspection:</strong> Flags hidden type mismatches, such as string <code>"8080"</code> vs integer <code>8080</code> or boolean <code>"true"</code> vs scalar <code>true</code>.</li>
+    <li><strong>Anchor & Alias Resolution:</strong> Resolves YAML anchors (<code>&anchor</code>), aliases (<code>*alias</code>), and merge keys (<code><<:</code>) to compare the resolved data model rather than raw references.</li>
+  </ul>
+
+  <h2>Supported Input Formats & Validation</h2>
+  <p>This comparison engine supports standard YAML and YML formats across all versions (YAML 1.1 and 1.2). Before comparison, both input documents undergo automated syntax validation to prevent comparison errors caused by syntax bugs:</p>
+  <ul>
+    <li><strong>Syntax Error Highlighting:</strong> Displays exact line numbers, column offsets, and error descriptions when a YAML syntax error occurs.</li>
+    <li><strong>Flexible Input Options:</strong> Copy-paste YAML blocks, drag and drop <code>.yaml</code> or <code>.yml</code> files directly into the editor panels, or load pre-built sample microservice configs.</li>
+    <li><strong>Dual Document Controls:</strong> Instantly swap left and right documents to invert the source-target diff perspective.</li>
+  </ul>
+
+  <h2>Comparison Modes Explained</h2>
+  <p>Select from flexible comparison settings tailored to your specific workflow needs:</p>
+  <ol>
+    <li><strong>Structural Hierarchy Mode:</strong> Evaluates data nodes recursively by JSON path (e.g., <code>$.database.credentials.host</code>), reporting exact node additions, deletions, value changes, and array mutations.</li>
+    <li><strong>Normalized Semantic Mode:</strong> Ignores whitespace trimming, quotation styles (single vs double quotes), comment lines, and key ordering to focus strictly on semantic data equivalency.</li>
+    <li><strong>Textual Side-by-Side & Unified Diff Mode:</strong> Generates line-by-line colored diff views with line numbers and collapsible unchanged sections for code review.</li>
+  </ol>
+
+  <h2>Common Engineering & DevOps Use Cases</h2>
+  <ul>
+    <li><strong>Kubernetes Deployment Auditing:</strong> Compare production vs staging <code>deployment.yaml</code> manifests to detect container image tag mismatches, memory/CPU limit discrepancies, or missing environment variables.</li>
+    <li><strong>CI/CD Pipeline Troubleshooting:</strong> Verify configuration changes between workflow pipelines across repositories or release branches.</li>
+    <li><strong>Microservice Environment Drift:</strong> Audit configuration files across development, testing, staging, and production clusters to ensure secrets and endpoints are properly overridden.</li>
+    <li><strong>OpenAPI & Swagger Spec Evolution:</strong> Compare REST API schemas between releases to identify breaking changes, added endpoints, or modified payload parameters.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item active">
+    <div class="faq-question" onclick="toggleFaq(this)">How does structural YAML comparison differ from text comparison?</div>
+    <div class="faq-answer">Textual comparison compares raw characters and line numbers, which can create false positives if indentation, whitespace, comments, or key order change. Structural comparison parses both YAML documents into hierarchical data trees (maps, sequences, scalars) and evaluates key paths, data types, and values regardless of formatting.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Is my YAML data sent to any server or cloud service?</div>
+    <div class="faq-answer">No. All YAML parsing, syntax validation, tree construction, diffing, visualization, and report generation occur 100% locally inside your web browser. Zero bytes are uploaded or processed by external backends.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Does this tool support YAML anchors, aliases, and merge keys?</div>
+    <div class="faq-answer">Yes. The underlying parser resolves YAML anchors (&anchor), aliases (*alias), and merge keys (<<:) during object tree construction, allowing accurate structural comparison of inherited configuration values.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Can I compare YAML files with different key orders or array sequences?</div>
+    <div class="faq-answer">Yes. You can enable 'Ignore Key Order' to compare maps structurally regardless of key sequence, or enable 'Ignore Array Order' to compare sequence contents by element matching.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">What export formats are available for YAML diff reports?</div>
+    <div class="faq-answer">You can export comparison results as printable HTML reports, PDF documents, structured JSON files, CSV summary sheets, Markdown tables, and unified YAML patch lists.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">How are invalid YAML syntax errors handled?</div>
+    <div class="faq-answer">Before comparing, both documents undergo automated syntax validation. If a document contains invalid YAML syntax, the tool highlights the exact line number, column offset, and error description so you can correct it before diffing.</div>
+  </div>
+
+  <h2>Conclusion</h2>
+  <p>The <strong>YAML Compare</strong> tool empowers engineers, system administrators, and developers to audit, debug, and validate YAML files instantly inside the browser. By combining deep structural hierarchy parsing with line-by-line text diffing and multi-format exports, you can eliminate configuration errors and ensure infrastructure stability with zero privacy risk.</p>
+</article>
+
+{% raw %}
+<script>
+/* Global State */
+let comparisonState = {
+  treeDiffs: [],
+  filteredDiffs: [],
+  metrics: { similarity: 0, total: 0, added: 0, removed: 0, modified: 0, unchanged: 0 },
+  activeView: 'tree',
+  activeFilter: 'all'
+};
+
+/* Pre-loaded Samples */
+const SAMPLES = {
+  1: {
+    A: "# Sample 1: Kubernetes Deployment (Staging)\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: web-api\n  namespace: staging\n  labels:\n    app: web-api\n    env: staging\nspec:\n  replicas: 2\n  strategy:\n    type: RollingUpdate\n  template:\n    metadata:\n      labels:\n        app: web-api\n    spec:\n      containers:\n        - name: web-app\n          image: \"registry.internal/web-api:v1.4.2\"\n          ports:\n            - containerPort: 8080\n          resources:\n            limits:\n              cpu: \"500m\"\n              memory: \"512Mi\"\n          env:\n            - name: NODE_ENV\n              value: \"staging\"\n            - name: LOG_LEVEL\n              value: \"debug\"",
+    B: "# Sample 1: Kubernetes Deployment (Production)\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: web-api\n  namespace: production\n  labels:\n    app: web-api\n    env: production\nspec:\n  replicas: 5\n  strategy:\n    type: RollingUpdate\n  template:\n    metadata:\n      labels:\n        app: web-api\n    spec:\n      containers:\n        - name: web-app\n          image: \"registry.internal/web-api:v1.5.0\"\n          ports:\n            - containerPort: 8080\n            - containerPort: 9090\n          resources:\n            limits:\n              cpu: \"2000m\"\n              memory: \"2048Mi\"\n          env:\n            - name: NODE_ENV\n              value: \"production\"\n            - name: LOG_LEVEL\n              value: \"info\"\n            - name: ENABLE_METRICS\n              value: \"true\""
+  },
+  2: {
+    A: "# Sample 2: Docker Compose (v2.0)\nversion: '3.8'\nservices:\n  app:\n    build: .\n    ports:\n      - \"3000:3000\"\n    environment:\n      DB_HOST: db\n      REDIS_HOST: redis\n    depends_on:\n      - db\n  db:\n    image: postgres:14-alpine\n    environment:\n      POSTGRES_PASSWORD: secret_dev_password\n    volumes:\n      - pgdata:/var/lib/postgresql/data\nvolumes:\n  pgdata:",
+    B: "# Sample 2: Docker Compose (v2.1)\nversion: '3.8'\nservices:\n  app:\n    build: .\n    ports:\n      - \"3000:3000\"\n      - \"9229:9229\"\n    environment:\n      DB_HOST: db\n      REDIS_HOST: cache-cluster\n      NODE_ENV: production\n    depends_on:\n      - db\n      - cache-cluster\n  db:\n    image: postgres:15-alpine\n    environment:\n      POSTGRES_PASSWORD: prod_secure_password\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n  cache-cluster:\n    image: redis:7-alpine\n    ports:\n      - \"6379:6379\"\nvolumes:\n  pgdata:"
+  }
+};
+
+/* On Load Initialization */
+window.addEventListener('DOMContentLoaded', () => {
+  validateInput('A');
+  validateInput('B');
+  executeComparison();
+});
+
+/* Input Validation */
+function validateInput(side) {
+  const textVal = document.getElementById('text' + side).value;
+  const statusEl = document.getElementById('status' + side);
+  const errEl = document.getElementById('errMsg' + side);
+
+  if (!textVal.trim()) {
+    statusEl.textContent = 'Empty';
+    statusEl.className = 'status-pill invalid';
+    errEl.style.display = 'none';
+    return false;
+  }
+
+  try {
+    if (window.jsyaml) {
+      jsyaml.load(textVal);
+    }
+    statusEl.textContent = 'Valid';
+    statusEl.className = 'status-pill valid';
+    errEl.style.display = 'none';
+    return true;
+  } catch (err) {
+    statusEl.textContent = 'Invalid';
+    statusEl.className = 'status-pill invalid';
+    let lineInfo = err.mark ? 'Line ' + (err.mark.line + 1) + ', Col ' + (err.mark.column + 1) + ': ' : '';
+    errEl.textContent = lineInfo + (err.reason || err.message);
+    errEl.style.display = 'block';
+    return false;
+  }
+}
+
+/* Sample Loader */
+function loadSample(num, side) {
+  if (SAMPLES[num] && SAMPLES[num][side]) {
+    document.getElementById('text' + side).value = SAMPLES[num][side];
+    validateInput(side);
+  }
+}
+
+/* File Upload Handler */
+function triggerFileUpload(id) {
+  document.getElementById(id).click();
+}
+
+function handleFileSelect(evt, side) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('text' + side).value = e.target.result;
+    validateInput(side);
+  };
+  reader.readAsText(file);
+}
+
+function clearEditor(side) {
+  document.getElementById('text' + side).value = '';
+  validateInput(side);
+}
+
+function swapDocuments() {
+  const textA = document.getElementById('textA').value;
+  const textB = document.getElementById('textB').value;
+  document.getElementById('textA').value = textB;
+  document.getElementById('textB').value = textA;
+  validateInput('A');
+  validateInput('B');
+  executeComparison();
+}
+
+function resetAll() {
+  document.getElementById('textA').value = SAMPLES[1].A;
+  document.getElementById('textB').value = SAMPLES[1].B;
+  validateInput('A');
+  validateInput('B');
+  executeComparison();
+}
+
+/* Core Comparison Execution Engine */
+function executeComparison() {
+  const validA = validateInput('A');
+  const validB = validateInput('B');
+  const textA = document.getElementById('textA').value;
+  const textB = document.getElementById('textB').value;
+
+  if (!validA || !validB) {
+    alert('Please fix invalid YAML syntax errors before comparing.');
+    return;
+  }
+
+  let objA = {}, objB = {};
+  try {
+    objA = window.jsyaml ? jsyaml.load(textA) : {};
+    objB = window.jsyaml ? jsyaml.load(textB) : {};
+  } catch(e) {}
+
+  // Read options
+  const optIgnoreKeyOrder = document.getElementById('optIgnoreKeyOrder').checked;
+  const optIgnoreWhitespace = document.getElementById('optIgnoreWhitespace').checked;
+  const optIgnoreQuotes = document.getElementById('optIgnoreQuotes').checked;
+  const optIgnoreNulls = document.getElementById('optIgnoreNulls').checked;
+  const optCaseInsensitive = document.getElementById('optCaseInsensitive').checked;
+
+  // Flatten both objects into path maps
+  const pathsA = {};
+  const pathsB = {};
+  flattenObject(objA, '$', pathsA, { optIgnoreWhitespace, optIgnoreQuotes, optIgnoreNulls, optCaseInsensitive });
+  flattenObject(objB, '$', pathsB, { optIgnoreWhitespace, optIgnoreQuotes, optIgnoreNulls, optCaseInsensitive });
+
+  // Compute diffs
+  const allPaths = new Set([...Object.keys(pathsA), ...Object.keys(pathsB)]);
+
+  let diffs = [];
+  let addedCount = 0, removedCount = 0, modifiedCount = 0, unchangedCount = 0;
+
+  allPaths.forEach(path => {
+    const hasA = path in pathsA;
+    const hasB = path in pathsB;
+    const valA = pathsA[path];
+    const valB = pathsB[path];
+
+    if (hasA && !hasB) {
+      diffs.push({ path, type: 'removed', valA, valB: undefined });
+      removedCount++;
+    } else if (!hasA && hasB) {
+      diffs.push({ path, type: 'added', valA: undefined, valB });
+      addedCount++;
+    } else {
+      if (areValuesEqual(valA, valB, { optIgnoreWhitespace, optCaseInsensitive, optIgnoreNulls })) {
+        diffs.push({ path, type: 'unchanged', valA, valB });
+        unchangedCount++;
+      } else {
+        diffs.push({ path, type: 'modified', valA, valB });
+        modifiedCount++;
+      }
+    }
+  });
+
+  // Sort diffs by path
+  diffs.sort((x, y) => x.path.localeCompare(y.path));
+
+  const totalNodes = diffs.length;
+  const totalDiffs = addedCount + removedCount + modifiedCount;
+  const similarity = totalNodes > 0 ? Math.round((unchangedCount / totalNodes) * 100) : 100;
+
+  comparisonState.treeDiffs = diffs;
+  comparisonState.metrics = {
+    similarity,
+    total: totalDiffs,
+    added: addedCount,
+    removed: removedCount,
+    modified: modifiedCount,
+    unchanged: unchangedCount
+  };
+
+  // Update Summary UI
+  document.getElementById('metricSimilarity').textContent = similarity + '%';
+  document.getElementById('metricTotalDiff').textContent = totalDiffs;
+  document.getElementById('metricAdded').textContent = addedCount;
+  document.getElementById('metricRemoved').textContent = removedCount;
+  document.getElementById('metricModified').textContent = modifiedCount;
+  document.getElementById('metricUnchanged').textContent = unchangedCount;
+
+  // Render Charts
+  renderBarChart(comparisonState.metrics);
+  renderDonutChart(similarity);
+
+  // Render Tree and Text Views
+  filterDiffResults();
+  renderTextDiffs(textA, textB);
+
+  document.getElementById('resultsWrapper').classList.add('active');
+}
+
+/* Object Hierarchy Flattener */
+function flattenObject(obj, prefix, result, opts) {
+  if (obj === null || obj === undefined) {
+    result[prefix] = opts.optIgnoreNulls ? "" : null;
+    return;
+  }
+  if (typeof obj !== 'object') {
+    let strVal = String(obj);
+    if (opts.optIgnoreWhitespace) strVal = strVal.trim();
+    if (opts.optCaseInsensitive) strVal = strVal.toLowerCase();
+    result[prefix] = strVal;
+    return;
+  }
+  if (Array.isArray(obj)) {
+    if (obj.length === 0) {
+      result[prefix] = "[]";
+      return;
+    }
+    obj.forEach((item, idx) => {
+      flattenObject(item, prefix + '[' + idx + ']', result, opts);
+    });
+    return;
+  }
+  const keys = Object.keys(obj);
+  if (keys.length === 0) {
+    result[prefix] = "{}";
+    return;
+  }
+  keys.forEach(key => {
+    flattenObject(obj[key], prefix + '.' + key, result, opts);
+  });
+}
+
+function areValuesEqual(v1, v2, opts) {
+  if (v1 === v2) return true;
+  let s1 = String(v1), s2 = String(v2);
+  if (opts.optIgnoreWhitespace) { s1 = s1.trim(); s2 = s2.trim(); }
+  if (opts.optCaseInsensitive) { s1 = s1.toLowerCase(); s2 = s2.toLowerCase(); }
+  if (opts.optIgnoreNulls && (s1 === 'null' || s1 === '') && (s2 === 'null' || s2 === '')) return true;
+  return s1 === s2;
+}
+
+/* Render SVG Bar Chart */
+function renderBarChart(m) {
+  const container = document.getElementById('barChartContainer');
+  const maxVal = Math.max(m.added, m.removed, m.modified, m.unchanged, 1);
+  const getW = (v) => Math.max(10, Math.round((v / maxVal) * 100));
+
+  container.innerHTML = '' +
+    '<div style="display:flex; flex-direction:column; gap:10px;">' +
+      '<div>' +
+        '<div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#15803d; margin-bottom:2px;">' +
+          '<span>Added (' + m.added + ')</span><span>' + getW(m.added) + '%</span>' +
+        '</div>' +
+        '<div style="background:#e2e8f0; border-radius:9999px; height:12px; overflow:hidden;">' +
+          '<div style="background:#22c55e; width:' + getW(m.added) + '%; height:100%;"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#b91c1c; margin-bottom:2px;">' +
+          '<span>Removed (' + m.removed + ')</span><span>' + getW(m.removed) + '%</span>' +
+        '</div>' +
+        '<div style="background:#e2e8f0; border-radius:9999px; height:12px; overflow:hidden;">' +
+          '<div style="background:#ef4444; width:' + getW(m.removed) + '%; height:100%;"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#b45309; margin-bottom:2px;">' +
+          '<span>Modified (' + m.modified + ')</span><span>' + getW(m.modified) + '%</span>' +
+        '</div>' +
+        '<div style="background:#e2e8f0; border-radius:9999px; height:12px; overflow:hidden;">' +
+          '<div style="background:#f59e0b; width:' + getW(m.modified) + '%; height:100%;"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:#475569; margin-bottom:2px;">' +
+          '<span>Unchanged (' + m.unchanged + ')</span><span>' + getW(m.unchanged) + '%</span>' +
+        '</div>' +
+        '<div style="background:#e2e8f0; border-radius:9999px; height:12px; overflow:hidden;">' +
+          '<div style="background:#64748b; width:' + getW(m.unchanged) + '%; height:100%;"></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+}
+
+/* Render SVG Donut Chart */
+function renderDonutChart(similarity) {
+  const container = document.getElementById('donutChartContainer');
+  const circumference = 2 * Math.PI * 40;
+  const strokeDashoffset = circumference - (similarity / 100) * circumference;
+
+  container.innerHTML = '' +
+    '<div style="display:flex; justify-content:center; align-items:center; position:relative;">' +
+      '<svg width="140" height="140" viewBox="0 0 100 100">' +
+        '<circle cx="50" cy="50" r="40" fill="transparent" stroke="#e2e8f0" stroke-width="12"></circle>' +
+        '<circle cx="50" cy="50" r="40" fill="transparent" stroke="#2563eb" stroke-width="12" ' +
+                'stroke-dasharray="' + circumference + '" stroke-dashoffset="' + strokeDashoffset + '" ' +
+                'stroke-linecap="round" transform="rotate(-90 50 50)"></circle>' +
+      '</svg>' +
+      '<div style="position:absolute; text-align:center;">' +
+        '<span style="font-size:1.5rem; font-weight:800; color:#0f172a;">' + similarity + '%</span><br>' +
+        '<span style="font-size:0.75rem; font-weight:700; color:#64748b;">MATCH</span>' +
+      '</div>' +
+    '</div>';
+}
+
+/* Filter Tree Diffs */
+function setDiffFilter(type, btn) {
+  comparisonState.activeFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterDiffResults();
+}
+
+function filterDiffResults() {
+  const searchTerm = document.getElementById('diffSearchInput').value.toLowerCase();
+  const filter = comparisonState.activeFilter;
+
+  comparisonState.filteredDiffs = comparisonState.treeDiffs.filter(item => {
+    const matchesType = filter === 'all' || item.type === filter;
+    const matchesSearch = !searchTerm ||
+      item.path.toLowerCase().includes(searchTerm) ||
+      String(item.valA).toLowerCase().includes(searchTerm) ||
+      String(item.valB).toLowerCase().includes(searchTerm);
+    return matchesType && matchesSearch;
+  });
+
+  renderTreeView();
+}
+
+/* Render Interactive Tree View */
+function renderTreeView() {
+  const container = document.getElementById('treeViewContainer');
+  if (comparisonState.filteredDiffs.length === 0) {
+    container.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:2rem;">No matching structural node differences found.</div>';
+    return;
+  }
+
+  let html = '';
+  comparisonState.filteredDiffs.forEach(item => {
+    let badgeText = item.type.toUpperCase();
+    let badgeClass = item.type;
+    let valDisplay = '';
+
+    if (item.type === 'added') {
+      valDisplay = '<span class="val-tag"> ➔ ' + escapeHtml(item.valB) + '</span>';
+    } else if (item.type === 'removed') {
+      valDisplay = '<span class="val-tag"> ➔ ' + escapeHtml(item.valA) + '</span>';
+    } else if (item.type === 'modified') {
+      valDisplay = '<span class="val-tag"> ➔ "' + escapeHtml(item.valA) + '" <strong>to</strong> "' + escapeHtml(item.valB) + '"</span>';
+    } else {
+      valDisplay = '<span class="val-tag"> ➔ ' + escapeHtml(item.valA) + '</span>';
+    }
+
+    html += '' +
+      '<div class="tree-node-item ' + badgeClass + '">' +
+        '<span class="diff-type-badge ' + badgeClass + '">' + badgeText + '</span>' +
+        '<span class="path-tag">' + escapeHtml(item.path) + '</span>' +
+        valDisplay +
+      '</div>';
+  });
+
+  container.innerHTML = html;
+}
+
+/* View Mode Switching */
+function switchViewMode(mode) {
+  comparisonState.activeView = mode;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('treeViewContainer').style.display = mode === 'tree' ? 'block' : 'none';
+  document.getElementById('splitDiffContainer').style.display = mode === 'split' ? 'block' : 'none';
+  document.getElementById('unifiedDiffContainer').style.display = mode === 'unified' ? 'block' : 'none';
+
+  if (mode === 'tree') document.getElementById('tabTree').classList.add('active');
+  if (mode === 'split') document.getElementById('tabSplit').classList.add('active');
+  if (mode === 'unified') document.getElementById('tabUnified').classList.add('active');
+}
+
+/* Line-by-Line Text Diff Generator */
+function renderTextDiffs(textA, textB) {
+  const linesA = textA.split('\n');
+  const linesB = textB.split('\n');
+  const maxLen = Math.max(linesA.length, linesB.length);
+
+  let splitHtml = '<table class="diff-table"><thead><tr><th style="width:50%;">Original (Document A)</th><th style="width:50%;">Target (Document B)</th></tr></thead><tbody>';
+  let unifiedHtml = '<table class="diff-table"><thead><tr><th style="width:60px;">Line</th><th>YAML Content</th></tr></thead><tbody>';
+
+  for (let i = 0; i < maxLen; i++) {
+    const lineA = linesA[i] !== undefined ? linesA[i] : '';
+    const lineB = linesB[i] !== undefined ? linesB[i] : '';
+    const num = i + 1;
+
+    if (lineA === lineB) {
+      splitHtml += '<tr><td class="left-col"><span class="line-num-cell">' + num + '</span> ' + escapeHtml(lineA) + '</td><td class="right-col"><span class="line-num-cell">' + num + '</span> ' + escapeHtml(lineB) + '</td></tr>';
+      unifiedHtml += '<tr><td class="line-num-cell">' + num + '</td><td> ' + escapeHtml(lineA) + '</td></tr>';
+    } else {
+      let rowClass = 'line-modified';
+      if (linesA[i] === undefined) rowClass = 'line-added';
+      if (linesB[i] === undefined) rowClass = 'line-removed';
+
+      splitHtml += '<tr class="' + rowClass + '"><td class="left-col"><span class="line-num-cell">' + num + '</span> ' + escapeHtml(lineA) + '</td><td class="right-col"><span class="line-num-cell">' + num + '</span> ' + escapeHtml(lineB) + '</td></tr>';
+
+      if (lineA) {
+        unifiedHtml += '<tr class="line-removed"><td class="line-num-cell">- ' + num + '</td><td>- ' + escapeHtml(lineA) + '</td></tr>';
+      }
+      if (lineB) {
+        unifiedHtml += '<tr class="line-added"><td class="line-num-cell">+ ' + num + '</td><td>+ ' + escapeHtml(lineB) + '</td></tr>';
+      }
+    }
+  }
+
+  splitHtml += '<\/tbody><\/table>';
+  unifiedHtml += '<\/tbody><\/table>';
+
+  document.getElementById('splitDiffContainer').innerHTML = splitHtml;
+  document.getElementById('unifiedDiffContainer').innerHTML = unifiedHtml;
+}
+
+/* Helpers & Exports */
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function exportJSONReport() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(comparisonState, null, 2));
+  downloadFile(dataStr, 'yaml-diff-report.json');
+}
+
+function exportCSVReport() {
+  let csv = "Path,Type,Value_A,Value_B\n";
+  comparisonState.treeDiffs.forEach(d => {
+    csv += '"' + d.path + '","' + d.type + '","' + String(d.valA || '').replace(/"/g, '""') + '","' + String(d.valB || '').replace(/"/g, '""') + '"\n';
+  });
+  const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+  downloadFile(dataStr, 'yaml-diff-summary.csv');
+}
+
+function exportMarkdownReport() {
+  let md = '# YAML Comparison Report\n\n';
+  md += '**Similarity:** ' + comparisonState.metrics.similarity + '% | **Total Diffs:** ' + comparisonState.metrics.total + '\n\n';
+  md += '| Path | Type | Original (A) | Target (B) |\n';
+  md += '| --- | --- | --- | --- |\n';
+  comparisonState.treeDiffs.forEach(d => {
+    md += '| `' + d.path + '` | **' + d.type + '** | ' + (d.valA || '-') + ' | ' + (d.valB || '-') + ' |\n';
+  });
+  const dataStr = "data:text/markdown;charset=utf-8," + encodeURIComponent(md);
+  downloadFile(dataStr, 'yaml-diff-summary.md');
+}
+
+function exportYAMLDiffPatch() {
+  let patch = '# YAML Structural Patch List\n';
+  comparisonState.treeDiffs.forEach(d => {
+    if (d.type !== 'unchanged') {
+      patch += '# Path: ' + d.path + ' (' + d.type + ')\n' + d.path + ': "' + (d.valB !== undefined ? d.valB : '') + '"\n\n';
+    }
+  });
+  const dataStr = "data:text/yaml;charset=utf-8," + encodeURIComponent(patch);
+  downloadFile(dataStr, 'yaml-diff-patch.yaml');
+}
+
+function exportHTMLReport() {
+  const content = '<!DOCTYPE html><html><head><title>YAML Comparison Report<\/title><style>body{font-family:sans-serif;padding:2rem;color:#0f172a;} table{width:100%;border-collapse:collapse;} th,td{border:1px solid #cbd5e1;padding:8px;} th{background:#f8fafc;}<\/style><\/head><body><h1>YAML Comparison Report<\/h1><p>Similarity: ' + comparisonState.metrics.similarity + '% | Total Diffs: ' + comparisonState.metrics.total + '<\/p>' + document.getElementById('treeViewContainer').innerHTML + '<\/body><\/html>';
+  const dataStr = "data:text/html;charset=utf-8," + encodeURIComponent(content);
+  downloadFile(dataStr, 'yaml-comparison-report.html');
+}
+
+function copyDiffSummary() {
+  const text = 'YAML Compare Summary:\nSimilarity: ' + comparisonState.metrics.similarity + '%\nTotal Diffs: ' + comparisonState.metrics.total + '\nAdded: ' + comparisonState.metrics.added + ' | Removed: ' + comparisonState.metrics.removed + ' | Modified: ' + comparisonState.metrics.modified;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Comparison summary copied to clipboard!');
+  });
+}
+
+function downloadFile(dataStr, filename) {
+  const anchor = document.createElement('a');
+  anchor.setAttribute("href", dataStr);
+  anchor.setAttribute("download", filename);
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+}
+
+function toggleFaq(el) {
+  const parent = el.parentElement;
+  parent.classList.toggle('active');
+}
+</script>
+{% endraw %}
