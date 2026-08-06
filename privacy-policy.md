@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Privacy Policy - 100% Local Data Intelligence | DataFrog"
-description: "Read the DataFrog.tools Privacy Policy. Zero server uploads, zero backend tracking, and complete client-side data privacy assurance 100% free, fast, and pri..."
+description: "Privacy policy for DataFrog.tools. Learn how our browser-based privacy-first tools process data 100% locally on your machine with zero server tracking."
 permalink: /privacy-policy
 keywords: "DataFrog privacy policy, browser based data security, client side data processing, AdSense privacy compliance, cookies policy"
 ---

@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Sitemap - Complete Directory of DataFrog Tools | DataFrog"
-description: "Browse the complete DataFrog.tools sitemap directory. Access all browser-based inspection, analysis, comparison, and visual tools 100% browser-based and secure."
+description: "Sitemap for DataFrog.tools. Browse all client-side tools, category indexes, data engineering guides, & online documentation pages on our platform today."
 permalink: /sitemap
 keywords: "DataFrog sitemap, site directory, all tools list"
 ---

@@ -16,7 +16,7 @@
 
 - title: "JSON Viewer"
   short_name: "JSON Viewer"
-  url: "/inspect/json-viewer/"
+  url: "/inspect/json-viewer"
   category: "Inspect"
   description: "View, inspect, search, validate, and explore JSON data locally in your browser with an interactive tree view, depth metrics, and JSON path copy."
   keywords: ["JSON Viewer", "View JSON", "JSON Tree Viewer", "JSON File Viewer", "JSON Inspector", "JSON Explorer", "View JSON Online", "JSON Viewer Online", "Open JSON File", "JSON Structure Viewer", "Interactive JSON Viewer"]
@@ -27,7 +27,7 @@
 
 - title: "CSV Viewer"
   short_name: "CSV Viewer"
-  url: "/inspect/csv-viewer/"
+  url: "/inspect/csv-viewer"
   category: "Inspect"
   description: "Open, inspect, search, filter, sort, and explore CSV files locally in your browser with interactive tables, auto delimiter detection, and column metrics."
   keywords: ["CSV Viewer", "View CSV Online", "CSV File Viewer", "Open CSV File", "CSV Table Viewer", "CSV Reader", "Online CSV Viewer", "View CSV File", "CSV Viewer Online"]
@@ -38,7 +38,7 @@
 
 - title: "XML Viewer"
   short_name: "XML Viewer"
-  url: "/inspect/xml-viewer/"
+  url: "/inspect/xml-viewer"
   category: "Inspect"
   description: "Open, inspect, search, validate, and explore XML documents locally in your browser using an interactive tree structure, XPath finder, and attribute inspector."
   keywords: ["XML Viewer", "View XML Online", "XML File Viewer", "Open XML File", "XML Tree Viewer", "XML Reader", "Online XML Viewer", "View XML File", "XML Structure Viewer"]
@@ -49,7 +49,7 @@
 
 - title: "YAML Viewer"
   short_name: "YAML Viewer"
-  url: "/inspect/yaml-viewer/"
+  url: "/inspect/yaml-viewer"
   category: "Inspect"
   description: "View, inspect, search, validate, and explore YAML documents locally in your browser using an interactive tree view, path finder, and depth statistics."
   keywords: ["YAML Viewer", "View YAML Online", "YAML File Viewer", "Open YAML File", "YAML Parser", "YAML Tree Viewer", "YAML Reader", "YAML Viewer Online", "Inspect YAML"]
@@ -60,7 +60,7 @@
 
 - title: "Excel Viewer"
   short_name: "Excel Viewer"
-  url: "/inspect/excel-viewer/"
+  url: "/inspect/excel-viewer"
   category: "Inspect"
   description: "Open, inspect, search, filter, and explore Excel workbooks (.xlsx, .xls, .xlsm) locally in your browser with multi-sheet tabs, column sorting, and formula toggles."
   keywords: ["Excel Viewer", "View Excel Online", "Excel File Viewer", "Open Excel File", "XLSX Viewer", "XLS Viewer", "Excel Spreadsheet Viewer", "Online Excel Viewer", "View XLSX File"]
@@ -71,7 +71,7 @@
 
 - title: "Data Dictionary Generator"
   short_name: "Data Dictionary Generator"
-  url: "/inspect/data-dictionary-generator/"
+  url: "/inspect/data-dictionary-generator"
   category: "Inspect"
   description: "Automatically analyze structured datasets (CSV, Excel, JSON, XML, YAML) and extract metadata to generate comprehensive data dictionaries with physical types, inferred semantic types, column quality stats, and multi-format exports."
   keywords: ["data dictionary generator", "metadata analyzer", "metadata analysis", "data dictionary", "dataset documentation", "column documentation", "metadata generator", "metadata documentation", "schema documentation", "data catalog", "field documentation", "file metadata analyzer"]
@@ -82,7 +82,7 @@
 
 - title: "Metadata Viewer"
   short_name: "Metadata Viewer"
-  url: "/inspect/metadata-viewer/"
+  url: "/inspect/metadata-viewer"
   category: "Inspect"
   description: "Extract and inspect hidden file metadata, EXIF camera tags, document properties, ID3 audio tags, video containers, and cryptographic hashes locally in your browser."
   keywords: ["metadata viewer", "meta data viewer", "file metadata viewer", "metadata reader", "metadata inspector", "metadata checker", "metadata explorer", "view metadata online", "metadata extractor", "file information viewer", "file properties viewer", "exif viewer", "pdf metadata viewer", "image metadata viewer", "exif reader"]
@@ -93,7 +93,7 @@
 
 - title: "SQLite Viewer"
   short_name: "SQLite Viewer"
-  url: "/inspect/sqlite-viewer/"
+  url: "/inspect/sqlite-viewer"
   category: "Inspect"
   description: "Open, inspect, explore, search, filter, and export SQLite databases (.sqlite, .sqlite3, .db) locally in your browser with table data grids, schema trees, foreign key maps, and visual charts."
   keywords: ["sqlite viewer", "sqlite database viewer", "sqlite file viewer", "sqlite browser online", "sqlite reader", "sqlite db viewer", "open sqlite database", "open sqlite file", "sqlite database browser", "sqlite explorer", "sqlite table viewer", "browse sqlite database", "inspect sqlite database", "sqlite schema viewer"]
@@ -104,7 +104,7 @@
 
 - title: "GeoJSON Viewer"
   short_name: "GeoJSON Viewer"
-  url: "/inspect/geojson-viewer/"
+  url: "/inspect/geojson-viewer"
   category: "Inspect"
   description: "Open, parse, validate, inspect, search, and visualize GeoJSON files (.geojson, .json) locally in your browser with interactive maps, attribute tables, feature trees, and exports."
   keywords: ["geojson viewer", "geojson map viewer", "geojson file viewer", "geojson reader", "view geojson online", "open geojson", "geojson visualizer", "geojson explorer", "geojson map", "geojson parser", "geojson inspector", "browse geojson", "geojson feature viewer"]
@@ -115,7 +115,7 @@
 
 - title: "JSON Analyzer"
   short_name: "JSON Analyzer"
-  url: "/analyze/json-analyzer/"
+  url: "/analyze/json-analyzer"
   category: "Analyze"
   description: "Analyze JSON structure, complexity metrics, data type distribution, key frequencies, and data quality insights locally in your browser."
   keywords: ["JSON Analyzer", "Analyze JSON", "JSON Analysis", "JSON Structure Analyzer", "JSON Statistics", "JSON Analyzer Online", "JSON Data Analyzer", "JSON Insights", "JSON Structure Analysis"]
@@ -126,7 +126,7 @@
 
 - title: "CSV Analyzer"
   short_name: "CSV Analyzer"
-  url: "/analyze/csv-analyzer/"
+  url: "/analyze/csv-analyzer"
   category: "Analyze"
   description: "Analyze CSV datasets with column profiling, numeric summary stats (mean, median, min, max, sum), missing value detection, duplicate checks, and quality audits."
   keywords: ["CSV Analyzer", "Analyze CSV", "CSV File Analyzer", "CSV Data Analyzer", "CSV Analysis Tool", "CSV Statistics", "CSV Profiler", "Analyze CSV Online"]
@@ -137,7 +137,7 @@
 
 - title: "Excel Analyzer"
   short_name: "Excel Analyzer"
-  url: "/analyze/excel-analyzer/"
+  url: "/analyze/excel-analyzer"
   category: "Analyze"
   description: "Analyze Excel workbooks (.xlsx, .xls, .xlsm) with multi-sheet statistics, formula audit, cell type breakdown, merged cell metrics, and data quality reports."
   keywords: ["Excel Analyzer", "Analyze Excel", "Excel File Analyzer", "Excel Workbook Analyzer", "XLSX Analyzer", "Spreadsheet Analyzer", "Analyze Excel Online", "Excel Data Analysis"]
@@ -148,7 +148,7 @@
 
 - title: "XML Analyzer"
   short_name: "XML Analyzer"
-  url: "/analyze/xml-analyzer/"
+  url: "/analyze/xml-analyzer"
   category: "Analyze"
   description: "Analyze XML structure, hierarchy depth, element frequencies, namespace usage, attribute metrics, and data quality reports locally in your browser."
   keywords: ["XML Analyzer", "Analyze XML", "XML File Analyzer", "XML Structure Analyzer", "XML Data Analyzer", "XML Analysis Tool", "Analyze XML Online", "XML Statistics"]
@@ -159,7 +159,7 @@
 
 - title: "Data Profiler"
   short_name: "Data Profiler"
-  url: "/analyze/data-profiler/"
+  url: "/analyze/data-profiler"
   category: "Analyze"
   description: "Automatically profile CSV, Excel, JSON, and XML datasets in your browser. Generate column statistics, data quality scores, missing value analysis, duplicate detection, and insights."
   keywords: ["Data Profiler", "Data Profiling", "Dataset Profiler", "Column Profiling", "Data Quality Profiling", "Missing Value Analysis", "Automated Data Profiling", "Dataset Statistics"]
@@ -170,7 +170,7 @@
 
 - title: "Duplicate Data Finder"
   short_name: "Duplicate Data Finder"
-  url: "/analyze/duplicate-data-finder/"
+  url: "/analyze/duplicate-data-finder"
   category: "Analyze"
   description: "Find duplicate rows, records, and values in CSV, Excel, JSON, XML, YAML, and more. Detect repeated entries, group duplicates, calculate duplicate percentage, and export clean or duplicate-only datasets."
   keywords: ["Duplicate Data Finder", "Find Duplicate Data", "Duplicate Row Finder", "Duplicate Record Finder", "Duplicate Checker", "Duplicate Detector", "Remove Duplicate Records", "Duplicate Data Analysis"]
@@ -181,7 +181,7 @@
 
 - title: "Deduplicate"
   short_name: "Deduplicate"
-  url: "/analyze/deduplicate/"
+  url: "/analyze/deduplicate"
   category: "Analyze"
   description: "Deduplicate CSV, Excel, JSON, XML, and YAML datasets locally in your browser. Remove duplicate rows and records with custom retention rules (keep first, keep last, keep most complete)."
   keywords: ["deduplicate", "deduplicate data", "data deduplication", "duplicate remover", "remove duplicate data", "remove duplicate rows", "remove duplicate records", "clean duplicate data"]
@@ -192,7 +192,7 @@
 
 - title: "Bank Statement Analyzer"
   short_name: "Bank Statement Analyzer"
-  url: "/analyze/bank-statement-analyzer/"
+  url: "/analyze/bank-statement-analyzer"
   category: "Analyze"
   description: "Analyze bank statements and transaction files locally in your browser. Automatic categorization, income vs expense analysis, cash flow trends, recurring payment detection, financial health scoring, and private reports."
   keywords: ["bank statement analyzer", "analyze bank statement", "bank statement analysis", "bank transaction analysis", "spending analysis", "expense analysis", "income analysis", "financial analysis", "cash flow analysis", "recurring transactions"]
@@ -202,7 +202,7 @@
   updated: "2026-08-05"
 - title: "JSON Validator"
   short_name: "JSON Validator"
-  url: "/validate/json-validator/"
+  url: "/validate/json-validator"
   category: "Validate"
   description: "Validate JSON syntax, detect parsing errors with line & column numbers, highlight syntax issues, pretty print, minify, and format JSON locally."
   keywords: ["JSON Validator", "Validate JSON", "JSON Checker", "JSON Validation Tool", "JSON Syntax Validator", "JSON Validator Online"]
@@ -213,7 +213,7 @@
 
 - title: "XML Validator"
   short_name: "XML Validator"
-  url: "/validate/xml-validator/"
+  url: "/validate/xml-validator"
   category: "Validate"
   description: "Validate XML documents, detect malformed syntax, unclosed tags, namespace issues, encoding errors, and format XML locally in your browser."
   keywords: ["XML Validator", "Validate XML", "XML Checker", "XML Validation Tool", "XML Syntax Validator", "XML Validator Online"]
@@ -224,7 +224,7 @@
 
 - title: "CSV Validator"
   short_name: "CSV Validator"
-  url: "/validate/csv-validator/"
+  url: "/validate/csv-validator"
   category: "Validate"
   description: "Validate CSV files for column count consistency, duplicate headers, empty rows, invalid quote escaping, missing values, and delimiter issues."
   keywords: ["CSV Validator", "Validate CSV", "CSV Checker", "CSV Validation Tool", "CSV Syntax Checker", "CSV Validator Online"]
@@ -235,7 +235,7 @@
 
 - title: "YAML Validator"
   short_name: "YAML Validator"
-  url: "/validate/yaml-validator/"
+  url: "/validate/yaml-validator"
   category: "Validate"
   description: "Validate YAML syntax, indentation levels, duplicate keys, anchors, aliases, and structural integrity locally in your browser."
   keywords: ["YAML Validator", "Validate YAML", "YAML Checker", "YAML Validation Tool", "YAML Syntax Validator", "YAML Validator Online"]
@@ -248,7 +248,7 @@
 
 - title: "Text Compare"
   short_name: "Text Compare"
-  url: "/compare/text-compare/"
+  url: "/compare/text-compare"
   category: "Compare"
   description: "Compare two text blocks or code files side-by-side or inline. Highlight additions, deletions, modifications, line-by-line differences, and word changes."
   keywords: ["Text Compare", "Compare Text", "Text Diff", "Compare Text Online", "Text Difference Checker", "Compare Two Text Files", "Online Text Compare"]
@@ -259,7 +259,7 @@
 
 - title: "JSON Compare"
   short_name: "JSON Compare"
-  url: "/compare/json-compare/"
+  url: "/compare/json-compare"
   category: "Compare"
   description: "Compare two JSON documents structurally. Highlight added keys, removed keys, modified values, nested array differences, and JSON paths."
   keywords: ["JSON Compare", "JSON Diff", "Compare JSON", "Compare JSON Online", "JSON Difference Checker", "JSON Compare Tool", "JSON Diff Viewer"]
@@ -270,7 +270,7 @@
 
 - title: "CSV Compare"
   short_name: "CSV Compare"
-  url: "/compare/csv-compare/"
+  url: "/compare/csv-compare"
   category: "Compare"
   description: "Compare two CSV files or spreadsheet data. Highlight added rows, removed rows, modified cell values, and column mismatches with diff reports."
   keywords: ["CSV Compare", "Compare CSV", "CSV Diff", "CSV Difference Checker", "CSV Compare Tool", "Compare CSV Files", "CSV Comparison"]
@@ -281,7 +281,7 @@
 
 - title: "XML Compare"
   short_name: "XML Compare"
-  url: "/compare/xml-compare/"
+  url: "/compare/xml-compare"
   category: "Compare"
   description: "Compare two XML documents by analyzing element nodes, attributes, namespace URIs, text contents, and XML hierarchy differences."
   keywords: ["XML Compare", "XML Diff", "Compare XML", "XML Difference Checker", "XML Compare Tool", "Compare XML Files", "XML Diff Viewer"]
@@ -292,7 +292,7 @@
 
 - title: "Excel Compare"
   short_name: "Excel Compare"
-  url: "/compare/excel-compare/"
+  url: "/compare/excel-compare"
   category: "Compare"
   description: "Compare two Excel workbooks (.xlsx, .xls) cell-by-cell. Highlight modified values, formula changes, sheet mismatches, and row/column diffs."
   keywords: ["Excel Compare", "Compare Excel Files", "Excel Difference Checker", "Excel Workbook Compare", "Spreadsheet Compare", "XLSX Compare", "Excel Compare Online"]
@@ -303,7 +303,7 @@
 
 - title: "SQL Compare"
   short_name: "SQL Compare"
-  url: "/compare/sql-compare/"
+  url: "/compare/sql-compare"
   category: "Compare"
   description: "Compare SQL scripts, DDL queries, schemas, stored procedures, and tables side-by-side or inline. Highlight differences, detect changes, normalize formatting, and export diff reports."
   keywords: ["sql compare", "compare sql", "sql comparison", "sql diff", "sql difference checker", "sql script compare", "compare sql queries", "compare sql schema", "compare sql tables"]
@@ -314,7 +314,7 @@
 
 - title: "YAML Compare"
   short_name: "YAML Compare"
-  url: "/compare/yaml-compare/"
+  url: "/compare/yaml-compare"
   category: "Compare"
   description: "Compare two YAML documents structurally or textually. Highlight added keys, removed keys, modified values, array changes, data types, and tree hierarchy differences."
   keywords: ["yaml compare", "compare yaml", "yaml diff", "yaml difference checker", "yaml comparator", "yaml comparison", "compare yaml files", "yaml compare online", "yaml file compare", "yaml structure compare", "yaml document compare"]
@@ -325,7 +325,7 @@
 
 - title: "JSON Visualizer"
   short_name: "JSON Visualizer"
-  url: "/visualize/json-visualizer/"
+  url: "/visualize/json-visualizer"
   category: "Visualize"
   description: "Transform JSON documents into interactive visual trees. Expand/collapse branches, search nodes, display JSON paths, view statistics, and export diagrams."
   keywords: ["JSON Visualizer", "Visualize JSON", "JSON Tree Viewer", "JSON Graph Viewer", "JSON Structure Visualizer", "JSON Hierarchy Viewer", "JSON Diagram"]
@@ -336,7 +336,7 @@
 
 - title: "CSV Visualizer"
   short_name: "CSV Visualizer"
-  url: "/visualize/csv-visualizer/"
+  url: "/visualize/csv-visualizer"
   category: "Visualize"
   description: "Convert CSV datasets into interactive charts (Bar, Line, Area, Pie, Scatter, Doughnut). Auto-detect columns, filter metrics, and export high-res PNG/SVG charts."
   keywords: ["CSV Visualizer", "CSV Chart Generator", "CSV Graph", "CSV Charts", "CSV Visualization", "Visualize CSV", "CSV Dashboard"]
@@ -347,7 +347,7 @@
 
 - title: "XML Visualizer"
   short_name: "XML Visualizer"
-  url: "/visualize/xml-visualizer/"
+  url: "/visualize/xml-visualizer"
   category: "Visualize"
   description: "Visualize XML documents as interactive element hierarchy trees. Inspect attributes, namespace URIs, XPath pointers, and export SVG/PNG structure diagrams."
   keywords: ["XML Visualizer", "XML Tree Viewer", "Visualize XML", "XML Structure Viewer", "XML Hierarchy Viewer", "XML Diagram", "XML Graph"]
@@ -358,7 +358,7 @@
 
 - title: "Excel Visualizer"
   short_name: "Excel Visualizer"
-  url: "/visualize/excel-visualizer/"
+  url: "/visualize/excel-visualizer"
   category: "Visualize"
   description: "Convert Excel workbooks (.xlsx, .xls) into interactive dashboards and charts. Multi-sheet support, automatic column detection, and PNG/SVG export."
   keywords: ["Excel Visualizer", "Excel Chart Generator", "Excel Dashboard", "Spreadsheet Charts", "Visualize Excel", "Excel Graph Generator", "Excel Data Visualization"]
@@ -369,7 +369,7 @@
 
 - title: "Flowchart Builder"
   short_name: "Flowchart Builder"
-  url: "/visualize/flowchart-builder/"
+  url: "/visualize/flowchart-builder"
   category: "Visualize"
   description: "Create, edit, organize, and export flowcharts, workflow diagrams, org charts, and process maps in your browser. Drag-and-drop shapes, auto-connectors, templates, and PNG/SVG/JSON exports."
   keywords: ["flow chart builder", "flowchart builder", "online flowchart builder", "flowchart maker", "flow chart maker", "create flowchart online", "workflow builder", "workflow diagram", "process flow builder", "org chart builder"]
@@ -380,7 +380,7 @@
 
 - title: "Correlation Heatmap"
   short_name: "Correlation Heatmap"
-  url: "/visualize/correlation-heatmap/"
+  url: "/visualize/correlation-heatmap"
   category: "Visualize"
   description: "Calculate correlation matrices (Pearson, Spearman, Kendall) and visualize variable relationships with interactive heatmaps. Multi-format imports and PNG/SVG/CSV exports."
   keywords: ["correlation heatmap", "correlation matrix", "correlation matrix generator", "correlation analysis", "Pearson correlation", "Spearman correlation", "Kendall correlation", "feature correlation"]
@@ -391,7 +391,7 @@
 
 - title: "YAML Visualizer"
   short_name: "YAML Visualizer"
-  url: "/visualize/yaml-visualizer/"
+  url: "/visualize/yaml-visualizer"
   category: "Visualize"
   description: "Transform YAML configuration files into interactive visual trees. Inspect nested mappings, sequences, node paths, statistics, and export diagrams."
   keywords: ["YAML Visualizer", "Visualize YAML", "YAML Tree Viewer", "YAML Structure Viewer", "YAML Hierarchy Viewer", "YAML Diagram", "YAML Explorer"]
@@ -402,7 +402,7 @@
 
 - title: "Word Cloud Generator"
   short_name: "Word Cloud Generator"
-  url: "/visualize/word-cloud-generator/"
+  url: "/visualize/word-cloud-generator"
   category: "Visualize"
   description: "Transform text documents and datasets into interactive word clouds, generate word frequency analysis, bigrams, trigrams, and export high-res PNG, SVG, CSV, Excel, and HTML reports."
   keywords: ["word cloud generator", "word cloud maker", "online word cloud", "word frequency", "keyword cloud", "text visualization", "word frequency analyzer", "word visualization", "text analytics", "keyword visualization"]

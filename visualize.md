@@ -1,8 +1,8 @@
 ---
 layout: main
 title: "Visualize Tools - Interactive Charts & Heatmaps | DataFrog"
-description: "Explore browser-based visualization tools for CSV, Excel, JSON, XML, YAML, flowcharts, word clouds, and correlation heatmaps locally 100% free, fast, and pr..."
-permalink: /visualize
+description: "Free browser-based data visualization tools. Create charts, flowcharts, correlation heatmaps, & word clouds from CSV & JSON data 100% locally in browser."
+permalink: /visualize/
 is_category: true
 category_name: "Visualize"
 ---
@@ -34,7 +34,7 @@ category_name: "Visualize"
   <section style="margin-bottom: 3.5rem;">
     <div id="category-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
       {% for tool in category_tools %}
-        <div class="category-tool-card" data-title="{{ tool.title | lowercase }}" data-keywords="{{ tool.keywords | join: ' ' | lowercase }}" data-desc="{{ tool.description | lowercase }}"
+        <div class="category-tool-card" data-title="{{ tool.title | downcase }}" data-keywords="{{ tool.keywords | join: ' ' | downcase }}" data-desc="{{ tool.description | downcase }}"
              style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.75rem; display: flex; flex-direction: column;">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
             <span style="font-size: 1.75rem;">{{ tool.icon | default: "📈" }}</span>
@@ -60,24 +60,9 @@ category_name: "Visualize"
     </div>
   </section>
 
-  <!-- Related Blog Posts -->
-  <section style="margin-bottom: 3.5rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem;">Related Articles &amp; Guides</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
-      {% for post in site.posts limit:3 %}
-        <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
-          <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">
-            <a href="{{ post.url }}" style="color: #0f172a; text-decoration: none;">{{ post.title }}</a>
-          </h3>
-          <p style="color: #64748b; font-size: 0.85rem; line-height: 1.5;">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
-        </article>
-      {% endfor %}
-    </div>
-  </section>
-
   <!-- Category FAQ -->
   <section style="max-width: 850px; margin: 0 auto;">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem; text-align: center;">Visualize Tools FAQ</h2>
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem; text-align: center;">Visualization FAQ</h2>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; cursor: pointer;">
         <summary style="font-weight: 600; color: #0f172a;">What are Visualize Tools?</summary>

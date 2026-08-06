@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Terms of Service - Usage Rules & Privacy Scope | DataFrog"
-description: "Read the DataFrog.tools Terms of Service. Understand rules for using our browser-based data inspection, analysis, and cleaning tools 100% free, fast, and pr..."
+description: "Terms of service for DataFrog.tools. Read our terms & conditions for using our free browser-based data inspection, analysis, & conversion tools online."
 permalink: /terms-of-service
 keywords: "DataFrog terms of service, terms of use, privacy first terms, client side data tool terms"
 ---

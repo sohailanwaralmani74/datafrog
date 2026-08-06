@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Mastering JSON Schema Validation: Complete Guide & Best P..."
-description: "Learn JSON Schema validation (Draft-07 & 2020-12). Master property constraints, $ref composition, error debugging, and instant browser testing 100% free, fa..."
+title: "Mastering JSON Schema Validation: Complete Guide"
+description: "Learn JSON Schema validation (Draft-07 & 2020-12). Master property constraints, $ref composition, error debugging, and instant browser testing 100% free."
 excerpt: "Master JSON Schema validation from fundamentals to Draft 2020-12. Discover property constraints, array validation, schema composition ($ref, allOf, oneOf), and instant browser debugging."
 keywords: "JSON Schema Validation, Validate JSON Schema, JSON Schema Draft 2020-12, JSON Schema Checker, JSON Schema Best Practices, JSON Schema Tutorial"
 author: "DataFrog Engineering Team"
@@ -9,9 +9,9 @@ date: 2026-08-05
 categories: ["Validate", "Tutorials"]
 tags: ["JSON", "JSON Schema", "Data Validation", "Developer Tools"]
 image: "/assets/img/json-schema-validation-featured.jpg"
-canonical: "https://datafrog.tools/blog/mastering-json-schema-validation/"
+canonical: "https://datafrog.tools/blog/mastering-json-schema-validation"
 sitemap: true
-permalink: /blog/mastering-json-schema-validation/
+permalink: /blog/mastering-json-schema-validation
 ---
 
 <!-- ═══════════════════════════════════════════════════
@@ -208,7 +208,7 @@ permalink: /blog/mastering-json-schema-validation/
     </div>
 
     <p>
-      Developers can use the browser-based <a href="/validate/json-validator/" style="color: #2563eb; font-weight: 600;">JSON Validator</a> to paste sample payloads and verify syntax compliance instantly before deploying backend code.
+      Developers can use the browser-based <a href="/validate/json-validator" style="color: #2563eb; font-weight: 600;">JSON Validator</a> to paste sample payloads and verify syntax compliance instantly before deploying backend code.
     </p>
   </section>
 
@@ -309,7 +309,7 @@ permalink: /blog/mastering-json-schema-validation/
     </table>
 
     <p>
-      If you need to verify whether your JSON data adheres to these constraints or analyze payload depth metrics, check out our related tools like the <a href="/inspect/json-viewer/" style="color: #2563eb; font-weight: 600;">JSON Viewer</a> and <a href="/analyze/json-analyzer/" style="color: #2563eb; font-weight: 600;">JSON Analyzer</a>.
+      If you need to verify whether your JSON data adheres to these constraints or analyze payload depth metrics, check out our related tools like the <a href="/inspect/json-viewer" style="color: #2563eb; font-weight: 600;">JSON Viewer</a> and <a href="/analyze/json-analyzer" style="color: #2563eb; font-weight: 600;">JSON Analyzer</a>.
     </p>
   </section>
 
@@ -371,7 +371,7 @@ permalink: /blog/mastering-json-schema-validation/
 
     <div style="margin: 2rem 0; text-align: center;">
       <img src="/assets/img/json-schema-workflow-diagram.jpg" 
-           alt="JSON Schema validation pipeline workflow diagram showing JSON payload input, schema rules evaluation, and browser local validation results" 
+           alt="JSON Schema validation pipeline workflow diagram." 
            loading="lazy"
            style="width: 100%; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: 0 4px 14px rgba(0,0,0,0.05);" />
       <span style="display: block; font-size: 0.85rem; color: #64748b; margin-top: 0.5rem; font-style: italic;">
@@ -380,7 +380,7 @@ permalink: /blog/mastering-json-schema-validation/
     </div>
 
     <p>
-      When validating client payloads in <a href="/validate/json-validator/" style="color: #2563eb; font-weight: 600;">DataFrog's JSON Validator</a>, the underlying engine parses the document in browser memory, evaluates object trees recursively, and pinpoints exact error line locations if the JSON violates structural rules.
+      When validating client payloads in <a href="/validate/json-validator" style="color: #2563eb; font-weight: 600;">DataFrog's JSON Validator</a>, the underlying engine parses the document in browser memory, evaluates object trees recursively, and pinpoints exact error line locations if the JSON violates structural rules.
     </p>
   </section>
 
@@ -510,11 +510,11 @@ permalink: /blog/mastering-json-schema-validation/
     </p>
 
     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="/validate/json-validator/" 
+      <a href="/validate/json-validator" 
          style="padding: 0.85rem 1.75rem; background: #2563eb; color: #ffffff; font-weight: 700; border-radius: 8px; text-decoration: none; font-size: 0.95rem;">
         ✅ Launch JSON Validator
       </a>
-      <a href="/inspect/json-viewer/" 
+      <a href="/inspect/json-viewer" 
          style="padding: 0.85rem 1.75rem; background: rgba(255,255,255,0.1); color: #ffffff; font-weight: 600; border-radius: 8px; text-decoration: none; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2);">
         🔍 JSON Viewer
       </a>

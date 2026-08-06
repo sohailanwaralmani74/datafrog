@@ -1,8 +1,8 @@
 ---
 layout: main
 title: "Analyze Tools - Dataset Profiling & Statistics | DataFrog"
-description: "Explore browser-based dataset analysis tools for CSV, Excel, JSON, XML, YAML, and bank statements. Compute metrics and profile data 100% free, fast, and pri..."
-permalink: /analyze
+description: "Free browser-based data analysis tools. Profile datasets, calculate column statistics, analyze JSON, & find duplicate records 100% locally in browser."
+permalink: /analyze/
 is_category: true
 category_name: "Analyze"
 ---
@@ -12,7 +12,7 @@ category_name: "Analyze"
   <!-- Header -->
   <header style="margin-bottom: 2.5rem; text-align: center;">
     <span style="font-size: 3rem; display: block; margin-bottom: 0.5rem;">📊</span>
-    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Analyze Tools</h1>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Analyz Tools</h1>
     <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6;">
       Statistical summaries, dataset profiling, field frequency distributions, column metrics, and pattern analyzers — processed 100% locally in your browser.
     </p>
@@ -34,7 +34,7 @@ category_name: "Analyze"
   <section style="margin-bottom: 3.5rem;">
     <div id="category-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
       {% for tool in category_tools %}
-        <div class="category-tool-card" data-title="{{ tool.title | lowercase }}" data-keywords="{{ tool.keywords | join: ' ' | lowercase }}" data-desc="{{ tool.description | lowercase }}"
+        <div class="category-tool-card" data-title="{{ tool.title | downcase }}" data-keywords="{{ tool.keywords | join: ' ' | downcase }}" data-desc="{{ tool.description | downcase }}"
              style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.75rem; display: flex; flex-direction: column;">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
             <span style="font-size: 1.75rem;">{{ tool.icon | default: "📊" }}</span>
@@ -60,24 +60,9 @@ category_name: "Analyze"
     </div>
   </section>
 
-  <!-- Related Blog Posts -->
-  <section style="margin-bottom: 3.5rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem;">Related Articles &amp; Guides</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
-      {% for post in site.posts limit:3 %}
-        <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
-          <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">
-            <a href="{{ post.url }}" style="color: #0f172a; text-decoration: none;">{{ post.title }}</a>
-          </h3>
-          <p style="color: #64748b; font-size: 0.85rem; line-height: 1.5;">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
-        </article>
-      {% endfor %}
-    </div>
-  </section>
-
   <!-- Category FAQ -->
   <section style="max-width: 850px; margin: 0 auto;">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem; text-align: center;">Analyze Tools FAQ</h2>
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem; text-align: center;">Analyzation FAQ</h2>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; cursor: pointer;">
         <summary style="font-weight: 600; color: #0f172a;">What are Analyze Tools?</summary>

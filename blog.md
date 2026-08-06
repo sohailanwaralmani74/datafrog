@@ -1,8 +1,8 @@
 ---
 layout: main
 title: "Data Intelligence Blog — Tutorials & Guides DataFrog"
-description: "Read expert data engineering guides, JSON Schema tutorials, CSV profiling tips, XML tree analysis, and local browser data processing best practices."
-permalink: /blog
+description: "Data engineering blog by DataFrog.tools. Read helpful tutorials & guides on JSON Schema validation, data profiling, file parsing, & browser utilities."
+permalink: /blog/
 sitemap: true
 ---
 

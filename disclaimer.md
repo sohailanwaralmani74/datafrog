@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Disclaimer - Terms of Use for DataFrog.tools | DataFrog"
-description: "Read the DataFrog.tools disclaimer. Understand the scope, privacy guarantees, and usage terms of browser-based data processing tools 100% free, fast, and pr..."
+description: "Disclaimer for DataFrog.tools. Read our client-side execution policies, tool usage guidelines, liability terms, & browser data processing terms online."
 permalink: /disclaimer
 keywords: "DataFrog disclaimer, client side tool disclaimer, browser computational terms"
 ---
