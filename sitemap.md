@@ -16,11 +16,11 @@ keywords: "DataFrog sitemap, site directory, all tools list"
     <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Core Categories</h2>
     <ul style="line-height: 2; padding-left: 1.25rem;">
       <li><a href="/" style="color: var(--primary);">Home Page</a></li>
-      <li><a href="/inspect" style="color: var(--primary);">🔍 Inspect Category</a></li>
-      <li><a href="/analyze" style="color: var(--primary);">📊 Analyze Category</a></li>
-      <li><a href="/validate" style="color: var(--primary);">✅ Validate Category</a></li>
-      <li><a href="/compare" style="color: var(--primary);">⚖️ Compare Category</a></li>
-      <li><a href="/visualize" style="color: var(--primary);">📈 Visualize Category</a></li>
+      <li><a href="/inspect/" style="color: var(--primary);">🔍 Inspect Category</a></li>
+      <li><a href="/analyze/" style="color: var(--primary);">📊 Analyze Category</a></li>
+      <li><a href="/validate/" style="color: var(--primary);">✅ Validate Category</a></li>
+      <li><a href="/compare/" style="color: var(--primary);">⚖️ Compare Category</a></li>
+      <li><a href="/visualize/" style="color: var(--primary);">📈 Visualize Category</a></li>
     </ul>
   </section>
 
@@ -29,7 +29,7 @@ keywords: "DataFrog sitemap, site directory, all tools list"
     <ul style="line-height: 2; padding-left: 1.25rem;">
       <li><a href="/about-us" style="color: var(--primary);">About Us</a></li>
       <li><a href="/contact-us" style="color: var(--primary);">Contact Us</a></li>
-      <li><a href="/blog" style="color: var(--primary);">Blog</a></li>
+      <li><a href="/blog/" style="color: var(--primary);">Blog</a></li>
       <li><a href="/privacy-policy" style="color: var(--primary);">Privacy Policy</a></li>
       <li><a href="/terms-of-service" style="color: var(--primary);">Terms of Service</a></li>
       <li><a href="/disclaimer" style="color: var(--primary);">Disclaimer</a></li>
