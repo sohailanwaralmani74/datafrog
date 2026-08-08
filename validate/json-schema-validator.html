@@ -1,0 +1,1444 @@
+---
+layout: main
+title: "JSON Schema Validator - Validate JSON Against Schema"
+short_name: "JSON Schema Validator"
+description: "Validate JSON against JSON Schema online with instant error reporting, schema tree explorer, draft detection, and total 100% complete client-side privacy."
+keywords: "json schema validator, json schema validation, validate json schema, validate json against schema, json schema checker, json schema validation online"
+category: "Validate"
+permalink: /validate/json-schema-validator
+---
+
+<!-- External Ajv Library for high-accuracy JSON Schema draft support -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.12.0/ajv2020.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv-formats/2.1.1/ajv-formats.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #eff6ff; color: #2563eb; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #bfdbfe;">
+      <span>📋</span> Privacy-First JSON Schema Validation Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      JSON Schema Validator
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 750px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Validate structured JSON data against JSON Schema definitions locally in your browser. Inspect syntax errors, schema draft compatibility, error paths, and data statistics with zero server processing.
+    </p>
+
+    <!-- Global Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.6rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Client-Side Privacy: Your JSON data and schemas never leave your device.</span>
+    </div>
+  </div>
+
+  <!-- Global Action & Preset Bar -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      
+      <!-- Preset Scenarios -->
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <label for="sample-select" style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Sample Scenarios:</label>
+        <select id="sample-select" style="padding: 0.45rem 0.85rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.875rem; background: #f8fafc; color: #0f172a; cursor: pointer; font-weight: 500;">
+          <option value="simple-valid">1. Simple Valid User Object</option>
+          <option value="missing-required">2. Invalid: Missing Required Field</option>
+          <option value="type-mismatch">3. Invalid: Data Type Mismatch</option>
+          <option value="format-email">4. Invalid: Email Format Violation</option>
+          <option value="array-constraints">5. Array Constraints (minItems & unique)</option>
+          <option value="nested-object">6. Nested Address & Customer Schema</option>
+          <option value="enum-const">7. Enum & Const Value Violation</option>
+          <option value="oneof-composition">8. Composition (oneOf / anyOf Choice)</option>
+          <option value="additional-props">9. additionalProperties Rejection</option>
+        </select>
+        <button onclick="loadSelectedSample()" style="padding: 0.45rem 0.85rem; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          Load Sample
+        </button>
+      </div>
+
+      <!-- Execution Buttons -->
+      <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+        <button onclick="runValidation()" style="padding: 0.55rem 1.35rem; background: #0f172a; color: #ffffff; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          ▶ Validate Now
+        </button>
+        <button onclick="swapPanels()" style="padding: 0.55rem 1rem; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          ⇄ Swap Panels
+        </button>
+        <button onclick="clearAllInput()" style="padding: 0.55rem 1rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          🗑️ Clear All
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Validation Options -->
+    <div style="margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; font-size: 0.85rem; color: #475569;">
+      <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        <input type="checkbox" id="opt-validate-formats" checked onchange="runValidation()">
+        <strong>Validate Formats</strong> (email, date, ipv4, uuid, uri)
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        <input type="checkbox" id="opt-all-errors" checked onchange="runValidation()">
+        <strong>Show All Errors</strong> (report every failure)
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        <input type="checkbox" id="opt-strict-mode" onchange="runValidation()">
+        <strong>Strict Mode</strong> (disallow unknown keywords)
+      </label>
+    </div>
+  </div>
+
+  <!-- Dual Input Workspace Grid (Schema Left, Data Right) -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+    
+    <!-- Left Panel: JSON Schema -->
+    <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.25rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-weight: 800; font-size: 1.05rem; color: #0f172a;">1. JSON Schema Input</span>
+          <span id="schema-syntax-badge" style="font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px; background: #f1f5f9; color: #475569;">Draft-07</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <button onclick="formatSchema()" title="Prettify JSON Schema" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-weight: 600;">Format</button>
+          <button onclick="minifySchema()" title="Minify JSON Schema" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-weight: 600;">Minify</button>
+          <button onclick="clearSchema()" title="Clear Schema" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; cursor: pointer; font-weight: 600;">Clear</button>
+        </div>
+      </div>
+
+      <!-- File Upload & Drag Target -->
+      <div id="schema-dropzone" style="border: 2px dashed #cbd5e1; border-radius: 10px; padding: 0.6rem; text-align: center; margin-bottom: 0.75rem; background: #f8fafc; transition: border-color 0.2s;">
+        <span style="font-size: 0.8rem; color: #64748b;">Drag &amp; drop schema file here or </span>
+        <label style="color: #2563eb; font-weight: 700; font-size: 0.8rem; cursor: pointer; text-decoration: underline;">
+          browse file
+          <input type="file" id="schema-file-input" accept=".json,.schema" style="display: none;" onchange="handleSchemaFileUpload(event)">
+        </label>
+      </div>
+
+      <!-- Textarea Editor -->
+      <textarea id="schema-input" rows="16" placeholder="Paste or type your JSON Schema definition here..."
+                style="width: 100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.45; padding: 0.85rem; border-radius: 10px; border: 1px solid #cbd5e1; background: #0f172a; color: #f8fafc; resize: vertical; box-sizing: border-box;"
+                oninput="debouncedValidate()"></textarea>
+
+      <!-- Status Indicator bar below textarea -->
+      <div id="schema-status-bar" style="margin-top: 0.6rem; font-size: 0.8rem; color: #64748b; display: flex; justify-content: space-between;">
+        <span id="schema-line-count">Lines: 0</span>
+        <span id="schema-draft-name">Detected: Draft-07</span>
+      </div>
+    </div>
+
+    <!-- Right Panel: JSON Data -->
+    <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.25rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-weight: 800; font-size: 1.05rem; color: #0f172a;">2. JSON Data Input</span>
+          <span id="data-syntax-badge" style="font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px; background: #f1f5f9; color: #475569;">JSON</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <button onclick="formatData()" title="Prettify JSON Data" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-weight: 600;">Format</button>
+          <button onclick="minifyData()" title="Minify JSON Data" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-weight: 600;">Minify</button>
+          <button onclick="clearData()" title="Clear Data" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; cursor: pointer; font-weight: 600;">Clear</button>
+        </div>
+      </div>
+
+      <!-- File Upload & Drag Target -->
+      <div id="data-dropzone" style="border: 2px dashed #cbd5e1; border-radius: 10px; padding: 0.6rem; text-align: center; margin-bottom: 0.75rem; background: #f8fafc; transition: border-color 0.2s;">
+        <span style="font-size: 0.8rem; color: #64748b;">Drag &amp; drop JSON data file here or </span>
+        <label style="color: #2563eb; font-weight: 700; font-size: 0.8rem; cursor: pointer; text-decoration: underline;">
+          browse file
+          <input type="file" id="data-file-input" accept=".json,.txt" style="display: none;" onchange="handleDataFileUpload(event)">
+        </label>
+      </div>
+
+      <!-- Textarea Editor -->
+      <textarea id="data-input" rows="16" placeholder="Paste or type your target JSON data payload here..."
+                style="width: 100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.45; padding: 0.85rem; border-radius: 10px; border: 1px solid #cbd5e1; background: #0f172a; color: #f8fafc; resize: vertical; box-sizing: border-box;"
+                oninput="debouncedValidate()"></textarea>
+
+      <!-- Status Indicator bar below textarea -->
+      <div id="data-status-bar" style="margin-top: 0.6rem; font-size: 0.8rem; color: #64748b; display: flex; justify-content: space-between;">
+        <span id="data-line-count">Lines: 0</span>
+        <span id="data-size-bytes">Size: 0 B</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Main Validation Results Container -->
+  <div id="validation-results-panel" style="margin-bottom: 2.5rem;">
+    
+    <!-- Prominent Status Banner -->
+    <div id="result-status-banner" style="background: #ffffff; border: 2px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div id="result-icon-badge" style="width: 52px; height: 52px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+          ⚡
+        </div>
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <h2 id="result-status-title" style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin: 0;">
+              Ready for Validation
+            </h2>
+            <span id="result-status-tag" style="font-size: 0.8rem; font-weight: 800; padding: 0.2rem 0.75rem; border-radius: 9999px; background: #f1f5f9; color: #475569;">
+              STANDBY
+            </span>
+          </div>
+          <p id="result-status-desc" style="color: #64748b; font-size: 0.9rem; margin-top: 0.25rem; margin-bottom: 0;">
+            Provide a JSON Schema and target JSON data payload above to run instant validation.
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align: right; font-size: 0.85rem; color: #64748b; line-height: 1.6;">
+        <div>Validation Time: <strong id="val-time-ms">0 ms</strong></div>
+        <div>Draft Compatibility: <strong id="val-draft-badge">Draft-07</strong></div>
+      </div>
+    </div>
+
+    <!-- Summary Metric Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Total Errors</div>
+        <div id="stat-total-errors" style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Required Errors</div>
+        <div id="stat-req-errors" style="font-size: 1.8rem; font-weight: 800; color: #ea580c; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Type Mismatches</div>
+        <div id="stat-type-errors" style="font-size: 1.8rem; font-weight: 800; color: #2563eb; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Format Failures</div>
+        <div id="stat-fmt-errors" style="font-size: 1.8rem; font-weight: 800; color: #9333ea; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Data Payload Size</div>
+        <div id="stat-data-bytes" style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">0 B</div>
+      </div>
+    </div>
+
+    <!-- Inspector Tabs Navigation -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+      
+      <div style="display: flex; background: #f8fafc; border-bottom: 1px solid #e2e8f0; overflow-x: auto;">
+        <button onclick="switchTab('tab-errors')" id="btn-tab-errors" class="tab-btn active-tab" style="padding: 0.85rem 1.25rem; font-weight: 700; font-size: 0.9rem; border: none; background: #ffffff; border-bottom: 3px solid #2563eb; color: #2563eb; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+          ⚠️ Error Explorer <span id="badge-tab-errors" style="background: #ef4444; color: #ffffff; font-size: 0.75rem; padding: 0.1rem 0.45rem; border-radius: 9999px;">0</span>
+        </button>
+        <button onclick="switchTab('tab-schema-tree')" id="btn-tab-schema-tree" class="tab-btn" style="padding: 0.85rem 1.25rem; font-weight: 700; font-size: 0.9rem; border: none; background: transparent; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+          🌳 Schema Explorer
+        </button>
+        <button onclick="switchTab('tab-data-tree')" id="btn-tab-data-tree" class="tab-btn" style="padding: 0.85rem 1.25rem; font-weight: 700; font-size: 0.9rem; border: none; background: transparent; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+          🗂️ Data Tree Explorer
+        </button>
+        <button onclick="switchTab('tab-stats')" id="btn-tab-stats" class="tab-btn" style="padding: 0.85rem 1.25rem; font-weight: 700; font-size: 0.9rem; border: none; background: transparent; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+          📊 Data Statistics &amp; Coverage
+        </button>
+      </div>
+
+      <!-- Tab Content 1: Error Explorer -->
+      <div id="tab-errors" class="tab-pane" style="padding: 1.5rem; display: block;">
+        
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <label style="font-weight: 700; font-size: 0.85rem; color: #475569;">Filter Error Category:</label>
+            <select id="filter-error-category" onchange="renderErrorsList()" style="padding: 0.35rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+              <option value="all">All Categories</option>
+              <option value="Required">Required Properties</option>
+              <option value="Type">Type Mismatches</option>
+              <option value="Format">Format Failures</option>
+              <option value="Pattern">Pattern / Regex</option>
+              <option value="Minimum/Maximum">Minimum / Maximum</option>
+              <option value="Length/Items">String &amp; Array Length</option>
+              <option value="Enum/Const">Enum &amp; Const</option>
+              <option value="Composition">Composition (oneOf/anyOf)</option>
+              <option value="Additional Properties">Additional Properties</option>
+            </select>
+          </div>
+
+          <!-- Export Buttons -->
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <button onclick="exportCSVReport()" style="padding: 0.35rem 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Export CSV Errors</button>
+            <button onclick="exportJSONReport()" style="padding: 0.35rem 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Export JSON Report</button>
+            <button onclick="copySummaryReport()" style="padding: 0.35rem 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Copy Summary</button>
+          </div>
+        </div>
+
+        <!-- Detailed Error List Container -->
+        <div id="errors-container" style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="text-align: center; padding: 2rem; color: #64748b;">
+            Run validation to view detailed schema error paths, failed keywords, and expected values.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tab Content 2: Schema Tree Explorer -->
+      <div id="tab-schema-tree" class="tab-pane" style="padding: 1.5rem; display: none;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <div style="font-weight: 700; font-size: 0.95rem; color: #0f172a;">JSON Schema Visual Tree Representation</div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="expandSchemaTree()" style="padding: 0.3rem 0.65rem; font-size: 0.8rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; cursor: pointer;">Expand All</button>
+            <button onclick="collapseSchemaTree()" style="padding: 0.3rem 0.65rem; font-size: 0.8rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; cursor: pointer;">Collapse All</button>
+          </div>
+        </div>
+        <div id="schema-tree-view" style="font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.875rem; line-height: 1.6; background: #f8fafc; padding: 1.25rem; border-radius: 10px; border: 1px solid #e2e8f0; max-height: 500px; overflow-y: auto;">
+          <span style="color: #64748b;">Schema tree will render here after loading valid schema JSON.</span>
+        </div>
+      </div>
+
+      <!-- Tab Content 3: Data Tree Explorer -->
+      <div id="tab-data-tree" class="tab-pane" style="padding: 1.5rem; display: none;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <div style="font-weight: 700; font-size: 0.95rem; color: #0f172a;">Target JSON Payload Tree Explorer</div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="expandDataTree()" style="padding: 0.3rem 0.65rem; font-size: 0.8rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; cursor: pointer;">Expand All</button>
+            <button onclick="collapseDataTree()" style="padding: 0.3rem 0.65rem; font-size: 0.8rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; cursor: pointer;">Collapse All</button>
+          </div>
+        </div>
+        <div id="data-tree-view" style="font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.875rem; line-height: 1.6; background: #f8fafc; padding: 1.25rem; border-radius: 10px; border: 1px solid #e2e8f0; max-height: 500px; overflow-y: auto;">
+          <span style="color: #64748b;">JSON data tree will render here after loading valid JSON payload.</span>
+        </div>
+      </div>
+
+      <!-- Tab Content 4: Statistics & Coverage -->
+      <div id="tab-stats" class="tab-pane" style="padding: 1.5rem; display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+          
+          <!-- Payload Stats -->
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem; border-bottom: 2px solid #cbd5e1; padding-bottom: 0.5rem;">
+              JSON Data Statistics
+            </h3>
+            <table style="width: 100%; font-size: 0.875rem; border-collapse: collapse;">
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Total Character Count:</td><td id="stat-char-count" style="font-weight: 700; text-align: right; color: #0f172a;">0</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Objects Count:</td><td id="stat-obj-count" style="font-weight: 700; text-align: right; color: #0f172a;">0</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Arrays Count:</td><td id="stat-arr-count" style="font-weight: 700; text-align: right; color: #0f172a;">0</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Properties Count:</td><td id="stat-prop-count" style="font-weight: 700; text-align: right; color: #0f172a;">0</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Max Nesting Depth:</td><td id="stat-max-depth" style="font-weight: 700; text-align: right; color: #0f172a;">0</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Strings / Numbers:</td><td id="stat-str-num-count" style="font-weight: 700; text-align: right; color: #0f172a;">0 / 0</td></tr>
+              <tr><td style="padding: 0.4rem 0; color: #475569;">Booleans / Nulls:</td><td id="stat-bool-null-count" style="font-weight: 700; text-align: right; color: #0f172a;">0 / 0</td></tr>
+            </table>
+          </div>
+
+          <!-- Schema Coverage & Constraints -->
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem; border-bottom: 2px solid #cbd5e1; padding-bottom: 0.5rem;">
+              Schema Coverage &amp; Rules
+            </h3>
+            <table style="width: 100%; font-size: 0.875rem; border-collapse: collapse;">
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Defined Properties:</td><td id="cov-defined-props" style="font-weight: 700; text-align: right; color: #0f172a;">0</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Required Properties:</td><td id="cov-req-props" style="font-weight: 700; text-align: right; color: #0f172a;">0</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Required Satisfied / Missing:</td><td id="cov-req-sat-miss" style="font-weight: 700; text-align: right; color: #0f172a;">0 / 0</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.4rem 0; color: #475569;">Definitions &amp; Local $ref:</td><td id="cov-defs-count" style="font-weight: 700; text-align: right; color: #0f172a;">0</td></tr>
+              <tr><td style="padding: 0.4rem 0; color: #475569;">Additional Properties Status:</td><td id="cov-add-props-status" style="font-weight: 700; text-align: right; color: #0f172a;">Allowed</td></tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Educational Article & Documentation -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-bottom: 2rem;">
+    
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
+      What Is a JSON Schema Validator?
+    </h2>
+    <p>
+      A <strong>JSON Schema Validator</strong> is an automated data verification tool that evaluates structured JSON payloads against a formal JSON Schema definition. While standard JSON validators only check whether a text string satisfies raw JSON syntax rules, a JSON Schema validator verifies whether the data satisfies domain-specific structural constraints, data types, required fields, value ranges, and format patterns.
+    </p>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      How JSON Schema Validation Works
+    </h2>
+    <p>
+      JSON Schema validation operates in a two-stage pipeline:
+    </p>
+    <ol style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
+      <li><strong>Syntax Verification:</strong> Both the JSON Schema document and the target JSON payload are parsed to ensure they are valid JSON constructs. Any missing brackets, trailing commas, or quotes halt execution with explicit line and column pointers.</li>
+      <li><strong>Structural Constraint Evaluation:</strong> The validation engine recursively traverses the data instance alongside the schema rules tree, evaluating keywords such as <code>type</code>, <code>required</code>, <code>properties</code>, <code>pattern</code>, <code>minimum</code>, <code>maximum</code>, <code>enum</code>, and <code>format</code>.</li>
+    </ol>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      Understanding Common JSON Schema Validation Errors
+    </h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Required Property Failures</h3>
+        <p style="font-size: 0.9rem; color: #64748b; margin: 0;">
+          Occurs when an object instance lacks one or more keys specified in the schema's <code>required</code> array.
+        </p>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Type Mismatch Errors</h3>
+        <p style="font-size: 0.9rem; color: #64748b; margin: 0;">
+          Triggered when a field's primitive type does not match the <code>type</code> keyword (e.g. string provided where integer is expected).
+        </p>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Format &amp; Pattern Errors</h3>
+        <p style="font-size: 0.9rem; color: #64748b; margin: 0;">
+          Evaluates string values against standard semantic formats (such as <code>email</code>, <code>date-time</code>, <code>uuid</code>, <code>ipv4</code>) or custom regex patterns.
+        </p>
+      </div>
+    </div>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      Supported JSON Schema Keywords &amp; Drafts
+    </h2>
+    <p>
+      Our browser validation workspace supports modern JSON Schema draft declarations, including <strong>Draft-07</strong>, <strong>Draft-06</strong>, <strong>Draft-04</strong>, and <strong>2020-12</strong>. Key supported keywords include:
+    </p>
+    <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
+      <li><code>$schema</code>, <code>$id</code>, <code>$ref</code>, <code>$defs</code>, <code>definitions</code></li>
+      <li><code>type</code>, <code>enum</code>, <code>const</code>, <code>properties</code>, <code>required</code>, <code>additionalProperties</code></li>
+      <li><code>items</code>, <code>prefixItems</code>, <code>minItems</code>, <code>maxItems</code>, <code>uniqueItems</code></li>
+      <li><code>minimum</code>, <code>maximum</code>, <code>exclusiveMinimum</code>, <code>exclusiveMaximum</code>, <code>multipleOf</code></li>
+      <li><code>minLength</code>, <code>maxLength</code>, <code>pattern</code>, <code>format</code></li>
+      <li><code>allOf</code>, <code>anyOf</code>, <code>oneOf</code>, <code>not</code>, <code>if</code>, <code>then</code>, <code>else</code></li>
+    </ul>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      100% Client-Side Privacy Guarantee
+    </h2>
+    <p>
+      Data security and confidential payload integrity are paramount. All JSON Schema parsing, syntax checks, and rule validations occur 100% locally within your client browser using JavaScript memory and Web Workers. No file payloads, schemas, or personal data are ever transmitted to any remote cloud server.
+    </p>
+
+    <!-- FAQ Section -->
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1.25rem;">
+      Frequently Asked Questions (FAQ)
+    </h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does this validator handle missing required fields?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          It identifies missing required keys by comparing object instance keys against the schema's <code>required</code> array, pinpointing the exact parent JSON path and instance location.
+        </p>
+      </details>
+
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What happens if the JSON Schema itself contains syntax errors?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          The tool validates the schema syntax first. If the schema is invalid, it reports <strong>INVALID SCHEMA</strong> with the exact line/column parsing error rather than producing misleading data validation results.
+        </p>
+      </details>
+
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Are local $ref definitions supported?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. Internal schema references pointing to <code>#/$defs/Name</code> or <code>#/definitions/Name</code> are resolved locally within the browser memory without network latency.
+        </p>
+      </details>
+    </div>
+
+  </article>
+
+</div>
+
+<!-- Application Logic JavaScript -->
+<script>
+// Sample Datasets & Schemas
+const SAMPLES = {
+  'simple-valid': {
+    schema: JSON.stringify({
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User Profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer" },
+        "name": { "type": "string", "minLength": 2 },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "user", "guest"] }
+      },
+      "required": ["id", "name", "email"]
+    }, null, 2),
+    data: JSON.stringify({
+      "id": 101,
+      "name": "Jane Doe",
+      "email": "jane.doe@example.com",
+      "role": "admin"
+    }, null, 2)
+  },
+  'missing-required': {
+    schema: JSON.stringify({
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "age": { "type": "integer" }
+      },
+      "required": ["username", "email", "age"]
+    }, null, 2),
+    data: JSON.stringify({
+      "username": "alex_99",
+      "email": "alex@example.com"
+      // Missing 'age'
+    }, null, 2)
+  },
+  'type-mismatch': {
+    schema: JSON.stringify({
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "product_id": { "type": "integer" },
+        "price": { "type": "number" },
+        "in_stock": { "type": "boolean" }
+      },
+      "required": ["product_id", "price", "in_stock"]
+    }, null, 2),
+    data: JSON.stringify({
+      "product_id": "P-10023", // Expected integer, received string
+      "price": 49.99,
+      "in_stock": "yes" // Expected boolean, received string
+    }, null, 2)
+  },
+  'format-email': {
+    schema: JSON.stringify({
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "contact_email": { "type": "string", "format": "email" },
+        "website": { "type": "string", "format": "uri" }
+      },
+      "required": ["contact_email"]
+    }, null, 2),
+    data: JSON.stringify({
+      "contact_email": "invalid-email-address", // Invalid email format
+      "website": "not-a-valid-uri"
+    }, null, 2)
+  },
+  'array-constraints': {
+    schema: JSON.stringify({
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "uniqueItems": true
+        }
+      },
+      "required": ["tags"]
+    }, null, 2),
+    data: JSON.stringify({
+      "tags": ["javascript", "javascript"] // Duplicate items violating uniqueItems
+    }, null, 2)
+  },
+  'nested-object': {
+    schema: JSON.stringify({
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "customer": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "address": {
+              "type": "object",
+              "properties": {
+                "street": { "type": "string" },
+                "zip": { "type": "string", "pattern": "^[0-9]{5}$" }
+              },
+              "required": ["street", "zip"]
+            }
+          },
+          "required": ["name", "address"]
+        }
+      },
+      "required": ["customer"]
+    }, null, 2),
+    data: JSON.stringify({
+      "customer": {
+        "name": "Acme Corp",
+        "address": {
+          "street": "123 Tech Way",
+          "zip": "9021" // Pattern failure: needs 5 digits
+        }
+      }
+    }, null, 2)
+  },
+  'enum-const': {
+    schema: JSON.stringify({
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "environment": { "type": "string", "enum": ["development", "staging", "production"] },
+        "apiVersion": { "const": "v2" }
+      },
+      "required": ["environment", "apiVersion"]
+    }, null, 2),
+    data: JSON.stringify({
+      "environment": "testing", // Not in enum
+      "apiVersion": "v1"       // Does not match const "v2"
+    }, null, 2)
+  },
+  'oneof-composition': {
+    schema: JSON.stringify({
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "payment": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "method": { "const": "credit_card" },
+                "cardNumber": { "type": "string", "minLength": 16 }
+              },
+              "required": ["method", "cardNumber"]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "method": { "const": "paypal" },
+                "paypalEmail": { "type": "string", "format": "email" }
+              },
+              "required": ["method", "paypalEmail"]
+            }
+          ]
+        }
+      },
+      "required": ["payment"]
+    }, null, 2),
+    data: JSON.stringify({
+      "payment": {
+        "method": "credit_card",
+        "cardNumber": "1234" // Too short (min 16)
+      }
+    }, null, 2)
+  },
+  'additional-props': {
+    schema: JSON.stringify({
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer" },
+        "name": { "type": "string" }
+      },
+      "required": ["id", "name"],
+      "additionalProperties": false
+    }, null, 2),
+    data: JSON.stringify({
+      "id": 501,
+      "name": "Server Alpha",
+      "extra_token": "xyz-123" // Rejected by additionalProperties: false
+    }, null, 2)
+  }
+};
+
+let currentValidationErrors = [];
+let debounceTimer = null;
+
+// Initialize Page
+document.addEventListener('DOMContentLoaded', () => {
+  setupDragAndDrop('schema-dropzone', 'schema-input');
+  setupDragAndDrop('data-dropzone', 'data-input');
+  loadSelectedSample();
+});
+
+function debouncedValidate() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(runValidation, 300);
+}
+
+function loadSelectedSample() {
+  const sel = document.getElementById('sample-select').value;
+  if (SAMPLES[sel]) {
+    document.getElementById('schema-input').value = SAMPLES[sel].schema;
+    document.getElementById('data-input').value = SAMPLES[sel].data;
+    runValidation();
+  }
+}
+
+function clearSchema() {
+  document.getElementById('schema-input').value = '';
+  updateLineCounts();
+}
+
+function clearData() {
+  document.getElementById('data-input').value = '';
+  updateLineCounts();
+}
+
+function clearAllInput() {
+  if (confirm('Clear both JSON Schema and JSON Data inputs?')) {
+    clearSchema();
+    clearData();
+    resetResultsUI();
+  }
+}
+
+function swapPanels() {
+  const s = document.getElementById('schema-input').value;
+  const d = document.getElementById('data-input').value;
+  document.getElementById('schema-input').value = d;
+  document.getElementById('data-input').value = s;
+  runValidation();
+}
+
+function formatSchema() {
+  try {
+    const val = document.getElementById('schema-input').value;
+    if (val.trim()) {
+      const obj = JSON.parse(val);
+      document.getElementById('schema-input').value = JSON.stringify(obj, null, 2);
+      runValidation();
+    }
+  } catch (e) {
+    alert('Invalid Schema JSON syntax: ' + e.message);
+  }
+}
+
+function minifySchema() {
+  try {
+    const val = document.getElementById('schema-input').value;
+    if (val.trim()) {
+      const obj = JSON.parse(val);
+      document.getElementById('schema-input').value = JSON.stringify(obj);
+      runValidation();
+    }
+  } catch (e) {
+    alert('Invalid Schema JSON syntax: ' + e.message);
+  }
+}
+
+function formatData() {
+  try {
+    const val = document.getElementById('data-input').value;
+    if (val.trim()) {
+      const obj = JSON.parse(val);
+      document.getElementById('data-input').value = JSON.stringify(obj, null, 2);
+      runValidation();
+    }
+  } catch (e) {
+    alert('Invalid JSON Data syntax: ' + e.message);
+  }
+}
+
+function minifyData() {
+  try {
+    const val = document.getElementById('data-input').value;
+    if (val.trim()) {
+      const obj = JSON.parse(val);
+      document.getElementById('data-input').value = JSON.stringify(obj);
+      runValidation();
+    }
+  } catch (e) {
+    alert('Invalid JSON Data syntax: ' + e.message);
+  }
+}
+
+function handleSchemaFileUpload(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      document.getElementById('schema-input').value = evt.target.result;
+      runValidation();
+    };
+    reader.readAsText(file);
+  }
+}
+
+function handleDataFileUpload(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      document.getElementById('data-input').value = evt.target.result;
+      runValidation();
+    };
+    reader.readAsText(file);
+  }
+}
+
+function setupDragAndDrop(dropzoneId, textareaId) {
+  const zone = document.getElementById(dropzoneId);
+  if (!zone) return;
+  
+  ['dragenter', 'dragover'].forEach(eventName => {
+    zone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      zone.style.borderColor = '#2563eb';
+      zone.style.background = '#eff6ff';
+    }, false);
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    zone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      zone.style.borderColor = '#cbd5e1';
+      zone.style.background = '#f8fafc';
+    }, false);
+  });
+
+  zone.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    if (files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        document.getElementById(textareaId).value = evt.target.result;
+        runValidation();
+      };
+      reader.readAsText(files[0]);
+    }
+  });
+}
+
+function updateLineCounts() {
+  const sStr = document.getElementById('schema-input').value;
+  const dStr = document.getElementById('data-input').value;
+  
+  const sLines = sStr ? sStr.split('\n').length : 0;
+  const dLines = dStr ? dStr.split('\n').length : 0;
+  const dBytes = new Blob([dStr]).size;
+
+  document.getElementById('schema-line-count').innerText = `Lines: ${sLines}`;
+  document.getElementById('data-line-count').innerText = `Lines: ${dLines}`;
+  document.getElementById('data-size-bytes').innerText = `Size: ${formatBytes(dBytes)}`;
+}
+
+function formatBytes(bytes) {
+  if (bytes === 0) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+// Core Validation Engine
+function runValidation() {
+  const startTime = performance.now();
+  updateLineCounts();
+  currentValidationErrors = [];
+
+  const schemaStr = document.getElementById('schema-input').value.trim();
+  const dataStr = document.getElementById('data-input').value.trim();
+
+  if (!schemaStr && !dataStr) {
+    resetResultsUI();
+    return;
+  }
+
+  // Stage 1: Parse JSON Schema Syntax
+  let schemaObj = null;
+  if (schemaStr) {
+    try {
+      schemaObj = JSON.parse(schemaStr);
+    } catch (e) {
+      renderStatusUI('INVALID SCHEMA', 'SCHEMA SYNTAX ERROR', `JSON Schema syntax error: ${e.message}`, '#ef4444', '#fef2f2', '#fca5a5', '❌');
+      renderSchemaSyntaxError(e);
+      return;
+    }
+  } else {
+    renderStatusUI('MISSING SCHEMA', 'EMPTY SCHEMA', 'Please provide a valid JSON Schema to validate data.', '#f59e0b', '#fffbeb', '#fcd34d', '⚠️');
+    return;
+  }
+
+  // Detect Schema Draft
+  const draftName = detectSchemaDraft(schemaObj);
+  document.getElementById('schema-draft-name').innerText = `Detected: ${draftName}`;
+  document.getElementById('schema-syntax-badge').innerText = draftName;
+  document.getElementById('val-draft-badge').innerText = draftName;
+
+  // Stage 2: Parse JSON Data Payload Syntax
+  let dataObj = null;
+  if (dataStr) {
+    try {
+      dataObj = JSON.parse(dataStr);
+    } catch (e) {
+      renderStatusUI('INVALID JSON', 'JSON SYNTAX ERROR', `Target JSON payload syntax error: ${e.message}`, '#ef4444', '#fef2f2', '#fca5a5', '❌');
+      renderJSONSyntaxError(e);
+      return;
+    }
+  } else {
+    renderStatusUI('MISSING DATA', 'EMPTY JSON DATA', 'Please provide a target JSON data payload to validate against the schema.', '#f59e0b', '#fffbeb', '#fcd34d', '⚠️');
+    return;
+  }
+
+  // Stage 3: Execute Schema Validation
+  const validateFormats = document.getElementById('opt-validate-formats').checked;
+  const showAllErrors = document.getElementById('opt-all-errors').checked;
+
+  let errors = [];
+  
+  // Use Ajv 2020/v8 if loaded via CDN
+  if (window.Ajv2020) {
+    try {
+      const ajv = new window.Ajv2020({
+        allErrors: showAllErrors,
+        strict: false,
+        validateFormats: validateFormats
+      });
+      if (window.ajvFormats) {
+        window.ajvFormats(ajv);
+      }
+      const validate = ajv.compile(schemaObj);
+      const valid = validate(dataObj);
+      if (!valid && validate.errors) {
+        errors = formatAjvErrors(validate.errors, dataObj);
+      }
+    } catch (ajvErr) {
+      // Fallback to built-in JS schema validator if Ajv fails on custom ref
+      errors = builtInSchemaValidator(schemaObj, dataObj, validateFormats);
+    }
+  } else {
+    // Fallback to built-in JS schema validator engine
+    errors = builtInSchemaValidator(schemaObj, dataObj, validateFormats);
+  }
+
+  const endTime = performance.now();
+  const valMs = Math.round(endTime - startTime);
+  document.getElementById('val-time-ms').innerText = `${valMs} ms`;
+
+  currentValidationErrors = errors;
+
+  if (errors.length === 0) {
+    renderStatusUI('VALID', 'VALID JSON DATA', 'JSON data strictly conforms to the supplied JSON Schema definition with 0 errors.', '#16a34a', '#f0fdf4', '#bbf7d0', '✅');
+  } else {
+    renderStatusUI('INVALID', `INVALID (${errors.length} ERRORS)`, `JSON data failed validation with ${errors.length} error(s). Review details below.`, '#dc2626', '#fef2f2', '#fca5a5', '❌');
+  }
+
+  // Render Stats & Trees
+  updateSummaryStats(errors, dataStr, dataObj, schemaObj);
+  renderErrorsList();
+  renderSchemaTree(schemaObj);
+  renderDataTree(dataObj);
+  calculateDataStatistics(dataStr, dataObj, schemaObj);
+}
+
+function detectSchemaDraft(schemaObj) {
+  if (!schemaObj || typeof schemaObj !== 'object') return 'Draft-07';
+  const schemaURI = schemaObj['$schema'] || '';
+  if (schemaURI.includes('2020-12')) return '2020-12';
+  if (schemaURI.includes('2019-09')) return '2019-09';
+  if (schemaURI.includes('draft-07')) return 'Draft-07';
+  if (schemaURI.includes('draft-06')) return 'Draft-06';
+  if (schemaURI.includes('draft-04')) return 'Draft-04';
+  return 'Not Specified (Draft-07)';
+}
+
+function formatAjvErrors(ajvErrors, dataObj) {
+  return ajvErrors.map((err, idx) => {
+    const instPath = err.instancePath || '';
+    const jsonPath = instPath ? '$' + instPath.replace(/\//g, '.') : '$';
+    const schemaPath = '#' + (err.schemaPath || '');
+    const keyword = err.keyword || 'validation';
+    
+    let category = 'Other';
+    if (keyword === 'required') category = 'Required';
+    else if (keyword === 'type') category = 'Type';
+    else if (keyword === 'format') category = 'Format';
+    else if (keyword === 'pattern') category = 'Pattern';
+    else if (['minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'multipleOf'].includes(keyword)) category = 'Minimum/Maximum';
+    else if (['minLength', 'maxLength', 'minItems', 'maxItems', 'uniqueItems', 'contains'].includes(keyword)) category = 'Length/Items';
+    else if (['enum', 'const'].includes(keyword)) category = 'Enum/Const';
+    else if (['oneOf', 'anyOf', 'allOf', 'not'].includes(keyword)) category = 'Composition';
+    else if (keyword === 'additionalProperties') category = 'Additional Properties';
+
+    const actualVal = getValueByPointer(dataObj, instPath);
+
+    return {
+      id: idx + 1,
+      category: category,
+      message: err.message || 'Validation failed',
+      keyword: keyword,
+      jsonPath: jsonPath,
+      schemaPath: schemaPath,
+      instancePath: instPath || '/',
+      expected: JSON.stringify(err.params || {}),
+      actual: JSON.stringify(actualVal !== undefined ? actualVal : 'undefined')
+    };
+  });
+}
+
+function getValueByPointer(obj, pointer) {
+  if (!pointer || pointer === '/') return obj;
+  const parts = pointer.split('/').filter(p => p !== '');
+  let curr = obj;
+  for (const p of parts) {
+    if (curr && typeof curr === 'object' && p in curr) {
+      curr = curr[p];
+    } else {
+      return undefined;
+    }
+  }
+  return curr;
+}
+
+// Built-in Lightweight Fallback Validator Engine
+function builtInSchemaValidator(schema, data, validateFormats) {
+  const errors = [];
+  
+  function validateNode(sch, dat, path, schemaPath) {
+    if (!sch || typeof sch !== 'object') return;
+
+    // Local $ref resolution
+    if (sch['$ref']) {
+      const refPath = sch['$ref'];
+      const target = resolveLocalRef(schema, refPath);
+      if (target) {
+        validateNode(target, dat, path, schemaPath + '/$ref');
+      }
+    }
+
+    // Type validation
+    if (sch.type) {
+      const actualType = getTypeName(dat);
+      const expectedTypes = Array.isArray(sch.type) ? sch.type : [sch.type];
+      
+      let matched = false;
+      for (const t of expectedTypes) {
+        if (t === 'integer' && typeof dat === 'number' && Number.isInteger(dat)) matched = true;
+        else if (t === actualType) matched = true;
+        else if (t === 'number' && actualType === 'integer') matched = true;
+      }
+
+      if (!matched) {
+        errors.push({
+          id: errors.length + 1,
+          category: 'Type',
+          message: `Expected type [${expectedTypes.join(', ')}], but received type '${actualType}'`,
+          keyword: 'type',
+          jsonPath: path || '$',
+          schemaPath: schemaPath + '/type',
+          instancePath: path || '/',
+          expected: expectedTypes.join(', '),
+          actual: actualType
+        });
+      }
+    }
+
+    // Object validation
+    if (sch.type === 'object' || (typeof dat === 'object' && dat !== null && !Array.isArray(dat))) {
+      if (sch.required && Array.isArray(sch.required)) {
+        for (const reqKey of sch.required) {
+          if (!dat || !(reqKey in dat)) {
+            errors.push({
+              id: errors.length + 1,
+              category: 'Required',
+              message: `Must have required property '${reqKey}'`,
+              keyword: 'required',
+              jsonPath: (path ? path + '.' : '$.') + reqKey,
+              schemaPath: schemaPath + '/required',
+              instancePath: (path ? path + '/' : '/') + reqKey,
+              expected: `Property '${reqKey}' present`,
+              actual: 'Missing property'
+            });
+          }
+        }
+      }
+
+      if (sch.properties && typeof dat === 'object' && dat !== null) {
+        for (const k in sch.properties) {
+          if (k in dat) {
+            validateNode(sch.properties[k], dat[k], (path ? path + '.' : '$.') + k, schemaPath + '/properties/' + k);
+          }
+        }
+      }
+
+      if (sch.additionalProperties === false && typeof dat === 'object' && dat !== null) {
+        const allowed = new Set(Object.keys(sch.properties || {}));
+        for (const k in dat) {
+          if (!allowed.has(k)) {
+            errors.push({
+              id: errors.length + 1,
+              category: 'Additional Properties',
+              message: `Must NOT have additional properties, but found extra property '${k}'`,
+              keyword: 'additionalProperties',
+              jsonPath: (path ? path + '.' : '$.') + k,
+              schemaPath: schemaPath + '/additionalProperties',
+              instancePath: (path ? path + '/' : '/') + k,
+              expected: 'No extra properties',
+              actual: `'${k}'`
+            });
+          }
+        }
+      }
+    }
+
+    // Enum & Const
+    if (sch.enum && Array.isArray(sch.enum)) {
+      if (!sch.enum.some(e => JSON.stringify(e) === JSON.stringify(dat))) {
+        errors.push({
+          id: errors.length + 1,
+          category: 'Enum/Const',
+          message: `Must be equal to one of the allowed enum values: ${JSON.stringify(sch.enum)}`,
+          keyword: 'enum',
+          jsonPath: path || '$',
+          schemaPath: schemaPath + '/enum',
+          instancePath: path || '/',
+          expected: JSON.stringify(sch.enum),
+          actual: JSON.stringify(dat)
+        });
+      }
+    }
+
+    if ('const' in sch) {
+      if (JSON.stringify(sch.const) !== JSON.stringify(dat)) {
+        errors.push({
+          id: errors.length + 1,
+          category: 'Enum/Const',
+          message: `Must be equal to constant value: ${JSON.stringify(sch.const)}`,
+          keyword: 'const',
+          jsonPath: path || '$',
+          schemaPath: schemaPath + '/const',
+          instancePath: path || '/',
+          expected: JSON.stringify(sch.const),
+          actual: JSON.stringify(dat)
+        });
+      }
+    }
+
+    // Format validation
+    if (validateFormats && sch.format && typeof dat === 'string') {
+      if (sch.format === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dat)) {
+        errors.push({
+          id: errors.length + 1,
+          category: 'Format',
+          message: `Must match format "email"`,
+          keyword: 'format',
+          jsonPath: path || '$',
+          schemaPath: schemaPath + '/format',
+          instancePath: path || '/',
+          expected: 'email format (user@domain.com)',
+          actual: `"${dat}"`
+        });
+      }
+    }
+  }
+
+  validateNode(schema, data, '$', '#');
+  return errors;
+}
+
+function resolveLocalRef(rootSchema, refStr) {
+  if (!refStr || !refStr.startsWith('#/')) return null;
+  const parts = refStr.replace('#/', '').split('/');
+  let curr = rootSchema;
+  for (const p of parts) {
+    if (curr && typeof curr === 'object' && p in curr) {
+      curr = curr[p];
+    } else {
+      return null;
+    }
+  }
+  return curr;
+}
+
+function getTypeName(val) {
+  if (val === null) return 'null';
+  if (Array.isArray(val)) return 'array';
+  if (typeof val === 'number') {
+    return Number.isInteger(val) ? 'integer' : 'number';
+  }
+  return typeof val;
+}
+
+function renderStatusUI(title, tag, desc, color, bgColor, borderColor, icon) {
+  document.getElementById('result-status-title').innerText = title;
+  document.getElementById('result-status-title').style.color = color;
+  
+  const tagEl = document.getElementById('result-status-tag');
+  tagEl.innerText = tag;
+  tagEl.style.background = bgColor;
+  tagEl.style.color = color;
+  tagEl.style.border = `1px solid ${borderColor}`;
+
+  document.getElementById('result-status-desc').innerText = desc;
+  document.getElementById('result-icon-badge').innerText = icon;
+  document.getElementById('result-icon-badge').style.background = bgColor;
+
+  const banner = document.getElementById('result-status-banner');
+  banner.style.borderColor = borderColor;
+}
+
+function renderJSONSyntaxError(e) {
+  const container = document.getElementById('errors-container');
+  container.innerHTML = `
+    <div style="background: #fef2f2; border: 1px solid #fca5a5; border-radius: 10px; padding: 1.25rem; color: #991b1b;">
+      <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem;">Target JSON Payload Syntax Error</h4>
+      <p style="margin: 0; font-family: monospace; font-size: 0.9rem;">${escapeHTML(e.message)}</p>
+    </div>
+  `;
+}
+
+function renderSchemaSyntaxError(e) {
+  const container = document.getElementById('errors-container');
+  container.innerHTML = `
+    <div style="background: #fef2f2; border: 1px solid #fca5a5; border-radius: 10px; padding: 1.25rem; color: #991b1b;">
+      <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem;">JSON Schema Definition Syntax Error</h4>
+      <p style="margin: 0; font-family: monospace; font-size: 0.9rem;">${escapeHTML(e.message)}</p>
+    </div>
+  `;
+}
+
+function resetResultsUI() {
+  renderStatusUI('Ready for Validation', 'STANDBY', 'Provide a JSON Schema and target JSON data payload above to run instant validation.', '#0f172a', '#f1f5f9', '#cbd5e1', '⚡');
+  document.getElementById('stat-total-errors').innerText = '0';
+  document.getElementById('stat-req-errors').innerText = '0';
+  document.getElementById('stat-type-errors').innerText = '0';
+  document.getElementById('stat-fmt-errors').innerText = '0';
+  document.getElementById('stat-data-bytes').innerText = '0 B';
+  document.getElementById('badge-tab-errors').innerText = '0';
+  document.getElementById('errors-container').innerHTML = '<div style="text-align: center; padding: 2rem; color: #64748b;">Run validation to view detailed schema error paths, failed keywords, and expected values.</div>';
+}
+
+function updateSummaryStats(errors, dataStr, dataObj, schemaObj) {
+  document.getElementById('stat-total-errors').innerText = errors.length;
+  document.getElementById('badge-tab-errors').innerText = errors.length;
+
+  const reqErr = errors.filter(e => e.category === 'Required').length;
+  const typeErr = errors.filter(e => e.category === 'Type').length;
+  const fmtErr = errors.filter(e => e.category === 'Format').length;
+
+  document.getElementById('stat-req-errors').innerText = reqErr;
+  document.getElementById('stat-type-errors').innerText = typeErr;
+  document.getElementById('stat-fmt-errors').innerText = fmtErr;
+  document.getElementById('stat-data-bytes').innerText = formatBytes(new Blob([dataStr]).size);
+}
+
+function renderErrorsList() {
+  const container = document.getElementById('errors-container');
+  const catFilter = document.getElementById('filter-error-category').value;
+
+  let list = currentValidationErrors;
+  if (catFilter !== 'all') {
+    list = list.filter(e => e.category === catFilter);
+  }
+
+  if (list.length === 0) {
+    container.innerHTML = `
+      <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 1.5rem; text-align: center; color: #166534;">
+        <strong>🎉 Zero Schema Errors Found!</strong> All JSON data values conform perfectly to the schema rules.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = list.map((err, idx) => `
+    <div style="background: #ffffff; border: 1px solid #fee2e2; border-left: 5px solid #ef4444; border-radius: 10px; padding: 1.25rem; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-weight: 800; font-size: 0.85rem; background: #fef2f2; color: #991b1b; padding: 0.15rem 0.5rem; border-radius: 6px; border: 1px solid #fca5a5;">
+            #${err.id}
+          </span>
+          <span style="font-weight: 700; font-size: 0.8rem; background: #f1f5f9; color: #334155; padding: 0.15rem 0.5rem; border-radius: 9999px;">
+            ${escapeHTML(err.category)}
+          </span>
+          <code style="font-size: 0.85rem; font-weight: 700; color: #2563eb;">${escapeHTML(err.keyword)}</code>
+        </div>
+        <button onclick="jumpToJSONPath('${escapeHTML(err.jsonPath)}')" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 6px; font-weight: 700; cursor: pointer;">
+          📍 Jump to Location
+        </button>
+      </div>
+
+      <div style="font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 0.75rem;">
+        ${escapeHTML(err.message)}
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem; font-size: 0.825rem; background: #f8fafc; padding: 0.85rem; border-radius: 8px; border: 1px solid #e2e8f0; font-family: ui-monospace, SFMono-Regular, monospace;">
+        <div><strong>JSON Path:</strong> <span style="color: #0284c7;">${escapeHTML(err.jsonPath)}</span></div>
+        <div><strong>Schema Path:</strong> <span style="color: #9333ea;">${escapeHTML(err.schemaPath)}</span></div>
+        <div><strong>Expected:</strong> <span style="color: #16a34a;">${escapeHTML(err.expected)}</span></div>
+        <div><strong>Actual:</strong> <span style="color: #dc2626;">${escapeHTML(err.actual)}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function jumpToJSONPath(jsonPath) {
+  const dataArea = document.getElementById('data-input');
+  dataArea.focus();
+  const searchStr = jsonPath.split('.').pop().replace(/[\[\]]/g, '');
+  const text = dataArea.value;
+  const pos = text.indexOf(searchStr);
+  if (pos !== -1) {
+    dataArea.setSelectionRange(pos, pos + searchStr.length);
+  }
+}
+
+function renderSchemaTree(schemaObj) {
+  const container = document.getElementById('schema-tree-view');
+  if (!schemaObj || typeof schemaObj !== 'object') {
+    container.innerHTML = '<span style="color: #64748b;">Invalid schema.</span>';
+    return;
+  }
+  container.innerHTML = buildTreeHTML(schemaObj, '$');
+}
+
+function renderDataTree(dataObj) {
+  const container = document.getElementById('data-tree-view');
+  if (dataObj === undefined || dataObj === null) {
+    container.innerHTML = '<span style="color: #64748b;">No JSON data payload provided.</span>';
+    return;
+  }
+  container.innerHTML = buildTreeHTML(dataObj, '$');
+}
+
+function buildTreeHTML(obj, path) {
+  if (obj === null) return `<span style="color: #64748b;">null</span>`;
+  if (typeof obj !== 'object') {
+    const col = typeof obj === 'string' ? '#16a34a' : typeof obj === 'number' ? '#2563eb' : '#9333ea';
+    return `<span style="color: ${col};">${escapeHTML(JSON.stringify(obj))}</span>`;
+  }
+
+  const isArr = Array.isArray(obj);
+  const keys = Object.keys(obj);
+  if (keys.length === 0) return isArr ? '[]' : '{}';
+
+  let html = `<details open style="margin-left: 1rem;"><summary style="cursor: pointer; color: #0f172a; font-weight: 700;">${isArr ? `Array[${keys.length}]` : `Object{${keys.length}}`}</summary><div style="padding-left: 1rem; border-left: 2px solid #e2e8f0; margin-top: 0.25rem;">`;
+  
+  for (const k of keys) {
+    const subPath = isArr ? `${path}[${k}]` : `${path}.${k}`;
+    html += `<div style="margin: 0.2rem 0;"><strong style="color: #475569;">"${escapeHTML(k)}":</strong> ${buildTreeHTML(obj[k], subPath)}</div>`;
+  }
+
+  html += `</div></details>`;
+  return html;
+}
+
+function expandSchemaTree() {
+  document.querySelectorAll('#schema-tree-view details').forEach(d => d.open = true);
+}
+
+function collapseSchemaTree() {
+  document.querySelectorAll('#schema-tree-view details').forEach(d => d.open = false);
+}
+
+function expandDataTree() {
+  document.querySelectorAll('#data-tree-view details').forEach(d => d.open = true);
+}
+
+function collapseDataTree() {
+  document.querySelectorAll('#data-tree-view details').forEach(d => d.open = false);
+}
+
+function calculateDataStatistics(dataStr, dataObj, schemaObj) {
+  document.getElementById('stat-char-count').innerText = dataStr.length.toLocaleString();
+
+  let objs = 0, arrs = 0, props = 0, maxDepth = 0;
+  let strings = 0, numbers = 0, bools = 0, nulls = 0;
+
+  function traverse(node, depth) {
+    if (depth > maxDepth) maxDepth = depth;
+    if (node === null) { nulls++; return; }
+    if (typeof node === 'string') { strings++; return; }
+    if (typeof node === 'number') { numbers++; return; }
+    if (typeof node === 'boolean') { bools++; return; }
+
+    if (Array.isArray(node)) {
+      arrs++;
+      node.forEach(item => traverse(item, depth + 1));
+    } else if (typeof node === 'object') {
+      objs++;
+      const keys = Object.keys(node);
+      props += keys.length;
+      keys.forEach(k => traverse(node[k], depth + 1));
+    }
+  }
+
+  if (dataObj !== null && dataObj !== undefined) {
+    traverse(dataObj, 1);
+  }
+
+  document.getElementById('stat-obj-count').innerText = objs;
+  document.getElementById('stat-arr-count').innerText = arrs;
+  document.getElementById('stat-prop-count').innerText = props;
+  document.getElementById('stat-max-depth').innerText = maxDepth;
+  document.getElementById('stat-str-num-count').innerText = `${strings} / ${numbers}`;
+  document.getElementById('stat-bool-null-count').innerText = `${bools} / ${nulls}`;
+
+  // Schema Stats
+  let defProps = 0, reqProps = 0, defsCount = 0;
+  if (schemaObj && typeof schemaObj === 'object') {
+    if (schemaObj.properties) defProps = Object.keys(schemaObj.properties).length;
+    if (schemaObj.required && Array.isArray(schemaObj.required)) reqProps = schemaObj.required.length;
+    if (schemaObj['$defs']) defsCount += Object.keys(schemaObj['$defs']).length;
+    if (schemaObj.definitions) defsCount += Object.keys(schemaObj.definitions).length;
+  }
+
+  document.getElementById('cov-defined-props').innerText = defProps;
+  document.getElementById('cov-req-props').innerText = reqProps;
+  document.getElementById('cov-defs-count').innerText = defsCount;
+  
+  const reqErr = currentValidationErrors.filter(e => e.category === 'Required').length;
+  const satReq = Math.max(0, reqProps - reqErr);
+  document.getElementById('cov-req-sat-miss').innerText = `${satReq} / ${reqErr}`;
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-pane').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.tab-btn').forEach(el => {
+    el.style.background = 'transparent';
+    el.style.color = '#64748b';
+    el.style.borderBottom = 'none';
+  });
+
+  const activePane = document.getElementById(tabId);
+  const activeBtn = document.getElementById('btn-' + tabId);
+
+  if (activePane) activePane.style.display = 'block';
+  if (activeBtn) {
+    activeBtn.style.background = '#ffffff';
+    activeBtn.style.color = '#2563eb';
+    activeBtn.style.borderBottom = '3px solid #2563eb';
+  }
+}
+
+function exportCSVReport() {
+  if (currentValidationErrors.length === 0) {
+    alert('No errors to export. Validation status is VALID.');
+    return;
+  }
+  let csv = 'Error ID,Category,Keyword,JSON Path,Schema Path,Message\n';
+  currentValidationErrors.forEach(e => {
+    csv += `"${e.id}","${e.category}","${e.keyword}","${e.jsonPath}","${e.schemaPath}","${e.message.replace(/"/g, '""')}"\n`;
+  });
+  downloadFile('json-schema-errors.csv', csv, 'text/csv');
+}
+
+function exportJSONReport() {
+  const report = {
+    tool: 'DataFrog JSON Schema Validator',
+    timestamp: new Date().toISOString(),
+    status: currentValidationErrors.length === 0 ? 'VALID' : 'INVALID',
+    errorCount: currentValidationErrors.length,
+    errors: currentValidationErrors
+  };
+  downloadFile('validation-report.json', JSON.stringify(report, null, 2), 'application/json');
+}
+
+function copySummaryReport() {
+  const status = currentValidationErrors.length === 0 ? 'VALID' : `INVALID (${currentValidationErrors.length} Errors)`;
+  const text = `DataFrog JSON Schema Validation Summary:\nStatus: ${status}\nTotal Errors: ${currentValidationErrors.length}\nTimestamp: ${new Date().toLocaleString()}`;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Validation Summary copied to clipboard!');
+  });
+}
+
+function downloadFile(filename, content, type) {
+  const blob = new Blob([content], { type: type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function escapeHTML(str) {
+  if (typeof str !== 'string') return str;
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+</script>

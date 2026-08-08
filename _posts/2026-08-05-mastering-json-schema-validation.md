@@ -208,7 +208,7 @@ permalink: /blog/mastering-json-schema-validation
     </div>
 
     <p>
-      Developers can use the browser-based <a href="/validate/json-validator" style="color: #2563eb; font-weight: 600;">JSON Validator</a> to paste sample payloads and verify syntax compliance instantly before deploying backend code.
+      Developers can use the browser-based <a href="/validate/json-schema-validator" style="color: #2563eb; font-weight: 600;">JSON Schema Validator</a> to paste schemas and data payloads to verify compliance, test constraints, and debug schema failures instantly before deploying backend code.
     </p>
   </section>
 
@@ -221,8 +221,7 @@ permalink: /blog/mastering-json-schema-validation
       A JSON Schema is itself a valid JSON document. Let's look at a complete, production-grade example validating a user account registration payload:
     </p>
 
-```json
-{
+<pre style="background: #0f172a; color: #f8fafc; padding: 1.25rem; border-radius: 10px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.9rem; line-height: 1.5; overflow-x: auto;"><code class="language-json">{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://datafrog.tools/schemas/user-profile.json",
   "title": "UserProfile",
@@ -252,8 +251,7 @@ permalink: /blog/mastering-json-schema-validation
   },
   "required": ["userId", "username", "email", "roles"],
   "additionalProperties": false
-}
-```
+}</code></pre>
 
     <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem; margin-bottom: 0.75rem;">Key Schema Keywords Explained:</h3>
     <ul style="line-height: 1.8; color: #334155;">
@@ -328,8 +326,7 @@ permalink: /blog/mastering-json-schema-validation
         Use <code>$defs</code> (or <code>definitions</code> in Draft-07) to define reusable sub-schemas, then reference them across your schema document with <code>$ref</code>:
       </p>
 
-```json
-{
+<pre style="background: #0f172a; color: #f8fafc; padding: 1.25rem; border-radius: 10px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.9rem; line-height: 1.5; overflow-x: auto;"><code class="language-json">{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "Address": {
@@ -347,8 +344,7 @@ permalink: /blog/mastering-json-schema-validation
     "billingAddress": { "$ref": "#/$defs/Address" },
     "shippingAddress": { "$ref": "#/$defs/Address" }
   }
-}
-```
+}</code></pre>
     </div>
 
     <h3 style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem; margin-bottom: 0.5rem;">Logical Combinators:</h3>
@@ -380,7 +376,7 @@ permalink: /blog/mastering-json-schema-validation
     </div>
 
     <p>
-      When validating client payloads in <a href="/validate/json-validator" style="color: #2563eb; font-weight: 600;">DataFrog's JSON Validator</a>, the underlying engine parses the document in browser memory, evaluates object trees recursively, and pinpoints exact error line locations if the JSON violates structural rules.
+      When validating client payloads in <a href="/validate/json-schema-validator" style="color: #2563eb; font-weight: 600;">DataFrog's JSON Schema Validator</a>, the underlying engine parses the document in browser memory, evaluates object trees recursively, detects schema drafts, and pinpoints exact error line locations if the JSON violates structural rules.
     </p>
   </section>
 
@@ -503,20 +499,20 @@ permalink: /blog/mastering-json-schema-validation
   <section id="conclusion" style="background: #0f172a; color: #ffffff; border-radius: 16px; padding: 2.5rem; text-align: center; margin-top: 3rem;">
     <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🛡️</span>
     <h2 style="font-size: 1.75rem; font-weight: 800; color: #ffffff; margin-bottom: 0.75rem;">
-      Ready to Validate & Inspect Your JSON Data?
+      Ready to Validate &amp; Inspect Your JSON Schema?
     </h2>
     <p style="color: #94a3b8; font-size: 1.05rem; max-width: 650px; margin: 0 auto 1.75rem; line-height: 1.6;">
-      Instantly validate, inspect, and analyze your JSON payloads with line & column error pointers — entirely inside your browser.
+      Instantly validate JSON data against JSON Schema draft specifications with detailed error explorer, schema trees, and 100% client-side privacy.
     </p>
 
     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="/validate/json-validator" 
+      <a href="/validate/json-schema-validator" 
          style="padding: 0.85rem 1.75rem; background: #2563eb; color: #ffffff; font-weight: 700; border-radius: 8px; text-decoration: none; font-size: 0.95rem;">
-        ✅ Launch JSON Validator
+        📋 Launch JSON Schema Validator
       </a>
-      <a href="/inspect/json-viewer" 
+      <a href="/validate/json-validator" 
          style="padding: 0.85rem 1.75rem; background: rgba(255,255,255,0.1); color: #ffffff; font-weight: 600; border-radius: 8px; text-decoration: none; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2);">
-        🔍 JSON Viewer
+        ✅ JSON Syntax Validator
       </a>
     </div>
   </section>

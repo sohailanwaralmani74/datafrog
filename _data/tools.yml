@@ -244,6 +244,39 @@
   date: "2026-07-11"
   updated: "2026-07-14"
 
+- title: "JSON Schema Validator"
+  short_name: "JSON Schema Validator"
+  url: "/validate/json-schema-validator"
+  category: "Validate"
+  description: "Validate JSON against JSON Schema online with instant error reporting, schema tree explorer, draft detection, and total client-side data privacy."
+  keywords: ["json schema validator", "json schema validation", "validate json schema", "validate json against schema", "json schema checker"]
+  icon: "📋"
+  featured: true
+  date: "2026-08-08"
+  updated: "2026-08-08"
+
+- title: "Excel Validator"
+  short_name: "Excel Validator"
+  url: "/validate/excel-validator"
+  category: "Validate"
+  description: "Validate Excel workbooks (.xlsx, .xls, .xlsm) for broken formulas, type mismatches, merged cells, blank sheets, and errors with 100% total data privacy."
+  keywords: ["excel validator", "excel validation", "validate excel file", "validate excel spreadsheet", "excel file validator", "spreadsheet validator"]
+  icon: "📈"
+  featured: true
+  date: "2026-08-08"
+  updated: "2026-08-08"
+
+- title: "SQL Validator"
+  short_name: "SQL Validator"
+  url: "/validate/sql-validator"
+  category: "Validate"
+  description: "Validate SQL queries, detect syntax errors, check DDL & DML statements, lint SELECT/UPDATE/DELETE queries, and analyze dialects with 100% data privacy."
+  keywords: ["sql validator", "sql syntax validator", "sql syntax checker", "sql validator online", "validate sql", "sql query validator", "sql lint"]
+  icon: "🗄️"
+  featured: true
+  date: "2026-08-08"
+  updated: "2026-08-08"
+
 
 
 - title: "Text Compare"

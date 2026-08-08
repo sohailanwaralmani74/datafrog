@@ -1,0 +1,1046 @@
+---
+layout: main
+title: "SQL Validator - Check SQL Syntax & Lint Online"
+short_name: "SQL Validator"
+description: "Validate SQL queries, detect syntax errors, check DDL & DML statements, lint SELECT/UPDATE/DELETE queries, and analyze dialects with 100% data privacy."
+keywords: "sql validator, sql syntax validator, sql syntax checker, sql validator online, validate sql, sql query validator, sql query checker, sql lint"
+category: "Validate"
+permalink: /validate/sql-validator
+---
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #eff6ff; color: #2563eb; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #bfdbfe;">
+      <span>🗄️</span> Privacy-First SQL Syntax &amp; Linter Workspace
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      SQL Validator
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Validate SQL query syntax, detect broken statements, audit DDL/DML structures, identify dangerous <code>UPDATE</code>/<code>DELETE</code> queries, and lint SQL across multiple dialects before running against your database.
+    </p>
+
+    <!-- Global Privacy & Safety Banner -->
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+      <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+        <span>🔒 100% Client-Side Privacy: Static analysis only. Zero database connections. Zero SQL execution. Queries remain in your browser memory.</span>
+      </div>
+      <div style="font-size: 0.8rem; color: #64748b; font-style: italic;">
+        ⚠️ Note: Syntax validation verifies language structure but does not guarantee table/column existence on a live database.
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Options & Toolbar -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      
+      <!-- Dialect & Sample Selector -->
+      <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+        <label for="sql-dialect" style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">SQL Dialect:</label>
+        <select id="sql-dialect" onchange="runSQLValidation()" style="padding: 0.45rem 0.85rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.875rem; background: #f8fafc; color: #0f172a; cursor: pointer; font-weight: 600;">
+          <option value="generic">Generic SQL</option>
+          <option value="mysql">MySQL / MariaDB</option>
+          <option value="postgres">PostgreSQL</option>
+          <option value="sqlite">SQLite</option>
+          <option value="tsql">SQL Server (T-SQL)</option>
+          <option value="oracle">Oracle</option>
+        </select>
+
+        <label for="sample-select" style="font-weight: 700; font-size: 0.875rem; color: #0f172a; margin-left: 0.5rem;">Samples:</label>
+        <select id="sample-select" style="padding: 0.45rem 0.85rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.875rem; background: #f8fafc; color: #0f172a; cursor: pointer; font-weight: 500;">
+          <option value="1">1. Valid SELECT Query with JOIN</option>
+          <option value="2">2. Invalid SELECT (Syntax Error &amp; Unclosed Parenthesis)</option>
+          <option value="3">3. Valid INSERT INTO Statement</option>
+          <option value="4">4. Invalid INSERT (Values Mismatch)</option>
+          <option value="5">5. Valid UPDATE Statement</option>
+          <option value="6">6. DANGEROUS: UPDATE Without WHERE Clause</option>
+          <option value="7">7. Valid DELETE Statement</option>
+          <option value="8">8. DANGEROUS: DELETE Without WHERE Clause</option>
+          <option value="9">9. DDL: CREATE TABLE with Foreign Keys</option>
+          <option value="10">10. DDL: ALTER TABLE Add Column</option>
+          <option value="11">11. Complex CTE (WITH Clause) Query</option>
+          <option value="12">12. Subquery in WHERE Clause</option>
+          <option value="13">13. Mistake: Column = NULL Comparison</option>
+          <option value="14">14. Multi-Statement Script</option>
+          <option value="15">15. Dialect Feature Test</option>
+        </select>
+        <button onclick="loadSelectedSample()" style="padding: 0.45rem 0.85rem; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          Load Sample
+        </button>
+      </div>
+
+      <!-- Actions Buttons -->
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <button onclick="runSQLValidation()" style="padding: 0.55rem 1.35rem; background: #0f172a; color: #ffffff; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          ▶ Validate SQL
+        </button>
+        <button onclick="formatSQL()" style="padding: 0.55rem 1rem; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          ⚡ Format SQL
+        </button>
+        <button onclick="clearSQLEditor()" style="padding: 0.55rem 1rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          🗑️ Clear
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Additional Rules Checkboxes -->
+    <div style="margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; font-size: 0.85rem; color: #475569;">
+      <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        <input type="checkbox" id="opt-check-safety" checked onchange="runSQLValidation()">
+        <strong>Safety Linter</strong> (Warn on UPDATE/DELETE without WHERE)
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        <input type="checkbox" id="opt-check-nulls" checked onchange="runSQLValidation()">
+        <strong>NULL Check</strong> (Flag col = NULL mistakes)
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        <input type="checkbox" id="opt-check-style" checked onchange="runSQLValidation()">
+        <strong>Style Suggestions</strong> (SELECT * and casing)
+      </label>
+    </div>
+  </div>
+
+  <!-- SQL Input Editor Container -->
+  <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.25rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+    
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="font-weight: 800; font-size: 1.05rem; color: #0f172a;">SQL Script Editor</span>
+        <span id="editor-line-badge" style="font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px; background: #f1f5f9; color: #475569;">Lines: 0</span>
+      </div>
+
+      <!-- File Upload Button -->
+      <div>
+        <label style="padding: 0.3rem 0.75rem; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📁 Open .sql File
+          <input type="file" id="sql-file-input" accept=".sql,.txt" style="display: none;" onchange="handleFileUpload(event)">
+        </label>
+      </div>
+    </div>
+
+    <!-- SQL Textarea Editor -->
+    <textarea id="sql-input" rows="14" placeholder="Paste or type your SQL queries, DDL tables, or DML statements here..."
+              style="width: 100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.9rem; line-height: 1.45; padding: 0.85rem; border-radius: 10px; border: 1px solid #cbd5e1; background: #0f172a; color: #f8fafc; resize: vertical; box-sizing: border-box;"
+              oninput="debouncedValidate()"></textarea>
+
+  </div>
+
+  <!-- Validation Results & Dashboard Container -->
+  <div id="validation-results-panel">
+    
+    <!-- Prominent Status Banner -->
+    <div id="result-status-banner" style="background: #ffffff; border: 2px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div id="result-icon-badge" style="width: 52px; height: 52px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+          🗄️
+        </div>
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <h2 id="result-status-title" style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin: 0;">
+              Ready for Validation
+            </h2>
+            <span id="result-status-tag" style="font-size: 0.8rem; font-weight: 800; padding: 0.2rem 0.75rem; border-radius: 9999px; background: #f1f5f9; color: #475569;">
+              STANDBY
+            </span>
+          </div>
+          <p id="result-status-desc" style="color: #64748b; font-size: 0.9rem; margin-top: 0.25rem; margin-bottom: 0;">
+            Type or paste your SQL query above to run instant local syntax validation and linting.
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align: right; font-size: 0.85rem; color: #64748b; line-height: 1.6;">
+        <div>Validation Time: <strong id="val-time-ms">0 ms</strong></div>
+        <div>Dialect: <strong id="val-dialect-badge">Generic SQL</strong></div>
+      </div>
+    </div>
+
+    <!-- Summary Metric Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+      <div style="background: #ffffff; border: 1px solid #fee2e2; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #991b1b; text-transform: uppercase;">Syntax Errors</div>
+        <div id="stat-syntax-errs" style="font-size: 1.8rem; font-weight: 800; color: #dc2626; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #fef3c7; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #92400e; text-transform: uppercase;">Safety Warnings</div>
+        <div id="stat-safety-warns" style="font-size: 1.8rem; font-weight: 800; color: #d97706; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e0f2fe; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #075985; text-transform: uppercase;">Style Suggestions</div>
+        <div id="stat-style-suggs" style="font-size: 1.8rem; font-weight: 800; color: #0284c7; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #475569; text-transform: uppercase;">Statements Parsed</div>
+        <div id="stat-statements-count" style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #475569; text-transform: uppercase;">Tables Referenced</div>
+        <div id="stat-tables-count" style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">0</div>
+      </div>
+    </div>
+
+    <!-- Inspector Tabs -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 2.5rem;">
+      
+      <div style="display: flex; background: #f8fafc; border-bottom: 1px solid #e2e8f0; overflow-x: auto;">
+        <button onclick="switchTab('tab-issues')" id="btn-tab-issues" class="tab-btn active-tab" style="padding: 0.85rem 1.25rem; font-weight: 700; font-size: 0.9rem; border: none; background: #ffffff; border-bottom: 3px solid #2563eb; color: #2563eb; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+          ⚠️ Issues &amp; Linter <span id="badge-tab-issues" style="background: #ef4444; color: #ffffff; font-size: 0.75rem; padding: 0.1rem 0.45rem; border-radius: 9999px;">0</span>
+        </button>
+        <button onclick="switchTab('tab-statements')" id="btn-tab-statements" class="tab-btn" style="padding: 0.85rem 1.25rem; font-weight: 700; font-size: 0.9rem; border: none; background: transparent; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+          📑 Statement Breakdown
+        </button>
+        <button onclick="switchTab('tab-objects')" id="btn-tab-objects" class="tab-btn" style="padding: 0.85rem 1.25rem; font-weight: 700; font-size: 0.9rem; border: none; background: transparent; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+          🗂️ Database Objects &amp; Tables
+        </button>
+        <button onclick="switchTab('tab-complexity')" id="btn-tab-complexity" class="tab-btn" style="padding: 0.85rem 1.25rem; font-weight: 700; font-size: 0.9rem; border: none; background: transparent; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+          📊 Query Complexity &amp; Metrics
+        </button>
+      </div>
+
+      <!-- Tab Content 1: Issue Explorer -->
+      <div id="tab-issues" class="tab-pane" style="padding: 1.5rem; display: block;">
+        
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <select id="filter-severity" onchange="renderIssuesList()" style="padding: 0.4rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+              <option value="all">All Severities (ERROR, WARN, STYLE)</option>
+              <option value="ERROR">Errors Only</option>
+              <option value="WARNING">Warnings Only</option>
+              <option value="STYLE">Style Suggestions</option>
+            </select>
+          </div>
+
+          <!-- Export Buttons -->
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <button onclick="exportCSVReport()" style="padding: 0.35rem 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Export CSV Issues</button>
+            <button onclick="exportJSONReport()" style="padding: 0.35rem 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Export JSON Report</button>
+            <button onclick="copySummaryReport()" style="padding: 0.35rem 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Copy Summary</button>
+          </div>
+        </div>
+
+        <div id="issues-container" style="display: flex; flex-direction: column; gap: 0.85rem;">
+          <div style="text-align: center; padding: 2rem; color: #64748b;">
+            Enter SQL queries above to run static syntax validation and linting.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tab Content 2: Statement Breakdown -->
+      <div id="tab-statements" class="tab-pane" style="padding: 1.5rem; display: none;">
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left;">
+            <thead>
+              <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0; color: #0f172a;">
+                <th style="padding: 0.75rem;">Stmt #</th>
+                <th style="padding: 0.75rem;">Statement Type</th>
+                <th style="padding: 0.75rem;">Line Range</th>
+                <th style="padding: 0.75rem;">Referenced Tables</th>
+                <th style="padding: 0.75rem;">Status</th>
+              </tr>
+            </thead>
+            <tbody id="statements-table-body">
+              <tr><td colspan="5" style="text-align: center; padding: 2rem; color: #64748b;">No SQL query analyzed.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab Content 3: Database Objects -->
+      <div id="tab-objects" class="tab-pane" style="padding: 1.5rem; display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem;">Referenced Tables / Views</h3>
+            <ul id="list-tables" style="padding-left: 1.25rem; margin: 0; font-size: 0.9rem; color: #334155;">
+              <li style="color: #64748b;">None detected</li>
+            </ul>
+          </div>
+
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem;">Defined CTEs (WITH Clause)</h3>
+            <ul id="list-ctes" style="padding-left: 1.25rem; margin: 0; font-size: 0.9rem; color: #334155;">
+              <li style="color: #64748b;">None detected</li>
+            </ul>
+          </div>
+        </div>
+        <p style="font-size: 0.8rem; color: #64748b; margin-top: 1rem; margin-bottom: 0; font-style: italic;">
+          * Note: Object detection is performed via static AST lexing. It does not verify whether these tables exist in your live database.
+        </p>
+      </div>
+
+      <!-- Tab Content 4: Complexity -->
+      <div id="tab-complexity" class="tab-pane" style="padding: 1.5rem; display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem;">
+            <div style="font-size: 0.8rem; color: #64748b; font-weight: 700;">JOIN Clauses</div>
+            <div id="cx-joins" style="font-size: 1.5rem; font-weight: 800; color: #0f172a;">0</div>
+          </div>
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem;">
+            <div style="font-size: 0.8rem; color: #64748b; font-weight: 700;">WHERE Conditions</div>
+            <div id="cx-conditions" style="font-size: 1.5rem; font-weight: 800; color: #0f172a;">0</div>
+          </div>
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem;">
+            <div style="font-size: 0.8rem; color: #64748b; font-weight: 700;">Subqueries / CTEs</div>
+            <div id="cx-subqueries" style="font-size: 1.5rem; font-weight: 800; color: #0f172a;">0</div>
+          </div>
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem;">
+            <div style="font-size: 0.8rem; color: #64748b; font-weight: 700;">Selected Columns</div>
+            <div id="cx-columns" style="font-size: 1.5rem; font-weight: 800; color: #0f172a;">0</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Educational Documentation Section -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-bottom: 2rem;">
+    
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
+      What Is a SQL Validator?
+    </h2>
+    <p>
+      A <strong>SQL Validator</strong> is a static code analysis tool that parses SQL queries, DDL schemas, and DML data manipulation scripts locally before executing them against a database. It inspects SQL syntax, verifies clause ordering (such as <code>SELECT</code>, <code>FROM</code>, <code>JOIN</code>, <code>WHERE</code>, <code>GROUP BY</code>), detects dangerous statements (like <code>UPDATE</code> or <code>DELETE</code> missing a <code>WHERE</code> clause), and identifies common SQL mistakes.
+    </p>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      SQL Syntax Validation vs Live Database Execution
+    </h2>
+    <p>
+      Static SQL validation verifies language grammar and syntax correctness without connecting to a live database engine. While it detects missing parentheses, invalid keywords, and malformed clauses, it cannot verify:
+    </p>
+    <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
+      <li>Whether referenced tables or columns actually exist in your database instance.</li>
+      <li>Database user permissions or execution roles.</li>
+      <li>Database-specific runtime constraints or live data state.</li>
+    </ul>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      Understanding Common SQL Validation Warnings &amp; Errors
+    </h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">UPDATE / DELETE Without WHERE</h3>
+        <p style="font-size: 0.9rem; color: #64748b; margin: 0;">
+          Executing an <code>UPDATE</code> or <code>DELETE</code> statement without a <code>WHERE</code> clause will modify or delete every single row in the table. The validator flags this with a prominent <strong>WARNING</strong>.
+        </p>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">NULL Comparison Mistakes</h3>
+        <p style="font-size: 0.9rem; color: #64748b; margin: 0;">
+          In standard SQL, comparing columns using <code>col = NULL</code> or <code>col != NULL</code> evaluates to UNKNOWN. SQL requires <code>IS NULL</code> or <code>IS NOT NULL</code> expressions.
+        </p>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Syntax &amp; Unclosed Strings</h3>
+        <p style="font-size: 0.9rem; color: #64748b; margin: 0;">
+          Catches missing quotes, unterminated multi-line comments, missing parentheses in subqueries or CTEs, and keyword order violations.
+        </p>
+      </div>
+    </div>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      Supported SQL Dialects
+    </h2>
+    <p>
+      SQL syntax varies slightly across database engines. Our validator provides dialect-specific lexing rules for <strong>Generic SQL</strong>, <strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>SQLite</strong>, <strong>SQL Server (T-SQL)</strong>, and <strong>Oracle</strong>.
+    </p>
+
+    <!-- FAQ Section -->
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1.25rem;">
+      Frequently Asked Questions (FAQ)
+    </h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is my SQL code sent to any cloud server or database?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          No. Static analysis and syntax parsing occur 100% locally within your client browser using JavaScript memory. Your SQL scripts are never uploaded or executed against a database.
+        </p>
+      </details>
+
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How is SQL Validator different from SQL Compare?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          SQL Validator parses syntax correctness, DDL/DML rules, and safety linter warnings. SQL Compare compares two different SQL schema scripts side-by-side to highlight added or modified columns.
+        </p>
+      </details>
+
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Why does the tool warn about UPDATE without WHERE?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          An UPDATE statement without a WHERE clause will modify every row in the target table. The validator flags this as a safety warning to prevent accidental database data overwrites.
+        </p>
+      </details>
+    </div>
+
+  </article>
+
+</div>
+
+<!-- Application Logic JavaScript -->
+<script>
+const SAMPLES = {
+  '1': "SELECT u.id, u.username, u.email, o.total_amount
+FROM users u
+INNER JOIN orders o ON u.id = o.user_id
+WHERE u.status = 'active'
+ORDER BY o.total_amount DESC
+LIMIT 50;",
+  '2': "SELECT u.id, u.username u.email
+FROM users u
+WHERE (u.status = 'active' AND u.age > 18;
+-- Error: Missing comma between username and email, unclosed parenthesis",
+  '3': "INSERT INTO customers (name, email, age, created_at)
+VALUES ('Alice Smith', 'alice@example.com', 29, NOW());",
+  '4': "INSERT INTO customers (name, email, age)
+VALUES ('Bob Jones', 'bob@example.com');
+-- Error: Column count (3) does not match value count (2)",
+  '5': "UPDATE accounts
+SET balance = balance + 100.00,
+    updated_at = CURRENT_TIMESTAMP
+WHERE account_id = 1042;",
+  '6': "UPDATE accounts
+SET is_active = false;
+-- DANGEROUS: UPDATE without WHERE clause will modify ALL rows in the table!",
+  '7': "DELETE FROM audit_logs
+WHERE created_at < '2025-01-01';",
+  '8': "DELETE FROM audit_logs;
+-- DANGEROUS: DELETE without WHERE clause will delete ALL rows in the table!",
+  '9': "CREATE TABLE employees (
+  emp_id INT PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  department_id INT,
+  salary DECIMAL(10, 2) DEFAULT 0.00,
+  FOREIGN KEY (department_id) REFERENCES departments(dept_id)
+);",
+  '10': "ALTER TABLE employees
+ADD COLUMN email VARCHAR(100) UNIQUE;",
+  '11': "WITH regional_sales AS (
+  SELECT region, SUM(amount) AS total_sales
+  FROM sales
+  GROUP BY region
+)
+SELECT r.region, r.total_sales
+FROM regional_sales r
+WHERE r.total_sales > 100000;",
+  '12': "SELECT name, salary
+FROM employees
+WHERE department_id IN (
+  SELECT dept_id
+  FROM departments
+  WHERE location = 'New York'
+);",
+  '13': "SELECT * FROM users WHERE email = NULL;
+-- MISTAKE: SQL NULL comparison requires 'IS NULL' instead of '= NULL'",
+  '14': "CREATE TABLE products (id INT PRIMARY KEY, name VARCHAR(100));
+INSERT INTO products (id, name) VALUES (1, 'Widget');
+SELECT * FROM products;",
+  '15': "SELECT JSON_EXTRACT(data, '$.user.name') AS user_name
+FROM user_events
+LIMIT 10;"
+};
+
+let currentIssues = [];
+let debounceTimer = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadSelectedSample();
+});
+
+function debouncedValidate() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(runSQLValidation, 300);
+}
+
+function loadSelectedSample() {
+  const sel = document.getElementById('sample-select').value;
+  if (SAMPLES[sel]) {
+    document.getElementById('sql-input').value = SAMPLES[sel];
+    runSQLValidation();
+  }
+}
+
+function clearSQLEditor() {
+  document.getElementById('sql-input').value = '';
+  runSQLValidation();
+}
+
+function handleFileUpload(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      document.getElementById('sql-input').value = evt.target.result;
+      runSQLValidation();
+    };
+    reader.readAsText(file);
+  }
+}
+
+// Core SQL Lexer & Validator
+function runSQLValidation() {
+  const startTime = performance.now();
+  currentIssues = [];
+
+  const rawSQL = document.getElementById('sql-input').value;
+  const dialect = document.getElementById('sql-dialect').value;
+
+  const lines = rawSQL ? rawSQL.split('\n') : [];
+  document.getElementById('editor-line-badge').innerText = `Lines: ${lines.length}`;
+
+  if (!rawSQL.trim()) {
+    resetResultsUI();
+    return;
+  }
+
+  const statements = parseSQLStatements(rawSQL);
+
+  const checkSafety = document.getElementById('opt-check-safety').checked;
+  const checkNulls = document.getElementById('opt-check-nulls').checked;
+  const checkStyle = document.getElementById('opt-check-style').checked;
+
+  let syntaxErrs = 0;
+  let safetyWarns = 0;
+  let styleSuggs = 0;
+
+  const tablesFound = new Set();
+  const ctesFound = new Set();
+
+  let totalJoins = 0;
+  let totalConditions = 0;
+  let totalSubqueries = 0;
+  let totalColumns = 0;
+
+  const stmtSummaries = [];
+
+  statements.forEach((stmtObj, idx) => {
+    const stmtText = stmtObj.text.trim();
+    if (!stmtText) return;
+
+    const stmtLine = stmtObj.startLine;
+    const upperText = stmtText.toUpperCase();
+    let stmtType = 'UNKNOWN';
+    let stmtErrCount = 0;
+
+    if (upperText.startsWith('SELECT') || upperText.startsWith('WITH')) stmtType = 'SELECT';
+    else if (upperText.startsWith('INSERT')) stmtType = 'INSERT';
+    else if (upperText.startsWith('UPDATE')) stmtType = 'UPDATE';
+    else if (upperText.startsWith('DELETE')) stmtType = 'DELETE';
+    else if (upperText.startsWith('CREATE TABLE')) stmtType = 'CREATE TABLE';
+    else if (upperText.startsWith('CREATE')) stmtType = 'CREATE';
+    else if (upperText.startsWith('ALTER')) stmtType = 'ALTER';
+    else if (upperText.startsWith('DROP')) stmtType = 'DROP';
+    else if (upperText.startsWith('TRUNCATE')) stmtType = 'TRUNCATE';
+
+    // 1. Parentheses & Quote Checks
+    const parenBal = checkParenthesesBalance(stmtText);
+    if (parenBal !== 0) {
+      syntaxErrs++;
+      stmtErrCount++;
+      currentIssues.push({
+        id: currentIssues.length + 1,
+        severity: 'ERROR',
+        issue: 'Unclosed Parenthesis',
+        stmtIndex: idx + 1,
+        line: stmtLine,
+        category: 'Syntax',
+        description: `Statement #${idx + 1} contains unclosed parentheses (balance mismatch = ${parenBal}).`
+      });
+    }
+
+    const quoteBal = checkQuotesBalance(stmtText);
+    if (!quoteBal) {
+      syntaxErrs++;
+      stmtErrCount++;
+      currentIssues.push({
+        id: currentIssues.length + 1,
+        severity: 'ERROR',
+        issue: 'Unterminated String Literal',
+        stmtIndex: idx + 1,
+        line: stmtLine,
+        category: 'Syntax',
+        description: `Statement #${idx + 1} contains an unterminated single or double quote string literal.`
+      });
+    }
+
+    // 2. Clause Order Checks (DML)
+    if (stmtType === 'SELECT') {
+      if (!upperText.includes('FROM') && !upperText.includes('DUAL') && dialect !== 'postgres' && dialect !== 'sqlite') {
+        // Warning: SELECT without FROM
+        styleSuggs++;
+        currentIssues.push({
+          id: currentIssues.length + 1,
+          severity: 'STYLE',
+          issue: 'SELECT Statement Without FROM Clause',
+          stmtIndex: idx + 1,
+          line: stmtLine,
+          category: 'DML',
+          description: 'SELECT query does not reference a FROM table.'
+        });
+      }
+
+      // Check JOIN ON clause
+      if (upperText.includes('JOIN') && !upperText.includes('CROSS JOIN')) {
+        totalJoins++;
+        if (!upperText.includes(' ON ') && !upperText.includes(' USING')) {
+          syntaxErrs++;
+          stmtErrCount++;
+          currentIssues.push({
+            id: currentIssues.length + 1,
+            severity: 'ERROR',
+            issue: 'Missing JOIN ON / USING Condition',
+            stmtIndex: idx + 1,
+            line: stmtLine,
+            category: 'DML',
+            description: 'JOIN clause requires an explicit ON or USING condition.'
+          });
+        }
+      }
+    }
+
+    // 3. Safety Linter: UPDATE / DELETE without WHERE
+    if (checkSafety) {
+      if (stmtType === 'UPDATE' && !upperText.includes('WHERE')) {
+        safetyWarns++;
+        currentIssues.push({
+          id: currentIssues.length + 1,
+          severity: 'WARNING',
+          issue: 'DANGEROUS: UPDATE Without WHERE Clause',
+          stmtIndex: idx + 1,
+          line: stmtLine,
+          category: 'Safety',
+          description: 'UPDATE statement has no WHERE clause and will modify EVERY row in the target table!'
+        });
+      }
+
+      if (stmtType === 'DELETE' && !upperText.includes('WHERE')) {
+        safetyWarns++;
+        currentIssues.push({
+          id: currentIssues.length + 1,
+          severity: 'WARNING',
+          issue: 'DANGEROUS: DELETE Without WHERE Clause',
+          stmtIndex: idx + 1,
+          line: stmtLine,
+          category: 'Safety',
+          description: 'DELETE statement has no WHERE clause and will delete EVERY row in the target table!'
+        });
+      }
+    }
+
+    // 4. NULL Comparison Linter
+    if (checkNulls) {
+      if (/=\s*NULL/i.test(stmtText) || /!=\s*NULL/i.test(stmtText) || /<>\s*NULL/i.test(stmtText)) {
+        safetyWarns++;
+        currentIssues.push({
+          id: currentIssues.length + 1,
+          severity: 'WARNING',
+          issue: 'Incorrect NULL Comparison (= NULL)',
+          stmtIndex: idx + 1,
+          line: stmtLine,
+          category: 'DML',
+          description: 'Comparing values using "= NULL" or "!= NULL" in SQL evaluates to UNKNOWN. Use "IS NULL" or "IS NOT NULL" instead.'
+        });
+      }
+    }
+
+    // 5. Style Linter: SELECT * Wildcard
+    if (checkStyle) {
+      if (/SELECT\s+\*/i.test(stmtText)) {
+        styleSuggs++;
+        currentIssues.push({
+          id: currentIssues.length + 1,
+          severity: 'STYLE',
+          issue: 'Wildcard SELECT * Usage',
+          stmtIndex: idx + 1,
+          line: stmtLine,
+          category: 'Style',
+          description: 'Explicit column names are recommended instead of SELECT * for production stability.'
+        });
+      }
+    }
+
+    // Extract Table References (Static Lexing)
+    const tables = extractTableNames(stmtText);
+    tables.forEach(t => tablesFound.add(t));
+
+    // Extract CTEs
+    const ctes = extractCTENames(stmtText);
+    ctes.forEach(c => ctesFound.add(c));
+
+    if (upperText.includes('WHERE')) totalConditions++;
+    if (upperText.includes('SELECT')) totalSubqueries++;
+
+    stmtSummaries.push({
+      index: idx + 1,
+      type: stmtType,
+      lineRange: `Line ${stmtLine}`,
+      tables: Array.from(tables).join(', ') || 'N/A',
+      status: stmtErrCount > 0 ? 'ERROR' : 'VALID'
+    });
+  });
+
+  const endTime = performance.now();
+  const valMs = Math.round(endTime - startTime);
+
+  document.getElementById('val-time-ms').innerText = `${valMs} ms`;
+  document.getElementById('val-dialect-badge').innerText = dialect.toUpperCase();
+
+  // Render Status
+  if (syntaxErrs > 0) {
+    renderStatusUI('INVALID', `INVALID (${syntaxErrs} ERRORS)`, `SQL script contains ${syntaxErrs} syntax error(s). Review details below.`, '#dc2626', '#fef2f2', '#fca5a5', '❌');
+  } else if (safetyWarns > 0) {
+    renderStatusUI('WARNING', `WARNING (${safetyWarns} WARNS)`, `SQL syntax is valid, but contains ${safetyWarns} dangerous query warning(s).`, '#d97706', '#fffbeb', '#fcd34d', '⚠️');
+  } else {
+    renderStatusUI('VALID', 'VALID SQL SYNTAX', 'SQL script parsed cleanly with zero syntax or safety errors.', '#16a34a', '#f0fdf4', '#bbf7d0', '✅');
+  }
+
+  // Render Stats & Tables
+  document.getElementById('stat-syntax-errs').innerText = syntaxErrs;
+  document.getElementById('stat-safety-warns').innerText = safetyWarns;
+  document.getElementById('stat-style-suggs').innerText = styleSuggs;
+  document.getElementById('stat-statements-count').innerText = statements.length;
+  document.getElementById('stat-tables-count').innerText = tablesFound.size;
+  document.getElementById('badge-tab-issues').innerText = currentIssues.length;
+
+  document.getElementById('cx-joins').innerText = totalJoins;
+  document.getElementById('cx-conditions').innerText = totalConditions;
+  document.getElementById('cx-subqueries').innerText = totalSubqueries;
+  document.getElementById('cx-columns').innerText = totalColumns || 'N/A';
+
+  renderIssuesList();
+  renderStatementsTable(stmtSummaries);
+  renderObjectsLists(tablesFound, ctesFound);
+}
+
+function parseSQLStatements(sql) {
+  const statements = [];
+  let curr = '';
+  let inSingleQuote = false;
+  let inDoubleQuote = false;
+  let inLineComment = false;
+  let inBlockComment = false;
+  let startLine = 1;
+  let currentLine = 1;
+
+  for (let i = 0; i < sql.length; i++) {
+    const ch = sql[i];
+    const next = sql[i + 1];
+
+    if (ch === '\n') {
+      currentLine++;
+      inLineComment = false;
+    }
+
+    if (inLineComment) {
+      curr += ch;
+      continue;
+    }
+
+    if (inBlockComment) {
+      curr += ch;
+      if (ch === '*' && next === '/') {
+        inBlockComment = false;
+        curr += '/';
+        i++;
+      }
+      continue;
+    }
+
+    if (ch === '-' && next === '-' && !inSingleQuote && !inDoubleQuote) {
+      inLineComment = true;
+      curr += '--';
+      i++;
+      continue;
+    }
+
+    if (ch === '/' && next === '*' && !inSingleQuote && !inDoubleQuote) {
+      inBlockComment = true;
+      curr += '/*';
+      i++;
+      continue;
+    }
+
+    if (ch === "'" && !inDoubleQuote) {
+      inSingleQuote = !inSingleQuote;
+    } else if (ch === '"' && !inSingleQuote) {
+      inDoubleQuote = !inDoubleQuote;
+    }
+
+    if (ch === ';' && !inSingleQuote && !inDoubleQuote) {
+      if (curr.trim()) {
+        statements.push({ text: curr, startLine: startLine });
+      }
+      curr = '';
+      startLine = currentLine;
+    } else {
+      if (!curr.trim()) startLine = currentLine;
+      curr += ch;
+    }
+  }
+
+  if (curr.trim()) {
+    statements.push({ text: curr, startLine: startLine });
+  }
+
+  return statements;
+}
+
+function checkParenthesesBalance(str) {
+  let bal = 0;
+  let inSingle = false, inDouble = false;
+  for (let i = 0; i < str.length; i++) {
+    const c = str[i];
+    if (c === "'" && !inDouble) inSingle = !inSingle;
+    else if (c === '"' && !inSingle) inDouble = !inDouble;
+    else if (!inSingle && !inDouble) {
+      if (c === '(') bal++;
+      else if (c === ')') bal--;
+    }
+  }
+  return bal;
+}
+
+function checkQuotesBalance(str) {
+  let inSingle = false, inDouble = false;
+  for (let i = 0; i < str.length; i++) {
+    const c = str[i];
+    if (c === "'" && !inDouble) inSingle = !inSingle;
+    else if (c === '"' && !inSingle) inDouble = !inDouble;
+  }
+  return !inSingle && !inDouble;
+}
+
+function extractTableNames(sql) {
+  const tables = new Set();
+  const matches = sql.match(/(FROM|JOIN|INTO|UPDATE|TABLE)\s+([a-zA-Z0-9_\.]+)/gi);
+  if (matches) {
+    matches.forEach(m => {
+      const parts = m.split(/\s+/);
+      if (parts.length >= 2) {
+        const tbl = parts[1].replace(/[`"\[\]]/g, '');
+        if (!['SELECT', 'WHERE', 'SET', 'VALUES', '(', 'ON'].includes(tbl.toUpperCase())) {
+          tables.add(tbl);
+        }
+      }
+    });
+  }
+  return tables;
+}
+
+function extractCTENames(sql) {
+  const ctes = new Set();
+  const matches = sql.match(/WITH\s+([a-zA-Z0-9_]+)\s+AS/gi);
+  if (matches) {
+    matches.forEach(m => {
+      const parts = m.split(/\s+/);
+      if (parts.length >= 2) ctes.add(parts[1]);
+    });
+  }
+  return ctes;
+}
+
+function renderStatusUI(title, tag, desc, color, bgColor, borderColor, icon) {
+  document.getElementById('result-status-title').innerText = title;
+  document.getElementById('result-status-title').style.color = color;
+  
+  const tagEl = document.getElementById('result-status-tag');
+  tagEl.innerText = tag;
+  tagEl.style.background = bgColor;
+  tagEl.style.color = color;
+  tagEl.style.border = `1px solid ${borderColor}`;
+
+  document.getElementById('result-status-desc').innerText = desc;
+  document.getElementById('result-icon-badge').innerText = icon;
+  document.getElementById('result-icon-badge').style.background = bgColor;
+
+  const banner = document.getElementById('result-status-banner');
+  banner.style.borderColor = borderColor;
+}
+
+function resetResultsUI() {
+  renderStatusUI('Ready for Validation', 'STANDBY', 'Type or paste your SQL query above to run instant local syntax validation and linting.', '#0f172a', '#f1f5f9', '#cbd5e1', '🗄️');
+  document.getElementById('stat-syntax-errs').innerText = '0';
+  document.getElementById('stat-safety-warns').innerText = '0';
+  document.getElementById('stat-style-suggs').innerText = '0';
+  document.getElementById('stat-statements-count').innerText = '0';
+  document.getElementById('stat-tables-count').innerText = '0';
+  document.getElementById('badge-tab-issues').innerText = '0';
+  document.getElementById('issues-container').innerHTML = '<div style="text-align: center; padding: 2rem; color: #64748b;">Enter SQL queries above to run static syntax validation and linting.</div>';
+}
+
+function renderIssuesList() {
+  const container = document.getElementById('issues-container');
+  const sevFilter = document.getElementById('filter-severity').value;
+
+  let list = currentIssues;
+  if (sevFilter !== 'all') list = list.filter(i => i.severity === sevFilter);
+
+  if (list.length === 0) {
+    container.innerHTML = `
+      <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 1.5rem; text-align: center; color: #166534;">
+        <strong>🎉 Zero Syntax or Safety Issues Found!</strong> Your SQL query parsed cleanly with 0 errors.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = list.map((item) => `
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid ${item.severity === 'ERROR' ? '#ef4444' : item.severity === 'WARNING' ? '#f59e0b' : '#3b82f6'}; border-radius: 10px; padding: 1.1rem 1.25rem;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.4rem;">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-size: 0.75rem; font-weight: 800; padding: 0.15rem 0.5rem; border-radius: 6px; background: ${item.severity === 'ERROR' ? '#fef2f2' : item.severity === 'WARNING' ? '#fffbeb' : '#eff6ff'}; color: ${item.severity === 'ERROR' ? '#dc2626' : item.severity === 'WARNING' ? '#b45309' : '#1d4ed8'};">
+            ${item.severity}
+          </span>
+          <span style="font-weight: 700; font-size: 0.8rem; background: #f1f5f9; color: #334155; padding: 0.15rem 0.5rem; border-radius: 9999px;">
+            ${escapeHTML(item.category)}
+          </span>
+          <span style="font-weight: 700; font-size: 0.85rem; color: #0f172a;">Stmt #${item.stmtIndex} (Line ${item.line})</span>
+        </div>
+        <button onclick="jumpToLine(${item.line})" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 6px; font-weight: 700; cursor: pointer;">
+          📍 Jump to Line ${item.line}
+        </button>
+      </div>
+      <div style="font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 0.25rem;">
+        ${escapeHTML(item.issue)}
+      </div>
+      <p style="color: #64748b; font-size: 0.875rem; margin: 0;">
+        ${escapeHTML(item.description)}
+      </p>
+    </div>
+  `).join('');
+}
+
+function jumpToLine(lineNum) {
+  const sqlArea = document.getElementById('sql-input');
+  sqlArea.focus();
+  const lines = sqlArea.value.split('\n');
+  let pos = 0;
+  for (let i = 0; i < Math.min(lineNum - 1, lines.length); i++) {
+    pos += lines[i].length + 1;
+  }
+  const lineLen = lines[lineNum - 1] ? lines[lineNum - 1].length : 0;
+  sqlArea.setSelectionRange(pos, pos + lineLen);
+}
+
+function renderStatementsTable(stmts) {
+  const tbody = document.getElementById('statements-table-body');
+  if (stmts.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 2rem; color: #64748b;">No SQL queries analyzed.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = stmts.map(s => `
+    <tr style="border-bottom: 1px solid #e2e8f0;">
+      <td style="padding: 0.75rem; font-weight: 700; color: #0f172a;">#${s.index}</td>
+      <td style="padding: 0.75rem; font-weight: 600; color: #2563eb;">${escapeHTML(s.type)}</td>
+      <td style="padding: 0.75rem;">${s.lineRange}</td>
+      <td style="padding: 0.75rem; font-family: monospace;">${escapeHTML(s.tables)}</td>
+      <td style="padding: 0.75rem;"><span style="font-weight: 800; font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 9999px; background: ${s.status === 'VALID' ? '#f0fdf4' : '#fef2f2'}; color: ${s.status === 'VALID' ? '#16a34a' : '#dc2626'};">${s.status}</span></td>
+    </tr>
+  `).join('');
+}
+
+function renderObjectsLists(tables, ctes) {
+  const tList = document.getElementById('list-tables');
+  const cList = document.getElementById('list-ctes');
+
+  if (tables.size > 0) {
+    tList.innerHTML = Array.from(tables).map(t => `<li style="margin-bottom: 0.25rem;"><code>${escapeHTML(t)}</code></li>`).join('');
+  } else {
+    tList.innerHTML = '<li style="color: #64748b;">None detected</li>';
+  }
+
+  if (ctes.size > 0) {
+    cList.innerHTML = Array.from(ctes).map(c => `<li style="margin-bottom: 0.25rem;"><code>${escapeHTML(c)}</code></li>`).join('');
+  } else {
+    cList.innerHTML = '<li style="color: #64748b;">None detected</li>';
+  }
+}
+
+function formatSQL() {
+  const raw = document.getElementById('sql-input').value;
+  if (!raw.trim()) return;
+
+  const keywords = ['SELECT', 'FROM', 'WHERE', 'JOIN', 'INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'GROUP BY', 'HAVING', 'ORDER BY', 'LIMIT', 'OFFSET', 'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM', 'CREATE TABLE', 'ALTER TABLE', 'DROP TABLE', 'WITH', 'AS'];
+  let formatted = raw;
+
+  keywords.forEach(kw => {
+    const reg = new RegExp('\\b' + kw.replace(/ /g, '\\s+') + '\\b', 'gi');
+    formatted = formatted.replace(reg, '\n' + kw);
+  });
+
+  formatted = formatted.trim();
+  document.getElementById('sql-input').value = formatted;
+  runSQLValidation();
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-pane').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.tab-btn').forEach(el => {
+    el.style.background = 'transparent';
+    el.style.color = '#64748b';
+    el.style.borderBottom = 'none';
+  });
+
+  const activePane = document.getElementById(tabId);
+  const activeBtn = document.getElementById('btn-' + tabId);
+
+  if (activePane) activePane.style.display = 'block';
+  if (activeBtn) {
+    activeBtn.style.background = '#ffffff';
+    activeBtn.style.color = '#2563eb';
+    activeBtn.style.borderBottom = '3px solid #2563eb';
+  }
+}
+
+function exportCSVReport() {
+  if (currentIssues.length === 0) {
+    alert('No issues to export.');
+    return;
+  }
+  let csv = 'ID,Severity,Issue,Statement,Line,Category,Description\n';
+  currentIssues.forEach(i => {
+    csv += `"${i.id}","${i.severity}","${i.issue.replace(/"/g, '""')}","${i.stmtIndex}","${i.line}","${i.category}","${i.description.replace(/"/g, '""')}"\n`;
+  });
+  downloadFile('sql-validation-issues.csv', csv, 'text/csv');
+}
+
+function exportJSONReport() {
+  const report = {
+    tool: 'DataFrog SQL Validator',
+    timestamp: new Date().toISOString(),
+    issueCount: currentIssues.length,
+    issues: currentIssues
+  };
+  downloadFile('sql-validation-report.json', JSON.stringify(report, null, 2), 'application/json');
+}
+
+function copySummaryReport() {
+  const text = `DataFrog SQL Validation Summary:\nTotal Issues: ${currentIssues.length}\nTimestamp: ${new Date().toLocaleString()}`;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Validation Summary copied to clipboard!');
+  });
+}
+
+function downloadFile(filename, content, type) {
+  const blob = new Blob([content], { type: type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function escapeHTML(str) {
+  if (typeof str !== 'string') return str;
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+</script>
