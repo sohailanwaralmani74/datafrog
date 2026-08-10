@@ -283,6 +283,28 @@ is_homepage: true
           </div>
         </div>
 
+        <!-- Clean -->
+        {% assign clean_tools = site.data.tools | where: "category", "Clean" %}
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.85rem;">🧹</span>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: #0f172a;">Clean</h3>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.65rem; background: #ecfdf5; color: #059669; border-radius: 9999px;">
+              {{ clean_tools.size | default: 0 }} Tools
+            </span>
+          </div>
+          <p style="color: #475569; font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Deduplicate Excel workbooks and CSV files, normalize whitespace, standardize casing, filter unwanted records, and sanitize raw datasets locally in your browser with zero data uploads.
+          </p>
+          <div style="text-align: right;">
+            <a href="/visualize" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
+              Open Visualize Category →
+            </a>
+          </div>
+        </div>
+
         <!-- Visualize -->
         {% assign visualize_tools = site.data.tools | where: "category", "Visualize" %}
         <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
@@ -299,8 +321,8 @@ is_homepage: true
             Transform JSON, CSV, XML, Excel, and YAML datasets into interactive visual node trees, multi-sheet dashboards, searchable spreadsheet tables, and high-resolution chart graphics (Bar, Line, Pie, Doughnut).
           </p>
           <div style="text-align: right;">
-            <a href="/visualize" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
-              Open Visualize Category →
+            <a href="/clean" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
+              Open Clean Category →
             </a>
           </div>
         </div>

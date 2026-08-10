@@ -444,3 +444,14 @@
   date: "2026-08-06"
   updated: "2026-08-06"
 
+- title: "Excel Duplicate Remover"
+  short_name: "Excel Duplicate Remover"
+  url: "/clean/excel-duplicate-remover"
+  category: "Clean"
+  description: "Find and remove Excel duplicates (.xlsx, .xls) by selected columns or full rows. Preview duplicate groups and download cleaned files in total privacy."
+  keywords: ["excel duplicate remover", "excel find duplicates", "eliminate duplicate excel", "remove repeats in excel", "show duplicates in excel", "xls remove duplicates"]
+  icon: "🧹"
+  featured: true
+  date: "2026-08-10"
+  updated: "2026-08-10"
+

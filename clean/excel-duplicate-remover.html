@@ -1,0 +1,942 @@
+---
+layout: main
+title: "Excel Duplicate Remover - Find & Remove Duplicates Online"
+short_name: "Excel Duplicate Remover"
+description: "Find & remove Excel duplicates online (.xlsx, .xls) by selected columns or entire rows. Preview duplicate groups & download cleaned files in total privacy."
+keywords: "excel duplicate remover, excel find duplicates, eliminate duplicate excel, eliminate repeats in excel, excel search duplicates, excel select duplicates, in excel how to remove duplicates, remove repeats in excel, show duplicates in excel, xls remove duplicates, excel delete duplicates, check duplicate in excel, clear duplicate excel, delete duplicate entries in excel"
+category: "Clean"
+permalink: /clean/excel-duplicate-remover
+---
+
+<!-- SheetJS for browser-side Excel reading & writing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>🧹</span> Client-Side Excel Deduplication Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      Excel Duplicate Remover
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Identify, preview, and eliminate duplicate records in Excel spreadsheets (.xlsx, .xls) by selected key columns or entire rows. Customize matching rules, inspect duplicate groups, and export clean workbooks 100% locally.
+    </p>
+
+    <!-- Global Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Client-Side Privacy: Excel files never leave your device. Zero server uploads. Original files remain untouched.</span>
+    </div>
+  </div>
+
+  <!-- File Upload & Sample Loader Section -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    
+    <div id="excel-dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Excel Workbook Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xlsx</strong> and <strong>.xls</strong> workbooks
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer; text-decoration: none;">
+        Browse Excel File
+        <input type="file" id="excel-file-input" accept=".xlsx,.xls,.xlsm" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample Generator & Actions -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Test With Sample Dataset:</span>
+        <button onclick="loadSampleWorkbook()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample Contact List (With Duplicates)
+        </button>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem;">
+        <button onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          Reset Tool
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Loaded Workbook Summary Bar -->
+  <div id="workbook-meta-bar" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="meta-filename" style="font-size: 1rem; color: #0f172a;">Customers_Master.xlsx</strong>
+          <div id="meta-filesize" style="color: #64748b; font-size: 0.8rem;">Size: 32.4 KB | Type: XLSX</div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1rem; color: #475569;">
+        <label for="select-worksheet" style="font-weight: 700; color: #0f172a;">Worksheet:</label>
+        <select id="select-worksheet" onchange="changeActiveSheet()" style="padding: 0.35rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; font-weight: 600; background: #ffffff;">
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deduplication Configuration & Options Box -->
+  <div id="dedup-config-panel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      ⚙️ Deduplication Settings &amp; Rules
+    </h3>
+
+    <!-- Options Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+      
+      <!-- Box 1: Mode & Headers -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.1rem;">
+        <h4 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;">1. Comparison Mode &amp; Header</h4>
+        
+        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; cursor: pointer; font-size: 0.875rem;">
+          <input type="checkbox" id="opt-has-header" checked onchange="recalculateDuplicates()">
+          <strong>First row contains column headers</strong>
+        </label>
+
+        <div style="margin-top: 0.75rem; font-size: 0.875rem;">
+          <div style="font-weight: 700; color: #475569; margin-bottom: 0.4rem;">Compare By:</div>
+          <label style="display: block; margin-bottom: 0.35rem; cursor: pointer;">
+            <input type="radio" name="opt-mode" value="selected" checked onchange="toggleModeControls(); recalculateDuplicates();">
+            Selected Columns (Match specified fields)
+          </label>
+          <label style="display: block; cursor: pointer;">
+            <input type="radio" name="opt-mode" value="all" onchange="toggleModeControls(); recalculateDuplicates();">
+            Entire Row (All populated columns must match)
+          </label>
+        </div>
+      </div>
+
+      <!-- Box 2: Keep Record Rule -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.1rem;">
+        <h4 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;">2. Record Retention Rule</h4>
+        
+        <div style="font-size: 0.875rem;">
+          <label style="display: block; margin-bottom: 0.4rem; cursor: pointer;">
+            <input type="radio" name="opt-keep" value="first" checked onchange="recalculateDuplicates()">
+            <strong>Keep First Occurrence</strong> (Remove subsequent repeats)
+          </label>
+          <label style="display: block; margin-bottom: 0.6rem; cursor: pointer;">
+            <input type="radio" name="opt-keep" value="last" onchange="recalculateDuplicates()">
+            <strong>Keep Last Occurrence</strong> (Remove preceding repeats)
+          </label>
+        </div>
+
+        <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.5rem; margin-bottom: 0; line-height: 1.4;">
+          Example: If rows 2, 8, &amp; 15 match, "Keep First" retains row 2 and flags rows 8 &amp; 15 for removal.
+        </p>
+      </div>
+
+      <!-- Box 3: Text Normalization -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.1rem;">
+        <h4 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;">3. Matching Normalization</h4>
+        
+        <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; color: #334155;">
+          <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+            <input type="checkbox" id="opt-trim-space" checked onchange="recalculateDuplicates()">
+            Ignore leading/trailing whitespace
+          </label>
+          <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+            <input type="checkbox" id="opt-ignore-case" onchange="recalculateDuplicates()">
+            Case-insensitive text matching (Apple = apple)
+          </label>
+          <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+            <input type="checkbox" id="opt-blanks-equal" checked onchange="recalculateDuplicates()">
+            Treat empty / blank cells as equal
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Column Selection Panel -->
+    <div id="column-selection-wrapper" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 1.25rem;">
+      <div style="font-size: 0.8rem; color: #0284c7; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 0.55rem 0.85rem; margin-bottom: 0.85rem;">
+        💡 <strong>Pro-Tip:</strong> Unique primary keys or ID columns (like <em>Customer ID</em> or <em>Row #</em>) are automatically unchecked by default so that rows with identical Emails, Names, or Addresses match as duplicates.
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem;">
+        <div style="font-weight: 700; font-size: 0.95rem; color: #0f172a;">
+          Select Comparison Columns (Which fields determine a duplicate?):
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <input type="text" id="col-search-input" placeholder="Search columns..." oninput="filterColumnBoxes()"
+                 style="padding: 0.25rem 0.6rem; font-size: 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px;">
+          <button onclick="selectAllColumns(true)" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; cursor: pointer;">Select All</button>
+          <button onclick="selectAllColumns(false)" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; cursor: pointer;">Clear All</button>
+        </div>
+      </div>
+
+      <div id="columns-checkbox-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.6rem; max-height: 200px; overflow-y: auto; padding: 0.5rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Dashboard & Statistics Container -->
+  <div id="results-dashboard" style="display: none; margin-bottom: 2rem;">
+    
+    <!-- Action Banner & Safe Removal Button -->
+    <div id="action-summary-banner" style="background: #ffffff; border: 2px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+      
+      <div style="display: flex; align-items: center; gap: 1.25rem;">
+        <div id="action-icon-badge" style="width: 56px; height: 56px; border-radius: 50%; background: #f0fdf4; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+          🔍
+        </div>
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <h2 id="action-title" style="font-size: 1.4rem; font-weight: 800; color: #0f172a; margin: 0;">
+              Duplicate Inspection Ready
+            </h2>
+          </div>
+          <p id="action-desc" style="color: #64748b; font-size: 0.9rem; margin-top: 0.25rem; margin-bottom: 0;">
+            Review identified duplicate groups below. Click "Download Cleaned Excel" to generate a deduplicated workbook.
+          </p>
+        </div>
+      </div>
+
+      <!-- Execution Buttons -->
+      <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="btn-download-selected" onclick="downloadCleanedWorkbook('selected')" style="padding: 0.7rem 1.35rem; background: #059669; color: #ffffff; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+          💾 Remove Selected Duplicates &amp; Download
+        </button>
+        <button id="btn-download-all" onclick="downloadCleanedWorkbook('all')" style="padding: 0.7rem 1.25rem; background: #0284c7; color: #ffffff; border: none; border-radius: 8px; font-size: 0.875rem; font-weight: 700; cursor: pointer;">
+          ⚡ Remove All Duplicates &amp; Download
+        </button>
+        <button onclick="downloadDuplicateRowsWorkbook('selected')" style="padding: 0.7rem 1.15rem; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
+          📥 Download Duplicates Only
+        </button>
+        <button onclick="exportAuditReportCSV()" style="padding: 0.7rem 1.15rem; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
+          📊 Export Audit Report (CSV)
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Summary Metrics Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase;">Total Rows</div>
+        <div id="stat-total-rows" style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #d1fae5; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #065f46; text-transform: uppercase;">Unique Records</div>
+        <div id="stat-unique-rows" style="font-size: 1.8rem; font-weight: 800; color: #059669; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #fee2e2; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #991b1b; text-transform: uppercase;">Duplicate Rows</div>
+        <div id="stat-dupe-rows" style="font-size: 1.8rem; font-weight: 800; color: #dc2626; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #fef3c7; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #92400e; text-transform: uppercase;">Duplicate Groups</div>
+        <div id="stat-dupe-groups" style="font-size: 1.8rem; font-weight: 800; color: #d97706; margin-top: 0.25rem;">0</div>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+        <div style="font-size: 0.75rem; font-weight: 800; color: #475569; text-transform: uppercase;">Duplication Rate</div>
+        <div id="stat-dupe-pct" style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">0%</div>
+      </div>
+    </div>
+
+    <!-- Preview & Group Inspector Workspace -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+      
+      <!-- Toolbar & Filters -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <label style="font-weight: 700; font-size: 0.85rem; color: #475569;">View Filter:</label>
+          <select id="filter-preview-rows" onchange="renderPreviewTable()" style="padding: 0.4rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+            <option value="all">All Rows</option>
+            <option value="kept">Kept Records Only (Unique)</option>
+            <option value="removed">Duplicate Records Only (Candidates for Removal)</option>
+          </select>
+
+          <input type="text" id="preview-search-input" placeholder="Search cell values or row #..." oninput="renderPreviewTable()"
+                 style="padding: 0.4rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; width: 200px;">
+
+          <button onclick="toggleSelectAllDupes(true)" style="padding: 0.35rem 0.7rem; font-size: 0.8rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 700; color: #059669; cursor: pointer;">
+            ☑️ Select All Duplicates
+          </button>
+          <button onclick="toggleSelectAllDupes(false)" style="padding: 0.35rem 0.7rem; font-size: 0.8rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 700; color: #dc2626; cursor: pointer;">
+            ☐ Deselect All Duplicates
+          </button>
+        </div>
+
+        <div style="font-size: 0.85rem; color: #64748b;" id="preview-rows-counter">
+          Showing 0 of 0 records
+        </div>
+      </div>
+
+      <!-- Table Container -->
+      <div style="overflow-x: auto; max-height: 520px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left;">
+          <thead style="position: sticky; top: 0; background: #f1f5f9; z-index: 10;">
+            <tr id="preview-thead-row" style="border-bottom: 2px solid #cbd5e1; color: #0f172a;">
+              <th style="padding: 0.75rem;">Row #</th>
+              <th style="padding: 0.75rem;">Status</th>
+              <th style="padding: 0.75rem;">Group #</th>
+            </tr>
+          </thead>
+          <tbody id="preview-tbody">
+            <tr><td colspan="3" style="text-align: center; padding: 2rem; color: #64748b;">No data loaded.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Educational Article -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-bottom: 2rem;">
+    
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
+      What Is an Excel Duplicate Remover?
+    </h2>
+    <p>
+      An <strong>Excel Duplicate Remover</strong> is a specialized data cleaning utility designed to scan Excel workbooks (<code>.xlsx</code>, <code>.xls</code>), detect repeated records, organize duplicates into structured comparison groups, and safely produce a deduplicated spreadsheet. Whether managing customer contact lists, e-commerce orders, employee directories, or inventory logs, eliminating duplicate rows is essential for dataset accuracy and reporting integrity.
+    </p>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      How Excel Duplicate Detection Works
+    </h2>
+    <p>
+      Duplicate detection evaluates rows based on user-selected key comparison columns or entire records:
+    </p>
+    <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
+      <li><strong>Selected Columns Matching:</strong> Compares specific fields (e.g. <code>Email</code> or <code>Customer ID</code>). Two rows with identical email addresses are identified as duplicates even if other columns differ.</li>
+      <li><strong>Entire Row Matching:</strong> Evaluates all populated columns across the worksheet. Rows are only flagged as duplicates if every single cell value matches.</li>
+      <li><strong>Keep First vs Keep Last:</strong> Determines which record to retain. Keeping the first occurrence preserves the initial entry and flags subsequent repeats for removal.</li>
+    </ul>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      Exact vs Normalized Duplicate Matching
+    </h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Whitespace Trimming</h3>
+        <p style="font-size: 0.9rem; color: #64748b; margin: 0;">
+          Ignores accidental leading or trailing spaces. For example, <code>"John Smith "</code> and <code>"John Smith"</code> match seamlessly.
+        </p>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Case Insensitivity</h3>
+        <p style="font-size: 0.9rem; color: #64748b; margin: 0;">
+          Treats text variations as equivalent (e.g. <code>"ADMIN@EXAMPLE.COM"</code> matches <code>"admin@example.com"</code>).
+        </p>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Blank Cell Handling</h3>
+        <p style="font-size: 0.9rem; color: #64748b; margin: 0;">
+          Consistently compares empty cells as equal values without treating them as wildcards.
+        </p>
+      </div>
+    </div>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      Privacy &amp; Client-Side Data Security Guarantee
+    </h2>
+    <p>
+      All spreadsheet parsing, hash-based duplicate grouping, rule calculations, and Excel file generation occur 100% locally within your client browser memory using JavaScript and WebAssembly. No workbook payloads, customer records, or financial metrics are ever transmitted over external networks. Your original uploaded Excel workbook is never modified directly.
+    </p>
+
+    <!-- FAQ Section -->
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1.25rem;">
+      Frequently Asked Questions (FAQ)
+    </h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does this tool modify my original uploaded Excel file?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          No. Your original file remains untouched. The tool generates a brand-new deduplicated Excel workbook for you to download.
+        </p>
+      </details>
+
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I choose specific columns to check for duplicates?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. You can select single or multiple columns (such as Email or Phone Number) to determine uniqueness, or choose "Entire Row" mode.
+        </p>
+      </details>
+
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What is the difference between "Keep First" and "Keep Last"?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          "Keep First" preserves the initial occurrence of a record and removes subsequent repeats. "Keep Last" retains the final matching row and removes earlier instances.
+        </p>
+      </details>
+    </div>
+
+  </article>
+
+</div>
+
+<!-- Application Logic JavaScript -->
+<script>
+let currentWorkbook = null;
+let currentFileName = "";
+let currentFileSize = 0;
+let parsedSheets = {};
+let activeSheetName = "";
+
+let sheetHeaders = [];
+let sheetRows = [];
+let calculatedGroups = [];
+let rowStatuses = []; // { index: rowIdx, isKept: bool, groupId: int, rowData: [] }
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupDragAndDrop();
+});
+
+function setupDragAndDrop() {
+  const zone = document.getElementById('excel-dropzone');
+  if (!zone) return;
+
+  ['dragenter', 'dragover'].forEach(name => {
+    zone.addEventListener(name, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      zone.style.borderColor = '#059669';
+      zone.style.background = '#ecfdf5';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    zone.addEventListener(name, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      zone.style.borderColor = '#cbd5e1';
+      zone.style.background = '#f8fafc';
+    });
+  });
+
+  zone.addEventListener('drop', (e) => {
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      processFile(files[0]);
+    }
+  });
+}
+
+function handleFileSelect(e) {
+  const files = e.target.files;
+  if (files.length > 0) {
+    processFile(files[0]);
+  }
+}
+
+function processFile(file) {
+  currentFileName = file.name;
+  currentFileSize = file.size;
+
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    try {
+      const data = new Uint8Array(evt.target.result);
+      currentWorkbook = XLSX.read(data, { type: 'array', cellStyles: true });
+      initializeWorkbookUI();
+    } catch (err) {
+      alert('Error reading Excel file: ' + err.message);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function loadSampleWorkbook() {
+  currentFileName = "Sample_Customer_Contacts.xlsx";
+  currentFileSize = 28400;
+
+  const sampleData = [
+    ["Customer ID", "Full Name", "Email Address", "Phone Number", "City", "Status"],
+    ["CUST-101", "John Smith", "john.smith@example.com", "555-0192", "New York", "Active"],
+    ["CUST-102", "Sarah Johnson", "sarah.j@example.com", "555-0193", "Chicago", "Active"],
+    ["CUST-101", "John Smith", "john.smith@example.com", "555-0192", "New York", "Active"], // Exact duplicate of Row 1
+    ["CUST-104", "Alice Brown ", "alice.b@example.com ", "555-0194", "Dallas", "Pending"],
+    ["CUST-105", "Michael Davis", "m.davis@example.com", "555-0195", "Seattle", "Active"],
+    ["CUST-102", "Sarah Johnson", "sarah.j@example.com", "555-0193", "Chicago", "Active"], // Exact duplicate of Row 2
+    ["CUST-104", "Alice Brown", "alice.b@example.com", "555-0194", "Dallas", "Pending"], // Whitespace duplicate of Row 4
+    ["CUST-108", "David Wilson", "david.w@example.com", "555-0196", "Miami", "Active"]
+  ];
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(sampleData);
+  XLSX.utils.book_append_sheet(wb, ws, "Contacts Master");
+
+  currentWorkbook = wb;
+  initializeWorkbookUI();
+}
+
+function resetTool() {
+  document.getElementById('workbook-meta-bar').style.display = 'none';
+  document.getElementById('dedup-config-panel').style.display = 'none';
+  document.getElementById('results-dashboard').style.display = 'none';
+  document.getElementById('excel-file-input').value = '';
+  currentWorkbook = null;
+}
+
+function initializeWorkbookUI() {
+  if (!currentWorkbook || !currentWorkbook.SheetNames.length) return;
+
+  document.getElementById('meta-filename').innerText = currentFileName;
+  document.getElementById('meta-filesize').innerText = `Size: ${formatBytes(currentFileSize)} | Format: Excel`;
+  document.getElementById('workbook-meta-bar').style.display = 'block';
+
+  const sheetSelect = document.getElementById('select-worksheet');
+  sheetSelect.innerHTML = '';
+
+  currentWorkbook.SheetNames.forEach((name) => {
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.innerText = name;
+    sheetSelect.appendChild(opt);
+  });
+
+  activeSheetName = currentWorkbook.SheetNames[0];
+  loadActiveSheetData();
+}
+
+function changeActiveSheet() {
+  activeSheetName = document.getElementById('select-worksheet').value;
+  loadActiveSheetData();
+}
+
+function loadActiveSheetData() {
+  const ws = currentWorkbook.Sheets[activeSheetName];
+  if (!ws) return;
+
+  const rawData = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+  if (rawData.length === 0) {
+    alert('Selected worksheet is empty.');
+    return;
+  }
+
+  sheetRows = rawData;
+  renderColumnCheckboxes();
+  recalculateDuplicates();
+  document.getElementById('dedup-config-panel').style.display = 'block';
+  document.getElementById('results-dashboard').style.display = 'block';
+}
+
+function renderColumnCheckboxes() {
+  const hasHeader = document.getElementById('opt-has-header').checked;
+  const container = document.getElementById('columns-checkbox-container');
+  container.innerHTML = '';
+
+  const firstRow = sheetRows[0] || [];
+  const colCount = Math.max(...sheetRows.map(r => r.length), 0);
+
+  sheetHeaders = [];
+
+  for (let c = 0; c < colCount; c++) {
+    let label = hasHeader && firstRow[c] !== undefined && firstRow[c] !== '' ? String(firstRow[c]) : `Column ${getColLetter(c)}`;
+    sheetHeaders.push(label);
+
+    const div = document.createElement('div');
+    div.className = 'col-check-item';
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.gap = '0.4rem';
+
+    // Smart default: Uncheck unique ID columns so duplicate detection matches on non-ID fields
+    const labelLower = label.toLowerCase();
+    const isIdCol = /^(id|_id|customer_id|cust_id|user_id|row|#|no|number)$/i.test(labelLower) || labelLower === 'id' || labelLower.includes('customer id') || labelLower.includes('row #');
+    const isChecked = !isIdCol;
+
+    div.innerHTML = `
+      <label style="font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.35rem;">
+        <input type="checkbox" class="col-checkbox" data-col-idx="${c}" ${isChecked ? 'checked' : ''} onchange="recalculateDuplicates()">
+        <strong>${getColLetter(c)}:</strong> ${escapeHTML(label)}
+      </label>
+    `;
+    container.appendChild(div);
+  }
+}
+
+function getColLetter(colIdx) {
+  let temp = '';
+  let letter = '';
+  while (colIdx >= 0) {
+    temp = colIdx % 26;
+    letter = String.fromCharCode(temp + 65) + letter;
+    colIdx = (colIdx - temp) / 26 - 1;
+  }
+  return letter;
+}
+
+function toggleModeControls() {
+  const mode = document.querySelector('input[name="opt-mode"]:checked').value;
+  const colWrapper = document.getElementById('column-selection-wrapper');
+  if (mode === 'all') {
+    colWrapper.style.opacity = '0.5';
+    colWrapper.style.pointerEvents = 'none';
+  } else {
+    colWrapper.style.opacity = '1';
+    colWrapper.style.pointerEvents = 'auto';
+  }
+}
+
+function selectAllColumns(check) {
+  document.querySelectorAll('.col-checkbox').forEach(cb => cb.checked = check);
+  recalculateDuplicates();
+}
+
+function filterColumnBoxes() {
+  const q = document.getElementById('col-search-input').value.toLowerCase();
+  document.querySelectorAll('.col-check-item').forEach(item => {
+    const text = item.innerText.toLowerCase();
+    item.style.display = text.includes(q) ? 'flex' : 'none';
+  });
+}
+
+// Core Hash-Based Duplicate Recalculation
+function recalculateDuplicates() {
+  if (!sheetRows || sheetRows.length === 0) return;
+
+  const hasHeader = document.getElementById('opt-has-header').checked;
+  const mode = document.querySelector('input[name="opt-mode"]:checked').value;
+  const keepRule = document.querySelector('input[name="opt-keep"]:checked').value;
+
+  const trimSpace = document.getElementById('opt-trim-space').checked;
+  const ignoreCase = document.getElementById('opt-ignore-case').checked;
+  const blanksEqual = document.getElementById('opt-blanks-equal').checked;
+
+  const selectedCols = [];
+  if (mode === 'all') {
+    const maxCols = Math.max(...sheetRows.map(r => r.length), 0);
+    for (let i = 0; i < maxCols; i++) selectedCols.push(i);
+  } else {
+    document.querySelectorAll('.col-checkbox:checked').forEach(cb => {
+      selectedCols.push(parseInt(cb.dataset.colIdx));
+    });
+  }
+
+  const startRowIdx = hasHeader ? 1 : 0;
+  const dataRows = sheetRows.slice(startRowIdx);
+
+  // Group by Key Hash
+  const groupsMap = new Map(); // key -> array of row objects
+
+  dataRows.forEach((row, idx) => {
+    const actualRowIdx = startRowIdx + idx + 1; // 1-indexed row in Excel
+    
+    // Construct Hash Key
+    const keyParts = selectedCols.map(c => {
+      let val = row[c] !== undefined && row[c] !== null ? String(row[c]) : '';
+      if (trimSpace) val = val.trim();
+      if (ignoreCase) val = val.toLowerCase();
+      if (blanksEqual && val === '') val = '__EMPTY__';
+      return val;
+    });
+
+    const key = keyParts.join('|||');
+
+    if (!groupsMap.has(key)) {
+      groupsMap.set(key, []);
+    }
+    groupsMap.get(key).push({ rowIdx: actualRowIdx, rowData: row });
+  });
+
+  calculatedGroups = [];
+  rowStatuses = [];
+
+  let dupeGroupCounter = 0;
+  let totalKept = 0;
+  let totalRemoved = 0;
+
+  groupsMap.forEach((rowsList, key) => {
+    const count = rowsList.length;
+
+    if (count > 1) {
+      dupeGroupCounter++;
+
+      const targetKeepIdx = (keepRule === 'first') ? 0 : count - 1;
+
+      rowsList.forEach((item, listIdx) => {
+        const isKept = (listIdx === targetKeepIdx);
+        if (isKept) totalKept++;
+        else totalRemoved++;
+
+        rowStatuses.push({
+          rowIdx: item.rowIdx,
+          isKept: isKept,
+          selectedForRemoval: !isKept, // Interactive choice: user can check/uncheck individual duplicates!
+          groupId: dupeGroupCounter,
+          key: key,
+          rowData: item.rowData
+        });
+      });
+
+      calculatedGroups.push({
+        groupId: dupeGroupCounter,
+        key: key,
+        totalOccurrences: count,
+        keptRow: rowsList[targetKeepIdx].rowIdx,
+        removedRows: rowsList.filter((_, i) => i !== targetKeepIdx).map(r => r.rowIdx)
+      });
+
+    } else {
+      // Unique Record
+      totalKept++;
+      rowStatuses.push({
+        rowIdx: rowsList[0].rowIdx,
+        isKept: true,
+        selectedForRemoval: false,
+        groupId: 0,
+        key: key,
+        rowData: rowsList[0].rowData
+      });
+    }
+  });
+
+  // Sort row statuses by row index
+  rowStatuses.sort((a, b) => a.rowIdx - b.rowIdx);
+
+  // Update Summary Cards
+  const totalDataRows = dataRows.length;
+  document.getElementById('stat-total-rows').innerText = totalDataRows.toLocaleString();
+  document.getElementById('stat-unique-rows').innerText = (totalDataRows - totalRemoved).toLocaleString();
+  document.getElementById('stat-dupe-rows').innerText = totalRemoved.toLocaleString();
+  document.getElementById('stat-dupe-groups').innerText = dupeGroupCounter.toLocaleString();
+
+  const pct = totalDataRows > 0 ? ((totalRemoved / totalDataRows) * 100).toFixed(1) : 0;
+  document.getElementById('stat-dupe-pct').innerText = `${pct}%`;
+
+  updateRemovalCounters();
+  renderPreviewTable();
+}
+
+function updateRemovalCounters() {
+  const selectedForRemovalCount = rowStatuses.filter(r => r.selectedForRemoval).length;
+  const allDupesCount = rowStatuses.filter(r => !r.isKept).length;
+
+  const btnSelected = document.getElementById('btn-download-selected');
+  const btnAll = document.getElementById('btn-download-all');
+
+  if (btnSelected) {
+    btnSelected.innerText = `💾 Remove ${selectedForRemovalCount} Selected & Download`;
+  }
+  if (btnAll) {
+    btnAll.innerText = `⚡ Remove All ${allDupesCount} Duplicates & Download`;
+  }
+
+  document.getElementById('action-title').innerText = `${selectedForRemovalCount} Selected Duplicates Marked for Removal`;
+  document.getElementById('action-desc').innerText = `${selectedForRemovalCount} of ${allDupesCount} identified duplicate rows are selected for removal. Choose to remove selected items or all duplicates below.`;
+
+  const masterCb = document.getElementById('master-select-dupes');
+  if (masterCb) {
+    masterCb.checked = (allDupesCount > 0 && selectedForRemovalCount === allDupesCount);
+  }
+}
+
+function toggleRowRemoval(rowIdx, isChecked) {
+  const item = rowStatuses.find(r => r.rowIdx === rowIdx);
+  if (item) {
+    item.selectedForRemoval = isChecked;
+    updateRemovalCounters();
+
+    // Update row background color dynamically
+    const tr = document.getElementById(`preview-tr-${rowIdx}`);
+    if (tr) {
+      tr.style.background = isChecked ? '#fef2f2' : '#ffffff';
+    }
+  }
+}
+
+function toggleSelectAllDupes(isChecked) {
+  rowStatuses.forEach(r => {
+    if (!r.isKept) {
+      r.selectedForRemoval = isChecked;
+    }
+  });
+  updateRemovalCounters();
+  renderPreviewTable();
+}
+
+function renderPreviewTable() {
+  const filter = document.getElementById('filter-preview-rows').value;
+  const q = document.getElementById('preview-search-input').value.toLowerCase();
+  const hasHeader = document.getElementById('opt-has-header').checked;
+
+  const theadRow = document.getElementById('preview-thead-row');
+  const tbody = document.getElementById('preview-tbody');
+
+  // Build Header with Checkbox for Removal Choice
+  let headHTML = `
+    <th style="padding: 0.75rem; background: #f1f5f9; text-align: center;">
+      <input type="checkbox" id="master-select-dupes" title="Select/Deselect All Duplicates" onchange="toggleSelectAllDupes(this.checked)"> Remove?
+    </th>
+    <th style="padding: 0.75rem; background: #f1f5f9;">Row #</th>
+    <th style="padding: 0.75rem; background: #f1f5f9;">Status</th>
+    <th style="padding: 0.75rem; background: #f1f5f9;">Group</th>
+  `;
+  
+  const headers = hasHeader ? sheetRows[0] : sheetHeaders;
+  headers.forEach((h, i) => {
+    headHTML += `<th style="padding: 0.75rem; background: #f1f5f9;">${escapeHTML(String(h || `Col ${i+1}`))}`;
+  });
+  theadRow.innerHTML = headHTML;
+
+  // Filter Rows
+  let filtered = rowStatuses;
+
+  if (filter === 'kept') filtered = filtered.filter(r => r.isKept);
+  else if (filter === 'removed') filtered = filtered.filter(r => !r.isKept);
+
+  if (q) {
+    filtered = filtered.filter(r => {
+      const rowTxt = r.rowData.join(' ').toLowerCase();
+      return rowTxt.includes(q) || String(r.rowIdx).includes(q) || String(r.groupId).includes(q);
+    });
+  }
+
+  document.getElementById('preview-rows-counter').innerText = `Showing ${filtered.length} of ${rowStatuses.length} records`;
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="${headers.length + 4}" style="text-align: center; padding: 2rem; color: #64748b;">No matching records found.</td></tr>`;
+    return;
+  }
+
+  // Render Top 200 Rows for Speed
+  const displayLimit = 200;
+  const slice = filtered.slice(0, displayLimit);
+
+  tbody.innerHTML = slice.map(r => {
+    const isCandidateDupe = !r.isKept;
+
+    const cbHTML = isCandidateDupe
+      ? `<input type="checkbox" class="row-dupe-cb" data-row-idx="${r.rowIdx}" ${r.selectedForRemoval ? 'checked' : ''} onchange="toggleRowRemoval(${r.rowIdx}, this.checked)">`
+      : `<span style="color: #94a3b8; font-size: 0.75rem;">Kept</span>`;
+
+    const statusTag = r.isKept 
+      ? '<span style="font-weight: 800; font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 9999px; background: #d1fae5; color: #065f46;">KEPT</span>'
+      : (r.selectedForRemoval 
+          ? '<span style="font-weight: 800; font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 9999px; background: #fee2e2; color: #991b1b;">REMOVE</span>'
+          : '<span style="font-weight: 800; font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 9999px; background: #fef3c7; color: #92400e;">KEEP (DUPE)</span>');
+
+    const grpTag = r.groupId > 0 ? `#${r.groupId}` : '-';
+    const bgCol = r.selectedForRemoval ? '#fef2f2' : '#ffffff';
+
+    let cellsHTML = '';
+    headers.forEach((_, cIdx) => {
+      const cellVal = r.rowData[cIdx] !== undefined ? String(r.rowData[cIdx]) : '';
+      cellsHTML += `<td style="padding: 0.65rem;">${escapeHTML(cellVal)}</td>`;
+    });
+
+    return `
+      <tr id="preview-tr-${r.rowIdx}" style="background: ${bgCol}; border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 0.65rem; text-align: center;">${cbHTML}</td>
+        <td style="padding: 0.65rem; font-weight: 700; color: #0f172a;">${r.rowIdx}</td>
+        <td style="padding: 0.65rem;">${statusTag}</td>
+        <td style="padding: 0.65rem; font-weight: 600; color: #d97706;">${grpTag}</td>
+        ${cellsHTML}
+      </tr>
+    `;
+  }).join('');
+
+  updateRemovalCounters();
+}
+
+function downloadCleanedWorkbook(mode) {
+  if (!sheetRows || sheetRows.length === 0) return;
+
+  const hasHeader = document.getElementById('opt-has-header').checked;
+  const cleanedRows = [];
+
+  if (hasHeader) {
+    cleanedRows.push(sheetRows[0]); // Header
+  }
+
+  rowStatuses.forEach(r => {
+    // If mode is 'all', remove all !r.isKept duplicates
+    // If mode is 'selected' (default), remove only if user selected r.selectedForRemoval
+    const shouldRemove = (mode === 'all') ? !r.isKept : r.selectedForRemoval;
+    if (!shouldRemove) {
+      cleanedRows.push(r.rowData);
+    }
+  });
+
+  const newWb = XLSX.utils.book_new();
+  const newWs = XLSX.utils.aoa_to_sheet(cleanedRows);
+  XLSX.utils.book_append_sheet(newWb, newWs, activeSheetName);
+
+  const cleanName = currentFileName.replace(/\.(xlsx|xls|xlsm)$/i, '') + '-deduplicated.xlsx';
+  XLSX.writeFile(newWb, cleanName);
+}
+
+function downloadDuplicateRowsWorkbook(mode) {
+  if (!sheetRows || sheetRows.length === 0) return;
+
+  const hasHeader = document.getElementById('opt-has-header').checked;
+  const dupeRows = [];
+
+  if (hasHeader) {
+    dupeRows.push(sheetRows[0]);
+  }
+
+  rowStatuses.forEach(r => {
+    const isDupeTarget = (mode === 'selected') ? r.selectedForRemoval : !r.isKept;
+    if (isDupeTarget) {
+      dupeRows.push(r.rowData);
+    }
+  });
+
+  if (dupeRows.length <= 1) {
+    alert('No duplicate rows selected to export.');
+    return;
+  }
+
+  const newWb = XLSX.utils.book_new();
+  const newWs = XLSX.utils.aoa_to_sheet(dupeRows);
+  XLSX.utils.book_append_sheet(newWb, newWs, "Duplicate Rows");
+
+  const dupeName = currentFileName.replace(/\.(xlsx|xls|xlsm)$/i, '') + '-duplicates.xlsx';
+  XLSX.writeFile(newWb, dupeName);
+}
+
+function exportAuditReportCSV() {
+  if (calculatedGroups.length === 0) {
+    alert('No duplicate groups found to export audit report.');
+    return;
+  }
+
+  let csv = `Worksheet,Duplicate Group ID,Occurrences,Kept Row #,Removed Rows\n`;
+  calculatedGroups.forEach(g => {
+    csv += `"${activeSheetName}","${g.groupId}","${g.totalOccurrences}","${g.keptRow}","${g.removedRows.join('; ')}"\n`;
+  });
+
+  downloadFile('excel-deduplication-audit-report.csv', csv, 'text/csv');
+}
+
+function downloadFile(filename, content, type) {
+  const blob = new Blob([content], { type: type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function formatBytes(bytes) {
+  if (bytes === 0) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+function escapeHTML(str) {
+  if (typeof str !== 'string') return str;
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+</script>
