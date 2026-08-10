@@ -160,8 +160,7 @@ To import JSON into Excel, open Microsoft Excel 365 or Excel 2016+, navigate to 
 
 JSON (JavaScript Object Notation) formats data using key-value pairs, nested objects `{}` and ordered arrays `[]`, whereas Excel requires rectangular grid structures organized into fixed rows and columns. Importing JSON data into Excel requires parsing hierarchical object trees into flattened tabular records.
 
-```json
-[
+<pre style="background: #1e293b; color: #f8fafc; padding: 1.25rem; border-radius: 10px; overflow-x: auto; font-family: Consolas, Monaco, 'Andale Mono', monospace; font-size: 0.9rem; line-height: 1.55; margin: 1.5rem 0;"><code>[
   {
     "id": 101,
     "customer": "Alice Brown",
@@ -179,8 +178,7 @@ JSON (JavaScript Object Notation) formats data using key-value pairs, nested obj
       { "item": "Monitor", "price": 199.99 }
     ]
   }
-]
-```
+]</code></pre>
 
 When you open a JSON file directly in text editors, the document appears as text strings. When learning **how to import JSON into Excel**, the goal is converting keys like `"customer"` and `"email"` into column headers while mapping array values to individual worksheet rows.
 
@@ -233,15 +231,14 @@ Legacy versions of Microsoft Excel (Excel 2010, 2013) do not include native JSON
 ### Option A: Install Microsoft Power Query Add-in (Excel 2010 & 2013)
 Microsoft provides a standalone Power Query add-in download for legacy Excel versions:
 1. Download the **Microsoft Power Query Add-in for Excel** from Microsoft's official download center.
-2. Install the executable matching your installed Office bitness (364-bit or 32-bit).
+2. Install the executable matching your installed Office bitness (64-bit or 32-bit).
 3. Relaunch Excel. A new **Power Query** tab will appear in your ribbon menu.
 4. Click **Power Query > From File > From JSON** and follow the step-by-step Power Query workflow outlined in Method 1.
 
 ### Option B: Use VBA Macro Scripts for Automated JSON Import
 If third-party add-ins are restricted by IT policy, use a VBA macro utilizing the open-source `VBA-JSON` parser library (`JsonConverter.bas`).
 
-```vba
-' VBA Macro Snippet for Parsing JSON Strings into Excel Rows
+<pre style="background: #1e293b; color: #f8fafc; padding: 1.25rem; border-radius: 10px; overflow-x: auto; font-family: Consolas, Monaco, 'Andale Mono', monospace; font-size: 0.9rem; line-height: 1.55; margin: 1.5rem 0;"><code>' VBA Macro Snippet for Parsing JSON Strings into Excel Rows
 Sub ImportJSONData()
     Dim FSO As Object
     Dim JsonFile As Object
@@ -273,8 +270,7 @@ Sub ImportJSONData()
     Next Item
     
     MsgBox "JSON Import Complete!", vbInformation
-End Sub
-```
+End Sub</code></pre>
 
 ---
 
@@ -285,10 +281,8 @@ Converting JSON data into CSV (Comma-Separated Values) format first is a univers
 ### Using Command-Line `jq` Utility
 The open-source command-line tool `jq` parses JSON payloads and formats fields directly into CSV text:
 
-```bash
-# Extract JSON array attributes to CSV using jq
-jq -r '.[] | [.id, .customer, .email] | @csv' input.json > output.csv
-```
+<pre style="background: #1e293b; color: #f8fafc; padding: 1.25rem; border-radius: 10px; overflow-x: auto; font-family: Consolas, Monaco, 'Andale Mono', monospace; font-size: 0.9rem; line-height: 1.55; margin: 1.5rem 0;"><code># Extract JSON array attributes to CSV using jq
+jq -r '.[] | [.id, .customer, .email] | @csv' input.json &gt; output.csv</code></pre>
 
 Once `output.csv` is generated, open Excel and navigate to **Data > From Text/CSV**, select UTF-8 encoding, and click **Load**.
 
@@ -335,9 +329,8 @@ Selecting the right method depends on your installed Excel version, computer sec
 ### Error 2: Dates Import as Text Strings or Raw UNIX Timestamps
 **Root Cause:** JSON has no native date type; dates are stored as ISO-8601 strings (`"2026-08-10T09:30:00Z"`) or epoch integers (`1786343235`).
 **Fix:** In Power Query Editor, right-click the date column header, select **Change Type > Date/Time** (for ISO strings) or add a custom column formula for epoch timestamps:
-```powerquery
-#datetime(1970, 1, 1, 0, 0, 0) + #duration(0, 0, 0, [epoch_timestamp])
-```
+
+<pre style="background: #1e293b; color: #f8fafc; padding: 1.25rem; border-radius: 10px; overflow-x: auto; font-family: Consolas, Monaco, 'Andale Mono', monospace; font-size: 0.9rem; line-height: 1.55; margin: 1.5rem 0;"><code>#datetime(1970, 1, 1, 0, 0, 0) + #duration(0, 0, 0, [epoch_timestamp])</code></pre>
 
 ### Error 3: Special Characters and Diacritics Display as Corrupted Symbols (`Ã©`, `ï»¿`)
 **Root Cause:** The JSON file was encoded in UTF-8 without a BOM (Byte Order Mark) while Excel defaults to local ANSI/Windows-1252 codepages.
