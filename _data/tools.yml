@@ -200,6 +200,18 @@
   featured: true
   date: "2026-08-05"
   updated: "2026-08-05"
+
+- title: "Analyze Database"
+  short_name: "Analyze Database"
+  url: "/analyze/database-analyzer"
+  category: "Analyze"
+  description: "Analyze SQL databases, SQLite files, CSV, & JSON files locally in your browser. Inspect tables, columns, keys, ER diagrams, data quality, & schema issues."
+  keywords: ["analyze database", "database analyzer", "analyze SQL database", "database schema analyzer", "database analysis tool", "database structure analyzer", "database health checker", "database schema analysis", "database data quality analyzer", "SQL database analyzer", "inspect database online"]
+  icon: "🗄️"
+  featured: true
+  date: "2026-08-11"
+  updated: "2026-08-11"
+
 - title: "JSON Validator"
   short_name: "JSON Validator"
   url: "/validate/json-validator"

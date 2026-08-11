@@ -1,0 +1,2125 @@
+---
+layout: main
+title: "Analyze Database Online - Privacy-First Schema & Quality Inspector"
+short_name: "Analyze Database"
+description: "Analyze SQL databases, SQLite files, CSV, & JSON files locally in your browser. Inspect tables, columns, keys, ER diagrams, data quality, & schema issues."
+keywords: "analyze database, database analyzer, analyze SQL database, database schema analyzer, database analysis tool, database structure analyzer, database health checker, database schema analysis, database data quality analyzer, SQL database analyzer"
+category: "Analyze"
+permalink: /analyze/database-analyzer
+---
+
+<!-- ═══════════════════════════════════════════════════
+     EXTERNAL CLIENT-SIDE LIBRARIES (SQLITE WASM & SHEETJS)
+═══════════════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     STRUCTURED DATA (JSON-LD) FOR TOOL PAGE
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Analyze Database - DataFrog",
+  "operatingSystem": "Any",
+  "applicationCategory": "DeveloperApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Analyze SQL databases, SQLite files, CSV, & JSON locally in your browser. Inspect tables, columns, keys, ER diagrams, data quality, & schema issues."
+}
+</script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 1.5rem 1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #0f172a;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #e0f2fe; color: #0369a1; padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.75rem;">
+      <span>🗄️ Database Inspector &amp; Schema Profiler</span>
+    </div>
+    <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; margin: 0 0 0.5rem 0; tracking: -0.02em;">
+      Analyze Database
+    </h1>
+    <p style="color: #475569; font-size: 1.05rem; max-width: 720px; margin: 0 auto; line-height: 1.5;">
+      Inspect database structure, relationships, data quality, and potential schema design issues — 100% locally in your browser.
+    </p>
+  </div>
+
+  <!-- Privacy Banner -->
+  <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.75rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span style="font-size: 1.1rem;">🔒</span>
+      <span><strong>Privacy Guaranteed:</strong> Your database files and SQL code stay in your browser. No data is uploaded to any server.</span>
+    </div>
+    <div style="font-size: 0.8rem; color: #15803d; background: #dcfce7; padding: 0.25rem 0.65rem; border-radius: 9999px; font-weight: 700;">
+      100% Client-Side
+    </div>
+  </div>
+
+  <!-- Input Workspace (Visible when no database is loaded) -->
+  <div id="db-upload-container" style="background: #ffffff; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 2.5rem 1.5rem; text-align: center; margin-bottom: 2rem; transition: all 0.2s ease;">
+    <div style="font-size: 3rem; margin-bottom: 0.75rem;">📁</div>
+    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">
+      Drag &amp; Drop Your Database File Here
+    </h3>
+    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem;">
+      Supports <strong>.SQL</strong> scripts, <strong>SQLite</strong> (.db, .sqlite, .sqlite3), <strong>CSV</strong> (single or multi-file), and <strong>JSON</strong>.
+    </p>
+
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+      <label style="padding: 0.65rem 1.35rem; background: #2563eb; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">
+        <span>📂 Browse File</span>
+        <input type="file" id="db-file-input" accept=".sql,.db,.sqlite,.sqlite3,.csv,.json" multiple style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+      
+      <button onclick="openPasteSqlModal()" style="padding: 0.65rem 1.25rem; background: #ffffff; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <span>📝 Paste SQL Script</span>
+      </button>
+
+      <button onclick="loadSampleDatabase()" style="padding: 0.65rem 1.25rem; background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <span>🚀 Load Sample Database</span>
+      </button>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 1.5rem; font-size: 0.8rem; color: #64748b; flex-wrap: wrap;">
+      <span><strong>SQL Dialects:</strong> MySQL, PostgreSQL, SQLite, MariaDB, SQL Server</span>
+      <span>•</span>
+      <span><strong>Data Formats:</strong> .db, .sqlite, .csv, .json</span>
+    </div>
+  </div>
+
+  <!-- Progress / Loading Banner -->
+  <div id="analysis-progress-container" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 2rem; text-align: center; margin-bottom: 2rem;">
+    <div style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;" id="progress-status-text">
+      Analyzing database schema...
+    </div>
+    <div style="width: 100%; max-width: 480px; height: 10px; background: #e2e8f0; border-radius: 9999px; margin: 0 auto 1rem auto; overflow: hidden;">
+      <div id="progress-bar-fill" style="width: 15%; height: 100%; background: #2563eb; transition: width 0.3s ease;"></div>
+    </div>
+    <div style="font-size: 0.85rem; color: #64748b;" id="progress-detail-text">
+      Parsing tables, foreign keys, constraints, and profiling sample records...
+    </div>
+  </div>
+
+  <!-- Paste SQL Modal -->
+  <div id="paste-sql-modal" style="display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 1rem;">
+    <div style="background: #ffffff; border-radius: 16px; width: 100%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);">
+      <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 0;">Paste DDL or SQL Script</h3>
+        <button onclick="closePasteSqlModal()" style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: #64748b;">✕</button>
+      </div>
+      <div style="padding: 1.25rem 1.5rem; flex-grow: 1; overflow-y: auto;">
+        <p style="font-size: 0.85rem; color: #64748b; margin-top: 0; margin-bottom: 0.75rem;">
+          Paste <code>CREATE TABLE</code> statements, foreign keys, indexes, or <code>INSERT</code> statements below.
+        </p>
+        <textarea id="pasted-sql-input" placeholder="CREATE TABLE customers (
+  id INT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100)
+);"
+                  style="width: 100%; height: 320px; font-family: Consolas, Monaco, monospace; font-size: 0.85rem; padding: 0.85rem; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; resize: vertical; background: #0f172a; color: #f8fafc; line-height: 1.5;"></textarea>
+      </div>
+      <div style="padding: 1rem 1.5rem; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 0.75rem; background: #f8fafc; border-radius: 0 0 16px 16px;">
+        <button onclick="closePasteSqlModal()" style="padding: 0.55rem 1rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Cancel</button>
+        <button onclick="analyzePastedSql()" style="padding: 0.55rem 1.25rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">Analyze SQL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Analysis Dashboard (Hidden until data is loaded) -->
+  <div id="main-dashboard-container" style="display: none;">
+
+    <!-- Top Action Bar -->
+    <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1rem 1.5rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+      <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <h2 id="db-title-heading" style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin: 0;">Database Analysis</h2>
+            <span id="dialect-badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-weight: 700; font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 9999px;">
+              Dialect: Generic SQL
+            </span>
+          </div>
+          <div id="db-meta-subtitle" style="font-size: 0.8rem; color: #64748b; margin-top: 0.15rem;">
+            Analyzed 0 tables and 0 records locally
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons & Global Search -->
+      <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+        <input type="text" id="global-search-input" placeholder="🔍 Search tables, columns, keys, issues..." oninput="handleGlobalSearch(this.value)"
+               style="padding: 0.45rem 0.85rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; width: 240px; background: #f8fafc;">
+
+        <button onclick="loadSampleDatabase()" style="padding: 0.45rem 0.85rem; background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
+          🚀 Sample DB
+        </button>
+
+        <button onclick="resetAnalysis()" style="padding: 0.45rem 0.85rem; background: #ffffff; color: #334155; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          🔄 New Analysis
+        </button>
+
+        <button onclick="exportFullReportHTML()" style="padding: 0.45rem 1rem; background: #2563eb; color: #ffffff; border: none; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
+          📊 Export Report
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div style="display: flex; gap: 0.35rem; overflow-x: auto; border-bottom: 2px solid #e2e8f0; margin-bottom: 1.5rem; padding-bottom: 2px;">
+      <button class="nav-tab active" data-tab="tab-overview" onclick="switchTab('tab-overview')">📊 Overview</button>
+      <button class="nav-tab" data-tab="tab-issues" onclick="switchTab('tab-issues')">🚨 Issue Center <span id="tab-issue-badge" class="badge-red">0</span></button>
+      <button class="nav-tab" data-tab="tab-schema" onclick="switchTab('tab-schema')">🗄️ Schema Explorer</button>
+      <button class="nav-tab" data-tab="tab-profiling" onclick="switchTab('tab-profiling')">🔬 Column Profiling</button>
+      <button class="nav-tab" data-tab="tab-relationships" onclick="switchTab('tab-relationships')">🗺️ ER Diagram &amp; Integrity</button>
+      <button class="nav-tab" data-tab="tab-quality" onclick="switchTab('tab-quality')">📉 Data Quality &amp; NULLs</button>
+      <button class="nav-tab" data-tab="tab-design" onclick="switchTab('tab-design')">🛠️ Design &amp; Indexing</button>
+      <button class="nav-tab" data-tab="tab-reports" onclick="switchTab('tab-reports')">📖 Data Dictionary &amp; Export</button>
+    </div>
+
+    <style>
+      .nav-tab {
+        padding: 0.65rem 1.1rem;
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        font-weight: 700;
+        font-size: 0.875rem;
+        color: #64748b;
+        cursor: pointer;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: all 0.15s ease;
+      }
+      .nav-tab:hover {
+        color: #2563eb;
+      }
+      .nav-tab.active {
+        color: #2563eb;
+        border-bottom-color: #2563eb;
+      }
+      .badge-red {
+        background: #ef4444;
+        color: #ffffff;
+        font-size: 0.7rem;
+        padding: 0.1rem 0.45rem;
+        border-radius: 9999px;
+        font-weight: 800;
+      }
+      .tab-pane {
+        display: none;
+      }
+      .tab-pane.active {
+        display: block;
+      }
+    </style>
+
+    <!-- Global Search Results Popup Overlay -->
+    <div id="search-results-box" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+        <span style="font-weight: 700; font-size: 0.9rem; color: #0f172a;" id="search-count-text">Search Results</span>
+        <button onclick="closeSearchResults()" style="background: none; border: none; cursor: pointer; color: #64748b; font-weight: 700;">✕ Close Search</button>
+      </div>
+      <div id="search-results-list" style="display: flex; flex-direction: column; gap: 0.4rem; max-height: 240px; overflow-y: auto;">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         TAB 1: OVERVIEW DASHBOARD
+    ═══════════════════════════════════════════════════ -->
+    <div id="tab-overview" class="tab-pane active">
+      
+      <!-- Metrics Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase;">Tables</div>
+          <div id="stat-tables-count" style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-top: 0.2rem;">0</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase;">Columns</div>
+          <div id="stat-columns-count" style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-top: 0.2rem;">0</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase;">Total Rows</div>
+          <div id="stat-rows-count" style="font-size: 1.8rem; font-weight: 800; color: #2563eb; margin-top: 0.2rem;">0</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase;">Primary Keys</div>
+          <div id="stat-pk-count" style="font-size: 1.8rem; font-weight: 800; color: #059669; margin-top: 0.2rem;">0</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase;">Foreign Keys</div>
+          <div id="stat-fk-count" style="font-size: 1.8rem; font-weight: 800; color: #d97706; margin-top: 0.2rem;">0</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase;">Indexes</div>
+          <div id="stat-indexes-count" style="font-size: 1.8rem; font-weight: 800; color: #7c3aed; margin-top: 0.2rem;">0</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase;">Views</div>
+          <div id="stat-views-count" style="font-size: 1.8rem; font-weight: 800; color: #475569; margin-top: 0.2rem;">0</div>
+        </div>
+      </div>
+
+      <!-- Health Score Card + Sub-Scores -->
+      <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+        <div style="text-align: center; padding-right: 1.5rem; border-right: 1px solid #e2e8f0; min-width: 160px;">
+          <div style="font-size: 0.8rem; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 0.25rem;">Database Health</div>
+          <div id="health-score-value" style="font-size: 3.2rem; font-weight: 900; color: #16a34a; line-height: 1;">85</div>
+          <div style="font-size: 0.85rem; color: #64748b; font-weight: 600; margin-top: 0.35rem;">out of 100</div>
+        </div>
+
+        <div style="flex-grow: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <span>Schema Integrity</span>
+              <span id="score-schema-txt">85%</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 9999px; overflow: hidden;">
+              <div id="score-schema-bar" style="width: 85%; height: 100%; background: #2563eb;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <span>Data Quality</span>
+              <span id="score-quality-txt">80%</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 9999px; overflow: hidden;">
+              <div id="score-quality-bar" style="width: 80%; height: 100%; background: #059669;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <span>Referential Integrity</span>
+              <span id="score-integrity-txt">75%</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 9999px; overflow: hidden;">
+              <div id="score-integrity-bar" style="width: 75%; height: 100%; background: #d97706;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <span>Indexing Coverage</span>
+              <span id="score-indexing-txt">70%</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 9999px; overflow: hidden;">
+              <div id="score-indexing-bar" style="width: 70%; height: 100%; background: #7c3aed;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <span>Design Normalization</span>
+              <span id="score-design-txt">90%</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 9999px; overflow: hidden;">
+              <div id="score-design-bar" style="width: 90%; height: 100%; background: #0891b2;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Summary Highlights -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+          <h3 style="font-size: 1rem; font-weight: 700; color: #0f172a; margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: space-between;">
+            <span>🚨 Priority Issues</span>
+            <button onclick="switchTab('tab-issues')" style="font-size: 0.75rem; color: #2563eb; background: none; border: none; cursor: pointer; font-weight: 700;">View All →</button>
+          </h3>
+          <div id="overview-issues-preview" style="display: flex; flex-direction: column; gap: 0.6rem;">
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+          <h3 style="font-size: 1rem; font-weight: 700; color: #0f172a; margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: space-between;">
+            <span>📊 Top Tables by Row Count</span>
+            <button onclick="switchTab('tab-schema')" style="font-size: 0.75rem; color: #2563eb; background: none; border: none; cursor: pointer; font-weight: 700;">Schema Explorer →</button>
+          </h3>
+          <div id="overview-top-tables" style="display: flex; flex-direction: column; gap: 0.5rem;">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         TAB 2: ISSUE CENTER
+    ═══════════════════════════════════════════════════ -->
+    <div id="tab-issues" class="tab-pane">
+      <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
+          <div>
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0;">Issue &amp; Anomaly Center</h2>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0.2rem 0 0 0;">
+              Detected potential data quality, missing indexes, missing primary keys, and referential integrity anomalies.
+            </p>
+          </div>
+
+          <!-- Severity Filter Buttons -->
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+            <button onclick="filterIssues('all')" class="issue-filter-btn active" data-sev="all">All (<span id="cnt-sev-all">0</span>)</button>
+            <button onclick="filterIssues('critical')" class="issue-filter-btn" data-sev="critical" style="color: #dc2626;">Critical (<span id="cnt-sev-critical">0</span>)</button>
+            <button onclick="filterIssues('high')" class="issue-filter-btn" data-sev="high" style="color: #ea580c;">High (<span id="cnt-sev-high">0</span>)</button>
+            <button onclick="filterIssues('medium')" class="issue-filter-btn" data-sev="medium" style="color: #d97706;">Medium (<span id="cnt-sev-medium">0</span>)</button>
+            <button onclick="filterIssues('low')" class="issue-filter-btn" data-sev="low" style="color: #2563eb;">Low (<span id="cnt-sev-low">0</span>)</button>
+          </div>
+
+          <style>
+            .issue-filter-btn {
+              padding: 0.35rem 0.75rem;
+              background: #f1f5f9;
+              border: 1px solid #cbd5e1;
+              border-radius: 6px;
+              font-size: 0.8rem;
+              font-weight: 700;
+              color: #475569;
+              cursor: pointer;
+            }
+            .issue-filter-btn.active {
+              background: #0f172a;
+              color: #ffffff !important;
+              border-color: #0f172a;
+            }
+          </style>
+        </div>
+
+        <div id="issues-list-container" style="display: flex; flex-direction: column; gap: 0.85rem;">
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         TAB 3: SCHEMA EXPLORER
+    ═══════════════════════════════════════════════════ -->
+    <div id="tab-schema" class="tab-pane">
+      <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0;">Tables &amp; Schema Inspector</h2>
+          <input type="text" id="schema-search-input" placeholder="Search tables..." oninput="renderSchemaExplorer()"
+                 style="padding: 0.4rem 0.85rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; width: 220px;">
+        </div>
+
+        <div style="overflow-x: auto; max-height: 480px; margin-bottom: 1.5rem;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left;">
+            <thead style="position: sticky; top: 0; background: #f1f5f9; z-index: 10;">
+              <tr style="border-bottom: 2px solid #cbd5e1;">
+                <th style="padding: 0.75rem;">Table Name</th>
+                <th style="padding: 0.75rem;">Rows</th>
+                <th style="padding: 0.75rem;">Columns</th>
+                <th style="padding: 0.75rem;">Primary Key</th>
+                <th style="padding: 0.75rem;">Foreign Keys</th>
+                <th style="padding: 0.75rem;">Indexes</th>
+                <th style="padding: 0.75rem;">Issues</th>
+                <th style="padding: 0.75rem;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="schema-tables-tbody">
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Selected Table Detail Panel -->
+        <div id="table-detail-panel" style="display: none; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 id="selected-table-title" style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin: 0;">Table: customers</h3>
+            <button onclick="closeTableDetail()" style="background: none; border: none; font-size: 1rem; cursor: pointer; color: #64748b; font-weight: 700;">✕ Close</button>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; background: #ffffff; border-radius: 8px; overflow: hidden;">
+              <thead>
+                <tr style="background: #e2e8f0; color: #0f172a;">
+                  <th style="padding: 0.6rem;">Column</th>
+                  <th style="padding: 0.6rem;">Physical Type</th>
+                  <th style="padding: 0.6rem;">Semantic Type</th>
+                  <th style="padding: 0.6rem;">Nullable</th>
+                  <th style="padding: 0.6rem;">Default</th>
+                  <th style="padding: 0.6rem;">PK</th>
+                  <th style="padding: 0.6rem;">FK</th>
+                  <th style="padding: 0.6rem;">Unique</th>
+                  <th style="padding: 0.6rem;">Inspect</th>
+                </tr>
+              </thead>
+              <tbody id="selected-table-columns-tbody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         TAB 4: COLUMN PROFILING
+    ═══════════════════════════════════════════════════ -->
+    <div id="tab-profiling" class="tab-pane">
+      <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 800; color: #64748b; text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Select Table:</label>
+            <select id="profile-select-table" onchange="updateProfileColumnDropdown()" style="padding: 0.45rem 0.85rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.875rem; background: #ffffff; font-weight: 700;">
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 800; color: #64748b; text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Select Column:</label>
+            <select id="profile-select-column" onchange="renderColumnProfileDetail()" style="padding: 0.45rem 0.85rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.875rem; background: #ffffff; font-weight: 700;">
+            </select>
+          </div>
+        </div>
+
+        <!-- Profile Output Container -->
+        <div id="column-profile-output">
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         TAB 5: RELATIONSHIPS & ER DIAGRAM
+    ═══════════════════════════════════════════════════ -->
+    <div id="tab-relationships" class="tab-pane">
+      <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0;">Interactive ER Diagram</h2>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0.2rem 0 0 0;">
+              Visual entity-relationship map. Pan, zoom, click tables, and export.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="resetErDiagramZoom()" style="padding: 0.35rem 0.75rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">Reset View</button>
+            <button onclick="exportErDiagramPNG()" style="padding: 0.35rem 0.75rem; background: #059669; color: #ffffff; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">Export PNG</button>
+          </div>
+        </div>
+
+        <div style="position: relative; width: 100%; height: 500px; background: #0f172a; border-radius: 12px; overflow: hidden;" id="er-canvas-wrapper">
+          <canvas id="er-diagram-canvas" width="1200" height="500" style="cursor: grab; width: 100%; height: 100%;"></canvas>
+          <div style="position: absolute; bottom: 1rem; right: 1rem; background: rgba(15,23,42,0.85); color: #f8fafc; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem;">
+            💡 Scroll to zoom | Drag to pan
+          </div>
+        </div>
+      </div>
+
+      <!-- Referential Integrity Analysis & Discovery Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.25rem;">
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.25rem;">
+          <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 0.75rem;">
+            🔗 Referential Integrity Auditor
+          </h3>
+          <div id="referential-integrity-list" style="display: flex; flex-direction: column; gap: 0.6rem;">
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.25rem;">
+          <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 0.75rem;">
+            🔍 Inferred / Candidate Relationships
+          </h3>
+          <div id="inferred-relationships-list" style="display: flex; flex-direction: column; gap: 0.6rem;">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         TAB 6: DATA QUALITY & NULLS
+    ═══════════════════════════════════════════════════ -->
+    <div id="tab-quality" class="tab-pane">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+        
+        <!-- NULL Analysis Box -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 1rem;">
+            🌫️ NULL &amp; Empty Value Ranking
+          </h3>
+          <div id="null-analysis-table-container" style="overflow-x: auto; max-height: 380px;">
+          </div>
+        </div>
+
+        <!-- Duplicate Analysis Box -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 1rem;">
+            👯 Duplicate &amp; Uniqueness Audit
+          </h3>
+          <div id="duplicate-analysis-container" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         TAB 7: DESIGN & INDEXING
+    ═══════════════════════════════════════════════════ -->
+    <div id="tab-design" class="tab-pane">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.25rem;">
+        
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 1rem;">
+            ⚡ Indexing &amp; FK Performance Audit
+          </h3>
+          <div id="index-analysis-container" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 1rem;">
+            📏 Normalization &amp; Naming Consistency
+          </h3>
+          <div id="design-analysis-container" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         TAB 8: REPORTS & DATA DICTIONARY
+    ═══════════════════════════════════════════════════ -->
+    <div id="tab-reports" class="tab-pane">
+      <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0;">Auto-Generated Data Dictionary</h2>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0.2rem 0 0 0;">
+              Export full schema metadata to Markdown, CSV, JSON, or HTML documentation.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+            <button onclick="exportDataDictionary('csv')" style="padding: 0.4rem 0.85rem; background: #059669; color: #ffffff; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">CSV</button>
+            <button onclick="exportDataDictionary('json')" style="padding: 0.4rem 0.85rem; background: #0284c7; color: #ffffff; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">JSON</button>
+            <button onclick="exportDataDictionary('markdown')" style="padding: 0.4rem 0.85rem; background: #7c3aed; color: #ffffff; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">Markdown</button>
+            <button onclick="exportDataDictionary('html')" style="padding: 0.4rem 0.85rem; background: #334155; color: #ffffff; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">HTML</button>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto; max-height: 480px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+            <thead style="position: sticky; top: 0; background: #f1f5f9; z-index: 10;">
+              <tr style="border-bottom: 2px solid #cbd5e1;">
+                <th style="padding: 0.6rem;">Table</th>
+                <th style="padding: 0.6rem;">Column</th>
+                <th style="padding: 0.6rem;">Data Type</th>
+                <th style="padding: 0.6rem;">Nullable</th>
+                <th style="padding: 0.6rem;">Default</th>
+                <th style="padding: 0.6rem;">PK</th>
+                <th style="padding: 0.6rem;">FK</th>
+                <th style="padding: 0.6rem;">Unique</th>
+                <th style="padding: 0.6rem;">Semantic Type</th>
+              </tr>
+            </thead>
+            <tbody id="data-dictionary-tbody">
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Educational Article -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 3rem;">
+    
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
+      What Is Database Analysis &amp; Inspection?
+    </h2>
+    <p>
+      Database analysis is the process of auditing a database's structural schema, physical data types, primary and foreign key constraints, table relationships, indexing coverage, and underlying data quality metrics. Whether preparing a legacy database for cloud migration, auditing third-party application schemas, or debugging missing foreign keys, static and statistical database analysis reveals potential performance bottlenecks and schema anti-patterns before deploying code.
+    </p>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      Core Metrics Audited by DataFrog Analyze Database
+    </h2>
+    <ul style="padding-left: 1.25rem;">
+      <li><strong>Schema Integrity:</strong> Checks primary key definitions, foreign key integrity, and table constraints.</li>
+      <li><strong>Referential Integrity:</strong> Detects orphan records where child table foreign keys point to missing parent rows.</li>
+      <li><strong>Indexing Coverage:</strong> Flags unindexed foreign key columns that cause full-table scans during relational joins.</li>
+      <li><strong>Data Quality Profiling:</strong> Measures NULL percentages, duplicate rows, distinct counts, and numerical outliers.</li>
+      <li><strong>Schema Normalization:</strong> Identifies First Normal Form (1NF) violations like comma-separated list values or repeating attribute columns.</li>
+    </ul>
+
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
+      100% Client-Side Browser Privacy
+    </h2>
+    <p>
+      Traditional database inspection tools require database connection strings or uploading sensitive schema files to remote cloud servers. DataFrog <strong>Analyze Database</strong> runs entirely in your web browser memory using WASM and local JavaScript parsers. Your SQL code, SQLite binaries, CSV files, and JSON payloads never leave your computer.
+    </p>
+  </article>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT CORE ANALYSIS ENGINE & UI RENDERING
+═══════════════════════════════════════════════════ -->
+<script>
+// Master Normalized Database State Model
+let currentDatabase = null;
+let erCanvasState = { scale: 1, offsetX: 0, offsetY: 0, isDragging: false, startX: 0, startY: 0, selectedTable: null };
+
+// Drag & Drop Listener
+const uploadContainer = document.getElementById('db-upload-container');
+uploadContainer.addEventListener('dragover', (e) => { e.preventDefault(); uploadContainer.style.borderColor = '#2563eb'; });
+uploadContainer.addEventListener('dragleave', () => { uploadContainer.style.borderColor = '#cbd5e1'; });
+uploadContainer.addEventListener('drop', (e) => {
+  e.preventDefault();
+  uploadContainer.style.borderColor = '#cbd5e1';
+  if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+});
+
+function handleFileSelect(evt) {
+  if (evt.target.files.length) handleFiles(evt.target.files);
+}
+
+function openPasteSqlModal() {
+  document.getElementById('paste-sql-modal').style.display = 'flex';
+}
+
+function closePasteSqlModal() {
+  document.getElementById('paste-sql-modal').style.display = 'none';
+}
+
+function analyzePastedSql() {
+  const sql = document.getElementById('pasted-sql-input').value;
+  if (!sql.trim()) { alert('Please paste SQL script.'); return; }
+  closePasteSqlModal();
+  processSqlContent("Pasted_Schema.sql", sql);
+}
+
+function handleFiles(filesList) {
+  const files = Array.from(filesList);
+  if (files.length === 1 && (files[0].name.endsWith('.db') || files[0].name.endsWith('.sqlite') || files[0].name.endsWith('.sqlite3'))) {
+    processSqliteFile(files[0]);
+  } else if (files.length === 1 && files[0].name.endsWith('.sql')) {
+    const reader = new FileReader();
+    reader.onload = (e) => processSqlContent(files[0].name, e.target.result);
+    reader.readAsText(files[0]);
+  } else if (files.every(f => f.name.endsWith('.csv'))) {
+    processCsvFiles(files);
+  } else if (files.length === 1 && files[0].name.endsWith('.json')) {
+    const reader = new FileReader();
+    reader.onload = (e) => processJsonContent(files[0].name, e.target.result);
+    reader.readAsText(files[0]);
+  } else {
+    alert('Please upload a .sql file, SQLite database (.db), CSV files, or JSON payload.');
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// 1. SAMPLE DATABASE GENERATOR
+// ═══════════════════════════════════════════════════
+function loadSampleDatabase() {
+  showProgress('Loading Realistic E-Commerce Sample Database...', 30);
+  setTimeout(() => {
+    const db = createNormalizedDbModel("Sample_ECommerce_DB", "PostgreSQL (Sample)", 95);
+    
+    // Table 1: customers
+    const tCustomers = createTableObject("customers", 1250);
+    tCustomers.columns = [
+      { name: "id", type: "INTEGER", pk: true, fk: false, unique: true, nullable: false, defaultVal: "AUTO_INCREMENT", semantic: "Identifier" },
+      { name: "full_name", type: "VARCHAR(100)", pk: false, fk: false, unique: false, nullable: false, defaultVal: "", semantic: "Name" },
+      { name: "email", type: "VARCHAR(150)", pk: false, fk: false, unique: false, nullable: false, defaultVal: "", semantic: "Email" },
+      { name: "phone_numbers", type: "VARCHAR(100)", pk: false, fk: false, unique: false, nullable: true, defaultVal: "NULL", semantic: "Phone" },
+      { name: "city", type: "VARCHAR(50)", pk: false, fk: false, unique: false, nullable: true, defaultVal: "NULL", semantic: "Location" },
+      { name: "created_at", type: "TIMESTAMP", pk: false, fk: false, unique: false, nullable: false, defaultVal: "CURRENT_TIMESTAMP", semantic: "Timestamp" }
+    ];
+    tCustomers.primaryKey = ["id"];
+    tCustomers.indexes = [{ name: "idx_cust_email", columns: ["email"], isUnique: false }];
+    
+    // Sample rows for customers with intentional dupe email & comma phone
+    for (let i = 1; i <= 1250; i++) {
+      tCustomers.rows.push({
+        id: i,
+        full_name: i % 10 === 0 ? "Alice Smith" : `Customer ${i}`,
+        email: i % 15 === 0 ? "duplicate.user@example.com" : `customer_${i}@example.com`,
+        phone_numbers: i % 20 === 0 ? "555-0101, 555-0102" : `555-${1000 + i}`,
+        city: ["New York", "Chicago", "Dallas", "Seattle", null][i % 5],
+        created_at: "2026-01-15 10:00:00"
+      });
+    }
+
+    // Table 2: orders
+    const tOrders = createTableObject("orders", 3400);
+    tOrders.columns = [
+      { name: "order_id", type: "INTEGER", pk: true, fk: false, unique: true, nullable: false, defaultVal: "AUTO_INCREMENT", semantic: "Identifier" },
+      { name: "customer_id", type: "INTEGER", pk: false, fk: true, unique: false, nullable: true, defaultVal: "NULL", semantic: "Identifier" },
+      { name: "order_date", type: "DATE", pk: false, fk: false, unique: false, nullable: false, defaultVal: "CURRENT_DATE", semantic: "Date" },
+      { name: "status", type: "VARCHAR(20)", pk: false, fk: false, unique: false, nullable: false, defaultVal: "'Pending'", semantic: "Categorical" },
+      { name: "total_amount", type: "DECIMAL(10,2)", pk: false, fk: false, unique: false, nullable: false, defaultVal: "0.00", semantic: "Currency" }
+    ];
+    tOrders.primaryKey = ["order_id"];
+    tOrders.foreignKeys = [{ fkColumn: "customer_id", targetTable: "customers", targetColumn: "id" }];
+    // NOTE: Intentionally missing index on customer_id!
+    
+    for (let i = 1; i <= 3400; i++) {
+      // Intentionally insert orphan customer_id (e.g. customer_id 9999)
+      const custId = i === 12 || i === 45 ? 9999 : ((i % 1200) + 1);
+      tOrders.rows.push({
+        order_id: i,
+        customer_id: custId,
+        order_date: "2026-02-01",
+        status: ["Completed", "Pending", "Shipped", "Cancelled"][i % 4],
+        total_amount: (25.50 + (i % 300)).toFixed(2)
+      });
+    }
+
+    // Table 3: order_items
+    const tItems = createTableObject("order_items", 8500);
+    tItems.columns = [
+      { name: "item_id", type: "INTEGER", pk: true, fk: false, unique: true, nullable: false, defaultVal: "AUTO_INCREMENT", semantic: "Identifier" },
+      { name: "order_id", type: "INTEGER", pk: false, fk: true, unique: false, nullable: false, defaultVal: "", semantic: "Identifier" },
+      { name: "product_id", type: "INTEGER", pk: false, fk: true, unique: false, nullable: false, defaultVal: "", semantic: "Identifier" },
+      { name: "quantity", type: "INTEGER", pk: false, fk: false, unique: false, nullable: false, defaultVal: "1", semantic: "Numeric" },
+      { name: "unit_price", type: "DECIMAL(10,2)", pk: false, fk: false, unique: false, nullable: false, defaultVal: "0.00", semantic: "Currency" }
+    ];
+    tItems.primaryKey = ["item_id"];
+    tItems.foreignKeys = [
+      { fkColumn: "order_id", targetTable: "orders", targetColumn: "order_id" },
+      { fkColumn: "product_id", targetTable: "products", targetColumn: "product_id" }
+    ];
+    tItems.indexes = [
+      { name: "idx_item_order", columns: ["order_id"], isUnique: false },
+      { name: "idx_item_prod", columns: ["product_id"], isUnique: false }
+    ];
+
+    for (let i = 1; i <= 8500; i++) {
+      tItems.rows.push({
+        item_id: i,
+        order_id: ((i % 3400) + 1),
+        product_id: ((i % 150) + 1),
+        quantity: (i % 5) + 1,
+        unit_price: (15.00 + (i % 100)).toFixed(2)
+      });
+    }
+
+    // Table 4: products
+    const tProducts = createTableObject("products", 150);
+    tProducts.columns = [
+      { name: "product_id", type: "INTEGER", pk: true, fk: false, unique: true, nullable: false, defaultVal: "AUTO_INCREMENT", semantic: "Identifier" },
+      { name: "product_name", type: "VARCHAR(120)", pk: false, fk: false, unique: false, nullable: false, defaultVal: "", semantic: "Name" },
+      { name: "category", type: "VARCHAR(50)", pk: false, fk: false, unique: false, nullable: true, defaultVal: "NULL", semantic: "Categorical" },
+      { name: "price", type: "DECIMAL(10,2)", pk: false, fk: false, unique: false, nullable: false, defaultVal: "0.00", semantic: "Currency" }
+    ];
+    tProducts.primaryKey = ["product_id"];
+
+    for (let i = 1; i <= 150; i++) {
+      tProducts.rows.push({
+        product_id: i,
+        product_name: `Product Item ${i}`,
+        category: ["Electronics", "Office", "Software", "Hardware", null][i % 5],
+        price: (10.00 + i * 5).toFixed(2)
+      });
+    }
+
+    // Table 5: audit_logs (No Primary Key intentional issue)
+    const tLogs = createTableObject("audit_logs", 420);
+    tLogs.columns = [
+      { name: "log_time", type: "TIMESTAMP", pk: false, fk: false, unique: false, nullable: false, defaultVal: "CURRENT_TIMESTAMP", semantic: "Timestamp" },
+      { name: "user_action", type: "VARCHAR(255)", pk: false, fk: false, unique: false, nullable: false, defaultVal: "", semantic: "Text" },
+      { name: "ip_address", type: "VARCHAR(45)", pk: false, fk: false, unique: false, nullable: true, defaultVal: "NULL", semantic: "Text" }
+    ];
+    tLogs.primaryKey = []; // Missing PK!
+
+    db.tables = [tCustomers, tOrders, tItems, tProducts, tLogs];
+    
+    // Analyze & Render
+    finishDatabaseAnalysis(db);
+  }, 400);
+}
+
+// ═══════════════════════════════════════════════════
+// 2. SQL DIALECT DETECTOR & PARSER
+// ═══════════════════════════════════════════════════
+function processSqlContent(fileName, sqlText) {
+  showProgress('Parsing SQL Statements & Schema Model...', 40);
+  setTimeout(() => {
+    // Dialect Detector
+    let dialect = "Generic SQL";
+    let conf = 85;
+
+    if (/ENGINE\s*=\s*InnoDB|AUTO_INCREMENT|`\w+`/i.test(sqlText)) { dialect = "MySQL / MariaDB"; conf = 96; }
+    else if (/SERIAL\s+PRIMARY\s+KEY|VARCHAR2|BOOLEAN|NOW\(\)|::jsonb/i.test(sqlText)) { dialect = "PostgreSQL"; conf = 94; }
+    else if (/AUTOINCREMENT|WITHOUT\s+ROWID/i.test(sqlText)) { dialect = "SQLite"; conf = 95; }
+    else if (/IDENTITY\(\d+,\d+\)|\[\w+\]|GO/i.test(sqlText)) { dialect = "SQL Server (T-SQL)"; conf = 92; }
+
+    const db = createNormalizedDbModel(fileName, dialect, conf);
+
+    // Simple Regex Parser for CREATE TABLE
+    const tableRegex = /CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?["`\[]?(\w+)["`\]]?\s*\(([\s\S]*?)\);/gi;
+    let match;
+
+    while ((match = tableRegex.exec(sqlText)) !== null) {
+      const tableName = match[1];
+      const body = match[2];
+      const tableObj = createTableObject(tableName, 0);
+
+      const lines = body.split(/\r?\n/).map(l => l.trim()).filter(l => l);
+
+      lines.forEach(line => {
+        // Table level PK
+        if (/^PRIMARY\s+KEY\s*\(([^)]+)\)/i.test(line)) {
+          const pkCols = line.match(/^PRIMARY\s+KEY\s*\(([^)]+)\)/i)[1].replace(/["`\[\]\s]/g, '').split(',');
+          tableObj.primaryKey = pkCols;
+          pkCols.forEach(pkName => {
+            const col = tableObj.columns.find(c => c.name === pkName);
+            if (col) col.pk = true;
+          });
+        }
+        // Table level FK
+        else if (/^FOREIGN\s+KEY\s*\(([^)]+)\)\s*REFERENCES\s+["`\[]?(\w+)["`\]]?\s*\(([^)]+)\)/i.test(line)) {
+          const mFk = line.match(/^FOREIGN\s+KEY\s*\(([^)]+)\)\s*REFERENCES\s+["`\[]?(\w+)["`\]]?\s*\(([^)]+)\)/i);
+          tableObj.foreignKeys.push({
+            fkColumn: mFk[1].replace(/["`\[\]\s]/g, ''),
+            targetTable: mFk[2],
+            targetColumn: mFk[3].replace(/["`\[\]\s]/g, '')
+          });
+        }
+        // Column Definition
+        else if (/^["`\[]?(\w+)["`\]]?\s+([A-Za-z0-9_()]+)/.test(line) && !/^(PRIMARY|FOREIGN|CONSTRAINT|UNIQUE|KEY|INDEX)/i.test(line)) {
+          const parts = line.match(/^["`\[]?(\w+)["`\]]?\s+([A-Za-z0-9_()]+)(.*)/i);
+          if (parts) {
+            const cName = parts[1];
+            const cType = parts[2];
+            const rest = parts[3] || "";
+
+            const isPk = /PRIMARY\s+KEY/i.test(rest);
+            const isNull = !/NOT\s+NULL/i.test(rest);
+            const isUnique = /UNIQUE/i.test(rest);
+
+            let defVal = "NULL";
+            const defMatch = rest.match(/DEFAULT\s+('[^']+'|\w+)/i);
+            if (defMatch) defVal = defMatch[1];
+
+            if (isPk && !tableObj.primaryKey.includes(cName)) tableObj.primaryKey.push(cName);
+
+            tableObj.columns.push({
+              name: cName,
+              type: cType.toUpperCase(),
+              pk: isPk,
+              fk: false,
+              unique: isUnique,
+              nullable: isNull,
+              defaultVal: defVal,
+              semantic: inferSemanticType(cName, cType)
+            });
+          }
+        }
+      });
+
+      db.tables.push(tableObj);
+    }
+
+    if (db.tables.length === 0) {
+      alert("No CREATE TABLE statements found in SQL script.");
+      hideProgress();
+      return;
+    }
+
+    finishDatabaseAnalysis(db);
+  }, 300);
+}
+
+// ═══════════════════════════════════════════════════
+// 3. SQLITE WASM PARSER (.db, .sqlite)
+// ═══════════════════════════════════════════════════
+function processSqliteFile(file) {
+  showProgress('Initializing Browser SQLite WASM Engine...', 30);
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` }).then(SQL => {
+        const uInt8Array = new Uint8Array(e.target.result);
+        const sqliteDb = new SQL.Database(uInt8Array);
+        
+        const db = createNormalizedDbModel(file.name, "SQLite 3", 99);
+
+        // Fetch tables
+        const resTables = sqliteDb.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';");
+        if (resTables.length && resTables[0].values.length) {
+          resTables[0].values.forEach(row => {
+            const tableName = row[0];
+            const tableObj = createTableObject(tableName, 0);
+
+            // Fetch row count
+            const resCount = sqliteDb.exec(`SELECT COUNT(*) FROM "${tableName}";`);
+            if (resCount.length) tableObj.rowCount = resCount[0].values[0][0];
+
+            // Fetch Columns (PRAGMA table_info)
+            const resInfo = sqliteDb.exec(`PRAGMA table_info("${tableName}");`);
+            if (resInfo.length) {
+              resInfo[0].values.forEach(colRow => {
+                const cName = colRow[1];
+                const cType = (colRow[2] || "TEXT").toUpperCase();
+                const notNull = colRow[3] === 1;
+                const defVal = colRow[4] !== null ? String(colRow[4]) : "NULL";
+                const isPk = colRow[5] > 0;
+
+                if (isPk) tableObj.primaryKey.push(cName);
+
+                tableObj.columns.push({
+                  name: cName,
+                  type: cType,
+                  pk: isPk,
+                  fk: false,
+                  unique: false,
+                  nullable: !notNull,
+                  defaultVal: defVal,
+                  semantic: inferSemanticType(cName, cType)
+                });
+              });
+            }
+
+            // Fetch Foreign Keys (PRAGMA foreign_key_list)
+            const resFk = sqliteDb.exec(`PRAGMA foreign_key_list("${tableName}");`);
+            if (resFk.length) {
+              resFk[0].values.forEach(fkRow => {
+                const targetTable = fkRow[2];
+                const fromCol = fkRow[3];
+                const toCol = fkRow[4];
+                tableObj.foreignKeys.push({ fkColumn: fromCol, targetTable: targetTable, targetColumn: toCol });
+                const cObj = tableObj.columns.find(c => c.name === fromCol);
+                if (cObj) cObj.fk = true;
+              });
+            }
+
+            // Fetch Sample Rows for profiling (Top 200)
+            const resRows = sqliteDb.exec(`SELECT * FROM "${tableName}" LIMIT 200;`);
+            if (resRows.length) {
+              const colNames = resRows[0].columns;
+              resRows[0].values.forEach(valRow => {
+                const rowObj = {};
+                colNames.forEach((cn, i) => { rowObj[cn] = valRow[i]; });
+                tableObj.rows.push(rowObj);
+              });
+            }
+
+            db.tables.push(tableObj);
+          });
+        }
+
+        finishDatabaseAnalysis(db);
+      }).catch(err => {
+        alert("Error initializing SQLite WASM: " + err.message);
+        hideProgress();
+      });
+    } catch (err) {
+      alert("Error reading SQLite database: " + err.message);
+      hideProgress();
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ═══════════════════════════════════════════════════
+// 4. CSV MULTI-FILE PARSER
+// ═══════════════════════════════════════════════════
+function processCsvFiles(filesList) {
+  showProgress('Parsing CSV Datasets into Database Tables...', 40);
+  const db = createNormalizedDbModel("CSV_Dataset_Collection", "CSV Schema Engine", 90);
+
+  let loadedCount = 0;
+  filesList.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const csvText = e.target.result;
+      const workbook = XLSX.read(csvText, { type: 'string' });
+      const sheetName = workbook.SheetNames[0];
+      const rowsData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1, defval: '' });
+
+      if (rowsData.length > 0) {
+        const tableName = file.name.replace(/\.csv$/i, '').replace(/[^a-zA-Z0-9_]/g, '_');
+        const tableObj = createTableObject(tableName, rowsData.length - 1);
+
+        const firstRow = rowsData[0] || [];
+        const dataRows = rowsData.slice(1);
+
+        firstRow.forEach((colName, cIdx) => {
+          const cleanName = String(colName || `col_${cIdx + 1}`).trim();
+          const colValues = dataRows.map(r => r[cIdx]);
+          const inferredType = inferColumnDataType(colValues);
+
+          tableObj.columns.push({
+            name: cleanName,
+            type: inferredType,
+            pk: false,
+            fk: false,
+            unique: false,
+            nullable: colValues.some(v => v === '' || v === null || v === undefined),
+            defaultVal: "NULL",
+            semantic: inferSemanticType(cleanName, inferredType)
+          });
+        });
+
+        // Convert data rows to object list
+        dataRows.forEach(r => {
+          const rowObj = {};
+          tableObj.columns.forEach((c, cIdx) => {
+            rowObj[c.name] = r[cIdx] !== undefined ? r[cIdx] : '';
+          });
+          tableObj.rows.push(rowObj);
+        });
+
+        db.tables.push(tableObj);
+      }
+
+      loadedCount++;
+      if (loadedCount === filesList.length) {
+        finishDatabaseAnalysis(db);
+      }
+    };
+    reader.readAsText(file);
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// 5. JSON DATASET PARSER
+// ═══════════════════════════════════════════════════
+function processJsonContent(fileName, jsonText) {
+  showProgress('Parsing JSON Payloads...', 40);
+  setTimeout(() => {
+    try {
+      const data = JSON.parse(jsonText);
+      const db = createNormalizedDbModel(fileName, "JSON Document Schema", 90);
+
+      const items = Array.isArray(data) ? data : (typeof data === 'object' ? [data] : []);
+      if (items.length === 0) { alert('JSON payload is empty.'); hideProgress(); return; }
+
+      const tableName = fileName.replace(/\.json$/i, '').replace(/[^a-zA-Z0-9_]/g, '_');
+      const tableObj = createTableObject(tableName, items.length);
+
+      // Collect all keys across objects
+      const keyMap = new Map();
+      items.forEach(item => {
+        if (typeof item === 'object' && item !== null) {
+          Object.keys(item).forEach(k => {
+            if (!keyMap.has(k)) keyMap.set(k, []);
+            keyMap.get(k).push(item[k]);
+          });
+        }
+      });
+
+      keyMap.forEach((vals, k) => {
+        const inferredType = inferColumnDataType(vals);
+        tableObj.columns.push({
+          name: k,
+          type: inferredType,
+          pk: k.toLowerCase() === 'id' || k.toLowerCase() === `${tableName.toLowerCase()}_id`,
+          fk: false,
+          unique: false,
+          nullable: vals.some(v => v === null || v === undefined || v === ''),
+          defaultVal: "NULL",
+          semantic: inferSemanticType(k, inferredType)
+        });
+        if (k.toLowerCase() === 'id') tableObj.primaryKey.push(k);
+      });
+
+      tableObj.rows = items;
+      db.tables.push(tableObj);
+
+      finishDatabaseAnalysis(db);
+    } catch (err) {
+      alert("Invalid JSON file: " + err.message);
+      hideProgress();
+    }
+  }, 300);
+}
+
+// ═══════════════════════════════════════════════════
+// 6. CORE MASTER ANALYSIS PIPELINE
+// ═══════════════════════════════════════════════════
+function finishDatabaseAnalysis(db) {
+  showProgress('Performing Referential Integrity & Quality Profiling...', 80);
+  setTimeout(() => {
+    // 1. Mark FK column properties
+    db.tables.forEach(t => {
+      t.foreignKeys.forEach(fk => {
+        const col = t.columns.find(c => c.name === fk.fkColumn);
+        if (col) col.fk = true;
+      });
+    });
+
+    // 2. Discover Unconstrained FK Relationships & Candidate Keys
+    discoverCandidateRelationships(db);
+
+    // 3. Issue Engine & Data Quality Auditor
+    runIssueDetectionEngine(db);
+
+    // 4. Calculate Database Health Score (0 - 100)
+    calculateDatabaseHealthScore(db);
+
+    // 5. Store active model & render GUI
+    currentDatabase = db;
+    hideProgress();
+    renderMainDashboard();
+  }, 400);
+}
+
+function createNormalizedDbModel(name, dialect, conf) {
+  return {
+    name: name,
+    dialect: dialect,
+    dialectConfidence: conf,
+    tables: [],
+    issues: [],
+    healthScore: { overall: 85, schema: 85, quality: 80, integrity: 75, indexing: 70, design: 90 }
+  };
+}
+
+function createTableObject(name, rowCount) {
+  return {
+    name: name,
+    rowCount: rowCount,
+    columns: [],
+    primaryKey: [],
+    foreignKeys: [],
+    indexes: [],
+    rows: []
+  };
+}
+
+function inferSemanticType(colName, dataType) {
+  const name = colName.toLowerCase();
+  const type = dataType.toLowerCase();
+
+  if (/id$|_id$|^id$/i.test(name)) return "Identifier";
+  if (/email/i.test(name)) return "Email";
+  if (/phone|mobile|cell/i.test(name)) return "Phone";
+  if (/price|amount|cost|total|salary|balance|fee/i.test(name) || /decimal|money|numeric/i.test(type)) return "Currency";
+  if (/created|updated|time|timestamp|date_time/i.test(name) || /timestamp|datetime/i.test(type)) return "Timestamp";
+  if (/date|dob|birth/i.test(name) || /date/i.test(type)) return "Date";
+  if (/country|nation|iso_code/i.test(name)) return "Country Code";
+  if (/status|type|category|state|gender|role/i.test(name)) return "Categorical";
+  return "Text";
+}
+
+function inferColumnDataType(valArray) {
+  const sample = valArray.filter(v => v !== null && v !== undefined && v !== '');
+  if (sample.length === 0) return "VARCHAR(255)";
+
+  const isNum = sample.every(v => !isNaN(Number(v)));
+  if (isNum) {
+    const isInt = sample.every(v => Number.isInteger(Number(v)));
+    return isInt ? "INTEGER" : "DECIMAL(10,2)";
+  }
+
+  const isBool = sample.every(v => String(v).toLowerCase() === 'true' || String(v).toLowerCase() === 'false' || v === 1 || v === 0);
+  if (isBool) return "BOOLEAN";
+
+  return "VARCHAR(255)";
+}
+
+// Candidate Relationship Discoverer
+function discoverCandidateRelationships(db) {
+  db.inferredRelationships = [];
+
+  db.tables.forEach(childTable => {
+    childTable.columns.forEach(col => {
+      // Look for columns matching parent_table_id pattern
+      if (col.name.endsWith('_id') && !col.fk) {
+        const potentialParentName = col.name.replace(/_id$/i, '');
+        const parentTable = db.tables.find(t => t.name.toLowerCase() === potentialParentName.toLowerCase() || t.name.toLowerCase() === (potentialParentName + 's').toLowerCase());
+        
+        if (parentTable) {
+          const parentPkCol = parentTable.primaryKey[0] || 'id';
+          db.inferredRelationships.push({
+            childTable: childTable.name,
+            childColumn: col.name,
+            parentTable: parentTable.name,
+            parentColumn: parentPkCol,
+            confidence: 88,
+            reason: `Matching naming pattern '${col.name}' → '${parentTable.name}.${parentPkCol}'`
+          });
+        }
+      }
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// 7. ISSUE DETECTION ENGINE
+// ═══════════════════════════════════════════════════
+function runIssueDetectionEngine(db) {
+  const issues = [];
+
+  db.tables.forEach(t => {
+    // 1. Missing Primary Key
+    if (!t.primaryKey || t.primaryKey.length === 0) {
+      issues.push({
+        severity: "medium",
+        title: `Table '${t.name}' has no Primary Key`,
+        table: t.name,
+        column: "-",
+        explanation: `Table '${t.name}' does not specify a primary key constraint, which may hinder row identification and replication.`,
+        recommendation: `Review whether a primary key (such as an auto-incrementing id) should be defined.`
+      });
+    }
+
+    // 2. Unindexed Foreign Keys
+    t.foreignKeys.forEach(fk => {
+      const hasIndex = t.indexes.some(idx => idx.columns.includes(fk.fkColumn));
+      if (!hasIndex) {
+        issues.push({
+          severity: "medium",
+          title: `Foreign key '${t.name}.${fk.fkColumn}' has no supporting index`,
+          table: t.name,
+          column: fk.fkColumn,
+          explanation: `Foreign key column '${fk.fkColumn}' references '${fk.targetTable}.${fk.targetColumn}' but has no supporting index, which can slow relational JOIN queries.`,
+          recommendation: `Consider creating an index on '${t.name}.${fk.fkColumn}'.`
+        });
+      }
+    });
+
+    // 3. Data-level Checks if rows available
+    if (t.rows && t.rows.length > 0) {
+      // Orphan Record Check for Foreign Keys
+      t.foreignKeys.forEach(fk => {
+        const parentTable = db.tables.find(p => p.name === fk.targetTable);
+        if (parentTable && parentTable.rows && parentTable.rows.length > 0) {
+          const parentPkSet = new Set(parentTable.rows.map(pr => String(pr[fk.targetColumn])));
+          let orphanCount = 0;
+
+          t.rows.forEach(r => {
+            const val = r[fk.fkColumn];
+            if (val !== null && val !== undefined && val !== '' && !parentPkSet.has(String(val))) {
+              orphanCount++;
+            }
+          });
+
+          if (orphanCount > 0) {
+            const orphanRate = ((orphanCount / t.rows.length) * 100).toFixed(2);
+            issues.push({
+              severity: "high",
+              title: `${orphanCount} orphan records detected in '${t.name}.${fk.fkColumn}'`,
+              table: t.name,
+              column: fk.fkColumn,
+              explanation: `${orphanCount} child rows in '${t.name}.${fk.fkColumn}' reference non-existent parent IDs in '${fk.targetTable}.${fk.targetColumn}' (Orphan Rate: ${orphanRate}%).`,
+              recommendation: `Investigate referential integrity violations and clean orphan foreign key values.`
+            });
+          }
+        }
+      });
+
+      // 4. Duplicate Primary Keys Check
+      if (t.primaryKey.length > 0) {
+        const pkCol = t.primaryKey[0];
+        const pkSeen = new Set();
+        let dupePkCount = 0;
+
+        t.rows.forEach(r => {
+          const val = r[pkCol];
+          if (val !== undefined && val !== null) {
+            if (pkSeen.has(String(val))) dupePkCount++;
+            else pkSeen.add(String(val));
+          }
+        });
+
+        if (dupePkCount > 0) {
+          issues.push({
+            severity: "critical",
+            title: `Duplicate primary-key values detected in '${t.name}.${pkCol}'`,
+            table: t.name,
+            column: pkCol,
+            explanation: `${dupePkCount} rows contain duplicate values in primary key column '${pkCol}'.`,
+            recommendation: `Enforce primary key uniqueness and remove duplicate key records.`
+          });
+        }
+      }
+
+      // 5. Column High NULL Rate Check
+      t.columns.forEach(col => {
+        let nullCount = 0;
+        t.rows.forEach(r => {
+          const v = r[col.name];
+          if (v === null || v === undefined || v === '') nullCount++;
+        });
+
+        const nullRate = (nullCount / t.rows.length) * 100;
+        if (nullRate > 50) {
+          issues.push({
+            severity: "low",
+            title: `Column '${t.name}.${col.name}' has ${nullRate.toFixed(1)}% missing/empty values`,
+            table: t.name,
+            column: col.name,
+            explanation: `${nullCount} out of ${t.rows.length} rows contain empty or NULL values.`,
+            recommendation: `Assess whether this column is redundant or requires default value constraints.`
+          });
+        }
+
+        // 6. 1NF Violation Check (Comma-separated values)
+        if (col.type.includes('VARCHAR') || col.type.includes('TEXT')) {
+          const commaCount = t.rows.filter(r => String(r[col.name] || '').includes(',')).length;
+          if (commaCount > 0 && commaCount / t.rows.length > 0.05) {
+            issues.push({
+              severity: "low",
+              title: `Potential 1NF violation in '${t.name}.${col.name}'`,
+              table: t.name,
+              column: col.name,
+              explanation: `${commaCount} values in '${col.name}' contain comma-separated lists, suggesting multiple attributes in a single field.`,
+              recommendation: `Consider normalizing into a separate child junction table.`
+            });
+          }
+        }
+      });
+
+    }
+  });
+
+  db.issues = issues;
+}
+
+// Health Score Calculator (0 - 100)
+function calculateDatabaseHealthScore(db) {
+  let schemaScore = 100;
+  let qualityScore = 100;
+  let integrityScore = 100;
+  let indexingScore = 100;
+  let designScore = 100;
+
+  db.issues.forEach(iss => {
+    if (iss.severity === 'critical') { schemaScore -= 20; integrityScore -= 25; }
+    else if (iss.severity === 'high') { integrityScore -= 15; qualityScore -= 10; }
+    else if (iss.severity === 'medium') { indexingScore -= 10; designScore -= 10; }
+    else if (iss.severity === 'low') { qualityScore -= 5; designScore -= 5; }
+  });
+
+  schemaScore = Math.max(40, schemaScore);
+  qualityScore = Math.max(40, qualityScore);
+  integrityScore = Math.max(40, integrityScore);
+  indexingScore = Math.max(40, indexingScore);
+  designScore = Math.max(40, designScore);
+
+  const overall = Math.round((schemaScore + qualityScore + integrityScore + indexingScore + designScore) / 5);
+
+  db.healthScore = {
+    overall: overall,
+    schema: schemaScore,
+    quality: qualityScore,
+    integrity: integrityScore,
+    indexing: indexingScore,
+    design: designScore
+  };
+}
+
+// ═══════════════════════════════════════════════════
+// 8. GUI DASHBOARD RENDERING
+// ═══════════════════════════════════════════════════
+function renderMainDashboard() {
+  const db = currentDatabase;
+  if (!db) return;
+
+  document.getElementById('db-upload-container').style.display = 'none';
+  document.getElementById('main-dashboard-container').style.display = 'block';
+
+  // Update Header Metadata
+  document.getElementById('db-title-heading').innerText = db.name;
+  document.getElementById('dialect-badge').innerText = `Dialect: ${db.dialect} (${db.dialectConfidence}% Conf.)`;
+
+  const totalCols = db.tables.reduce((acc, t) => acc + t.columns.length, 0);
+  const totalRows = db.tables.reduce((acc, t) => acc + (t.rowCount || t.rows.length), 0);
+  const totalPks = db.tables.reduce((acc, t) => acc + t.primaryKey.length, 0);
+  const totalFks = db.tables.reduce((acc, t) => acc + t.foreignKeys.length, 0);
+  const totalIdx = db.tables.reduce((acc, t) => acc + t.indexes.length, 0);
+
+  document.getElementById('db-meta-subtitle').innerText = `Analyzed ${db.tables.length} tables, ${totalCols} columns, and ${totalRows.toLocaleString()} rows`;
+
+  // Stats Grid
+  document.getElementById('stat-tables-count').innerText = db.tables.length;
+  document.getElementById('stat-columns-count').innerText = totalCols;
+  document.getElementById('stat-rows-count').innerText = totalRows.toLocaleString();
+  document.getElementById('stat-pk-count').innerText = totalPks;
+  document.getElementById('stat-fk-count').innerText = totalFks;
+  document.getElementById('stat-indexes-count').innerText = totalIdx;
+
+  // Health Score UI
+  const hs = db.healthScore;
+  document.getElementById('health-score-value').innerText = hs.overall;
+  document.getElementById('health-score-value').style.color = hs.overall >= 80 ? '#16a34a' : (hs.overall >= 60 ? '#d97706' : '#dc2626');
+
+  document.getElementById('score-schema-txt').innerText = `${hs.schema}%`;
+  document.getElementById('score-schema-bar').style.width = `${hs.schema}%`;
+  document.getElementById('score-quality-txt').innerText = `${hs.quality}%`;
+  document.getElementById('score-quality-bar').style.width = `${hs.quality}%`;
+  document.getElementById('score-integrity-txt').innerText = `${hs.integrity}%`;
+  document.getElementById('score-integrity-bar').style.width = `${hs.integrity}%`;
+  document.getElementById('score-indexing-txt').innerText = `${hs.indexing}%`;
+  document.getElementById('score-indexing-bar').style.width = `${hs.indexing}%`;
+  document.getElementById('score-design-txt').innerText = `${hs.design}%`;
+  document.getElementById('score-design-bar').style.width = `${hs.design}%`;
+
+  // Issue Center Count Badges
+  document.getElementById('tab-issue-badge').innerText = db.issues.length;
+  document.getElementById('cnt-sev-all').innerText = db.issues.length;
+  document.getElementById('cnt-sev-critical').innerText = db.issues.filter(i => i.severity === 'critical').length;
+  document.getElementById('cnt-sev-high').innerText = db.issues.filter(i => i.severity === 'high').length;
+  document.getElementById('cnt-sev-medium').innerText = db.issues.filter(i => i.severity === 'medium').length;
+  document.getElementById('cnt-sev-low').innerText = db.issues.filter(i => i.severity === 'low').length;
+
+  // Render Sub-Views
+  renderOverviewHighlights();
+  renderIssueCenter();
+  renderSchemaExplorer();
+  populateProfilingDropdowns();
+  renderReferentialIntegrity();
+  renderQualityTab();
+  renderDesignTab();
+  renderDataDictionary();
+  drawErDiagramCanvas();
+}
+
+function renderOverviewHighlights() {
+  const db = currentDatabase;
+  const issueContainer = document.getElementById('overview-issues-preview');
+  issueContainer.innerHTML = '';
+
+  if (db.issues.length === 0) {
+    issueContainer.innerHTML = `<div style="color: #059669; font-size: 0.85rem; font-weight: 700;">✅ No critical schema or quality issues detected!</div>`;
+  } else {
+    db.issues.slice(0, 3).forEach(iss => {
+      const color = iss.severity === 'critical' ? '#dc2626' : (iss.severity === 'high' ? '#ea580c' : '#d97706');
+      issueContainer.innerHTML += `
+        <div style="padding: 0.6rem 0.85rem; background: #f8fafc; border-left: 3px solid ${color}; border-radius: 6px; font-size: 0.85rem;">
+          <div style="font-weight: 700; color: #0f172a;">${escapeHTML(iss.title)}</div>
+          <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.15rem;">Table: ${iss.table} | Col: ${iss.column}</div>
+        </div>
+      `;
+    });
+  }
+
+  const topTablesContainer = document.getElementById('overview-top-tables');
+  topTablesContainer.innerHTML = '';
+  const sortedTables = [...db.tables].sort((a, b) => (b.rowCount || b.rows.length) - (a.rowCount || a.rows.length)).slice(0, 4);
+
+  sortedTables.forEach(t => {
+    topTablesContainer.innerHTML += `
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.75rem; background: #f8fafc; border-radius: 6px; font-size: 0.85rem;">
+        <span style="font-weight: 700; color: #0f172a;">${t.name}</span>
+        <span style="color: #64748b; font-weight: 600;">${(t.rowCount || t.rows.length).toLocaleString()} rows (${t.columns.length} cols)</span>
+      </div>
+    `;
+  });
+}
+
+function renderIssueCenter() {
+  filterIssues('all');
+}
+
+function filterIssues(severity) {
+  document.querySelectorAll('.issue-filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.sev === severity);
+  });
+
+  const db = currentDatabase;
+  const container = document.getElementById('issues-list-container');
+  container.innerHTML = '';
+
+  let list = db.issues;
+  if (severity !== 'all') list = list.filter(i => i.severity === severity);
+
+  if (list.length === 0) {
+    container.innerHTML = `<div style="text-align: center; padding: 2rem; color: #64748b;">No issues found matching this filter.</div>`;
+    return;
+  }
+
+  list.forEach(iss => {
+    const color = iss.severity === 'critical' ? '#dc2626' : (iss.severity === 'high' ? '#ea580c' : (iss.severity === 'medium' ? '#d97706' : '#2563eb'));
+    const bg = iss.severity === 'critical' ? '#fef2f2' : (iss.severity === 'high' ? '#fff7ed' : '#fffbeb');
+
+    container.innerHTML += `
+      <div style="background: ${bg}; border: 1px solid #e2e8f0; border-left: 4px solid ${color}; border-radius: 10px; padding: 1rem 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0;">${escapeHTML(iss.title)}</h4>
+          <span style="background: ${color}; color: #ffffff; font-weight: 800; font-size: 0.7rem; padding: 0.15rem 0.55rem; border-radius: 9999px; text-transform: uppercase;">${iss.severity}</span>
+        </div>
+        <p style="font-size: 0.85rem; color: #334155; margin: 0 0 0.5rem 0; line-height: 1.5;">${escapeHTML(iss.explanation)}</p>
+        <div style="font-size: 0.8rem; color: #0369a1; background: #f0f9ff; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600;">
+          💡 <strong>Recommendation:</strong> ${escapeHTML(iss.recommendation)}
+        </div>
+      </div>
+    `;
+  });
+}
+
+function renderSchemaExplorer() {
+  const db = currentDatabase;
+  const q = document.getElementById('schema-search-input').value.toLowerCase();
+  const tbody = document.getElementById('schema-tables-tbody');
+  tbody.innerHTML = '';
+
+  const list = db.tables.filter(t => t.name.toLowerCase().includes(q));
+
+  list.forEach(t => {
+    const tableIssues = db.issues.filter(i => i.table === t.name).length;
+    const pkTxt = t.primaryKey.length ? t.primaryKey.join(', ') : '-';
+    const fkTxt = t.foreignKeys.length ? `${t.foreignKeys.length} FKs` : '0';
+
+    tbody.innerHTML += `
+      <tr style="border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 0.65rem; font-weight: 700; color: #0f172a;">${t.name}</td>
+        <td style="padding: 0.65rem;">${(t.rowCount || t.rows.length).toLocaleString()}</td>
+        <td style="padding: 0.65rem;">${t.columns.length}</td>
+        <td style="padding: 0.65rem; font-weight: 600; color: #059669;">${pkTxt}</td>
+        <td style="padding: 0.65rem; font-weight: 600; color: #d97706;">${fkTxt}</td>
+        <td style="padding: 0.65rem;">${t.indexes.length}</td>
+        <td style="padding: 0.65rem;">${tableIssues > 0 ? `<span class="badge-red">${tableIssues}</span>` : '0'}</td>
+        <td style="padding: 0.65rem;">
+          <button onclick="inspectTableDetail('${t.name}')" style="padding: 0.25rem 0.6rem; background: #2563eb; color: #ffffff; border: none; border-radius: 4px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">Inspect</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function inspectTableDetail(tableName) {
+  const db = currentDatabase;
+  const t = db.tables.find(tbl => tbl.name === tableName);
+  if (!t) return;
+
+  document.getElementById('selected-table-title').innerText = `Table: ${t.name} (${(t.rowCount || t.rows.length).toLocaleString()} rows)`;
+  const tbody = document.getElementById('selected-table-columns-tbody');
+  tbody.innerHTML = '';
+
+  t.columns.forEach(c => {
+    tbody.innerHTML += `
+      <tr style="border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 0.55rem; font-weight: 700; color: #0f172a;">${c.name}</td>
+        <td style="padding: 0.55rem; font-family: monospace;">${c.type}</td>
+        <td style="padding: 0.55rem;"><span style="background: #e0f2fe; color: #0369a1; padding: 0.1rem 0.45rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">${c.semantic}</span></td>
+        <td style="padding: 0.55rem;">${c.nullable ? 'YES' : 'NO'}</td>
+        <td style="padding: 0.55rem; font-family: monospace;">${c.defaultVal}</td>
+        <td style="padding: 0.55rem;">${c.pk ? '🔑 PK' : '-'}</td>
+        <td style="padding: 0.55rem;">${c.fk ? '🔗 FK' : '-'}</td>
+        <td style="padding: 0.55rem;">${c.unique ? 'YES' : 'NO'}</td>
+        <td style="padding: 0.55rem;">
+          <button onclick="inspectSpecificColumn('${t.name}', '${c.name}')" style="padding: 0.2rem 0.5rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">Profile Column</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  document.getElementById('table-detail-panel').style.display = 'block';
+}
+
+function closeTableDetail() {
+  document.getElementById('table-detail-panel').style.display = 'none';
+}
+
+// ═══════════════════════════════════════════════════
+// 9. COLUMN PROFILING STATS ENGINE
+// ═══════════════════════════════════════════════════
+function populateProfilingDropdowns() {
+  const db = currentDatabase;
+  const selectTbl = document.getElementById('profile-select-table');
+  selectTbl.innerHTML = '';
+
+  db.tables.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t.name;
+    opt.innerText = t.name;
+    selectTbl.appendChild(opt);
+  });
+
+  if (db.tables.length) {
+    selectTbl.value = db.tables[0].name;
+    updateProfileColumnDropdown();
+  }
+}
+
+function updateProfileColumnDropdown() {
+  const db = currentDatabase;
+  const tblName = document.getElementById('profile-select-table').value;
+  const t = db.tables.find(tbl => tbl.name === tblName);
+  const selectCol = document.getElementById('profile-select-column');
+  selectCol.innerHTML = '';
+
+  if (t) {
+    t.columns.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.name;
+      opt.innerText = `${c.name} (${c.type})`;
+      selectCol.appendChild(opt);
+    });
+    if (t.columns.length) selectCol.value = t.columns[0].name;
+  }
+
+  renderColumnProfileDetail();
+}
+
+function inspectSpecificColumn(tblName, colName) {
+  switchTab('tab-profiling');
+  document.getElementById('profile-select-table').value = tblName;
+  updateProfileColumnDropdown();
+  document.getElementById('profile-select-column').value = colName;
+  renderColumnProfileDetail();
+}
+
+function renderColumnProfileDetail() {
+  const db = currentDatabase;
+  const tblName = document.getElementById('profile-select-table').value;
+  const colName = document.getElementById('profile-select-column').value;
+  const output = document.getElementById('column-profile-output');
+
+  const t = db.tables.find(tbl => tbl.name === tblName);
+  if (!t) return;
+  const c = t.columns.find(col => col.name === colName);
+  if (!c) return;
+
+  const vals = (t.rows || []).map(r => r[colName]).filter(v => v !== null && v !== undefined && v !== '');
+  const nullCount = (t.rows || []).length - vals.length;
+  const nullPct = (t.rows.length > 0 ? (nullCount / t.rows.length) * 100 : 0).toFixed(1);
+
+  // Distinct count & Uniqueness
+  const distinctSet = new Set(vals.map(v => String(v)));
+  const uniquenessPct = vals.length > 0 ? ((distinctSet.size / vals.length) * 100).toFixed(1) : 0;
+
+  // Numeric Stats if applicable
+  const numVals = vals.map(v => Number(v)).filter(v => !isNaN(v));
+  const isNumeric = numVals.length > 0 && numVals.length === vals.length;
+
+  let statsHTML = '';
+  if (isNumeric) {
+    numVals.sort((a, b) => a - b);
+    const min = numVals[0];
+    const max = numVals[numVals.length - 1];
+    const sum = numVals.reduce((acc, v) => acc + v, 0);
+    const mean = (sum / numVals.length).toFixed(2);
+    const p50 = numVals[Math.floor(numVals.length * 0.5)] || 0;
+    const p95 = numVals[Math.floor(numVals.length * 0.95)] || 0;
+
+    statsHTML = `
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
+        <div style="background: #f8fafc; padding: 0.75rem; border-radius: 8px; text-align: center;"><div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">MIN</div><div style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">${min}</div></div>
+        <div style="background: #f8fafc; padding: 0.75rem; border-radius: 8px; text-align: center;"><div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">MAX</div><div style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">${max}</div></div>
+        <div style="background: #f8fafc; padding: 0.75rem; border-radius: 8px; text-align: center;"><div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">MEAN</div><div style="font-weight: 800; font-size: 1.1rem; color: #2563eb;">${mean}</div></div>
+        <div style="background: #f8fafc; padding: 0.75rem; border-radius: 8px; text-align: center;"><div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">MEDIAN (P50)</div><div style="font-weight: 800; font-size: 1.1rem; color: #059669;">${p50}</div></div>
+        <div style="background: #f8fafc; padding: 0.75rem; border-radius: 8px; text-align: center;"><div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">P95 PERC.</div><div style="font-weight: 800; font-size: 1.1rem; color: #7c3aed;">${p95}</div></div>
+      </div>
+    `;
+  }
+
+  // Top Frequencies
+  const freqMap = new Map();
+  vals.forEach(v => {
+    const s = String(v);
+    freqMap.set(s, (freqMap.get(s) || 0) + 1);
+  });
+  const sortedFreq = [...freqMap.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+  let freqHTML = '';
+  sortedFreq.forEach(([val, count]) => {
+    const pct = ((count / vals.length) * 100).toFixed(1);
+    freqHTML += `
+      <div style="margin-bottom: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.2rem;">
+          <span>${escapeHTML(val)}</span>
+          <span>${count} (${pct}%)</span>
+        </div>
+        <div style="width: 100%; height: 6px; background: #e2e8f0; border-radius: 9999px; overflow: hidden;">
+          <div style="width: ${pct}%; height: 100%; background: #2563eb;"></div>
+        </div>
+      </div>
+    `;
+  });
+
+  output.innerHTML = `
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0;">Column: ${c.name}</h3>
+          <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Physical: <code>${c.type}</code> | Suggested Semantic: <strong>${c.semantic}</strong></div>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          ${c.pk ? '<span style="background: #d1fae5; color: #065f46; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 9999px;">PRIMARY KEY</span>' : ''}
+          ${c.fk ? '<span style="background: #fef3c7; color: #92400e; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 9999px;">FOREIGN KEY</span>' : ''}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 1rem;">
+        <div style="background: #ffffff; padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid #cbd5e1;"><div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">NULL RATE</div><div style="font-weight: 800; font-size: 1.1rem; color: ${nullCount > 0 ? '#dc2626' : '#059669'};">${nullPct}% (${nullCount})</div></div>
+        <div style="background: #ffffff; padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid #cbd5e1;"><div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">DISTINCT VALUES</div><div style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">${distinctSet.size}</div></div>
+        <div style="background: #ffffff; padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid #cbd5e1;"><div style="font-size: 0.75rem; color: #64748b; font-weight: 700;">UNIQUENESS</div><div style="font-weight: 800; font-size: 1.1rem; color: #2563eb;">${uniquenessPct}%</div></div>
+      </div>
+
+      ${statsHTML}
+
+      <div style="margin-top: 1.25rem; background: #ffffff; padding: 1rem; border-radius: 8px; border: 1px solid #cbd5e1;">
+        <h4 style="font-size: 0.85rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 0.75rem;">Top Most Common Values</h4>
+        ${freqHTML || '<div style="font-size: 0.8rem; color: #64748b;">No sample values available.</div>'}
+      </div>
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════
+// 10. INTERACTIVE CANVAS ER DIAGRAM RENDERING
+// ═══════════════════════════════════════════════════
+function drawErDiagramCanvas() {
+  const canvas = document.getElementById('er-diagram-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const db = currentDatabase;
+  if (!db || db.tables.length === 0) return;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+
+  // Background
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Position tables in grid layout
+  const tablePositions = new Map();
+  const boxWidth = 200;
+  const boxHeight = 120;
+  const paddingX = 70;
+  const paddingY = 60;
+  const cols = Math.min(4, Math.ceil(Math.sqrt(db.tables.length)));
+
+  db.tables.forEach((t, i) => {
+    const row = Math.floor(i / cols);
+    const col = i % cols;
+    const x = 50 + col * (boxWidth + paddingX);
+    const y = 50 + row * (boxHeight + paddingY);
+    tablePositions.set(t.name, { x, y, width: boxWidth, height: boxHeight });
+  });
+
+  // Draw Foreign Key Connector Lines
+  db.tables.forEach(t => {
+    t.foreignKeys.forEach(fk => {
+      const fromPos = tablePositions.get(t.name);
+      const toPos = tablePositions.get(fk.targetTable);
+
+      if (fromPos && toPos) {
+        ctx.beginPath();
+        ctx.moveTo(fromPos.x + boxWidth / 2, fromPos.y + boxHeight / 2);
+        ctx.lineTo(toPos.x + boxWidth / 2, toPos.y + boxHeight / 2);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    });
+  });
+
+  // Draw Table Nodes
+  db.tables.forEach(t => {
+    const pos = tablePositions.get(t.name);
+    if (!pos) return;
+
+    // Header box
+    ctx.fillStyle = '#1e293b';
+    ctx.fillRect(pos.x, pos.y, boxWidth, boxHeight);
+    ctx.strokeStyle = '#3b82f6';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(pos.x, pos.y, boxWidth, boxHeight);
+
+    // Title Bar
+    ctx.fillStyle = '#2563eb';
+    ctx.fillRect(pos.x, pos.y, boxWidth, 28);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.fillText(t.name, pos.x + 10, pos.y + 18);
+
+    // Columns preview
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '11px monospace';
+    t.columns.slice(0, 4).forEach((c, idx) => {
+      const badge = c.pk ? '[PK]' : (c.fk ? '[FK]' : '');
+      ctx.fillText(`${badge} ${c.name}`, pos.x + 10, pos.y + 45 + idx * 16);
+    });
+
+    if (t.columns.length > 4) {
+      ctx.fillStyle = '#64748b';
+      ctx.fillText(`+ ${t.columns.length - 4} more...`, pos.x + 10, pos.y + 110);
+    }
+  });
+
+  ctx.restore();
+}
+
+function resetErDiagramZoom() {
+  drawErDiagramCanvas();
+}
+
+function exportErDiagramPNG() {
+  const canvas = document.getElementById('er-diagram-canvas');
+  if (!canvas) return;
+  const image = canvas.toDataURL("image/png");
+  const a = document.createElement('a');
+  a.href = image;
+  a.download = `${currentDatabase.name}-ER-Diagram.png`;
+  a.click();
+}
+
+// ═══════════════════════════════════════════════════
+// 11. REFERENTIAL INTEGRITY & QUALITY AUDIT UI
+// ═══════════════════════════════════════════════════
+function renderReferentialIntegrity() {
+  const db = currentDatabase;
+  const listIntegrity = document.getElementById('referential-integrity-list');
+  listIntegrity.innerHTML = '';
+
+  let fkFound = false;
+  db.tables.forEach(t => {
+    t.foreignKeys.forEach(fk => {
+      fkFound = true;
+      listIntegrity.innerHTML += `
+        <div style="padding: 0.65rem 0.85rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.85rem;">
+          <div style="font-weight: 700; color: #0f172a;">${t.name}.${fk.fkColumn} → ${fk.targetTable}.${fk.targetColumn}</div>
+          <div style="font-size: 0.75rem; color: #059669; margin-top: 0.15rem;">✔ Foreign Key Constraint Defined</div>
+        </div>
+      `;
+    });
+  });
+
+  if (!fkFound) {
+    listIntegrity.innerHTML = `<div style="font-size: 0.85rem; color: #64748b;">No declared foreign keys found in database.</div>`;
+  }
+
+  const listInferred = document.getElementById('inferred-relationships-list');
+  listInferred.innerHTML = '';
+
+  if (db.inferredRelationships && db.inferredRelationships.length) {
+    db.inferredRelationships.forEach(inf => {
+      listInferred.innerHTML += `
+        <div style="padding: 0.65rem 0.85rem; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; font-size: 0.85rem;">
+          <div style="font-weight: 700; color: #0369a1;">${inf.childTable}.${inf.childColumn} ➔ ${inf.parentTable}.${inf.parentColumn}</div>
+          <div style="font-size: 0.75rem; color: #0284c7; margin-top: 0.15rem;">Inferred (Conf: ${inf.confidence}%) - ${inf.reason}</div>
+        </div>
+      `;
+    });
+  } else {
+    listInferred.innerHTML = `<div style="font-size: 0.85rem; color: #64748b;">No unconstrained inferred candidate relationships detected.</div>`;
+  }
+}
+
+function renderQualityTab() {
+  const db = currentDatabase;
+  const nullContainer = document.getElementById('null-analysis-table-container');
+  
+  let nullRows = [];
+  db.tables.forEach(t => {
+    t.columns.forEach(c => {
+      if (t.rows && t.rows.length) {
+        const nulls = t.rows.filter(r => r[c.name] === null || r[c.name] === undefined || r[c.name] === '').length;
+        const pct = ((nulls / t.rows.length) * 100).toFixed(1);
+        if (nulls > 0) nullRows.push({ table: t.name, column: c.name, nulls, pct, total: t.rows.length });
+      }
+    });
+  });
+
+  nullRows.sort((a, b) => b.pct - a.pct);
+
+  let html = `<table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;"><tr style="background: #f1f5f9;"><th style="padding: 0.5rem;">Table</th><th style="padding: 0.5rem;">Column</th><th style="padding: 0.5rem;">NULL Count</th><th style="padding: 0.5rem;">NULL %</th></tr>`;
+  nullRows.forEach(r => {
+    html += `<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 0.5rem; font-weight: 700;">${r.table}</td><td style="padding: 0.5rem;">${r.column}</td><td style="padding: 0.5rem;">${r.nulls}</td><td style="padding: 0.5rem; font-weight: 700; color: #dc2626;">${r.pct}%</td></tr>`;
+  });
+  html += `</table>`;
+  nullContainer.innerHTML = nullRows.length ? html : `<div style="color: #059669; font-weight: 700; font-size: 0.85rem;">✅ No NULL values detected!</div>`;
+
+  const dupeContainer = document.getElementById('duplicate-analysis-container');
+  dupeContainer.innerHTML = '';
+
+  db.tables.forEach(t => {
+    if (t.rows && t.rows.length > 1) {
+      const jsonRows = t.rows.map(r => JSON.stringify(r));
+      const dupeCount = jsonRows.length - new Set(jsonRows).size;
+      
+      dupeContainer.innerHTML += `
+        <div style="padding: 0.75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.85rem;">
+          <div style="font-weight: 700; color: #0f172a;">Table: ${t.name}</div>
+          <div style="color: #64748b; margin-top: 0.2rem;">Complete Duplicate Rows: <strong>${dupeCount}</strong></div>
+        </div>
+      `;
+    }
+  });
+}
+
+function renderDesignTab() {
+  const db = currentDatabase;
+  const idxContainer = document.getElementById('index-analysis-container');
+  idxContainer.innerHTML = '';
+
+  db.tables.forEach(t => {
+    t.foreignKeys.forEach(fk => {
+      const isIndexed = t.indexes.some(idx => idx.columns.includes(fk.fkColumn));
+      idxContainer.innerHTML += `
+        <div style="padding: 0.65rem 0.85rem; background: ${isIndexed ? '#f0fdf4' : '#fff7ed'}; border: 1px solid ${isIndexed ? '#bbf7d0' : '#fed7aa'}; border-radius: 8px; font-size: 0.85rem;">
+          <div style="font-weight: 700; color: #0f172a;">${t.name}.${fk.fkColumn}</div>
+          <div style="font-size: 0.75rem; color: ${isIndexed ? '#166534' : '#c2410c'}; font-weight: 600;">
+            ${isIndexed ? '✔ Indexed' : '⚠️ Missing Index on Foreign Key'}
+          </div>
+        </div>
+      `;
+    });
+  });
+
+  const desContainer = document.getElementById('design-analysis-container');
+  desContainer.innerHTML = '';
+
+  db.tables.forEach(t => {
+    if (!t.primaryKey || t.primaryKey.length === 0) {
+      desContainer.innerHTML += `
+        <div style="padding: 0.65rem 0.85rem; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; font-size: 0.85rem;">
+          <div style="font-weight: 700; color: #92400e;">Table '${t.name}' has no Primary Key</div>
+          <div style="font-size: 0.75rem; color: #78350f;">Recommendation: Define an auto-incrementing ID or natural key.</div>
+        </div>
+      `;
+    }
+  });
+}
+
+function renderDataDictionary() {
+  const db = currentDatabase;
+  const tbody = document.getElementById('data-dictionary-tbody');
+  tbody.innerHTML = '';
+
+  db.tables.forEach(t => {
+    t.columns.forEach(c => {
+      tbody.innerHTML += `
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 0.55rem; font-weight: 700; color: #0f172a;">${t.name}</td>
+          <td style="padding: 0.55rem; font-weight: 600;">${c.name}</td>
+          <td style="padding: 0.55rem; font-family: monospace;">${c.type}</td>
+          <td style="padding: 0.55rem;">${c.nullable ? 'YES' : 'NO'}</td>
+          <td style="padding: 0.55rem; font-family: monospace;">${c.defaultVal}</td>
+          <td style="padding: 0.55rem;">${c.pk ? 'YES' : 'NO'}</td>
+          <td style="padding: 0.55rem;">${c.fk ? 'YES' : 'NO'}</td>
+          <td style="padding: 0.55rem;">${c.unique ? 'YES' : 'NO'}</td>
+          <td style="padding: 0.55rem;"><span style="background: #e0f2fe; color: #0369a1; padding: 0.1rem 0.45rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">${c.semantic}</span></td>
+        </tr>
+      `;
+    });
+  });
+}
+
+function exportDataDictionary(format) {
+  const db = currentDatabase;
+  if (!db) return;
+
+  let content = "";
+  let filename = `${db.name}-data-dictionary.${format}`;
+  let type = "text/plain";
+
+  if (format === 'csv') {
+    content = "Table,Column,Type,Nullable,Default,PK,FK,Unique,SemanticType\n";
+    db.tables.forEach(t => {
+      t.columns.forEach(c => {
+        content += `"${t.name}","${c.name}","${c.type}","${c.nullable}","${c.defaultVal}","${c.pk}","${c.fk}","${c.unique}","${c.semantic}"\n`;
+      });
+    });
+    type = "text/csv";
+  } else if (format === 'json') {
+    const list = [];
+    db.tables.forEach(t => {
+      t.columns.forEach(c => {
+        list.push({ table: t.name, column: c.name, type: c.type, nullable: c.nullable, default: c.defaultVal, pk: c.pk, fk: c.fk, unique: c.unique, semantic: c.semantic });
+      });
+    });
+    content = JSON.stringify(list, null, 2);
+    type = "application/json";
+  } else if (format === 'markdown') {
+    content = `# Data Dictionary - ${db.name}\n\n| Table | Column | Type | Nullable | Default | PK | FK | Unique | Semantic |\n|---|---|---|---|---|---|---|---|---|\n`;
+    db.tables.forEach(t => {
+      t.columns.forEach(c => {
+        content += `| ${t.name} | ${c.name} | ${c.type} | ${c.nullable} | ${c.defaultVal} | ${c.pk} | ${c.fk} | ${c.unique} | ${c.semantic} |\n`;
+      });
+    });
+  }
+
+  downloadFile(filename, content, type);
+}
+
+function exportFullReportHTML() {
+  window.print();
+}
+
+function handleGlobalSearch(q) {
+  const box = document.getElementById('search-results-box');
+  const list = document.getElementById('search-results-list');
+  if (!q.trim() || !currentDatabase) { box.style.display = 'none'; return; }
+
+  const query = q.toLowerCase();
+  const matches = [];
+
+  currentDatabase.tables.forEach(t => {
+    if (t.name.toLowerCase().includes(query)) matches.push({ type: "Table", title: t.name, action: () => { switchTab('tab-schema'); inspectTableDetail(t.name); } });
+    t.columns.forEach(c => {
+      if (c.name.toLowerCase().includes(query) || c.semantic.toLowerCase().includes(query)) {
+        matches.push({ type: "Column", title: `${t.name}.${c.name} (${c.semantic})`, action: () => inspectSpecificColumn(t.name, c.name) });
+      }
+    });
+  });
+
+  currentDatabase.issues.forEach(i => {
+    if (i.title.toLowerCase().includes(query)) matches.push({ type: "Issue", title: i.title, action: () => switchTab('tab-issues') });
+  });
+
+  document.getElementById('search-count-text').innerText = `${matches.length} Search Results for '${q}'`;
+  list.innerHTML = '';
+
+  matches.slice(0, 10).forEach(m => {
+    list.innerHTML += `
+      <div onclick="executeSearchMatch('${m.title}')" style="padding: 0.4rem 0.75rem; background: #f8fafc; border-radius: 6px; font-size: 0.85rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">${escapeHTML(m.title)}</span>
+        <span style="font-size: 0.75rem; background: #e0f2fe; color: #0369a1; padding: 0.1rem 0.45rem; border-radius: 4px; font-weight: 700;">${m.type}</span>
+      </div>
+    `;
+  });
+
+  box.style.display = 'block';
+}
+
+function closeSearchResults() {
+  document.getElementById('search-results-box').style.display = 'none';
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabId));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.toggle('active', p.id === tabId));
+  if (tabId === 'tab-relationships') drawErDiagramCanvas();
+}
+
+function showProgress(text, pct) {
+  document.getElementById('analysis-progress-container').style.display = 'block';
+  document.getElementById('progress-status-text').innerText = text;
+  document.getElementById('progress-bar-fill').style.width = `${pct}%`;
+}
+
+function hideProgress() {
+  document.getElementById('analysis-progress-container').style.display = 'none';
+}
+
+function resetAnalysis() {
+  document.getElementById('main-dashboard-container').style.display = 'none';
+  document.getElementById('db-upload-container').style.display = 'block';
+  currentDatabase = null;
+}
+
+function escapeHTML(str) {
+  return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function downloadFile(filename, content, type) {
+  const blob = new Blob([content], { type: type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
