@@ -6,7 +6,7 @@ excerpt: "Master JSON online view tools to format minified strings, inspect nest
 keywords: "json online view, json online viewer, view json online, online json viewer, json file viewer online, view json file online, open json online, json data viewer, json tree viewer"
 author: "DataFrog Engineering Team"
 date: 2026-08-11
-categories: ["Inspect", "Tutorials"]
+categories: ["Inspect"]
 tags: ["JSON", "Developer Tools", "Data Parsing", "JSON Viewer", "Privacy"]
 image: "/assets/img/json-online-view-hero.jpg"
 canonical: "https://datafrog.tools/blog/json-online-view"

@@ -6,7 +6,7 @@ excerpt: "Master JSON Schema validation from fundamentals to Draft 2020-12. Disc
 keywords: "JSON Schema Validation, Validate JSON Schema, JSON Schema Draft 2020-12, JSON Schema Checker, JSON Schema Best Practices, JSON Schema Tutorial"
 author: "DataFrog Engineering Team"
 date: 2026-08-05
-categories: ["Validate", "Tutorials"]
+categories: ["Validate"]
 tags: ["JSON", "JSON Schema", "Data Validation", "Developer Tools"]
 image: "/assets/img/json-schema-validation-featured.jpg"
 canonical: "https://datafrog.tools/blog/mastering-json-schema-validation"

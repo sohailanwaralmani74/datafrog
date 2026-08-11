@@ -87,7 +87,10 @@ layout: default
     {% assign tool_breadcrumb_name = page.short_name | default: matched_tool.short_name | default: matched_tool.title | default: page.title %}
     <nav aria-label="Breadcrumb" style="margin-bottom: 1.25rem; font-size: 0.875rem; color: var(--text-muted, #64748b);">
       <a href="/" style="color: inherit; text-decoration: none;">Home</a>
-      {% if page.category %}
+      {% if page.url contains '/blog/' and page.url != '/blog/' and page.url != '/blog' %}
+        <span> / </span>
+        <a href="/blog/" style="color: inherit; text-decoration: none;">Blog</a>
+      {% elsif page.category %}
         <span> / </span>
         <a href="/{{ page.category | downcase }}" style="color: inherit; text-decoration: none;">{{ page.category }}</a>
       {% endif %}
@@ -131,26 +134,32 @@ layout: default
         {% endif %}
       </ul>
     </div>
-    {% else %}
-    <!-- Related Blog Articles (For Article / Blog Post Pages Only) -->
+    {% elsif page.url == '/blog/' or page.url == '/blog' %}
+    <!-- Second Ad Box Slot (For Main Blog Listing Page Only -> Shows 2 Ad Boxes Total) -->
+    <div class="ad-box" style="background: var(--bg-soft, #f8fafc); border: 1px dashed var(--border-default, #cbd5e1); border-radius: 12px; padding: 1.5rem; text-align: center; min-height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted, #94a3b8); text-transform: uppercase; letter-spacing: 0.05em;">Advertisement</span>
+    </div>
+    {% elsif page.url contains '/blog/' %}
+    <!-- Related Blog Articles Box (For Individual Blog Posts ONLY -> 1 Ad Box + 1 Related Box) -->
     <div style="background: var(--bg-soft, #f8fafc); border: 1px solid var(--border-default, #e2e8f0); border-radius: 12px; padding: 1.5rem;">
       <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">
-        📝 Related Articles
+        📝 Related {{ page.categories.first }} Articles
       </h4>
       <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8; font-size: 0.875rem;">
-        {% assign article_count = 0 %}
+        {% assign primary_cat = page.categories.first %}
+        {% assign render_count = 0 %}
         {% for post in site.posts %}
-          {% if post.url != page.url and article_count < 4 %}
+          {% if post.url != page.url and post.categories contains primary_cat and render_count < 4 %}
             <li style="margin-bottom: 0.75rem;">
               <a href="{{ post.url }}" style="color: var(--text-primary, #0f172a); text-decoration: none; font-weight: 500;">
                 {{ post.title }}
               </a>
             </li>
-            {% assign article_count = article_count | plus: 1 %}
+            {% assign render_count = render_count | plus: 1 %}
           {% endif %}
         {% endfor %}
-        {% if article_count == 0 %}
-          <li style="color: var(--text-muted, #94a3b8); font-style: italic;">Explore engineering guides on <a href="/blog/">our blog</a>.</li>
+        {% if render_count == 0 %}
+          <li style="color: var(--text-muted, #94a3b8); font-style: italic;">No related articles in this category yet.</li>
         {% endif %}
       </ul>
     </div>

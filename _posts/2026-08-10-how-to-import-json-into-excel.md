@@ -6,7 +6,7 @@ excerpt: "Learn how to import JSON into Excel using Power Query, legacy VBA scri
 keywords: "how to import JSON into Excel, import json to excel, import data from json file to excel, import json data to excel, import data from json to excel, json in excel, import json into excel, excel open json file, open json in excel"
 author: "DataFrog Engineering Team"
 date: 2026-08-10
-categories: ["Inspect", "Tutorials"]
+categories: ["Inspect"]
 tags: ["JSON", "Excel", "Power Query", "Data Import", "Developer Tools"]
 image: "/assets/img/how-to-import-json-into-excel-hero.jpg"
 canonical: "https://datafrog.tools/blog/how-to-import-json-into-excel"

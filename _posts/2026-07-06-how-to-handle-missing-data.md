@@ -6,7 +6,7 @@ excerpt: "Master missing data handling in datasets. Learn MCAR, MAR, and MNAR me
 keywords: "missing data handling, how to treat missing values, how to handle missing values in dataset, how to handle missing values, how to handle missing data, how to deal with missing data, handling missing values, handling missing data in python, dealing with missing values, dealing with missing data, handle missing data"
 author: "DataFrog Engineering Team"
 date: 2026-07-06
-categories: ["Analyze", "Tutorials"]
+categories: ["Analyze"]
 tags: ["Data Engineering", "Python", "Pandas", "Data Cleaning", "Machine Learning"]
 image: "/assets/img/how-to-handle-missing-data-hero.jpg"
 canonical: "https://datafrog.tools/blog/how-to-handle-missing-data"
