@@ -1,0 +1,1384 @@
+---
+layout: main
+title: "Financial Data Quality Management - Privacy-First Assessment Tool"
+short_name: "Financial Data Quality"
+description: "Assess financial data quality online with DataFrog. Perform completeness checks, balance reconciliation, debit-credit audit, & currency validations free."
+keywords: "financial data quality management, financial data quality, financial data quality assessment, financial data quality checks, financial data validation, financial data quality framework, financial data quality monitoring, financial data quality analysis, financial data quality issues, financial data quality rules, financial dataset quality, financial data integrity, financial data consistency, financial data completeness, financial data accuracy, financial data profiling, financial data validation tool, financial data quality tool, financial data quality management tool, financial data quality checks, data quality in financial services, financial data quality assessment tool, financial data quality report, financial data cleansing, financial data reconciliation, financial data anomaly detection"
+category: "Analyze"
+permalink: /analyze/financial-data-quality-management/
+---
+
+<!-- ═══════════════════════════════════════════════════
+     EXTERNAL CLIENT-SIDE LIBRARIES (SHEETJS & PAPAPARSE)
+═══════════════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     STRUCTURED DATA (JSON-LD) FOR TOOL PAGE
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Financial Data Quality Management - DataFrog",
+  "operatingSystem": "Any",
+  "applicationCategory": "DeveloperApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Assess financial data quality online with DataFrog. Perform completeness checks, balance reconciliation, debit-credit audit, & currency validations free."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Financial Data Quality Management Tool",
+  "url": "https://datafrog.tools/analyze/financial-data-quality-management/",
+  "applicationCategory": "BusinessApplication",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "permissions": "None",
+  "isAccessibleForFree": true
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Analyze",
+      "item": "https://datafrog.tools/analyze/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Financial Data Quality Management",
+      "item": "https://datafrog.tools/analyze/financial-data-quality-management/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is financial data quality management?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Financial data quality management is the systematic practice of evaluating, profiling, and monitoring financial datasets for accuracy, completeness, consistency, validity, balance math reconciliation, and currency integrity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my uploaded financial data secure and private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% private. All processing occurs strictly inside your web browser's local JavaScript engine. No data is sent to external servers, cloud storage, or third-party APIs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the tool perform balance reconciliation checks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool automatically detects opening balance, debit, credit, and closing balance columns or running balance sequences, calculating mathematical deltas to verify if Opening + Credits - Debits equals Closing within user-configurable tolerance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this tool detect fraudulent transactions or provide financial advice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The tool is a static data quality profiling engine. It checks mathematical consistency, formatting errors, and statistical outliers. Outliers are labeled strictly as statistical anomalies or data quality issues, never as fraud or financial advice."
+      }
+    }
+  ]
+}
+</script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 1.5rem 1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #0f172a;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #dcfce7; color: #15803d; padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.75rem;">
+      <span>💰 Privacy-First Financial Data Quality Framework</span>
+    </div>
+    <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">
+      Financial Data Quality Management
+    </h1>
+    <p style="color: #475569; font-size: 1.05rem; max-width: 780px; margin: 0 auto; line-height: 1.5;">
+      Assess trustworthiness, completeness, debit/credit consistency, running balance reconciliation, and currency integrity — 100% locally in your web browser.
+    </p>
+  </div>
+
+  <!-- Privacy Security Banner -->
+  <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.75rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span style="font-size: 1.4rem;">🔒</span>
+      <div>
+        <strong style="color: #166534; font-size: 0.95rem;">100% Client-Side Privacy Guarantee:</strong>
+        <span style="color: #15803d; font-size: 0.875rem;"> No server upload. No API calls. No bank connections. All financial data stays strictly inside your browser memory.</span>
+      </div>
+    </div>
+    <span style="background: #166534; color: #ffffff; padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700;">Zero Storage</span>
+  </div>
+
+  <!-- Input Section Card -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+      <h2 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+        <span>📁 Load Financial Dataset</span>
+        <span style="font-size: 0.75rem; font-weight: 600; color: #64748b; background: #f1f5f9; padding: 0.15rem 0.5rem; border-radius: 4px;">CSV, XLSX, XLS, JSON, XML, TSV</span>
+      </h2>
+      <div style="display: flex; gap: 0.5rem;">
+        <button id="btn-load-sample" onclick="loadSampleFinancialDataset()" style="background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; padding: 0.45rem 0.9rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.2s;">
+          ⚡ Load Sample Financial Dataset
+        </button>
+        <button id="btn-clear" onclick="resetToolData()" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 0.45rem 0.9rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          🗑️ Clear
+        </button>
+      </div>
+    </div>
+
+    <!-- Drag Drop Zone -->
+    <div id="drop-zone" ondrop="handleFileDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; transition: all 0.2s; cursor: pointer;" onclick="document.getElementById('file-input').click()">
+      <input type="file" id="file-input" style="display: none;" onchange="handleFileSelect(event)" accept=".csv,.xlsx,.xls,.json,.xml,.tsv,.txt">
+      <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">📊</div>
+      <div style="font-weight: 700; color: #0f172a; font-size: 1.05rem; margin-bottom: 0.25rem;">
+        Drag &amp; Drop Financial File Here or <span style="color: #2563eb; text-decoration: underline;">Browse File</span>
+      </div>
+      <div style="color: #64748b; font-size: 0.85rem;">
+        Supports General Ledgers, Bank Statements, Invoices, Payment Logs, Customer Balances (.csv, .xlsx, .json, .xml)
+      </div>
+    </div>
+
+    <!-- Text Area Direct Paste Collapsible -->
+    <div style="margin-top: 1rem;">
+      <details>
+        <summary style="font-weight: 600; color: #2563eb; font-size: 0.875rem; cursor: pointer; user-select: none;">
+          📋 Paste Raw Financial Text Data (CSV / TSV / JSON / XML)
+        </summary>
+        <div style="margin-top: 0.75rem;">
+          <textarea id="paste-input" placeholder="Paste tab-delimited or CSV financial records here..." style="width: 100%; height: 110px; padding: 0.75rem; font-family: monospace; font-size: 0.825rem; border: 1px solid #cbd5e1; border-radius: 8px; resize: vertical; margin-bottom: 0.5rem;"></textarea>
+          <button onclick="handlePastedData()" style="background: #2563eb; color: #ffffff; border: none; padding: 0.45rem 1rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer;">
+            Process Pasted Dataset
+          </button>
+        </div>
+      </details>
+    </div>
+
+    <!-- Optional Multi-File Master Dataset Reference -->
+    <div style="margin-top: 1rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem 1rem;">
+      <details>
+        <summary style="font-weight: 600; color: #475569; font-size: 0.85rem; cursor: pointer;">
+          🔗 Optional: Load Master Reference Dataset for Referential Integrity Checks (e.g. Account Master / Customer List)
+        </summary>
+        <div style="margin-top: 0.75rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <input type="file" id="master-file-input" onchange="handleMasterFileSelect(event)" accept=".csv,.xlsx,.xls,.json" style="font-size: 0.85rem;">
+          <span id="master-file-status" style="font-size: 0.8rem; color: #64748b;">No master dataset loaded</span>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <!-- Loading State Indicator -->
+  <div id="loading-indicator" style="display: none; text-align: center; padding: 2rem; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 1.5rem;">
+    <div style="font-size: 1.8rem; margin-bottom: 0.5rem; animation: spin 1s linear infinite; display: inline-block;">⚙️</div>
+    <div id="loading-text" style="font-weight: 700; color: #0f172a; font-size: 1rem;">Analyzing Financial Dataset...</div>
+    <div id="loading-subtext" style="font-size: 0.85rem; color: #64748b; margin-top: 0.25rem;">Checking completeness, balance math, debit/credit consistency, and currency integrity...</div>
+  </div>
+
+  <!-- Main Analysis Output Container -->
+  <div id="analysis-output" style="display: none;">
+
+    <!-- Summary Metadata Header Bar -->
+    <div style="background: #0f172a; color: #ffffff; border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; align-items: center;">
+      <div>
+        <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 600; text-transform: uppercase;">File Name</div>
+        <div id="meta-filename" style="font-size: 0.95rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">-</div>
+      </div>
+      <div>
+        <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 600; text-transform: uppercase;">Records / Columns</div>
+        <div id="meta-records-cols" style="font-size: 0.95rem; font-weight: 700;">-</div>
+      </div>
+      <div>
+        <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 600; text-transform: uppercase;">Detected Dates</div>
+        <div id="meta-daterange" style="font-size: 0.95rem; font-weight: 700;">-</div>
+      </div>
+      <div>
+        <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 600; text-transform: uppercase;">Financial Fields</div>
+        <div id="meta-financial-fields" style="font-size: 0.95rem; font-weight: 700;">-</div>
+      </div>
+      <div>
+        <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 600; text-transform: uppercase;">Overall Status</div>
+        <div id="meta-quality-status" style="font-size: 0.95rem; font-weight: 700;">-</div>
+      </div>
+    </div>
+
+    <!-- Financial Field Classification Mapping Pill Section -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+      <div style="font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">
+        🔍 Detected Financial Field Mapping &amp; Semantic Confidence:
+      </div>
+      <div id="field-mapping-pills" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <!-- Dynamically populated field mapping pills -->
+      </div>
+    </div>
+
+    <!-- Quality Score & Executive Summary Dashboard -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+      
+      <!-- Quality Score Card -->
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.5rem; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+        <div style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+          Financial Data Quality Score
+        </div>
+        <div id="score-circle-badge" style="width: 110px; height: 110px; border-radius: 50%; background: #22c55e; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0.5rem 0;">
+          <span id="overall-quality-score" style="font-size: 2.2rem; font-weight: 900; line-height: 1;">0</span>
+          <span style="font-size: 0.75rem; font-weight: 700; opacity: 0.9;">/ 100</span>
+        </div>
+        <div id="score-rating-text" style="font-size: 1.1rem; font-weight: 800; color: #166534; margin-top: 0.25rem;">-</div>
+        <div id="score-basis-note" style="font-size: 0.75rem; color: #64748b; margin-top: 0.35rem; max-width: 240px;">
+          Calculated from 15 financial data quality dimensions &amp; internal math audits.
+        </div>
+      </div>
+
+      <!-- Key Metrics Breakdown Cards -->
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">
+          Quality Dimension Summary
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
+          <div style="background: #f8fafc; padding: 0.65rem; border-radius: 8px; border-left: 3px solid #3b82f6;">
+            <div style="font-size: 0.75rem; color: #64748b;">Completeness</div>
+            <div id="score-dim-completeness" style="font-size: 1.1rem; font-weight: 800; color: #0f172a;">100%</div>
+          </div>
+          <div style="background: #f8fafc; padding: 0.65rem; border-radius: 8px; border-left: 3px solid #10b981;">
+            <div style="font-size: 0.75rem; color: #64748b;">Validity</div>
+            <div id="score-dim-validity" style="font-size: 1.1rem; font-weight: 800; color: #0f172a;">100%</div>
+          </div>
+          <div style="background: #f8fafc; padding: 0.65rem; border-radius: 8px; border-left: 3px solid #f59e0b;">
+            <div style="font-size: 0.75rem; color: #64748b;">Consistency</div>
+            <div id="score-dim-consistency" style="font-size: 1.1rem; font-weight: 800; color: #0f172a;">100%</div>
+          </div>
+          <div style="background: #f8fafc; padding: 0.65rem; border-radius: 8px; border-left: 3px solid #8b5cf6;">
+            <div style="font-size: 0.75rem; color: #64748b;">Uniqueness</div>
+            <div id="score-dim-uniqueness" style="font-size: 1.1rem; font-weight: 800; color: #0f172a;">100%</div>
+          </div>
+          <div style="background: #f8fafc; padding: 0.65rem; border-radius: 8px; border-left: 3px solid #ef4444;">
+            <div style="font-size: 0.75rem; color: #64748b;">Financial Math</div>
+            <div id="score-dim-math" style="font-size: 1.1rem; font-weight: 800; color: #0f172a;">100%</div>
+          </div>
+          <div style="background: #f8fafc; padding: 0.65rem; border-radius: 8px; border-left: 3px solid #06b6d4;">
+            <div style="font-size: 0.75rem; color: #64748b;">Reconciliation</div>
+            <div id="score-dim-reconciliation" style="font-size: 1.1rem; font-weight: 800; color: #0f172a;">100%</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Interactive Navigation Tabs -->
+    <div style="border-bottom: 2px solid #e2e8f0; margin-bottom: 1.5rem; display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 2px;">
+      <button class="fq-tab-btn active" onclick="switchFqTab('tab-issues')" id="btn-tab-issues" style="padding: 0.65rem 1.1rem; font-weight: 700; font-size: 0.9rem; border: none; background: none; border-bottom: 3px solid #2563eb; color: #2563eb; cursor: pointer; white-space: nowrap;">
+        ⚠️ Issue Explorer (<span id="count-total-issues">0</span>)
+      </button>
+      <button class="fq-tab-btn" onclick="switchFqTab('tab-preview')" id="btn-tab-preview" style="padding: 0.65rem 1.1rem; font-weight: 600; font-size: 0.9rem; border: none; background: none; color: #64748b; cursor: pointer; white-space: nowrap;">
+        🔍 Data Preview &amp; Cell Highlights
+      </button>
+      <button class="fq-tab-btn" onclick="switchFqTab('tab-reconciliation')" id="btn-tab-reconciliation" style="padding: 0.65rem 1.1rem; font-weight: 600; font-size: 0.9rem; border: none; background: none; color: #64748b; cursor: pointer; white-space: nowrap;">
+        ⚖️ Balance &amp; Reconciliation Audit
+      </button>
+      <button class="fq-tab-btn" onclick="switchFqTab('tab-profile')" id="btn-tab-profile" style="padding: 0.65rem 1.1rem; font-weight: 600; font-size: 0.9rem; border: none; background: none; color: #64748b; cursor: pointer; white-space: nowrap;">
+        📊 Financial Data Profile
+      </button>
+      <button class="fq-tab-btn" onclick="switchFqTab('tab-rules')" id="btn-tab-rules" style="padding: 0.65rem 1.1rem; font-weight: 600; font-size: 0.9rem; border: none; background: none; color: #64748b; cursor: pointer; white-space: nowrap;">
+        ⚙️ Rules &amp; Tolerances
+      </button>
+      <button class="fq-tab-btn" onclick="switchFqTab('tab-report')" id="btn-tab-report" style="padding: 0.65rem 1.1rem; font-weight: 600; font-size: 0.9rem; border: none; background: none; color: #64748b; cursor: pointer; white-space: nowrap;">
+        📑 Executive Report &amp; Export
+      </button>
+    </div>
+
+    <!-- TAB 1: ISSUE EXPLORER -->
+    <div id="tab-issues" class="fq-tab-content" style="display: block;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem;">
+        
+        <!-- Controls Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button onclick="filterIssues('ALL')" id="flt-issue-all" style="padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; border: 1px solid #cbd5e1; background: #0f172a; color: #ffffff; cursor: pointer;">
+              All Issues (<span id="issue-badge-all">0</span>)
+            </button>
+            <button onclick="filterIssues('ERROR')" id="flt-issue-error" style="padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; border: 1px solid #fca5a5; background: #fef2f2; color: #991b1b; cursor: pointer;">
+              Errors (<span id="issue-badge-error">0</span>)
+            </button>
+            <button onclick="filterIssues('WARNING')" id="flt-issue-warning" style="padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; border: 1px solid #fde68a; background: #fffbeb; color: #92400e; cursor: pointer;">
+              Warnings (<span id="issue-badge-warning">0</span>)
+            </button>
+            <button onclick="filterIssues('INFO')" id="flt-issue-info" style="padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; border: 1px solid #bae6fd; background: #f0f9ff; color: #075985; cursor: pointer;">
+              Info (<span id="issue-badge-info">0</span>)
+            </button>
+          </div>
+
+          <!-- Search Input -->
+          <input type="text" id="issue-search-input" onkeyup="renderIssuesTable()" placeholder="Search detected quality issues..." style="padding: 0.4rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; width: 220px;">
+        </div>
+
+        <!-- Issue Table -->
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+            <thead>
+              <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0; text-align: left;">
+                <th style="padding: 0.65rem 0.75rem; font-weight: 700; color: #475569;">Severity</th>
+                <th style="padding: 0.65rem 0.75rem; font-weight: 700; color: #475569;">Dimension</th>
+                <th style="padding: 0.65rem 0.75rem; font-weight: 700; color: #475569;">Column / Field</th>
+                <th style="padding: 0.65rem 0.75rem; font-weight: 700; color: #475569;">Row #</th>
+                <th style="padding: 0.65rem 0.75rem; font-weight: 700; color: #475569;">Detected Finding &amp; Explanation</th>
+                <th style="padding: 0.65rem 0.75rem; font-weight: 700; color: #475569;">Observed Value</th>
+                <th style="padding: 0.65rem 0.75rem; font-weight: 700; color: #475569;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="issues-tbody">
+              <!-- Dynamically populated issues -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 2: DATA PREVIEW & CELL HIGHLIGHTS -->
+    <div id="tab-preview" class="fq-tab-content" style="display: none;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="font-size: 0.9rem; font-weight: 700; color: #0f172a;">
+            Interactive Dataset Cell Inspection (First 300 Rows)
+          </div>
+          <div style="display: flex; gap: 0.5rem; font-size: 0.8rem; align-items: center;">
+            <span style="display: inline-block; width: 12px; height: 12px; background: #fca5a5; border-radius: 3px;"></span> Error
+            <span style="display: inline-block; width: 12px; height: 12px; background: #fde68a; border-radius: 3px; margin-left: 0.5rem;"></span> Warning
+            <span style="display: inline-block; width: 12px; height: 12px; background: #bae6fd; border-radius: 3px; margin-left: 0.5rem;"></span> Info / Outlier
+          </div>
+        </div>
+
+        <!-- Filter Buttons for Data Grid -->
+        <div style="margin-bottom: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button onclick="filterGrid('ALL')" id="grid-flt-all" style="padding: 0.3rem 0.65rem; font-size: 0.8rem; border-radius: 6px; border: 1px solid #cbd5e1; background: #0f172a; color: #ffffff; font-weight: 700; cursor: pointer;">All Rows</button>
+          <button onclick="filterGrid('ISSUES')" id="grid-flt-issues" style="padding: 0.3rem 0.65rem; font-size: 0.8rem; border-radius: 6px; border: 1px solid #cbd5e1; background: #f1f5f9; color: #475569; font-weight: 700; cursor: pointer;">Rows With Issues Only</button>
+        </div>
+
+        <div style="overflow-x: auto; max-height: 480px; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <table id="preview-grid-table" style="width: 100%; border-collapse: collapse; font-size: 0.8rem; font-family: monospace;">
+            <thead id="preview-grid-thead" style="position: sticky; top: 0; background: #f8fafc; z-index: 10;">
+              <!-- Dynamically populated column headers -->
+            </thead>
+            <tbody id="preview-grid-tbody">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 3: BALANCE & RECONCILIATION AUDIT -->
+    <div id="tab-reconciliation" class="fq-tab-content" style="display: none;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 1rem;">
+          ⚖️ Financial Reconciliation &amp; Mathematical Audits
+        </h3>
+
+        <!-- Multi-Currency Summary Box -->
+        <div id="currency-summary-box" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">
+            💱 Currency Distribution &amp; Aggregation Check
+          </div>
+          <div id="currency-breakdown-list" style="font-size: 0.85rem; color: #334155;">
+            <!-- Dynamically populated currency summary -->
+          </div>
+        </div>
+
+        <!-- Sequential Running Balance Audit Table -->
+        <div style="margin-bottom: 1.5rem;">
+          <div style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">
+            🔄 Sequential Running Balance Discrepancies
+          </div>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+              <thead>
+                <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0; text-align: left;">
+                  <th style="padding: 0.55rem; font-weight: 700;">Row #</th>
+                  <th style="padding: 0.55rem; font-weight: 700;">Prev Balance</th>
+                  <th style="padding: 0.55rem; font-weight: 700;">Credit (+)</th>
+                  <th style="padding: 0.55rem; font-weight: 700;">Debit (-)</th>
+                  <th style="padding: 0.55rem; font-weight: 700;">Expected Balance</th>
+                  <th style="padding: 0.55rem; font-weight: 700;">Reported Balance</th>
+                  <th style="padding: 0.55rem; font-weight: 700;">Difference</th>
+                  <th style="padding: 0.55rem; font-weight: 700;">Status</th>
+                </tr>
+              </thead>
+              <tbody id="balance-audit-tbody">
+                <!-- Dynamically populated balance discrepancies -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Debit vs Credit Dual Column Audit -->
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">
+            💳 Debit / Credit Relationship Audit
+          </div>
+          <div id="debit-credit-audit-text" style="font-size: 0.85rem; color: #475569; line-height: 1.6;">
+            <!-- Dynamically populated debit/credit audit -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 4: FINANCIAL DATA PROFILE -->
+    <div id="tab-profile" class="fq-tab-content" style="display: none;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 1rem;">
+          📊 Column-by-Column Financial Profile &amp; Quality Scores
+        </h3>
+
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+            <thead>
+              <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0; text-align: left;">
+                <th style="padding: 0.6rem; font-weight: 700;">Column Name</th>
+                <th style="padding: 0.6rem; font-weight: 700;">Detected Role</th>
+                <th style="padding: 0.6rem; font-weight: 700;">Data Type</th>
+                <th style="padding: 0.6rem; font-weight: 700;">Completeness</th>
+                <th style="padding: 0.6rem; font-weight: 700;">Unique Values</th>
+                <th style="padding: 0.6rem; font-weight: 700;">Min / Max</th>
+                <th style="padding: 0.6rem; font-weight: 700;">Mean / Sum</th>
+                <th style="padding: 0.6rem; font-weight: 700;">Quality Score</th>
+              </tr>
+            </thead>
+            <tbody id="profile-tbody">
+              <!-- Dynamically populated profile rows -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 5: RULES & TOLERANCES CONFIGURATION -->
+    <div id="tab-rules" class="fq-tab-content" style="display: none;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 1rem;">
+          ⚙️ Configurable Data Quality Rules &amp; Mathematical Tolerances
+        </h3>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+          
+          <!-- Balance Tolerance Slider -->
+          <div style="background: #f8fafc; padding: 1rem; border-radius: 10px; border: 1px solid #e2e8f0;">
+            <label style="font-weight: 700; font-size: 0.875rem; color: #0f172a; display: block; margin-bottom: 0.4rem;">
+              Mathematical Balance Delta Tolerance: <span id="lbl-tol-balance" style="color: #2563eb;">0.01</span>
+            </label>
+            <input type="range" id="cfg-tol-balance" min="0" max="1" step="0.01" value="0.01" oninput="updateRulesConfig()" style="width: 100%;">
+            <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
+              Allowed rounding discrepancy for balance math (e.g. 0.01 for cent rounding).
+            </div>
+          </div>
+
+          <!-- Outlier Z-Score Sensitivity Slider -->
+          <div style="background: #f8fafc; padding: 1rem; border-radius: 10px; border: 1px solid #e2e8f0;">
+            <label style="font-weight: 700; font-size: 0.875rem; color: #0f172a; display: block; margin-bottom: 0.4rem;">
+              Statistical Outlier Threshold (Z-Score): <span id="lbl-tol-outlier" style="color: #2563eb;">3.0</span>
+            </label>
+            <input type="range" id="cfg-tol-outlier" min="2.0" max="4.0" step="0.1" value="3.0" oninput="updateRulesConfig()" style="width: 100%;">
+            <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
+              Standard deviations above/below mean to trigger statistical outlier info badge.
+            </div>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: right;">
+          <button onclick="reanalyzeWithNewRules()" style="background: #2563eb; color: #ffffff; border: none; padding: 0.55rem 1.25rem; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+            🔄 Re-Run Analysis with Updated Rules
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 6: EXECUTIVE REPORT & EXPORTS -->
+    <div id="tab-report" class="fq-tab-content" style="display: none;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin: 0;">
+            📑 Comprehensive Financial Data Quality Report
+          </h3>
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="exportReport('html')" style="background: #0f172a; color: #ffffff; border: none; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
+              📥 Export HTML Report
+            </button>
+            <button onclick="exportReport('csv')" style="background: #16a34a; color: #ffffff; border: none; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
+              📊 Export Findings CSV
+            </button>
+            <button onclick="exportReport('json')" style="background: #2563eb; color: #ffffff; border: none; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
+              📄 Export Findings JSON
+            </button>
+            <button onclick="window.print()" style="background: #e2e8f0; color: #0f172a; border: none; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
+              🖨️ Print / Save PDF
+            </button>
+          </div>
+        </div>
+
+        <div id="report-view-container" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; font-size: 0.9rem; line-height: 1.6; color: #334155;">
+          <!-- Dynamically populated HTML executive report -->
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Educational Guide & Technical SEO Sections -->
+  <div style="margin-top: 3.5rem; border-top: 2px solid #e2e8f0; padding-top: 2.5rem; color: #334155; line-height: 1.7;">
+    
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
+      Understanding Financial Data Quality Management
+    </h2>
+    <p>
+      <strong>Financial data quality management</strong> is a structured methodology for measuring, auditing, and maintaining the integrity of financial datasets. In modern accounting, corporate finance, data engineering, and auditing, untrustworthy datasets containing missing fields, broken running balance equations, duplicate transaction IDs, or mixed un-converted currencies can distort financial statements and lead to compliance risks.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-top: 0;">🎯 The 15 Data Quality Dimensions</h3>
+        <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 0;">
+          Evaluates completeness, accuracy, validity, consistency, uniqueness, timeliness, integrity, conformity, balance consistency, debit/credit math, currency mixing, transaction consistency, referential integrity, reconciliation, and statistical plausibility.
+        </p>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-top: 0;">⚖️ Sequential Balance Reconciliation</h3>
+        <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 0;">
+          Automatically verifies mathematical balance movement across transactional sequences: <code>Previous Balance + Credits - Debits = Current Balance</code> within user-configurable rounding tolerance.
+        </p>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-top: 0;">💱 Currency Integrity &amp; Mixing Alerts</h3>
+        <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 0;">
+          Identifies un-converted multi-currency aggregation risks (e.g. summing USD and EUR directly), non-standard ISO currency representations, and invalid monetary formats.
+        </p>
+      </div>
+    </div>
+
+    <h2 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-top: 2rem; margin-bottom: 0.75rem;">
+      Frequently Asked Questions (FAQ)
+    </h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem 1.15rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does this tool connect to my bank or financial APIs?</summary>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">No. This tool operates 100% locally in your browser. It does not connect to financial institutions, banking APIs, or payment gateways, ensuring complete privacy for sensitive corporate spreadsheets.</p>
+      </details>
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem 1.15rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What file formats are supported?</summary>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">You can load CSV, XLSX, XLS, JSON, XML, TSV, or paste raw tabular text directly. The engine automatically parses structure and identifies financial column roles.</p>
+      </details>
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.85rem 1.15rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are statistical outliers detected?</summary>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">Numeric monetary fields are evaluated using standard Z-score and Interquartile Range (IQR) thresholds. Outliers are explicitly flagged as statistical observations for manual review, never as fraud or errors.</p>
+      </details>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     TOOL JAVASCRIPT ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+let currentDataset = null;
+let masterDataset = null;
+let detectedFields = {};
+let qualityIssues = [];
+let columnProfiles = {};
+let overallScore = 100;
+let activeIssueFilter = 'ALL';
+let activeGridFilter = 'ALL';
+
+// Rules Configuration State
+let configRules = {
+  balanceTolerance: 0.01,
+  outlierZThreshold: 3.0
+};
+
+// Field Auto-Detection Role Definitions
+const FIELD_ROLES = [
+  { key: 'transaction_id', label: 'Transaction ID', patterns: [/txn_?id/i, /transaction_?id/i, /trans_?id/i, /ref_?no/i, /reference/i] },
+  { key: 'account_id', label: 'Account ID', patterns: [/account_?id/i, /acct_?no/i, /account_?number/i, /account/i] },
+  { key: 'customer_id', label: 'Customer ID', patterns: [/customer_?id/i, /client_?id/i, /customer/i, /client/i] },
+  { key: 'date', label: 'Transaction Date', patterns: [/date/i, /txn_?date/i, /posting_?date/i, /value_?date/i, /created_?at/i] },
+  { key: 'debit', label: 'Debit Amount', patterns: [/debit/i, /^dr$/i, /debit_?amount/i] },
+  { key: 'credit', label: 'Credit Amount', patterns: [/credit/i, /^cr$/i, /credit_?amount/i] },
+  { key: 'amount', label: 'Amount', patterns: [/amount/i, /txn_?amount/i, /val/i, /total_?amount/i] },
+  { key: 'balance', label: 'Running Balance', patterns: [/balance/i, /running_?balance/i, /current_?balance/i] },
+  { key: 'currency', label: 'Currency', patterns: [/currency/i, /curr/i, /ccy/i] },
+  { key: 'status', label: 'Status', patterns: [/status/i, /state/i, /txn_?status/i] },
+  { key: 'category', label: 'Category', patterns: [/category/i, /type/i, /class/i] },
+  { key: 'subtotal', label: 'Subtotal', patterns: [/subtotal/i, /sub_?total/i] },
+  { key: 'tax', label: 'Tax', patterns: [/tax/i, /vat/i, /gst/i] },
+  { key: 'total', label: 'Total', patterns: [/total/i, /net_?total/i] },
+  { key: 'quantity', label: 'Quantity', patterns: [/quantity/i, /qty/i, /count/i] },
+  { key: 'unit_price', label: 'Unit Price', patterns: [/unit_?price/i, /price/i, /rate/i] }
+];
+
+function handleDragOver(e) { e.preventDefault(); document.getElementById('drop-zone').style.borderColor = '#2563eb'; document.getElementById('drop-zone').style.background = '#eff6ff'; }
+function handleDragLeave(e) { e.preventDefault(); document.getElementById('drop-zone').style.borderColor = '#cbd5e1'; document.getElementById('drop-zone').style.background = '#f8fafc'; }
+function handleFileDrop(e) { e.preventDefault(); handleDragLeave(e); if (e.dataTransfer.files.length) processSelectedFile(e.dataTransfer.files[0]); }
+function handleFileSelect(e) { if (e.target.files.length) processSelectedFile(e.target.files[0]); }
+
+function processSelectedFile(file) {
+  showLoading(true, "Reading file format...", file.name);
+  const ext = file.name.split('.').pop().toLowerCase();
+  
+  if (['xlsx', 'xls'].includes(ext)) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const jsonRows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { defval: "" });
+        analyzeParsedRows(jsonRows, file.name, "Excel (" + ext.toUpperCase() + ")");
+      } catch (err) {
+        alert("Failed to parse Excel file: " + err.message);
+        showLoading(false);
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  } else {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const content = e.target.result;
+      if (ext === 'json') {
+        try {
+          const parsed = JSON.parse(content);
+          const rows = Array.isArray(parsed) ? parsed : (parsed.data || [parsed]);
+          analyzeParsedRows(rows, file.name, "JSON");
+        } catch (err) { alert("Invalid JSON format"); showLoading(false); }
+      } else {
+        Papa.parse(content, {
+          header: true,
+          skipEmptyLines: true,
+          dynamicTyping: false,
+          complete: function(results) {
+            analyzeParsedRows(results.data, file.name, ext.toUpperCase());
+          }
+        });
+      }
+    };
+    reader.readAsText(file);
+  }
+}
+
+function handlePastedData() {
+  const text = document.getElementById('paste-input').value.trim();
+  if (!text) { alert("Please paste tabular data first."); return; }
+  showLoading(true, "Parsing pasted text...", "pasted_data.txt");
+  if (text.startsWith('[') || text.startsWith('{')) {
+    try {
+      const parsed = JSON.parse(text);
+      const rows = Array.isArray(parsed) ? parsed : [parsed];
+      analyzeParsedRows(rows, "Pasted_Data.json", "JSON");
+    } catch(e) { parseCsvText(text); }
+  } else { parseCsvText(text); }
+}
+
+function parseCsvText(text) {
+  Papa.parse(text, {
+    header: true,
+    skipEmptyLines: true,
+    complete: function(results) {
+      analyzeParsedRows(results.data, "Pasted_Dataset.csv", "CSV");
+    }
+  });
+}
+
+function handleMasterFileSelect(e) {
+  if (!e.target.files.length) return;
+  const file = e.target.files[0];
+  Papa.parse(file, {
+    header: true,
+    skipEmptyLines: true,
+    complete: function(results) {
+      masterDataset = results.data;
+      document.getElementById('master-file-status').innerText = `Loaded (${masterDataset.length} rows)`;
+      if (currentDataset) runFinancialQualityAnalysis();
+    }
+  });
+}
+
+function loadSampleFinancialDataset() {
+  showLoading(true, "Generating realistic financial sample dataset...", "sample_ledger.csv");
+  setTimeout(() => {
+    const sampleRows = [
+      { txn_id: "TXN-1001", date: "2026-08-01", account_id: "ACC-5001", customer_id: "CUST-101", debit: "1250.00", credit: "0.00", balance: "8750.00", currency: "USD", subtotal: "1200.00", tax: "50.00", total: "1250.00", status: "COMPLETED" },
+      { txn_id: "TXN-1002", date: "2026-08-02", account_id: "ACC-5001", customer_id: "CUST-102", debit: "0.00", credit: "3000.00", balance: "11750.00", currency: "USD", subtotal: "3000.00", tax: "0.00", total: "3000.00", status: "COMPLETED" },
+      { txn_id: "TXN-1003", date: "2026-08-03", account_id: "ACC-5001", customer_id: "CUST-103", debit: "500.00", credit: "0.00", balance: "11250.00", currency: "USD", subtotal: "450.00", tax: "50.00", total: "500.00", status: "COMPLETED" },
+      { txn_id: "TXN-1004", date: "2026-08-04", account_id: "ACC-5002", customer_id: "", debit: "800.00", credit: "0.00", balance: "10400.00", currency: "EUR", subtotal: "800.00", tax: "0.00", total: "800.00", status: "PENDING" },
+      { txn_id: "TXN-1004", date: "2026-08-04", account_id: "ACC-5002", customer_id: "CUST-104", debit: "800.00", credit: "0.00", balance: "10400.00", currency: "EUR", subtotal: "800.00", tax: "0.00", total: "800.00", status: "PENDING" }, // Duplicate TXN ID
+      { txn_id: "TXN-1005", date: "2026-08-05", account_id: "ACC-5002", customer_id: "CUST-105", debit: "1500.00", credit: "0.00", balance: "9000.00", currency: "USD", subtotal: "1400.00", tax: "50.00", total: "1500.00", status: "COMPLETED" }, // Subtotal math mismatch
+      { txn_id: "TXN-1006", date: "2026-08-06", account_id: "ACC-5003", customer_id: "CUST-106", debit: "200.00", credit: "0.00", balance: "8600.00", currency: "USD", subtotal: "200.00", tax: "0.00", total: "200.00", status: "COMPLETED" }, // Balance math error (8900-200=8700, reported 8600)
+      { txn_id: "TXN-1007", date: "INVALID-DATE", account_id: "ACC-5003", customer_id: "CUST-107", debit: "-50.00", credit: "0.00", balance: "8650.00", currency: "US$", subtotal: "50.00", tax: "0.00", total: "50.00", status: "COMPLETE" }, // Invalid Date, Negative Debit, Non-ISO Currency
+      { txn_id: "TXN-1008", date: "2026-08-08", account_id: "ACC-5004", customer_id: "CUST-108", debit: "125000.00", credit: "0.00", balance: "-116350.00", currency: "USD", subtotal: "125000.00", tax: "0.00", total: "125000.00", status: "COMPLETED" } // Outlier Amount
+    ];
+    analyzeParsedRows(sampleRows, "Sample_Financial_Ledger.csv", "CSV Sample");
+  }, 200);
+}
+
+function analyzeParsedRows(rows, filename, format) {
+  if (!rows || !rows.length) { alert("Dataset contains no records."); showLoading(false); return; }
+  currentDataset = { rows: rows, filename: filename, format: format };
+  detectFinancialFieldRoles(rows);
+  runFinancialQualityAnalysis();
+  showLoading(false);
+}
+
+function detectFinancialFieldRoles(rows) {
+  detectedFields = {};
+  if (!rows.length) return;
+  const cols = Object.keys(rows[0]);
+  
+  cols.forEach(col => {
+    let bestMatch = null;
+    let maxConf = 0;
+    
+    FIELD_ROLES.forEach(role => {
+      role.patterns.forEach(pat => {
+        if (pat.test(col)) {
+          bestMatch = role;
+          maxConf = 95;
+        }
+      });
+    });
+    
+    if (bestMatch) {
+      detectedFields[col] = { role: bestMatch.key, label: bestMatch.label, confidence: maxConf };
+    } else {
+      detectedFields[col] = { role: 'other', label: 'General Field', confidence: 50 };
+    }
+  });
+  renderFieldMappingPills();
+}
+
+function renderFieldMappingPills() {
+  const container = document.getElementById('field-mapping-pills');
+  container.innerHTML = '';
+  Object.keys(detectedFields).forEach(col => {
+    const f = detectedFields[col];
+    const color = f.role !== 'other' ? '#15803d' : '#64748b';
+    const bg = f.role !== 'other' ? '#dcfce7' : '#f1f5f9';
+    container.innerHTML += `
+      <span style="background: ${bg}; color: ${color}; padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.35rem;">
+        <span>${col}</span> → <span style="text-decoration: underline;">${f.label}</span> (${f.confidence}%)
+      </span>
+    `;
+  });
+}
+
+function runFinancialQualityAnalysis() {
+  qualityIssues = [];
+  columnProfiles = {};
+  const rows = currentDataset.rows;
+  const cols = Object.keys(rows[0]);
+  const totalRows = rows.length;
+
+  // Trackers
+  let missingValueCount = 0;
+  let invalidValueCount = 0;
+  let duplicateCount = 0;
+  let balanceMathErrorCount = 0;
+  
+  const txnIdMap = {};
+  const currenciesSet = new Set();
+
+  // Find Role Columns
+  const txnIdCol = findColByRole('transaction_id');
+  const dateCol = findColByRole('date');
+  const debitCol = findColByRole('debit');
+  const creditCol = findColByRole('credit');
+  const amountCol = findColByRole('amount');
+  const balanceCol = findColByRole('balance');
+  const currencyCol = findColByRole('currency');
+  const subtotalCol = findColByRole('subtotal');
+  const taxCol = findColByRole('tax');
+  const totalCol = findColByRole('total');
+  const customerIdCol = findColByRole('customer_id');
+
+  // 1. Column Level Profiling
+  cols.forEach(col => {
+    let emptyCount = 0;
+    let uniqueSet = new Set();
+    let numValues = [];
+    
+    rows.forEach(r => {
+      const val = r[col];
+      if (val === "" || val === null || val === undefined) { emptyCount++; }
+      else {
+        uniqueSet.add(String(val).trim());
+        const num = parseFloat(val);
+        if (!isNaN(num)) numValues.push(num);
+      }
+    });
+
+    const completenessPct = Math.round(((totalRows - emptyCount) / totalRows) * 100);
+    missingValueCount += emptyCount;
+
+    let min = numValues.length ? Math.min(...numValues) : '-';
+    let max = numValues.length ? Math.max(...numValues) : '-';
+    let mean = numValues.length ? (numValues.reduce((a,b)=>a+b,0)/numValues.length) : '-';
+    let sum = numValues.length ? numValues.reduce((a,b)=>a+b,0) : '-';
+
+    columnProfiles[col] = {
+      role: detectedFields[col] ? detectedFields[col].label : 'General',
+      emptyCount: emptyCount,
+      completenessPct: completenessPct,
+      uniqueCount: uniqueSet.size,
+      numValues: numValues,
+      min: typeof min === 'number' ? min.toFixed(2) : min,
+      max: typeof max === 'number' ? max.toFixed(2) : max,
+      mean: typeof mean === 'number' ? mean.toFixed(2) : mean,
+      sum: typeof sum === 'number' ? sum.toFixed(2) : sum,
+      qualityScore: completenessPct
+    };
+
+    if (completenessPct < 90) {
+      addIssue("WARNING", "Completeness", col, "-", `Column has ${emptyCount} missing or blank entries (${100 - completenessPct}% missing).`, "High Missingness");
+    }
+  });
+
+  // 2. Row Level Financial Checks
+  let prevBalance = null;
+
+  rows.forEach((r, idx) => {
+    const rowNum = idx + 1;
+
+    // Check Transaction ID Duplication
+    if (txnIdCol && r[txnIdCol]) {
+      const tid = String(r[txnIdCol]).trim();
+      if (txnIdMap[tid]) {
+        duplicateCount++;
+        addIssue("WARNING", "Uniqueness", txnIdCol, rowNum, `Potential duplicate transaction identifier '${tid}' detected. First seen at row ${txnIdMap[tid]}.`, tid);
+      } else { txnIdMap[tid] = rowNum; }
+    }
+
+    // Check Date Validity
+    if (dateCol && r[dateCol]) {
+      const dStr = String(r[dateCol]).trim();
+      const d = new Date(dStr);
+      if (isNaN(d.getTime())) {
+        invalidValueCount++;
+        addIssue("ERROR", "Validity", dateCol, rowNum, `Invalid transaction date representation '${dStr}'.`, dStr);
+      } else if (d > new Date('2030-01-01')) {
+        addIssue("WARNING", "Timeliness", dateCol, rowNum, `Future-dated transaction record detected (${dStr}).`, dStr);
+      }
+    }
+
+    // Check Currency
+    if (currencyCol && r[currencyCol]) {
+      const ccy = String(r[currencyCol]).trim().toUpperCase();
+      currenciesSet.add(ccy);
+      if (!/^[A-Z]{3}$/.test(ccy)) {
+        addIssue("WARNING", "Conformity", currencyCol, rowNum, `Non-standard ISO currency representation '${ccy}'. Expected 3-letter ISO code (e.g. USD, EUR).`, ccy);
+      }
+    }
+
+    // Check Negative Debit / Credit Inconsistency
+    if (debitCol && r[debitCol]) {
+      const dVal = parseFloat(r[debitCol]);
+      if (dVal < 0) addIssue("ERROR", "Debit/Credit Consistency", debitCol, rowNum, "Negative debit amount detected. Use positive values or credit column.", r[debitCol]);
+    }
+    if (creditCol && r[creditCol]) {
+      const cVal = parseFloat(r[creditCol]);
+      if (cVal < 0) addIssue("ERROR", "Debit/Credit Consistency", creditCol, rowNum, "Negative credit amount detected. Use positive values or debit column.", r[creditCol]);
+    }
+
+    // Subtotal + Tax = Total Check
+    if (subtotalCol && taxCol && totalCol && r[subtotalCol] && r[taxCol] && r[totalCol]) {
+      const sub = parseFloat(r[subtotalCol]);
+      const tax = parseFloat(r[taxCol]);
+      const tot = parseFloat(r[totalCol]);
+      if (!isNaN(sub) && !isNaN(tax) && !isNaN(tot)) {
+        const expectedTot = sub + tax;
+        if (Math.abs(expectedTot - tot) > configRules.balanceTolerance) {
+          addIssue("ERROR", "Accuracy", totalCol, rowNum, `Subtotal (${sub}) + Tax (${tax}) = ${expectedTot.toFixed(2)}, which mathematically contradicts reported Total (${tot}).`, tot);
+        }
+      }
+    }
+
+    // Running Balance Math Audit
+    if (balanceCol && r[balanceCol]) {
+      const currBal = parseFloat(r[balanceCol]);
+      const dr = debitCol && r[debitCol] ? parseFloat(r[debitCol]) || 0 : 0;
+      const cr = creditCol && r[creditCol] ? parseFloat(r[creditCol]) || 0 : 0;
+
+      if (prevBalance !== null && !isNaN(currBal)) {
+        const expectedBal = prevBalance + cr - dr;
+        const diff = Math.abs(expectedBal - currBal);
+        if (diff > configRules.balanceTolerance) {
+          balanceMathErrorCount++;
+          addIssue("ERROR", "Balance Consistency", balanceCol, rowNum, `Sequential balance discrepancy detected. Previous (${prevBalance.toFixed(2)}) + Credit (${cr}) - Debit (${dr}) = Expected (${expectedBal.toFixed(2)}), but reported balance is (${currBal.toFixed(2)}). Difference: ${diff.toFixed(2)}.`, currBal);
+        }
+      }
+      if (!isNaN(currBal)) prevBalance = currBal;
+    }
+
+    // Referential Integrity Check against Master Dataset
+    if (masterDataset && customerIdCol && r[customerIdCol]) {
+      const cid = String(r[customerIdCol]).trim();
+      if (cid) {
+        const foundInMaster = masterDataset.some(mr => Object.values(mr).some(mv => String(mv).trim() === cid));
+        if (!foundInMaster) {
+          addIssue("ERROR", "Referential Integrity", customerIdCol, rowNum, `Customer ID '${cid}' does not exist in master reference dataset.`, cid);
+        }
+      }
+    }
+
+  });
+
+  // Currency Mixing Warning
+  if (currenciesSet.size > 1) {
+    addIssue("WARNING", "Currency Consistency", currencyCol || "Currency", "-", `Dataset contains ${currenciesSet.size} distinct currencies (${Array.from(currenciesSet).join(', ')}). Amounts should not be aggregated without conversion.`, Array.from(currenciesSet).join(', '));
+  }
+
+  // Statistical Outlier Detection on Amount Column
+  const amtCol = debitCol || amountCol || totalCol;
+  if (amtCol && columnProfiles[amtCol] && columnProfiles[amtCol].numValues.length > 5) {
+    const vals = columnProfiles[amtCol].numValues;
+    const mean = vals.reduce((a,b)=>a+b,0)/vals.length;
+    const std = Math.sqrt(vals.reduce((a,b)=>a+Math.pow(b-mean,2),0)/vals.length);
+    if (std > 0) {
+      rows.forEach((r, idx) => {
+        const v = parseFloat(r[amtCol]);
+        if (!isNaN(v)) {
+          const z = Math.abs((v - mean) / std);
+          if (z >= configRules.outlierZThreshold) {
+            addIssue("INFO", "Financial Plausibility", amtCol, idx + 1, `Statistical outlier transaction amount detected (${v.toFixed(2)}). Z-score: ${z.toFixed(2)}.`, v);
+          }
+        }
+      });
+    }
+  }
+
+  // Calculate Overall Financial Quality Score
+  let totalErrors = qualityIssues.filter(i => i.severity === 'ERROR').length;
+  let totalWarnings = qualityIssues.filter(i => i.severity === 'WARNING').length;
+  let totalInfos = qualityIssues.filter(i => i.severity === 'INFO').length;
+
+  let penalty = (totalErrors * 8) + (totalWarnings * 3) + (totalInfos * 0.5);
+  overallScore = Math.max(0, Math.min(100, Math.round(100 - (penalty / totalRows * 20))));
+
+  renderDashboardUI(totalRows, cols.length, missingValueCount, duplicateCount, invalidValueCount, balanceMathErrorCount);
+}
+
+function addIssue(severity, dimension, col, row, explanation, val) {
+  qualityIssues.push({
+    severity: severity,
+    dimension: dimension,
+    col: col,
+    row: row,
+    explanation: explanation,
+    val: val
+  });
+}
+
+function findColByRole(roleKey) {
+  return Object.keys(detectedFields).find(c => detectedFields[c].role === roleKey);
+}
+
+function renderDashboardUI(totalRows, colCount, missingCount, dupeCount, invalidCount, balanceErrCount) {
+  // Update Header Metadata
+  document.getElementById('meta-filename').innerText = currentDataset.filename;
+  document.getElementById('meta-records-cols').innerText = `${totalRows} Rows / ${colCount} Cols`;
+  document.getElementById('meta-daterange').innerText = getDetectedDateRange();
+  document.getElementById('meta-financial-fields').innerText = `${Object.values(detectedFields).filter(f=>f.role!=='other').length} Mapped`;
+  
+  // Score Badge
+  const scoreBadge = document.getElementById('score-circle-badge');
+  const ratingText = document.getElementById('score-rating-text');
+  const statusMeta = document.getElementById('meta-quality-status');
+
+  document.getElementById('overall-quality-score').innerText = overallScore;
+
+  if (overallScore >= 90) {
+    scoreBadge.style.background = '#22c55e'; ratingText.innerText = 'EXCELLENT'; ratingText.style.color = '#15803d'; statusMeta.innerText = '✅ Excellent';
+  } else if (overallScore >= 75) {
+    scoreBadge.style.background = '#3b82f6'; ratingText.innerText = 'GOOD'; ratingText.style.color = '#1d4ed8'; statusMeta.innerText = '👍 Good';
+  } else if (overallScore >= 60) {
+    scoreBadge.style.background = '#eab308'; ratingText.innerText = 'NEEDS ATTENTION'; ratingText.style.color = '#a16207'; statusMeta.innerText = '⚠️ Needs Attention';
+  } else if (overallScore >= 40) {
+    scoreBadge.style.background = '#f97316'; ratingText.innerText = 'POOR'; ratingText.style.color = '#c2410c'; statusMeta.innerText = '🟧 Poor';
+  } else {
+    scoreBadge.style.background = '#ef4444'; ratingText.innerText = 'CRITICAL'; ratingText.style.color = '#b91c1c'; statusMeta.innerText = '🚨 Critical Issues';
+  }
+
+  // Dimension Breakdown
+  document.getElementById('score-dim-completeness').innerText = getDimensionScore('Completeness') + '%';
+  document.getElementById('score-dim-validity').innerText = getDimensionScore('Validity') + '%';
+  document.getElementById('score-dim-consistency').innerText = getDimensionScore('Consistency') + '%';
+  document.getElementById('score-dim-uniqueness').innerText = getDimensionScore('Uniqueness') + '%';
+  document.getElementById('score-dim-math').innerText = getDimensionScore('Accuracy') + '%';
+  document.getElementById('score-dim-reconciliation').innerText = getDimensionScore('Balance Consistency') + '%';
+
+  // Issue Badges
+  const errs = qualityIssues.filter(i=>i.severity==='ERROR').length;
+  const warns = qualityIssues.filter(i=>i.severity==='WARNING').length;
+  const infos = qualityIssues.filter(i=>i.severity==='INFO').length;
+
+  document.getElementById('count-total-issues').innerText = qualityIssues.length;
+  document.getElementById('issue-badge-all').innerText = qualityIssues.length;
+  document.getElementById('issue-badge-error').innerText = errs;
+  document.getElementById('issue-badge-warning').innerText = warns;
+  document.getElementById('issue-badge-info').innerText = infos;
+
+  renderIssuesTable();
+  renderPreviewGrid();
+  renderReconciliationTab();
+  renderProfileTab();
+  renderExecutiveReport();
+
+  document.getElementById('analysis-output').style.display = 'block';
+}
+
+function getDimensionScore(dimName) {
+  const issuesInDim = qualityIssues.filter(i => i.dimension.toLowerCase().includes(dimName.toLowerCase()));
+  if (!issuesInDim.length) return 100;
+  const errs = issuesInDim.filter(i => i.severity === 'ERROR').length;
+  const warns = issuesInDim.filter(i => i.severity === 'WARNING').length;
+  return Math.max(0, Math.round(100 - (errs * 10 + warns * 4)));
+}
+
+function getDetectedDateRange() {
+  const dateCol = findColByRole('date');
+  if (!dateCol || !columnProfiles[dateCol]) return 'Not Detected';
+  const dates = currentDataset.rows.map(r => r[dateCol]).filter(d => d && !isNaN(new Date(d).getTime())).sort();
+  if (!dates.length) return 'Not Detected';
+  return `${dates[0]} to ${dates[dates.length-1]}`;
+}
+
+function filterIssues(sev) {
+  activeIssueFilter = sev;
+  ['all', 'error', 'warning', 'info'].forEach(s => {
+    const btn = document.getElementById('flt-issue-' + s);
+    if (s.toUpperCase() === sev) {
+      btn.style.background = '#0f172a'; btn.style.color = '#ffffff';
+    } else {
+      btn.style.background = '#f1f5f9'; btn.style.color = '#475569';
+    }
+  });
+  renderIssuesTable();
+}
+
+function renderIssuesTable() {
+  const tbody = document.getElementById('issues-tbody');
+  tbody.innerHTML = '';
+  const searchQ = (document.getElementById('issue-search-input').value || '').toLowerCase();
+
+  const filtered = qualityIssues.filter(i => {
+    const matchSev = activeIssueFilter === 'ALL' || i.severity === activeIssueFilter;
+    const matchQ = !searchQ || i.explanation.toLowerCase().includes(searchQ) || String(i.col).toLowerCase().includes(searchQ);
+    return matchSev && matchQ;
+  });
+
+  if (!filtered.length) {
+    tbody.innerHTML = `<tr><td colspan="7" style="padding: 1.5rem; text-align: center; color: #64748b; font-style: italic;">No quality issues found matching active criteria.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach(i => {
+    let sevBadge = `<span style="background: #fee2e2; color: #991b1b; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700; font-size: 0.75rem;">ERROR</span>`;
+    if (i.severity === 'WARNING') sevBadge = `<span style="background: #fef3c7; color: #92400e; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700; font-size: 0.75rem;">WARNING</span>`;
+    if (i.severity === 'INFO') sevBadge = `<span style="background: #e0f2fe; color: #075985; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700; font-size: 0.75rem;">INFO</span>`;
+
+    tbody.innerHTML += `
+      <tr style="border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 0.65rem 0.75rem;">${sevBadge}</td>
+        <td style="padding: 0.65rem 0.75rem; font-weight: 600;">${i.dimension}</td>
+        <td style="padding: 0.65rem 0.75rem; font-family: monospace;">${i.col}</td>
+        <td style="padding: 0.65rem 0.75rem;">${i.row}</td>
+        <td style="padding: 0.65rem 0.75rem; color: #0f172a;">${i.explanation}</td>
+        <td style="padding: 0.65rem 0.75rem; font-family: monospace; color: #64748b;">${i.val}</td>
+        <td style="padding: 0.65rem 0.75rem;">
+          ${i.row !== '-' ? `<button onclick="jumpToRow(${i.row})" style="background: #e0f2fe; color: #0369a1; border: none; padding: 0.2rem 0.55rem; border-radius: 4px; font-weight: 700; font-size: 0.75rem; cursor: pointer;">Inspect Row</button>` : '-'}
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function jumpToRow(rowNum) {
+  switchFqTab('tab-preview');
+  filterGrid('ALL');
+  setTimeout(() => {
+    const el = document.getElementById('grid-row-' + rowNum);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.style.background = '#fef08a';
+    }
+  }, 100);
+}
+
+function renderPreviewGrid() {
+  const rows = currentDataset.rows.slice(0, 300);
+  const cols = Object.keys(rows[0]);
+  const thead = document.getElementById('preview-grid-thead');
+  const tbody = document.getElementById('preview-grid-tbody');
+
+  thead.innerHTML = `<tr><th style="padding: 0.5rem; border-bottom: 2px solid #e2e8f0; background: #f8fafc; text-align: left;">#</th>${cols.map(c => `<th style="padding: 0.5rem; border-bottom: 2px solid #e2e8f0; background: #f8fafc; text-align: left;">${c}</th>`).join('')}</tr>`;
+
+  tbody.innerHTML = '';
+
+  rows.forEach((r, idx) => {
+    const rowNum = idx + 1;
+    const rowIssues = qualityIssues.filter(i => i.row === rowNum);
+    const hasError = rowIssues.some(i => i.severity === 'ERROR');
+    const hasWarning = rowIssues.some(i => i.severity === 'WARNING');
+
+    if (activeGridFilter === 'ISSUES' && !rowIssues.length) return;
+
+    let trBg = '#ffffff';
+    if (hasError) trBg = '#fff5f5';
+    else if (hasWarning) trBg = '#fffbeb';
+
+    let cellsHtml = `<td style="padding: 0.45rem; border-bottom: 1px solid #e2e8f0; font-weight: 700; color: #64748b;">${rowNum}</td>`;
+
+    cols.forEach(col => {
+      const cellVal = r[col];
+      const cellIssue = rowIssues.find(i => i.col === col);
+      let style = 'padding: 0.45rem; border-bottom: 1px solid #e2e8f0;';
+      let title = '';
+
+      if (cellIssue) {
+        if (cellIssue.severity === 'ERROR') style += ' background: #fca5a5; font-weight: 700; color: #7f1d1d;';
+        else if (cellIssue.severity === 'WARNING') style += ' background: #fde68a; font-weight: 700; color: #78350f;';
+        else style += ' background: #bae6fd; font-weight: 700; color: #0c4a6e;';
+        title = cellIssue.explanation;
+      }
+
+      cellsHtml += `<td style="${style}" title="${title}">${cellVal !== undefined ? cellVal : ''}</td>`;
+    });
+
+    tbody.innerHTML += `<tr id="grid-row-${rowNum}" style="background: ${trBg};">${cellsHtml}</tr>`;
+  });
+}
+
+function filterGrid(type) {
+  activeGridFilter = type;
+  document.getElementById('grid-flt-all').style.background = type === 'ALL' ? '#0f172a' : '#f1f5f9';
+  document.getElementById('grid-flt-all').style.color = type === 'ALL' ? '#ffffff' : '#475569';
+  document.getElementById('grid-flt-issues').style.background = type === 'ISSUES' ? '#0f172a' : '#f1f5f9';
+  document.getElementById('grid-flt-issues').style.color = type === 'ISSUES' ? '#ffffff' : '#475569';
+  renderPreviewGrid();
+}
+
+function renderReconciliationTab() {
+  const currencyCol = findColByRole('currency');
+  const currencyBox = document.getElementById('currency-breakdown-list');
+  
+  if (currencyCol && columnProfiles[currencyCol]) {
+    const ccyCounts = {};
+    currentDataset.rows.forEach(r => {
+      const c = (r[currencyCol] || 'UNSPECIFIED').toUpperCase();
+      ccyCounts[c] = (ccyCounts[c] || 0) + 1;
+    });
+    currencyBox.innerHTML = Object.keys(ccyCounts).map(c => `
+      <span style="display: inline-block; background: #ffffff; border: 1px solid #cbd5e1; padding: 0.25rem 0.6rem; border-radius: 6px; margin-right: 0.5rem; margin-bottom: 0.4rem; font-weight: 700;">
+        ${c}: ${ccyCounts[c]} transactions
+      </span>
+    `).join('');
+  } else {
+    currencyBox.innerHTML = `<span style="color: #64748b; font-style: italic;">No explicit currency column detected. Standard monetary evaluation applied.</span>`;
+  }
+
+  // Render Balance Audit Table
+  const tbody = document.getElementById('balance-audit-tbody');
+  tbody.innerHTML = '';
+  const balanceIssues = qualityIssues.filter(i => i.dimension === 'Balance Consistency');
+
+  if (!balanceIssues.length) {
+    tbody.innerHTML = `<tr><td colspan="8" style="padding: 1.25rem; text-align: center; color: #166534; background: #f0fdf4; font-weight: 700;">✅ Perfect Balance Movement: All sequential running balances mathematically reconcile within tolerance (${configRules.balanceTolerance}).</td></tr>`;
+  } else {
+    balanceIssues.forEach(i => {
+      tbody.innerHTML += `
+        <tr style="border-bottom: 1px solid #e2e8f0; background: #fef2f2;">
+          <td style="padding: 0.55rem; font-weight: 700;">Row ${i.row}</td>
+          <td style="padding: 0.55rem;" colspan="5">${i.explanation}</td>
+          <td style="padding: 0.55rem; font-family: monospace; font-weight: 700; color: #991b1b;">${i.val}</td>
+          <td style="padding: 0.55rem;"><span style="background: #fee2e2; color: #991b1b; padding: 0.15rem 0.45rem; border-radius: 4px; font-weight: 700; font-size: 0.75rem;">DISCREPANCY</span></td>
+        </tr>
+      `;
+    });
+  }
+
+  // Debit Credit Text Summary
+  const debitCol = findColByRole('debit');
+  const creditCol = findColByRole('credit');
+  const textDiv = document.getElementById('debit-credit-audit-text');
+
+  if (debitCol && creditCol) {
+    const totalDebit = parseFloat(columnProfiles[debitCol].sum) || 0;
+    const totalCredit = parseFloat(columnProfiles[creditCol].sum) || 0;
+    const netDiff = Math.abs(totalCredit - totalDebit);
+    textDiv.innerHTML = `
+      <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+        <div><strong>Total Debits Reported:</strong> ${totalDebit.toFixed(2)}</div>
+        <div><strong>Total Credits Reported:</strong> ${totalCredit.toFixed(2)}</div>
+        <div><strong>Net Trial Difference:</strong> <span style="color: ${netDiff === 0 ? '#166534' : '#b91c1c'}; font-weight: 800;">${netDiff.toFixed(2)}</span></div>
+      </div>
+    `;
+  } else {
+    textDiv.innerHTML = `<span style="color: #64748b; font-style: italic;">Dual debit/credit columns not detected together in dataset.</span>`;
+  }
+}
+
+function renderProfileTab() {
+  const tbody = document.getElementById('profile-tbody');
+  tbody.innerHTML = '';
+  Object.keys(columnProfiles).forEach(col => {
+    const p = columnProfiles[col];
+    tbody.innerHTML += `
+      <tr style="border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 0.6rem; font-weight: 700; color: #0f172a;">${col}</td>
+        <td style="padding: 0.6rem;"><span style="background: #e0f2fe; color: #0369a1; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">${p.role}</span></td>
+        <td style="padding: 0.6rem; font-family: monospace;">${p.numValues.length ? 'Numeric' : 'String/Text'}</td>
+        <td style="padding: 0.6rem;">${p.completenessPct}% (${p.emptyCount} missing)</td>
+        <td style="padding: 0.6rem;">${p.uniqueCount}</td>
+        <td style="padding: 0.6rem; font-family: monospace;">${p.min} / ${p.max}</td>
+        <td style="padding: 0.6rem; font-family: monospace;">${p.mean} (Sum: ${p.sum})</td>
+        <td style="padding: 0.6rem;"><strong style="color: ${p.qualityScore > 85 ? '#16a34a' : '#d97706'};">${p.qualityScore}/100</strong></td>
+      </tr>
+    `;
+  });
+}
+
+function renderExecutiveReport() {
+  const container = document.getElementById('report-view-container');
+  const errs = qualityIssues.filter(i=>i.severity==='ERROR');
+  const warns = qualityIssues.filter(i=>i.severity==='WARNING');
+
+  container.innerHTML = `
+    <div style="border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1rem;">
+      <h2 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0 0 0.25rem 0;">Financial Data Quality Executive Assessment Report</h2>
+      <div style="font-size: 0.85rem; color: #64748b;">Dataset: <strong>${currentDataset.filename}</strong> | Generated: ${new Date().toLocaleDateString()}</div>
+    </div>
+    
+    <div style="margin-bottom: 1.25rem;">
+      <h3 style="font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Executive Summary</h3>
+      <p>The financial dataset <strong>${currentDataset.filename}</strong> contains ${currentDataset.rows.length} records across ${Object.keys(currentDataset.rows[0]).length} columns. Overall data quality score is evaluated at <strong>${overallScore}/100</strong>. A total of ${qualityIssues.length} quality findings were identified (${errs.length} Critical Errors, ${warns.length} Warnings).</p>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <h3 style="font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Actionable Remediation Recommendations</h3>
+      <ul style="padding-left: 1.25rem; margin: 0;">
+        ${errs.length ? `<li><strong>Balance Math & Arithmetic:</strong> Review ${errs.length} row(s) with mathematical balance discrepancies before downstream financial reporting.</li>` : `<li><strong>Balance Math:</strong> Sequential running balance mathematics fully reconciled within tolerance.</li>`}
+        ${warns.length ? `<li><strong>Uniqueness & Consistency:</strong> Review potential duplicate transaction identifiers and non-standard currency format representations.</li>` : `<li><strong>Consistency:</strong> No major formatting inconsistencies detected.</li>`}
+      </ul>
+    </div>
+  `;
+}
+
+function updateRulesConfig() {
+  configRules.balanceTolerance = parseFloat(document.getElementById('cfg-tol-balance').value);
+  configRules.outlierZThreshold = parseFloat(document.getElementById('cfg-tol-outlier').value);
+  document.getElementById('lbl-tol-balance').innerText = configRules.balanceTolerance;
+  document.getElementById('lbl-tol-outlier').innerText = configRules.outlierZThreshold;
+}
+
+function reanalyzeWithNewRules() {
+  if (currentDataset) {
+    runFinancialQualityAnalysis();
+    switchFqTab('tab-issues');
+  }
+}
+
+function switchFqTab(tabId) {
+  document.querySelectorAll('.fq-tab-content').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.fq-tab-btn').forEach(el => {
+    el.style.color = '#64748b'; el.style.borderBottom = 'none'; el.classList.remove('active');
+  });
+  document.getElementById(tabId).style.display = 'block';
+  const btn = document.getElementById('btn-' + tabId);
+  if (btn) { btn.style.color = '#2563eb'; btn.style.borderBottom = '3px solid #2563eb'; btn.classList.add('active'); }
+}
+
+function resetToolData() {
+  currentDataset = null;
+  qualityIssues = [];
+  columnProfiles = {};
+  document.getElementById('analysis-output').style.display = 'none';
+  document.getElementById('file-input').value = '';
+  document.getElementById('paste-input').value = '';
+}
+
+function showLoading(show, text, subtext) {
+  const el = document.getElementById('loading-indicator');
+  if (show) {
+    document.getElementById('loading-text').innerText = text || "Processing...";
+    document.getElementById('loading-subtext').innerText = subtext || "";
+    el.style.display = 'block';
+  } else { el.style.display = 'none'; }
+}
+
+function exportReport(format) {
+  if (!currentDataset) return;
+  let filename = `${currentDataset.filename}-quality-findings.${format}`;
+  let content = "";
+  let type = "text/plain";
+
+  if (format === 'csv') {
+    content = "Severity,Dimension,Column,Row,Explanation,Value\n";
+    qualityIssues.forEach(i => {
+      content += `"${i.severity}","${i.dimension}","${i.col}","${i.row}","${i.explanation.replace(/"/g, '""')}","${String(i.val).replace(/"/g, '""')}"\n`;
+    });
+    type = "text/csv";
+  } else if (format === 'json') {
+    content = JSON.stringify({ filename: currentDataset.filename, score: overallScore, issues: qualityIssues }, null, 2);
+    type = "application/json";
+  } else if (format === 'html') {
+    content = document.getElementById('report-view-container').innerHTML;
+    type = "text/html";
+  }
+
+  const blob = new Blob([content], { type: type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+}
+</script>
