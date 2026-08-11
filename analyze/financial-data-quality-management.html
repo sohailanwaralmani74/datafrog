@@ -630,6 +630,7 @@ let detectedFields = {};
 let qualityIssues = [];
 let columnProfiles = {};
 let overallScore = 100;
+let dimensionScores = {};
 let activeIssueFilter = 'ALL';
 let activeGridFilter = 'ALL';
 
@@ -771,6 +772,19 @@ function analyzeParsedRows(rows, filename, format) {
   showLoading(false);
 }
 
+function parseAnyDate(dStr) {
+  if (!dStr) return null;
+  const str = String(dStr).trim();
+  let d = new Date(str);
+  if (!isNaN(d.getTime())) return d;
+  const num = parseFloat(str);
+  if (!isNaN(num) && num > 10000 && num < 100000) {
+    const excelEpoch = new Date(1899, 11, 30);
+    return new Date(excelEpoch.getTime() + num * 86400000);
+  }
+  return null;
+}
+
 function detectFinancialFieldRoles(rows) {
   detectedFields = {};
   if (!rows.length) return;
@@ -902,8 +916,8 @@ function runFinancialQualityAnalysis() {
     // Check Date Validity
     if (dateCol && r[dateCol]) {
       const dStr = String(r[dateCol]).trim();
-      const d = new Date(dStr);
-      if (isNaN(d.getTime())) {
+      const d = parseAnyDate(dStr);
+      if (!d) {
         invalidValueCount++;
         addIssue("ERROR", "Validity", dateCol, rowNum, `Invalid transaction date representation '${dStr}'.`, dStr);
       } else if (d > new Date('2030-01-01')) {
@@ -997,13 +1011,40 @@ function runFinancialQualityAnalysis() {
     }
   }
 
-  // Calculate Overall Financial Quality Score
-  let totalErrors = qualityIssues.filter(i => i.severity === 'ERROR').length;
-  let totalWarnings = qualityIssues.filter(i => i.severity === 'WARNING').length;
-  let totalInfos = qualityIssues.filter(i => i.severity === 'INFO').length;
+  // Calculate Normalized Financial Quality Dimension Scores (0-100)
+  const totalCells = totalRows * cols.length;
+  const completenessScore = Math.max(0, Math.round(100 - (missingValueCount / (totalCells || 1) * 100)));
+  const validityScore = Math.max(0, Math.round(100 - (invalidValueCount / (totalRows || 1) * 100)));
+  const uniquenessScore = Math.max(0, Math.round(100 - (duplicateCount / (totalRows || 1) * 100)));
+  
+  const mathErrors = qualityIssues.filter(i => i.dimension === 'Accuracy' && i.severity === 'ERROR').length;
+  const mathScore = Math.max(0, Math.round(100 - (mathErrors / (totalRows || 1) * 100)));
+  
+  const balanceScore = Math.max(0, Math.round(100 - (balanceMathErrorCount / (totalRows || 1) * 100)));
+  
+  const consistencyErrors = qualityIssues.filter(i => (i.dimension === 'Consistency' || i.dimension === 'Conformity') && i.severity !== 'INFO').length;
+  const consistencyScore = Math.max(0, Math.round(100 - (consistencyErrors / (totalRows || 1) * 50)));
 
-  let penalty = (totalErrors * 8) + (totalWarnings * 3) + (totalInfos * 0.5);
-  overallScore = Math.max(0, Math.min(100, Math.round(100 - (penalty / totalRows * 20))));
+  // Store Dimension Scores Globally for Cards
+  dimensionScores = {
+    completeness: completenessScore,
+    validity: validityScore,
+    uniqueness: uniquenessScore,
+    consistency: consistencyScore,
+    math: mathScore,
+    reconciliation: balanceScore
+  };
+
+  // Overall Financial Data Quality Score (Weighted Average)
+  overallScore = Math.round(
+    (completenessScore * 0.20) +
+    (validityScore * 0.20) +
+    (uniquenessScore * 0.15) +
+    (consistencyScore * 0.15) +
+    (mathScore * 0.15) +
+    (balanceScore * 0.15)
+  );
+  overallScore = Math.max(0, Math.min(100, overallScore));
 
   renderDashboardUI(totalRows, cols.length, missingValueCount, duplicateCount, invalidValueCount, balanceMathErrorCount);
 }
@@ -1050,12 +1091,12 @@ function renderDashboardUI(totalRows, colCount, missingCount, dupeCount, invalid
   }
 
   // Dimension Breakdown
-  document.getElementById('score-dim-completeness').innerText = getDimensionScore('Completeness') + '%';
-  document.getElementById('score-dim-validity').innerText = getDimensionScore('Validity') + '%';
-  document.getElementById('score-dim-consistency').innerText = getDimensionScore('Consistency') + '%';
-  document.getElementById('score-dim-uniqueness').innerText = getDimensionScore('Uniqueness') + '%';
-  document.getElementById('score-dim-math').innerText = getDimensionScore('Accuracy') + '%';
-  document.getElementById('score-dim-reconciliation').innerText = getDimensionScore('Balance Consistency') + '%';
+  document.getElementById('score-dim-completeness').innerText = (dimensionScores.completeness || 100) + '%';
+  document.getElementById('score-dim-validity').innerText = (dimensionScores.validity || 100) + '%';
+  document.getElementById('score-dim-consistency').innerText = (dimensionScores.consistency || 100) + '%';
+  document.getElementById('score-dim-uniqueness').innerText = (dimensionScores.uniqueness || 100) + '%';
+  document.getElementById('score-dim-math').innerText = (dimensionScores.math || 100) + '%';
+  document.getElementById('score-dim-reconciliation').innerText = (dimensionScores.reconciliation || 100) + '%';
 
   // Issue Badges
   const errs = qualityIssues.filter(i=>i.severity==='ERROR').length;
