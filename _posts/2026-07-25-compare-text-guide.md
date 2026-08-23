@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "Compare Text Online: Complete Text to Text Comparison & Diff Guide"
+title: "Compare Text Online: Complete Text to Text Comparison"
 description: "Learn how to compare text online using client-side diff algorithms. Perform line-by-line text to text comparison, inspect diffs, & analyze text changes."
 excerpt: "Master text to text comparison online using client-side diff algorithms. Compare two texts side-by-side or inline, inspect line differences, and maintain privacy."
 keywords: "compare text, text to text comparison, compare text online, compare two texts, diff online, text diff, check diff online, diff between text, diff checker online"
@@ -8,7 +8,7 @@ author: "DataFrog Engineering Team"
 date: 2026-07-25
 categories: ["Compare"]
 tags: ["Text Compare", "Diff Checker", "Developer Tools", "Text Analysis", "Privacy"]
-image: "/assets/img/compare-text-hero.jpg"
+image: "/assets/img/compare-text-hero.png"
 canonical: "https://datafrog.tools/blog/compare-text-guide"
 sitemap: true
 permalink: /blog/compare-text-guide
@@ -135,8 +135,7 @@ permalink: /blog/compare-text-guide
     </div>
 
     <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; color: #0f172a; line-height: 1.25; margin-bottom: 1rem;">
-      Compare Text Online: The Complete Guide to Text to Text Comparison & Diffing
-    </h1>
+      Compare Text Online: The Guide to Text to Text Comparison & Diff</h1>
 
     <p style="font-size: 1.15rem; color: #475569; line-height: 1.6; margin-bottom: 1.5rem;">
       Whether you need to review source code, audit legal contracts, verify configuration files, or edit technical articles, performing an accurate <strong>text to text comparison</strong> is vital. In this detailed guide, we explain how to <strong>compare text online</strong>, explore underlying <strong>text diff</strong> algorithms, and show you how to leverage our privacy-first <strong>Text Compare tool</strong>.
