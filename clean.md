@@ -2,7 +2,7 @@
 layout: main
 title: "Clean Tools - Data Deduplication & Standardization | DataFrog"
 description: "Free browser-based data cleaning tools. Remove Excel duplicates, clean CSV records, normalize text, and remove repeats with 100% total local data privacy."
-permalink: /clean
+permalink: /clean/
 is_category: true
 category_name: "Clean"
 ---
