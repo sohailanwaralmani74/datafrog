@@ -307,7 +307,7 @@
   url: "/compare/text-compare"
   category: "Compare"
   description: "Compare two text blocks or code files side-by-side or inline. Highlight additions, deletions, modifications, line-by-line differences, and word changes."
-  keywords: ["Text Compare", "Compare Text", "Text Diff", "Compare Text Online", "Text Difference Checker", "Compare Two Text Files", "Online Text Compare"]
+  keywords: ["compare text", "text to text comparison", "compare text online", "compare two texts", "diff online", "text diff", "check diff online", "diff between text", "diff checker online"]
   icon: "⚖️"
   featured: true
   date: "2026-07-17"

@@ -138,7 +138,7 @@ permalink: /blog/how-to-handle-missing-data
 *Figure 1: Data cleaning pipeline identifying null values and applying domain-appropriate imputation techniques.*
 
 <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 1.25rem 1.5rem; border-radius: 0 10px 10px 0; margin: 1.5rem 0;">
-  <h3 style="margin-top: 0; margin-bottom: 0.5rem; color: #1e40af; font-size: 1.1rem; font-weight: 700;">⚡ Quick Summary: Recommended Missing Data Strategy</h3>
+  <span style="margin-top: 0; margin-bottom: 0.5rem; color: #1e40af; font-size: 1.1rem; font-weight: 700;">⚡ Quick Summary: Recommended Missing Data Strategy</span>
   <p style="margin: 0; color: #1e3a8a; font-size: 0.95rem; line-height: 1.6;">
     If missing data accounts for less than 5% of rows and is un-correlated with key features, use row deletion (<code>df.dropna()</code>). For missingness between 5% and 30% in continuous features, use median imputation for skewed data or KNN imputation for correlated variables. If a column has over 60% missing entries, consider dropping the column or creating an explicit <code>Missing</code> indicator category. Always analyze null distributions first using tools like <a href="/analyze/data-profiler">DataFrog Data Profiler</a> or <a href="/analyze/csv-analyzer">DataFrog CSV Analyzer</a> before training models.
   </p>

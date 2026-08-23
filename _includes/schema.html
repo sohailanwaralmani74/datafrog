@@ -133,23 +133,6 @@
   }
 }
 </script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": {{ page.title | jsonify }},
-  "url": "{{ page.url | absolute_url }}",
-  "description": {{ page.description | jsonify }},
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Any",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
-}
-</script>
 {% endif %}
 
 {% if page.layout == "post" or page.is_post %}

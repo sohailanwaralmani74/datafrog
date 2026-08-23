@@ -138,7 +138,7 @@ To import JSON into Excel, open Microsoft Excel 365 or Excel 2016+, navigate to 
 *Figure 1: Transforming structured JSON documents into clean Microsoft Excel tables using native queries and browser converters.*
 
 <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 1.25rem 1.5rem; border-radius: 0 10px 10px 0; margin: 1.5rem 0;">
-  <h3 style="margin-top: 0; margin-bottom: 0.5rem; color: #1e40af; font-size: 1.1rem; font-weight: 700;">⚡ Quick Answer: Fastest Method</h3>
+  <span style="margin-top: 0; margin-bottom: 0.5rem; color: #1e40af; font-size: 1.1rem; font-weight: 700;">⚡ Quick Answer: Fastest Method</span>
   <p style="margin: 0; color: #1e3a8a; font-size: 0.95rem; line-height: 1.6;">
     If you use Microsoft 365, Excel 2021, 2019, or 2016, use native Power Query: Click <strong>Data > Get Data > From File > From JSON</strong>. Select your <code>.json</code> file, click <strong>To Table</strong> in Power Query Editor, click the expand icon (<code>⤢</code>) in the column header, and click <strong>Close &amp; Load</strong>. For older Excel versions or instant web processing without desktop software, convert your JSON data using a privacy-first browser utility like <a href="/inspect/json-viewer">DataFrog JSON Viewer</a> or <a href="/analyze/json-analyzer">DataFrog JSON Analyzer</a> to generate downloadable Excel workbooks.
   </p>

@@ -138,7 +138,7 @@ A **JSON online view** tool is a browser-based utility designed to transform com
 *Figure 1: Viewing minified JSON data payloads in structured interactive tree views with color-coded data types.*
 
 <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 1.25rem 1.5rem; border-radius: 0 10px 10px 0; margin: 1.5rem 0;">
-  <h3 style="margin-top: 0; margin-bottom: 0.5rem; color: #1e40af; font-size: 1.1rem; font-weight: 700;">⚡ Quick Summary: Fastest Way to View JSON Online</h3>
+  <span style="margin-top: 0; margin-bottom: 0.5rem; color: #1e40af; font-size: 1.1rem; font-weight: 700;">⚡ Quick Summary: Fastest Way to View JSON Online</span>
   <p style="margin: 0; color: #1e3a8a; font-size: 0.95rem; line-height: 1.6;">
     To open and view a JSON file online instantly, use a client-side browser tool like <a href="/inspect/json-viewer">DataFrog JSON Viewer</a>. Paste your raw JSON string or drag-and-drop your <code>.json</code> file into the editor. The browser engine parses the payload in local memory, generating a color-coded, expandable tree view with real-time syntax checking and node filtering — 100% private with zero server uploads.
   </p>
