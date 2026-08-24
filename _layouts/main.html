@@ -28,9 +28,10 @@ layout: default
 
     <!-- Right Side Actions: Search Button -->
     <div class="desktop-actions">
-      <a href="/#site-search-input" style="padding: 0.45rem 1.15rem; background: var(--bg-soft, #f1f5f9); color: var(--text-primary, #0f172a); border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 0.875rem; border: 1px solid #cbd5e1;">
-        🔍 Search
+      <a href="/#site-search-input" style="padding: 0.45rem 1.15rem; background: var(--bg-soft, #f1f5f9); color: var(--text-primary, #0f172a); border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 0.875rem; border: 1px solid #cbd5e1; margin-top:0.40rem;">
+        🔍
       </a>
+      <a google-add-preferred-source-btn></a>
     </div>
 
     <!-- Mobile Hamburger -->
@@ -57,6 +58,7 @@ layout: default
       <li style="margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0;">
         <a href="/#site-search-input" style="font-weight: 700; font-size: 1.05rem; text-decoration: none; color: #2563eb; display: block; padding: 0.4rem 0;">🔎 Search Tools</a>
       </li>
+      <li><a google-add-preferred-source-btn></a></li>
     </ul>
   </nav>
   <div class="overlay" id="overlay"></div>
@@ -203,3 +205,4 @@ layout: default
     if (overlay) overlay.addEventListener('click', closeDrawer);
   })();
 </script>
+<script async src="https://news.google.com/swg/js/v1/publisher.js"></script>

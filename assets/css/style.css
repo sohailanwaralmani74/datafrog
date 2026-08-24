@@ -80,8 +80,10 @@
 }
 .desktop-actions {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 1rem;
+  width:20rem;
+  margin-top:0.40rem;
 }
 .hamburger {
   display: none;
