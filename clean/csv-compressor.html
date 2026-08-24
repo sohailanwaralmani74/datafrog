@@ -1,0 +1,572 @@
+---
+layout: main
+title: "Compress CSV File - Reduce CSV File Size Online Free"
+short_name: "CSV Compressor"
+description: "Compress CSV file online – reduce CSV file size by removing empty rows & columns. Download as CSV, GZIP, or BZIP2. 100% private, no uploads."
+keywords: "compress a csv file, compress csv file, compress csv, compress csv file size, csv compress, csv file compression, csv file size reducer, bz2 to csv, compress csv file online, compress csv file size online, compress csv file to smaller size, compress csv file to smaller size online, compress large csv file online, compress pdf to csv, csv file compressor online, csv file size reducer online"
+category: "Clean"
+permalink: /clean/csv-compressor
+---
+
+<!-- External libraries for compression -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js" integrity="sha512-Uvq9qqP1oyW3QpFjF6FiLpJN8QhT0b2P9Rj64RAdJwBZuFZ+9H3YZlD6zLoxB1Hz9x4nEJW3aD5iRXkmP5nDsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bzip2-js/0.5.0/bzip2.min.js" integrity="sha512-4FzY8g+tH5w3X8Tfh9mFhk9F9kvGk9NpZysJY4YSSFZMA3CghLmKnjV9LV5dRwA4iPblPs8w2dLjb5vh65tFcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>📦</span> Client‑Side CSV Compression Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      Compress CSV File Size Online
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Reduce the size of your CSV files by stripping out empty rows and empty columns. Download the cleaned result as <strong>.csv</strong>, <strong>.csv.gz</strong> (GZIP), or <strong>.csv.bz2</strong> (BZIP2). All processing is 100% local – nothing is uploaded.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Your CSV file never leaves your device. No server uploads. No tracking.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="csv-dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your CSV File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Works with <strong>.csv</strong> files (comma, semicolon, or tab separated)
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse CSV File
+        <input type="file" id="csv-file-input" accept=".csv,.tsv,.txt" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample Button & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button onclick="loadSampleCSV()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (with empty rows/cols)
+        </button>
+      </div>
+      <button onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="file-meta-bar" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="meta-filename" style="font-size: 1rem; color: #0f172a;">data.csv</strong>
+          <div id="meta-filesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="font-size: 0.85rem; color: #475569;">
+        Rows: <span id="meta-row-count">0</span> &nbsp;|&nbsp; Columns: <span id="meta-col-count">0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compression Options & Progress -->
+  <div id="compression-panel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      ⚙️ Compression Settings
+    </h3>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 1.25rem;">
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="opt-remove-empty-rows" checked>
+        Remove completely empty rows
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="opt-remove-empty-cols" checked>
+        Remove completely empty columns
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="opt-trim-whitespace" checked>
+        Trim leading/trailing spaces in cells
+      </label>
+    </div>
+
+    <div style="margin-top: 0.5rem; margin-bottom: 1.5rem;">
+      <button id="btn-run-compression" onclick="runCompression()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🗜️ Compress Now
+      </button>
+      <span style="margin-left: 1rem; font-size: 0.9rem; color: #64748b;">Removes empty rows/cols and prepares download options.</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progress-container" style="display: none; margin-top: 1rem;">
+      <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #475569; margin-bottom: 0.3rem;">
+        <span id="progress-label">Processing…</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div style="width: 100%; background: #e2e8f0; border-radius: 9999px; height: 10px; overflow: hidden;">
+        <div id="progress-bar" style="width: 0%; background: #059669; height: 100%; transition: width 0.3s;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results: Download Buttons + Preview -->
+  <div id="results-area" style="display: none; margin-top: 1.5rem;">
+    <!-- Download Buttons (above preview) -->
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">Compression Complete!</h3>
+          <p id="compression-stats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Original: 0 KB → Compressed: 0 KB (saved 0%)</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button onclick="downloadCleanedCSV('csv')" style="padding: 0.7rem 1.5rem; background: #059669; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          ⬇️ .csv
+        </button>
+        <button onclick="downloadCompressed('gz')" style="padding: 0.7rem 1.5rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          ⬇️ .csv.gz
+        </button>
+        <button onclick="downloadCompressed('bz2')" style="padding: 0.7rem 1.5rem; background: #7c3aed; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          ⬇️ .csv.bz2
+        </button>
+      </div>
+    </div>
+
+    <!-- Preview Table -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden;">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">Preview of Cleaned Data (first 100 rows)</span>
+        <span id="preview-row-count" style="font-size: 0.85rem; color: #64748b;">0 rows</span>
+      </div>
+      <div style="overflow-x: auto; max-height: 400px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+          <thead style="position: sticky; top: 0; background: #f1f5f9; z-index: 10;">
+            <tr id="preview-thead"></tr>
+          </thead>
+          <tbody id="preview-tbody">
+            <tr><td colspan="1" style="text-align: center; padding: 2rem; color: #64748b;">No data to preview.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Article -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
+      How to Compress a CSV File Online
+    </h2>
+    <p>
+      A <strong>CSV compressor</strong> helps you <strong>reduce CSV file size</strong> by removing unnecessary empty rows and empty columns. It's perfect for cleaning up exported data, logs, or large datasets before sharing or uploading.
+    </p>
+    <p>
+      This tool works 100% in your browser – your file is never uploaded to any server. It reads the CSV, strips out all blank lines and useless columns, and gives you the cleaned version. You can then download the result as a plain <strong>.csv</strong>, or as a compressed <strong>.csv.gz</strong> (GZIP) or <strong>.csv.bz2</strong> (BZIP2) file for even smaller sizes.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Why Use a CSV Compressor?</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>Save storage space</strong> – compress large CSV files before archiving.</li>
+      <li><strong>Faster uploads</strong> – smaller files upload quicker to cloud services.</li>
+      <li><strong>Privacy first</strong> – all processing is client‑side; nothing leaves your computer.</li>
+      <li><strong>Multiple formats</strong> – download as plain CSV, GZIP, or BZIP2.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does it change the actual data?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          No. The tool only removes rows where <strong>every cell is empty</strong> and columns where <strong>every cell is empty</strong>. Your real data stays intact.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I compress a very large CSV file?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes – the tool uses streaming‑like processing and can handle files up to several hundred MB, depending on your browser's memory. For extremely large files, consider splitting them first.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What’s the difference between GZIP and BZIP2?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          GZIP is faster and more widely supported; BZIP2 often compresses slightly better but is slower. Both are standard compression formats for CSV files.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  // --------------------------------------------------------------
+  // State
+  // --------------------------------------------------------------
+  let originalCSVText = "";
+  let cleanedCSVText = "";
+  let currentFileName = "";
+  let originalSize = 0;
+  let cleanedSize = 0;
+  let parsedRows = [];
+  let cleanedRows = [];
+  let headers = [];
+
+  // DOM refs
+  const dropzone = document.getElementById('csv-dropzone');
+  const fileInput = document.getElementById('csv-file-input');
+  const metaBar = document.getElementById('file-meta-bar');
+  const metaFilename = document.getElementById('meta-filename');
+  const metaFilesize = document.getElementById('meta-filesize');
+  const metaRowCount = document.getElementById('meta-row-count');
+  const metaColCount = document.getElementById('meta-col-count');
+  const panel = document.getElementById('compression-panel');
+  const progressContainer = document.getElementById('progress-container');
+  const progressBar = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
+  const progressPercent = document.getElementById('progress-percent');
+  const resultsArea = document.getElementById('results-area');
+  const compressionStats = document.getElementById('compression-stats');
+  const previewThead = document.getElementById('preview-thead');
+  const previewTbody = document.getElementById('preview-tbody');
+  const previewRowCount = document.getElementById('preview-row-count');
+  const btnRun = document.getElementById('btn-run-compression');
+
+  // --------------------------------------------------------------
+  // Drag & Drop
+  // --------------------------------------------------------------
+  function setupDropzone() {
+    ['dragenter', 'dragover'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#059669';
+        dropzone.style.background = '#ecfdf5';
+      });
+    });
+    ['dragleave', 'drop'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files.length > 0) processFile(files[0]);
+    });
+  }
+  setupDropzone();
+
+  // --------------------------------------------------------------
+  // File selection
+  // --------------------------------------------------------------
+  function handleFileSelect(e) {
+    const files = e.target.files;
+    if (files.length > 0) processFile(files[0]);
+  }
+
+  function processFile(file) {
+    currentFileName = file.name;
+    originalSize = file.size;
+
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        originalCSVText = evt.target.result;
+        // Parse CSV – first detect delimiter
+        const delimiter = detectDelimiter(originalCSVText);
+        const rows = parseCSV(originalCSVText, delimiter);
+        parsedRows = rows;
+        if (rows.length === 0) {
+          alert('No data found in CSV.');
+          return;
+        }
+        // Set meta info
+        const colCount = rows[0] ? rows[0].length : 0;
+        metaRowCount.innerText = rows.length;
+        metaColCount.innerText = colCount;
+        metaFilename.innerText = file.name;
+        metaFilesize.innerText = `Size: ${formatBytes(originalSize)}`;
+        metaBar.style.display = 'block';
+        panel.style.display = 'block';
+        resultsArea.style.display = 'none';
+        progressContainer.style.display = 'none';
+        btnRun.disabled = false;
+      } catch (err) {
+        alert('Error reading CSV: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // --------------------------------------------------------------
+  // CSV parsing helper
+  // --------------------------------------------------------------
+  function detectDelimiter(text) {
+    const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+    if (lines.length === 0) return ',';
+    const line = lines[0];
+    const delimiters = [',', ';', '\t', '|'];
+    let best = ',';
+    let maxCount = 0;
+    for (const d of delimiters) {
+      const count = (line.match(new RegExp(d, 'g')) || []).length;
+      if (count > maxCount) {
+        maxCount = count;
+        best = d;
+      }
+    }
+    return best;
+  }
+
+  function parseCSV(text, delimiter) {
+    // Simple parser: split by newline, then by delimiter (handles quoted fields)
+    const lines = text.split(/\r?\n/);
+    const result = [];
+    for (const line of lines) {
+      if (line.trim() === '') continue;
+      const fields = [];
+      let current = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"') {
+          if (inQuotes && line[i+1] === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === delimiter && !inQuotes) {
+          fields.push(current);
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      fields.push(current);
+      result.push(fields);
+    }
+    return result;
+  }
+
+  // --------------------------------------------------------------
+  // Sample CSV
+  // --------------------------------------------------------------
+  function loadSampleCSV() {
+    const sample = `ID,Name,Email,City,,,
+1,Alice,alice@example.com,New York,,
+2,Bob,bob@example.com,Chicago,,
+,,,,
+3,Carol,carol@example.com,Dallas,,
+,,,,
+4,Dave,dave@example.com,Seattle,,
+,,,,
+5,Eve,eve@example.com,Miami,,
+`;
+    // Create a Blob and process
+    const blob = new Blob([sample], { type: 'text/csv' });
+    const file = new File([blob], 'sample_data.csv', { type: 'text/csv' });
+    processFile(file);
+  }
+
+  // --------------------------------------------------------------
+  // Compression logic
+  // --------------------------------------------------------------
+  function runCompression() {
+    if (!parsedRows || parsedRows.length === 0) return;
+    btnRun.disabled = true;
+    progressContainer.style.display = 'block';
+    updateProgress(0, 'Cleaning empty rows…');
+
+    setTimeout(() => {
+      try {
+        const removeEmptyRows = document.getElementById('opt-remove-empty-rows').checked;
+        const removeEmptyCols = document.getElementById('opt-remove-empty-cols').checked;
+        const trimWhitespace = document.getElementById('opt-trim-whitespace').checked;
+
+        let data = parsedRows.map(row => row.map(cell => (cell !== undefined) ? String(cell) : ''));
+
+        // Trim whitespace if needed
+        if (trimWhitespace) {
+          data = data.map(row => row.map(cell => cell.trim()));
+        }
+
+        updateProgress(30, 'Removing empty rows…');
+        // Remove empty rows
+        let filteredRows = data;
+        if (removeEmptyRows) {
+          filteredRows = filteredRows.filter(row => row.some(cell => cell !== '' && cell !== null && cell !== undefined));
+        }
+
+        updateProgress(60, 'Removing empty columns…');
+        // Remove empty columns
+        let processedData = filteredRows;
+        if (removeEmptyCols && filteredRows.length > 0) {
+          const colCount = Math.max(...filteredRows.map(r => r.length), 0);
+          const nonEmptyCols = [];
+          for (let c = 0; c < colCount; c++) {
+            let hasData = false;
+            for (let r = 0; r < filteredRows.length; r++) {
+              const val = filteredRows[r][c] || '';
+              if (val !== '') { hasData = true; break; }
+            }
+            if (hasData) nonEmptyCols.push(c);
+          }
+          processedData = filteredRows.map(row => nonEmptyCols.map(c => row[c] !== undefined ? row[c] : ''));
+        }
+
+        cleanedRows = processedData;
+        // Build cleaned CSV text
+        const delimiter = detectDelimiter(originalCSVText) || ',';
+        cleanedCSVText = cleanedRows.map(row => row.join(delimiter)).join('\n');
+
+        cleanedSize = new Blob([cleanedCSVText]).size;
+
+        updateProgress(90, 'Preparing preview…');
+
+        // Update stats
+        const saved = originalSize - cleanedSize;
+        const pct = originalSize > 0 ? (saved / originalSize * 100).toFixed(1) : 0;
+        compressionStats.innerText = `Original: ${formatBytes(originalSize)} → Cleaned: ${formatBytes(cleanedSize)} (saved ${pct}%)`;
+
+        // Show preview
+        showPreview(cleanedRows);
+        resultsArea.style.display = 'block';
+        updateProgress(100, 'Done!');
+        btnRun.disabled = false;
+        setTimeout(() => { progressContainer.style.display = 'none'; }, 500);
+
+      } catch (err) {
+        alert('Compression error: ' + err.message);
+        btnRun.disabled = false;
+        progressContainer.style.display = 'none';
+      }
+    }, 100);
+  }
+
+  function updateProgress(percent, label) {
+    const p = Math.min(100, Math.max(0, percent));
+    progressBar.style.width = p + '%';
+    progressPercent.innerText = Math.round(p) + '%';
+    progressLabel.innerText = label || 'Processing…';
+  }
+
+  // --------------------------------------------------------------
+  // Preview
+  // --------------------------------------------------------------
+  function showPreview(rows) {
+    if (!rows || rows.length === 0) {
+      previewTbody.innerHTML = '<tr><td colspan="1" style="text-align:center;padding:2rem;">No data.</td></tr>';
+      previewRowCount.innerText = '0 rows';
+      return;
+    }
+
+    const headers = rows[0] || [];
+    const displayRows = rows.slice(0, 101); // 100 rows + header
+
+    let theadHTML = '';
+    headers.forEach(h => {
+      theadHTML += `<th style="padding:0.5rem;background:#f1f5f9;border-bottom:1px solid #cbd5e1;">${escapeHTML(String(h))}</th>`;
+    });
+    previewThead.innerHTML = theadHTML;
+
+    let tbodyHTML = '';
+    const rowData = displayRows.slice(1); // skip header for body
+    rowData.forEach(row => {
+      tbodyHTML += '<tr>';
+      headers.forEach((_, idx) => {
+        const val = row[idx] !== undefined ? String(row[idx]) : '';
+        tbodyHTML += `<td style="padding:0.5rem;border-bottom:1px solid #e2e8f0;">${escapeHTML(val)}</td>`;
+      });
+      tbodyHTML += '</tr>';
+    });
+    previewTbody.innerHTML = tbodyHTML || '<tr><td colspan="1" style="text-align:center;padding:2rem;">No rows to show.</td></tr>';
+
+    previewRowCount.innerText = `${displayRows.length - 1} rows`;
+  }
+
+  // --------------------------------------------------------------
+  // Downloads
+  // --------------------------------------------------------------
+  function downloadCleanedCSV() {
+    if (!cleanedCSVText) return;
+    const outName = currentFileName.replace(/\.[^.]+$/, '') + '_cleaned.csv';
+    const blob = new Blob([cleanedCSVText], { type: 'text/csv' });
+    downloadBlob(blob, outName);
+  }
+
+  function downloadCompressed(format) {
+    if (!cleanedCSVText) return;
+    let blob, ext;
+    const baseName = currentFileName.replace(/\.[^.]+$/, '') + '_cleaned';
+    if (format === 'gz') {
+      // GZIP using pako
+      const uint8 = pako.gzip(cleanedCSVText);
+      blob = new Blob([uint8], { type: 'application/gzip' });
+      ext = 'csv.gz';
+    } else if (format === 'bz2') {
+      // BZIP2 using bzip2 library
+      const input = new TextEncoder().encode(cleanedCSVText);
+      const compressed = bzip2.compress(input, { blockSize: 9 });
+      blob = new Blob([compressed], { type: 'application/x-bzip2' });
+      ext = 'csv.bz2';
+    } else {
+      return;
+    }
+    const outName = baseName + '.' + ext;
+    downloadBlob(blob, outName);
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // --------------------------------------------------------------
+  // Reset
+  // --------------------------------------------------------------
+  function resetTool() {
+    originalCSVText = '';
+    cleanedCSVText = '';
+    parsedRows = [];
+    cleanedRows = [];
+    metaBar.style.display = 'none';
+    panel.style.display = 'none';
+    resultsArea.style.display = 'none';
+    progressContainer.style.display = 'none';
+    fileInput.value = '';
+    btnRun.disabled = false;
+  }
+
+  // --------------------------------------------------------------
+  // Helpers
+  // --------------------------------------------------------------
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+</script>

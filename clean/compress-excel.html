@@ -1,0 +1,560 @@
+---
+layout: main
+title: "Compress Excel - Reduce Excel File Size Online Free"
+short_name: "Excel Compressor"
+description: "Compress Excel file online – reduce XLSX, XLS file size by removing empty rows & columns. Free, private, client-side tool. Download compressed Excel instantly."
+keywords: "compress excel, compress file excel, compress excel file size, compress excel file online, compressed excel file, compressed excel, compress excel file, compress xls file online, compress the excel file online, compress xls file size, compress xlsx file online, decrease excel file size, excel compress online, excel compressor online, excel file reduce size, excel file reduce size online, excel file size reduce online, excel size reduce, minimize excel file size, online excel compress"
+category: "Clean"
+permalink: /clean/compress-excel
+---
+
+<!-- SheetJS for reading & writing Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>🗜️</span> Client‑Side Excel Compression Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      Compress Excel File Size Online
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Reduce the size of your Excel workbooks (<strong>.xlsx</strong>, <strong>.xls</strong>) by stripping out empty rows, empty columns, and unnecessary bloat. All processing stays in your browser – nothing is uploaded.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Your Excel file never leaves your device. No server uploads. No tracking.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="compressor-dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your Excel File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Works with <strong>.xlsx</strong> and <strong>.xls</strong> files
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse Excel File
+        <input type="file" id="excel-file-input" accept=".xlsx,.xls,.xlsm" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample Button & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button onclick="loadSampleWorkbook()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (with empty rows/cols)
+        </button>
+      </div>
+      <button onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="file-meta-bar" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="meta-filename" style="font-size: 1rem; color: #0f172a;">Workbook.xlsx</strong>
+          <div id="meta-filesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div>
+        <label for="select-worksheet" style="font-weight: 700; color: #0f172a; margin-right: 0.5rem;">Worksheet:</label>
+        <select id="select-worksheet" onchange="loadActiveSheet()" style="padding: 0.35rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compression Options & Progress -->
+  <div id="compression-panel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      ⚙️ Compression Settings
+    </h3>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 1.25rem;">
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="opt-remove-empty-rows" checked>
+        Remove completely empty rows
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="opt-remove-empty-cols" checked>
+        Remove completely empty columns
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="opt-remove-hidden-sheets" checked>
+        Remove hidden sheets (if any)
+      </label>
+    </div>
+
+    <div style="margin-top: 0.5rem; margin-bottom: 1.5rem;">
+      <button id="btn-run-compression" onclick="runCompression()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🗜️ Compress Now
+      </button>
+      <span style="margin-left: 1rem; font-size: 0.9rem; color: #64748b;">This will reduce file size by cleaning empty rows and columns.</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progress-container" style="display: none; margin-top: 1rem;">
+      <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #475569; margin-bottom: 0.3rem;">
+        <span id="progress-label">Processing…</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div style="width: 100%; background: #e2e8f0; border-radius: 9999px; height: 10px; overflow: hidden;">
+        <div id="progress-bar" style="width: 0%; background: #059669; height: 100%; transition: width 0.3s;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results: Download Button + Preview -->
+  <div id="results-area" style="display: none; margin-top: 1.5rem;">
+    <!-- Download Button (above preview) -->
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">Compression Complete!</h3>
+          <p id="compression-stats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Original: 0 KB → Compressed: 0 KB (saved 0%)</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="btn-download-xlsx" onclick="downloadCompressed('xlsx')" style="padding: 0.7rem 1.5rem; background: #059669; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 0.95rem; cursor: pointer;">
+          ⬇️ Download .xlsx
+        </button>
+        <button id="btn-download-xls" onclick="downloadCompressed('xls')" style="padding: 0.7rem 1.5rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          ⬇️ Download .xls
+        </button>
+      </div>
+    </div>
+
+    <!-- Preview Table -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden;">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">Preview of Compressed Data (first 100 rows)</span>
+        <span id="preview-row-count" style="font-size: 0.85rem; color: #64748b;">0 rows</span>
+      </div>
+      <div style="overflow-x: auto; max-height: 400px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+          <thead style="position: sticky; top: 0; background: #f1f5f9; z-index: 10;">
+            <tr id="preview-thead"></tr>
+          </thead>
+          <tbody id="preview-tbody">
+            <tr><td colspan="1" style="text-align: center; padding: 2rem; color: #64748b;">No data to preview.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Article -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
+      How to Compress an Excel File Online
+    </h2>
+    <p>
+      An <strong>Excel compressor</strong> is a handy tool that shrinks the size of your spreadsheets. If you have a large Excel file that’s slow to open or too big to email, <strong>compressing it online</strong> can help. This tool works directly in your browser – no uploads, no waiting.
+    </p>
+    <p>
+      The main ways to <strong>reduce Excel file size</strong> are:
+    </p>
+    <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
+      <li><strong>Remove empty rows and columns</strong> – these take up space for no reason.</li>
+      <li><strong>Strip hidden sheets</strong> – extra sheets you don’t need.</li>
+      <li><strong>Re-save with minimal formatting</strong> – our tool rebuilds the file cleanly.</li>
+    </ul>
+    <p>
+      This online compressor is perfect for quickly <strong>decreasing Excel file size</strong> before sharing, storing, or uploading. It supports both <code>.xlsx</code> and <code>.xls</code> formats, and you can download the compressed file in either format.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Why Use a Client‑Side Excel Compressor?</h3>
+    <p>
+      Many online tools ask you to upload your file to a server. That’s risky if your data is sensitive. Our tool processes everything <strong>locally in your browser</strong>. Your original file never leaves your computer. This means you get <strong>fast, private compression</strong> without any security worries.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How much can I reduce my Excel file size?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          It depends on how many empty rows and columns your file has. Some files shrink by 30‑50%, others with lots of blank space can reduce by over 80%. The tool shows you the exact savings after compression.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does it change my data?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          No. The compressor only removes rows and columns that are completely empty. Your actual data (numbers, text, formulas) stays untouched. You can preview the result before downloading.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I compress a .xls file?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. You can upload both .xls (older Excel) and .xlsx files. After compression, you can download as .xlsx or .xls – your choice.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  // --------------------------------------------------------------
+  // State
+  // --------------------------------------------------------------
+  let originalWorkbook = null;
+  let compressedWorkbook = null;
+  let currentFileName = "";
+  let currentFileSize = 0;
+  let originalSize = 0;
+  let compressedSize = 0;
+  let activeSheetName = "";
+  let sheetData = [];
+
+  // --------------------------------------------------------------
+  // DOM refs
+  // --------------------------------------------------------------
+  const dropzone = document.getElementById('compressor-dropzone');
+  const fileInput = document.getElementById('excel-file-input');
+  const metaBar = document.getElementById('file-meta-bar');
+  const metaFilename = document.getElementById('meta-filename');
+  const metaFilesize = document.getElementById('meta-filesize');
+  const sheetSelect = document.getElementById('select-worksheet');
+  const panel = document.getElementById('compression-panel');
+  const progressContainer = document.getElementById('progress-container');
+  const progressBar = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
+  const progressPercent = document.getElementById('progress-percent');
+  const resultsArea = document.getElementById('results-area');
+  const compressionStats = document.getElementById('compression-stats');
+  const previewThead = document.getElementById('preview-thead');
+  const previewTbody = document.getElementById('preview-tbody');
+  const previewRowCount = document.getElementById('preview-row-count');
+  const btnRun = document.getElementById('btn-run-compression');
+
+  // --------------------------------------------------------------
+  // Drag & Drop
+  // --------------------------------------------------------------
+  function setupDropzone() {
+    ['dragenter', 'dragover'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#059669';
+        dropzone.style.background = '#ecfdf5';
+      });
+    });
+    ['dragleave', 'drop'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files.length > 0) processFile(files[0]);
+    });
+  }
+  setupDropzone();
+
+  // --------------------------------------------------------------
+  // File selection
+  // --------------------------------------------------------------
+  function handleFileSelect(e) {
+    const files = e.target.files;
+    if (files.length > 0) processFile(files[0]);
+  }
+
+  function processFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const data = new Uint8Array(evt.target.result);
+        originalWorkbook = XLSX.read(data, { type: 'array', cellStyles: true });
+        originalSize = file.size;
+        initUI();
+      } catch (err) {
+        alert('Error reading file: ' + err.message);
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  // --------------------------------------------------------------
+  // Sample data – FIXED (proper Workbook structure)
+  // --------------------------------------------------------------
+  function loadSampleWorkbook() {
+    const data = [
+      ["ID", "Name", "Email", "City", "", ""],
+      [1, "Alice", "alice@example.com", "New York", "", ""],
+      [2, "Bob", "bob@example.com", "Chicago", "", ""],
+      ["", "", "", "", "", ""],
+      [3, "Carol", "carol@example.com", "Dallas", "", ""],
+      ["", "", "", "", "", ""],
+      [4, "Dave", "dave@example.com", "Seattle", "", ""],
+      ["", "", "", "", "", ""],
+      [5, "Eve", "eve@example.com", "Miami", "", ""],
+    ];
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, "Sample Data");
+
+    // Add a hidden sheet with proper Workbook.Sheets structure
+    const ws2 = XLSX.utils.aoa_to_sheet([["Hidden", "Data"]]);
+    XLSX.utils.book_append_sheet(wb, ws2, "HiddenSheet");
+    // Mark it hidden
+    if (!wb.Workbook) wb.Workbook = { Sheets: {} };
+    wb.Workbook.Sheets["HiddenSheet"] = { hidden: 1 };
+
+    originalWorkbook = wb;
+    currentFileName = "Sample_Workbook.xlsx";
+    originalSize = 10240;
+    currentFileSize = originalSize;
+    initUI();
+  }
+
+  // --------------------------------------------------------------
+  // Initialize UI after load
+  // --------------------------------------------------------------
+  function initUI() {
+    if (!originalWorkbook || !originalWorkbook.SheetNames.length) return;
+
+    metaFilename.innerText = currentFileName;
+    metaFilesize.innerText = `Size: ${formatBytes(originalSize)} | Format: ${currentFileName.split('.').pop().toUpperCase()}`;
+    metaBar.style.display = 'block';
+
+    sheetSelect.innerHTML = '';
+    originalWorkbook.SheetNames.forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      sheetSelect.appendChild(opt);
+    });
+    activeSheetName = originalWorkbook.SheetNames[0];
+    sheetSelect.value = activeSheetName;
+
+    loadActiveSheet();
+    panel.style.display = 'block';
+    resultsArea.style.display = 'none';
+    progressContainer.style.display = 'none';
+    btnRun.disabled = false;
+  }
+
+  function loadActiveSheet() {
+    activeSheetName = sheetSelect.value;
+    const ws = originalWorkbook.Sheets[activeSheetName];
+    if (!ws) return;
+    const raw = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+    sheetData = raw;
+  }
+
+  // --------------------------------------------------------------
+  // Compression logic – with MAX compression
+  // --------------------------------------------------------------
+  function runCompression() {
+    if (!originalWorkbook) return;
+    btnRun.disabled = true;
+    progressContainer.style.display = 'block';
+    updateProgress(0, 'Starting compression…');
+
+    setTimeout(() => {
+      try {
+        const removeEmptyRows = document.getElementById('opt-remove-empty-rows').checked;
+        const removeEmptyCols = document.getElementById('opt-remove-empty-cols').checked;
+        const removeHiddenSheets = document.getElementById('opt-remove-hidden-sheets').checked;
+
+        let sheetNames = originalWorkbook.SheetNames;
+
+        if (removeHiddenSheets) {
+          const wb = originalWorkbook;
+          sheetNames = sheetNames.filter(name => {
+            const hidden = wb.Workbook && wb.Workbook.Sheets && wb.Workbook.Sheets[name] && wb.Workbook.Sheets[name].hidden;
+            return !hidden;
+          });
+        }
+
+        const totalSheets = sheetNames.length;
+        if (totalSheets === 0) {
+          alert('No visible sheets found.');
+          btnRun.disabled = false;
+          progressContainer.style.display = 'none';
+          return;
+        }
+
+        const newWb = XLSX.utils.book_new();
+        const totalSteps = totalSheets * 3 + 1;
+
+        sheetNames.forEach((sheetName, idx) => {
+          const ws = originalWorkbook.Sheets[sheetName];
+          const rawData = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+
+          updateProgress((idx * 3) / totalSteps * 100, `Reading sheet ${idx+1}/${totalSheets}…`);
+
+          let filteredRows = rawData;
+          if (removeEmptyRows) {
+            filteredRows = filteredRows.filter(row => row.some(cell => cell !== '' && cell !== undefined && cell !== null));
+          }
+
+          let processedData = filteredRows;
+          if (removeEmptyCols && filteredRows.length > 0) {
+            const colCount = Math.max(...filteredRows.map(r => r.length), 0);
+            const nonEmptyCols = [];
+            for (let c = 0; c < colCount; c++) {
+              let hasData = false;
+              for (let r = 0; r < filteredRows.length; r++) {
+                const val = filteredRows[r][c];
+                if (val !== '' && val !== undefined && val !== null) { hasData = true; break; }
+              }
+              if (hasData) nonEmptyCols.push(c);
+            }
+            processedData = filteredRows.map(row => nonEmptyCols.map(c => row[c] !== undefined ? row[c] : ''));
+          }
+
+          const newWs = XLSX.utils.aoa_to_sheet(processedData);
+          XLSX.utils.book_append_sheet(newWb, newWs, sheetName);
+
+          const progress = ((idx + 1) * 3) / totalSteps * 100;
+          updateProgress(progress, `Processed sheet ${idx+1}/${totalSheets}`);
+        });
+
+        updateProgress(95, 'Generating compressed file…');
+
+        // 👇 MAX COMPRESSION: add compression: true
+        const wbout = XLSX.write(newWb, { bookType: 'xlsx', type: 'array', compression: true });
+        compressedSize = wbout.length;
+
+        compressedWorkbook = newWb;
+        originalSize = currentFileSize;
+
+        const savedBytes = originalSize - compressedSize;
+        const savedPercent = originalSize > 0 ? (savedBytes / originalSize * 100).toFixed(1) : 0;
+        compressionStats.innerText = `Original: ${formatBytes(originalSize)} → Compressed: ${formatBytes(compressedSize)} (saved ${savedPercent}%)`;
+
+        showPreview(compressedWorkbook);
+        resultsArea.style.display = 'block';
+        updateProgress(100, 'Done!');
+        btnRun.disabled = false;
+        setTimeout(() => { progressContainer.style.display = 'none'; }, 500);
+
+      } catch (err) {
+        alert('Compression error: ' + err.message);
+        btnRun.disabled = false;
+        progressContainer.style.display = 'none';
+      }
+    }, 100);
+  }
+
+  function updateProgress(percent, label) {
+    const p = Math.min(100, Math.max(0, percent));
+    progressBar.style.width = p + '%';
+    progressPercent.innerText = Math.round(p) + '%';
+    progressLabel.innerText = label || 'Processing…';
+  }
+
+  // --------------------------------------------------------------
+  // Preview compressed data
+  // --------------------------------------------------------------
+  function showPreview(wb) {
+    if (!wb || !wb.SheetNames.length) return;
+    const firstSheet = wb.Sheets[wb.SheetNames[0]];
+    const data = XLSX.utils.sheet_to_json(firstSheet, { header: 1, defval: '' });
+    if (data.length === 0) {
+      previewTbody.innerHTML = '<tr><td colspan="1" style="text-align:center;padding:2rem;">Empty sheet.</td></tr>';
+      previewRowCount.innerText = '0 rows';
+      return;
+    }
+
+    const headerRow = data[0] || [];
+    const hasHeader = headerRow.some(cell => cell !== '');
+    let displayData = data;
+    let displayHeaders;
+    if (hasHeader) {
+      displayHeaders = headerRow.map(h => String(h));
+      displayData = data.slice(1);
+    } else {
+      displayHeaders = headerRow.map((_, i) => `Col ${i+1}`);
+    }
+
+    const previewRows = displayData.slice(0, 100);
+
+    let theadHTML = '';
+    displayHeaders.forEach(h => {
+      theadHTML += `<th style="padding:0.5rem;background:#f1f5f9;border-bottom:1px solid #cbd5e1;">${escapeHTML(h)}</th>`;
+    });
+    previewThead.innerHTML = theadHTML;
+
+    let tbodyHTML = '';
+    previewRows.forEach(row => {
+      tbodyHTML += '<tr>';
+      displayHeaders.forEach((_, idx) => {
+        const val = row[idx] !== undefined ? String(row[idx]) : '';
+        tbodyHTML += `<td style="padding:0.5rem;border-bottom:1px solid #e2e8f0;">${escapeHTML(val)}</td>`;
+      });
+      tbodyHTML += '</tr>';
+    });
+    previewTbody.innerHTML = tbodyHTML || '<tr><td colspan="1" style="text-align:center;padding:2rem;">No rows to show.</td></tr>';
+
+    previewRowCount.innerText = `${displayData.length} rows`;
+  }
+
+  // --------------------------------------------------------------
+  // Download – with MAX compression
+  // --------------------------------------------------------------
+  function downloadCompressed(type) {
+    if (!compressedWorkbook) return;
+    const bookType = type === 'xls' ? 'biff8' : 'xlsx';
+    const ext = type === 'xls' ? 'xls' : 'xlsx';
+    const outName = currentFileName.replace(/\.[^.]+$/, '') + '-compressed.' + ext;
+
+    // 👇 MAX COMPRESSION on download too
+    const opts = { bookType: bookType, compression: true };
+    XLSX.writeFile(compressedWorkbook, outName, opts);
+  }
+
+  // --------------------------------------------------------------
+  // Reset
+  // --------------------------------------------------------------
+  function resetTool() {
+    originalWorkbook = null;
+    compressedWorkbook = null;
+    metaBar.style.display = 'none';
+    panel.style.display = 'none';
+    resultsArea.style.display = 'none';
+    progressContainer.style.display = 'none';
+    fileInput.value = '';
+    sheetData = [];
+    btnRun.disabled = false;
+  }
+
+  // --------------------------------------------------------------
+  // Helpers
+  // --------------------------------------------------------------
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+</script>

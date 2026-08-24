@@ -1,0 +1,531 @@
+---
+layout: main
+title: "Compress JSON File - Reduce JSON File Size Online Free"
+short_name: "JSON Compressor"
+description: "Compress JSON file online – reduce JSON file size by minifying, removing whitespace, and stripping comments. Download as JSON, GZIP, BZIP2, or ZIP. 100% private, no uploads."
+keywords: "compress json, compress json file, json file compressor, compress json file online, compress lottie json online, json gz to json, json to zip converter, reduce json file size online"
+category: "Clean"
+permalink: /clean/json-compressor
+---
+
+<!-- External libraries for compression -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js" integrity="sha512-Uvq9qqP1oyW3QpFjF6FiLpJN8QhT0b2P9Rj64RAdJwBZuFZ+9H3YZlD6zLoxB1Hz9x4nEJW3aD5iRXkmP5nDsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bzip2-js/0.5.0/bzip2.min.js" integrity="sha512-4FzY8g+tH5w3X8Tfh9mFhk9F9kvGk9NpZysJY4YSSFZMA3CghLmKnjV9LV5dRwA4iPblPs8w2dLjb5vh65tFcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtyfSN5uPXUdcAe1Lk5/k2JzVYFSpwItjEr2c2C0Bz5f+9lZBUVF95NQPFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>📦</span> Client‑Side JSON Compression Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      Compress JSON File Size Online
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Reduce the size of your JSON files by removing unnecessary whitespace, comments, and minifying the structure. Download the cleaned result as <strong>.json</strong>, <strong>.json.gz</strong>, <strong>.json.bz2</strong>, or <strong>.zip</strong>. All processing is 100% local – nothing is uploaded.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Your JSON file never leaves your device. No server uploads. No tracking.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="json-dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your JSON File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Works with <strong>.json</strong> files
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse JSON File
+        <input type="file" id="json-file-input" accept=".json" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample Button & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button onclick="loadSampleJSON()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (with whitespace & comments)
+        </button>
+      </div>
+      <button onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="file-meta-bar" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="meta-filename" style="font-size: 1rem; color: #0f172a;">data.json</strong>
+          <div id="meta-filesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="font-size: 0.85rem; color: #475569;">
+        Keys: <span id="meta-key-count">0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compression Options & Progress -->
+  <div id="compression-panel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      ⚙️ Compression Settings
+    </h3>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 1.25rem;">
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="opt-minify" checked>
+        Minify JSON (remove all whitespace)
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="opt-remove-comments" checked>
+        Remove JSON comments (/* */ and //)
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="opt-pretty-print">
+        Pretty print (keep formatting, just remove comments)
+      </label>
+    </div>
+
+    <div style="margin-top: 0.5rem; margin-bottom: 1.5rem;">
+      <button id="btn-run-compression" onclick="runCompression()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🗜️ Compress Now
+      </button>
+      <span style="margin-left: 1rem; font-size: 0.9rem; color: #64748b;">Minifies JSON and removes comments.</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progress-container" style="display: none; margin-top: 1rem;">
+      <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #475569; margin-bottom: 0.3rem;">
+        <span id="progress-label">Processing…</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div style="width: 100%; background: #e2e8f0; border-radius: 9999px; height: 10px; overflow: hidden;">
+        <div id="progress-bar" style="width: 0%; background: #059669; height: 100%; transition: width 0.3s;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results: Download Buttons + Preview -->
+  <div id="results-area" style="display: none; margin-top: 1.5rem;">
+    <!-- Download Buttons (above preview) -->
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">Compression Complete!</h3>
+          <p id="compression-stats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Original: 0 KB → Compressed: 0 KB (saved 0%)</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button onclick="downloadCleanedJSON('json')" style="padding: 0.7rem 1.5rem; background: #059669; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          ⬇️ .json
+        </button>
+        <button onclick="downloadCompressed('gz')" style="padding: 0.7rem 1.5rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          ⬇️ .json.gz
+        </button>
+        <button onclick="downloadCompressed('bz2')" style="padding: 0.7rem 1.5rem; background: #7c3aed; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          ⬇️ .json.bz2
+        </button>
+        <button onclick="downloadCompressed('zip')" style="padding: 0.7rem 1.5rem; background: #dc2626; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          ⬇️ .zip
+        </button>
+      </div>
+    </div>
+
+    <!-- Preview -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden;">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">Preview of Compressed JSON (first 50 lines)</span>
+        <span id="preview-size" style="font-size: 0.85rem; color: #64748b;">0 characters</span>
+      </div>
+      <div style="overflow-x: auto; max-height: 400px; background: #1e293b; padding: 1rem;">
+        <pre id="preview-content" style="margin: 0; font-family: 'Courier New', monospace; font-size: 0.8rem; color: #e2e8f0; white-space: pre-wrap; word-break: break-all;">No data to preview.</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Article -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
+      How to Compress a JSON File Online
+    </h2>
+    <p>
+      A <strong>JSON compressor</strong> helps you <strong>reduce JSON file size</strong> by removing unnecessary whitespace, comments, and minifying the structure. This is essential for API responses, configuration files, Lottie animations, and data exchange where every kilobyte matters.
+    </p>
+    <p>
+      This tool works 100% in your browser – your file is never uploaded to any server. It parses the JSON, strips out all the bloat, and gives you a clean, compact version. You can then download the result as a plain <strong>.json</strong>, or as a compressed <strong>.json.gz</strong> (GZIP), <strong>.json.bz2</strong> (BZIP2), or <strong>.zip</strong> file for even smaller sizes.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Why Use a JSON Compressor?</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>Faster loading</strong> – smaller JSON files load quicker in apps and websites.</li>
+      <li><strong>Less bandwidth</strong> – save money on API calls and data transfer.</li>
+      <li><strong>Privacy first</strong> – all processing is client‑side; nothing leaves your computer.</li>
+      <li><strong>Multiple formats</strong> – download as JSON, GZIP, BZIP2, or ZIP.</li>
+      <li><strong>Lottie support</strong> – compress Lottie JSON animations for faster loading.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does it change the JSON structure?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          No. The tool preserves all keys and values. It only removes whitespace and comments. The JSON remains perfectly valid.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What about Lottie JSON files?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          This tool works perfectly for Lottie animation JSON files. Lottie files often contain large amounts of data – compressing them can significantly improve load times.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What's the difference between GZIP, BZIP2, and ZIP?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          GZIP is fast and widely supported. BZIP2 often compresses better but is slower. ZIP is the most common format and can include multiple files. All are standard compression formats for JSON files.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  // --------------------------------------------------------------
+  // State
+  // --------------------------------------------------------------
+  let originalJSONText = "";
+  let cleanedJSONText = "";
+  let currentFileName = "";
+  let originalSize = 0;
+  let cleanedSize = 0;
+  let parsedJSON = null;
+
+  // DOM refs
+  const dropzone = document.getElementById('json-dropzone');
+  const fileInput = document.getElementById('json-file-input');
+  const metaBar = document.getElementById('file-meta-bar');
+  const metaFilename = document.getElementById('meta-filename');
+  const metaFilesize = document.getElementById('meta-filesize');
+  const metaKeyCount = document.getElementById('meta-key-count');
+  const panel = document.getElementById('compression-panel');
+  const progressContainer = document.getElementById('progress-container');
+  const progressBar = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
+  const progressPercent = document.getElementById('progress-percent');
+  const resultsArea = document.getElementById('results-area');
+  const compressionStats = document.getElementById('compression-stats');
+  const previewContent = document.getElementById('preview-content');
+  const previewSize = document.getElementById('preview-size');
+  const btnRun = document.getElementById('btn-run-compression');
+
+  // --------------------------------------------------------------
+  // Drag & Drop
+  // --------------------------------------------------------------
+  function setupDropzone() {
+    ['dragenter', 'dragover'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#059669';
+        dropzone.style.background = '#ecfdf5';
+      });
+    });
+    ['dragleave', 'drop'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files.length > 0) processFile(files[0]);
+    });
+  }
+  setupDropzone();
+
+  // --------------------------------------------------------------
+  // File selection
+  // --------------------------------------------------------------
+  function handleFileSelect(e) {
+    const files = e.target.files;
+    if (files.length > 0) processFile(files[0]);
+  }
+
+  function processFile(file) {
+    currentFileName = file.name;
+    originalSize = file.size;
+
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        originalJSONText = evt.target.result;
+        // Validate JSON
+        parsedJSON = JSON.parse(originalJSONText);
+        const keyCount = countKeys(parsedJSON);
+        metaKeyCount.innerText = keyCount;
+
+        metaFilename.innerText = file.name;
+        metaFilesize.innerText = `Size: ${formatBytes(originalSize)}`;
+        metaBar.style.display = 'block';
+        panel.style.display = 'block';
+        resultsArea.style.display = 'none';
+        progressContainer.style.display = 'none';
+        btnRun.disabled = false;
+      } catch (err) {
+        alert('Error reading JSON: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // Helper: count keys in JSON
+  function countKeys(obj) {
+    let count = 0;
+    if (Array.isArray(obj)) {
+      for (const item of obj) {
+        count += countKeys(item);
+      }
+    } else if (typeof obj === 'object' && obj !== null) {
+      count += Object.keys(obj).length;
+      for (const key in obj) {
+        count += countKeys(obj[key]);
+      }
+    }
+    return count;
+  }
+
+  // --------------------------------------------------------------
+  // Sample JSON
+  // --------------------------------------------------------------
+  function loadSampleJSON() {
+    const sample = `{
+  // This is a sample JSON with whitespace and comments
+  "bookstore": {
+    "books": [
+      {
+        "id": 1,
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "year": 1925,
+        "price": 12.99,
+        "inStock": true,
+        "tags": ["classic", "fiction"]
+      },
+      {
+        "id": 2,
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "year": 1960,
+        "price": 14.99,
+        "inStock": true,
+        "tags": ["classic", "fiction", "southern"]
+      },
+      {
+        "id": 3,
+        "title": "1984",
+        "author": "George Orwell",
+        "year": 1949,
+        "price": 11.99,
+        "inStock": false,
+        "tags": ["classic", "dystopian"]
+      }
+    ],
+    "location": "New York",
+    "established": 2020
+  }
+  /* End of bookstore data */ 
+}`;
+    const blob = new Blob([sample], { type: 'application/json' });
+    const file = new File([blob], 'sample_data.json', { type: 'application/json' });
+    processFile(file);
+  }
+
+  // --------------------------------------------------------------
+  // JSON Compression Logic
+  // --------------------------------------------------------------
+  function runCompression() {
+    if (!parsedJSON) return;
+    btnRun.disabled = true;
+    progressContainer.style.display = 'block';
+    updateProgress(0, 'Parsing JSON…');
+
+    setTimeout(() => {
+      try {
+        const minify = document.getElementById('opt-minify').checked;
+        const removeComments = document.getElementById('opt-remove-comments').checked;
+        const prettyPrint = document.getElementById('opt-pretty-print').checked;
+
+        updateProgress(30, 'Cleaning JSON…');
+
+        let jsonString = originalJSONText;
+
+        // Remove comments if selected
+        if (removeComments) {
+          // Remove block comments /* ... */
+          jsonString = jsonString.replace(/\/\*[\s\S]*?\*\//g, '');
+          // Remove line comments // ...
+          jsonString = jsonString.replace(/\/\/.*$/gm, '');
+        }
+
+        // Parse again to validate after comment removal
+        let cleanedObj;
+        try {
+          cleanedObj = JSON.parse(jsonString);
+        } catch (e) {
+          // If parsing fails, try with the original but without comments
+          // Some JSON may have trailing commas, handle gracefully
+          try {
+            // Remove trailing commas (simple approach)
+            const fixed = jsonString.replace(/,\s*([}\]])/g, '$1');
+            cleanedObj = JSON.parse(fixed);
+          } catch (e2) {
+            // Fallback: use the original parsed object
+            cleanedObj = parsedJSON;
+          }
+        }
+
+        updateProgress(60, 'Stringifying JSON…');
+
+        // Stringify with or without formatting
+        if (prettyPrint) {
+          cleanedJSONText = JSON.stringify(cleanedObj, null, 2);
+        } else if (minify) {
+          cleanedJSONText = JSON.stringify(cleanedObj);
+        } else {
+          // Default: minify (same as remove whitespace)
+          cleanedJSONText = JSON.stringify(cleanedObj);
+        }
+
+        cleanedSize = new Blob([cleanedJSONText]).size;
+
+        updateProgress(90, 'Preparing preview…');
+
+        // Update stats
+        const saved = originalSize - cleanedSize;
+        const pct = originalSize > 0 ? (saved / originalSize * 100).toFixed(1) : 0;
+        compressionStats.innerText = `Original: ${formatBytes(originalSize)} → Compressed: ${formatBytes(cleanedSize)} (saved ${pct}%)`;
+
+        // Show preview
+        showPreview(cleanedJSONText);
+        resultsArea.style.display = 'block';
+        updateProgress(100, 'Done!');
+        btnRun.disabled = false;
+        setTimeout(() => { progressContainer.style.display = 'none'; }, 500);
+
+      } catch (err) {
+        alert('Compression error: ' + err.message);
+        btnRun.disabled = false;
+        progressContainer.style.display = 'none';
+      }
+    }, 100);
+  }
+
+  function updateProgress(percent, label) {
+    const p = Math.min(100, Math.max(0, percent));
+    progressBar.style.width = p + '%';
+    progressPercent.innerText = Math.round(p) + '%';
+    progressLabel.innerText = label || 'Processing…';
+  }
+
+  // --------------------------------------------------------------
+  // Preview
+  // --------------------------------------------------------------
+  function showPreview(text) {
+    const lines = text.split('\n');
+    const previewLines = lines.slice(0, 50);
+    previewContent.textContent = previewLines.join('\n') + (lines.length > 50 ? '\n... (truncated)' : '');
+    previewSize.innerText = `${text.length} characters (${formatBytes(cleanedSize)})`;
+  }
+
+  // --------------------------------------------------------------
+  // Downloads
+  // --------------------------------------------------------------
+  function downloadCleanedJSON() {
+    if (!cleanedJSONText) return;
+    const outName = currentFileName.replace(/\.[^.]+$/, '') + '_cleaned.json';
+    const blob = new Blob([cleanedJSONText], { type: 'application/json' });
+    downloadBlob(blob, outName);
+  }
+
+  function downloadCompressed(format) {
+    if (!cleanedJSONText) return;
+    let blob, ext;
+    const baseName = currentFileName.replace(/\.[^.]+$/, '') + '_cleaned';
+    if (format === 'gz') {
+      const uint8 = pako.gzip(cleanedJSONText);
+      blob = new Blob([uint8], { type: 'application/gzip' });
+      ext = 'json.gz';
+    } else if (format === 'bz2') {
+      const input = new TextEncoder().encode(cleanedJSONText);
+      const compressed = bzip2.compress(input, { blockSize: 9 });
+      blob = new Blob([compressed], { type: 'application/x-bzip2' });
+      ext = 'json.bz2';
+    } else if (format === 'zip') {
+      const zip = new JSZip();
+      const fileName = baseName + '.json';
+      zip.file(fileName, cleanedJSONText);
+      // Generate ZIP asynchronously, but we'll use sync generation via Blob
+      const zipBlob = zip.generate({ type: 'blob' });
+      blob = zipBlob;
+      ext = 'zip';
+    } else {
+      return;
+    }
+    const outName = baseName + '.' + ext;
+    downloadBlob(blob, outName);
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // --------------------------------------------------------------
+  // Reset
+  // --------------------------------------------------------------
+  function resetTool() {
+    originalJSONText = '';
+    cleanedJSONText = '';
+    parsedJSON = null;
+    metaBar.style.display = 'none';
+    panel.style.display = 'none';
+    resultsArea.style.display = 'none';
+    progressContainer.style.display = 'none';
+    fileInput.value = '';
+    btnRun.disabled = false;
+  }
+
+  // --------------------------------------------------------------
+  // Helpers
+  // --------------------------------------------------------------
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+</script>

@@ -478,3 +478,46 @@
   date: "2026-08-10"
   updated: "2026-08-10"
 
+- title: "Compress Excel"
+  short_name: "Compress Excel"
+  url: "/clean/compress-excel"
+  category: "Clean"
+  description: "Compress Excel file online – reduce XLSX, XLS file size by removing empty rows and columns. Free, private, client-side tool. Download compressed Excel instantly."
+  keywords: ["compress excel", "compress file excel", "compress excel file size", "compress excel file online", "compressed excel file", "compressed excel", "compress xls file online", "compress the excel file online", "compress xls file size", "compress xlsx file online", "decrease excel file size", "excel compress online", "excel compressor online", "excel file reduce size", "excel file reduce size online", "excel file size reduce online", "excel size reduce", "minimize excel file size", "online excel compress"]
+  icon: "🗜️"
+  featured: true
+  date: "2026-07-15"
+  updated: "2026-07-15"
+
+- title: "CSV Compressor"
+  short_name: "CSV Compressor"
+  url: "/clean/csv-compressor"
+  category: "Clean"
+  description: "Compress CSV file online – reduce CSV file size by removing empty rows and columns. Download as CSV, GZIP, or BZIP2. 100% private, no uploads."
+  keywords: ["compress a csv file", "compress csv file", "compress csv", "compress csv file size", "csv compress", "csv file compression", "csv file size reducer", "bz2 to csv", "compress csv file online", "compress csv file size online", "compress csv file to smaller size", "compress csv file to smaller size online", "compress large csv file online", "compress pdf to csv", "csv file compressor online", "csv file size reducer online"]
+  icon: "📦"
+  featured: true
+  date: "2026-07-20"
+  updated: "2026-07-20"
+
+- title: "XML Compressor"
+  short_name: "XML Compressor"
+  url: "/clean/xml-compressor"
+  category: "Clean"
+  description: "Compress XML file online – reduce XML file size by removing whitespace, comments, and empty nodes. Download as XML, GZIP, or BZIP2. 100% private, no uploads."
+  keywords: ["compress xml", "compress xml file", "compress xml file online", "compress xml file online free", "compress xml file size", "compress xml file size online", "compress xml online", "compress xml to one line", "xml file compressor online", "xml file size reducer"]
+  icon: "🗜️"
+  featured: true
+  date: "2026-07-22"
+  updated: "2026-07-22"
+
+- title: "JSON Compressor"
+  short_name: "JSON Compressor"
+  url: "/clean/json-compressor"
+  category: "Clean"
+  description: "Compress JSON file online – reduce JSON file size by minifying, removing whitespace, and stripping comments. Download as JSON, GZIP, BZIP2, or ZIP. 100% private, no uploads."
+  keywords: ["compress json", "compress json file", "json file compressor", "compress json file online", "compress lottie json online", "json gz to json", "json to zip converter", "reduce json file size online"]
+  icon: "📦"
+  featured: true
+  date: "2026-07-25"
+  updated: "2026-07-25"  
