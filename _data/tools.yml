@@ -5,7 +5,7 @@
 #   - title: Tool Title
 #   - short_name: Short Tool Name (used for clean breadcrumbs & navigation)
 #   - url: /tool-permalink
-#   - category: Inspect | Analyze | Validate | Compare | Visualize
+#   - category: Inspect | Analyze | Validate | Compare | Convert | Visualize
 #   - description: Short tool description
 #   - keywords: ["keyword1", "keyword2"]
 #   - icon: icon-name
@@ -520,4 +520,15 @@
   icon: "📦"
   featured: true
   date: "2026-07-25"
-  updated: "2026-07-25"  
+  updated: "2026-07-25"
+
+- title: "Data Anonymizer"
+  short_name: "Data Anonymizer"
+  url: "/clean/data-anonymizer"
+  category: "Clean"
+  description: "Anonymize sensitive PII, email addresses, phone numbers, credit cards, and IP addresses in Excel workbooks (.xlsx, .xls), CSV, JSON, or text files locally with 100% complete data privacy."
+  keywords: ["data anonymizer", "data anonymization meaning", "anonymous ip address", "data anonymization tool", "gdpr anonymization", "anonymised data", "pii anonymization", "anonymous data"]
+  icon: "🔒"
+  featured: true
+  date: "2026-08-25"
+  updated: "2026-08-25"  

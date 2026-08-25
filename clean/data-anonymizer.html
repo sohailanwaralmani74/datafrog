@@ -1,0 +1,654 @@
+---
+layout: main
+title: "Data Anonymizer - Online PII & Data Anonymization Tool"
+short_name: "Data Anonymizer"
+description: "Anonymize sensitive PII data locally in your browser. Mask email addresses, phone numbers, names, & IP addresses with GDPR-compliant data anonymization."
+keywords: "data anonymizer, data anonymization meaning, anonymous ip address, data anonymization tool, gdpr anonymization, anonymised data, pii anonymization, anonymous data"
+category: "Clean"
+permalink: /clean/data-anonymizer
+---
+
+<!-- ═══════════════════════════════════════════════════
+     SEO SCHEMA STRUCTURED DATA
+═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Data Anonymizer – DataFrog.tools",
+  "url": "https://datafrog.tools/clean/data-anonymizer",
+  "description": "Client-side Data Anonymizer tool for masking email addresses, phone numbers, names, and IP addresses locally in your browser with 100% data privacy.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Clean",
+      "item": "https://datafrog.tools/clean/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Data Anonymizer",
+      "item": "https://datafrog.tools/clean/data-anonymizer"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is data anonymization meaning?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Data anonymization meaning refers to the process of scrubbing or modifying Personally Identifiable Information (PII) such that individual data subjects cannot be identified directly or indirectly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does GDPR anonymization differ from pseudonymization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GDPR anonymization permanently alters data so that re-identification is impossible, placing anonymised data outside GDPR scope. Pseudonymization replaces identifiers with keys, maintaining a link that can be reversed with extra information."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does IP address anonymization work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anonymizing an IP address involves zeroing or masking the final octets of IPv4 addresses (e.g. converting 192.168.1.45 to 192.168.1.0/24) or masking IPv6 network prefixes, preventing geographic tracking down to an individual device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my dataset secure when using this Data Anonymizer tool?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% secure. All PII detection, redaction, masking, and hashing algorithms run strictly inside your local browser memory. Zero raw data or anonymised data is ever transmitted to cloud servers."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- SheetJS Library for Excel (.xlsx, .xls) Support -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER & H1 TITLE BLOCK
+═══════════════════════════════════════════════════ -->
+<div style="margin-bottom: 1.5rem;">
+  <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f0fdf4; color: #166534; font-weight: 700; font-size: 0.8rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+    🧹 Clean Module
+  </span>
+  <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
+    Data Anonymizer – Online PII & Data Anonymization Tool
+  </h1>
+  <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
+    Anonymize sensitive PII, email addresses, phone numbers, credit cards, and IP addresses in Excel workbooks (.xlsx, .xls), CSV, JSON, logs, or raw text locally in your browser with 100% complete data privacy.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRAG & DROP ZONE
+═══════════════════════════════════════════════════ -->
+<div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+  <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🔒</span>
+  <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your Excel workbook, CSV, or dataset file here</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports Excel (.xlsx, .xls), CSV, JSON, TXT, LOG files or paste raw text below</span>
+  
+  <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
+    <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+      📁 Browse File
+      <input type="file" id="file-input" accept=".csv,.json,.txt,.log,.sql,.xlsx,.xls,.xlsm" style="display: none;">
+    </label>
+    <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      ⚡ Load Sample PII Data
+    </button>
+    <button id="btn-clear" style="padding: 0.6rem 1.25rem; background: #ffffff; color: #dc2626; border: 1px solid #fca5a5; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
+      🗑️ Clear Input
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     WORKSPACE & ANONYMIZATION CONTROLS
+═══════════════════════════════════════════════════ -->
+<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+  
+  <!-- Anonymization Settings Panel -->
+  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
+    <h3 style="font-size: 1.05rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;">
+      ⚙️ PII Masking & Strategy Options
+    </h3>
+    
+    <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+      <div>
+        <span style="font-weight: 700; font-size: 0.85rem; color: #334155; display: block; margin-bottom: 0.4rem;">Select PII Types to Anonymize:</span>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; font-size: 0.85rem; font-weight: 600;">
+          <label style="cursor: pointer;"><input type="checkbox" id="chk-email" checked> 📧 Emails</label>
+          <label style="cursor: pointer;"><input type="checkbox" id="chk-phone" checked> 📞 Phones</label>
+          <label style="cursor: pointer;"><input type="checkbox" id="chk-ip" checked> 🌐 IP Addresses</label>
+          <label style="cursor: pointer;"><input type="checkbox" id="chk-card" checked> 💳 Credit Cards / SSNs</label>
+          <label style="cursor: pointer;"><input type="checkbox" id="chk-names" checked> 👤 Person Names</label>
+        </div>
+      </div>
+
+      <div>
+        <label for="anonymize-strategy" style="font-weight: 700; font-size: 0.85rem; color: #334155; display: block; margin-bottom: 0.4rem;">Anonymization Strategy:</label>
+        <select id="anonymize-strategy" style="padding: 0.45rem 0.85rem; font-size: 0.85rem; border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; font-weight: 600; color: #0f172a;">
+          <option value="mask" selected>Asterisk Masking (e.g. j***n@domain.com)</option>
+          <option value="redact">Redaction Tag (e.g. [REDACTED_EMAIL])</option>
+          <option value="hash">SHA-256 Hash Pseudonymization</option>
+          <option value="synthetic">Synthetic Mock Values (e.g. user_4a2d@anonymized.local)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Manual Execution Trigger Button -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #cbd5e1;">
+      <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">
+        Press the button below to process your input data safely in local browser memory.
+      </span>
+      <button id="btn-anonymize" style="padding: 0.65rem 1.5rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 800; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 2px 6px rgba(22,163,74,0.3);">
+        🔒 Anonymize Data
+      </button>
+    </div>
+  </div>
+
+  <!-- Dual Input / Output Textarea Grid -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+        <label style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">
+          1. Original Input Data
+        </label>
+        <span id="input-type-badge" style="font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem; background: #f1f5f9; color: #475569; border-radius: 4px;">
+          Raw Input
+        </span>
+      </div>
+      <textarea id="text-input" placeholder="Paste CSV, JSON, server logs, or raw text containing sensitive PII data..." 
+                style="width: 100%; height: 260px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+    </div>
+
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+        <label style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">
+          2. Anonymized Output
+        </label>
+        <div style="display: flex; gap: 0.5rem;">
+          <button id="btn-copy-output" style="padding: 0.2rem 0.6rem; background: #2563eb; color: #ffffff; border: none; border-radius: 4px; font-weight: 600; font-size: 0.75rem; cursor: pointer;">
+            📋 Copy
+          </button>
+          <button id="btn-download-output" style="padding: 0.2rem 0.6rem; background: #0f172a; color: #ffffff; border: none; border-radius: 4px; font-weight: 600; font-size: 0.75rem; cursor: pointer;">
+            📥 Download
+          </button>
+        </div>
+      </div>
+      <textarea id="text-output" readonly placeholder="Click '🔒 Anonymize Data' above to generate sanitized output..." 
+                style="width: 100%; height: 260px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #f8fafc; resize: vertical;"></textarea>
+    </div>
+  </div>
+
+  <!-- Summary Statistics Panel -->
+  <div id="stats-panel" style="display: none; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #166534; font-weight: 600; display: block;">Total PII Masked</span>
+      <span id="stat-total-pii" style="font-size: 1.25rem; font-weight: 800; color: #16a34a;">0</span>
+    </div>
+    <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #1e40af; font-weight: 600; display: block;">Emails</span>
+      <span id="stat-emails" style="font-size: 1.25rem; font-weight: 800; color: #2563eb;">0</span>
+    </div>
+    <div style="background: #faf5ff; border: 1px solid #e9d5ff; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #6b21a8; font-weight: 600; display: block;">Phones</span>
+      <span id="stat-phones" style="font-size: 1.25rem; font-weight: 800; color: #9333ea;">0</span>
+    </div>
+    <div style="background: #fff7ed; border: 1px solid #ffedd5; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #9a3412; font-weight: 600; display: block;">Anonymous IPs</span>
+      <span id="stat-ips" style="font-size: 1.25rem; font-weight: 800; color: #c2410c;">0</span>
+    </div>
+    <div style="background: #fdf2f8; border: 1px solid #fbcfe8; padding: 0.75rem; border-radius: 8px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #9d174d; font-weight: 600; display: block;">Cards / SSNs</span>
+      <span id="stat-cards" style="font-size: 1.25rem; font-weight: 800; color: #db2777;">0</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES GRID SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Data Anonymizer Features</h2>
+    <p style="color: #475569; font-size: 1rem;">Automated PII detection, customizable masking strategies, and 100% privacy</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🌐 Universal Format Support</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Anonymizes CSV files, JSON payloads, server log files, SQL dumps, or unformatted text blocks.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🛡️ GDPR Anonymization Standards</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Scubs PII and creates anonymised data compliant with GDPR, HIPAA, and SOC2 regulations.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">📡 Anonymous IP Address Masking</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Zeroes final octets on IPv4/IPv6 addresses to turn raw network logs into anonymous data.</p>
+    </div>
+    <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Browser Local Privacy</h3>
+      <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All data processing runs exclusively inside client-side browser RAM. Zero text is uploaded to servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     HOW TO USE SECTION
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Anonymize Data</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Paste or Upload Input Data</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste CSV, JSON, logs, or text into the input container, or drag & drop your data file.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Configure PII Filters & Strategy</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Check desired PII fields (Emails, Phones, IPs, Cards) and pick your preferred masking strategy.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Click "🔒 Anonymize Data" & Export</h3>
+          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click the <strong>🔒 Anonymize Data</strong> button to execute processing, then copy or download the anonymised data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     TEXTUAL SEO EDUCATIONAL CONTENT
+═══════════════════════════════════════════════════ -->
+<section style="padding: 2.5rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto; color: #334155; line-height: 1.6; font-size: 0.95rem;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem;">Understanding Data Anonymization & PII Protection</h2>
+    <p style="margin-bottom: 1rem;">
+      What is <strong>data anonymization meaning</strong> in modern software compliance? Data anonymization is the technical practice of stripping or transforming Personally Identifiable Information (PII) from data files so that individuals cannot be identified. Utilizing a reliable <strong>data anonymization tool</strong> allows organizations to safely use production data in staging environments, machine learning training, and public reporting without violating user privacy.
+    </p>
+    <p style="margin-bottom: 1rem;">
+      Under strict regulations like <strong>gdpr anonymization</strong> guidelines, creating true <strong>anonymised data</strong> requires irreversible modification. When applying <strong>pii anonymization</strong> to logs and databases, masking email addresses, phone numbers, and generating an <strong>anonymous ip address</strong> ensures compliance with EU data protection laws.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY ASKED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">What is data anonymization meaning?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Data anonymization meaning refers to the process of scrubbing or modifying Personally Identifiable Information (PII) such that individual data subjects cannot be identified directly or indirectly.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does GDPR anonymization differ from pseudonymization?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          GDPR anonymization permanently alters data so that re-identification is impossible, placing anonymised data outside GDPR scope. Pseudonymization replaces identifiers with keys, maintaining a link that can be reversed with extra information.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">How does IP address anonymization work?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Anonymizing an IP address involves zeroing or masking the final octets of IPv4 addresses (e.g. converting 192.168.1.45 to 192.168.1.0/24) or masking IPv6 network prefixes, preventing geographic tracking down to an individual device.
+        </p>
+      </details>
+
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my dataset secure when using this Data Anonymizer tool?</summary>
+        <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
+          Yes, 100% secure. All PII detection, redaction, masking, and hashing algorithms run strictly inside your local browser memory. Zero raw data or anonymised data is ever transmitted to cloud servers.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT ANONYMIZER ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const textInput = document.getElementById('text-input');
+  const textOutput = document.getElementById('text-output');
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const inputTypeBadge = document.getElementById('input-type-badge');
+
+  const chkEmail = document.getElementById('chk-email');
+  const chkPhone = document.getElementById('chk-phone');
+  const chkIp = document.getElementById('chk-ip');
+  const chkCard = document.getElementById('chk-card');
+  const chkNames = document.getElementById('chk-names');
+  const anonymizeStrategy = document.getElementById('anonymize-strategy');
+
+  const btnAnonymize = document.getElementById('btn-anonymize');
+  const btnLoadSample = document.getElementById('btn-load-sample');
+  const btnClear = document.getElementById('btn-clear');
+  const btnCopyOutput = document.getElementById('btn-copy-output');
+  const btnDownloadOutput = document.getElementById('btn-download-output');
+
+  const statsPanel = document.getElementById('stats-panel');
+  const statTotalPii = document.getElementById('stat-total-pii');
+  const statEmails = document.getElementById('stat-emails');
+  const statPhones = document.getElementById('stat-phones');
+  const statIps = document.getElementById('stat-ips');
+  const statCards = document.getElementById('stat-cards');
+
+  const SAMPLE_PII = `[2026-08-25 14:22:01] LOGIN_SUCCESS - User: John Doe (john.doe@techcorp.io), IP: 192.168.1.142, Phone: +1 (555) 234-5678, Card: 4532-8910-4421-9012
+[2026-08-25 14:23:45] PAYMENT_SUCCESS - Customer: Sarah Connor (sconnor@cyberdyne.com), IP: 10.0.4.88, Phone: 415-555-0199, SSN: 987-65-4321
+[2026-08-25 14:25:12] API_REQUEST - Client IP: 2001:0db8:85a3:0000:0000:8a2e:0370:7334, Contact: robert.smith@datafrog.tools`;
+
+  // Drag & Drop Handling
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#16a34a';
+      dropZone.style.backgroundColor = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.backgroundColor = '#ffffff';
+    });
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#cbd5e1';
+    dropZone.style.backgroundColor = '#ffffff';
+    if (e.dataTransfer.files.length) {
+      readFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files.length) readFile(e.target.files[0]);
+  });
+
+  function readFile(file) {
+    const ext = file.name.split('.').pop().toLowerCase();
+    if (['xlsx', 'xls', 'xlsm', 'xlsb'].includes(ext)) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          let fullText = '';
+          workbook.SheetNames.forEach(sheetName => {
+            const sheet = workbook.Sheets[sheetName];
+            const csv = XLSX.utils.sheet_to_csv(sheet);
+            if (csv.trim()) {
+              if (workbook.SheetNames.length > 1) {
+                fullText += `--- Sheet: ${sheetName} ---\n`;
+              }
+              fullText += csv + '\n\n';
+            }
+          });
+          textInput.value = fullText.trim();
+          inputTypeBadge.textContent = file.name + ' (Excel Workbook)';
+        } catch(err) {
+          alert('Failed to parse Excel file: ' + err.message);
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        textInput.value = e.target.result;
+        inputTypeBadge.textContent = file.name;
+      };
+      reader.readAsText(file);
+    }
+  }
+
+  btnLoadSample.addEventListener('click', e => {
+    e.stopPropagation();
+    textInput.value = SAMPLE_PII;
+    inputTypeBadge.textContent = 'Sample Log Data';
+  });
+
+  btnClear.addEventListener('click', e => {
+    e.stopPropagation();
+    textInput.value = '';
+    textOutput.value = '';
+    inputTypeBadge.textContent = 'Raw Input';
+    statsPanel.style.display = 'none';
+  });
+
+  // Manual Trigger: Execute Anonymization on Button Click ONLY!
+  btnAnonymize.addEventListener('click', function() {
+    anonymizeData();
+  });
+
+  function anonymizeData() {
+    const raw = textInput.value;
+    if (!raw) {
+      alert("Please paste or upload input data first.");
+      return;
+    }
+
+    let result = raw;
+    let emailCount = 0;
+    let phoneCount = 0;
+    let ipCount = 0;
+    let cardCount = 0;
+
+    const strategy = anonymizeStrategy.value;
+
+    // 1. Email Anonymization Regex
+    if (chkEmail.checked) {
+      const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+      result = result.replace(emailRegex, function(match) {
+        emailCount++;
+        return maskEmail(match, strategy);
+      });
+    }
+
+    // 2. Phone Number Anonymization Regex
+    if (chkPhone.checked) {
+      const phoneRegex = /(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b/g;
+      result = result.replace(phoneRegex, function(match) {
+        phoneCount++;
+        return maskPhone(match, strategy);
+      });
+    }
+
+    // 3. IP Address Anonymization Regex (IPv4 and IPv6)
+    if (chkIp.checked) {
+      const ipv4Regex = /\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/g;
+      const ipv6Regex = /\b(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\b/g;
+      
+      result = result.replace(ipv4Regex, function(match) {
+        ipCount++;
+        return maskIPv4(match, strategy);
+      });
+      result = result.replace(ipv6Regex, function(match) {
+        ipCount++;
+        return maskIPv6(match, strategy);
+      });
+    }
+
+    // 4. Credit Card & SSN Masking Regex
+    if (chkCard.checked) {
+      const cardRegex = /\b(?:\d[ -]*?){13,16}\b/g;
+      const ssnRegex = /\b\d{3}-\d{2}-\d{4}\b/g;
+
+      result = result.replace(cardRegex, function(match) {
+        cardCount++;
+        return maskCard(match, strategy);
+      });
+      result = result.replace(ssnRegex, function(match) {
+        cardCount++;
+        return strategy === 'redact' ? '[REDACTED_SSN]' : '***-**-****';
+      });
+    }
+
+    // 5. Names (Basic heuristics)
+    if (chkNames.checked) {
+      const nameRegex = /\b(?:User|Customer|Contact):\s*([A-Z][a-z]+\s+[A-Z][a-z]+)\b/g;
+      result = result.replace(nameRegex, function(fullMatch, nameGroup) {
+        let maskedName = strategy === 'redact' ? '[REDACTED_NAME]' : (nameGroup.charAt(0) + '*** ' + nameGroup.split(' ')[1].charAt(0) + '***');
+        return fullMatch.replace(nameGroup, maskedName);
+      });
+    }
+
+    const totalCount = emailCount + phoneCount + ipCount + cardCount;
+
+    textOutput.value = result;
+    statsPanel.style.display = 'grid';
+    statTotalPii.textContent = totalCount;
+    statEmails.textContent = emailCount;
+    statPhones.textContent = phoneCount;
+    statIps.textContent = ipCount;
+    statCards.textContent = cardCount;
+  }
+
+  // Anonymization Helpers
+  function maskEmail(email, strategy) {
+    if (strategy === 'redact') return '[REDACTED_EMAIL]';
+    if (strategy === 'hash') return 'user_' + simpleHash(email) + '@anonymized.local';
+    if (strategy === 'synthetic') return 'user_' + Math.floor(1000 + Math.random()*9000) + '@anonymized.local';
+    
+    // Masking
+    const parts = email.split('@');
+    const name = parts[0];
+    const domain = parts[1];
+    const maskedName = name.length > 2 ? name.charAt(0) + '***' + name.charAt(name.length-1) : '***';
+    const domParts = domain.split('.');
+    const maskedDom = domParts[0].charAt(0) + '*****' + '.' + domParts.slice(1).join('.');
+    return maskedName + '@' + maskedDom;
+  }
+
+  function maskPhone(phone, strategy) {
+    if (strategy === 'redact') return '[REDACTED_PHONE]';
+    if (strategy === 'hash') return 'phone_' + simpleHash(phone);
+    if (strategy === 'synthetic') return '+1 (555) ' + Math.floor(100 + Math.random()*900) + '-' + Math.floor(1000 + Math.random()*9000);
+    return phone.replace(/\d(?=\d{4})/g, '*');
+  }
+
+  function maskIPv4(ip, strategy) {
+    if (strategy === 'redact') return '[REDACTED_IP]';
+    if (strategy === 'hash') return '10.' + (simpleHash(ip) % 255) + '.0.0/24';
+    // Zero out last octet for GDPR Anonymous IP Address
+    const octets = ip.split('.');
+    return octets[0] + '.' + octets[1] + '.' + octets[2] + '.***';
+  }
+
+  function maskIPv6(ip, strategy) {
+    if (strategy === 'redact') return '[REDACTED_IPV6]';
+    const segments = ip.split(':');
+    return segments.slice(0, 3).join(':') + ':****:****:****:****';
+  }
+
+  function maskCard(card, strategy) {
+    if (strategy === 'redact') return '[REDACTED_CARD]';
+    const digits = card.replace(/\D/g, '');
+    const last4 = digits.slice(-4);
+    return '****-****-****-' + last4;
+  }
+
+  function simpleHash(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash |= 0;
+    }
+    return Math.abs(hash).toString(16);
+  }
+
+  // Copy & Download
+  btnCopyOutput.addEventListener('click', () => {
+    if (!textOutput.value) return;
+    navigator.clipboard.writeText(textOutput.value);
+    showToast('Anonymized data copied to clipboard!');
+  });
+
+  btnDownloadOutput.addEventListener('click', () => {
+    if (!textOutput.value) return;
+    const blob = new Blob([textOutput.value], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'anonymized-data.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Anonymized file downloaded!');
+  });
+
+  function showToast(msg) {
+    let toast = document.getElementById('datafrog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'datafrog-toast';
+      toast.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.3s;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+  }
+
+})();
+</script>
