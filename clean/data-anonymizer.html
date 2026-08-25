@@ -427,9 +427,14 @@ permalink: /clean/data-anonymizer
     if (e.target.files.length) readFile(e.target.files[0]);
   });
 
+  let currentFileName = '';
+  let currentFileExt = '';
+
   function readFile(file) {
-    const ext = file.name.split('.').pop().toLowerCase();
-    if (['xlsx', 'xls', 'xlsm', 'xlsb'].includes(ext)) {
+    currentFileName = file.name;
+    currentFileExt = file.name.split('.').pop().toLowerCase();
+
+    if (['xlsx', 'xls', 'xlsm', 'xlsb'].includes(currentFileExt)) {
       const reader = new FileReader();
       reader.onload = function(e) {
         try {
@@ -466,6 +471,8 @@ permalink: /clean/data-anonymizer
   btnLoadSample.addEventListener('click', e => {
     e.stopPropagation();
     textInput.value = SAMPLE_PII;
+    currentFileName = 'sample_log_data.log';
+    currentFileExt = 'log';
     inputTypeBadge.textContent = 'Sample Log Data';
   });
 
@@ -473,6 +480,8 @@ permalink: /clean/data-anonymizer
     e.stopPropagation();
     textInput.value = '';
     textOutput.value = '';
+    currentFileName = '';
+    currentFileExt = '';
     inputTypeBadge.textContent = 'Raw Input';
     statsPanel.style.display = 'none';
   });
@@ -627,15 +636,54 @@ permalink: /clean/data-anonymizer
 
   btnDownloadOutput.addEventListener('click', () => {
     if (!textOutput.value) return;
-    const blob = new Blob([textOutput.value], { type: 'text/plain' });
+
+    let fileLabel = currentFileName || 'anonymized_data.csv';
+    let baseName = fileLabel.substring(0, fileLabel.lastIndexOf('.')) || fileLabel;
+    let ext = currentFileExt || (fileLabel.includes('.') ? fileLabel.split('.').pop().toLowerCase() : 'csv');
+
+    if (['xlsx', 'xls', 'xlsm'].includes(ext)) {
+      // Export anonymized dataset back as a native Excel (.xlsx) workbook via SheetJS
+      try {
+        const lines = textOutput.value.split('\n').filter(l => l.trim() && !l.startsWith('--- Sheet:'));
+        const rows = lines.map(line => {
+          if (line.includes(',')) {
+            return line.split(',');
+          }
+          return [line];
+        });
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(rows);
+        XLSX.utils.book_append_sheet(wb, ws, "Anonymized Data");
+        const outName = 'anonymized_' + baseName + '.xlsx';
+        XLSX.writeFile(wb, outName);
+        showToast('Anonymized Excel (.xlsx) workbook downloaded!');
+      } catch(err) {
+        // Fallback to text if Excel build fails
+        triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.csv', 'text/csv;charset=utf-8;');
+      }
+    } else if (ext === 'json') {
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.json', 'application/json');
+    } else if (ext === 'csv') {
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.csv', 'text/csv;charset=utf-8;');
+    } else if (ext === 'log') {
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.log', 'text/plain');
+    } else if (ext === 'sql') {
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.sql', 'text/plain');
+    } else {
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.' + (ext || 'txt'), 'text/plain');
+    }
+  });
+
+  function triggerBlobDownload(content, filename, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'anonymized-data.txt';
+    a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
-    showToast('Anonymized file downloaded!');
-  });
+    showToast('Anonymized file (' + filename + ') downloaded!');
+  }
 
   function showToast(msg) {
     let toast = document.getElementById('datafrog-toast');
