@@ -121,12 +121,12 @@ permalink: /clean/data-anonymizer
 <div id="drop-zone" style="margin-bottom: 1.75rem; border: 2px dashed #cbd5e1; border-radius: 14px; background: #ffffff; padding: 1.75rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
   <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🔒</span>
   <span style="font-weight: 800; color: #0f172a; font-size: 1.15rem; display: block; margin-bottom: 0.25rem;">Drag & Drop your Excel workbook, CSV, or dataset file here</span>
-  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports Excel (.xlsx, .xls), CSV, JSON, TXT, LOG files or paste raw text below</span>
+  <span style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 1.25rem;">Supports Excel (.xlsx, .xls), CSV, JSON, XML, TXT, LOG files or paste raw text below</span>
   
   <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;" onclick="event.stopPropagation();">
     <label style="padding: 0.6rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
       📁 Browse File
-      <input type="file" id="file-input" accept=".csv,.json,.txt,.log,.sql,.xlsx,.xls,.xlsm" style="display: none;">
+      <input type="file" id="file-input" accept=".csv,.json,.txt,.log,.sql,.xml,.xlsx,.xls,.xlsm" style="display: none;">
     </label>
     <button id="btn-load-sample" style="padding: 0.6rem 1.25rem; background: #16a34a; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.875rem;">
       ⚡ Load Sample PII Data
@@ -182,38 +182,37 @@ permalink: /clean/data-anonymizer
     </div>
   </div>
 
-  <!-- Dual Input / Output Textarea Grid -->
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
-    <div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-        <label style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">
-          1. Original Input Data
-        </label>
-        <span id="input-type-badge" style="font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem; background: #f1f5f9; color: #475569; border-radius: 4px;">
-          Raw Input
-        </span>
-      </div>
-      <textarea id="text-input" placeholder="Paste CSV, JSON, server logs, or raw text containing sensitive PII data..." 
-                style="width: 100%; height: 260px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical;"></textarea>
+  <!-- Original Input Preview (Full Width) -->
+  <div style="margin-bottom: 1.5rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+      <label style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">
+        1. Original Input Data
+      </label>
+      <span id="input-type-badge" style="font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem; background: #f1f5f9; color: #475569; border-radius: 4px;">
+        Raw Input
+      </span>
     </div>
+    <textarea id="text-input" placeholder="Paste CSV, JSON, XML, server logs, or raw text containing sensitive PII data..." 
+              style="width: 100%; height: 340px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #fafafa; resize: vertical; box-sizing: border-box;"></textarea>
+  </div>
 
-    <div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-        <label style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">
-          2. Anonymized Output
-        </label>
-        <div style="display: flex; gap: 0.5rem;">
-          <button id="btn-copy-output" style="padding: 0.2rem 0.6rem; background: #2563eb; color: #ffffff; border: none; border-radius: 4px; font-weight: 600; font-size: 0.75rem; cursor: pointer;">
-            📋 Copy
-          </button>
-          <button id="btn-download-output" style="padding: 0.2rem 0.6rem; background: #0f172a; color: #ffffff; border: none; border-radius: 4px; font-weight: 600; font-size: 0.75rem; cursor: pointer;">
-            📥 Download
-          </button>
-        </div>
+  <!-- Anonymized Output Preview (Full Width) - hidden until "Anonymize Data" is run -->
+  <div id="output-section" style="display: none; margin-bottom: 1.25rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+      <label style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">
+        2. Anonymized Output Preview
+      </label>
+      <div style="display: flex; gap: 0.5rem;">
+        <button id="btn-copy-output" style="padding: 0.2rem 0.6rem; background: #2563eb; color: #ffffff; border: none; border-radius: 4px; font-weight: 600; font-size: 0.75rem; cursor: pointer;">
+          📋 Copy
+        </button>
+        <button id="btn-download-output" style="padding: 0.2rem 0.6rem; background: #0f172a; color: #ffffff; border: none; border-radius: 4px; font-weight: 600; font-size: 0.75rem; cursor: pointer;">
+          📥 Download
+        </button>
       </div>
-      <textarea id="text-output" readonly placeholder="Click '🔒 Anonymize Data' above to generate sanitized output..." 
-                style="width: 100%; height: 260px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; background: #f8fafc; resize: vertical;"></textarea>
     </div>
+    <textarea id="text-output" readonly placeholder="Click '🔒 Anonymize Data' above to generate sanitized output..." 
+              style="width: 100%; height: 340px; padding: 0.85rem; font-family: consolas, monaco, monospace; font-size: 0.85rem; line-height: 1.5; border: 1px solid #86efac; border-radius: 10px; outline: none; background: #f0fdf4; resize: vertical; box-sizing: border-box;"></textarea>
   </div>
 
   <!-- Summary Statistics Panel -->
@@ -370,6 +369,7 @@ permalink: /clean/data-anonymizer
   const dropZone = document.getElementById('drop-zone');
   const fileInput = document.getElementById('file-input');
   const inputTypeBadge = document.getElementById('input-type-badge');
+  const outputSection = document.getElementById('output-section');
 
   const chkEmail = document.getElementById('chk-email');
   const chkPhone = document.getElementById('chk-phone');
@@ -434,6 +434,11 @@ permalink: /clean/data-anonymizer
     currentFileName = file.name;
     currentFileExt = file.name.split('.').pop().toLowerCase();
 
+    // Reset any previously generated output — it no longer matches the new input
+    outputSection.style.display = 'none';
+    textOutput.value = '';
+    statsPanel.style.display = 'none';
+
     if (['xlsx', 'xls', 'xlsm', 'xlsb'].includes(currentFileExt)) {
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -474,6 +479,9 @@ permalink: /clean/data-anonymizer
     currentFileName = 'sample_log_data.log';
     currentFileExt = 'log';
     inputTypeBadge.textContent = 'Sample Log Data';
+    outputSection.style.display = 'none';
+    textOutput.value = '';
+    statsPanel.style.display = 'none';
   });
 
   btnClear.addEventListener('click', e => {
@@ -483,6 +491,7 @@ permalink: /clean/data-anonymizer
     currentFileName = '';
     currentFileExt = '';
     inputTypeBadge.textContent = 'Raw Input';
+    outputSection.style.display = 'none';
     statsPanel.style.display = 'none';
   });
 
@@ -566,12 +575,18 @@ permalink: /clean/data-anonymizer
     const totalCount = emailCount + phoneCount + ipCount + cardCount;
 
     textOutput.value = result;
+    outputSection.style.display = 'block';
     statsPanel.style.display = 'grid';
     statTotalPii.textContent = totalCount;
     statEmails.textContent = emailCount;
     statPhones.textContent = phoneCount;
     statIps.textContent = ipCount;
     statCards.textContent = cardCount;
+
+    // Auto-scroll the newly revealed anonymized preview into view
+    requestAnimationFrame(() => {
+      outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 
   // Anonymization Helpers
@@ -665,12 +680,16 @@ permalink: /clean/data-anonymizer
       triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.json', 'application/json');
     } else if (ext === 'csv') {
       triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.csv', 'text/csv;charset=utf-8;');
+    } else if (ext === 'xml') {
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.xml', 'application/xml;charset=utf-8;');
+    } else if (ext === 'txt') {
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.txt', 'text/plain;charset=utf-8;');
     } else if (ext === 'log') {
-      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.log', 'text/plain');
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.log', 'text/plain;charset=utf-8;');
     } else if (ext === 'sql') {
-      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.sql', 'text/plain');
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.sql', 'text/plain;charset=utf-8;');
     } else {
-      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.' + (ext || 'txt'), 'text/plain');
+      triggerBlobDownload(textOutput.value, 'anonymized_' + baseName + '.' + (ext || 'txt'), 'text/plain;charset=utf-8;');
     }
   });
 
