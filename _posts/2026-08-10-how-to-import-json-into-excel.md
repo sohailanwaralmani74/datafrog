@@ -31,7 +31,7 @@ permalink: /blog/how-to-import-json-into-excel
   },
   "publisher": {
     "@type": "Organization",
-    "name": "DataFrog.tools",
+    "name": "DataFrog",
     "logo": {
       "@type": "ImageObject",
       "url": "https://datafrog.tools/assets/img/datafrog.png"

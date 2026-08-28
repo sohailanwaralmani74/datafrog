@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Data Intelligence Blog — Tutorials & Guides DataFrog"
-description: "Data engineering blog by DataFrog.tools. Read helpful tutorials & guides on JSON Schema validation, data profiling, file parsing, & browser utilities."
+description: "Data engineering blog by DataFrog. Read helpful tutorials & guides on JSON Schema validation, data profiling, file parsing, & browser utilities."
 permalink: /blog/
 sitemap: true
 ---
@@ -18,7 +18,7 @@ sitemap: true
   "description": "Expert data engineering guides, API contract tutorials, and privacy-first local data tools.",
   "publisher": {
     "@type": "Organization",
-    "name": "DataFrog.tools"
+    "name": "DataFrog"
   }
 }
 </script>

@@ -15,7 +15,7 @@ permalink: /analyze/csv-analyzer
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "CSV Analyzer – DataFrog.tools",
+  "name": "CSV Analyzer – DataFrog",
   "url": "https://datafrog.tools/analyze/csv-analyzer/",
   "description": "Browser-based CSV Analyzer providing column profiling, numeric summary stats (mean, median, min, max, sum), missing value detection, duplicate checks, and quality audits locally.",
   "applicationCategory": "DeveloperApplication",
@@ -815,7 +815,7 @@ ${currentColumnStats.map(s => `- ${s.colName.padEnd(20)} [${s.inferredType}] | U
 ${auditItems.map(i => `[${i.level.toUpperCase()}] ${i.msg}`).join('\n')}
 
 ==================================================
-DataFrog.tools — Privacy-First Data Intelligence`;
+DataFrog — Privacy-First Data Intelligence`;
 
     summaryReportOutput.textContent = currentReportText;
   }

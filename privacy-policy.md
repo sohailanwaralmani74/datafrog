@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Privacy Policy - 100% Local Data Intelligence | DataFrog"
-description: "Privacy policy for DataFrog.tools. Learn how our browser-based privacy-first tools process data 100% locally on your machine with zero server tracking."
+description: "Privacy policy for DataFrog. Learn how our browser-based privacy-first tools process data 100% locally on your machine with zero server tracking."
 permalink: /privacy-policy
 keywords: "DataFrog privacy policy, browser based data security, client side data processing, AdSense privacy compliance, cookies policy"
 ---
@@ -14,7 +14,7 @@ keywords: "DataFrog privacy policy, browser based data security, client side dat
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">1. Our Privacy Commitment</h2>
-    <p>At <strong>DataFrog.tools</strong>, we take your privacy extremely seriously. Our fundamental design principle is <strong>Privacy-First, Browser-Based Processing</strong>. When you inspect, analyze, validate, compare, clean, or visualize datasets on DataFrog.tools, <strong>your data never leaves your device</strong>.</p>
+    <p>At <strong>DataFrog</strong>, we take your privacy extremely seriously. Our fundamental design principle is <strong>Privacy-First, Browser-Based Processing</strong>. When you inspect, analyze, validate, compare, clean, or visualize datasets on DataFrog, <strong>your data never leaves your device</strong>.</p>
     <p>All data transformations, file parses, and utility computations happen entirely within your web browser using client-side JavaScript. We do not operate back-end processing servers for data manipulation, nor do we store, log, or transmit your uploaded files or pasted text.</p>
   </section>
 
@@ -22,30 +22,30 @@ keywords: "DataFrog privacy policy, browser based data security, client side dat
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">2. Information We Do Not Collect</h2>
     <ul style="padding-left: 1.5rem; margin-bottom: 1rem;">
       <li><strong>No File Uploads to Server:</strong> Files uploaded to our tools are processed locally in your browser memory (RAM) and discarded when you close or refresh the page.</li>
-      <li><strong>No Account Creation:</strong> DataFrog.tools does not offer or require user registration or logins. We store no user profile data.</li>
+      <li><strong>No Account Creation:</strong> DataFrog does not offer or require user registration or logins. We store no user profile data.</li>
       <li><strong>No Data Retention:</strong> We do not keep copies of input text, CSVs, JSON data, XML schemas, or generated output.</li>
     </ul>
   </section>
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">3. Cookies & Advertising (Google AdSense)</h2>
-    <p>DataFrog.tools uses third-party advertising partners, including <strong>Google AdSense</strong>, to serve advertisements when you visit our website. These partners may collect and use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.</p>
+    <p>DataFrog uses third-party advertising partners, including <strong>Google AdSense</strong>, to serve advertisements when you visit our website. These partners may collect and use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.</p>
 
     <h3 style="font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--text-primary);">Google DoubleClick DART Cookie</h3>
     <ul style="padding-left: 1.5rem; margin-bottom: 1rem;">
-      <li>Google, as a third-party vendor, uses cookies to serve ads on DataFrog.tools.</li>
-      <li>Google's use of the DART cookie enables it to serve ads to users based on their visit to DataFrog.tools and other sites on the Internet.</li>
+      <li>Google, as a third-party vendor, uses cookies to serve ads on DataFrog.</li>
+      <li>Google's use of the DART cookie enables it to serve ads to users based on their visit to DataFrog and other sites on the Internet.</li>
       <li>Users may opt out of the use of the DART cookie by visiting the <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Google Ad and Content Network Privacy Policy</a>.</li>
     </ul>
 
     <h3 style="font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--text-primary);">Third-Party Ad Networks</h3>
-    <p>Third-party ad servers or ad networks use technology in their advertisements and links that appear on DataFrog.tools, which are sent directly to your browser. They automatically receive your IP address when this occurs. Other technologies (such as cookies, JavaScript, or Web Beacons) may also be used by third-party ad networks to measure the effectiveness of their advertisements and/or to personalize the advertising content that you see.</p>
-    <p>DataFrog.tools has no access to or control over these cookies that are used by third-party advertisers.</p>
+    <p>Third-party ad servers or ad networks use technology in their advertisements and links that appear on DataFrog, which are sent directly to your browser. They automatically receive your IP address when this occurs. Other technologies (such as cookies, JavaScript, or Web Beacons) may also be used by third-party ad networks to measure the effectiveness of their advertisements and/or to personalize the advertising content that you see.</p>
+    <p>DataFrog has no access to or control over these cookies that are used by third-party advertisers.</p>
   </section>
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">4. Analytics & Log Files</h2>
-    <p>Like most websites, DataFrog.tools may use standard web analytics tools to analyze site performance, traffic trends, and user experience. Standard log files collect non-personally identifiable information such as IP addresses, browser types, Internet Service Providers (ISP), referring/exit pages, platform type, date/time stamps, and number of clicks. This data is used solely to administer the site, track movement in the aggregate, and gather broad demographic information for site optimization.</p>
+    <p>Like most websites, DataFrog may use standard web analytics tools to analyze site performance, traffic trends, and user experience. Standard log files collect non-personally identifiable information such as IP addresses, browser types, Internet Service Providers (ISP), referring/exit pages, platform type, date/time stamps, and number of clicks. This data is used solely to administer the site, track movement in the aggregate, and gather broad demographic information for site optimization.</p>
   </section>
 
   <section style="margin-bottom: 2rem;">

@@ -15,7 +15,7 @@ permalink: /analyze/xml-analyzer
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "XML Analyzer – DataFrog.tools",
+  "name": "XML Analyzer – DataFrog",
   "url": "https://datafrog.tools/analyze/xml-analyzer/",
   "description": "Browser-based XML Analyzer providing structural hierarchy analysis, element profiling, namespace auditing, attribute metrics, and data quality reports locally.",
   "applicationCategory": "DeveloperApplication",
@@ -708,7 +708,7 @@ ${sortedElementFreqs.slice(0, 10).map(i => `- <${i.tag.padEnd(20)}> : ${i.count}
 ${auditItems.map(i => `[${i.level.toUpperCase()}] ${i.msg}`).join('\n')}
 
 ==================================================
-DataFrog.tools — Privacy-First Data Intelligence Workspace`;
+DataFrog — Privacy-First Data Intelligence Workspace`;
 
     summaryReportOutput.textContent = currentReportText;
   }

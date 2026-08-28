@@ -18,7 +18,7 @@ permalink: /analyze/excel-analyzer
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Excel Analyzer – DataFrog.tools",
+  "name": "Excel Analyzer – DataFrog",
   "url": "https://datafrog.tools/analyze/excel-analyzer/",
   "description": "Interactive browser-based Excel Analyzer providing workbook statistics, worksheet profiling, formula auditing, cell type breakdown, and data quality insights locally.",
   "applicationCategory": "DeveloperApplication",
@@ -749,7 +749,7 @@ ${sheetStatsList.map(s => `- ${s.sName.padEnd(22)} | Status: ${s.isHidden ? 'Hid
 ${auditItems.map(i => `[${i.level.toUpperCase()}] ${i.msg}`).join('\n')}
 
 ==================================================
-DataFrog.tools — Privacy-First Data Intelligence Workspace`;
+DataFrog — Privacy-First Data Intelligence Workspace`;
 
     summaryReportOutput.textContent = currentReportText;
   }

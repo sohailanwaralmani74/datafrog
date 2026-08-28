@@ -1,6 +1,6 @@
-# DataFrog.tools — Browser-Based Data Intelligence Workspace
+# DataFrog — Browser-Based Data Intelligence Workspace
 
-Welcome to **[DataFrog.tools](https://datafrog.tools/)** — a privacy-first, client-side data intelligence workspace for software engineers, data professionals, and analysts. DataFrog offers an expanding suite of specialized data tools organized across core operational categories (**Inspect**, **Analyze**, **Validate**, **Compare**, and **Visualize**).
+Welcome to **[DataFrog](https://datafrog.tools/)** — a privacy-first, client-side data intelligence workspace for software engineers, data professionals, and analysts. DataFrog offers an expanding suite of specialized data tools organized across core operational categories (**Inspect**, **Analyze**, **Validate**, **Compare**, and **Visualize**).
 
 All processing executes 100% locally inside your browser memory — **zero server uploads, zero remote logging, zero paywalls, and fully offline-capable once loaded**.
 

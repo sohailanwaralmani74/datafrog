@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Sitemap - Complete Directory of DataFrog Tools | DataFrog"
-description: "Sitemap for DataFrog.tools. Browse all client-side tools, category indexes, data engineering guides, & online documentation pages on our platform today."
+description: "Sitemap for DataFrog. Browse all client-side tools, category indexes, data engineering guides, & online documentation pages on our platform today."
 permalink: /sitemap
 keywords: "DataFrog sitemap, site directory, all tools list"
 ---
@@ -9,7 +9,7 @@ keywords: "DataFrog sitemap, site directory, all tools list"
 <div class="page-container" style="max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; line-height: 1.7; color: var(--text-primary);">
   <header style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-default); padding-bottom: 1.5rem;">
     <h1 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Site Directory &amp; Sitemap</h1>
-    <p style="color: var(--text-muted); font-size: 1rem;">Complete index of DataFrog.tools pages and categories.</p>
+    <p style="color: var(--text-muted); font-size: 1rem;">Complete index of DataFrog pages and categories.</p>
   </header>
 
   <section style="margin-bottom: 2.5rem;">

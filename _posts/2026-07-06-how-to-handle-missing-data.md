@@ -1,6 +1,6 @@
 ---
 layout: main
-title: "How to Handle Missing Data: Complete Guide & Python Methods"
+title: "How to Handle Missing Data - DataFrog"
 description: "Learn how to handle missing data in datasets using listwise deletion methods, statistical mean or median imputation, KNN, & Python pandas ML algorithms."
 excerpt: "Master missing data handling in datasets. Learn MCAR, MAR, and MNAR mechanisms, deletion rules, statistical imputation, KNN methods, and Python code."
 keywords: "missing data handling, how to treat missing values, how to handle missing values in dataset, how to handle missing values, how to handle missing data, how to deal with missing data, handling missing values, handling missing data in python, dealing with missing values, dealing with missing data, handle missing data"
@@ -31,7 +31,7 @@ permalink: /blog/how-to-handle-missing-data
   },
   "publisher": {
     "@type": "Organization",
-    "name": "DataFrog.tools",
+    "name": "DataFrog",
     "logo": {
       "@type": "ImageObject",
       "url": "https://datafrog.tools/assets/img/datafrog.png"

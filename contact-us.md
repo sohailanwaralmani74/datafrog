@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Contact Us - Get in Touch with DataFrog.tools | DataFrog"
-description: "Contact DataFrog.tools. Send feedback, report issues, or suggest new browser-based data inspection, analysis, & validation tools directly to our team."
+title: "Contact Us - Get in Touch with DataFrog | DataFrog"
+description: "Contact DataFrog. Send feedback, report issues, or suggest new browser-based data inspection, analysis, & validation tools directly to our team."
 permalink: /contact-us
 keywords: "Contact DataFrog, datafrog support, feature request, feedback"
 ---
@@ -32,7 +32,7 @@ keywords: "Contact DataFrog, datafrog support, feature request, feedback"
   <section style="background: var(--bg-soft); padding: 2rem; border-radius: var(--radius-lg, 12px); border: 1px solid var(--border-default);">
     <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">Send Us a Message</h2>
     
-    <form onsubmit="event.preventDefault(); alert('Thank you for contacting DataFrog.tools! Your message has been prepared for transmission.');" style="display: flex; flex-direction: column; gap: 1.25rem;">
+    <form onsubmit="event.preventDefault(); alert('Thank you for contacting DataFrog! Your message has been prepared for transmission.');" style="display: flex; flex-direction: column; gap: 1.25rem;">
       <div>
         <label for="contact-name" style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-primary);">Your Name</label>
         <input type="text" id="contact-name" name="name" required placeholder="Jane Doe" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md, 8px); border: 1px solid var(--border-default); background: var(--bg-surface, #ffffff); color: var(--text-primary); font-size: 1rem;">

@@ -1,21 +1,21 @@
 ---
 layout: main
 title: "About Us - Browser-Based Data Intelligence Tools | DataFrog"
-description: "Learn about DataFrog.tools. We build free browser-based privacy-first tools to inspect, analyze, validate, & compare datasets locally with zero uploads."
+description: "Learn about DataFrog. We build free browser-based privacy-first tools to inspect, analyze, validate, & compare datasets locally with zero uploads."
 permalink: /about-us
 keywords: "About DataFrog, browser based data tools, privacy first data workspace, client side data analysis"
 ---
 
 <div class="page-container" style="max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; line-height: 1.7; color: var(--text-primary);">
   <header style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-default); padding-bottom: 1.5rem;">
-    <h1 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">About DataFrog.tools</h1>
+    <h1 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">About DataFrog</h1>
     <p style="color: var(--text-muted); font-size: 1.1rem;">Inspect • Analyze • Validate • Compare • Visualize Data — 100% In Your Browser.</p>
   </header>
 
   <section style="margin-bottom: 2.5rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Our Mission</h2>
     <p>Data science, software engineering, financial analysis, and business operations frequently require inspecting, parsing, validating, and formatting raw data. However, using traditional online tools often comes with severe privacy risks — uploading sensitive data, CSV exports, API logs, or financial records to unknown third-party servers.</p>
-    <p><strong>DataFrog.tools</strong> was built to eliminate that risk entirely. We provide a modern, high-performance workspace where users can inspect, analyze, validate, compare, clean, and visualize datasets locally inside their web browser without ever sending a single byte to an external server.</p>
+    <p><strong>DataFrog</strong> was built to eliminate that risk entirely. We provide a modern, high-performance workspace where users can inspect, analyze, validate, compare, clean, and visualize datasets locally inside their web browser without ever sending a single byte to an external server.</p>
   </section>
 
   <section style="margin-bottom: 2.5rem;">

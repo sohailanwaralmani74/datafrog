@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Terms of Service - Usage Rules & Privacy Scope | DataFrog"
-description: "Terms of service for DataFrog.tools. Read our terms & conditions for using our free browser-based data inspection, analysis, & conversion tools online."
+description: "Terms of service for DataFrog. Read our terms & conditions for using our free browser-based data inspection, analysis, & conversion tools online."
 permalink: /terms-of-service
 keywords: "DataFrog terms of service, terms of use, privacy first terms, client side data tool terms"
 ---
@@ -14,33 +14,33 @@ keywords: "DataFrog terms of service, terms of use, privacy first terms, client 
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">1. Agreement to Terms</h2>
-    <p>By accessing or using <strong>DataFrog.tools</strong> ("the Website"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please discontinue use of the Website immediately.</p>
+    <p>By accessing or using <strong>DataFrog</strong> ("the Website"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please discontinue use of the Website immediately.</p>
   </section>
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">2. Description of Service</h2>
-    <p>DataFrog.tools provides a suite of browser-based data inspection, analysis, validation, comparison, visualization, and report utilities. All computational functions run locally inside your client web browser. We do not store or transmit your datasets to external servers.</p>
+    <p>DataFrog provides a suite of browser-based data inspection, analysis, validation, comparison, visualization, and report utilities. All computational functions run locally inside your client web browser. We do not store or transmit your datasets to external servers.</p>
   </section>
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">3. User Responsibilities & Acceptable Use</h2>
-    <p>You agree to use DataFrog.tools only for lawful purposes. You are solely responsible for ensuring that you have all necessary rights, permissions, and authorizations to process any data, datasets, files, or text you load into your browser session.</p>
+    <p>You agree to use DataFrog only for lawful purposes. You are solely responsible for ensuring that you have all necessary rights, permissions, and authorizations to process any data, datasets, files, or text you load into your browser session.</p>
   </section>
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">4. Disclaimer of Warranties</h2>
-    <p>DataFrog.tools is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
-    <p>While we strive for maximum accuracy across all calculations and conversions, DataFrog.tools does not warrant that utility results, statistics, or reports will be completely error-free or uninterrupted. You should independently verify critical data prior to reliance.</p>
+    <p>DataFrog is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+    <p>While we strive for maximum accuracy across all calculations and conversions, DataFrog does not warrant that utility results, statistics, or reports will be completely error-free or uninterrupted. You should independently verify critical data prior to reliance.</p>
   </section>
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">5. Limitation of Liability</h2>
-    <p>In no event shall DataFrog.tools, its owners, operators, or contributors be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or related to your use or inability to use the Website, even if advised of the possibility of such damages.</p>
+    <p>In no event shall DataFrog, its owners, operators, or contributors be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or related to your use or inability to use the Website, even if advised of the possibility of such damages.</p>
   </section>
 
   <section style="margin-bottom: 2rem;">
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">6. Intellectual Property</h2>
-    <p>The code, branding, interface design, graphics, and structure of DataFrog.tools are protected by copyright and intellectual property laws. Users retain full ownership and intellectual property rights over any datasets they process using our browser tools.</p>
+    <p>The code, branding, interface design, graphics, and structure of DataFrog are protected by copyright and intellectual property laws. Users retain full ownership and intellectual property rights over any datasets they process using our browser tools.</p>
   </section>
 
   <section style="margin-bottom: 2rem;">

@@ -15,7 +15,7 @@ permalink: /analyze/json-analyzer
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "JSON Analyzer – DataFrog.tools",
+  "name": "JSON Analyzer – DataFrog",
   "url": "https://datafrog.tools/analyze/json-analyzer",
   "description": "Browser-based JSON Analyzer providing structural insights, data type distribution, complexity scoring, key frequency analysis, and quality audits locally.",
   "applicationCategory": "DeveloperApplication",
@@ -844,7 +844,7 @@ ${sortedKeyFreqs.map(k => `- ${k.key.padEnd(20)} : ${k.count} times (${((k.count
 ${auditItems.map(i => `[${i.level.toUpperCase()}] ${i.msg}`).join('\n')}
 
 ==================================================
-DataFrog.tools — Privacy-First Data Intelligence`;
+DataFrog — Privacy-First Data Intelligence`;
 
     summaryReportOutput.textContent = currentReportText;
   }

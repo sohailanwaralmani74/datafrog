@@ -31,7 +31,7 @@ permalink: /blog/mastering-json-schema-validation
   },
   "publisher": {
     "@type": "Organization",
-    "name": "DataFrog.tools",
+    "name": "DataFrog",
     "logo": {
       "@type": "ImageObject",
       "url": "https://datafrog.tools/assets/img/datafrog.png"
@@ -371,7 +371,7 @@ permalink: /blog/mastering-json-schema-validation
            loading="lazy"
            style="width: 100%; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: 0 4px 14px rgba(0,0,0,0.05);" />
       <span style="display: block; font-size: 0.85rem; color: #64748b; margin-top: 0.5rem; font-style: italic;">
-        Figure 1: Client-Side JSON Schema Validation Pipeline in DataFrog.tools
+        Figure 1: Client-Side JSON Schema Validation Pipeline in DataFrog
       </span>
     </div>
 
