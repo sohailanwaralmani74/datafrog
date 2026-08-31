@@ -18,14 +18,14 @@ category_name: "Convert"
     </p>
 
     <!-- Search within Category -->
-    <div style="max-width: 540px; margin: 0 auto 1rem; position: relative;">
+   <div style="max-width: 540px; margin: 0 auto 1rem; position: relative;">
       <input type="text" id="category-search-input" placeholder="Search within Convert tools..." 
              style="width: 100%; padding: 0.85rem 1rem 0.85rem 2.75rem; font-size: 0.95rem; border-radius: 10px; border: 1px solid #cbd5e1; background: #ffffff;">
       <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); opacity: 0.5;">🔍</span>
     </div>
 
     {% assign category_tools = site.data.tools | where: "category", "Convert" %}
-    <div style="font-size: 0.9rem; font-weight: 600; color: #0284c7; background: #f0f9ff; display: inline-block; padding: 0.35rem 1rem; border-radius: 9999px;">
+  <div style="font-size: 0.9rem; font-weight: 600; color: #0284c7; background: #f0f9ff; display: inline-block; padding: 0.35rem 1rem; border-radius: 9999px;">
       Total Tools Available: <span id="tool-count-badge">{{ category_tools.size | default: 0 }}</span>
     </div>
   </header>
@@ -56,9 +56,6 @@ category_name: "Convert"
         <div style="grid-column: 1 / -1; text-align: center; padding: 3.5rem 1.5rem; background: #f8fafc; border-radius: 14px; border: 1px dashed #cbd5e1;">
           <span style="font-size: 2.5rem; display: block; margin-bottom: 0.75rem;">🔄</span>
           <h3 style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Converters Coming Soon</h3>
-          <p style="color: #64748b; font-size: 0.95rem; max-width: 540px; margin: 0 auto; line-height: 1.5;">
-            Tools added to <code>_data/tools.yml</code> with <code>category: Convert</code> will automatically appear here in this category workspace.
-          </p>
         </div>
       {% endfor %}
     </div>
