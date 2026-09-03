@@ -84,7 +84,6 @@ layout: default
 
 <!-- Standard Tool / Content Page Layout with Category Sidebar -->
 <div class="tool-grid">
-
   <div class="tool-main">
     <!-- Breadcrumb Standard -->
     {% assign matched_tool = site.data.tools | where: "url", page.url | first %}
@@ -94,9 +93,9 @@ layout: default
       {% if page.url contains '/blog/' and page.url != '/blog/' and page.url != '/blog' %}
         <span> / </span>
         <a href="/blog/" style="color: inherit; text-decoration: none;">Blog</a>
-      {% elsif page.category %}
+      {% elsif matched_tool.category %}
         <span> / </span>
-        <a href="/{{ page.category | downcase }}" style="color: inherit; text-decoration: none;">{{ page.category }}</a>
+        <a href="/{{ matched_tool.category | downcase }}" style="color: inherit; text-decoration: none;">{{ matched_tool.category }}</a>
       {% endif %}
       <span> / </span>
       <span style="color: var(--text-primary, #0f172a); font-weight: 600;">{{ tool_breadcrumb_name }}</span>
@@ -133,10 +132,23 @@ layout: default
             {% assign related_count = related_count | plus: 1 %}
           {% endif %}
         {% endfor %}
-        {% if related_count == 0 %}
-          <li style="color: var(--text-muted, #94a3b8); font-style: italic;">Explore tools in <a href="/{{ page.category | downcase }}">{{ page.category }}</a>.</li>
-        {% endif %}
       </ul>
+
+      <ul style="list-style: none; padding: 0; margin: 0; line-height: 2; font-size: 0.9rem;">
+        {% assign category_converters = site.data.converters | where: "category", page.category %}
+        {% assign related_count = 0 %}
+        {% for tool in category_converters %}
+          {% if tool.url != page.url %}
+            <li>
+              <a href="{{ tool.url }}" style="color: var(--primary, #2563eb); text-decoration: none; font-weight: 500;">
+                {{ tool.icon | default: "⚡" }} {{ tool.title }}
+              </a>
+            </li>
+            {% assign related_count = related_count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+
     </div>
     {% elsif page.url == '/blog/' or page.url == '/blog' %}
     <!-- Second Ad Box Slot (For Main Blog Listing Page Only -> Shows 2 Ad Boxes Total) -->
