@@ -1,0 +1,54 @@
+- title: "Excel to SQL"
+  short_name: "Excel to SQL"
+  url: "/convert/xlsx-to-sql-converter"
+  category: "Convert"
+  description: "Convert Excel to SQL online – transform XLSX or XLS files into SQL INSERT statements. Choose table name, batch size, and SQL dialect. 100% private, no uploads."
+  keywords: ["excel to sql", "convert excel to sql", "xlsx to sql", "xls to sql", "excel to insert statements", "excel to sql converter online", "free excel to sql", "excel to sql generator"]
+  icon: "🗄️"
+  featured: true
+  date: "2026-08-01"
+  updated: "2026-08-01"
+
+- title: "Excel to JSON"
+  short_name: "Excel to JSON"
+  url: "/convert/excel-to-json"
+  category: "Convert"
+  description: "Convert Excel to JSON online – transform XLSX or XLS files into clean JSON instantly. Preview, edit, and download. 100% private, no uploads."
+  keywords: ["excel to json converter", "excel to json", "xlsx to json", "xls to json", "convert excel to json online free", "free excel to json", "browser based excel to json"]
+  icon: "🔄"
+  featured: true
+  date: "2026-07-28"
+  updated: "2026-07-28"
+
+- title: "Excel to HTML"
+  short_name: "Excel to HTML"
+  url: "/convert/excel-to-html"
+  category: "Convert"
+  description: "Convert Excel to HTML table online – transform XLSX or XLS files into clean, responsive HTML tables. Preview, edit, and download as .html. 100% private, no uploads."
+  keywords: ["excel to html", "convert excel to html table", "xlsx to html", "xls to html", "excel to html converter online", "free excel to html", "excel to html table generator"]
+  icon: "📊"
+  featured: true
+  date: "2026-08-01"
+  updated: "2026-08-01"  
+
+- title: "Excel to TXT"
+  short_name: "Excel to TXT"
+  url: "/convert/excel-to-txt"
+  category: "Convert"
+  description: "Convert Excel to TXT online – transform XLSX or XLS files into plain text. Choose delimiters, include headers, and download as .txt. 100% private, no uploads."
+  keywords: ["excel to txt", "convert excel to text", "xlsx to txt", "xls to txt", "excel to plain text", "excel to txt online", "free excel to text converter"]
+  icon: "📝"
+  featured: true
+  date: "2026-08-01"
+  updated: "2026-08-01"  
+
+- title: "Excel to PDF"
+  short_name: "Excel to PDF"
+  url: "/convert/xlsx-to-pdf"
+  category: "Convert"
+  description: "Convert Excel to PDF online – transform XLSX or XLS files into professional PDF documents. Choose orientation, page size, and include headers. 100% private, no uploads."
+  keywords: ["excel to pdf", "convert excel to pdf", "xlsx to pdf", "xls to pdf", "excel to pdf converter online", "free excel to pdf", "excel to pdf table", "excel to pdf document"]
+  icon: "📄"
+  featured: true
+  date: "2026-07-01"
+  updated: "2026-07-01"  

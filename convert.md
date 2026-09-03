@@ -24,7 +24,7 @@ category_name: "Convert"
       <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); opacity: 0.5;">🔍</span>
     </div>
 
-    {% assign category_tools = site.data.tools | where: "category", "Convert" %}
+    {% assign category_tools = site.data.converters %}
   <div style="font-size: 0.9rem; font-weight: 600; color: #0284c7; background: #f0f9ff; display: inline-block; padding: 0.35rem 1rem; border-radius: 9999px;">
       Total Tools Available: <span id="tool-count-badge">{{ category_tools.size | default: 0 }}</span>
     </div>
@@ -39,7 +39,7 @@ category_name: "Convert"
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
             <span style="font-size: 1.75rem;">{{ tool.icon | default: "🔄" }}</span>
             <span style="font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; background: #f0f9ff; color: #0284c7; border-radius: 9999px;">
-              Convert
+              {{ tool.category }}
             </span>
           </div>
           <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: #0f172a;">

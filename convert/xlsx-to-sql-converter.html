@@ -1,0 +1,617 @@
+---
+layout: main
+title: "Excel to SQL – Convert XLSX / XLS to SQL INSERT Statements Online Free"
+short_name: "Excel to SQL"
+description: "Convert Excel to SQL online – transform XLSX or XLS files into SQL INSERT statements. Choose table name, batch size, and SQL dialect. 100% private, no uploads."
+keywords: "excel to sql, convert excel to sql, xlsx to sql, xls to sql, excel to insert statements, excel to sql converter online, free excel to sql, excel to sql generator"
+category: "Convert"
+permalink: /convert/xlsx-to-sql-converter
+---
+
+<!-- SheetJS for reading Excel files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>🗄️</span> Client‑Side Excel to SQL Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      Excel to SQL – Generate INSERT Statements from Spreadsheets
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Turn any Excel file (<strong>.xlsx</strong> or <strong>.xls</strong>) into SQL INSERT statements. Choose your table name, column mapping, and batch size. Perfect for database seeding, data migration, and ETL pipelines. No signup, no limits, 100% private.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Your Excel file never leaves your device. No server uploads. No tracking.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your Excel File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xlsx</strong> and <strong>.xls</strong> workbooks
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse Excel File
+        <input type="file" id="fileInput" accept=".xlsx,.xls" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button onclick="loadSampleExcel()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (customers table)
+        </button>
+      </div>
+      <button onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">workbook.xlsx</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem; color: #475569;">
+        <label for="sheetSelect" style="font-weight: 700;">Worksheet:</label>
+        <select id="sheetSelect" onchange="loadActiveSheet()" style="padding: 0.35rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conversion Settings & Preview -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      ⚙️ SQL Generation Settings
+    </h3>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 1.25rem;">
+
+      <div>
+        <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Table Name</label>
+        <input type="text" id="tableNameInput" value="my_table" style="width:100%; padding:0.4rem 0.6rem; border:1px solid #cbd5e1; border-radius:6px; font-size:0.85rem;">
+      </div>
+
+      <div>
+        <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">SQL Dialect</label>
+        <select id="dialectSelect" style="width:100%; padding:0.4rem 0.6rem; border:1px solid #cbd5e1; border-radius:6px; font-size:0.85rem; background:#ffffff;">
+          <option value="mysql">MySQL</option>
+          <option value="postgresql">PostgreSQL</option>
+          <option value="sqlite">SQLite</option>
+          <option value="sqlserver">SQL Server</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Batch Size</label>
+        <select id="batchSizeSelect" style="width:100%; padding:0.4rem 0.6rem; border:1px solid #cbd5e1; border-radius:6px; font-size:0.85rem; background:#ffffff;">
+          <option value="1">1 row per INSERT</option>
+          <option value="10" selected>10 rows per INSERT</option>
+          <option value="50">50 rows per INSERT</option>
+          <option value="100">100 rows per INSERT</option>
+          <option value="500">500 rows per INSERT</option>
+          <option value="1000">1000 rows per INSERT</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Quote Style</label>
+        <select id="quoteStyleSelect" style="width:100%; padding:0.4rem 0.6rem; border:1px solid #cbd5e1; border-radius:6px; font-size:0.85rem; background:#ffffff;">
+          <option value="single">Single quotes (')</option>
+          <option value="double">Double quotes (")</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1.25rem;">
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="optHeaders" checked>
+        First row as column names
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="optEncloseNames" checked>
+        Enclose column names in backticks / quotes
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="optIncludeDrop" >
+        Include DROP TABLE IF EXISTS
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="optIncludeCreate" >
+        Include CREATE TABLE statement
+      </label>
+    </div>
+
+    <div style="margin-top: 0.5rem; margin-bottom: 1.5rem;">
+      <button id="convertBtn" onclick="generateSQL()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🗄️ Generate SQL
+      </button>
+      <span style="margin-left: 1rem; font-size: 0.9rem; color: #64748b;">Creates INSERT statements from your data.</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progressContainer" style="display: none; margin-top: 1rem;">
+      <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #475569; margin-bottom: 0.3rem;">
+        <span id="progressLabel">Generating SQL…</span>
+        <span id="progressPercent">0%</span>
+      </div>
+      <div style="width: 100%; background: #e2e8f0; border-radius: 9999px; height: 10px; overflow: hidden;">
+        <div id="progressBar" style="width: 0%; background: #059669; height: 100%; transition: width 0.3s;"></div>
+      </div>
+    </div>
+
+    <!-- Table Preview -->
+    <div style="border-top: 1px solid #e2e8f0; padding-top: 1rem; margin-top: 1rem;">
+      <h4 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Data Preview (first 100 rows)</h4>
+      <div style="overflow-x: auto; max-height: 300px; border: 1px solid #e2e8f0; border-radius: 8px;">
+        <table id="previewTable" style="width: 100%; border-collapse: collapse; font-size: 0.875rem;"></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">SQL Ready</h3>
+          <p id="sqlStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Download or copy the SQL below</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button onclick="copySQL()" style="padding: 0.7rem 1.5rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          📋 Copy SQL
+        </button>
+        <button onclick="downloadSQL()" style="padding: 0.7rem 1.5rem; background: #059669; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          💾 Download .sql
+        </button>
+      </div>
+    </div>
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden;">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+        <span style="font-weight: 700; color: #0f172a;">SQL Output</span>
+        <span style="margin-left:1rem; font-size:0.8rem; color:#64748b;" id="sqlLineCount"></span>
+      </div>
+      <textarea id="sqlOutput" style="width:100%; min-height:350px; max-height:450px; background:#1b1b1b; color:#e2e8f0; font-family:'Courier New',monospace; font-size:0.8rem; padding:1rem; border:none; resize:vertical; outline:none;" readonly></textarea>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Why Convert Excel to SQL?</h2>
+    <p>
+      Converting Excel spreadsheets to SQL is essential for database migration, data seeding, and ETL (Extract, Transform, Load) pipelines. Whether you're populating a development database, migrating data to production, or sharing structured data with a development team, SQL INSERT statements are the standard way to load data into relational databases. This tool transforms your <strong>.xlsx</strong> or <strong>.xls</strong> files into ready‑to‑run SQL – perfect for PostgreSQL, MySQL, SQLite, and SQL Server.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">How to Use the Excel to SQL Converter</h3>
+    <ol style="padding-left: 1.5rem;">
+      <li><strong>Upload</strong> – drag &amp; drop your Excel file or click to browse.</li>
+      <li><strong>Configure</strong> – set the table name, choose your SQL dialect, batch size, and quote style.</li>
+      <li><strong>Options</strong> – toggle headers, column name quoting, DROP TABLE, and CREATE TABLE statements.</li>
+      <li><strong>Generate</strong> – click <kbd>Generate SQL</kbd> to produce the INSERT statements.</li>
+      <li><strong>Copy or Download</strong> – copy the SQL to your clipboard or download it as a <code>.sql</code> file.</li>
+    </ol>
+    <p>
+      The tool automatically maps Excel column names to SQL column names, handles data types (strings, numbers, dates), and escapes special characters. Large datasets are batched into multiple INSERT statements for efficiency.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Privacy &amp; Security</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li>🔒 All processing happens in your browser – no files are uploaded.</li>
+      <li>🚫 No server interaction – everything runs locally using SheetJS.</li>
+      <li>🕵️ No tracking, no logging – your data stays yours.</li>
+      <li>💼 Safe for sensitive data – perfect for financial or customer spreadsheets.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display:flex; flex-direction:column; gap:1rem;">
+      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Which SQL dialects are supported?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">MySQL, PostgreSQL, SQLite, and SQL Server. The tool adapts quoting, escaping, and syntax accordingly.</p>
+      </details>
+      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Does this tool support multiple sheets?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Only the <strong>first sheet</strong> is converted. You can select a different sheet from the dropdown after uploading.</p>
+      </details>
+      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">How are data types handled?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Numbers become numeric literals, strings are quoted, and empty cells become NULL. Dates are converted to string literals in standard format.</p>
+      </details>
+      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">What is batch size?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Batch size controls how many rows are included in each INSERT statement. Larger batches produce fewer statements and can run faster in some databases.</p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  // -----------------------------------------------------------------
+  // State
+  // -----------------------------------------------------------------
+  let workbook = null;
+  let activeSheetName = '';
+  let currentFileName = '';
+  let currentFileSize = 0;
+  let tableData = []; // 2D array
+  let sqlOutput = '';
+
+  // DOM refs
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileMeta = document.getElementById('fileMeta');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const sheetSelect = document.getElementById('sheetSelect');
+  const previewTable = document.getElementById('previewTable');
+  const conversionPanel = document.getElementById('conversionPanel');
+  const resultArea = document.getElementById('resultArea');
+  const sqlOutputEl = document.getElementById('sqlOutput');
+  const sqlStats = document.getElementById('sqlStats');
+  const sqlLineCount = document.getElementById('sqlLineCount');
+  const progressContainer = document.getElementById('progressContainer');
+  const progressBar = document.getElementById('progressBar');
+  const progressLabel = document.getElementById('progressLabel');
+  const progressPercent = document.getElementById('progressPercent');
+
+  // -----------------------------------------------------------------
+  // Drag & Drop
+  // -----------------------------------------------------------------
+  function setupDropzone() {
+    ['dragenter', 'dragover'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#059669';
+        dropzone.style.background = '#ecfdf5';
+      });
+    });
+    ['dragleave', 'drop'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files.length) processFile(files[0]);
+    });
+  }
+  setupDropzone();
+
+  // -----------------------------------------------------------------
+  // File handling
+  // -----------------------------------------------------------------
+  function handleFileSelect(e) {
+    const files = e.target.files;
+    if (files.length) processFile(files[0]);
+  }
+
+  function processFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const data = new Uint8Array(evt.target.result);
+        workbook = XLSX.read(data, { type: 'array', cellStyles: true });
+        populateSheetDropdown();
+        activeSheetName = workbook.SheetNames[0] || '';
+        sheetSelect.value = activeSheetName;
+        loadActiveSheet();
+        fileMeta.style.display = 'block';
+        metaFilename.innerText = currentFileName;
+        metaFilesize.innerText = `Size: ${formatBytes(currentFileSize)}`;
+        conversionPanel.style.display = 'block';
+        resultArea.style.display = 'none';
+        progressContainer.style.display = 'none';
+      } catch (err) {
+        alert('Error reading file: ' + err.message);
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  function populateSheetDropdown() {
+    sheetSelect.innerHTML = '';
+    workbook.SheetNames.forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      sheetSelect.appendChild(opt);
+    });
+  }
+
+  function loadActiveSheet() {
+    activeSheetName = sheetSelect.value;
+    if (!activeSheetName) return;
+    const ws = workbook.Sheets[activeSheetName];
+    const data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+    tableData = data;
+    updatePreviewTable();
+  }
+
+  // -----------------------------------------------------------------
+  // Preview table
+  // -----------------------------------------------------------------
+  function updatePreviewTable() {
+    if (!tableData.length) {
+      previewTable.innerHTML = '<tr><td>No data</td></tr>';
+      return;
+    }
+    const useHeaders = document.getElementById('optHeaders').checked;
+    const headerRow = useHeaders ? tableData[0] : [];
+    const dataRows = useHeaders ? tableData.slice(1) : tableData;
+    const maxRows = Math.min(dataRows.length, 100);
+    const colCount = headerRow.length || (dataRows.length ? Math.max(...dataRows.map(r => r.length)) : 0);
+
+    let html = '<thead><tr>';
+    for (let c = 0; c < colCount; c++) {
+      const label = headerRow[c] !== undefined ? String(headerRow[c]) : `Col ${c+1}`;
+      html += `<th style="padding:0.5rem;border-bottom:2px solid #cbd5e1;text-align:left;">${escapeHTML(label)}</th>`;
+    }
+    html += '</tr></thead><tbody>';
+    for (let r = 0; r < maxRows; r++) {
+      const row = dataRows[r] || [];
+      html += '<tr>';
+      for (let c = 0; c < colCount; c++) {
+        const val = row[c] !== undefined ? String(row[c]) : '';
+        html += `<td style="padding:0.4rem;border-bottom:1px solid #e2e8f0;">${escapeHTML(val)}</td>`;
+      }
+      html += '</tr>';
+    }
+    html += '</tbody>';
+    previewTable.innerHTML = html;
+  }
+
+  // -----------------------------------------------------------------
+  // SQL Generation
+  // -----------------------------------------------------------------
+  function generateSQL() {
+    if (!tableData.length) {
+      alert('No data loaded.');
+      return;
+    }
+
+    // Get settings
+    const useHeaders = document.getElementById('optHeaders').checked;
+    const tableName = document.getElementById('tableNameInput').value.trim() || 'my_table';
+    const dialect = document.getElementById('dialectSelect').value;
+    const batchSize = parseInt(document.getElementById('batchSizeSelect').value);
+    const quoteStyle = document.getElementById('quoteStyleSelect').value;
+    const encloseNames = document.getElementById('optEncloseNames').checked;
+    const includeDrop = document.getElementById('optIncludeDrop').checked;
+    const includeCreate = document.getElementById('optIncludeCreate').checked;
+
+    // Determine quote character
+    const qChar = quoteStyle === 'single' ? "'" : '"';
+    const escChar = quoteStyle === 'single' ? "\\'" : '\\"';
+
+    // Determine name quoting
+    let nameOpen = '', nameClose = '';
+    if (encloseNames) {
+      if (dialect === 'mysql') { nameOpen = '`'; nameClose = '`'; }
+      else if (dialect === 'postgresql' || dialect === 'sqlite') { nameOpen = '"'; nameClose = '"'; }
+      else if (dialect === 'sqlserver') { nameOpen = '['; nameClose = ']'; }
+      else { nameOpen = '"'; nameClose = '"'; }
+    }
+
+    // Determine IF EXISTS syntax
+    const dropPrefix = (dialect === 'mysql' || dialect === 'postgresql' || dialect === 'sqlite') ? 'IF EXISTS' : '';
+
+    // Prepare data
+    const headerRow = useHeaders ? tableData[0] : [];
+    const dataRows = useHeaders ? tableData.slice(1) : tableData;
+
+    if (!dataRows.length) {
+      alert('No data rows found.');
+      return;
+    }
+
+    // Generate column names
+    const colCount = headerRow.length || Math.max(...dataRows.map(r => r.length));
+    let colNames = [];
+    for (let c = 0; c < colCount; c++) {
+      let name = headerRow[c] !== undefined ? String(headerRow[c]) : `col_${c+1}`;
+      // Sanitize column name
+      name = name.replace(/[^a-zA-Z0-9_]/g, '_');
+      if (/^\d/.test(name)) name = '_' + name;
+      colNames.push(name);
+    }
+
+    const quotedCols = colNames.map(n => nameOpen + n + nameClose);
+
+    // Build SQL
+    const lines = [];
+    const headerLine = `INSERT INTO ${nameOpen + tableName + nameClose} (${quotedCols.join(', ')})`;
+
+    // Include DROP TABLE
+    if (includeDrop) {
+      lines.push(`DROP TABLE ${dropPrefix} ${nameOpen + tableName + nameClose};`);
+    }
+
+    // Include CREATE TABLE (simplified – all columns as TEXT/VARCHAR)
+    if (includeCreate) {
+      const colDefs = colNames.map(n => {
+        return `  ${nameOpen + n + nameClose} TEXT`;
+      });
+      lines.push(`CREATE TABLE ${nameOpen + tableName + nameClose} (`);
+      lines.push(colDefs.join(',\n'));
+      lines.push(`);`);
+      lines.push('');
+    }
+
+    let insertCount = 0;
+    let totalRows = 0;
+
+    // Process rows in batches
+    for (let i = 0; i < dataRows.length; i += batchSize) {
+      const batch = dataRows.slice(i, i + batchSize);
+      const valueRows = batch.map(row => {
+        const rowValues = [];
+        for (let c = 0; c < colCount; c++) {
+          let val = row[c] !== undefined ? row[c] : null;
+          if (val === null || val === '') {
+            rowValues.push('NULL');
+          } else if (typeof val === 'number' && !isNaN(val)) {
+            rowValues.push(String(val));
+          } else if (typeof val === 'boolean') {
+            rowValues.push(val ? '1' : '0');
+          } else {
+            // String – escape quotes and special chars
+            let str = String(val);
+            // Escape the quote character
+            str = str.replace(new RegExp(qChar, 'g'), escChar);
+            rowValues.push(qChar + str + qChar);
+          }
+        }
+        return '(' + rowValues.join(', ') + ')';
+      });
+
+      const insertSQL = headerLine + ' VALUES\n  ' + valueRows.join(',\n  ') + ';';
+      lines.push(insertSQL);
+      insertCount++;
+      totalRows += batch.length;
+
+      // Update progress
+      const pct = Math.round((i + batch.length) / dataRows.length * 100);
+      updateProgress(pct, `Processed ${Math.min(i + batch.length, dataRows.length)} of ${dataRows.length} rows…`);
+    }
+
+    sqlOutput = lines.join('\n');
+    sqlOutputEl.value = sqlOutput;
+
+    const size = new Blob([sqlOutput]).size;
+    sqlStats.innerText = `${totalRows} rows, ${insertCount} INSERT statements, ${formatBytes(size)}`;
+    sqlLineCount.innerText = `${lines.length} lines`;
+
+    resultArea.style.display = 'block';
+    progressContainer.style.display = 'none';
+    updateProgress(100, 'Done!');
+  }
+
+  function updateProgress(percent, label) {
+    const p = Math.min(100, Math.max(0, percent));
+    progressBar.style.width = p + '%';
+    progressPercent.innerText = Math.round(p) + '%';
+    progressLabel.innerText = label || 'Processing…';
+  }
+
+  // -----------------------------------------------------------------
+  // Copy & Download
+  // -----------------------------------------------------------------
+  function copySQL() {
+    if (!sqlOutput) return;
+    navigator.clipboard.writeText(sqlOutput).then(() => {
+      alert('✅ SQL copied to clipboard!');
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = sqlOutput;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      alert('✅ SQL copied!');
+    });
+  }
+
+  function downloadSQL() {
+    if (!sqlOutput) return;
+    const blob = new Blob([sqlOutput], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = currentFileName.replace(/\.[^.]+$/, '') + '.sql';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // -----------------------------------------------------------------
+  // Sample Excel
+  // -----------------------------------------------------------------
+  function loadSampleExcel() {
+    const sampleData = [
+      ['id', 'first_name', 'last_name', 'email', 'city', 'active'],
+      [1, 'Alice', 'Smith', 'alice@example.com', 'New York', true],
+      [2, 'Bob', 'Johnson', 'bob@example.com', 'Chicago', false],
+      [3, 'Carol', 'Williams', 'carol@example.com', 'Dallas', true],
+      [4, 'Dave', 'Brown', 'dave@example.com', 'Seattle', true],
+      [5, 'Eve', 'Davis', 'eve@example.com', 'Miami', false],
+      [6, 'Frank', 'Miller', 'frank@example.com', 'Boston', true],
+      [7, 'Grace', 'Wilson', 'grace@example.com', 'Denver', true],
+      [8, 'Henry', 'Moore', 'henry@example.com', 'Austin', false],
+      [9, 'Ivy', 'Taylor', 'ivy@example.com', 'Portland', true],
+      [10, 'Jack', 'Anderson', 'jack@example.com', 'San Diego', true]
+    ];
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet(sampleData);
+    XLSX.utils.book_append_sheet(wb, ws, 'Customers');
+    const out = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([out], { type: 'application/octet-stream' });
+    const file = new File([blob], 'sample_customers.xlsx', { type: 'application/octet-stream' });
+    // Auto-fill table name
+    document.getElementById('tableNameInput').value = 'customers';
+    processFile(file);
+  }
+
+  // -----------------------------------------------------------------
+  // Reset
+  // -----------------------------------------------------------------
+  function resetTool() {
+    workbook = null;
+    activeSheetName = '';
+    tableData = [];
+    sqlOutput = '';
+    fileMeta.style.display = 'none';
+    conversionPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    progressContainer.style.display = 'none';
+    fileInput.value = '';
+    previewTable.innerHTML = '';
+    sqlOutputEl.value = '';
+    document.getElementById('tableNameInput').value = 'my_table';
+  }
+
+  // -----------------------------------------------------------------
+  // Helpers
+  // -----------------------------------------------------------------
+  function formatBytes(bytes) {
+    if (!bytes) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+</script>

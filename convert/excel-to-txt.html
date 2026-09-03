@@ -1,0 +1,456 @@
+---
+layout: main
+title: "Excel to TXT – Convert XLSX / XLS to Plain Text Online Free"
+short_name: "Excel to TXT"
+description: "Convert Excel to TXT online – transform XLSX or XLS files into plain text. Choose delimiters, include headers, and download as .txt. 100% private, no uploads."
+keywords: "excel to txt, convert excel to text, xlsx to txt, xls to txt, excel to plain text, excel to txt online, free excel to text converter"
+category: "Convert"
+permalink: /convert/excel-to-txt
+---
+
+<!-- SheetJS for reading Excel files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>📝</span> Client‑Side Excel to TXT Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      Excel to TXT – Convert Spreadsheets to Plain Text
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Extract clean plain text from any Excel file (<strong>.xlsx</strong> or <strong>.xls</strong>). Choose your delimiter, include headers, and download a <strong>.txt</strong> file. Perfect for legacy systems, data imports, and quick text extraction. No signup, no limits, 100% private.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Your Excel file never leaves your device. No server uploads. No tracking.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your Excel File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xlsx</strong> and <strong>.xls</strong> workbooks
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse Excel File
+        <input type="file" id="fileInput" accept=".xlsx,.xls" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button onclick="loadSampleExcel()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (simple contact list)
+        </button>
+      </div>
+      <button onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">workbook.xlsx</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem; color: #475569;">
+        <label for="sheetSelect" style="font-weight: 700;">Worksheet:</label>
+        <select id="sheetSelect" onchange="loadActiveSheet()" style="padding: 0.35rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+        </select>
+        <label style="display: flex; align-items: center; gap: 0.4rem;">
+          <input type="checkbox" id="optHeaders" checked>
+          Include header row
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conversion Options & Preview -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      ⚙️ Text Export Settings
+    </h3>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 1.25rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <label style="font-weight: 700; font-size: 0.9rem;">Delimiter:</label>
+        <select id="delimiterSelect" style="padding: 0.35rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+          <option value="tab">Tab</option>
+          <option value="comma">Comma ( , )</option>
+          <option value="semicolon">Semicolon ( ; )</option>
+          <option value="space">Space</option>
+          <option value="pipe">Pipe ( | )</option>
+          <option value="custom">Custom</option>
+        </select>
+        <input type="text" id="customDelimiter" placeholder="Custom delimiter" style="display: none; padding: 0.35rem 0.6rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; width: 80px;">
+      </div>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="optTrim" checked>
+        Trim whitespace from cells
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; cursor: pointer;">
+        <input type="checkbox" id="optQuote" checked>
+        Quote fields with spaces
+      </label>
+    </div>
+
+    <div style="margin-top: 0.5rem; margin-bottom: 1rem;">
+      <button id="convertBtn" onclick="generateTXT()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        📝 Convert to TXT
+      </button>
+      <span style="margin-left: 1rem; font-size: 0.9rem; color: #64748b;">Generates plain text from your data.</span>
+    </div>
+
+    <!-- Preview of the generated text (first 20 lines) -->
+    <div id="previewContainer" style="display: none; margin-top: 1rem; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+      <h4 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Preview (first 20 lines)</h4>
+      <pre id="txtPreview" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; max-height: 200px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.8rem; white-space: pre-wrap; word-break: break-all;"></pre>
+    </div>
+  </div>
+
+  <!-- Output Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">Text Ready</h3>
+          <p id="txtStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Download or copy the text below</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button onclick="copyTXT()" style="padding: 0.7rem 1.5rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          📋 Copy Text
+        </button>
+        <button onclick="downloadTXT()" style="padding: 0.7rem 1.5rem; background: #059669; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          💾 Download .txt
+        </button>
+      </div>
+    </div>
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden;">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+        <span style="font-weight: 700; color: #0f172a;">Plain Text Output</span>
+      </div>
+      <textarea id="txtOutput" style="width:100%; min-height:300px; max-height:400px; background:#1b1b1b; color:#e2e8f0; font-family:'Courier New',monospace; font-size:0.85rem; padding:1rem; border:none; resize:vertical; outline:none;" readonly></textarea>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Why Convert Excel to TXT?</h2>
+    <p>
+      Converting Excel spreadsheets to plain text is a common need for data migration, legacy system imports, and simple text processing. Many older systems accept only text files, and plain text is the most universal format for data exchange. This tool extracts all your data into a clean, delimiter‑separated text file that can be opened in any text editor or imported into almost any application.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">How to Use the Excel to TXT Converter</h3>
+    <ol style="padding-left: 1.5rem;">
+      <li><strong>Upload</strong> – drag &amp; drop your Excel file or click to browse.</li>
+      <li><strong>Choose settings</strong> – pick a delimiter (tab, comma, etc.), decide whether to include headers, and optionally trim whitespace.</li>
+      <li><strong>Convert</strong> – click <kbd>Convert to TXT</kbd> to generate the text.</li>
+      <li><strong>Copy or Download</strong> – copy the text to your clipboard or download it as a <code>.txt</code> file.</li>
+    </ol>
+    <p>
+      The output preserves data types – numbers stay numbers, strings remain strings, and empty cells become empty fields. You can also quote fields that contain spaces to avoid parsing issues.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Privacy &amp; Security</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li>🔒 All processing happens in your browser – no files are uploaded.</li>
+      <li>🚫 No server interaction – everything runs locally using SheetJS.</li>
+      <li>🕵️ No tracking, no logging – your data stays yours.</li>
+      <li>💼 Safe for sensitive data – perfect for financial or personal spreadsheets.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display:flex; flex-direction:column; gap:1rem;">
+      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Does this tool support multiple sheets?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Only the <strong>first sheet</strong> is converted. You can select a different sheet from the dropdown after uploading.</p>
+      </details>
+      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Can I choose a custom delimiter?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Yes – select "Custom" from the delimiter dropdown and enter any character you like (e.g., a colon or hyphen).</p>
+      </details>
+      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">What happens to empty cells?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Empty cells become empty fields in the text output – they are not skipped, so column alignment is preserved.</p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  // -----------------------------------------------------------------
+  // State
+  // -----------------------------------------------------------------
+  let workbook = null;
+  let activeSheetName = '';
+  let currentFileName = '';
+  let currentFileSize = 0;
+  let tableData = []; // 2D array of current sheet data (including header if present)
+  let txtOutput = '';
+
+  // DOM refs
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileMeta = document.getElementById('fileMeta');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const sheetSelect = document.getElementById('sheetSelect');
+  const conversionPanel = document.getElementById('conversionPanel');
+  const resultArea = document.getElementById('resultArea');
+  const txtOutputEl = document.getElementById('txtOutput');
+  const txtStats = document.getElementById('txtStats');
+  const delimiterSelect = document.getElementById('delimiterSelect');
+  const customDelimiter = document.getElementById('customDelimiter');
+  const previewContainer = document.getElementById('previewContainer');
+  const txtPreview = document.getElementById('txtPreview');
+
+  // Show/hide custom delimiter input
+  delimiterSelect.addEventListener('change', () => {
+    customDelimiter.style.display = delimiterSelect.value === 'custom' ? 'inline-block' : 'none';
+  });
+
+  // -----------------------------------------------------------------
+  // Drag & Drop
+  // -----------------------------------------------------------------
+  function setupDropzone() {
+    ['dragenter', 'dragover'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#059669';
+        dropzone.style.background = '#ecfdf5';
+      });
+    });
+    ['dragleave', 'drop'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files.length) processFile(files[0]);
+    });
+  }
+  setupDropzone();
+
+  // -----------------------------------------------------------------
+  // File handling
+  // -----------------------------------------------------------------
+  function handleFileSelect(e) {
+    const files = e.target.files;
+    if (files.length) processFile(files[0]);
+  }
+
+  function processFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const data = new Uint8Array(evt.target.result);
+        workbook = XLSX.read(data, { type: 'array', cellStyles: true });
+        populateSheetDropdown();
+        activeSheetName = workbook.SheetNames[0] || '';
+        sheetSelect.value = activeSheetName;
+        loadActiveSheet();
+        fileMeta.style.display = 'block';
+        metaFilename.innerText = currentFileName;
+        metaFilesize.innerText = `Size: ${formatBytes(currentFileSize)}`;
+        conversionPanel.style.display = 'block';
+        resultArea.style.display = 'none';
+        previewContainer.style.display = 'none';
+      } catch (err) {
+        alert('Error reading file: ' + err.message);
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  function populateSheetDropdown() {
+    sheetSelect.innerHTML = '';
+    workbook.SheetNames.forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      sheetSelect.appendChild(opt);
+    });
+  }
+
+  function loadActiveSheet() {
+    activeSheetName = sheetSelect.value;
+    if (!activeSheetName) return;
+    const ws = workbook.Sheets[activeSheetName];
+    const data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+    tableData = data;
+    // Auto-convert? No – user clicks convert.
+  }
+
+  // -----------------------------------------------------------------
+  // Generate TXT
+  // -----------------------------------------------------------------
+  function generateTXT() {
+    if (!tableData.length) {
+      alert('No data loaded.');
+      return;
+    }
+
+    const useHeaders = document.getElementById('optHeaders').checked;
+    const trim = document.getElementById('optTrim').checked;
+    const quote = document.getElementById('optQuote').checked;
+
+    // Get delimiter
+    let delim = '';
+    const delimValue = delimiterSelect.value;
+    if (delimValue === 'tab') delim = '\t';
+    else if (delimValue === 'comma') delim = ',';
+    else if (delimValue === 'semicolon') delim = ';';
+    else if (delimValue === 'space') delim = ' ';
+    else if (delimValue === 'pipe') delim = '|';
+    else if (delimValue === 'custom') delim = customDelimiter.value || '\t';
+    else delim = '\t';
+
+    // Determine data rows
+    let rows = tableData;
+    const headerRow = (rows.length && useHeaders) ? rows[0] : [];
+    const dataRows = useHeaders ? rows.slice(1) : rows;
+
+    // Build text lines
+    const lines = [];
+    // If headers included, add them
+    if (useHeaders && headerRow.length) {
+      const headerLine = headerRow.map(cell => {
+        let val = cell !== undefined ? String(cell) : '';
+        if (trim) val = val.trim();
+        if (quote && val.includes(' ')) val = '"' + val + '"';
+        return val;
+      }).join(delim);
+      lines.push(headerLine);
+    }
+
+    // Data rows
+    dataRows.forEach(row => {
+      const line = row.map(cell => {
+        let val = cell !== undefined ? String(cell) : '';
+        if (trim) val = val.trim();
+        if (quote && val.includes(' ')) val = '"' + val + '"';
+        return val;
+      }).join(delim);
+      lines.push(line);
+    });
+
+    txtOutput = lines.join('\n');
+    txtOutputEl.value = txtOutput;
+    const size = new Blob([txtOutput]).size;
+    txtStats.innerText = `Plain text – ${lines.length} lines, ${formatBytes(size)}`;
+    resultArea.style.display = 'block';
+
+    // Show preview (first 20 lines)
+    const previewLines = lines.slice(0, 20);
+    txtPreview.textContent = previewLines.join('\n') + (lines.length > 20 ? '\n... (truncated)' : '');
+    previewContainer.style.display = 'block';
+  }
+
+  // -----------------------------------------------------------------
+  // Copy & Download
+  // -----------------------------------------------------------------
+  function copyTXT() {
+    if (!txtOutput) return;
+    navigator.clipboard.writeText(txtOutput).then(() => {
+      alert('✅ Text copied to clipboard!');
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = txtOutput;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      alert('✅ Text copied!');
+    });
+  }
+
+  function downloadTXT() {
+    if (!txtOutput) return;
+    const blob = new Blob([txtOutput], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = currentFileName.replace(/\.[^.]+$/, '') + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // -----------------------------------------------------------------
+  // Sample Excel
+  // -----------------------------------------------------------------
+  function loadSampleExcel() {
+    const sampleData = [
+      ['ID', 'Name', 'Email', 'City', 'Active'],
+      [1, 'Alice', 'alice@example.com', 'New York', 'Yes'],
+      [2, 'Bob', 'bob@example.com', 'Chicago', 'No'],
+      [3, 'Carol', 'carol@example.com', 'Dallas', 'Yes'],
+      [4, 'Dave', 'dave@example.com', 'Seattle', 'Yes'],
+      [5, 'Eve', 'eve@example.com', 'Miami', 'No']
+    ];
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet(sampleData);
+    XLSX.utils.book_append_sheet(wb, ws, 'Contacts');
+    const out = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([out], { type: 'application/octet-stream' });
+    const file = new File([blob], 'sample_contacts.xlsx', { type: 'application/octet-stream' });
+    processFile(file);
+  }
+
+  // -----------------------------------------------------------------
+  // Reset
+  // -----------------------------------------------------------------
+  function resetTool() {
+    workbook = null;
+    activeSheetName = '';
+    tableData = [];
+    txtOutput = '';
+    fileMeta.style.display = 'none';
+    conversionPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    previewContainer.style.display = 'none';
+    fileInput.value = '';
+    txtOutputEl.value = '';
+    txtPreview.textContent = '';
+  }
+
+  // -----------------------------------------------------------------
+  // Helpers
+  // -----------------------------------------------------------------
+  function formatBytes(bytes) {
+    if (!bytes) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+</script>
