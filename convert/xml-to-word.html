@@ -1,0 +1,191 @@
+---
+layout: main
+title: "XML to Word – Convert XML to Formatted Microsoft Word Documents Online"
+short_name: "XML to Word"
+description: "Convert XML to Microsoft Word documents (.doc) online. Turn raw XML into structured headings, styled tables, and formatted reports. 100% private in-browser."
+keywords: "xml to word, convert xml to word, xml to docx, xml to doc, xml to word document online, format xml in word"
+category: "XML"
+permalink: /xml-to-word
+---
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #eff6ff; color: #1d4ed8; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #bfdbfe;">
+      <span>📝</span> Client‑Side XML to Word Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      XML to Word – Convert Raw XML to Styled Word Documents
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Solve the classic XML-in-Word formatting nightmare. Transform nested XML files, invoices, and legal records into clean headings, formatted tables, and styled Microsoft Word documents. No uploads, 100% private.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Your documents are formatted entirely in local browser memory. Zero cloud transmission.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your XML File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xml</strong>, <strong>.xhtml</strong>, and <strong>.docbook</strong> files
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse XML File
+        <input type="file" id="fileInput" accept=".xml,.xhtml,.rss,.atom,.svg,.txt" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button type="button" onclick="loadSampleXml()" style="padding: 0.4rem 0.85rem; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📝 Load Sample (business contract &amp; milestones)
+        </button>
+      </div>
+      <button type="button" onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">document.xml</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; color: #475569;">
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="docTitleInput" style="font-weight: 700;">Document Title:</label>
+          <input type="text" id="docTitleInput" value="Executive XML Summary" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; width: 180px;">
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="styleModeSelect" style="font-weight: 700;">Word Style:</label>
+          <select id="styleModeSelect" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+            <option value="executive">Executive (Headings + Data Tables)</option>
+            <option value="tabular">Tabular Grid (Corporate Blue)</option>
+            <option value="detailed">Technical Hierarchy Outline</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>XML Parsing Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Preview & Conversion Panel -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0;">
+        📊 Raw XML Input (editable)
+      </h3>
+      <span style="font-size: 0.85rem; color: #64748b;">Ready to format for Word</span>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <textarea id="xmlEditor" style="width: 100%; min-height: 200px; max-height: 360px; padding: 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #f8fafc; line-height: 1.5; resize: vertical; outline: none; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+      <button id="convertBtn" onclick="generateWordDoc()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🔄 Convert to Word
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">Word Document Ready</h3>
+          <p id="wordStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Native Word-formatted document ready to download</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button onclick="downloadWordDoc()" style="padding: 0.7rem 1.6rem; background: #1d4ed8; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+          <span>📘</span> Download .doc (Word)
+        </button>
+        <button id="copyBtn" onclick="copyWordHTML()" style="padding: 0.7rem 1.4rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          📋 Copy Word HTML
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Word Preview Container -->
+    <div style="background: #cbd5e1; padding: 2rem 1rem; border-radius: 14px; display: flex; justify-content: center; overflow-x: auto;">
+      <div id="wordPaper" style="width: 100%; max-width: 820px; background: #ffffff; min-height: 520px; padding: 3.5rem 3rem; border-radius: 4px; box-shadow: 0 12px 28px rgba(0,0,0,0.12); box-sizing: border-box; font-family: Calibri, 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #1e293b;">
+        <!-- Formatted Word document content will render here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Solving Common XML-to-Word Conversion Pain Points</h2>
+    <p>
+      On developer communities and office forums, converting XML into Microsoft Word is widely recognized as one of the most frustrating document management tasks. When users try opening an XML file directly in Microsoft Word, Word frequently presents a broken wall of raw text, displays schema validation warnings, or completely strips out tabular formatting.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">How DataFrog Fixes the 4 Major XML-to-Word Issues</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>Automatic Table Reconstruction:</strong> Instead of dumping repeating tags sequentially, DataFrog detects arrays of records (such as line items, transactions, or employee entries) and builds native Microsoft Word tables with styled header rows, alternating background fills, and clean cell padding.</li>
+      <li><strong>Preserved Document Hierarchy:</strong> Parent tags automatically map to Microsoft Word standard Heading styles (Heading 1, Heading 2), allowing navigation via the Word Navigation Pane and Table of Contents.</li>
+      <li><strong>Metadata Callout Formatting:</strong> Root attributes and configuration details are encapsulated in executive summary callout cards rather than being discarded.</li>
+      <li><strong>Native Office OpenXML / Word HTML Compatibility:</strong> The downloaded <code>.doc</code> file incorporates Microsoft Word namespace schemas (<code>xmlns:w="urn:schemas-microsoft-com:office:word"</code>), ensuring seamless opening in Microsoft Word 365, Word 2016-2024, Google Docs, and LibreOffice Writer without formatting errors.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Why does my raw XML normally look terrible when opened in Microsoft Word?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          By default, Microsoft Word treats XML as plain text markup unless an XSLT transformation stylesheet is attached. Without a styling engine, Word displays all angle brackets and cannot infer how tables or headings should be rendered. DataFrog performs that transformation for you automatically in your browser.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can non-technical clients edit the generated Word file?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes! The exported document opens directly in Word as editable paragraphs, bullet points, and tables. Users can change text, modify cell values, and apply their corporate Word templates.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is my XML data kept private when converting to Word?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          100% private. Unlike commercial online converters that upload your contracts or reports to remote servers, DataFrog builds the Word document entirely in your browser using client-side JavaScript.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the converter handle deeply nested XML elements and repeating lists without crashing Word?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Deeply nested or unformatted XML structures frequently cause Word layout overflow errors. DataFrog intelligently detects repeated record nodes and converts them into clean tables with proportional column widths, while child metadata is converted into styled sub-headings and lists to preserve readability without document corruption.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does the converted document support header rows repeating across pages in Word?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes! The generated tables include standard Word table header definitions (&lt;thead&gt; and shaded &lt;th&gt; cells) with standard page margin settings, allowing Microsoft Word and LibreOffice to cleanly split multi-page tables across pages.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script src="{{ '/assets/js/xml-to-word.js' | relative_url }}" defer></script>

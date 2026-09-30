@@ -1,0 +1,450 @@
+---
+layout: main
+title: "XML to SVG – Convert XML to Vector Graphics & Visual Node Trees Online"
+short_name: "XML to SVG"
+description: "Convert XML to scalable vector graphics (SVG) online. Generate clean visual node trees or extract embedded SVGs instantly. 100% private in-browser."
+keywords: "xml to svg, convert xml to svg, xml tree to svg, xml vector diagram, xml diagram generator online"
+category: "XML"
+permalink: /xml-to-svg
+---
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>🎨</span> Client‑Side XML to SVG Vector Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      XML to SVG – Render XML Hierarchies as Scalable Vector Diagrams
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Visualize complex XML node trees as crisp, high-resolution SVG diagrams, or extract vector graphics embedded inside XML envelopes. 100% private, no server compute.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Vector generation executes locally inside your browser SVG engine.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your XML File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xml</strong>, <strong>.svg</strong>, <strong>.xhtml</strong>, and <strong>.rss</strong>
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse XML File
+        <input type="file" id="fileInput" accept=".xml,.xhtml,.rss,.atom,.svg,.txt" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button type="button" onclick="loadSampleXml()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (organization hierarchy)
+        </button>
+      </div>
+      <button type="button" onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">diagram.xml</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; color: #475569;">
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="modeSelect" style="font-weight: 700;">Conversion Mode:</label>
+          <select id="modeSelect" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+            <option value="tree">Visual Node Tree Diagram</option>
+            <option value="extract">Extract Raw &lt;svg&gt; Tag</option>
+          </select>
+        </div>
+        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+          <input type="checkbox" id="optAttributes" checked>
+          <span>Render Attributes in Tree</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>XML Parsing Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Preview & Conversion Panel -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0;">
+        📊 Raw XML Input (editable)
+      </h3>
+      <span style="font-size: 0.85rem; color: #64748b;">Ready to generate vector diagram</span>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <textarea id="xmlEditor" style="width: 100%; min-height: 200px; max-height: 360px; padding: 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #f8fafc; line-height: 1.5; resize: vertical; outline: none; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+      <button id="convertBtn" onclick="generateSVG()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🔄 Convert to SVG
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">SVG Vector Ready</h3>
+          <p id="svgStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Vector graphics compiled – download or copy below</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="copyBtn" onclick="copySVG()" style="padding: 0.7rem 1.4rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          📋 Copy SVG
+        </button>
+        <button onclick="downloadSVG()" style="padding: 0.7rem 1.4rem; background: #059669; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          💾 Download .svg
+        </button>
+      </div>
+    </div>
+
+    <!-- Visual Canvas Preview -->
+    <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; overflow: auto; text-align: center;">
+      <div id="svgCanvasContainer" style="display: inline-block; min-width: 300px; max-width: 100%;"></div>
+    </div>
+
+    <!-- Code Display -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">SVG Vector Code</span>
+        <span id="outputMetrics" style="font-size: 0.85rem; color: #64748b;"></span>
+      </div>
+      <textarea id="svgOutput" style="width: 100%; min-height: 240px; max-height: 400px; background: #0f172a; color: #f8fafc; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.85rem; padding: 1rem; border: none; resize: vertical; outline: none; line-height: 1.5; box-sizing: border-box;" readonly></textarea>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Why Convert XML to SVG Vector Graphics?</h2>
+    <p>
+      XML’s tree-based object hierarchy can become overwhelming when documents nest 5 to 10 levels deep. Translating complex XML into an SVG (Scalable Vector Graphics) diagram provides immediate spatial clarity. Technical architects, schema engineers, and documentation authors use SVG diagrams to visualize data schemas, organizational charts, and XML-RPC network payloads directly within technical specifications.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Infinite Scalability &amp; Web Standard</h3>
+    <p>
+      Because SVG is XML-based vector graphics, output files can be scaled to billboard resolution without pixelation, inserted directly into HTML using <code>&lt;svg&gt;</code> tags, or imported into vector editing tools like Adobe Illustrator, Figma, and Inkscape.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What happens if my XML already contains SVG vector code?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Select the "Extract Raw &lt;svg&gt; Tag" mode. The converter will isolate the vector graphic from any surrounding SOAP envelopes or container tags and clean up namespaces.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I embed the downloaded SVG directly in Figma or React?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. The generated SVG is 100% compliant with the W3C SVG 1.1 specification and can be dropped directly into Figma canvas or used as an inline JSX SVG component in React/Next.js.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Are large tree diagrams legible in SVG?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. Nodes are rendered with high-contrast text badges and dynamic width calculation to ensure label text never collides or truncates.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does the generated SVG diagram scale cleanly without pixelation?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes, because the output is pure vector graphics using SVG &lt;rect&gt;, &lt;path&gt;, and &lt;text&gt; elements, the diagram can be zoomed indefinitely, printed on high-resolution posters, or embedded into crisp web vector illustrations.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I customize the colors and font of the generated SVG tree?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Absolutely. The generated SVG contains clean inline attributes and CSS classes that you can open and customize in vector editors like Adobe Illustrator, Inkscape, or Figma, or style with external CSS rules.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  let currentFileName = 'diagram.xml';
+  let currentFileSize = 0;
+  let rawXmlText = '';
+  let generatedSvgText = '';
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileMeta = document.getElementById('fileMeta');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const modeSelect = document.getElementById('modeSelect');
+  const optAttributes = document.getElementById('optAttributes');
+  const parseError = document.getElementById('parseError');
+  const errorMessage = document.getElementById('errorMessage');
+  const conversionPanel = document.getElementById('conversionPanel');
+  const xmlEditor = document.getElementById('xmlEditor');
+  const resultArea = document.getElementById('resultArea');
+  const svgCanvasContainer = document.getElementById('svgCanvasContainer');
+  const svgStats = document.getElementById('svgStats');
+  const outputMetrics = document.getElementById('outputMetrics');
+  const svgOutput = document.getElementById('svgOutput');
+  const copyBtn = document.getElementById('copyBtn');
+
+  if (dropzone) {
+    ['dragenter', 'dragover'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#2563eb';
+        dropzone.style.background = '#eff6ff';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        processUploadedFile(files[0]);
+      }
+    });
+
+    dropzone.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+        fileInput.click();
+      }
+    });
+  }
+
+  window.handleFileSelect = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      processUploadedFile(file);
+    }
+  };
+
+  function processUploadedFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize > 1024 ? (currentFileSize / 1024).toFixed(1) + ' KB' : currentFileSize + ' bytes');
+    fileMeta.style.display = 'block';
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      rawXmlText = e.target.result;
+      xmlEditor.value = rawXmlText;
+      conversionPanel.style.display = 'block';
+      resultArea.style.display = 'none';
+      conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+    reader.readAsText(file);
+  }
+
+  window.generateSVG = function() {
+    parseError.style.display = 'none';
+    const text = xmlEditor.value.trim();
+    if (!text) return;
+
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/xml');
+      const err = doc.getElementsByTagName('parsererror');
+      if (err && err.length > 0) {
+        throw new Error(err[0].textContent.split('\n')[0] || 'Invalid XML markup.');
+      }
+
+      const mode = modeSelect.value;
+      if (mode === 'extract') {
+        const svgEl = doc.querySelector('svg');
+        if (!svgEl) {
+          throw new Error('No <svg> tag found in the provided XML document.');
+        }
+        generatedSvgText = new XMLSerializer().serializeToString(svgEl);
+      } else {
+        // Build SVG Node Tree Diagram
+        const root = doc.documentElement;
+        const incAttrs = optAttributes.checked;
+
+        // Flatten nodes with coordinates
+        let currentY = 40;
+        const nodesData = [];
+        const linesData = [];
+
+        function layoutNode(node, depth, parentPos) {
+          const x = 30 + depth * 180;
+          const y = currentY;
+          currentY += 60;
+
+          let label = node.nodeName;
+          let subtext = '';
+
+          if (incAttrs && node.attributes && node.attributes.length > 0) {
+            const attrStr = Array.from(node.attributes).map(a => `${a.name}="${a.value}"`).join(' ');
+            if (attrStr) subtext = attrStr;
+          } else if (node.children.length === 0 && node.textContent.trim()) {
+            subtext = node.textContent.trim().slice(0, 24);
+          }
+
+          const myPos = { x, y: y + 16 };
+          if (parentPos) {
+            linesData.push({ x1: parentPos.x + 130, y1: parentPos.y, x2: myPos.x, y2: myPos.y });
+          }
+
+          nodesData.push({ x, y, label, subtext });
+
+          Array.from(node.children).forEach(child => {
+            layoutNode(child, depth + 1, myPos);
+          });
+        }
+
+        layoutNode(root, 0, null);
+
+        const maxX = Math.max(...nodesData.map(n => n.x)) + 220;
+        const maxY = currentY + 40;
+
+        let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${maxX}" height="${maxY}" viewBox="0 0 ${maxX} ${maxY}" style="background: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">\n`;
+        svg += `  <defs>\n`;
+        svg += `    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">\n`;
+        svg += `      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>\n`;
+        svg += `    </filter>\n`;
+        svg += `  </defs>\n`;
+
+        // Connectors
+        linesData.forEach(l => {
+          const midX = (l.x1 + l.x2) / 2;
+          svg += `  <path d="M ${l.x1} ${l.y1} C ${midX} ${l.y1}, ${midX} ${l.y2}, ${l.x2} ${l.y2}" fill="none" stroke="#94a3b8" stroke-width="2"/>\n`;
+        });
+
+        // Nodes
+        nodesData.forEach(n => {
+          svg += `  <g transform="translate(${n.x}, ${n.y})" filter="url(#shadow)">\n`;
+          svg += `    <rect width="140" height="38" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>\n`;
+          svg += `    <rect width="140" height="18" rx="8" fill="#eff6ff"/>\n`;
+          svg += `    <text x="70" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">&lt;${n.label}&gt;</text>\n`;
+          if (n.subtext) {
+            svg += `    <text x="70" y="30" text-anchor="middle" font-size="9" fill="#475569">${n.subtext.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</text>\n`;
+          }
+          svg += `  </g>\n`;
+        });
+
+        svg += `</svg>`;
+        generatedSvgText = svg;
+      }
+
+      svgCanvasContainer.innerHTML = generatedSvgText;
+      svgOutput.value = generatedSvgText;
+
+      const sizeBytes = new Blob([generatedSvgText]).size;
+      const sizeStr = sizeBytes > 1024 ? (sizeBytes / 1024).toFixed(1) + ' KB' : sizeBytes + ' bytes';
+
+      svgStats.textContent = `SVG compiled successfully (${sizeStr})`;
+      outputMetrics.textContent = `${generatedSvgText.split('\n').length} lines • ${sizeStr}`;
+      resultArea.style.display = 'block';
+      resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      errorMessage.textContent = err.message || 'Failed to generate SVG from XML';
+      parseError.style.display = 'block';
+    }
+  };
+
+  window.copySVG = function() {
+    if (!generatedSvgText) return;
+    navigator.clipboard.writeText(generatedSvgText).then(() => {
+      const orig = copyBtn.textContent;
+      copyBtn.textContent = '✓ Copied!';
+      copyBtn.style.background = '#059669';
+      setTimeout(() => {
+        copyBtn.textContent = orig;
+        copyBtn.style.background = '#0284c7';
+      }, 2000);
+    });
+  };
+
+  window.downloadSVG = function() {
+    if (!generatedSvgText) return;
+    const blob = new Blob([generatedSvgText], { type: 'image/svg+xml;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const baseName = currentFileName.replace(/\.[^/.]+$/, '') || 'diagram';
+    a.href = url;
+    a.download = `${baseName}.svg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  window.loadSampleXml = function() {
+    currentFileName = 'organization_chart.xml';
+    const sample = `<?xml version="1.0" encoding="UTF-8"?>
+<company name="Acrobatics Software Inc">
+  <executive_team>
+    <ceo name="Dr. Julian Vance">
+      <engineering_vp name="Maya Lin">
+        <team_lead name="David Kim"/>
+        <team_lead name="Sophie Martin"/>
+      </engineering_vp>
+      <product_vp name="Carlos Gomez">
+        <design_lead name="Hannah Scott"/>
+      </product_vp>
+    </ceo>
+  </executive_team>
+</company>`;
+
+    currentFileSize = sample.length;
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize / 1024).toFixed(1) + ' KB';
+    fileMeta.style.display = 'block';
+
+    xmlEditor.value = sample;
+    conversionPanel.style.display = 'block';
+    resultArea.style.display = 'none';
+    conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  window.resetTool = function() {
+    fileInput.value = '';
+    rawXmlText = '';
+    xmlEditor.value = '';
+    svgCanvasContainer.innerHTML = '';
+    generatedSvgText = '';
+    fileMeta.style.display = 'none';
+    conversionPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    parseError.style.display = 'none';
+  };
+</script>

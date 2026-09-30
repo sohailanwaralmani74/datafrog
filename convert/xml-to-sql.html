@@ -1,0 +1,508 @@
+---
+layout: main
+title: "XML to SQL – Convert XML Files to SQL Tables & INSERT Statements"
+short_name: "XML to SQL"
+description: "Convert XML to SQL online – generate CREATE TABLE definitions and batch INSERT statements for PostgreSQL, MySQL, SQLite, and SQL Server. 100% private."
+keywords: "xml to sql, convert xml to sql, xml to database, xml to insert statements, xml to sql converter online"
+category: "XML"
+permalink: /xml-to-sql
+---
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>🗄️</span> Client‑Side XML to SQL Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      XML to SQL – Generate DDL Schemas &amp; Batch INSERT Statements
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Convert XML datasets into production-ready SQL scripts. Supports PostgreSQL, MySQL, SQLite, and SQL Server with automatic type detection. No uploads, 100% private.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – SQL generation executes entirely in your browser. Zero database credentials or data uploaded.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your XML File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xml</strong>, <strong>.xhtml</strong>, and <strong>.sql</strong> data exports
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse XML File
+        <input type="file" id="fileInput" accept=".xml,.xhtml,.rss,.atom,.svg,.txt" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button type="button" onclick="loadSampleXml()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (warehouse products)
+        </button>
+      </div>
+      <button type="button" onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">dataset.xml</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; color: #475569;">
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="tableNameInput" style="font-weight: 700;">Table Name:</label>
+          <input type="text" id="tableNameInput" value="products" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; width: 130px;">
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="dialectSelect" style="font-weight: 700;">Dialect:</label>
+          <select id="dialectSelect" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+            <option value="postgres">PostgreSQL</option>
+            <option value="mysql">MySQL / MariaDB</option>
+            <option value="sqlite">SQLite</option>
+            <option value="sqlserver">SQL Server (T-SQL)</option>
+          </select>
+        </div>
+        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+          <input type="checkbox" id="optCreateTable" checked>
+          <span>Include CREATE TABLE</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>SQL Generation Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Preview & Conversion Panel -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0;">
+        📊 Raw XML Input (editable)
+      </h3>
+      <span style="font-size: 0.85rem; color: #64748b;">Ready to generate SQL script</span>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <textarea id="xmlEditor" style="width: 100%; min-height: 200px; max-height: 360px; padding: 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #f8fafc; line-height: 1.5; resize: vertical; outline: none; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+      <button id="convertBtn" onclick="generateSQL()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🔄 Convert to SQL
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">SQL Script Ready</h3>
+          <p id="sqlStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Statements generated successfully</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="copyBtn" onclick="copySQL()" style="padding: 0.7rem 1.4rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          📋 Copy SQL
+        </button>
+        <button onclick="downloadSQL()" style="padding: 0.7rem 1.4rem; background: #059669; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          💾 Download .sql
+        </button>
+      </div>
+    </div>
+
+    <!-- Output Viewer -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">Generated SQL Script</span>
+        <span id="outputMetrics" style="font-size: 0.85rem; color: #64748b;"></span>
+      </div>
+      <textarea id="sqlOutput" style="width: 100%; min-height: 280px; max-height: 460px; background: #0f172a; color: #f8fafc; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.85rem; padding: 1.25rem; border: none; resize: vertical; outline: none; line-height: 1.6; box-sizing: border-box;" readonly></textarea>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Why Convert XML to Relational SQL?</h2>
+    <p>
+      While modern document stores ingest JSON natively, most enterprise transactions, data warehouses, and mission-critical applications run on relational SQL databases like PostgreSQL, MySQL, and Microsoft SQL Server. Parsing nested XML directly in SQL stored procedures using <code>OPENXML</code> or XPath queries is notoriously slow and resource-intensive. Converting XML into clean, pre-compiled <code>INSERT</code> statements accelerates data ingestion by orders of magnitude.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Dialect-Specific Syntax Generation</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>PostgreSQL:</strong> Uses standard single-quote literal escaping, <code>BOOLEAN</code>, <code>NUMERIC</code>, and <code>TIMESTAMP</code> types.</li>
+      <li><strong>MySQL / MariaDB:</strong> Generates multi-row <code>INSERT INTO table (...) VALUES (...), (...)</code> batches for maximum throughput.</li>
+      <li><strong>SQLite:</strong> Uses clean ANSI SQL compatible with embedded mobile and local database setups.</li>
+      <li><strong>SQL Server (T-SQL):</strong> Implements <code>SET NOCOUNT ON;</code> and T-SQL type declarations (<code>NVARCHAR</code>, <code>DECIMAL</code>).</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the converter escape single quotes in text fields?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          All string values undergo automatic SQL injection sanitization: single quotes (<code>'</code>) are escaped to double single quotes (<code>''</code>) according to ANSI SQL standards, preventing SQL syntax errors.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are missing or empty XML tags handled in INSERT statements?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Missing tags or empty self-closing elements (e.g. <code>&lt;discount/&gt;</code>) are emitted as standard SQL <code>NULL</code> keywords rather than empty strings, preserving database integrity.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is my data uploaded to any SQL database during conversion?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          No. This tool generates pure SQL text scripts locally in your browser. You can inspect the complete script before manually executing it against your database server.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the converter differentiate numeric and boolean values from text strings?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          DataFrog inspects each field's contents: integers and floating-point decimals are rendered unquoted as numbers, booleans are mapped to TRUE/FALSE or 1/0 according to the selected dialect, and strings are wrapped in escaped single quotes.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I choose different SQL dialects like PostgreSQL, MySQL, and SQLite?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes! The toolbar includes a Dialect dropdown that automatically adjusts column data types (such as SERIAL vs AUTO_INCREMENT, TEXT vs VARCHAR, BOOLEAN vs TINYINT(1)) and quoting conventions.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  let currentFileName = 'dataset.xml';
+  let currentFileSize = 0;
+  let rawXmlText = '';
+  let generatedSqlScript = '';
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileMeta = document.getElementById('fileMeta');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const tableNameInput = document.getElementById('tableNameInput');
+  const dialectSelect = document.getElementById('dialectSelect');
+  const optCreateTable = document.getElementById('optCreateTable');
+  const parseError = document.getElementById('parseError');
+  const errorMessage = document.getElementById('errorMessage');
+  const conversionPanel = document.getElementById('conversionPanel');
+  const xmlEditor = document.getElementById('xmlEditor');
+  const resultArea = document.getElementById('resultArea');
+  const sqlStats = document.getElementById('sqlStats');
+  const outputMetrics = document.getElementById('outputMetrics');
+  const sqlOutput = document.getElementById('sqlOutput');
+  const copyBtn = document.getElementById('copyBtn');
+
+  if (dropzone) {
+    ['dragenter', 'dragover'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#2563eb';
+        dropzone.style.background = '#eff6ff';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        processUploadedFile(files[0]);
+      }
+    });
+
+    dropzone.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+        fileInput.click();
+      }
+    });
+  }
+
+  window.handleFileSelect = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      processUploadedFile(file);
+    }
+  };
+
+  function processUploadedFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize > 1024 ? (currentFileSize / 1024).toFixed(1) + ' KB' : currentFileSize + ' bytes');
+    fileMeta.style.display = 'block';
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      rawXmlText = e.target.result;
+      xmlEditor.value = rawXmlText;
+      conversionPanel.style.display = 'block';
+      resultArea.style.display = 'none';
+      conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+    reader.readAsText(file);
+  }
+
+  function sanitizeSqlString(val) {
+    if (val === null || val === undefined || val === '') return 'NULL';
+    const s = String(val).trim();
+    if (s.toLowerCase() === 'true') return 'TRUE';
+    if (s.toLowerCase() === 'false') return 'FALSE';
+    if (/^-?\d+$/.test(s)) return s;
+    if (/^-?\d+\.\d+$/.test(s)) return s;
+    return `'${s.replace(/'/g, "''")}'`;
+  }
+
+  function inferSqlType(values, dialect) {
+    let hasInt = false;
+    let hasFloat = false;
+    let hasBool = false;
+    let hasText = false;
+    let maxLen = 0;
+
+    for (const v of values) {
+      if (!v) continue;
+      maxLen = Math.max(maxLen, v.length);
+      if (v.toLowerCase() === 'true' || v.toLowerCase() === 'false') {
+        hasBool = true;
+      } else if (/^-?\d+$/.test(v)) {
+        hasInt = true;
+      } else if (/^-?\d+\.\d+$/.test(v)) {
+        hasFloat = true;
+      } else {
+        hasText = true;
+      }
+    }
+
+    if (hasText || (hasBool && hasInt)) {
+      if (maxLen > 255) return 'TEXT';
+      return `VARCHAR(${Math.max(50, Math.ceil(maxLen * 1.5))})`;
+    }
+    if (hasFloat) return dialect === 'postgres' ? 'NUMERIC(12,2)' : 'DECIMAL(12,2)';
+    if (hasInt) return 'INTEGER';
+    if (hasBool) return dialect === 'sqlserver' ? 'BIT' : 'BOOLEAN';
+    return 'VARCHAR(255)';
+  }
+
+  window.generateSQL = function() {
+    parseError.style.display = 'none';
+    const text = xmlEditor.value.trim();
+    if (!text) return;
+
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/xml');
+      const err = doc.getElementsByTagName('parsererror');
+      if (err && err.length > 0) {
+        throw new Error(err[0].textContent.split('\n')[0] || 'Invalid XML markup.');
+      }
+
+      const root = doc.documentElement;
+      let recordNodes = [];
+      const children = Array.from(root.children);
+
+      if (children.length > 0) {
+        const hasGrandchildren = children.some(c => c.children.length > 0);
+        if (children.length === 1 && hasGrandchildren) {
+          recordNodes = Array.from(children[0].children);
+        } else {
+          recordNodes = children;
+        }
+      } else {
+        recordNodes = [root];
+      }
+
+      const headersSet = new Set();
+      const rows = [];
+      const colValuesMap = {};
+
+      recordNodes.forEach(node => {
+        const row = {};
+        if (node.attributes) {
+          Array.from(node.attributes).forEach(a => {
+            headersSet.add(a.name);
+            row[a.name] = a.value;
+            if (!colValuesMap[a.name]) colValuesMap[a.name] = [];
+            colValuesMap[a.name].push(a.value);
+          });
+        }
+        if (node.children.length > 0) {
+          Array.from(node.children).forEach(c => {
+            headersSet.add(c.nodeName);
+            const val = c.textContent.trim();
+            row[c.nodeName] = val;
+            if (!colValuesMap[c.nodeName]) colValuesMap[c.nodeName] = [];
+            colValuesMap[c.nodeName].push(val);
+          });
+        } else {
+          headersSet.add(node.nodeName);
+          const val = node.textContent.trim();
+          row[node.nodeName] = val;
+          if (!colValuesMap[node.nodeName]) colValuesMap[node.nodeName] = [];
+          colValuesMap[node.nodeName].push(val);
+        }
+        rows.push(row);
+      });
+
+      const headers = Array.from(headersSet);
+      if (!headers.length || !rows.length) {
+        throw new Error('No repeating structured records found in XML to generate SQL rows.');
+      }
+
+      const tableName = (tableNameInput.value.trim() || 'xml_records').replace(/[^a-zA-Z0-9_]/g, '_');
+      const dialect = dialectSelect.value;
+      let sql = `-- ====================================================\n`;
+      sql += `-- Generated from: ${currentFileName}\n`;
+      sql += `-- Dialect: ${dialect.toUpperCase()} | Records: ${rows.length}\n`;
+      sql += `-- ====================================================\n\n`;
+
+      // CREATE TABLE
+      if (optCreateTable.checked) {
+        sql += `CREATE TABLE ${tableName} (\n`;
+        sql += `  id SERIAL PRIMARY KEY,\n`;
+        const colDefs = headers.map(h => {
+          const colName = h.replace(/[^a-zA-Z0-9_]/g, '_');
+          const colType = inferSqlType(colValuesMap[h] || [], dialect);
+          return `  ${colName} ${colType}`;
+        });
+        sql += colDefs.join(',\n');
+        sql += `\n);\n\n`;
+      }
+
+      // INSERT STATEMENTS
+      const colList = headers.map(h => h.replace(/[^a-zA-Z0-9_]/g, '_')).join(', ');
+      
+      // Batch inserts
+      rows.forEach(r => {
+        const valList = headers.map(h => sanitizeSqlString(r[h])).join(', ');
+        sql += `INSERT INTO ${tableName} (${colList}) VALUES (${valList});\n`;
+      });
+
+      generatedSqlScript = sql;
+      sqlOutput.value = sql;
+
+      const lines = sql.split('\n').length;
+      const sizeBytes = new Blob([sql]).size;
+      const sizeStr = sizeBytes > 1024 ? (sizeBytes / 1024).toFixed(1) + ' KB' : sizeBytes + ' bytes';
+
+      sqlStats.textContent = `Generated ${rows.length} INSERT statements across ${headers.length} columns`;
+      outputMetrics.textContent = `${lines} lines • ${sizeStr}`;
+      resultArea.style.display = 'block';
+      resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      errorMessage.textContent = err.message || 'Failed to generate SQL from XML';
+      parseError.style.display = 'block';
+    }
+  };
+
+  window.copySQL = function() {
+    if (!generatedSqlScript) return;
+    navigator.clipboard.writeText(generatedSqlScript).then(() => {
+      const orig = copyBtn.textContent;
+      copyBtn.textContent = '✓ Copied!';
+      copyBtn.style.background = '#059669';
+      setTimeout(() => {
+        copyBtn.textContent = orig;
+        copyBtn.style.background = '#0284c7';
+      }, 2000);
+    });
+  };
+
+  window.downloadSQL = function() {
+    if (!generatedSqlScript) return;
+    const blob = new Blob([generatedSqlScript], { type: 'application/sql;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const baseName = tableNameInput.value.trim() || 'dataset';
+    a.href = url;
+    a.download = `${baseName}.sql`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  window.loadSampleXml = function() {
+    currentFileName = 'warehouse_inventory.xml';
+    const sample = `<?xml version="1.0" encoding="UTF-8"?>
+<inventory warehouse="Chicago Hub" region="Midwest">
+  <item sku="VALVE-01" active="true">
+    <title>High-Pressure Brass Ball Valve</title>
+    <category>Plumbing</category>
+    <quantity>150</quantity>
+    <unit_price>24.50</unit_price>
+    <reorder_level>25</reorder_level>
+  </item>
+  <item sku="PIPE-02" active="true">
+    <title>Stainless Steel Seamless Tubing</title>
+    <category>Raw Materials</category>
+    <quantity>48</quantity>
+    <unit_price>89.00</unit_price>
+    <reorder_level>10</reorder_level>
+  </item>
+  <item sku="FLANGE-03" active="false">
+    <title>Carbon Steel Blind Flange 4-inch</title>
+    <category>Hardware</category>
+    <quantity>0</quantity>
+    <unit_price>42.75</unit_price>
+    <reorder_level>15</reorder_level>
+  </item>
+</inventory>`;
+
+    currentFileSize = sample.length;
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize / 1024).toFixed(1) + ' KB';
+    fileMeta.style.display = 'block';
+
+    xmlEditor.value = sample;
+    conversionPanel.style.display = 'block';
+    resultArea.style.display = 'none';
+    conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  window.resetTool = function() {
+    fileInput.value = '';
+    rawXmlText = '';
+    xmlEditor.value = '';
+    generatedSqlScript = '';
+    fileMeta.style.display = 'none';
+    conversionPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    parseError.style.display = 'none';
+  };
+</script>

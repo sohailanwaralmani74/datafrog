@@ -1,0 +1,476 @@
+---
+layout: main
+title: "XML to Excel – Convert XML to XLSX & XLS Online Free"
+short_name: "XML to Excel"
+description: "Convert XML to Excel online – transform XML data into XLSX and XLS spreadsheets instantly. Multi-format download, tabular preview. 100% private, no uploads."
+keywords: "xml to excel, convert xml to excel, xml to xlsx, xml to xls, xml to spreadsheet online, free xml to excel converter"
+category: "XML"
+permalink: /xml-to-excel
+---
+
+<!-- SheetJS for writing Excel files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>📊</span> Client‑Side XML to Excel Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      XML to Excel – Convert XML Datasets to XLSX &amp; XLS Workbooks
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Transform hierarchical XML files, web feeds, and exports into structured Microsoft Excel workbooks. Download in modern <strong>.xlsx</strong> or legacy <strong>.xls</strong> format. No uploads, 100% private.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Your XML file never leaves your device. Spreadsheet generation runs entirely in your browser.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your XML File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xml</strong>, <strong>.xhtml</strong>, and <strong>.rss</strong> files
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse XML File
+        <input type="file" id="fileInput" accept=".xml,.xhtml,.rss,.atom,.svg,.txt" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button type="button" onclick="loadSampleXml()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (sales invoices)
+        </button>
+      </div>
+      <button type="button" onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">dataset.xml</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; color: #475569;">
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="sheetNameInput" style="font-weight: 700;">Sheet Name:</label>
+          <input type="text" id="sheetNameInput" value="Sheet1" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; width: 110px;">
+        </div>
+        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+          <input type="checkbox" id="optAttributes" checked>
+          <span>Include Attributes as Columns</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>XML Parsing Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Preview & Conversion Panel -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0;">
+        📊 Raw XML Input (editable)
+      </h3>
+      <span style="font-size: 0.85rem; color: #64748b;">Ready to convert</span>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <textarea id="xmlEditor" style="width: 100%; min-height: 200px; max-height: 360px; padding: 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #f8fafc; line-height: 1.5; resize: vertical; outline: none; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+      <button id="convertBtn" onclick="generateExcel()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🔄 Convert to Excel
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">Workbook Ready</h3>
+          <p id="excelStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Table generated successfully – download below</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button onclick="downloadWorkbook('xlsx')" style="padding: 0.7rem 1.4rem; background: #16a34a; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          📗 Download .xlsx
+        </button>
+        <button onclick="downloadWorkbook('xls')" style="padding: 0.7rem 1.4rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          📘 Download .xls
+        </button>
+      </div>
+    </div>
+
+    <!-- Table Preview Card -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">Excel Spreadsheet Preview</span>
+        <span id="outputMetrics" style="font-size: 0.85rem; color: #64748b;"></span>
+      </div>
+      <div style="overflow-x: auto; max-height: 420px;">
+        <table id="previewTable" style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left;">
+          <thead id="previewThead" style="position: sticky; top: 0; background: #f1f5f9; z-index: 10;"></thead>
+          <tbody id="previewTbody" style="background: #ffffff;"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Why Convert XML to Excel (XLSX &amp; XLS)?</h2>
+    <p>
+      XML is a dominant carrier format for enterprise data interchanges, banking systems, SOAP web services, and inventory catalogs. However, non-technical stakeholders, financial analysts, and business teams cannot directly manipulate raw XML tags. Converting XML into a Microsoft Excel spreadsheet transforms nested hierarchical tags into distinct spreadsheet columns, allowing users to leverage formulas, VLOOKUP, pivot tables, and conditional formatting.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Modern XLSX vs. Legacy XLS Formats</h3>
+    <p>
+      This converter provides one-click export for both standards:
+    </p>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>.xlsx (Office Open XML):</strong> The default modern format for Microsoft Excel 2007 and newer, Google Sheets, and LibreOffice Calc. Features ZIP-compressed XML architecture with support for over 1,048,576 rows.</li>
+      <li><strong>.xls (BIFF8 Binary):</strong> The legacy format used by Excel 97 through 2003. Essential for integrating with legacy ERP systems, mainframe reporting tools, and older third-party industrial software.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">How XML Hierarchy Maps to Spreadsheet Columns</h3>
+    <p>
+      DataFrog automatically detects repeating record nodes (such as <code>&lt;invoice&gt;</code>, <code>&lt;row&gt;</code>, or <code>&lt;item&gt;</code>). Sibling child tags become column headers, while nested elements and XML attributes are unrolled cleanly into respective table cells.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the converter identify what should be a row in Excel?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          The parser scans the XML tree for repeated child tags under the root element (or nested container elements). Each repeated tag is mapped to an Excel row, and its child elements and attributes become columns.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What is the difference between downloading .xlsx vs .xls?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          <strong>.xlsx</strong> is recommended for modern versions of Excel, Google Drive, and cloud apps. <strong>.xls</strong> is provided for legacy compatibility with enterprise software systems built for Excel 97-2003.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Are number and date formats preserved in Excel?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. Numbers and currency values are parsed as numerical values rather than plain text strings, enabling arithmetic functions and column sum formulas right out of the box.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I convert large XML datasets with thousands of items to Excel without browser lag?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. DataFrog uses high-performance in-memory DOM traversal and SheetJS binary serialization, converting thousands of XML records directly in your browser within seconds without hitting server timeouts or file size caps.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How can I ensure XML node attributes like IDs and currencies appear as Excel columns?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          By keeping the "Include Attributes as Columns" toggle enabled, DataFrog automatically inspects all XML tag attributes (such as &lt;invoice id="101" currency="USD"&gt;) and creates dedicated spreadsheet columns for each attribute alongside child elements.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  let currentFileName = 'converted.xml';
+  let currentFileSize = 0;
+  let rawXmlText = '';
+  let generatedDataRows = [];
+  let generatedHeaders = [];
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileMeta = document.getElementById('fileMeta');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const sheetNameInput = document.getElementById('sheetNameInput');
+  const optAttributes = document.getElementById('optAttributes');
+  const parseError = document.getElementById('parseError');
+  const errorMessage = document.getElementById('errorMessage');
+  const conversionPanel = document.getElementById('conversionPanel');
+  const xmlEditor = document.getElementById('xmlEditor');
+  const resultArea = document.getElementById('resultArea');
+  const excelStats = document.getElementById('excelStats');
+  const outputMetrics = document.getElementById('outputMetrics');
+  const previewThead = document.getElementById('previewThead');
+  const previewTbody = document.getElementById('previewTbody');
+
+  if (dropzone) {
+    ['dragenter', 'dragover'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#2563eb';
+        dropzone.style.background = '#eff6ff';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        processUploadedFile(files[0]);
+      }
+    });
+
+    dropzone.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+        fileInput.click();
+      }
+    });
+  }
+
+  window.handleFileSelect = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      processUploadedFile(file);
+    }
+  };
+
+  function processUploadedFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize > 1024 ? (currentFileSize / 1024).toFixed(1) + ' KB' : currentFileSize + ' bytes');
+    fileMeta.style.display = 'block';
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      rawXmlText = e.target.result;
+      xmlEditor.value = rawXmlText;
+      conversionPanel.style.display = 'block';
+      resultArea.style.display = 'none';
+      conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+    reader.readAsText(file);
+  }
+
+  function parseXmlToTable(xmlText, includeAttributes) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xmlText, 'text/xml');
+    const err = doc.getElementsByTagName('parsererror');
+    if (err && err.length > 0) {
+      throw new Error(err[0].textContent.split('\n')[0] || 'Invalid XML markup.');
+    }
+
+    const root = doc.documentElement;
+    // Find candidate record elements
+    let recordNodes = [];
+    const children = Array.from(root.children);
+
+    if (children.length > 0) {
+      // Check if child elements contain nested lists
+      const grandChildrenCounts = children.map(c => c.children.length);
+      const hasNested = grandChildrenCounts.some(cnt => cnt > 0);
+
+      if (children.length === 1 && hasNested) {
+        // e.g. <invoices><invoice>...</invoice></invoices>
+        recordNodes = Array.from(children[0].children);
+      } else {
+        recordNodes = children;
+      }
+    } else {
+      recordNodes = [root];
+    }
+
+    const headersSet = new Set();
+    const rows = [];
+
+    recordNodes.forEach(node => {
+      const row = {};
+
+      if (includeAttributes && node.attributes) {
+        Array.from(node.attributes).forEach(attr => {
+          headersSet.add(attr.name);
+          row[attr.name] = attr.value;
+        });
+      }
+
+      if (node.children.length > 0) {
+        Array.from(node.children).forEach(child => {
+          const key = child.nodeName;
+          headersSet.add(key);
+          row[key] = child.textContent.trim();
+        });
+      } else {
+        const key = node.nodeName;
+        headersSet.add(key);
+        row[key] = node.textContent.trim();
+      }
+
+      rows.push(row);
+    });
+
+    const headers = Array.from(headersSet);
+    return { headers, rows };
+  }
+
+  window.generateExcel = function() {
+    parseError.style.display = 'none';
+    const text = xmlEditor.value.trim();
+    if (!text) return;
+
+    try {
+      const { headers, rows } = parseXmlToTable(text, optAttributes.checked);
+      if (headers.length === 0 || rows.length === 0) {
+        throw new Error('No structured records found in XML to populate spreadsheet rows.');
+      }
+
+      generatedHeaders = headers;
+      generatedDataRows = rows;
+
+      // Render Preview Table
+      previewThead.innerHTML = `<tr>${headers.map(h => `<th style="padding: 0.6rem 0.85rem; border-bottom: 2px solid #cbd5e1; font-weight: 700; color: #1e293b; white-space: nowrap;">${h}</th>`).join('')}</tr>`;
+      
+      const tbodyHtml = rows.slice(0, 100).map(r => {
+        return `<tr style="border-bottom: 1px solid #f1f5f9;">${headers.map(h => {
+          const val = r[h] !== undefined ? r[h] : '';
+          return `<td style="padding: 0.5rem 0.85rem; color: #334155; white-space: nowrap;">${val}</td>`;
+        }).join('')}</tr>`;
+      }).join('');
+
+      previewTbody.innerHTML = tbodyHtml;
+
+      outputMetrics.textContent = `${rows.length.toLocaleString()} rows • ${headers.length} columns`;
+      excelStats.textContent = `Generated ${rows.length} rows across ${headers.length} columns ready for download`;
+      resultArea.style.display = 'block';
+      resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      errorMessage.textContent = err.message || 'Failed to parse XML for Excel conversion';
+      parseError.style.display = 'block';
+    }
+  };
+
+  window.downloadWorkbook = function(format) {
+    if (!generatedDataRows.length) return;
+
+    const sheetName = (sheetNameInput.value.trim() || 'Sheet1').slice(0, 31);
+    const dataForSheet = generatedDataRows.map(r => {
+      const rowObj = {};
+      generatedHeaders.forEach(h => {
+        const val = r[h];
+        if (val !== undefined && val !== null) {
+          if (!isNaN(val) && val !== '' && !val.includes('-') && !val.startsWith('0')) {
+            rowObj[h] = Number(val);
+          } else {
+            rowObj[h] = val;
+          }
+        } else {
+          rowObj[h] = '';
+        }
+      });
+      return rowObj;
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(dataForSheet, { header: generatedHeaders });
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+
+    const baseName = currentFileName.replace(/\.[^/.]+$/, '') || 'dataset';
+    const bookType = format === 'xls' ? 'biff8' : 'xlsx';
+    XLSX.writeFile(workbook, `${baseName}.${format}`, { bookType });
+  };
+
+  window.loadSampleXml = function() {
+    currentFileName = 'sample_invoices.xml';
+    const sample = `<?xml version="1.0" encoding="UTF-8"?>
+<invoices company="Acme Logistics Corp">
+  <invoice id="INV-2026-001" status="Paid">
+    <client>Global Freight Systems</client>
+    <date>2026-09-15</date>
+    <items_count>14</items_count>
+    <amount>4850.00</amount>
+    <tax>436.50</tax>
+    <total>5286.50</total>
+    <currency>USD</currency>
+  </invoice>
+  <invoice id="INV-2026-002" status="Pending">
+    <client>Pacific Horizon Trading</client>
+    <date>2026-09-18</date>
+    <items_count>8</items_count>
+    <amount>2190.00</amount>
+    <tax>197.10</tax>
+    <total>2387.10</total>
+    <currency>USD</currency>
+  </invoice>
+  <invoice id="INV-2026-003" status="Paid">
+    <client>Nordic Industrial Supplies</client>
+    <date>2026-09-22</date>
+    <items_count>25</items_count>
+    <amount>12400.00</amount>
+    <tax>1116.00</tax>
+    <total>13516.00</total>
+    <currency>USD</currency>
+  </invoice>
+  <invoice id="INV-2026-004" status="Paid">
+    <client>Apex Cloud Solutions</client>
+    <date>2026-09-25</date>
+    <items_count>4</items_count>
+    <amount>890.00</amount>
+    <tax>80.10</tax>
+    <total>970.10</total>
+    <currency>USD</currency>
+  </invoice>
+</invoices>`;
+
+    currentFileSize = sample.length;
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize / 1024).toFixed(1) + ' KB';
+    fileMeta.style.display = 'block';
+
+    xmlEditor.value = sample;
+    conversionPanel.style.display = 'block';
+    resultArea.style.display = 'none';
+    conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  window.resetTool = function() {
+    fileInput.value = '';
+    rawXmlText = '';
+    xmlEditor.value = '';
+    generatedDataRows = [];
+    generatedHeaders = [];
+    fileMeta.style.display = 'none';
+    conversionPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    parseError.style.display = 'none';
+  };
+</script>

@@ -1,0 +1,459 @@
+---
+layout: main
+title: "XML to DOM – Interactive XML Document Object Model Inspector"
+short_name: "XML to DOM"
+description: "Inspect and parse XML into an interactive Document Object Model (DOM) tree online. Evaluate XPath queries, inspect node types, attributes, & CDATA. 100% private."
+keywords: "xml to dom, xml dom parser, xml dom inspector, xpath evaluator online, xml node tree viewer"
+category: "XML"
+permalink: /xml-to-dom
+---
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>🌳</span> Client‑Side XML DOM Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      XML to DOM – Interactive Document Object Model Explorer
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Compile XML into an interactive DOM node hierarchy. Inspect element nodes, attributes, CDATA blocks, comments, and evaluate live XPath queries locally in your browser.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – DOM compilation runs in native browser memory. Zero cloud transmission.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your XML File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xml</strong>, <strong>.xhtml</strong>, and <strong>.rss</strong>
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse XML File
+        <input type="file" id="fileInput" accept=".xml,.xhtml,.rss,.atom,.svg,.txt" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button type="button" onclick="loadSampleXml()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (library book catalog)
+        </button>
+      </div>
+      <button type="button" onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">library.xml</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; color: #475569;">
+        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+          <input type="checkbox" id="optExpandAll" checked>
+          <span>Expand Tree by Default</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>DOM Parser Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Preview & Conversion Panel -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0;">
+        📊 Raw XML Input (editable)
+      </h3>
+      <span style="font-size: 0.85rem; color: #64748b;">Ready to construct DOM tree</span>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <textarea id="xmlEditor" style="width: 100%; min-height: 200px; max-height: 360px; padding: 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #f8fafc; line-height: 1.5; resize: vertical; outline: none; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+      <button id="convertBtn" onclick="generateDOM()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🔄 Convert to DOM
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">DOM Tree Constructed</h3>
+          <p id="domStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Interactive tree ready to explore</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button onclick="expandAllNodes()" style="padding: 0.6rem 1.1rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer;">
+          ➕ Expand All
+        </button>
+        <button onclick="collapseAllNodes()" style="padding: 0.6rem 1.1rem; background: #475569; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer;">
+          ➖ Collapse All
+        </button>
+      </div>
+    </div>
+
+    <!-- XPath Evaluator Bar -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+      <label for="xpathInput" style="display: block; font-weight: 700; font-size: 0.9rem; color: #0f172a; margin-bottom: 0.5rem;">
+        🔎 Test Live XPath Query on DOM:
+      </label>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <input type="text" id="xpathInput" placeholder="e.g. //book[@category='web'] or //title/text()" 
+               style="flex: 1; min-width: 260px; padding: 0.65rem 1rem; border: 1.5px solid #cbd5e1; border-radius: 8px; font-family: monospace; font-size: 0.9rem; outline: none;">
+        <button onclick="evaluateXPath()" style="padding: 0.65rem 1.5rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer;">
+          Evaluate XPath
+        </button>
+      </div>
+      <div id="xpathResults" style="display: none; margin-top: 0.75rem; padding: 0.75rem 1rem; background: #f8fafc; border-radius: 8px; font-size: 0.85rem; color: #1e293b; border: 1px solid #e2e8f0;"></div>
+    </div>
+
+    <!-- Visual Interactive DOM Tree -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">DOM Hierarchy Tree</span>
+        <span id="outputMetrics" style="font-size: 0.85rem; color: #64748b;"></span>
+      </div>
+      <div id="domTreeContainer" style="padding: 1.5rem; max-height: 540px; overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.6;">
+        <!-- DOM nodes inserted dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">What is the XML Document Object Model (DOM)?</h2>
+    <p>
+      The W3C DOM (Document Object Model) is a platform- and language-neutral interface that models XML documents as a logical tree structure. Each branch of the tree terminates in a node, and each node contains objects representing elements, attributes, text fragments, or comments. In modern web development, DOM parsing enables developers to programmatically navigate, query with XPath expressions, and manipulate XML trees with surgical precision.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Core DOM Node Types</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>Node.ELEMENT_NODE (1):</strong> Primary structural XML tags (e.g., <code>&lt;book&gt;</code>).</li>
+      <li><strong>Node.ATTRIBUTE_NODE (2):</strong> Key-value metadata defined within opening tags.</li>
+      <li><strong>Node.TEXT_NODE (3):</strong> The scalar textual content enclosed within tags.</li>
+      <li><strong>Node.CDATA_SECTION_NODE (4):</strong> Unparsed character blocks escaping markup punctuation.</li>
+      <li><strong>Node.COMMENT_NODE (8):</strong> Developer annotations (<code>&lt;!-- comment --&gt;</code>).</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the live XPath evaluator work?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          The tool utilizes the browser's native <code>document.evaluate()</code> engine to execute W3C XPath 1.0 queries directly against the parsed in-memory XML document, returning matching elements and their inner text values.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What is the memory footprint of a DOM tree compared to SAX?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Unlike streaming SAX parsers that process tags sequentially, the DOM instantiates the entire object graph in memory. This enables random-access navigation and ancestor traversals at the cost of higher RAM usage for giant multi-gigabyte files.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I copy the exact DOM traversal path for JavaScript code?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. Clicking on any element node badge in the visual tree displays its exact XPath expression and JavaScript navigation path for convenient pasting into test suites or scripts.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What is the difference between an Element Node and a Text Node in the DOM tree?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          In the W3C DOM specification, tags are Element Nodes (nodeType === 1), while the text content between tags resides in child Text Nodes (nodeType === 3). Attributes (nodeType === 2) represent key-value metadata attached to element nodes.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I inspect CDATA sections and comments in this DOM viewer?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes! DataFrog displays CDATA sections (&lt;![CDATA[...]]&gt;) and XML comments (&lt;!-- ... --&gt;) with distinctive visual badges, allowing you to debug unescaped character blocks and documentation annotations easily.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  let currentFileName = 'library.xml';
+  let currentFileSize = 0;
+  let rawXmlText = '';
+  let activeXmlDoc = null;
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileMeta = document.getElementById('fileMeta');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const optExpandAll = document.getElementById('optExpandAll');
+  const parseError = document.getElementById('parseError');
+  const errorMessage = document.getElementById('errorMessage');
+  const conversionPanel = document.getElementById('conversionPanel');
+  const xmlEditor = document.getElementById('xmlEditor');
+  const resultArea = document.getElementById('resultArea');
+  const domStats = document.getElementById('domStats');
+  const outputMetrics = document.getElementById('outputMetrics');
+  const domTreeContainer = document.getElementById('domTreeContainer');
+  const xpathInput = document.getElementById('xpathInput');
+  const xpathResults = document.getElementById('xpathResults');
+
+  if (dropzone) {
+    ['dragenter', 'dragover'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#2563eb';
+        dropzone.style.background = '#eff6ff';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        processUploadedFile(files[0]);
+      }
+    });
+
+    dropzone.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+        fileInput.click();
+      }
+    });
+  }
+
+  window.handleFileSelect = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      processUploadedFile(file);
+    }
+  };
+
+  function processUploadedFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize > 1024 ? (currentFileSize / 1024).toFixed(1) + ' KB' : currentFileSize + ' bytes');
+    fileMeta.style.display = 'block';
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      rawXmlText = e.target.result;
+      xmlEditor.value = rawXmlText;
+      conversionPanel.style.display = 'block';
+      resultArea.style.display = 'none';
+      conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+    reader.readAsText(file);
+  }
+
+  function renderDomNode(node, xpath) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const txt = node.nodeValue.trim();
+      if (!txt) return null;
+      return `<div style="padding-left: 20px; color: #059669;"><span style="color: #64748b; font-size: 0.75rem;">#text:</span> "${txt.replace(/</g, '&lt;')}"</div>`;
+    }
+    if (node.nodeType === Node.COMMENT_NODE) {
+      return `<div style="padding-left: 20px; color: #94a3b8; font-style: italic;">&lt;!-- ${node.nodeValue.trim()} --&gt;</div>`;
+    }
+    if (node.nodeType === Node.CDATA_SECTION_NODE) {
+      return `<div style="padding-left: 20px; color: #d97706; background: #fffbeb; padding: 2px 6px; border-radius: 4px;">&lt;![CDATA[ ${node.nodeValue.trim()} ]]&gt;</div>`;
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) return null;
+
+    const currentXpath = `${xpath}/${node.nodeName}`;
+    const attrs = [];
+    if (node.attributes) {
+      for (let i = 0; i < node.attributes.length; i++) {
+        const a = node.attributes[i];
+        attrs.push(`<span style="color: #9333ea;">${a.name}</span>=<span style="color: #2563eb;">"${a.value}"</span>`);
+      }
+    }
+
+    const hasChildren = node.childNodes.length > 0;
+    const childrenHtml = [];
+    for (let i = 0; i < node.childNodes.length; i++) {
+      const childRender = renderDomNode(node.childNodes[i], currentXpath);
+      if (childRender) childrenHtml.push(childRender);
+    }
+
+    const attrHtml = attrs.length > 0 ? ' ' + attrs.join(' ') : '';
+
+    if (childrenHtml.length === 0) {
+      return `
+        <div style="margin: 3px 0;">
+          <span style="color: #1e3a8a; font-weight: 700;">&lt;${node.nodeName}</span>${attrHtml}<span style="color: #1e3a8a; font-weight: 700;">/&gt;</span>
+        </div>
+      `;
+    }
+
+    return `
+      <details class="dom-node" open style="margin: 3px 0;">
+        <summary style="cursor: pointer; user-select: none;">
+          <span style="color: #1e3a8a; font-weight: 700;">&lt;${node.nodeName}</span>${attrHtml}<span style="color: #1e3a8a; font-weight: 700;">&gt;</span>
+          <span style="font-size: 0.7rem; color: #94a3b8; margin-left: 8px;">(${childrenHtml.length} nodes)</span>
+        </summary>
+        <div style="padding-left: 22px; border-left: 1.5px solid #e2e8f0; margin-left: 6px;">
+          ${childrenHtml.join('')}
+        </div>
+        <div style="color: #1e3a8a; font-weight: 700;">&lt;/${node.nodeName}&gt;</div>
+      </details>
+    `;
+  }
+
+  window.generateDOM = function() {
+    parseError.style.display = 'none';
+    xpathResults.style.display = 'none';
+    const text = xmlEditor.value.trim();
+    if (!text) return;
+
+    try {
+      const parser = new DOMParser();
+      activeXmlDoc = parser.parseFromString(text, 'text/xml');
+      const err = activeXmlDoc.getElementsByTagName('parsererror');
+      if (err && err.length > 0) {
+        throw new Error(err[0].textContent.split('\n')[0] || 'Invalid XML markup.');
+      }
+
+      const root = activeXmlDoc.documentElement;
+      const htmlTree = renderDomNode(root, '');
+      domTreeContainer.innerHTML = htmlTree;
+
+      const elementCount = activeXmlDoc.getElementsByTagName('*').length;
+      outputMetrics.textContent = `${elementCount.toLocaleString()} Elements`;
+      domStats.textContent = `Parsed ${elementCount} DOM elements successfully`;
+
+      if (!optExpandAll.checked) {
+        collapseAllNodes();
+      }
+
+      resultArea.style.display = 'block';
+      resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      errorMessage.textContent = err.message || 'Failed to parse XML DOM';
+      parseError.style.display = 'block';
+    }
+  };
+
+  window.evaluateXPath = function() {
+    if (!activeXmlDoc) return;
+    const query = xpathInput.value.trim();
+    if (!query) return;
+
+    try {
+      const result = activeXmlDoc.evaluate(query, activeXmlDoc, null, XPathResult.ANY_TYPE, null);
+      let match = result.iterateNext();
+      const matches = [];
+
+      while (match) {
+        if (match.nodeType === Node.ELEMENT_NODE) {
+          matches.push(`&lt;${match.nodeName}&gt; &rarr; "${match.textContent.trim().slice(0, 50)}"`);
+        } else if (match.nodeType === Node.TEXT_NODE) {
+          matches.push(`Text: "${match.nodeValue.trim()}"`);
+        } else if (match.nodeType === Node.ATTRIBUTE_NODE) {
+          matches.push(`Attribute @${match.name} = "${match.value}"`);
+        }
+        match = result.iterateNext();
+      }
+
+      xpathResults.style.display = 'block';
+      if (matches.length === 0) {
+        xpathResults.innerHTML = `<span style="color: #d97706;">No DOM nodes matched XPath: <code>${query}</code></span>`;
+      } else {
+        xpathResults.innerHTML = `<strong>Found ${matches.length} matches:</strong><ul style="margin: 0.4rem 0 0; padding-left: 1.2rem;">${matches.map(m => `<li>${m}</li>`).join('')}</ul>`;
+      }
+    } catch (err) {
+      xpathResults.style.display = 'block';
+      xpathResults.innerHTML = `<span style="color: #dc2626;">XPath Evaluation Error: ${err.message}</span>`;
+    }
+  };
+
+  window.expandAllNodes = function() {
+    document.querySelectorAll('#domTreeContainer details').forEach(d => d.open = true);
+  };
+
+  window.collapseAllNodes = function() {
+    document.querySelectorAll('#domTreeContainer details').forEach(d => d.open = false);
+  };
+
+  window.loadSampleXml = function() {
+    currentFileName = 'library_catalog.xml';
+    const sample = `<?xml version="1.0" encoding="UTF-8"?>
+<!-- Public Digital Library Catalog Index -->
+<catalog collection="Computer Science" updated="2026-09-29">
+  <book id="BK-101" category="Algorithms">
+    <title>Mastering Graph Neural Networks</title>
+    <author>Dr. Henrik Lindqvist</author>
+    <year>2025</year>
+    <price currency="USD">64.99</price>
+    <synopsis><![CDATA[A comprehensive guide to non-Euclidean machine learning <graphs, manifolds> and geometric representations.]]></synopsis>
+  </book>
+  <book id="BK-102" category="Distributed Systems">
+    <title>Raft Consensus in Distributed Systems</title>
+    <author>Clara Morales</author>
+    <year>2024</year>
+    <price currency="USD">52.50</price>
+    <synopsis><![CDATA[Understanding leader election, log replication, & safety invariants in partitioned clusters.]]></synopsis>
+  </book>
+</catalog>`;
+
+    currentFileSize = sample.length;
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize / 1024).toFixed(1) + ' KB';
+    fileMeta.style.display = 'block';
+
+    xmlEditor.value = sample;
+    conversionPanel.style.display = 'block';
+    resultArea.style.display = 'none';
+    conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  window.resetTool = function() {
+    fileInput.value = '';
+    rawXmlText = '';
+    xmlEditor.value = '';
+    domTreeContainer.innerHTML = '';
+    xpathResults.style.display = 'none';
+    xpathInput.value = '';
+    activeXmlDoc = null;
+    fileMeta.style.display = 'none';
+    conversionPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    parseError.style.display = 'none';
+  };
+</script>

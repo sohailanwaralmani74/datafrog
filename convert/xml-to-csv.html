@@ -1,0 +1,470 @@
+---
+layout: main
+title: "XML to CSV – Convert XML Files to Comma-Separated Values Online"
+short_name: "XML to CSV"
+description: "Convert XML to CSV online – transform XML data into clean comma-delimited text files instantly. Configurable delimiters, quotes, & instant download. 100% private."
+keywords: "xml to csv, convert xml to csv, xml to csv converter online, free xml to csv, export xml to csv"
+category: "XML"
+permalink: /xml-to-csv
+---
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>📑</span> Client‑Side XML to CSV Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      XML to CSV – Convert Structured XML into Clean Delimited Data
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Extract records from XML trees into RFC 4180 compliant CSV files. Customizable delimiters (comma, semicolon, tab, pipe) and quote handling. 100% browser-based.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Zero server uploads. Parsing and CSV generation happen entirely within your local browser.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your XML File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xml</strong>, <strong>.xhtml</strong>, and <strong>.rss</strong> files
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse XML File
+        <input type="file" id="fileInput" accept=".xml,.xhtml,.rss,.atom,.svg,.txt" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button type="button" onclick="loadSampleXml()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (customer database)
+        </button>
+      </div>
+      <button type="button" onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">data.xml</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; color: #475569;">
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="delimiterSelect" style="font-weight: 700;">Delimiter:</label>
+          <select id="delimiterSelect" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+            <option value=",">Comma (,)</option>
+            <option value=";">Semicolon (;)</option>
+            <option value="&#9;">Tab (\t)</option>
+            <option value="|">Pipe (|)</option>
+          </select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="quotesSelect" style="font-weight: 700;">Quotes:</label>
+          <select id="quotesSelect" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+            <option value="auto">As Needed</option>
+            <option value="always">Always Quote</option>
+            <option value="never">Never Quote</option>
+          </select>
+        </div>
+        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+          <input type="checkbox" id="optAttributes" checked>
+          <span>Include Attributes</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>XML Parsing Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Preview & Conversion Panel -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0;">
+        📊 Raw XML Input (editable)
+      </h3>
+      <span style="font-size: 0.85rem; color: #64748b;">Ready to convert</span>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <textarea id="xmlEditor" style="width: 100%; min-height: 200px; max-height: 360px; padding: 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #f8fafc; line-height: 1.5; resize: vertical; outline: none; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+      <button id="convertBtn" onclick="generateCSV()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🔄 Convert to CSV
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">CSV Ready</h3>
+          <p id="csvStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Valid CSV generated – copy or download below</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="copyBtn" onclick="copyCSV()" style="padding: 0.7rem 1.4rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          📋 Copy CSV
+        </button>
+        <button onclick="downloadCSV()" style="padding: 0.7rem 1.4rem; background: #059669; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          💾 Download .csv
+        </button>
+      </div>
+    </div>
+
+    <!-- Output Textarea -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">Generated CSV Content</span>
+        <span id="outputMetrics" style="font-size: 0.85rem; color: #64748b;"></span>
+      </div>
+      <textarea id="csvOutput" style="width: 100%; min-height: 280px; max-height: 440px; background: #1b1b1b; color: #e2e8f0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.85rem; padding: 1rem; border: none; resize: vertical; outline: none; line-height: 1.5; box-sizing: border-box;" readonly></textarea>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Why Convert XML to CSV?</h2>
+    <p>
+      CSV (Comma-Separated Values) remains the most universal flat data format for bulk database ingestion, machine learning data pipelines (Pandas, NumPy, Scikit-Learn), command-line tools (awk, grep, sed), and business intelligence software. XML’s verbosity and tag overhead can increase file sizes by 300% to 500% compared to pure delimited tabular files. Converting XML to CSV strips redundant closing tags and produces ultra-compact records ready for database bulk loaders like PostgreSQL <code>\COPY</code> or MySQL <code>LOAD DATA INFILE</code>.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">RFC 4180 Escaping Rules</h3>
+    <p>
+      To prevent CSV injection and corrupt line breaks, this converter rigorously respects the RFC 4180 standard:
+    </p>
+    <ul style="padding-left: 1.5rem;">
+      <li>Cells containing commas or selected delimiters are automatically wrapped in double quotes.</li>
+      <li>Quotes inside values are escaped by doubling them (e.g. <code>"He said ""Hello"""</code>).</li>
+      <li>Embedded newlines within XML text nodes are safely preserved inside quoted fields.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">When should I choose a semicolon delimiter instead of a comma?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          In European countries where a comma represents the decimal separator (e.g. <code>12,50 €</code>), European versions of Excel require semicolon delimiters to properly parse columns.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the converter handle missing values in some XML records?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          The converter gathers the union of all child tags across all records. If a specific record omits an optional tag, that column is left blank (two adjacent delimiters) to maintain strict columnar alignment.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is there any file size limit for XML to CSV conversion?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Because processing occurs 100% in client-side memory using browser DOM streams, there are zero server-side upload quotas or timeout limits. Datasets with tens of thousands of rows parse within seconds.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are commas or line breaks inside XML text nodes escaped in the CSV?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          When text inside an XML tag contains commas, quotes, or newline characters, DataFrog wraps the cell in standard RFC 4180 double quotes and escapes existing quotation marks, preventing columns from shifting in spreadsheet programs like Excel and Google Sheets.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I import the resulting CSV directly into databases like PostgreSQL or MySQL?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Absolutely. The exported CSV strictly adheres to standard delimiter formatting with uniform column headers, making it directly compatible with COPY FROM, LOAD DATA INFILE, and database GUI import wizards.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  let currentFileName = 'converted.xml';
+  let currentFileSize = 0;
+  let rawXmlText = '';
+  let generatedCsvText = '';
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileMeta = document.getElementById('fileMeta');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const delimiterSelect = document.getElementById('delimiterSelect');
+  const quotesSelect = document.getElementById('quotesSelect');
+  const optAttributes = document.getElementById('optAttributes');
+  const parseError = document.getElementById('parseError');
+  const errorMessage = document.getElementById('errorMessage');
+  const conversionPanel = document.getElementById('conversionPanel');
+  const xmlEditor = document.getElementById('xmlEditor');
+  const resultArea = document.getElementById('resultArea');
+  const csvStats = document.getElementById('csvStats');
+  const outputMetrics = document.getElementById('outputMetrics');
+  const csvOutput = document.getElementById('csvOutput');
+  const copyBtn = document.getElementById('copyBtn');
+
+  if (dropzone) {
+    ['dragenter', 'dragover'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#2563eb';
+        dropzone.style.background = '#eff6ff';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        processUploadedFile(files[0]);
+      }
+    });
+
+    dropzone.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+        fileInput.click();
+      }
+    });
+  }
+
+  window.handleFileSelect = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      processUploadedFile(file);
+    }
+  };
+
+  function processUploadedFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize > 1024 ? (currentFileSize / 1024).toFixed(1) + ' KB' : currentFileSize + ' bytes');
+    fileMeta.style.display = 'block';
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      rawXmlText = e.target.result;
+      xmlEditor.value = rawXmlText;
+      conversionPanel.style.display = 'block';
+      resultArea.style.display = 'none';
+      conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+    reader.readAsText(file);
+  }
+
+  function escapeCsvCell(val, delimiter, quoteMode) {
+    if (val === null || val === undefined) return '';
+    const str = String(val);
+    const mustQuote = quoteMode === 'always' || (quoteMode === 'auto' && (str.includes(delimiter) || str.includes('"') || str.includes('\n') || str.includes('\r')));
+
+    if (quoteMode === 'never') return str.replace(/[\r\n]+/g, ' ');
+    if (mustQuote) {
+      return '"' + str.replace(/"/g, '""') + '"';
+    }
+    return str;
+  }
+
+  window.generateCSV = function() {
+    parseError.style.display = 'none';
+    const text = xmlEditor.value.trim();
+    if (!text) return;
+
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/xml');
+      const err = doc.getElementsByTagName('parsererror');
+      if (err && err.length > 0) {
+        throw new Error(err[0].textContent.split('\n')[0] || 'Invalid XML markup.');
+      }
+
+      const root = doc.documentElement;
+      let recordNodes = [];
+      const children = Array.from(root.children);
+
+      if (children.length > 0) {
+        const hasGrandchildren = children.some(c => c.children.length > 0);
+        if (children.length === 1 && hasGrandchildren) {
+          recordNodes = Array.from(children[0].children);
+        } else {
+          recordNodes = children;
+        }
+      } else {
+        recordNodes = [root];
+      }
+
+      const headersSet = new Set();
+      const rows = [];
+      const incAttr = optAttributes.checked;
+
+      recordNodes.forEach(node => {
+        const row = {};
+        if (incAttr && node.attributes) {
+          Array.from(node.attributes).forEach(attr => {
+            headersSet.add(attr.name);
+            row[attr.name] = attr.value;
+          });
+        }
+
+        if (node.children.length > 0) {
+          Array.from(node.children).forEach(child => {
+            const key = child.nodeName;
+            headersSet.add(key);
+            row[key] = child.textContent.trim();
+          });
+        } else {
+          const key = node.nodeName;
+          headersSet.add(key);
+          row[key] = node.textContent.trim();
+        }
+        rows.push(row);
+      });
+
+      const headers = Array.from(headersSet);
+      if (!headers.length || !rows.length) {
+        throw new Error('No repeating structured records found in XML.');
+      }
+
+      const delim = delimiterSelect.value;
+      const quoteMode = quotesSelect.value;
+
+      const headerLine = headers.map(h => escapeCsvCell(h, delim, quoteMode)).join(delim);
+      const dataLines = rows.map(r => {
+        return headers.map(h => escapeCsvCell(r[h] !== undefined ? r[h] : '', delim, quoteMode)).join(delim);
+      });
+
+      generatedCsvText = [headerLine, ...dataLines].join('\n');
+      csvOutput.value = generatedCsvText;
+
+      const lines = rows.length;
+      const sizeBytes = new Blob([generatedCsvText]).size;
+      const sizeStr = sizeBytes > 1024 ? (sizeBytes / 1024).toFixed(1) + ' KB' : sizeBytes + ' bytes';
+
+      csvStats.textContent = `Generated ${lines} records across ${headers.length} columns (${sizeStr})`;
+      outputMetrics.textContent = `${(lines + 1).toLocaleString()} lines • ${headers.length} columns`;
+      resultArea.style.display = 'block';
+      resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      errorMessage.textContent = err.message || 'Failed to parse XML for CSV conversion';
+      parseError.style.display = 'block';
+    }
+  };
+
+  window.copyCSV = function() {
+    if (!generatedCsvText) return;
+    navigator.clipboard.writeText(generatedCsvText).then(() => {
+      const orig = copyBtn.textContent;
+      copyBtn.textContent = '✓ Copied!';
+      copyBtn.style.background = '#059669';
+      setTimeout(() => {
+        copyBtn.textContent = orig;
+        copyBtn.style.background = '#0284c7';
+      }, 2000);
+    });
+  };
+
+  window.downloadCSV = function() {
+    if (!generatedCsvText) return;
+    const blob = new Blob([generatedCsvText], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const baseName = currentFileName.replace(/\.[^/.]+$/, '') || 'dataset';
+    a.href = url;
+    a.download = `${baseName}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  window.loadSampleXml = function() {
+    currentFileName = 'sample_customers.xml';
+    const sample = `<?xml version="1.0" encoding="UTF-8"?>
+<customers database="CRM_Production">
+  <customer id="CUST-1001" tier="Enterprise">
+    <full_name>Alexander Wright</full_name>
+    <email>a.wright@solardynamics.io</email>
+    <company>Solar Dynamics</company>
+    <country>United States</country>
+    <annual_spend>48000</annual_spend>
+    <signup_date>2025-03-12</signup_date>
+  </customer>
+  <customer id="CUST-1002" tier="Professional">
+    <full_name>Elena Rostova</full_name>
+    <email>elena@rostova-tech.de</email>
+    <company>Rostova Tech Labs</company>
+    <country>Germany</country>
+    <annual_spend>18500</annual_spend>
+    <signup_date>2025-07-29</signup_date>
+  </customer>
+  <customer id="CUST-1003" tier="Enterprise">
+    <full_name>Kenji Takahashi</full_name>
+    <email>takahashi@nipponcloud.jp</email>
+    <company>Nippon Cloud Services</company>
+    <country>Japan</country>
+    <annual_spend>62000</annual_spend>
+    <signup_date>2024-11-04</signup_date>
+  </customer>
+  <customer id="CUST-1004" tier="Starter">
+    <full_name>Chloe Mercier</full_name>
+    <email>chloe@mercier-design.fr</email>
+    <company>Mercier Studio</company>
+    <country>France</country>
+    <annual_spend>4200</annual_spend>
+    <signup_date>2026-02-18</signup_date>
+  </customer>
+</customers>`;
+
+    currentFileSize = sample.length;
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize / 1024).toFixed(1) + ' KB';
+    fileMeta.style.display = 'block';
+
+    xmlEditor.value = sample;
+    conversionPanel.style.display = 'block';
+    resultArea.style.display = 'none';
+    conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  window.resetTool = function() {
+    fileInput.value = '';
+    rawXmlText = '';
+    xmlEditor.value = '';
+    generatedCsvText = '';
+    fileMeta.style.display = 'none';
+    conversionPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    parseError.style.display = 'none';
+  };
+</script>

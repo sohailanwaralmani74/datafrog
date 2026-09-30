@@ -1,0 +1,535 @@
+---
+layout: main
+title: "XML to PDF – Convert XML to Formatted PDF Document Online"
+short_name: "XML to PDF"
+description: "Convert XML to PDF online – turn XML datasets, invoices, and reports into professional, printable PDF documents. Custom styling, portrait & landscape. 100% private."
+keywords: "xml to pdf, convert xml to pdf, xml to pdf online free, export xml to pdf, print xml to pdf"
+category: "XML"
+permalink: /xml-to-pdf
+---
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>📑</span> Client‑Side XML to PDF Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      XML to PDF – Transform XML Data into Polished PDF Reports
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Convert raw XML markup, business receipts, medical data, or system logs into publication-ready PDF documents with customizable layouts. No uploads, 100% private.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – All document compilation takes place in your local browser sandbox.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your XML File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xml</strong>, <strong>.xhtml</strong>, and <strong>.rss</strong> files
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse XML File
+        <input type="file" id="fileInput" accept=".xml,.xhtml,.rss,.atom,.svg,.txt" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button type="button" onclick="loadSampleXml()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (clinical lab report)
+        </button>
+      </div>
+      <button type="button" onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">report.xml</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; color: #475569;">
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="docTitleInput" style="font-weight: 700;">Document Title:</label>
+          <input type="text" id="docTitleInput" value="XML Data Report" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; width: 140px;">
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <label for="themeSelect" style="font-weight: 700;">Theme:</label>
+          <select id="themeSelect" style="padding: 0.35rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; background: #ffffff;">
+            <option value="corporate">Corporate Navy</option>
+            <option value="emerald">Emerald Modern</option>
+            <option value="minimal">Minimalist Gray</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>XML Parsing Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Preview & Conversion Panel -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0;">
+        📊 Raw XML Input (editable)
+      </h3>
+      <span style="font-size: 0.85rem; color: #64748b;">Ready to convert</span>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <textarea id="xmlEditor" style="width: 100%; min-height: 200px; max-height: 360px; padding: 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #f8fafc; line-height: 1.5; resize: vertical; outline: none; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+      <button id="convertBtn" onclick="generatePDFView()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🔄 Convert to PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">PDF Document Ready</h3>
+          <p id="pdfStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Ready to download</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button type="button" onclick="downloadPDF()" style="padding: 0.7rem 1.6rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+          <span>⬇️</span> Download PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- PDF Document Preview Sheet -->
+    <div style="background: #e2e8f0; padding: 2rem 1rem; border-radius: 14px; display: flex; justify-content: center; overflow-x: auto;">
+      <div id="pdfPaper" style="width: 100%; max-width: 800px; background: #ffffff; min-height: 500px; padding: 3rem 2.5rem; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <!-- Dynamic Report Content Inserted Here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Why Convert XML to PDF?</h2>
+    <p>
+      While XML excels at structured machine-to-machine exchange, it is completely unreadable for clients, executive boards, auditors, and patients. Converting XML into a formatted PDF document transforms cold tags into human-centric visual documents featuring formatted titles, clean metadata banners, and styled tabular sections.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Print-Engine Vector Styling</h3>
+    <p>
+      Our PDF generator employs strict CSS Paged Media rules:
+    </p>
+    <ul style="padding-left: 1.5rem;">
+      <li>Automatic page-break containment ensuring table rows are never sliced awkwardly across pages.</li>
+      <li>Vector-quality typography rendering crystal-clear at 300+ DPI.</li>
+      <li>Browser-native PDF compilation ensuring zero watermarks, font substitutions, or compression artifacts.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does "Save as PDF" work on this page?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Clicking "Download PDF" creates the PDF directly in your browser and downloads it without opening a print dialog.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I convert HIPAA or confidential financial XML to PDF safely?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes, with complete peace of mind. Unlike third-party PDF cloud converters that store copies of your documents on remote servers, DataFrog runs entirely in client-side memory without external network calls.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are nested tags represented in the PDF report?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Root attributes and global headers are formatted as executive summary badges, while repeating record elements are organized into high-contrast data tables with alternating row shading.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How do I switch between Portrait and Landscape orientation for wide XML tables?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          The downloaded PDF uses an A4 portrait layout and automatically wraps cell text so wide XML data remains readable.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does the PDF generator support custom company titles and corporate color themes?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes! You can enter a custom Document Title in the toolbar and select from Corporate Navy, Emerald Modern, or Minimalist Gray themes to align the generated PDF with your organization's brand identity.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  let currentFileName = 'report.xml';
+  let currentFileSize = 0;
+  let rawXmlText = '';
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileMeta = document.getElementById('fileMeta');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const docTitleInput = document.getElementById('docTitleInput');
+  const themeSelect = document.getElementById('themeSelect');
+  const parseError = document.getElementById('parseError');
+  const errorMessage = document.getElementById('errorMessage');
+  const conversionPanel = document.getElementById('conversionPanel');
+  const xmlEditor = document.getElementById('xmlEditor');
+  const resultArea = document.getElementById('resultArea');
+  const pdfPaper = document.getElementById('pdfPaper');
+  const pdfStats = document.getElementById('pdfStats');
+
+  if (dropzone) {
+    ['dragenter', 'dragover'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#2563eb';
+        dropzone.style.background = '#eff6ff';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        processUploadedFile(files[0]);
+      }
+    });
+
+    dropzone.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+        fileInput.click();
+      }
+    });
+  }
+
+  window.handleFileSelect = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      processUploadedFile(file);
+    }
+  };
+
+  function processUploadedFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize > 1024 ? (currentFileSize / 1024).toFixed(1) + ' KB' : currentFileSize + ' bytes');
+    fileMeta.style.display = 'block';
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      rawXmlText = e.target.result;
+      xmlEditor.value = rawXmlText;
+      conversionPanel.style.display = 'block';
+      resultArea.style.display = 'none';
+      conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+    reader.readAsText(file);
+  }
+
+  function pdfEscape(value) {
+    return String(value == null ? '' : value)
+      .replace(/\\/g, '\\\\')
+      .replace(/\(/g, '\\(')
+      .replace(/\)/g, '\\)')
+      .replace(/\r?\n/g, ' ');
+  }
+
+  function pdfAscii(value) {
+    return String(value == null ? '' : value)
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^\x20-\x7E]/g, '?');
+  }
+
+  function createPdfDocument(title, headers, rows, theme) {
+    const pageW = 595.28;
+    const pageH = 841.89;
+    const margin = 36;
+    const contentW = pageW - margin * 2;
+    const top = pageH - margin;
+    const bottom = margin;
+    const primary = theme === 'emerald' ? [6,95,70] : theme === 'minimal' ? [15,23,42] : [30,58,138];
+    const headerBg = theme === 'emerald' ? [236,253,245] : theme === 'minimal' ? [241,245,249] : [239,246,255];
+    const textColor = [51,65,85];
+    const fontSize = 8;
+    const lineH = 11;
+    const headerH = 22;
+    const rowH = 22;
+    const titleH = 42;
+
+    function wrapText(value, maxChars) {
+      const str = pdfAscii(value).trim();
+      if (!str) return [''];
+      const words = str.split(/\s+/);
+      const lines = [];
+      let line = '';
+      words.forEach(word => {
+        if (word.length > maxChars) {
+          if (line) { lines.push(line); line = ''; }
+          for (let i = 0; i < word.length; i += maxChars) lines.push(word.slice(i, i + maxChars));
+        } else if (!line) line = word;
+        else if ((line + ' ' + word).length <= maxChars) line += ' ' + word;
+        else { lines.push(line); line = word; }
+      });
+      if (line) lines.push(line);
+      return lines.length ? lines : [''];
+    }
+
+    const colCount = Math.max(headers.length, 1);
+    const colW = contentW / colCount;
+    const maxChars = Math.max(6, Math.floor(colW / 4.3));
+    const pages = [];
+    let page = [];
+    let y = top;
+
+    function beginPage() {
+      page = [];
+      y = top;
+      pages.push(page);
+      page.push({type:'fillRect', x:0, y:0, w:pageW, h:pageH, color:[255,255,255]});
+      page.push({type:'text', x:margin, y:y-18, size:16, color:primary, text:pdfAscii(title || 'XML Report')});
+      page.push({type:'line', x1:margin, y1:y-25, x2:pageW-margin, y2:y-25, color:primary, width:1.4});
+      y -= titleH;
+      drawHeader();
+    }
+
+    function drawHeader() {
+      page.push({type:'fillRect', x:margin, y:y-headerH, w:contentW, h:headerH, color:headerBg});
+      const widths = headers.map(() => colW);
+      headers.forEach((h,i) => {
+        page.push({type:'text', x:margin + i*colW + 5, y:y-15, size:7, color:[15,23,42], text:pdfAscii(h).slice(0, Math.max(8,maxChars)).toUpperCase()});
+      });
+      page.push({type:'line', x1:margin, y1:y-headerH, x2:pageW-margin, y2:y-headerH, color:primary, width:1});
+      y -= headerH;
+    }
+
+    function drawRow(row, index) {
+      const cellLines = headers.map(h => wrapText(row[h] === undefined ? '' : row[h], maxChars));
+      const lineCount = Math.max(...cellLines.map(a => a.length), 1);
+      const h = Math.max(rowH, lineCount * lineH + 10);
+      if (y - h < bottom) {
+        beginPage();
+      }
+      if (index % 2 === 1) page.push({type:'fillRect', x:margin, y:y-h, w:contentW, h:h, color:[248,250,252]});
+      headers.forEach((hname, i) => {
+        cellLines[i].forEach((line, li) => {
+          page.push({type:'text', x:margin + i*colW + 5, y:y-13-li*lineH, size:fontSize, color:textColor, text:line});
+        });
+      });
+      page.push({type:'line', x1:margin, y1:y-h, x2:pageW-margin, y2:y-h, color:[226,232,240], width:0.5});
+      for (let i=1;i<colCount;i++) page.push({type:'line', x1:margin+i*colW, y1:y, x2:margin+i*colW, y2:y-h, color:[226,232,240], width:0.35});
+      y -= h;
+    }
+
+    beginPage();
+    if (!headers.length) headers = ['Value'];
+    rows.forEach((row, index) => drawRow(row, index));
+
+    const objects = [];
+    function addObject(body) { objects.push(body); return objects.length; }
+    const pagesObj = addObject('<< /Type /Pages /Kids [] /Count 0 >>');
+    const fontObj = addObject('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
+    const pageRefs = [];
+
+    function contentStream(commands) {
+      let out = '';
+      commands.forEach(c => {
+        if (c.type === 'fillRect') {
+          const y = c.y;
+          out += `${c.color[0]/255} ${c.color[1]/255} ${c.color[2]/255} rg ${c.x.toFixed(2)} ${y.toFixed(2)} ${c.w.toFixed(2)} ${c.h.toFixed(2)} re f\n`;
+        } else if (c.type === 'line') {
+          out += `${c.color[0]/255} ${c.color[1]/255} ${c.color[2]/255} RG ${c.width.toFixed(2)} w ${c.x1.toFixed(2)} ${c.y1.toFixed(2)} m ${c.x2.toFixed(2)} ${c.y2.toFixed(2)} l S\n`;
+        } else if (c.type === 'text') {
+          out += `${c.color[0]/255} ${c.color[1]/255} ${c.color[2]/255} rg BT /F1 ${c.size} Tf ${c.x.toFixed(2)} ${c.y.toFixed(2)} Td (${pdfEscape(c.text)}) Tj ET\n`;
+        }
+      });
+      return out;
+    }
+
+    pages.forEach(commands => {
+      const stream = contentStream(commands);
+      const contentObj = addObject(`<< /Length ${stream.length} >>\nstream\n${stream}endstream`);
+      const pageObj = addObject(`<< /Type /Page /Parent ${pagesObj} 0 R /MediaBox [0 0 ${pageW} ${pageH}] /Resources << /Font << /F1 ${fontObj} 0 R >> >> /Contents ${contentObj} 0 R >>`);
+      pageRefs.push(pageObj);
+    });
+    objects[pagesObj-1] = `<< /Type /Pages /Kids [${pageRefs.map(n => n + ' 0 R').join(' ')}] /Count ${pageRefs.length} >>`;
+    const catalogObj = addObject(`<< /Type /Catalog /Pages ${pagesObj} 0 R >>`);
+
+    let pdf = '%PDF-1.4\n%\xFF\xFF\xFF\xFF\n';
+    const offsets = [0];
+    objects.forEach((obj, i) => {
+      offsets[i+1] = pdf.length;
+      pdf += `${i+1} 0 obj\n${obj}\nendobj\n`;
+    });
+    const xref = pdf.length;
+    pdf += `xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;
+    for (let i=1;i<=objects.length;i++) pdf += `${String(offsets[i]).padStart(10,'0')} 00000 n \n`;
+    pdf += `trailer\n<< /Size ${objects.length+1} /Root ${catalogObj} 0 R >>\nstartxref\n${xref}\n%%EOF`;
+    return new Blob([pdf], {type:'application/pdf'});
+  }
+
+  window.generatePDFView = function() {
+    parseError.style.display = 'none';
+    const text = xmlEditor.value.trim();
+    if (!text) return;
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/xml');
+      const err = doc.getElementsByTagName('parsererror');
+      if (err && err.length > 0) throw new Error(err[0].textContent.split('\n')[0] || 'Invalid XML markup.');
+      const root = doc.documentElement;
+      let recordNodes = [];
+      const children = Array.from(root.children);
+      if (children.length > 0) {
+        const hasGrandchildren = children.some(c => c.children.length > 0);
+        recordNodes = children.length === 1 && hasGrandchildren ? Array.from(children[0].children) : children;
+      } else recordNodes = [root];
+
+      const headersSet = new Set();
+      const rows = [];
+      recordNodes.forEach(node => {
+        const row = {};
+        if (node.attributes) Array.from(node.attributes).forEach(attr => { headersSet.add(attr.name); row[attr.name] = attr.value; });
+        if (node.children.length > 0) Array.from(node.children).forEach(c => { headersSet.add(c.nodeName); row[c.nodeName] = c.textContent.trim(); });
+        else { headersSet.add(node.nodeName); row[node.nodeName] = node.textContent.trim(); }
+        rows.push(row);
+      });
+      const headers = Array.from(headersSet);
+      const title = docTitleInput.value.trim() || root.nodeName + ' Report';
+      const theme = themeSelect.value;
+      const primaryColor = theme === 'emerald' ? '#065f46' : theme === 'minimal' ? '#0f172a' : '#1e3a8a';
+      const tableHeaderBg = theme === 'emerald' ? '#ecfdf5' : theme === 'minimal' ? '#f1f5f9' : '#eff6ff';
+      let html = `<div style="border-bottom:2px solid ${primaryColor};padding-bottom:1.25rem;margin-bottom:1.5rem;"><h1 style="font-size:1.85rem;font-weight:800;color:${primaryColor};margin:0;">${title}</h1></div>`;
+      html += `<table style="width:100%;border-collapse:collapse;font-size:.85rem;text-align:left;line-height:1.4;"><thead><tr style="background:${tableHeaderBg};border-bottom:2px solid ${primaryColor};">${headers.map(h => `<th style="padding:.65rem .75rem;font-weight:700;color:#0f172a;text-transform:uppercase;font-size:.75rem;">${h}</th>`).join('')}</tr></thead><tbody>`;
+      html += rows.map((r,i) => `<tr style="border-bottom:1px solid #e2e8f0;background:${i%2===0?'#fff':'#f8fafc'};">${headers.map(h => `<td style="padding:.55rem .75rem;color:#334155;">${r[h] !== undefined ? r[h] : ''}</td>`).join('')}</tr>`).join('');
+      html += '</tbody></table>';
+      pdfPaper.innerHTML = html;
+      pdfStats.textContent = `Formatted ${rows.length} records into a PDF-ready document`;
+      resultArea.style.display = 'block';
+      resultArea.scrollIntoView({behavior:'smooth', block:'nearest'});
+      window._pdfData = {title, headers, rows, theme};
+    } catch (err) {
+      errorMessage.textContent = err.message || 'Failed to parse XML for PDF conversion';
+      parseError.style.display = 'block';
+    }
+  };
+
+  window.downloadPDF = function() {
+    if (!window._pdfData) {
+      generatePDFView();
+      if (!window._pdfData) return;
+    }
+    const d = window._pdfData;
+    const blob = createPdfDocument(d.title, d.headers, d.rows, d.theme);
+    const a = document.createElement('a');
+    const safeName = (d.title || 'xml-report').replace(/[^a-z0-9_-]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'xml-report';
+    a.href = URL.createObjectURL(blob);
+    a.download = safeName + '.pdf';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  };
+
+  window.loadSampleXml = function() {
+    currentFileName = 'clinical_lab_results.xml';
+    const sample = `<?xml version="1.0" encoding="UTF-8"?>
+<diagnostic_report facility="Northwestern Pathology Center" patient_id="PT-88410">
+  <test_result code="CBC-01" status="Final">
+    <test_name>Hemoglobin A1c</test_name>
+    <measured_value>5.4</measured_value>
+    <unit>%</unit>
+    <reference_range>4.0 - 5.6</reference_range>
+    <interpretation>Normal</interpretation>
+  </test_result>
+  <test_result code="LIP-02" status="Final">
+    <test_name>Total Cholesterol</test_name>
+    <measured_value>182</measured_value>
+    <unit>mg/dL</unit>
+    <reference_range>&lt; 200</reference_range>
+    <interpretation>Desirable</interpretation>
+  </test_result>
+  <test_result code="LIP-03" status="Final">
+    <test_name>HDL Cholesterol</test_name>
+    <measured_value>58</measured_value>
+    <unit>mg/dL</unit>
+    <reference_range>&gt; 40</reference_range>
+    <interpretation>Optimal</interpretation>
+  </test_result>
+  <test_result code="CMP-04" status="Final">
+    <test_name>Serum Fasting Glucose</test_name>
+    <measured_value>92</measured_value>
+    <unit>mg/dL</unit>
+    <reference_range>70 - 99</reference_range>
+    <interpretation>Normal</interpretation>
+  </test_result>
+  <test_result code="CMP-05" status="Final">
+    <test_name>Serum Creatinine</test_name>
+    <measured_value>0.95</measured_value>
+    <unit>mg/dL</unit>
+    <reference_range>0.74 - 1.35</reference_range>
+    <interpretation>Normal</interpretation>
+  </test_result>
+</diagnostic_report>`;
+
+    currentFileSize = sample.length;
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize / 1024).toFixed(1) + ' KB';
+    fileMeta.style.display = 'block';
+
+    xmlEditor.value = sample;
+    conversionPanel.style.display = 'block';
+    resultArea.style.display = 'none';
+    conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  window.resetTool = function() {
+    fileInput.value = '';
+    rawXmlText = '';
+    xmlEditor.value = '';
+    pdfPaper.innerHTML = '';
+    fileMeta.style.display = 'none';
+    conversionPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    parseError.style.display = 'none';
+  };
+</script>

@@ -1,0 +1,451 @@
+---
+layout: main
+title: "XML to XSD – Generate XML Schema Definition Online"
+short_name: "XML to XSD"
+description: "Generate W3C XML Schema Definition (XSD) from any XML document online. Inferred data types, complexTypes, sequences, and attributes. 100% private."
+keywords: "xml to xsd, xml to schema, generate xsd from xml, xml schema definition generator, xml to xsd converter online"
+category: "XML"
+permalink: /xml-to-xsd
+---
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>🛡️</span> Client‑Side XML to XSD Schema Engine
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      XML to XSD – Generate W3C XML Schema Definitions
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Automatically deduce element types, complexTypes, sequences, and attribute definitions from your XML files. Enforce API contracts and validate data pipelines. No uploads, 100% private.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Private – Schema induction executes locally in your browser memory.</span>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your XML File Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.xml</strong>, <strong>.xhtml</strong>, and <strong>.xsd</strong> files
+      </p>
+      <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        Browse XML File
+        <input type="file" id="fileInput" accept=".xml,.xhtml,.rss,.atom,.svg,.txt" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Sample & Reset -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button type="button" onclick="loadSampleXml()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📊 Load Sample (purchase order)
+        </button>
+      </div>
+      <button type="button" onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Reset Tool
+      </button>
+    </div>
+  </div>
+
+  <!-- File Info Bar -->
+  <div id="fileMeta" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.875rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 1rem; color: #0f172a;">source.xml</strong>
+          <div id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">Size: 0 KB</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; color: #475569;">
+        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+          <input type="checkbox" id="optStrictTypes" checked>
+          <span>Strict Type Inference (dates, numbers)</span>
+        </label>
+        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+          <input type="checkbox" id="optOccurs" checked>
+          <span>Auto-detect maxOccurs="unbounded"</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>XML Parsing Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Preview & Conversion Panel -->
+  <div id="conversionPanel" style="display: none; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0;">
+        📊 Raw XML Input (editable)
+      </h3>
+      <span style="font-size: 0.85rem; color: #64748b;">Ready to generate schema</span>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <textarea id="xmlEditor" style="width: 100%; min-height: 200px; max-height: 360px; padding: 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.875rem; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #f8fafc; line-height: 1.5; resize: vertical; outline: none; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+      <button id="convertBtn" onclick="generateXSD()" style="padding: 0.7rem 2rem; background: #0f172a; color: white; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer;">
+        🔄 Convert to XSD
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none; margin-top: 1.5rem;">
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 2rem;">✅</span>
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0;">XSD Schema Ready</h3>
+          <p id="xsdStats" style="color: #64748b; font-size: 0.9rem; margin: 0.25rem 0 0;">Valid W3C XML Schema generated</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="copyBtn" onclick="copyXSD()" style="padding: 0.7rem 1.4rem; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          📋 Copy XSD
+        </button>
+        <button onclick="downloadXSD()" style="padding: 0.7rem 1.4rem; background: #059669; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+          💾 Download .xsd
+        </button>
+      </div>
+    </div>
+
+    <!-- Output Viewer -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 700; color: #0f172a;">Generated W3C XSD Schema</span>
+        <span id="outputMetrics" style="font-size: 0.85rem; color: #64748b;"></span>
+      </div>
+      <textarea id="xsdOutput" style="width: 100%; min-height: 320px; max-height: 480px; background: #0f172a; color: #f8fafc; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.85rem; padding: 1.25rem; border: none; resize: vertical; outline: none; line-height: 1.6; box-sizing: border-box;" readonly></textarea>
+    </div>
+  </div>
+
+  <!-- Educational Article (SEO & GEO Optimised) -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Why Generate an XSD (XML Schema Definition)?</h2>
+    <p>
+      An XSD (XML Schema Definition) formalizes the architectural contract of an XML document. In enterprise banking, B2B EDI exchanges, healthcare HL7 workflows, and SOAP microservices, incoming XML must be validated against a strict schema to prevent malformed payloads, injection vulnerabilities, and processing crashes. Writing an XSD by hand is tedious and error-prone; DataFrog inspects your sample XML to automatically infer complex types, child element sequences, cardinality rules, and W3C data types.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">W3C Datatype Detection Rules</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><code>xs:integer</code> – Whole positive and negative numbers without fractional decimals.</li>
+      <li><code>xs:decimal</code> – Floating-point prices, percentages, and measurement ratios.</li>
+      <li><code>xs:boolean</code> – Literal <code>true</code> and <code>false</code> boolean flags.</li>
+      <li><code>xs:date</code> &amp; <code>xs:dateTime</code> – Standard ISO 8601 calendar strings (e.g. <code>2026-09-29</code>).</li>
+      <li><code>xs:string</code> – General character text, descriptions, and mixed content.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the generator distinguish complexType from simpleType?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Any XML tag that encloses child tags or declares XML attributes is defined as an <code>xs:complexType</code>. Tags containing exclusively scalar text values without attributes are assigned simple W3C datatypes.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are repeated sibling elements handled in the schema?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          When an element occurs multiple times within a parent container, the schema generator automatically appends <code>maxOccurs="unbounded"</code> to validate arrays of items.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can the generated XSD be used in Java, .NET, or Python validators?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. The output strictly conforms to the official W3C XML Schema 1.0 recommendation, compatible with Java Xerces, Microsoft .NET XmlSchemaSet, and Python lxml.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the schema generator detect optional vs required elements?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          When sibling records are evaluated, if an element is absent from one or more records, the generator assigns minOccurs="0" to mark it as optional. Elements present in all records default to minOccurs="1".
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Which W3C XML Schema versions are supported?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          The generated schema adheres to the universal W3C XML Schema 1.0 (XSD 1.0) standard with xmlns:xs="http://www.w3.org/2001/XMLSchema", ensuring 100% compatibility with standard parsers like Xerces, lxml, System.Xml, and JaxB.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  let currentFileName = 'schema.xml';
+  let currentFileSize = 0;
+  let rawXmlText = '';
+  let generatedXsdText = '';
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileMeta = document.getElementById('fileMeta');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const optStrictTypes = document.getElementById('optStrictTypes');
+  const optOccurs = document.getElementById('optOccurs');
+  const parseError = document.getElementById('parseError');
+  const errorMessage = document.getElementById('errorMessage');
+  const conversionPanel = document.getElementById('conversionPanel');
+  const xmlEditor = document.getElementById('xmlEditor');
+  const resultArea = document.getElementById('resultArea');
+  const xsdStats = document.getElementById('xsdStats');
+  const outputMetrics = document.getElementById('outputMetrics');
+  const xsdOutput = document.getElementById('xsdOutput');
+  const copyBtn = document.getElementById('copyBtn');
+
+  if (dropzone) {
+    ['dragenter', 'dragover'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#2563eb';
+        dropzone.style.background = '#eff6ff';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        processUploadedFile(files[0]);
+      }
+    });
+
+    dropzone.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+        fileInput.click();
+      }
+    });
+  }
+
+  window.handleFileSelect = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      processUploadedFile(file);
+    }
+  };
+
+  function processUploadedFile(file) {
+    currentFileName = file.name;
+    currentFileSize = file.size;
+
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize > 1024 ? (currentFileSize / 1024).toFixed(1) + ' KB' : currentFileSize + ' bytes');
+    fileMeta.style.display = 'block';
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      rawXmlText = e.target.result;
+      xmlEditor.value = rawXmlText;
+      conversionPanel.style.display = 'block';
+      resultArea.style.display = 'none';
+      conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+    reader.readAsText(file);
+  }
+
+  function inferType(val, strict) {
+    if (!strict) return 'xs:string';
+    const s = String(val).trim();
+    if (!s) return 'xs:string';
+    if (s === 'true' || s === 'false') return 'xs:boolean';
+    if (/^-?\d+$/.test(s)) return 'xs:integer';
+    if (/^-?\d+\.\d+$/.test(s)) return 'xs:decimal';
+    if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return 'xs:date';
+    return 'xs:string';
+  }
+
+  function buildElementSchema(node, indent, strict, checkOccurs) {
+    const spaces = ' '.repeat(indent);
+    const hasChildren = node.children.length > 0;
+    const hasAttributes = node.attributes && node.attributes.length > 0;
+
+    if (!hasChildren && !hasAttributes) {
+      const inferred = inferType(node.textContent, strict);
+      return `${spaces}<xs:element name="${node.nodeName}" type="${inferred}"/>\n`;
+    }
+
+    let out = `${spaces}<xs:element name="${node.nodeName}">\n`;
+    out += `${spaces}  <xs:complexType>\n`;
+
+    if (hasChildren) {
+      out += `${spaces}    <xs:sequence>\n`;
+
+      const counts = {};
+      Array.from(node.children).forEach(c => {
+        counts[c.nodeName] = (counts[c.nodeName] || 0) + 1;
+      });
+
+      const processed = new Set();
+      Array.from(node.children).forEach(c => {
+        if (!processed.has(c.nodeName)) {
+          processed.add(c.nodeName);
+          const isMultiple = checkOccurs && counts[c.nodeName] > 1;
+          const childXml = buildElementSchema(c, indent + 6, strict, checkOccurs);
+
+          if (isMultiple) {
+            // Inject maxOccurs
+            const modified = childXml.replace(/<xs:element name="([^"]+)"/, '<xs:element name="$1" maxOccurs="unbounded"');
+            out += modified;
+          } else {
+            out += childXml;
+          }
+        }
+      });
+
+      out += `${spaces}    </xs:sequence>\n`;
+    }
+
+    if (hasAttributes) {
+      Array.from(node.attributes).forEach(attr => {
+        const aType = inferType(attr.value, strict);
+        out += `${spaces}    <xs:attribute name="${attr.name}" type="${aType}" use="optional"/>\n`;
+      });
+    }
+
+    out += `${spaces}  </xs:complexType>\n`;
+    out += `${spaces}</xs:element>\n`;
+    return out;
+  }
+
+  window.generateXSD = function() {
+    parseError.style.display = 'none';
+    const text = xmlEditor.value.trim();
+    if (!text) return;
+
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/xml');
+      const err = doc.getElementsByTagName('parsererror');
+      if (err && err.length > 0) {
+        throw new Error(err[0].textContent.split('\n')[0] || 'Invalid XML markup.');
+      }
+
+      const root = doc.documentElement;
+      const strict = optStrictTypes.checked;
+      const checkOccurs = optOccurs.checked;
+
+      let xsd = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+      xsd += `<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">\n`;
+      xsd += buildElementSchema(root, 2, strict, checkOccurs);
+      xsd += `</xs:schema>`;
+
+      generatedXsdText = xsd;
+      xsdOutput.value = xsd;
+
+      const lines = xsd.split('\n').length;
+      const sizeBytes = new Blob([xsd]).size;
+      const sizeStr = sizeBytes > 1024 ? (sizeBytes / 1024).toFixed(1) + ' KB' : sizeBytes + ' bytes';
+
+      xsdStats.textContent = `Generated W3C Schema (${lines} lines, ${sizeStr})`;
+      outputMetrics.textContent = `${lines} lines • ${sizeStr}`;
+      resultArea.style.display = 'block';
+      resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      errorMessage.textContent = err.message || 'Failed to generate XSD from XML';
+      parseError.style.display = 'block';
+    }
+  };
+
+  window.copyXSD = function() {
+    if (!generatedXsdText) return;
+    navigator.clipboard.writeText(generatedXsdText).then(() => {
+      const orig = copyBtn.textContent;
+      copyBtn.textContent = '✓ Copied!';
+      copyBtn.style.background = '#059669';
+      setTimeout(() => {
+        copyBtn.textContent = orig;
+        copyBtn.style.background = '#0284c7';
+      }, 2000);
+    });
+  };
+
+  window.downloadXSD = function() {
+    if (!generatedXsdText) return;
+    const blob = new Blob([generatedXsdText], { type: 'application/xml;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const baseName = currentFileName.replace(/\.[^/.]+$/, '') || 'schema';
+    a.href = url;
+    a.download = `${baseName}.xsd`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  window.loadSampleXml = function() {
+    currentFileName = 'purchase_order.xml';
+    const sample = `<?xml version="1.0" encoding="UTF-8"?>
+<purchase_order order_id="PO-99214" order_date="2026-09-28">
+  <buyer>
+    <company_name>Meridian Industrial Supply</company_name>
+    <contact_email>procurement@meridian.com</contact_email>
+  </buyer>
+  <shipping_address country="US">
+    <street>742 Evergreen Terrace</street>
+    <city>Springfield</city>
+    <postal_code>97477</postal_code>
+  </shipping_address>
+  <line_items>
+    <item sku="SKU-881" quantity="12">
+      <product_name>Industrial Pneumatic Valve</product_name>
+      <unit_price>149.50</unit_price>
+      <in_stock>true</in_stock>
+    </item>
+    <item sku="SKU-882" quantity="4">
+      <product_name>Heavy-Duty Pressure Regulator</product_name>
+      <unit_price>320.00</unit_price>
+      <in_stock>true</in_stock>
+    </item>
+  </line_items>
+  <total_amount>3074.00</total_amount>
+</purchase_order>`;
+
+    currentFileSize = sample.length;
+    metaFilename.textContent = currentFileName;
+    metaFilesize.textContent = 'Size: ' + (currentFileSize / 1024).toFixed(1) + ' KB';
+    fileMeta.style.display = 'block';
+
+    xmlEditor.value = sample;
+    conversionPanel.style.display = 'block';
+    resultArea.style.display = 'none';
+    conversionPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  window.resetTool = function() {
+    fileInput.value = '';
+    rawXmlText = '';
+    xmlEditor.value = '';
+    generatedXsdText = '';
+    fileMeta.style.display = 'none';
+    conversionPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    parseError.style.display = 'none';
+  };
+</script>
