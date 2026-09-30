@@ -1,63 +1,55 @@
 <head>
-  <link rel="stylesheet" href="/assets/css/style.css">
   <meta charset="utf-8">
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="-1" />
-  <title>{% if page.title %}{{page.title}}{% else %}{{site.title}}{% endif %}</title>
-  <meta name="referrer" content="no-referrer-when-downgrade">
-  <link rel="icon" href="/assets/img/datafrog.png" type="image/x-icon">
-  <meta name="robots" content="{% if page.robots %}{{ page.robots }}{% else %}index, follow{% endif %}">
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=6">
-  <link rel="shortcut icon" href="{{ '/assets/img/datafrog.png' | prepend: site.baseurl }}" type="image/x-icon">
-  <link rel="apple-touch-icon" href="{{ '/assets/img/datafrog.png' | prepend: site.baseurl }}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- Theme & Mobile Bar Colors -->
-  <meta name="theme-color" content="#0f172a">
-  <meta name="msapplication-navbutton-color" content="#0f172a">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#0f172a">
+  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
 
-  <!-- Meta Description -->
   {% if page.description %}
-    <meta name="description" content="{{ page.description | escape }}">
+    <meta name="description" content="{{ page.description | strip_html | escape }}">
   {% elsif site.description %}
-    <meta name="description" content="{{ site.description | escape }}">
-  {% else %}
-    <meta name="description" content="A browser-based data intelligence workspace where users can inspect, analyze, validate, compare, clean, and visualize datasets locally.">
+    <meta name="description" content="{{ site.description | strip_html | escape }}">
   {% endif %}
 
-  <!-- Meta Keywords -->
   {% if page.keywords %}
     <meta name="keywords" content="{{ page.keywords | escape }}">
   {% elsif site.keywords %}
     <meta name="keywords" content="{{ site.keywords | escape }}">
-  {% else %}
-    <meta name="keywords" content="JSON Viewer, CSV Viewer, XML Viewer, Data Tools, Browser Data Tools">
   {% endif %}
 
-  <!-- Canonical URL -->
-  {% if page.url %}
-    <link rel="canonical" href="{{ page.url | absolute_url }}">
-  {% elsif site.url %}
-    <link rel="canonical" href="{{ site.url | absolute_url }}">
-  {% else %}
-    <link rel="canonical" href="https://datafrog.tools">
+  <meta name="robots" content="{% if page.robots %}{{ page.robots }}{% else %}index, follow{% endif %}">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  {% assign canonical_url = page.canonical | default: page.url | absolute_url %}
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" href="{{ '/assets/img/datafrog.png' | prepend: site.baseurl }}" type="image/png">
+  <link rel="shortcut icon" href="{{ '/assets/img/datafrog.png' | prepend: site.baseurl }}" type="image/png">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/datafrog.png' | prepend: site.baseurl }}">
+
+  <meta name="theme-color" content="#0f172a">
+  <meta name="msapplication-navbutton-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#0f172a">
+
+  <meta property="og:type" content="{% if page.is_post or page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+  <meta property="og:description" content="{% if page.description %}{{ page.description | strip_html | escape }}{% elsif site.description %}{{ site.description | strip_html | escape }}{% endif %}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:site_name" content="DataFrog">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="{% if page.image %}{{ page.image | absolute_url }}{% elsif page.img %}{{ '/assets/img/' | append: page.img | absolute_url }}{% else %}https://datafrog.tools/assets/img/datafrog.png{% endif %}">
+  {% if page.is_post or page.layout == 'post' %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  <meta property="article:modified_time" content="{{ page.updated | default: page.date | date_to_xmlschema }}">
   {% endif %}
 
-  <!-- Open Graph Tags -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% elsif site.title %}{{ site.title | escape }}{% else %}DataFrog{% endif %}">
-  <meta property="og:description" content="{% if page.description %}{{ page.description | escape }}{% elsif site.description %}{{ site.description | escape }}{% else %}DataFrog — Privacy-First Data Intelligence Workspace{% endif %}">
-  <meta property="og:url" content="{% if page.url %}{{ page.url | absolute_url }}{% elsif site.url %}{{ site.url | absolute_url }}{% else %}https://datafrog.tools{% endif %}">
-  <meta property="og:image" content="{% if page.image %}{{ page.image | absolute_url }}{% elsif site.image %}{{ site.image | absolute_url }}{% else %}https://datafrog.tools/assets/img/datafrog.png{% endif %}">
-
-  <!-- Twitter Card Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }}{% elsif site.title %}{{ site.title | escape }}{% else %}DataFrog{% endif %}">
-  <meta name="twitter:description" content="{% if page.description %}{{ page.description | escape }}{% elsif site.description %}{{ site.description | escape }}{% else %}DataFrog — Privacy-First Data Intelligence Workspace{% endif %}">
-  <meta name="twitter:image" content="{% if page.image %}{{ page.image | absolute_url }}{% elsif site.image %}{{ site.image | absolute_url }}{% else %}https://datafrog.tools/assets/img/datafrog.png{% endif %}">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+  <meta name="twitter:description" content="{% if page.description %}{{ page.description | strip_html | escape }}{% elsif site.description %}{{ site.description | strip_html | escape }}{% endif %}">
+  <meta name="twitter:image" content="{% if page.image %}{{ page.image | absolute_url }}{% elsif page.img %}{{ '/assets/img/' | append: page.img | absolute_url }}{% else %}https://datafrog.tools/assets/img/datafrog.png{% endif %}">
+
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="rcwqWZs4F7TML/u0B6Sk9g" async></script>
-  <!-- AUTOMATED GOOGLE-FRIENDLY JSON-LD STRUCTURED DATA -->
+
   {% include schema.html %}
 </head>

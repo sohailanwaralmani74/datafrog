@@ -1,5 +1,5 @@
 ---
-layout: main
+layout: post
 title: "Guide On View JSON Online | DataFrog"
 description: "Learn how to use JSON online view tools to format, inspect, and query complex JSON data safely in your browser without uploading payloads to cloud servers."
 excerpt: "Master JSON online view tools to format minified strings, inspect nested object trees, validate syntax, and analyze payloads privately inside your web browser."
@@ -17,62 +17,6 @@ permalink: /blog/json-online-view
 <!-- ═══════════════════════════════════════════════════
      STRUCTURED DATA (JSON-LD) FOR BLOG POST & FAQ
 ═══════════════════════════════════════════════════ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "JSON Online View: Complete Guide to Viewing & Formatted Trees",
-  "description": "Learn how to use JSON online view tools to format, inspect, and query complex JSON data safely in your browser without uploading payloads to cloud servers.",
-  "image": "https://datafrog.tools/assets/img/json-online-view-hero.jpg",
-  "author": {
-    "@type": "Organization",
-    "name": "DataFrog Engineering Team",
-    "url": "https://datafrog.tools/about-us"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "DataFrog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://datafrog.tools/assets/img/datafrog.png"
-    }
-  },
-  "datePublished": "2026-08-11",
-  "dateModified": "2026-08-11",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://datafrog.tools/blog/json-online-view"
-  }
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://datafrog.tools/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Blog",
-      "item": "https://datafrog.tools/blog"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "JSON Online View Guide",
-      "item": "https://datafrog.tools/blog/json-online-view"
-    }
-  ]
-}
-</script>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

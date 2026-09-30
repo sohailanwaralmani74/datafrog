@@ -1,96 +1,84 @@
-<!-- ═══════════════════════════════════════════════════
-     DATAFROG.TOOLS — AUTOMATED JSON-LD STRUCTURED DATA
-     Strictly Schema.org Validated | Zero Ratings/Reviews
-═══════════════════════════════════════════════════ -->
-
 {% assign site_domain = site.url | default: "https://datafrog.tools" %}
 
-<!-- 1. ORGANIZATION SCHEMA (Global) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "{{ site_domain }}/#organization",
   "name": "DataFrog",
   "url": "{{ site_domain }}/",
-  "logo": "{{ site_domain }}/assets/img/datafrog.png",
-  "description": "A browser-based data intelligence workspace where users can inspect, analyze, validate, compare, clean, and visualize datasets locally."
+  "logo": {
+    "@type": "ImageObject",
+    "url": "{{ site_domain }}/assets/img/datafrog.png"
+  },
+  "description": "Browser-based tools for inspecting, analyzing, validating, comparing, converting, cleaning, and visualizing data locally."
 }
 </script>
 
-<!-- 2. WEBSITE & SEARCHACTION SCHEMA (Global) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": "{{ site_domain }}/#website",
   "name": "DataFrog",
   "url": "{{ site_domain }}/",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "{{ site_domain }}/#site-search-input?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
+  "publisher": {
+    "@id": "{{ site_domain }}/#organization"
   }
 }
 </script>
 
-<!-- 3. SITE NAVIGATION ELEMENT SCHEMA (Global) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SiteNavigationElement",
-  "name": ["Home", "Inspect", "Analyze", "Validate", "Compare", "Convert", "Visualize"],
-  "url": [
-    "{{ site_domain }}/",
-    "{{ site_domain }}/inspect/",
-    "{{ site_domain }}/analyze/",
-    "{{ site_domain }}/validate/",
-    "{{ site_domain }}/compare/",
-    "{{ site_domain }}/convert",
-    "{{ site_domain }}/visualize/"
-  ]
-}
-</script>
-
 {% if page.is_homepage %}
-<!-- 4. HOMEPAGE WEBPAGE SCHEMA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": {{ page.title | jsonify }},
+  "@id": "{{ site_domain }}/#webpage",
   "url": "{{ site_domain }}/",
+  "name": {{ page.title | jsonify }},
   "description": {{ page.description | jsonify }},
+  "isPartOf": {
+    "@id": "{{ site_domain }}/#website"
+  },
+  "about": {
+    "@id": "{{ site_domain }}/#organization"
+  },
   "inLanguage": "en"
 }
 </script>
 {% endif %}
 
 {% if page.is_category %}
-<!-- 5. CATEGORY COLLECTIONPAGE & ITEMLIST SCHEMA -->
+{% assign cat_name = page.category_name %}
+{% if cat_name == "Convert" %}
+  {% assign category_items = site.data.converters %}
+{% else %}
+  {% assign category_items = site.data.tools | where: "category", cat_name %}
+{% endif %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": {{ page.title | jsonify }},
+  "@id": "{{ page.url | absolute_url }}#webpage",
   "url": "{{ page.url | absolute_url }}",
+  "name": {{ page.title | jsonify }},
   "description": {{ page.description | jsonify }},
+  "isPartOf": {
+    "@id": "{{ site_domain }}/#website"
+  },
   "inLanguage": "en"
 }
 </script>
-
-{% assign cat_name = page.category_name %}
-{% assign category_tools = site.data.tools | where: "category", cat_name %}
-{% if category_tools.size > 0 %}
+{% if category_items.size > 0 %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "{{ cat_name }} Data Tools",
-  "numberOfItems": {{ category_tools.size }},
+  "@id": "{{ page.url | absolute_url }}#itemlist",
+  "name": "{{ cat_name }} tools",
+  "numberOfItems": {{ category_items.size }},
   "itemListElement": [
-    {% for tool in category_tools %}
+    {% for tool in category_items %}
     {
       "@type": "ListItem",
       "position": {{ forloop.index }},
@@ -105,46 +93,43 @@
 {% endif %}
 
 {% if page.category and page.is_category != true %}
-<!-- 6. TOOL WEBAPPLICATION & SOFTWAREAPPLICATION SCHEMA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
+  "@type": "SoftwareApplication",
+  "@id": "{{ page.url | absolute_url }}#software",
   "name": {{ page.title | jsonify }},
   "url": "{{ page.url | absolute_url }}",
   "description": {{ page.description | jsonify }},
-  "applicationCategory": "DeveloperApplication",
-  "applicationSubCategory": "{{ page.category }}",
+  "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
-  "browserRequirements": "Requires JavaScript",
-  "inLanguage": "en",
+  "browserRequirements": "Requires JavaScript and a modern web browser",
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD"
   },
-  "creator": {
-    "@type": "Organization",
-    "name": "DataFrog"
+  "isPartOf": {
+    "@id": "{{ site_domain }}/#website"
   },
   "publisher": {
-    "@type": "Organization",
-    "name": "DataFrog",
-    "logo": "{{ site_domain }}/assets/img/datafrog.png"
-  }
+    "@id": "{{ site_domain }}/#organization"
+  },
+  "inLanguage": "en"
 }
 </script>
 {% endif %}
 
-{% if page.layout == "post" or page.is_post %}
-<!-- 7. BLOGPOSTING & ARTICLE SCHEMA -->
+{% if page.is_post or page.layout == "post" %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "@id": "{{ page.url | absolute_url }}#article",
   "headline": {{ page.title | jsonify }},
   "description": {{ page.description | default: page.excerpt | strip_html | jsonify }},
-  "image": "{{ page.image | default: '/assets/img/datafrog.png' | absolute_url }}",
+  "url": "{{ page.url | absolute_url }}",
+  "image": "{{ page.image | default: page.img | default: '/assets/img/datafrog.png' | absolute_url }}",
   "datePublished": "{{ page.date | date_to_xmlschema }}",
   "dateModified": "{{ page.updated | default: page.date | date_to_xmlschema }}",
   "mainEntityOfPage": {
@@ -153,26 +138,26 @@
   },
   "author": {
     "@type": "Organization",
-    "name": "DataFrog Team"
+    "name": "DataFrog",
+    "@id": "{{ site_domain }}/#organization"
   },
   "publisher": {
-    "@type": "Organization",
-    "name": "DataFrog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ site_domain }}/assets/img/datafrog.png"
-    }
-  }
+    "@id": "{{ site_domain }}/#organization"
+  },
+  "isPartOf": {
+    "@id": "{{ site_domain }}/#website"
+  },
+  "inLanguage": "en"
 }
 </script>
 {% endif %}
 
-{% if page.is_category or page.category or page.layout == "post" %}
-<!-- 8. BREADCRUMBLIST SCHEMA -->
+{% if page.is_category or page.category or page.is_post or page.layout == "post" %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": "{{ page.url | absolute_url }}#breadcrumb",
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -180,19 +165,31 @@
       "name": "Home",
       "item": "{{ site_domain }}/"
     }
-    {% if page.category %}
+    {% if page.is_post or page.layout == "post" %}
     ,{
       "@type": "ListItem",
       "position": 2,
-      "name": "{{ page.category }}",
-      "item": "{{ site_domain }}/{{ page.category | downcase }}"
-    },
-    {% assign matched_tool = site.data.tools | where: "url", page.url | first %}
-    {% assign tool_breadcrumb_name = page.short_name | default: matched_tool.short_name | default: matched_tool.title | default: page.title %}
-    {
+      "name": "Blog",
+      "item": "{{ site_domain }}/blog/"
+    },{
       "@type": "ListItem",
       "position": 3,
-      "name": {{ tool_breadcrumb_name | jsonify }},
+      "name": {{ page.title | jsonify }},
+      "item": "{{ page.url | absolute_url }}"
+    }
+    {% elsif page.category %}
+      {% assign matched_tool = site.data.tools | where: "url", page.url | first %}
+      {% assign matched_converter = site.data.converters | where: "url", page.url | first %}
+      {% assign crumb_name = page.short_name | default: matched_tool.short_name | default: matched_converter.short_name | default: matched_tool.title | default: matched_converter.title | default: page.title %}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ page.category | jsonify }},
+      "item": "{{ site_domain }}/{{ page.category | downcase }}/"
+    },{
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ crumb_name | jsonify }},
       "item": "{{ page.url | absolute_url }}"
     }
     {% elsif page.is_category %}
