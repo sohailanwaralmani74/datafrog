@@ -41,7 +41,7 @@ permalink: /blog/mastering-json-schema-validation
   "dateModified": "2026-08-05",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://datafrog.tools/blog/mastering-json-schema-validation/"
+    "@id": "https://datafrog.tools/blog/mastering-json-schema-validation"
   }
 }
 </script>
@@ -67,7 +67,7 @@ permalink: /blog/mastering-json-schema-validation
       "@type": "ListItem",
       "position": 3,
       "name": "Mastering JSON Schema Validation",
-      "item": "https://datafrog.tools/blog/mastering-json-schema-validation/"
+      "item": "https://datafrog.tools/blog/mastering-json-schema-validation"
     }
   ]
 }
