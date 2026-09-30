@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: main
 title: "How to Import JSON into Excel: Complete Step-by-Step Guide"
 description: "Learn how to import JSON into Excel using Power Query, VBA macro scripts, CSV conversion, & web browser tools without any data loss or encoding errors."
 excerpt: "Learn how to import JSON into Excel using Power Query, legacy VBA scripts, CSV conversion, and browser-based data tools. Step-by-step guide with error fixes."
@@ -17,6 +17,61 @@ permalink: /blog/how-to-import-json-into-excel
 <!-- ═══════════════════════════════════════════════════
      STRUCTURED DATA (JSON-LD) FOR BLOG POST & FAQ
 ═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Import JSON into Excel: Step-by-Step Tutorial & Best Methods",
+  "description": "Learn how to import JSON into Excel using Power Query, VBA macros, CSV conversion, & local browser tools without data loss or encoding bugs.",
+  "image": "https://datafrog.tools/assets/img/how-to-import-json-into-excel-hero.jpg",
+  "author": {
+    "@type": "Organization",
+    "name": "DataFrog Engineering Team",
+    "url": "https://datafrog.tools/about-us"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "DataFrog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://datafrog.tools/assets/img/datafrog.png"
+    }
+  },
+  "datePublished": "2026-08-10",
+  "dateModified": "2026-08-10",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://datafrog.tools/blog/how-to-import-json-into-excel"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://datafrog.tools/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How to Import JSON into Excel",
+      "item": "https://datafrog.tools/blog/how-to-import-json-into-excel"
+    }
+  ]
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
