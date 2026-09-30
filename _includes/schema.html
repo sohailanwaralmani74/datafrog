@@ -181,6 +181,14 @@
       {% assign matched_tool = site.data.tools | where: "url", page.url | first %}
       {% assign matched_converter = site.data.converters | where: "url", page.url | first %}
       {% assign crumb_name = page.short_name | default: matched_tool.short_name | default: matched_converter.short_name | default: matched_tool.title | default: matched_converter.title | default: page.title %}
+      {% if matched_converter.url %}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ crumb_name | jsonify }},
+      "item": "{{ page.url | absolute_url }}"
+    }
+      {% else %}
     ,{
       "@type": "ListItem",
       "position": 2,
@@ -192,6 +200,7 @@
       "name": {{ crumb_name | jsonify }},
       "item": "{{ page.url | absolute_url }}"
     }
+      {% endif %}
     {% elsif page.is_category %}
     ,{
       "@type": "ListItem",
