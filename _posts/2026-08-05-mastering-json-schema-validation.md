@@ -20,7 +20,6 @@ permalink: /blog/mastering-json-schema-validation
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-<<<<<<< HEAD
   "@type": "BlogPosting",
   "headline": "Mastering JSON Schema Validation: Complete Guide & Best Practices",
   "description": "Learn JSON Schema validation (Draft-07 & 2020-12). Master property constraints, $ref composition, error debugging, and instant browser testing.",
@@ -77,8 +76,6 @@ permalink: /blog/mastering-json-schema-validation
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-=======
->>>>>>> 5de3348f01c5f6c30bf06c9bcf8398fee4c1bf89
   "@type": "FAQPage",
   "mainEntity": [
     {
