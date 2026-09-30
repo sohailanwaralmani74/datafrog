@@ -12,7 +12,7 @@ category_name: "Analyze"
   <!-- Header -->
   <header style="margin-bottom: 2.5rem; text-align: center;">
     <span style="font-size: 3rem; display: block; margin-bottom: 0.5rem;">📊</span>
-    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Analyz Tools</h1>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Analyze Tools</h1>
     <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6;">
       Statistical summaries, dataset profiling, field frequency distributions, column metrics, and pattern analyzers — processed 100% locally in your browser.
     </p>
