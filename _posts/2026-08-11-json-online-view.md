@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: main
 title: "Guide On View JSON Online | DataFrog"
 description: "Learn how to use JSON online view tools to format, inspect, and query complex JSON data safely in your browser without uploading payloads to cloud servers."
 excerpt: "Master JSON online view tools to format minified strings, inspect nested object trees, validate syntax, and analyze payloads privately inside your web browser."
@@ -17,6 +17,7 @@ permalink: /blog/json-online-view
 <!-- ═══════════════════════════════════════════════════
      STRUCTURED DATA (JSON-LD) FOR BLOG POST & FAQ
 ═══════════════════════════════════════════════════ -->
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
