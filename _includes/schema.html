@@ -1,3 +1,5 @@
+{% if page.person_id %}{% assign person = site.data.people | where: "id", page.person_id | first %}<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"{{ site_domain }}{{ person.url }}#person","name":{{ person.name | jsonify }},"url":"{{ site_domain }}{{ person.url }}","image":"{{ site_domain }}{{ person.image }}","jobTitle":{{ person.role | jsonify }},"description":{{ person.bio | jsonify }},"worksFor":{"@id":"{{ site_domain }}/#organization"}}</script>{% endif %}
+
 {% assign site_domain = site.url | default: "https://datafrog.tools" %}
 
 <script type="application/ld+json">
@@ -11,7 +13,8 @@
     "@type": "ImageObject",
     "url": "{{ site_domain }}/assets/img/datafrog.png"
   },
-  "description": "Browser-based tools for inspecting, analyzing, validating, comparing, converting, cleaning, and visualizing data locally."
+  "description": "Browser-based tools for inspecting, analyzing, validating, comparing, converting, cleaning, and visualizing data locally.",
+  "employee": [{% for person in site.data.people %}{"@type":"Person","@id":"{{ site_domain }}{{ person.url }}#person","name":{{ person.name | jsonify }},"jobTitle":{{ person.role | jsonify }},"url":"{{ site_domain }}{{ person.url }}"}{% unless forloop.last %},{% endunless %}{% endfor %}]
 }
 </script>
 
@@ -136,11 +139,7 @@
     "@type": "WebPage",
     "@id": "{{ page.url | absolute_url }}"
   },
-  "author": {
-    "@type": "Organization",
-    "name": "DataFrog",
-    "@id": "{{ site_domain }}/#organization"
-  },
+  "author": {% assign article_author = site.data.people | where: "id", page.author_id | first %}{% if article_author.id %}{"@type":"Person","name":{{ article_author.name | jsonify }},"@id":"{{ site_domain }}{{ article_author.url }}#person","url":"{{ site_domain }}{{ article_author.url }}"}{% else %}{"@type":"Organization","name":"DataFrog","@id":"{{ site_domain }}/#organization"}{% endif %},
   "publisher": {
     "@id": "{{ site_domain }}/#organization"
   },
