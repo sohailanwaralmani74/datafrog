@@ -12,6 +12,7 @@ image: "/assets/img/json-schema-validation-featured.jpg"
 canonical: "https://datafrog.tools/blog/mastering-json-schema-validation"
 sitemap: true
 permalink: /blog/mastering-json-schema-validation
+author_id: sohail-anwar
 ---
 
 <!-- ═══════════════════════════════════════════════════
