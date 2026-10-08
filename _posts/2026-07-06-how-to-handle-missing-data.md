@@ -12,6 +12,7 @@ image: "/assets/img/how-to-handle-missing-data-hero.jpg"
 canonical: "https://datafrog.tools/blog/how-to-handle-missing-data"
 sitemap: true
 permalink: /blog/how-to-handle-missing-data
+author_id: gourav-mishra
 ---
 
 <!-- ═══════════════════════════════════════════════════
