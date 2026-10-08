@@ -21,7 +21,7 @@ A PDF can look perfectly simple while being surprisingly difficult to turn back 
 
 The reason is straightforward: a PDF preserves the appearance of a finished page. Word needs editable text, paragraphs, tables, images and a sensible document structure.
 
-The main lesson from testing PDF-to-Word conversion is that a successful conversion is not the same thing as a clean conversion. Getting a DOCX file at the end is only the first check.
+The main lesson from practical PDF-to-Word review is that a successful conversion is not the same thing as a clean conversion. Getting a DOCX file at the end is only the first check.
 
 ## The basic PDF to Word process
 
@@ -203,7 +203,7 @@ When choosing a conversion method, consider where the file is processed and whet
 
 Browser-based local processing can be useful when you need a web interface without handing the document to a remote server.
 
-## What I learned from testing different document types
+## What a practical review of different document types shows
 
 The cleanest conversions were the ones with ordinary selectable text and straightforward paragraphs.
 
