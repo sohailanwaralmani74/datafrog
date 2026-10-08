@@ -5,6 +5,7 @@ description: "Learn practical ways to convert a Word document to PDF, what to ch
 excerpt: "A practical, hands-on guide to converting Word documents to PDF and checking the result for page breaks, fonts, tables, images and layout changes."
 keywords: "how to convert Word to PDF, Word to PDF, convert DOCX to PDF, save Word as PDF, export Word document to PDF"
 author: "Sohail Anwar"
+author_id: sohail-anwar
 date: 2026-10-04
 categories: ["Documents"]
 tags: ["Word", "PDF", "DOCX", "Document Conversion"]
