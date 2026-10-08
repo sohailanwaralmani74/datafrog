@@ -4,6 +4,7 @@ title: "Gourav Mishra — Business Analyst | DataFrog"
 description: "Meet Gourav Mishra, a Business Analyst at DataFrog who focuses on practical data workflows, document handling, and how tools behave in real business use."
 permalink: /profiles/gourav-mishra
 sitemap: true
+person_id: gourav-mishra
 ---
 
 <article style="max-width: 860px; margin: 0 auto; padding: 2.5rem 1.25rem; line-height: 1.75; color: var(--text-primary);">
