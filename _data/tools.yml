@@ -5,7 +5,7 @@
 #   - title: Tool Title
 #   - short_name: Short Tool Name (used for clean breadcrumbs & navigation)
 #   - url: /tool-permalink
-#   - category: Inspect | Analyze | Validate | Compare | Convert | Visualize
+#   - category: Inspect | Analyze | Validate | Compare | Convert | Visualize | Generate
 #   - description: Short tool description
 #   - keywords: ["keyword1", "keyword2"]
 #   - icon: icon-name
