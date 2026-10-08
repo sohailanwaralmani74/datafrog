@@ -103,6 +103,14 @@ layout: default
     </nav>
 
     <main id="content" role="main">
+      {% if page.author_id %}
+      {% assign page_author = site.data.people | where: "id", page.author_id | first %}
+      {% if page_author.id %}
+      <div style="margin:0 0 1.25rem;padding:.75rem 1rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;color:#475569;font-size:.9rem;">
+        <span>Reviewed by </span><a href="{{ page_author.url }}" style="font-weight:700;color:#0f172a;text-decoration:none;">{{ page_author.name }}</a><span> · {{ page_author.role }}{% if page_author.experience %}, {{ page_author.experience }}{% endif %}</span>
+      </div>
+      {% endif %}
+      {% endif %}
       {{ content }}
     </main>
   </div>
