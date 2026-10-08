@@ -5,6 +5,7 @@ description: "A practical guide to reducing PDF file size, what actually makes a
 excerpt: "A hands-on guide to reducing PDF size without blindly chasing the smallest number. Learn what makes PDFs large, what compression changes, and how to check the result."
 keywords: "how to compress PDF file size, compress PDF, reduce PDF size, make PDF smaller, PDF compressor"
 author: "Gourav Mishra"
+author_id: gourav-mishra
 date: 2026-10-01
 categories: ["PDF"]
 tags: ["PDF", "Compression", "Documents", "File Size"]
