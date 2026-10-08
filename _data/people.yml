@@ -1,26 +1,26 @@
 - id: sohail-anwar
   name: Sohail Anwar
-  role: Software Developer
+  role: Software Engineer
   experience: "12 years of software development experience"
   image: /assets/img/sohail-anwar.png
-  url: /people/sohail-anwar
+  url: /profiles/sohail-anwar
   focus: "Software development, browser-based data tools, application architecture, and developer tooling"
   bio: "Sohail Anwar is a software developer with 12 years of experience building software applications and practical tools for working with data. At DataFrog, he focuses on the engineering behind browser-based data utilities and their usability for developers and data professionals."
 
 - id: saeed-ahmed
   name: Saeed Ahmed
-  role: Software Developer
+  role: Software Engineer
   experience: "8 years of software development experience"
   image: /assets/img/saeed-ahmed.jpg
-  url: /people/saeed-ahmed
+  url: /profiles/saeed-ahmed
   focus: "Software development, technical implementation, data tooling, and quality review"
   bio: "Saeed Ahmed is a software developer with 8 years of experience in software development. At DataFrog, he contributes technical experience to the development and review of browser-based data tools."
 
 - id: gourav-mishra
   name: Gourav Mishra
   role: Business Analyst
-  experience: "Business analysis experience"
+  experience: "Business Analyst"
   image: /assets/img/gourav-mishra.jpg
-  url: /people/gourav-mishra
+  url: /profiles/gourav-mishra
   focus: "Business analysis, requirements, workflows, and practical user needs"
   bio: "Gourav Mishra is a business analyst who brings a user and requirements perspective to DataFrog. He focuses on understanding practical workflows and making tools easier to use for people working with real-world data."
