@@ -118,6 +118,7 @@
   "publisher": {
     "@id": "{{ site_domain }}/#organization"
   },
+  "author": {% assign tool_author_key = page.author_id %}{% if tool_author_key == nil and page.category %}{% if page.category == "Compare" or page.category == "Visualize" %}{% assign tool_author_key = "saeed-ahmed" %}{% elsif page.category == "Convert" or page.category == "Validate" %}{% assign tool_author_key = "sohail-anwar" %}{% elsif page.category == "Analyze" or page.category == "Clean" or page.category == "Inspect" %}{% assign tool_author_key = "gourav-mishra" %}{% endif %}{% endif %}{% assign tool_author = site.data.people | where: "id", tool_author_key | first %}{% if tool_author.id %}{"@type":"Person","name":{{ tool_author.name | jsonify }},"url":"{{ site_domain }}{{ tool_author.url }}","jobTitle":{{ tool_author.role | jsonify }}}{% else %}{"@type":"Organization","name":"DataFrog"}{% endif %},
   "inLanguage": "en"
 }
 </script>
