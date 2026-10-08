@@ -50,4 +50,9 @@ sitemap: true
     <h2>Editorial standard</h2>
     <p>DataFrog uses contributor attribution to make it clear who prepared and reviewed practical content. The goal is not to add a decorative author box; it is to give readers a useful indication of the perspective behind an article and to make the site's documentation accountable to real people.</p>
   </section>
+
+## How Gourav contributes
+
+Gourav reviews content from the user's point of view: what a person is trying to accomplish, where a workflow can become confusing, and whether the result is actually useful. When an article carries his name, its practical observations are based on checking the workflow and output rather than simply repeating a feature description.
+
 </article>
