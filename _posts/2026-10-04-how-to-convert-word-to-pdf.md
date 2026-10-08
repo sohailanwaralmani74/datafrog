@@ -147,7 +147,7 @@ For a document that contains small screenshots, charts or scanned signatures, zo
 
 ## A practical test document
 
-For testing a conversion workflow, I prefer a document that is slightly awkward rather than a clean one-page sample.
+For testing a conversion workflow, For a meaningful review, use a document that is slightly awkward rather than a clean one-page sample.
 
 A useful test document contains:
 
