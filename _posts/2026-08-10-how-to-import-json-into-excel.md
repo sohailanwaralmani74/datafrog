@@ -12,6 +12,7 @@ image: "/assets/img/how-to-import-json-into-excel-hero.jpg"
 canonical: "https://datafrog.tools/blog/how-to-import-json-into-excel"
 sitemap: true
 permalink: /blog/how-to-import-json-into-excel
+author_id: gourav-mishra
 ---
 
 <!-- ═══════════════════════════════════════════════════
