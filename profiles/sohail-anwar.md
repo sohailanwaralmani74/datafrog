@@ -4,6 +4,7 @@ title: "Sohail Anwar — Software Engineer | DataFrog"
 description: "Meet Sohail Anwar, a Software Engineer with 12 years of software development experience and a contributor to DataFrog's document and data tooling content."
 permalink: /profiles/sohail-anwar
 sitemap: true
+person_id: sohail-anwar
 ---
 
 <article style="max-width: 860px; margin: 0 auto; padding: 2.5rem 1.25rem; line-height: 1.75; color: var(--text-primary);">
