@@ -51,8 +51,9 @@ sitemap: true
     <p>DataFrog attributes practical technical content to the contributor who prepared or reviewed it. The purpose is transparency: readers should be able to distinguish an observed workflow from a generic description of what a file format is supposed to do.</p>
   </section>
 
-## How Saeed contributes
-
-Saeed focuses on document-processing behavior and output verification. He checks whether a generated file is genuinely usable after processing, including cases where a file opens successfully but still needs manual repair. His articles emphasize these practical differences instead of promising perfect conversion.
+<section>
+    <h2>How Saeed contributes</h2>
+    <p>Saeed focuses on document-processing behavior and output verification. He checks whether a generated file is genuinely usable after processing, including cases where a file opens successfully but still needs manual repair. His articles emphasize these practical differences instead of promising perfect conversion.</p>
+  </section>
 
 </article>
