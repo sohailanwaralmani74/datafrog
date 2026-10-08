@@ -51,8 +51,9 @@ sitemap: true
     <p>Technical observations published under Sohail's name are intended to reflect actual workflow behavior and engineering review. DataFrog avoids presenting theoretical capability as though it were a tested result.</p>
   </section>
 
-## How Sohail contributes
-
-Sohail reviews technical behavior against real files and realistic edge cases. His focus is whether a tool produces the expected output, what happens when the input is imperfect, and where a claim needs a qualification. Articles under his name are intended to distinguish observed behavior from assumptions.
+<section>
+    <h2>How Sohail contributes</h2>
+    <p>Sohail reviews technical behavior against real files and realistic edge cases. His focus is whether a tool produces the expected output, what happens when the input is imperfect, and where a claim needs a qualification. Articles under his name are intended to distinguish observed behavior from assumptions.</p>
+  </section>
 
 </article>
