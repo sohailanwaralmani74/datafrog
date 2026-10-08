@@ -21,7 +21,7 @@ A large PDF usually becomes a problem at the worst possible time: the email refu
 
 The obvious answer is to compress it. The less obvious part is deciding how much compression is actually useful.
 
-For this guide, the useful test is not simply whether the number of bytes went down. The real question is whether the smaller file still looks and behaves like the original. A PDF that saves 70% of its size but makes a chart unreadable is not a successful result for most people.
+For this guide, the useful test is not simply whether the number of bytes goes down. The real question is whether the smaller file still looks and behaves like the original. A PDF that saves 70% of its size but makes a chart unreadable is not a successful result for most people.
 
 ## The quickest way to compress a PDF
 
