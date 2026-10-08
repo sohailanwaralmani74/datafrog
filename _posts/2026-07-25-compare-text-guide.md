@@ -12,6 +12,7 @@ image: "/assets/img/compare-text-hero.png"
 canonical: "https://datafrog.tools/blog/compare-text-guide"
 sitemap: true
 permalink: /blog/compare-text-guide
+author_id: saeed-ahmed
 ---
 
 <!-- ═══════════════════════════════════════════════════
