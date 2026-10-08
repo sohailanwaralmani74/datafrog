@@ -12,6 +12,7 @@ image: "/assets/img/json-online-view-hero.jpg"
 canonical: "https://datafrog.tools/blog/json-online-view"
 sitemap: true
 permalink: /blog/json-online-view
+author_id: saeed-ahmed
 ---
 
 <!-- ═══════════════════════════════════════════════════
