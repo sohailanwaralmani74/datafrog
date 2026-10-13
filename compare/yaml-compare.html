@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "YAML Compare - Structural & Text Difference Checker"
-description: "Compare YAML documents side-by-side locally in browser. Detect structural diffs, key changes, & modified values with visual side-by-side diffs online."
+description: "Compare YAML documents to find added, removed, or changed keys and values; check indentation, scalar types, and parser compatibility before interpreting changes."
 permalink: /compare/yaml-compare
 category: Compare
 short_name: YAML Compare
@@ -717,7 +717,7 @@ short_name: YAML Compare
   <h1>YAML Compare - Structural & Text Diff Generator</h1>
   <p>Compare two YAML files or configuration blocks online. Parse hierarchy, maps, sequences, scalar types, anchors, and merge keys to highlight structural differences with instant visual charts and exports.</p>
   <div class="tool-badge-row">
-    <span class="tool-badge">🔒 100% Client-Side Privacy</span>
+    <span class="tool-badge">Local processing and privacy notes</span>
     <span class="tool-badge">⚡ Instant Structural Parsing</span>
     <span class="tool-badge">🌿 Hierarchy & Path Diff</span>
     <span class="tool-badge">📊 Visual Summary Charts</span>
@@ -962,7 +962,8 @@ services:
     <li><strong>OpenAPI & Swagger Spec Evolution:</strong> Compare REST API schemas between releases to identify breaking changes, added endpoints, or modified payload parameters.</li>
   </ul>
 
-  <h2>Frequently Asked Questions</h2>
+  <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>YAML diff: structure and interpretation</h2><p>YAML indentation, sequence order, quoting, and scalar interpretation can affect the meaning of a configuration. A difference report should be read alongside the YAML version and the parser used by the application that consumes the file.</p><ul><li>Check whether a changed indentation level moves a key under a different parent.</li><li>Review values that look like booleans, numbers, dates, or null, especially when quoting changed.</li><li>After comparing, validate the edited file and test it with the intended application; a clean diff does not prove that a configuration is valid.</li></ul></div></section>
+<h2>Frequently Asked Questions</h2>
   <div class="faq-item active">
     <div class="faq-question" onclick="toggleFaq(this)">How does structural YAML comparison differ from text comparison?</div>
     <div class="faq-answer">Textual comparison compares raw characters and line numbers, which can create false positives if indentation, whitespace, comments, or key order change. Structural comparison parses both YAML documents into hierarchical data trees (maps, sequences, scalars) and evaluates key paths, data types, and values regardless of formatting.</div>

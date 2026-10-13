@@ -2,7 +2,7 @@
 layout: main
 title: "JSON Compare - Structural & Value Difference Checker"
 short_name: "JSON Compare"
-description: "Compare JSON files side-by-side locally in browser. Highlight structural differences, added keys, & changed values with zero server data uploads online."
+description: "Compare two JSON documents by key and value, inspect added or removed properties, and locate changes through JSON paths."
 keywords: "JSON Compare, JSON Diff, Compare JSON, Compare JSON Online, JSON Difference Checker, JSON Compare Tool, JSON Diff Viewer"
 category: "Compare"
 permalink: /compare/json-compare
@@ -74,7 +74,7 @@ permalink: /compare/json-compare
       "name": "Is my JSON payload transmitted to external servers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, 100% private. All object tree parsing, JSON path tracing, key order normalization, and report generation run locally inside your browser memory."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -226,7 +226,7 @@ permalink: /compare/json-compare
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Optionally sorts object keys alphabetically to eliminate false positives caused by key order.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All JSON comparison runs locally in browser RAM. Zero payload data is transmitted to servers.</p>
     </div>
   </div>
@@ -267,6 +267,8 @@ permalink: /compare/json-compare
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Structural JSON comparison: important details</h2><p>Object key order usually does not change the meaning of a JSON object, while array order often does. A structural comparison can therefore be more useful than a line diff when indentation or key order changes between versions.</p><ul><li>Check whether an array was reordered, not only whether its values changed.</li><li>Review additions and removals separately from changed values; a missing property is not the same as a property set to null.</li><li>Compare valid JSON inputs. Syntax errors should be fixed before you rely on a structural diff.</li></ul><p>Use the reported path to locate the value in the original document, and verify important changes in the context of the application that consumes the data.</p></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
@@ -285,8 +287,7 @@ permalink: /compare/json-compare
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my JSON payload transmitted to external servers?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          No, 100% private. All object tree parsing, JSON path tracing, key order normalization, and report generation run locally inside your browser memory.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">

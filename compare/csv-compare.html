@@ -2,7 +2,7 @@
 layout: main
 title: "CSV Compare - Compare CSV Files & Tabular Datasets"
 short_name: "CSV Compare"
-description: "Compare CSV files line-by-line locally in browser. Detect added, removed, & modified rows with visual side-by-side diff highlighting & zero data uploads."
+description: "Compare two CSV files for changed cells, added or removed rows, and column differences; check headers and delimiters before interpreting the result."
 keywords: "CSV Compare, Compare CSV, CSV Diff, CSV Difference Checker, CSV Compare Tool, Compare CSV Files, CSV Comparison"
 category: "Compare"
 permalink: /compare/csv-compare
@@ -74,7 +74,7 @@ permalink: /compare/csv-compare
       "name": "Is my CSV dataset stored on any remote server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, 100% private. All CSV parsing, delimiter auto-detection, cell diffing, and report downloads execute locally in your web browser RAM."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -226,7 +226,7 @@ permalink: /compare/csv-compare
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Highlights new data records inserted into modified CSVs or missing rows deleted from originals.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All CSV data processing happens in browser RAM. Zero rows or files are uploaded to servers.</p>
     </div>
   </div>
@@ -267,6 +267,8 @@ permalink: /compare/csv-compare
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Before comparing two CSV exports</h2><p>CSV files do not carry a built-in row identity. If records move, a row-by-row comparison can show many differences even when the same records are present in a different order. Make sure both files use compatible headers and delimiter settings.</p><ul><li>Check that both exports use the same columns and that headers have not shifted.</li><li>Look for changes in quoting, blank rows, date formats, and leading zeros before treating every changed cell as a data change.</li><li>If row order is unstable, sort both files by a reliable key before comparing, where that is appropriate for the dataset.</li></ul><p>A CSV diff is a useful change detector, but it does not determine whether a change is valid under your business rules.</p></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
@@ -285,8 +287,7 @@ permalink: /compare/csv-compare
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my CSV dataset stored on any remote server?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          No, 100% private. All CSV parsing, delimiter auto-detection, cell diffing, and report downloads execute locally in your web browser RAM.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">

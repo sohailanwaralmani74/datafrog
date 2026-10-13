@@ -2,7 +2,7 @@
 layout: main
 title: "XML Compare – Compare XML Online & Spot Element Diffs"
 short_name: "XML Compare"
-description: "Compare XML files side-by-side locally in browser. Detect node differences, attribute changes, & structural modifications with total complete data privacy."
+description: "Compare XML documents for changed elements, attributes, namespaces, and hierarchy; inspect the reported paths before deciding whether a change matters."
 keywords: "XML Compare, XML Diff, Compare XML, XML Difference Checker, XML Compare Tool, Compare XML Files, XML Diff Viewer"
 category: "Compare"
 permalink: /compare/xml-compare
@@ -74,7 +74,7 @@ permalink: /compare/xml-compare
       "name": "Is my XML document safe during comparison?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, 100% private. All DOM parsing, XPath generation, element diffing, and report downloads execute locally in your web browser RAM."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -225,7 +225,7 @@ permalink: /compare/xml-compare
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Identifies attribute value changes and namespace URI mismatches.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All XML comparison happens in browser RAM using DOMParser. Zero files are uploaded to servers.</p>
     </div>
   </div>
@@ -266,6 +266,8 @@ permalink: /compare/xml-compare
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>How to interpret XML differences</h2><p>XML structure can carry meaning through element order, attributes, namespace URIs, and text content. Two documents that look similar in a text editor may differ structurally, while a plain text diff can also highlight harmless indentation changes.</p><ul><li>Check namespace URIs as well as prefixes when reviewing namespace changes.</li><li>Review repeated elements and their order when the receiving application expects a particular sequence.</li><li>If the XML must conform to an XSD, run schema validation separately; a comparison does not establish schema validity.</li></ul></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
@@ -284,8 +286,7 @@ permalink: /compare/xml-compare
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my XML document safe during comparison?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          Yes, 100% private. All DOM parsing, XPath generation, element diffing, and report downloads execute locally in your web browser RAM.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">

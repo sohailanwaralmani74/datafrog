@@ -2,7 +2,7 @@
 layout: main
 title: "Text Compare - Compare Text Files & Code Difference"
 short_name: "Text Compare"
-description: "Compare text documents side-by-side locally in browser. Find line differences, character changes, & inline diff highlights with 100% complete privacy."
+description: "Compare two text blocks or code files, inspect line and word changes, and control whitespace or case normalization to understand diffs."
 keywords: "compare text, text to text comparison, compare text online, compare two texts, diff online, text diff, check diff online, diff between text, diff checker online"
 category: "Compare"
 permalink: /compare/text-compare
@@ -74,7 +74,7 @@ permalink: /compare/text-compare
       "name": "Is my text data safe during comparison?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, 100% private. All text comparisons, diff highlights, case options, and report generation run exclusively inside your browser memory. Zero data is sent to external servers."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -229,7 +229,7 @@ permalink: /compare/text-compare
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Ignore trailing spaces, indentation changes, or uppercase/lowercase variations.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Text processing runs entirely inside local browser RAM. Zero text is uploaded to servers.</p>
     </div>
   </div>
@@ -282,6 +282,8 @@ permalink: /compare/text-compare
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>How to read a text diff accurately</h2><p>A diff shows differences between two inputs; it does not decide whether a change is correct. Whitespace and case options can hide or reveal differences, so leave normalization off when spaces, indentation, or capitalization are meaningful to the file.</p><ul><li>Compare versions that use the same line-ending and encoding conventions when possible.</li><li>Review a few unchanged lines around each highlighted change to understand context.</li><li>For JSON, XML, or YAML, a plain text diff may show formatting changes as well as changes to the underlying structure. Use a format-aware comparison when structural meaning matters.</li></ul></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
@@ -300,8 +302,7 @@ permalink: /compare/text-compare
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my text data safe during comparison?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          Yes, 100% private. All text comparisons, diff highlights, case options, and report generation run exclusively inside your browser memory. Zero data is sent to external servers.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
@@ -354,7 +355,7 @@ Supported Categories:
 - Validate
 - Reports
 
-Privacy Guarantee: All processing happens on server servers.`;
+Processing note: comparison runs in the browser; the website can still make third-party network requests.`;
 
   const SAMPLE_MOD = `DataFrog Intelligence Workspace v2.4
 Supported Categories:

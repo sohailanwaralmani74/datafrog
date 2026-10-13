@@ -2,7 +2,7 @@
 layout: main
 title: "SQL Compare - Compare SQL Scripts & Database Schema"
 short_name: "SQL Compare"
-description: "Compare SQL scripts & schema definitions locally in browser. Highlight DDL differences, table changes, & modified columns side-by-side 100% privately."
+description: "Compare SQL scripts, DDL statements, and schema definitions side by side; inspect changes to table definitions, columns, and query logic."
 keywords: "sql compare, compare sql, sql comparison, sql diff, sql difference checker, sql script compare, compare sql queries, compare sql schema, compare sql tables, compare database schema"
 category: "Compare"
 permalink: /compare/sql-compare
@@ -236,7 +236,7 @@ permalink: /compare/sql-compare
     Unlike generic text diff tools, an intelligent SQL compare tool offers options to strip comments, ignore keyword capitalization differences, collapse extra whitespace, and bypass statement ordering mismatches. This allows developers to focus on actual structural and logic changes rather than superficial formatting edits.
   </p>
   <p style="color:#475569;font-size:1rem;line-height:1.7;max-width:860px;">
-    By running completely inside your browser, SQL Compare ensures that your sensitive database schemas, query logic, and table definitions remain 100% private and never touch third-party servers.
+    By running completely inside your browser, SQL Compare ensures that your sensitive database schemas, query logic, and table definitions remain 100% private and are handled by browser-side code; the website still loads third-party resources.
   </p>
 </section>
 
@@ -371,7 +371,8 @@ permalink: /compare/sql-compare
 </section>
 
 <section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
-  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+  <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Review SQL changes beyond formatting</h2><p>A script diff identifies textual changes; it does not execute SQL or confirm that a database migration will succeed. Case and comment normalization can make a comparison easier to read, but the exact SQL dialect and execution context still matter.</p><ul><li>Review changes to column types, nullability, defaults, indexes, constraints, and destructive statements carefully.</li><li>Check whether a query change alters joins, filters, or transaction behaviour, not only whether the text changed.</li><li>Test migrations in a suitable non-production environment and review the execution plan or database-specific behaviour where necessary.</li></ul></div></section>
+<h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
   <div style="display:flex;flex-direction:column;gap:1rem;max-width:860px;">
     <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
       <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What is SQL Compare and how does it work?</summary>
