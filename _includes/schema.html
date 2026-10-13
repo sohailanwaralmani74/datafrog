@@ -118,7 +118,7 @@
   "publisher": {
     "@id": "{{ site_domain }}/#organization"
   },
-  "author": {% assign tool_author_key = page.author_id %}{% assign tool_author = site.data.people | where: "id", tool_author_key | first %}{% if tool_author.id %}{"@type":"Person","name":{{ tool_author.name | jsonify }},"url":"{{ site_domain }}{{ tool_author.url }}","jobTitle":{{ tool_author.role | jsonify }}}{% else %}{"@type":"Organization","name":"DataFrog","@id":"{{ site_domain }}/#organization"}{% endif %},
+  "author": {% assign matched_tool = site.data.tools | where: "url", page.url | first %}{% assign matched_converter = site.data.converters | where: "url", page.url | first %}{% assign tool_author_key = page.author_id | default: matched_tool.author_id | default: matched_converter.author_id %}{% assign tool_author = site.data.people | where: "id", tool_author_key | first %}{% if tool_author.id %}{"@type":"Person","name":{{ tool_author.name | jsonify }},"url":"{{ site_domain }}{{ tool_author.url }}","jobTitle":{{ tool_author.role | jsonify }}}{% else %}{"@type":"Organization","name":"DataFrog","@id":"{{ site_domain }}/#organization"}{% endif %},
   "inLanguage": "en"
 }
 </script>

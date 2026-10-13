@@ -18,6 +18,7 @@
   short_name: "JSON Viewer"
   url: "/inspect/json-viewer"
   category: "Inspect"
+  author_id: "saeed-ahmed"
   description: "View, inspect, search, validate, and explore JSON data locally in your browser with an interactive tree view, depth metrics, and JSON path copy."
   keywords: ["JSON Viewer", "View JSON", "JSON Tree Viewer", "JSON File Viewer", "JSON Inspector", "JSON Explorer", "View JSON Online", "JSON Viewer Online", "Open JSON File", "JSON Structure Viewer", "Interactive JSON Viewer"]
   icon: "🔍"
@@ -29,6 +30,7 @@
   short_name: "CSV Viewer"
   url: "/inspect/csv-viewer"
   category: "Inspect"
+  author_id: "gourav-mishra"
   description: "Open, inspect, search, filter, sort, and explore CSV files locally in your browser with interactive tables, auto delimiter detection, and column metrics."
   keywords: ["CSV Viewer", "View CSV Online", "CSV File Viewer", "Open CSV File", "CSV Table Viewer", "CSV Reader", "Online CSV Viewer", "View CSV File", "CSV Viewer Online"]
   icon: "📊"
@@ -40,6 +42,7 @@
   short_name: "XML Viewer"
   url: "/inspect/xml-viewer"
   category: "Inspect"
+  author_id: "saeed-ahmed"
   description: "Open, inspect, search, validate, and explore XML documents locally in your browser using an interactive tree structure, XPath finder, and attribute inspector."
   keywords: ["XML Viewer", "View XML Online", "XML File Viewer", "Open XML File", "XML Tree Viewer", "XML Reader", "Online XML Viewer", "View XML File", "XML Structure Viewer"]
   icon: "📜"
@@ -51,6 +54,7 @@
   short_name: "YAML Viewer"
   url: "/inspect/yaml-viewer"
   category: "Inspect"
+  author_id: "saeed-ahmed"
   description: "View, inspect, search, validate, and explore YAML documents locally in your browser using an interactive tree view, path finder, and depth statistics."
   keywords: ["YAML Viewer", "View YAML Online", "YAML File Viewer", "Open YAML File", "YAML Parser", "YAML Tree Viewer", "YAML Reader", "YAML Viewer Online", "Inspect YAML"]
   icon: "📝"
@@ -62,6 +66,7 @@
   short_name: "Excel Viewer"
   url: "/inspect/excel-viewer"
   category: "Inspect"
+  author_id: "gourav-mishra"
   description: "Open, inspect, search, filter, and explore Excel workbooks (.xlsx, .xls, .xlsm) locally in your browser with multi-sheet tabs, column sorting, and formula toggles."
   keywords: ["Excel Viewer", "View Excel Online", "Excel File Viewer", "Open Excel File", "XLSX Viewer", "XLS Viewer", "Excel Spreadsheet Viewer", "Online Excel Viewer", "View XLSX File"]
   icon: "📈"
@@ -73,6 +78,7 @@
   short_name: "Data Dictionary Generator"
   url: "/inspect/data-dictionary-generator"
   category: "Inspect"
+  author_id: "gourav-mishra"
   description: "Automatically analyze structured datasets (CSV, Excel, JSON, XML, YAML) and extract metadata to generate comprehensive data dictionaries with physical types, inferred semantic types, column quality stats, and multi-format exports."
   keywords: ["data dictionary generator", "metadata analyzer", "metadata analysis", "data dictionary", "dataset documentation", "column documentation", "metadata generator", "metadata documentation", "schema documentation", "data catalog", "field documentation", "file metadata analyzer"]
   icon: "📖"
@@ -84,6 +90,7 @@
   short_name: "Metadata Viewer"
   url: "/inspect/metadata-viewer"
   category: "Inspect"
+  author_id: "sohail-anwar"
   description: "Extract and inspect hidden file metadata, EXIF camera tags, document properties, ID3 audio tags, video containers, and cryptographic hashes locally in your browser."
   keywords: ["metadata viewer", "meta data viewer", "file metadata viewer", "metadata reader", "metadata inspector", "metadata checker", "metadata explorer", "view metadata online", "metadata extractor", "file information viewer", "file properties viewer", "exif viewer", "pdf metadata viewer", "image metadata viewer", "exif reader"]
   icon: "🔍"
@@ -95,6 +102,7 @@
   short_name: "SQLite Viewer"
   url: "/inspect/sqlite-viewer"
   category: "Inspect"
+  author_id: "sohail-anwar"
   description: "Open, inspect, explore, search, filter, and export SQLite databases (.sqlite, .sqlite3, .db) locally in your browser with table data grids, schema trees, foreign key maps, and visual charts."
   keywords: ["sqlite viewer", "sqlite database viewer", "sqlite file viewer", "sqlite browser online", "sqlite reader", "sqlite db viewer", "open sqlite database", "open sqlite file", "sqlite database browser", "sqlite explorer", "sqlite table viewer", "browse sqlite database", "inspect sqlite database", "sqlite schema viewer"]
   icon: "🗄️"
@@ -106,6 +114,7 @@
   short_name: "GeoJSON Viewer"
   url: "/inspect/geojson-viewer"
   category: "Inspect"
+  author_id: "saeed-ahmed"
   description: "Open, parse, validate, inspect, search, and visualize GeoJSON files (.geojson, .json) locally in your browser with interactive maps, attribute tables, feature trees, and exports."
   keywords: ["geojson viewer", "geojson map viewer", "geojson file viewer", "geojson reader", "view geojson online", "open geojson", "geojson visualizer", "geojson explorer", "geojson map", "geojson parser", "geojson inspector", "browse geojson", "geojson feature viewer"]
   icon: "🗺️"
@@ -117,6 +126,7 @@
   short_name: "JSON Analyzer"
   url: "/analyze/json-analyzer"
   category: "Analyze"
+  author_id: "saeed-ahmed"
   description: "Analyze JSON structure, complexity metrics, data type distribution, key frequencies, and data quality insights locally in your browser."
   keywords: ["JSON Analyzer", "Analyze JSON", "JSON Analysis", "JSON Structure Analyzer", "JSON Statistics", "JSON Analyzer Online", "JSON Data Analyzer", "JSON Insights", "JSON Structure Analysis"]
   icon: "📈"
@@ -128,6 +138,7 @@
   short_name: "CSV Analyzer"
   url: "/analyze/csv-analyzer"
   category: "Analyze"
+  author_id: "gourav-mishra"
   description: "Analyze CSV datasets with column profiling, numeric summary stats (mean, median, min, max, sum), missing value detection, duplicate checks, and quality audits."
   keywords: ["CSV Analyzer", "Analyze CSV", "CSV File Analyzer", "CSV Data Analyzer", "CSV Analysis Tool", "CSV Statistics", "CSV Profiler", "Analyze CSV Online"]
   icon: "📊"
@@ -139,6 +150,7 @@
   short_name: "Excel Analyzer"
   url: "/analyze/excel-analyzer"
   category: "Analyze"
+  author_id: "gourav-mishra"
   description: "Analyze Excel workbooks (.xlsx, .xls, .xlsm) with multi-sheet statistics, formula audit, cell type breakdown, merged cell metrics, and data quality reports."
   keywords: ["Excel Analyzer", "Analyze Excel", "Excel File Analyzer", "Excel Workbook Analyzer", "XLSX Analyzer", "Spreadsheet Analyzer", "Analyze Excel Online", "Excel Data Analysis"]
   icon: "📈"
@@ -150,6 +162,7 @@
   short_name: "XML Analyzer"
   url: "/analyze/xml-analyzer"
   category: "Analyze"
+  author_id: "saeed-ahmed"
   description: "Analyze XML structure, hierarchy depth, element frequencies, namespace usage, attribute metrics, and data quality reports locally in your browser."
   keywords: ["XML Analyzer", "Analyze XML", "XML File Analyzer", "XML Structure Analyzer", "XML Data Analyzer", "XML Analysis Tool", "Analyze XML Online", "XML Statistics"]
   icon: "📜"
@@ -161,6 +174,7 @@
   short_name: "Data Profiler"
   url: "/analyze/data-profiler"
   category: "Analyze"
+  author_id: "gourav-mishra"
   description: "Automatically profile CSV, Excel, JSON, and XML datasets in your browser. Generate column statistics, data quality scores, missing value analysis, duplicate detection, and insights."
   keywords: ["Data Profiler", "Data Profiling", "Dataset Profiler", "Column Profiling", "Data Quality Profiling", "Missing Value Analysis", "Automated Data Profiling", "Dataset Statistics"]
   icon: "🔬"
@@ -172,6 +186,7 @@
   short_name: "Duplicate Data Finder"
   url: "/analyze/duplicate-data-finder"
   category: "Analyze"
+  author_id: "gourav-mishra"
   description: "Find duplicate rows, records, and values in CSV, Excel, JSON, XML, YAML, and more. Detect repeated entries, group duplicates, calculate duplicate percentage, and export clean or duplicate-only datasets."
   keywords: ["Duplicate Data Finder", "Find Duplicate Data", "Duplicate Row Finder", "Duplicate Record Finder", "Duplicate Checker", "Duplicate Detector", "Remove Duplicate Records", "Duplicate Data Analysis"]
   icon: "🔎"
@@ -183,6 +198,7 @@
   short_name: "Deduplicate"
   url: "/analyze/deduplicate"
   category: "Analyze"
+  author_id: "gourav-mishra"
   description: "Deduplicate CSV, Excel, JSON, XML, and YAML datasets locally in your browser. Remove duplicate rows and records with custom retention rules (keep first, keep last, keep most complete)."
   keywords: ["deduplicate", "deduplicate data", "data deduplication", "duplicate remover", "remove duplicate data", "remove duplicate rows", "remove duplicate records", "clean duplicate data"]
   icon: "🧹"
@@ -194,6 +210,7 @@
   short_name: "Bank Statement Analyzer"
   url: "/analyze/bank-statement-analyzer"
   category: "Analyze"
+  author_id: "gourav-mishra"
   description: "Analyze bank statements and transaction files locally in your browser. Automatic categorization, income vs expense analysis, cash flow trends, recurring payment detection, financial health scoring, and private reports."
   keywords: ["bank statement analyzer", "analyze bank statement", "bank statement analysis", "bank transaction analysis", "spending analysis", "expense analysis", "income analysis", "financial analysis", "cash flow analysis", "recurring transactions"]
   icon: "🏦"
@@ -205,6 +222,7 @@
   short_name: "Analyze Database"
   url: "/analyze/database-analyzer"
   category: "Analyze"
+  author_id: "sohail-anwar"
   description: "Analyze SQL databases, SQLite files, CSV, & JSON files locally in your browser. Inspect tables, columns, keys, ER diagrams, data quality, & schema issues."
   keywords: ["analyze database", "database analyzer", "analyze SQL database", "database schema analyzer", "database analysis tool", "database structure analyzer", "database health checker", "database schema analysis", "database data quality analyzer", "SQL database analyzer", "inspect database online"]
   icon: "🗄️"
@@ -216,6 +234,7 @@
   short_name: "Financial Data Quality"
   url: "/analyze/financial-data-quality-management"
   category: "Analyze"
+  author_id: "gourav-mishra"
   description: "Assess financial data quality online with DataFrog. Perform completeness checks, balance reconciliation, debit-credit audit, & currency validations free."
   keywords: ["financial data quality management", "financial data quality", "financial data quality assessment", "financial data quality checks", "financial data validation", "financial data quality framework", "financial data quality monitoring", "financial data quality analysis", "financial data quality issues", "financial data quality rules", "financial dataset quality", "financial data integrity", "financial data consistency", "financial data completeness", "financial data accuracy", "financial data profiling", "financial data validation tool", "financial data quality tool", "financial data quality management tool", "financial data quality checks", "data quality in financial services", "financial data quality assessment tool", "financial data quality report", "financial data cleansing", "financial data reconciliation", "financial data anomaly detection"]
   icon: "💰"
@@ -227,6 +246,7 @@
   short_name: "JSON Validator"
   url: "/validate/json-validator"
   category: "Validate"
+  author_id: "sohail-anwar"
   description: "Validate JSON syntax, detect parsing errors with line & column numbers, highlight syntax issues, pretty print, minify, and format JSON locally."
   keywords: ["JSON Validator", "Validate JSON", "JSON Checker", "JSON Validation Tool", "JSON Syntax Validator", "JSON Validator Online"]
   icon: "✅"
@@ -238,6 +258,7 @@
   short_name: "XML Validator"
   url: "/validate/xml-validator"
   category: "Validate"
+  author_id: "sohail-anwar"
   description: "Validate XML documents, detect malformed syntax, unclosed tags, namespace issues, encoding errors, and format XML locally in your browser."
   keywords: ["XML Validator", "Validate XML", "XML Checker", "XML Validation Tool", "XML Syntax Validator", "XML Validator Online"]
   icon: "📜"
@@ -249,6 +270,7 @@
   short_name: "CSV Validator"
   url: "/validate/csv-validator"
   category: "Validate"
+  author_id: "gourav-mishra"
   description: "Validate CSV files for column count consistency, duplicate headers, empty rows, invalid quote escaping, missing values, and delimiter issues."
   keywords: ["CSV Validator", "Validate CSV", "CSV Checker", "CSV Validation Tool", "CSV Syntax Checker", "CSV Validator Online"]
   icon: "📊"
@@ -260,6 +282,7 @@
   short_name: "YAML Validator"
   url: "/validate/yaml-validator"
   category: "Validate"
+  author_id: "sohail-anwar"
   description: "Validate YAML syntax, indentation levels, duplicate keys, anchors, aliases, and structural integrity locally in your browser."
   keywords: ["YAML Validator", "Validate YAML", "YAML Checker", "YAML Validation Tool", "YAML Syntax Validator", "YAML Validator Online"]
   icon: "📝"
@@ -271,6 +294,7 @@
   short_name: "JSON Schema Validator"
   url: "/validate/json-schema-validator"
   category: "Validate"
+  author_id: "sohail-anwar"
   description: "Validate JSON against JSON Schema online with instant error reporting, schema tree explorer, draft detection, and total client-side data privacy."
   keywords: ["json schema validator", "json schema validation", "validate json schema", "validate json against schema", "json schema checker"]
   icon: "📋"
@@ -282,6 +306,7 @@
   short_name: "Excel Validator"
   url: "/validate/excel-validator"
   category: "Validate"
+  author_id: "saeed-ahmed"
   description: "Validate Excel workbooks (.xlsx, .xls, .xlsm) for broken formulas, type mismatches, merged cells, blank sheets, and errors with processed in your browser."
   keywords: ["excel validator", "excel validation", "validate excel file", "validate excel spreadsheet", "excel file validator", "spreadsheet validator"]
   icon: "📈"
@@ -293,7 +318,8 @@
   short_name: "SQL Validator"
   url: "/validate/sql-validator"
   category: "Validate"
-  description: "Validate SQL queries, detect syntax errors, check DDL & DML statements, lint SELECT/UPDATE/DELETE queries, and analyze dialects with browser-based processing."
+  author_id: "sohail-anwar"
+  description: "Validate SQL queries, detect syntax errors, check DDL & DML statements, lint SELECT/UPDATE/DELETE queries, and analyze dialects with."
   keywords: ["sql validator", "sql syntax validator", "sql syntax checker", "sql validator online", "validate sql", "sql query validator", "sql lint"]
   icon: "🗄️"
   featured: true
@@ -306,6 +332,7 @@
   short_name: "Text Compare"
   url: "/compare/text-compare"
   category: "Compare"
+  author_id: "saeed-ahmed"
   description: "Compare two text blocks or code files side-by-side or inline. Highlight additions, deletions, modifications, line-by-line differences, and word changes."
   keywords: ["compare text", "text to text comparison", "compare text online", "compare two texts", "diff online", "text diff", "check diff online", "diff between text", "diff checker online"]
   icon: "⚖️"
@@ -317,6 +344,7 @@
   short_name: "JSON Compare"
   url: "/compare/json-compare"
   category: "Compare"
+  author_id: "saeed-ahmed"
   description: "Compare two JSON documents structurally. Highlight added keys, removed keys, modified values, nested array differences, and JSON paths."
   keywords: ["JSON Compare", "JSON Diff", "Compare JSON", "Compare JSON Online", "JSON Difference Checker", "JSON Compare Tool", "JSON Diff Viewer"]
   icon: "🔍"
@@ -328,6 +356,7 @@
   short_name: "CSV Compare"
   url: "/compare/csv-compare"
   category: "Compare"
+  author_id: "saeed-ahmed"
   description: "Compare two CSV files or spreadsheet data. Highlight added rows, removed rows, modified cell values, and column mismatches with diff reports."
   keywords: ["CSV Compare", "Compare CSV", "CSV Diff", "CSV Difference Checker", "CSV Compare Tool", "Compare CSV Files", "CSV Comparison"]
   icon: "📊"
@@ -339,6 +368,7 @@
   short_name: "XML Compare"
   url: "/compare/xml-compare"
   category: "Compare"
+  author_id: "saeed-ahmed"
   description: "Compare two XML documents by analyzing element nodes, attributes, namespace URIs, text contents, and XML hierarchy differences."
   keywords: ["XML Compare", "XML Diff", "Compare XML", "XML Difference Checker", "XML Compare Tool", "Compare XML Files", "XML Diff Viewer"]
   icon: "📜"
@@ -350,6 +380,7 @@
   short_name: "Excel Compare"
   url: "/compare/excel-compare"
   category: "Compare"
+  author_id: "saeed-ahmed"
   description: "Compare two Excel workbooks (.xlsx, .xls) cell-by-cell. Highlight modified values, formula changes, sheet mismatches, and row/column diffs."
   keywords: ["Excel Compare", "Compare Excel Files", "Excel Difference Checker", "Excel Workbook Compare", "Spreadsheet Compare", "XLSX Compare", "Excel Compare Online"]
   icon: "📈"
@@ -361,6 +392,7 @@
   short_name: "SQL Compare"
   url: "/compare/sql-compare"
   category: "Compare"
+  author_id: "saeed-ahmed"
   description: "Compare SQL scripts, DDL queries, schemas, stored procedures, and tables side-by-side or inline. Highlight differences, detect changes, normalize formatting, and export diff reports."
   keywords: ["sql compare", "compare sql", "sql comparison", "sql diff", "sql difference checker", "sql script compare", "compare sql queries", "compare sql schema", "compare sql tables"]
   icon: "⚡"
@@ -372,6 +404,7 @@
   short_name: "YAML Compare"
   url: "/compare/yaml-compare"
   category: "Compare"
+  author_id: "saeed-ahmed"
   description: "Compare two YAML documents structurally or textually. Highlight added keys, removed keys, modified values, array changes, data types, and tree hierarchy differences."
   keywords: ["yaml compare", "compare yaml", "yaml diff", "yaml difference checker", "yaml comparator", "yaml comparison", "compare yaml files", "yaml compare online", "yaml file compare", "yaml structure compare", "yaml document compare"]
   icon: "⚖️"
@@ -383,6 +416,7 @@
   short_name: "JSON Visualizer"
   url: "/visualize/json-visualizer"
   category: "Visualize"
+  author_id: "saeed-ahmed"
   description: "Transform JSON documents into interactive visual trees. Expand/collapse branches, search nodes, display JSON paths, view statistics, and export diagrams."
   keywords: ["JSON Visualizer", "Visualize JSON", "JSON Tree Viewer", "JSON Graph Viewer", "JSON Structure Visualizer", "JSON Hierarchy Viewer", "JSON Diagram"]
   icon: "👁️"
@@ -394,6 +428,7 @@
   short_name: "CSV Visualizer"
   url: "/visualize/csv-visualizer"
   category: "Visualize"
+  author_id: "gourav-mishra"
   description: "Convert CSV datasets into interactive charts (Bar, Line, Area, Pie, Scatter, Doughnut). Auto-detect columns, filter metrics, and export high-res PNG/SVG charts."
   keywords: ["CSV Visualizer", "CSV Chart Generator", "CSV Graph", "CSV Charts", "CSV Visualization", "Visualize CSV", "CSV Dashboard"]
   icon: "📊"
@@ -405,6 +440,7 @@
   short_name: "XML Visualizer"
   url: "/visualize/xml-visualizer"
   category: "Visualize"
+  author_id: "saeed-ahmed"
   description: "Visualize XML documents as interactive element hierarchy trees. Inspect attributes, namespace URIs, XPath pointers, and export SVG/PNG structure diagrams."
   keywords: ["XML Visualizer", "XML Tree Viewer", "Visualize XML", "XML Structure Viewer", "XML Hierarchy Viewer", "XML Diagram", "XML Graph"]
   icon: "📜"
@@ -416,6 +452,7 @@
   short_name: "Excel Visualizer"
   url: "/visualize/excel-visualizer"
   category: "Visualize"
+  author_id: "gourav-mishra"
   description: "Convert Excel workbooks (.xlsx, .xls) into interactive dashboards and charts. Multi-sheet support, automatic column detection, and PNG/SVG export."
   keywords: ["Excel Visualizer", "Excel Chart Generator", "Excel Dashboard", "Spreadsheet Charts", "Visualize Excel", "Excel Graph Generator", "Excel Data Visualization"]
   icon: "📈"
@@ -427,6 +464,7 @@
   short_name: "Flowchart Builder"
   url: "/visualize/flowchart-builder"
   category: "Visualize"
+  author_id: "sohail-anwar"
   description: "Create, edit, organize, and export flowcharts, workflow diagrams, org charts, and process maps in your browser. Drag-and-drop shapes, auto-connectors, templates, and PNG/SVG/JSON exports."
   keywords: ["flow chart builder", "flowchart builder", "online flowchart builder", "flowchart maker", "flow chart maker", "create flowchart online", "workflow builder", "workflow diagram", "process flow builder", "org chart builder"]
   icon: "🔀"
@@ -438,6 +476,7 @@
   short_name: "Correlation Heatmap"
   url: "/visualize/correlation-heatmap"
   category: "Visualize"
+  author_id: "gourav-mishra"
   description: "Calculate correlation matrices (Pearson, Spearman, Kendall) and visualize variable relationships with interactive heatmaps. Multi-format imports and PNG/SVG/CSV exports."
   keywords: ["correlation heatmap", "correlation matrix", "correlation matrix generator", "correlation analysis", "Pearson correlation", "Spearman correlation", "Kendall correlation", "feature correlation"]
   icon: "🔥"
@@ -449,6 +488,7 @@
   short_name: "YAML Visualizer"
   url: "/visualize/yaml-visualizer"
   category: "Visualize"
+  author_id: "saeed-ahmed"
   description: "Transform YAML configuration files into interactive visual trees. Inspect nested mappings, sequences, node paths, statistics, and export diagrams."
   keywords: ["YAML Visualizer", "Visualize YAML", "YAML Tree Viewer", "YAML Structure Viewer", "YAML Hierarchy Viewer", "YAML Diagram", "YAML Explorer"]
   icon: "📝"
@@ -460,6 +500,7 @@
   short_name: "Word Cloud Generator"
   url: "/visualize/word-cloud-generator"
   category: "Visualize"
+  author_id: "gourav-mishra"
   description: "Transform text documents and datasets into interactive word clouds, generate word frequency analysis, bigrams, trigrams, and export high-res PNG, SVG, CSV, Excel, and HTML reports."
   keywords: ["word cloud generator", "word cloud maker", "online word cloud", "word frequency", "keyword cloud", "text visualization", "word frequency analyzer", "word visualization", "text analytics", "keyword visualization"]
   icon: "☁️"
@@ -471,6 +512,7 @@
   short_name: "Excel Duplicate Remover"
   url: "/clean/excel-duplicate-remover"
   category: "Clean"
+  author_id: "gourav-mishra"
   description: "Find and remove Excel duplicates (.xlsx, .xls) by selected columns or full rows. Preview duplicate groups and download cleaned files in total privacy."
   keywords: ["excel duplicate remover", "excel find duplicates", "eliminate duplicate excel", "remove repeats in excel", "show duplicates in excel", "xls remove duplicates"]
   icon: "🧹"
@@ -482,6 +524,7 @@
   short_name: "Compress Excel"
   url: "/clean/compress-excel"
   category: "Clean"
+  author_id: "sohail-anwar"
   description: "Compress Excel file online – reduce XLSX, XLS file size by removing empty rows and columns. Free, private, client-side tool. Download compressed Excel instantly."
   keywords: ["compress excel", "compress file excel", "compress excel file size", "compress excel file online", "compressed excel file", "compressed excel", "compress xls file online", "compress the excel file online", "compress xls file size", "compress xlsx file online", "decrease excel file size", "excel compress online", "excel compressor online", "excel file reduce size", "excel file reduce size online", "excel file size reduce online", "excel size reduce", "minimize excel file size", "online excel compress"]
   icon: "🗜️"
@@ -493,7 +536,8 @@
   short_name: "CSV Compressor"
   url: "/clean/csv-compressor"
   category: "Clean"
-  description: "Compress CSV file online – reduce CSV file size by removing empty rows and columns. Download as CSV, GZIP, or BZIP2. browser-based processing, browser-based processing."
+  author_id: "sohail-anwar"
+  description: "Compress CSV file online – reduce CSV file size by removing empty rows and columns. Download as CSV, GZIP, or BZIP2."
   keywords: ["compress a csv file", "compress csv file", "compress csv", "compress csv file size", "csv compress", "csv file compression", "csv file size reducer", "bz2 to csv", "compress csv file online", "compress csv file size online", "compress csv file to smaller size", "compress csv file to smaller size online", "compress large csv file online", "compress pdf to csv", "csv file compressor online", "csv file size reducer online"]
   icon: "📦"
   featured: true
@@ -504,7 +548,8 @@
   short_name: "XML Compressor"
   url: "/clean/xml-compressor"
   category: "Clean"
-  description: "Compress XML file online – reduce XML file size by removing whitespace, comments, and empty nodes. Download as XML, GZIP, or BZIP2. browser-based processing, browser-based processing."
+  author_id: "sohail-anwar"
+  description: "Compress XML file online – reduce XML file size by removing whitespace, comments, and empty nodes. Download as XML, GZIP, or BZIP2."
   keywords: ["compress xml", "compress xml file", "compress xml file online", "compress xml file online free", "compress xml file size", "compress xml file size online", "compress xml online", "compress xml to one line", "xml file compressor online", "xml file size reducer"]
   icon: "🗜️"
   featured: true
@@ -515,7 +560,8 @@
   short_name: "JSON Compressor"
   url: "/clean/json-compressor"
   category: "Clean"
-  description: "Compress JSON file online – reduce JSON file size by minifying, removing whitespace, and stripping comments. Download as JSON, GZIP, BZIP2, or ZIP. browser-based processing, browser-based processing."
+  author_id: "sohail-anwar"
+  description: "Compress JSON file online – reduce JSON file size by minifying, removing whitespace, and stripping comments. Download as JSON, GZIP, BZIP2, or ZIP."
   keywords: ["compress json", "compress json file", "json file compressor", "compress json file online", "compress lottie json online", "json gz to json", "json to zip converter", "reduce json file size online"]
   icon: "📦"
   featured: true
@@ -526,6 +572,7 @@
   short_name: "Data Anonymizer"
   url: "/clean/data-anonymizer"
   category: "Clean"
+  author_id: "gourav-mishra"
   description: "Anonymize sensitive PII, email addresses, phone numbers, credit cards, and IP addresses in Excel workbooks (.xlsx, .xls), CSV, JSON, or text files locally with processed in your browser."
   keywords: ["data anonymizer", "data anonymization meaning", "anonymous ip address", "data anonymization tool", "gdpr anonymization", "anonymised data", "pii anonymization", "anonymous data"]
   icon: "🔒"

@@ -105,7 +105,7 @@ layout: default
     </nav>
 
     <main id="content" role="main">
-      {% assign author_key = page.author_id %}
+      {% assign author_key = page.author_id | default: matched_tool.author_id | default: matched_converter.author_id %}
       {% assign page_author = site.data.people | where: "id", author_key | first %}
       {% if page_author.id %}
       <div style="margin:0 0 1.25rem;padding:.75rem 1rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;color:#475569;font-size:.9rem;">
