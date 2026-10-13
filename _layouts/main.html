@@ -11,7 +11,7 @@ layout: default
   <div class="header-inner" style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.5rem;">
 
     <!-- Logo -->
-    <a href="/" class="logo" style="text-decoration: none; display: flex; align-items: center; gap: 0.6rem; color: var(--text-primary, #0f172a); font-weight: 700; font-size: 1.25rem;" title="DataFrog">
+    <a href="/" class="logo" aria-label="DataFrog home" style="text-decoration: none; display: flex; align-items: center; gap: 0.6rem; color: var(--text-primary, #0f172a); font-weight: 700; font-size: 1.25rem;" title="DataFrog">
       <img src="/assets/img/datafrog.png" alt="DataFrog Logo" width="36" height="36" style="display: block;" onerror="this.style.display='none'" />
     </a>
 
@@ -30,7 +30,7 @@ layout: default
 
     <!-- Right Side Actions: Search Button -->
     <div class="desktop-actions">
-      <a href="/#site-search-input" style="padding: 0.45rem 1.15rem; background: var(--bg-soft, #f1f5f9); color: var(--text-primary, #0f172a); border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 0.875rem; border: 1px solid #cbd5e1; margin-top:0.40rem;">
+      <a href="/#site-search-input" aria-label="Search tools" style="padding: 0.45rem 1.15rem; background: var(--bg-soft, #f1f5f9); color: var(--text-primary, #0f172a); border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 0.875rem; border: 1px solid #cbd5e1; margin-top:0.40rem;">
         🔍
       </a>
       <a google-add-preferred-source-btn></a>
@@ -47,7 +47,7 @@ layout: default
   <nav class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation" aria-hidden="true">
     <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0; margin-bottom: 1rem;">
       <span style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">DataFrog Menu</span>
-      <button id="close-drawer" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #64748b; font-weight: 700;">✕</button>
+      <button id="close-drawer" type="button" aria-label="Close navigation menu" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #64748b; font-weight: 700;">✕</button>
     </div>
     <ul class="mobile-nav-list" style="list-style: none; padding: 0; margin: 0; line-height: 2.2;">
       <li><a href="/" style="font-weight: 700; font-size: 1.05rem; text-decoration: none; color: #0f172a; display: block; padding: 0.4rem 0;">🏠 Home</a></li>
@@ -105,34 +105,42 @@ layout: default
     </nav>
 
     <main id="content" role="main">
+      <!-- Reviewer / author box -->
       {% assign author_key = page.author_id %}
       {% if author_key == nil and page.category %}
-        {% if page.category == "Compare" or page.category == "Visualize" %}{% assign author_key = "saeed-ahmed" %}
-        {% elsif page.category == "Convert" or page.category == "Validate" %}{% assign author_key = "sohail-anwar" %}
-        {% elsif page.category == "Analyze" or page.category == "Clean" or page.category == "Inspect" %}{% assign author_key = "gourav-mishra" %}{% endif %}
+        {% if page.category == "Compare" or page.category == "Visualize" %}
+          {% assign author_key = "saeed-ahmed" %}
+        {% elsif page.category == "Convert" or page.category == "Validate" %}
+          {% assign author_key = "sohail-anwar" %}
+        {% elsif page.category == "Analyze" or page.category == "Clean" or page.category == "Inspect" %}
+          {% assign author_key = "gourav-mishra" %}
+        {% endif %}
       {% endif %}
-      {% if author_key %}{% assign page_author = site.data.people | where: "id", author_key | first %}
-      {% if page_author.id %}
-      <div style="margin:0 0 1.25rem;padding:.75rem 1rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;color:#475569;font-size:.9rem;">
-        <span>Reviewed by </span><a href="{{ page_author.url }}" style="font-weight:700;color:#0f172a;text-decoration:none;">{{ page_author.name }}</a><span> · {{ page_author.role }}{% if page_author.experience %}, {{ page_author.experience }}{% endif %}</span>
-      </div>
+
+      {% if author_key %}
+        {% assign page_author = site.data.people | where: "id", author_key | first %}
+        {% if page_author.id %}
+          <div style="margin:0 0 1.25rem;padding:.75rem 1rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;color:#475569;font-size:.9rem;">
+            <span>Reviewed by </span><a href="{{ page_author.url }}" style="font-weight:700;color:#0f172a;text-decoration:none;">{{ page_author.name }}</a><span> · {{ page_author.role }}{% if page_author.experience %}, {{ page_author.experience }}{% endif %}</span>
+          </div>
+        {% endif %}
       {% endif %}
-      {% endif %}
-      {% endif %}
+
       {{ content }}
     </main>
   </div>
 
-  <!-- Sidebar: Ad Box, Related Articles (Article pages only), and All Category Tools (Tool pages only) -->
+  <!-- Sidebar: Ad Box, Related Articles (blog posts only), Related Tools/Converters (tool pages only) -->
   <aside class="tool-sidebar">
-    <!-- Ad Box Slot (Empty) -->
+    <!-- Ad Box Slot -->
     <div class="ad-box" style="background: var(--bg-soft, #f8fafc); border: 1px dashed var(--border-default, #cbd5e1); border-radius: 12px; padding: 1.5rem; text-align: center; min-height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
       <script async="async" data-cfasync="false" src="https://pl31489408.profitableratecpmnetwork.com/b9d05b997facba5a1ba689dd8b1d4482/invoke.js"></script>
       <div id="container-b9d05b997facba5a1ba689dd8b1d4482"></div>
     </div>
 
-   {% if matched_converter.url %}
-    <!-- Related converters for converter pages -->
+    {% if matched_converter.url %}
+
+    <!-- Related converters (converter pages) -->
     <div style="background: var(--bg-soft, #f8fafc); border: 1px solid var(--border-default, #e2e8f0); border-radius: 12px; padding: 1.5rem;">
       <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">🔗 Related Converters</h4>
       <ul style="list-style: none; padding: 0; margin: 0; line-height: 2; font-size: 0.9rem;">
@@ -144,8 +152,44 @@ layout: default
         {% endfor %}
       </ul>
     </div>
+
+    {% elsif page.url == '/blog/' or page.url == '/blog' %}
+
+    <!-- Blog listing page: ad box only -->
+
+    {% elsif page.url contains '/blog/' %}
+
+    <!-- Related Blog Articles (individual blog posts) -->
+    <div style="background: var(--bg-soft, #f8fafc); border: 1px solid var(--border-default, #e2e8f0); border-radius: 12px; padding: 1.5rem;">
+      <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">
+        📝 Related {{ page.categories.first }} Articles
+      </h4>
+      <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8; font-size: 0.875rem;">
+        {% assign primary_cat = page.categories.first %}
+        {% assign render_count = 0 %}
+        {% for post in site.posts %}
+          {% if render_count < 4 %}
+            {% if post.url != page.url %}
+              {% if post.categories contains primary_cat %}
+                <li style="margin-bottom: 0.75rem;">
+                  <a href="{{ post.url }}" style="color: var(--text-primary, #0f172a); text-decoration: none; font-weight: 500;">
+                    {{ post.title }}
+                  </a>
+                </li>
+                {% assign render_count = render_count | plus: 1 %}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% if render_count == 0 %}
+          <li style="color: var(--text-muted, #94a3b8); font-style: italic;">No related articles in this category yet.</li>
+        {% endif %}
+      </ul>
+    </div>
+
     {% elsif page.category %}
-    <!-- Dynamic Related Tools -->
+
+    <!-- Related tools (tool pages) -->
     <div style="background: var(--bg-soft, #f8fafc); border: 1px solid var(--border-default, #e2e8f0); border-radius: 12px; padding: 1.5rem;">
       <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">🔗 Related {{ page.category }} Tools</h4>
       <ul style="list-style: none; padding: 0; margin: 0; line-height: 2; font-size: 0.9rem;">
@@ -157,32 +201,8 @@ layout: default
         {% endfor %}
       </ul>
     </div>
-    {% elsif page.url == '/blog/' or page.url == '/blog' %}
-    <!-- Second Ad Box Slot (For Main Blog Listing Page Only -> Shows 2 Ad Boxes Total) -->
-    {% elsif page.url contains '/blog/' %}
-    <!-- Related Blog Articles Box (For Individual Blog Posts ONLY -> 1 Ad Box + 1 Related Box) -->
-    <div style="background: var(--bg-soft, #f8fafc); border: 1px solid var(--border-default, #e2e8f0); border-radius: 12px; padding: 1.5rem;">
-      <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary, #0f172a);">
-        📝 Related {{ page.categories.first }} Articles
-      </h4>
-      <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8; font-size: 0.875rem;">
-        {% assign primary_cat = page.categories.first %}
-        {% assign render_count = 0 %}
-        {% for post in site.posts %}
-          {% if post.url != page.url and post.categories contains primary_cat and render_count < 4 %}
-            <li style="margin-bottom: 0.75rem;">
-              <a href="{{ post.url }}" style="color: var(--text-primary, #0f172a); text-decoration: none; font-weight: 500;">
-                {{ post.title }}
-              </a>
-            </li>
-            {% assign render_count = render_count | plus: 1 %}
-          {% endif %}
-        {% endfor %}
-        {% if render_count == 0 %}
-          <li style="color: var(--text-muted, #94a3b8); font-style: italic;">No related articles in this category yet.</li>
-        {% endif %}
-      </ul>
-    </div>
+
+    {% endif %}
   </aside>
 
 </div>
@@ -191,28 +211,33 @@ layout: default
 
 <script>
   (function () {
-    const hamburger = document.getElementById('hamburger');
-    const drawer = document.getElementById('mobileDrawer');
-    const overlay = document.getElementById('overlay');
-    const closeBtn = document.getElementById('close-drawer');
+    var hamburger = document.getElementById('hamburger');
+    var drawer = document.getElementById('mobileDrawer');
+    var overlay = document.getElementById('overlay');
+    var closeBtn = document.getElementById('close-drawer');
 
     function closeDrawer() {
       if (!hamburger || !drawer || !overlay) return;
       hamburger.classList.remove('active');
       drawer.classList.remove('active');
       overlay.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
+
     function openDrawer() {
       if (!hamburger || !drawer || !overlay) return;
       hamburger.classList.add('active');
       drawer.classList.add('active');
       overlay.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
     }
 
     if (hamburger) {
-      hamburger.addEventListener('click', (e) => {
+      hamburger.addEventListener('click', function (e) {
         e.stopPropagation();
         if (drawer.classList.contains('active')) closeDrawer();
         else openDrawer();
@@ -220,6 +245,9 @@ layout: default
     }
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     if (overlay) overlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeDrawer();
+    });
   })();
 </script>
 <script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
