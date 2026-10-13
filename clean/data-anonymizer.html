@@ -2,7 +2,7 @@
 layout: main
 title: "Data Anonymizer - Online PII & Data Anonymization Tool"
 short_name: "Data Anonymizer"
-description: "Anonymize sensitive PII data locally in your browser. Mask email addresses, phone numbers, names, & IP addresses with GDPR-compliant data anonymization."
+description: "Mask selected personal-data patterns in supported text and data files. Review the output carefully; pattern-based masking is not a guarantee of complete anonymization or legal compliance."
 keywords: "data anonymizer, data anonymization meaning, anonymous ip address, data anonymization tool, gdpr anonymization, anonymised data, pii anonymization, anonymous data"
 category: "Clean"
 permalink: /clean/data-anonymizer
@@ -264,7 +264,7 @@ permalink: /clean/data-anonymizer
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Zeroes final octets on IPv4/IPv6 addresses to turn raw network logs into anonymous data.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Browser Local Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All data processing runs exclusively inside client-side browser RAM. Zero text is uploaded to servers.</p>
     </div>
   </div>
@@ -310,7 +310,8 @@ permalink: /clean/data-anonymizer
 ═══════════════════════════════════════════════════ -->
 <section style="padding: 2.5rem 0; border-top: 1px solid #e2e8f0;">
   <div style="max-width: 900px; margin: 0 auto; color: #334155; line-height: 1.6; font-size: 0.95rem;">
-    <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem;">Understanding Data Anonymization & PII Protection</h2>
+    <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Masking is not the same as guaranteed anonymization</h2><p>Replacing visible email addresses, phone numbers, or other recognized patterns can reduce exposure, but it does not prove that a dataset is anonymous. Names, rare combinations of attributes, free-text notes, indirect identifiers, and format-specific fields can still identify people.</p><ul><li>Inspect the output for direct identifiers and contextual details that could identify someone indirectly.</li><li>Check whether the selected masking strategy preserves relationships or values that could reveal the original data.</li><li>Do not describe the result as GDPR-compliant solely because a masking tool was used. Legal compliance depends on the full processing context and applicable requirements.</li></ul><p>Use this tool as one step in a data-minimization workflow, not as a substitute for a privacy assessment.</p></div></section>
+<h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem;">Understanding Data Anonymization & PII Protection</h2>
     <p style="margin-bottom: 1rem;">
       What is <strong>data anonymization meaning</strong> in modern software compliance? Data anonymization is the technical practice of stripping or transforming Personally Identifiable Information (PII) from data files so that individuals cannot be identified. Utilizing a reliable <strong>data anonymization tool</strong> allows organizations to safely use production data in staging environments, machine learning training, and public reporting without violating user privacy.
     </p>

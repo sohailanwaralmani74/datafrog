@@ -2,7 +2,7 @@
 layout: main
 title: "Analyze Database Online - Privacy-First Schema & Quality Inspector"
 short_name: "Analyze Database"
-description: "Analyze SQL databases, SQLite files, CSV, & JSON files locally in your browser. Inspect tables, columns, keys, ER diagrams, data quality, & schema issues."
+description: "Inspect supported SQLite files, SQL scripts, and tabular datasets for schema structure, relationships, and data-quality issues in your browser."
 keywords: "analyze database, database analyzer, analyze SQL database, database schema analyzer, database analysis tool, database structure analyzer, database health checker, database schema analysis, database data quality analyzer, SQL database analyzer"
 category: "Analyze"
 permalink: /analyze/database-analyzer
@@ -53,7 +53,7 @@ author_id: gourav-mishra
   <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.75rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
     <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
       <span style="font-size: 1.1rem;">🔒</span>
-      <span><strong>Privacy Guaranteed:</strong> Your database files and SQL code stay in your browser. No data is uploaded to any server.</span>
+      <span><strong>Input processing is intended to occur in the browser. The site also loads third-party analytics and advertising resources, so this does not guarantee that the website makes no third-party network requests.</span>
     </div>
     <div style="font-size: 0.8rem; color: #15803d; background: #dcfce7; padding: 0.25rem 0.65rem; border-radius: 9999px; font-weight: 700;">
       100% Client-Side
@@ -2075,7 +2075,8 @@ function handleGlobalSearch(q) {
       <div onclick="executeSearchMatch('${m.title}')" style="padding: 0.4rem 0.75rem; background: #f8fafc; border-radius: 6px; font-size: 0.85rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
         <span style="font-weight: 700; color: #0f172a;">${escapeHTML(m.title)}</span>
         <span style="font-size: 0.75rem; background: #e0f2fe; color: #0369a1; padding: 0.1rem 0.45rem; border-radius: 4px; font-weight: 700;">${m.type}</span>
-      </div>
+      <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Static database inspection versus running a query</h2><p>A schema analyzer can inspect a database file or parse SQL text, but that is not the same as connecting to a live database and executing statements. Findings depend on the input format and the database features the parser understands.</p><ul><li>Check the detected tables, columns, keys, and relationships against the source schema.</li><li>Treat inferred relationships and quality flags as candidates to review, not proof of business rules.</li><li>Test SQL or migrations in the target database and dialect before applying changes.</li></ul></div></section>
+</div>
     `;
   });
 

@@ -2,7 +2,7 @@
 layout: main
 title: "SQL Validator - Check SQL Syntax & Lint Online"
 short_name: "SQL Validator"
-description: "Validate SQL queries, detect syntax errors, check DDL & DML statements, lint SELECT/UPDATE/DELETE queries, and analyze dialects with 100% data privacy."
+description: "Inspect SQL syntax and common query risks, including unfiltered UPDATE or DELETE statements, while accounting for dialect-specific behaviour."
 keywords: "sql validator, sql syntax validator, sql syntax checker, sql validator online, validate sql, sql query validator, sql query checker, sql lint"
 category: "Validate"
 permalink: /validate/sql-validator
@@ -352,7 +352,8 @@ permalink: /validate/sql-validator
     </p>
 
     <!-- FAQ Section -->
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1.25rem;">
+    <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>SQL linting is not execution testing</h2><p>A browser-based SQL validator can flag syntax patterns and common risks, but it does not prove that a query will run against your database, return the intended rows, or perform safely in production. SQL dialects differ in functions, quoting, types, and DDL behaviour.</p><ul><li>Choose the dialect that matches the target database where the tool offers that option.</li><li>Review UPDATE and DELETE statements carefully and verify the intended WHERE clause before execution.</li><li>Test important queries against a non-production database with representative data and appropriate permissions.</li></ul></div></section>
+<h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1.25rem;">
       Frequently Asked Questions (FAQ)
     </h2>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
