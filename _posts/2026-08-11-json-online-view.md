@@ -1,10 +1,10 @@
 ---
 layout: main
-title: "How to View JSON Online: Inspect, Format, and Understand JSON"
-description: "Learn how to open JSON in a browser, format it, inspect nested objects and arrays, and diagnose common JSON syntax problems."
+title: "Guide On View JSON Online | DataFrog"
+description: "Learn how to use JSON online view tools to format, inspect, and query complex JSON data safely in your browser without uploading payloads to cloud servers."
 excerpt: "Master JSON online view tools to format minified strings, inspect nested object trees, validate syntax, and analyze payloads privately inside your web browser."
 keywords: "json online view, json online viewer, view json online, online json viewer, json file viewer online, view json file online, open json online, json data viewer, json tree viewer"
-author: "Saeed Ahmed"
+author: "DataFrog Engineering Team"
 date: 2026-08-11
 categories: ["Inspect"]
 tags: ["JSON", "Developer Tools", "Data Parsing", "JSON Viewer", "Privacy"]
@@ -13,7 +13,6 @@ canonical: "https://datafrog.tools/blog/json-online-view"
 sitemap: true
 permalink: /blog/json-online-view
 author_id: saeed-ahmed
-is_post: true
 ---
 
 <!-- ═══════════════════════════════════════════════════
