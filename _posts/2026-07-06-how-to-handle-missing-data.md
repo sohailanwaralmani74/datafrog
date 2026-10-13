@@ -4,7 +4,7 @@ title: "How to Handle Missing Data - DataFrog"
 description: "Learn how to handle missing data in datasets using listwise deletion methods, statistical mean or median imputation, KNN, & Python pandas ML algorithms."
 excerpt: "Master missing data handling in datasets. Learn MCAR, MAR, and MNAR mechanisms, deletion rules, statistical imputation, KNN methods, and Python code."
 keywords: "missing data handling, how to treat missing values, how to handle missing values in dataset, how to handle missing values, how to handle missing data, how to deal with missing data, handling missing values, handling missing data in python, dealing with missing values, dealing with missing data, handle missing data"
-author: "Gourav Mishra"
+author: "DataFrog Engineering Team"
 date: 2026-07-06
 categories: ["Analyze"]
 tags: ["Data Engineering", "Python", "Pandas", "Data Cleaning", "Machine Learning"]
@@ -13,12 +13,66 @@ canonical: "https://datafrog.tools/blog/how-to-handle-missing-data"
 sitemap: true
 permalink: /blog/how-to-handle-missing-data
 author_id: gourav-mishra
-is_post: true
 ---
 
 <!-- ═══════════════════════════════════════════════════
      STRUCTURED DATA (JSON-LD) FOR BLOG POST & FAQ
 ═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Handle Missing Data: Complete Guide & Python Methods",
+  "description": "Learn how to handle missing data in datasets using deletion, mean/median imputation, KNN, & Python pandas methods without introducing model bias.",
+  "image": "https://datafrog.tools/assets/img/how-to-handle-missing-data-hero.jpg",
+  "author": {
+    "@type": "Organization",
+    "name": "DataFrog Engineering Team",
+    "url": "https://datafrog.tools/about-us"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "DataFrog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://datafrog.tools/assets/img/datafrog.png"
+    }
+  },
+  "datePublished": "2026-07-06",
+  "dateModified": "2026-07-06",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://datafrog.tools/blog/how-to-handle-missing-data"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://datafrog.tools/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How to Handle Missing Data",
+      "item": "https://datafrog.tools/blog/how-to-handle-missing-data"
+    }
+  ]
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

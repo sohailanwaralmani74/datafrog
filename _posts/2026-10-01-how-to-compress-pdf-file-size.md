@@ -13,6 +13,7 @@ image: "/assets/img/datafrog.png"
 canonical: "https://datafrog.tools/blog/how-to-compress-pdf-file-size"
 sitemap: true
 permalink: /blog/how-to-compress-pdf-file-size
+is_post: true
 ---
 
 # How To Compress PDF File Size Without Ruining the Document

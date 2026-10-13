@@ -4,7 +4,7 @@ title: "Mastering JSON Schema Validation - Complete Guide"
 description: "Learn JSON Schema validation (Draft-07 & 2020-12). Master property constraints, $ref composition, error debugging, and instant browser testing 100% free."
 excerpt: "Master JSON Schema validation from fundamentals to Draft 2020-12. Discover property constraints, array validation, schema composition ($ref, allOf, oneOf), and instant browser debugging."
 keywords: "JSON Schema Validation, Validate JSON Schema, JSON Schema Draft 2020-12, JSON Schema Checker, JSON Schema Best Practices, JSON Schema Tutorial"
-author: "Sohail Anwar"
+author: "DataFrog Engineering Team"
 date: 2026-08-05
 categories: ["Validate"]
 tags: ["JSON", "JSON Schema", "Data Validation", "Developer Tools"]
@@ -13,12 +13,67 @@ canonical: "https://datafrog.tools/blog/mastering-json-schema-validation"
 sitemap: true
 permalink: /blog/mastering-json-schema-validation
 author_id: sohail-anwar
-is_post: true
 ---
 
 <!-- ═══════════════════════════════════════════════════
      STRUCTURED DATA (JSON-LD) FOR BLOG POST
 ═══════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Mastering JSON Schema Validation: Complete Guide & Best Practices",
+  "description": "Learn JSON Schema validation (Draft-07 & 2020-12). Master property constraints, $ref composition, error debugging, and instant browser testing.",
+  "image": "https://datafrog.tools/assets/img/json-schema-validation-featured.jpg",
+  "author": {
+    "@type": "Organization",
+    "name": "DataFrog Engineering Team",
+    "url": "https://datafrog.tools/about-us"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "DataFrog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://datafrog.tools/assets/img/datafrog.png"
+    }
+  },
+  "datePublished": "2026-08-05",
+  "dateModified": "2026-08-05",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://datafrog.tools/blog/mastering-json-schema-validation"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://datafrog.tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://datafrog.tools/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Mastering JSON Schema Validation",
+      "item": "https://datafrog.tools/blog/mastering-json-schema-validation"
+    }
+  ]
+}
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
