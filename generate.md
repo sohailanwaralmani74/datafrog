@@ -1,10 +1,12 @@
 ---
 layout: main
-title: "Generate Tools - Fast Browser-Based Generators | DataFrog"
-description: "Free browser-based generators for UUIDs, random strings, passwords, tokens, hashes, keys, and other useful values. Generate results directly in your browser."
+title: "Generate Tools | DataFrog"
+description: "No generator tools are currently registered in DataFrog’s Generate category. This page will be indexed when a working tool is available."
 permalink: /generate/
 is_category: true
 category_name: "Generate"
+robots: "noindex, follow"
+sitemap: false
 ---
 
 <div class="category-page" style="max-width: 1240px; margin: 0 auto; padding: 2.5rem 1.5rem;">
@@ -13,7 +15,7 @@ category_name: "Generate"
     <span style="font-size: 3rem; display: block; margin-bottom: 0.5rem;">⚙️</span>
     <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Generate Tools</h1>
     <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6;">
-      Fast browser-based generators for identifiers, random values, passwords, tokens, hashes, keys, and other useful data — created locally in your browser.
+      This category is reserved for generator tools. No generators are currently registered, so there are no tools to use here yet.
     </p>
 
     <div style="max-width: 540px; margin: 0 auto 1rem; position: relative;">
@@ -57,19 +59,7 @@ category_name: "Generate"
     </div>
   </section>
 
-  <section style="max-width: 850px; margin: 0 auto;">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem; text-align: center;">Generate Tools FAQ</h2>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; cursor: pointer;">
-        <summary style="font-weight: 600; color: #0f172a;">What are Generate Tools?</summary>
-        <p style="margin-top: 0.5rem; color: #475569; font-size: 0.95rem; line-height: 1.6;">Generate tools create useful values such as identifiers, random strings, passwords, tokens, hashes, and other generated data according to the selected options.</p>
-      </details>
-      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; cursor: pointer;">
-        <summary style="font-weight: 600; color: #0f172a;">Are generated values created in my browser?</summary>
-        <p style="margin-top: 0.5rem; color: #475569; font-size: 0.95rem; line-height: 1.6;">Generators are designed to create suitable values locally in the browser. Each generator should document any important limitations or security considerations.</p>
-      </details>
-    </div>
-  </section>
+  <section style="max-width: 850px; margin: 0 auto;"><h2 style="font-size:1.5rem;font-weight:700;color:#0f172a;margin-bottom:1rem;text-align:center;">About this category</h2><p style="color:#475569;line-height:1.7;">DataFrog will list generators here when a working tool is registered and its input, output, and limitations have been documented. Until then, this category is not presented as a collection of available tools.</p></section>
 
 </div>
 
