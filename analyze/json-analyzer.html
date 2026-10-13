@@ -2,7 +2,7 @@
 layout: main
 title: "JSON Analyzer - Structural Complexity & Key Metrics"
 short_name: "JSON Analyzer"
-description: "Analyze JSON document structure locally in browser. Inspect node depth, key frequency, data types, & structural complexity metrics with zero data uploads."
+description: "Analyze JSON structure with node depth, key frequency, data-type counts, and structural metrics to help you understand a document before changing it."
 keywords: "JSON Analyzer, Analyze JSON, JSON Analysis, JSON Structure Analyzer, JSON Statistics, JSON Analyzer Online, JSON Data Analyzer, JSON Insights, JSON Structure Analysis"
 category: "Analyze"
 permalink: /analyze/json-analyzer
@@ -416,7 +416,8 @@ author_id: gourav-mishra
       <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
         <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
         <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
+          <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Structure metrics are not schema validation</h2><p>Depth, key frequency, and type counts describe the shape of a JSON document. They do not prove that the document meets an API contract or that a value is valid for the application using it.</p><ul><li>Use the <a href="/inspect/json-viewer">JSON Viewer</a> when you need to locate an individual value or copy its path.</li><li>Use the <a href="/validate/json-schema-validator">JSON Schema Validator</a> when required properties, types, or constraints must be checked.</li><li>Inspect unusually deep nesting and repeated keys in context before treating them as a defect.</li></ul></div></section>
+<h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
           <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong> or <strong>Download Report</strong> to save the generated analysis summary.</p>
         </div>
       </div>

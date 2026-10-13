@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "SQLite Viewer - Inspect SQLite Databases (.db, .sqlite3)"
-description: "Open & inspect SQLite databases (.sqlite, .db) locally in browser. Explore tables, schema trees, foreign keys, & data grids with total complete privacy."
+description: "Open a SQLite database file in the browser to inspect tables, columns, indexes, views, foreign keys, and available records."
 permalink: /inspect/sqlite-viewer
 category: Inspect
 short_name: SQLite Viewer
@@ -654,7 +654,7 @@ short_name: SQLite Viewer
 
 <div class="tool-header-block">
   <h1>SQLite Viewer - Inspect & Explore SQLite Databases Online</h1>
-  <p>Open, search, filter, and export SQLite database files (.sqlite, .sqlite3, .db) locally in your browser. Inspect tables, column schemas, views, indexes, foreign keys, and DDL scripts with zero server uploads.</p>
+  <p>Open, search, filter, and export SQLite database files (.sqlite, .sqlite3, .db) locally in your browser. Inspect tables, column schemas, views, indexes, foreign keys, and DDL scripts with browser-based processing.</p>
   <div class="tool-badge-row">
     <span class="tool-badge">🔒 100% Browser-Only Privacy</span>
     <span class="tool-badge">⚡ Instant WebAssembly Parsing</span>
@@ -842,7 +842,7 @@ short_name: SQLite Viewer
 <article class="content-article">
   <h2>What is a SQLite Viewer?</h2>
   <p>A <strong>SQLite Viewer</strong> is a web-based database inspection utility that opens, parses, explores, and queries SQLite database files directly within your web browser. SQLite is a lightweight, zero-configuration relational database engine stored as a single standalone file (typically with <code>.sqlite</code>, <code>.sqlite3</code>, or <code>.db</code> file extensions). Because SQLite databases do not rely on a background server process, inspecting their contents traditionally required installing desktop database tools.</p>
-  <p>Our client-side SQLite Explorer uses compiled WebAssembly modules to read database file structures, parse schema objects (tables, views, indexes, triggers, and foreign keys), run SQL queries, and render interactive data grids without transmitting a single byte to external servers.</p>
+  <p>Our client-side SQLite Explorer uses compiled WebAssembly modules to read database file structures, parse schema objects (tables, views, indexes, triggers, and foreign keys), run SQL queries, and render interactive data grids using browser-side processing code.</p>
 
   <h2>Supported File Formats & Compatibility</h2>
   <p>This viewer natively supports all standard SQLite file formats and versions (SQLite 3.x format):</p>
@@ -869,7 +869,8 @@ short_name: SQLite Viewer
     <li><strong>SQL Learning & Student Research:</strong> Practice schema exploration and inspect table relationships in a safe, sandboxed browser workspace.</li>
   </ul>
 
-  <h2>Frequently Asked Questions</h2>
+  <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Inspecting a SQLite file is not the same as testing an application</h2><p>A database viewer can help you understand the tables and schema stored in a local SQLite file, but it does not establish that the application using the file behaves correctly or that inferred relationships reflect business rules.</p><ul><li>Check foreign keys, indexes, and triggers separately when they matter to your task.</li><li>Verify table counts and representative rows against the source application before using an export.</li><li>Keep a backup before running any operation that changes the database file.</li></ul></div></section>
+<h2>Frequently Asked Questions</h2>
   <div class="faq-item active">
     <div class="faq-question" onclick="toggleFaq(this)">What is SQLite?</div>
     <div class="faq-answer">SQLite is a self-contained, serverless, zero-configuration SQL database engine stored entirely inside a single cross-platform disk file. It is the most widely deployed database engine in the world.</div>

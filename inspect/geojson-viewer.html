@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "GeoJSON Viewer - Open & Inspect GeoJSON Maps Online"
-description: "Free online GeoJSON Viewer. Parse, validate, inspect, search, and visualize GeoJSON files (.geojson, .json) locally in browser. 100% private & secure."
+description: "Open GeoJSON files to inspect feature properties, geometry types, coordinate bounds, and map rendering in your browser."
 permalink: /inspect/geojson-viewer
 category: Inspect
 short_name: GeoJSON Viewer
@@ -643,7 +643,7 @@ short_name: GeoJSON Viewer
 
 <div class="tool-header-block">
   <h1>GeoJSON Viewer - Inspect GeoJSON Maps & Feature Data</h1>
-  <p>Open, parse, validate, inspect, search, and visualize GeoJSON files (.geojson, .json) locally in your browser. Inspect vector geometries, feature properties, coordinate bounds, and attribute tables with zero server uploads.</p>
+  <p>Open, parse, validate, inspect, search, and visualize GeoJSON files (.geojson, .json) locally in your browser. Inspect vector geometries, feature properties, coordinate bounds, and attribute tables with browser-based processing.</p>
   <div class="tool-badge-row">
     <span class="tool-badge">🔒 100% Browser-Only Privacy</span>
     <span class="tool-badge">🗺️ Leaflet Vector Map View</span>
@@ -837,7 +837,8 @@ short_name: GeoJSON Viewer
     <li><strong>Environmental & Urban Research:</strong> Profile land use polygons, elevation contour lines, transit routes, and field sample points locally with complete privacy.</li>
   </ul>
 
-  <h2>Frequently Asked Questions</h2>
+  <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Check coordinate order and coordinate reference</h2><p>In standard GeoJSON coordinates, positions use longitude followed by latitude in WGS 84 decimal degrees. Coordinates from a projected GIS dataset should not be copied into GeoJSON unchanged unless they have been transformed to the expected coordinate reference.</p><ul><li>Check that longitude and latitude have not been reversed.</li><li>Review coordinate bounds and a few known locations to catch values plotted in the wrong place.</li><li>Validate the source against the GeoJSON requirements you need; a map preview alone does not establish data correctness.</li></ul></div></section>
+<h2>Frequently Asked Questions</h2>
   <div class="faq-item active">
     <div class="faq-question" onclick="toggleFaq(this)">What is GeoJSON?</div>
     <div class="faq-answer">GeoJSON is an open standard format based on JSON designed for representing geographic data structures, including points, line strings, polygons, and feature collections with non-spatial attributes.</div>

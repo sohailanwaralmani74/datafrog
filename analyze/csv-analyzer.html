@@ -2,7 +2,7 @@
 layout: main
 title: "CSV Analyzer - Free Online Dataset Statistics & Audit"
 short_name: "CSV Analyzer"
-description: "Analyze CSV files locally in browser. Inspect column types, calculate summary statistics, detect missing values, & profile data with zero server uploads."
+description: "Profile CSV columns, summarize value distributions, detect missing values and anomalies, and review delimiter or structural issues in tabular data."
 keywords: "CSV Analyzer, Analyze CSV, CSV File Analyzer, CSV Data Analyzer, CSV Analysis Tool, CSV Statistics, CSV Profiler, Analyze CSV Online"
 category: "Analyze"
 permalink: /analyze/csv-analyzer
@@ -67,7 +67,7 @@ author_id: gourav-mishra
       "name": "Is my CSV file uploaded to any server for analysis?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, 100% private. Your CSV dataset is parsed, profiled, and audited entirely inside your web browser memory using client-side JavaScript. Zero data is sent to external servers."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -309,7 +309,7 @@ author_id: gourav-mishra
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Download a ready-to-use CSV file containing column profiling statistics and metric summaries.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Your CSV dataset stays in your browser memory. Zero files or data are uploaded to servers.</p>
     </div>
   </div>
@@ -342,7 +342,8 @@ author_id: gourav-mishra
       <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
         <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
         <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
+          <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>CSV profiling depends on parsing and column meaning</h2><p>Statistics are useful only when the rows and columns have been parsed correctly. A wrong delimiter, an unexpected header row, or values stored in mixed formats can make type summaries and missing-value counts misleading.</p><ul><li>Check the detected delimiter, headers, and row count before interpreting a quality score.</li><li>Distinguish an empty field from a value that is invalid under your business rules.</li><li>Use the broader <a href="/analyze/data-profiler">Data Profiler</a> for a first look across supported formats; use this page for CSV-specific profiling.</li></ul></div></section>
+<h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
           <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong>, <strong>Download Report</strong>, or <strong>Export Stats CSV</strong> to export analysis results.</p>
         </div>
       </div>
@@ -361,8 +362,7 @@ author_id: gourav-mishra
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my CSV file uploaded to any server for analysis?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          No, 100% private. Your CSV dataset is parsed, profiled, and audited entirely inside your web browser memory using client-side JavaScript. Zero data is sent to external servers.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">

@@ -2,7 +2,7 @@
 layout: main
 title: "Data Dictionary Generator - Auto Dataset Schema Docs"
 short_name: "Data Dictionary Generator"
-description: "Generate data dictionaries from CSV & JSON files locally in browser. Document column data types, null counts, sample values, & schema summaries online."
+description: "Generate a data dictionary from supported CSV or JSON datasets with column types, missing-value counts, sample values, and exportable schema notes."
 keywords: "data dictionary generator, metadata analyzer, metadata analysis, analyze metadata, metadata inspector, dataset metadata analyzer, data dictionary, dataset documentation, column documentation, metadata generator, metadata documentation, column metadata, schema documentation, data catalog, field documentation"
 category: "Inspect"
 permalink: /inspect/data-dictionary-generator
@@ -334,7 +334,8 @@ permalink: /inspect/data-dictionary-generator
 </section>
 
 <section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
-  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+  <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Interpret inferred metadata as a starting point</h2><p>Column types, semantic labels, and key-candidate flags are inferred from the observed values. A column that looks like an identifier may not be unique, and a numeric-looking field may represent a code rather than a quantity.</p><ul><li>Check inferred types against the source system and business meaning of each field.</li><li>Verify candidate keys for uniqueness and nulls before documenting them as identifiers.</li><li>Review sample values for edge cases that a summary can miss, such as mixed formats or rare categories.</li></ul></div></section>
+<h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
   <div style="display:flex;flex-direction:column;gap:1rem;max-width:860px;">
     <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
       <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What is a data dictionary and how does this tool work as a metadata analyzer?</summary>

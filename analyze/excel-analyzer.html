@@ -2,7 +2,7 @@
 layout: main
 title: "Excel Analyzer - Workbook Statistics & Data Auditing"
 short_name: "Excel Analyzer"
-description: "Analyze Excel spreadsheets (.xlsx, .xls) locally in browser. Profile sheet statistics, inspect formulas, & evaluate data quality with 100% data privacy."
+description: "Profile Excel worksheets, summarize cell types, inspect formula errors, and identify structural issues that may need manual review."
 keywords: "Excel Analyzer, Analyze Excel, Excel File Analyzer, Excel Workbook Analyzer, XLSX Analyzer, Spreadsheet Analyzer, Analyze Excel Online, Excel Data Analysis"
 category: "Analyze"
 permalink: /analyze/excel-analyzer
@@ -341,7 +341,7 @@ author_id: gourav-mishra
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Generates downloadable text/markdown reports summarizing workbook health and statistical insights.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All calculations execute in local browser JavaScript. Your Excel files are never uploaded to remote servers.</p>
     </div>
   </div>
@@ -374,7 +374,8 @@ author_id: gourav-mishra
       <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
         <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
         <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Summary</h3>
+          <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Review formula findings in spreadsheet context</h2><p>Workbook parsers may expose formulas, cached values, and error markers differently from a full spreadsheet application. A browser report is useful for triage, but it is not proof that every formula was recalculated or that every workbook feature was checked.</p><ul><li>Check important formula results in a compatible spreadsheet application.</li><li>Inspect merged cells, blank rows, and mixed data types before interpreting table statistics.</li><li>Do not assume macros or external connections were executed as part of browser analysis.</li></ul></div></section>
+<h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Summary</h3>
           <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong>, <strong>Download Report</strong>, or <strong>Export Stats CSV</strong> to export analysis results.</p>
         </div>
       </div>
