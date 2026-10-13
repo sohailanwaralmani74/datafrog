@@ -2,7 +2,7 @@
 layout: main
 title: "Deduplicate Data - Remove Duplicate Rows & Records"
 short_name: "Deduplicate"
-description: "Deduplicate datasets locally in browser. Remove exact & fuzzy duplicate rows from CSV or JSON files with custom column matching & zero server uploads."
+description: "Remove duplicate records from supported datasets using selected columns and retention rules, then review the cleaned output before replacing the source."
 keywords: "deduplicate, deduplicate data, data deduplication, duplicate remover, remove duplicate data, remove duplicate rows, remove duplicate records, clean duplicate data, duplicate removal tool"
 category: "Analyze"
 permalink: /analyze/deduplicate
@@ -459,7 +459,8 @@ author_id: gourav-mishra
 </section>
 
 <section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
-  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+  <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Decide what counts as a duplicate first</h2><p>Deduplication is a data-cleaning decision, not just a technical operation. Exact row matching, selected-key matching, and normalized matching can keep different records. Choose the rule that reflects the data's meaning before removing anything.</p><ul><li>Use the <a href="/analyze/duplicate-data-finder">Duplicate Data Finder</a> when you first need to inspect and understand duplicate groups.</li><li>Set a retention rule deliberately, then compare the cleaned row count and sample records with the source.</li><li>Keep the original dataset until downstream totals and key constraints have been checked.</li></ul></div></section>
+<h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
   <div style="display:flex;flex-direction:column;gap:1rem;max-width:860px;">
     <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;cursor:pointer;">
       <summary style="font-weight:700;font-size:1rem;color:#0f172a;">What is data deduplication and how does it work?</summary>

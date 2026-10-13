@@ -2,7 +2,7 @@
 layout: main
 title: "XML to SQL – Convert XML Files to SQL Tables & INSERT Statements"
 short_name: "XML to SQL"
-description: "Convert XML to SQL online – generate CREATE TABLE definitions and batch INSERT statements for PostgreSQL, MySQL, SQLite, and SQL Server. 100% private."
+description: "Generate SQL table definitions and INSERT statements from XML data for supported database dialects. Review inferred types and SQL before executing it."
 keywords: "xml to sql, convert xml to sql, xml to database, xml to insert statements, xml to sql converter online"
 category: "XML"
 permalink: /xml-to-sql
@@ -19,12 +19,12 @@ permalink: /xml-to-sql
       XML to SQL – Generate DDL Schemas &amp; Batch INSERT Statements
     </h1>
     <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
-      Convert XML datasets into production-ready SQL scripts. Supports PostgreSQL, MySQL, SQLite, and SQL Server with automatic type detection. No uploads, 100% private.
+      Convert XML datasets into production-ready SQL scripts. Supports PostgreSQL, MySQL, SQLite, and SQL Server with automatic type detection. browser-based processing, browser-based processing.
     </p>
 
     <!-- Privacy Banner -->
     <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
-      <span>🔒 100% Private – SQL generation executes entirely in your browser. Zero database credentials or data uploaded.</span>
+      <span>🔒 browser-based processing – SQL generation executes entirely in your browser. Zero database credentials or data uploaded.</span>
     </div>
   </div>
 
@@ -158,7 +158,8 @@ permalink: /xml-to-sql
       <li><strong>SQL Server (T-SQL):</strong> Implements <code>SET NOCOUNT ON;</code> and T-SQL type declarations (<code>NVARCHAR</code>, <code>DECIMAL</code>).</li>
     </ul>
 
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Review the schema and SQL before running it</h2><p>XML-to-SQL conversion has to flatten hierarchical data into relational tables and infer column types. The generated script is a draft based on the input and selected dialect; it does not prove that the target schema is correct or that the statements will execute safely.</p><ul><li>Check how nested and repeated XML elements map to tables or columns.</li><li>Review identifiers, reserved words, null values, and quoting of text containing apostrophes or special characters.</li><li>Test generated statements against a non-production database and verify row counts and key relationships.</li></ul></div></section>
+<h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
       <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
         <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the converter escape single quotes in text fields?</summary>

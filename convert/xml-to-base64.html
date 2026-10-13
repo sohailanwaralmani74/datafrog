@@ -2,7 +2,7 @@
 layout: main
 title: "XML to Base64 – Encode & Decode XML Payloads Online"
 short_name: "XML to Base64"
-description: "Convert XML to Base64 online. Encode XML into Standard RFC 4648, URL-Safe Base64, or Data URI. Perfect for SAML, SOAP, and API payloads. 100% private."
+description: "Encode XML text as Base64 or decode Base64 content back to text. Base64 is an encoding format, not encryption or access control."
 keywords: "xml to base64, encode xml to base64, base64 xml encoder, saml response base64, soap xml base64"
 category: "XML"
 permalink: /xml-to-base64
@@ -19,12 +19,12 @@ permalink: /xml-to-base64
       XML to Base64 – Encode XML Strings &amp; Files Locally
     </h1>
     <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
-      Encode XML payloads into standard, URL-safe, or Data URI Base64 strings. Perfect for SAML assertions, SOAP envelopes, and binary API headers. 100% private.
+      Encode XML payloads into standard, URL-safe, or Data URI Base64 strings. Perfect for SAML assertions, SOAP envelopes, and binary API headers. browser-based processing.
     </p>
 
     <!-- Privacy Banner -->
     <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
-      <span>🔒 100% Private – Base64 binary encoding runs strictly in your local browser sandbox.</span>
+      <span>🔒 browser-based processing – Base64 binary encoding runs strictly in your local browser sandbox.</span>
     </div>
   </div>
 
@@ -156,7 +156,8 @@ permalink: /xml-to-base64
       <li><strong>REST API Embedding:</strong> Placing XML files directly inside JSON properties without manual entity escaping.</li>
     </ul>
 
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Base64 does not protect confidential data</h2><p>Base64 represents bytes using a text alphabet so data can be transported through systems that expect text. It is reversible without a secret key and should not be treated as encryption, redaction, or a security boundary.</p><ul><li>Do not encode credentials or sensitive XML as a substitute for access controls or encryption.</li><li>Check whether the receiving system expects standard Base64, URL-safe Base64, or a data URI.</li><li>After decoding, verify the character encoding and XML syntax before using the result.</li></ul></div></section>
+<h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
       <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
         <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What is the difference between Standard and URL-Safe Base64?</summary>

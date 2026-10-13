@@ -2,7 +2,7 @@
 layout: main
 title: "XML to XSD – Generate XML Schema Definition Online"
 short_name: "XML to XSD"
-description: "Generate W3C XML Schema Definition (XSD) from any XML document online. Inferred data types, complexTypes, sequences, and attributes. 100% private."
+description: "Infer an XSD schema from an XML example, including observed elements, attributes, and data types. Review the generated schema against additional valid documents."
 keywords: "xml to xsd, xml to schema, generate xsd from xml, xml schema definition generator, xml to xsd converter online"
 category: "XML"
 permalink: /xml-to-xsd
@@ -19,12 +19,12 @@ permalink: /xml-to-xsd
       XML to XSD – Generate W3C XML Schema Definitions
     </h1>
     <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
-      Automatically deduce element types, complexTypes, sequences, and attribute definitions from your XML files. Enforce API contracts and validate data pipelines. No uploads, 100% private.
+      Automatically deduce element types, complexTypes, sequences, and attribute definitions from your XML files. Enforce API contracts and validate data pipelines. browser-based processing, browser-based processing.
     </p>
 
     <!-- Privacy Banner -->
     <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
-      <span>🔒 100% Private – Schema induction executes locally in your browser memory.</span>
+      <span>🔒 browser-based processing – Schema induction executes locally in your browser memory.</span>
     </div>
   </div>
 
@@ -150,7 +150,8 @@ permalink: /xml-to-xsd
       <li><code>xs:string</code> – General character text, descriptions, and mixed content.</li>
     </ul>
 
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>An inferred XSD is a starting point, not a complete contract</h2><p>A schema inferred from one XML example can only learn from the structures and values present in that sample. It may not capture optional elements, alternative values, maximum lengths, occurrence limits, or business rules that appear in other documents.</p><ul><li>Test the generated schema against several valid examples, including optional and repeated elements.</li><li>Review inferred data types and occurrence constraints before publishing the XSD as a contract.</li><li>Add requirements that cannot be inferred from sample data, then validate representative valid and invalid documents.</li></ul></div></section>
+<h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
       <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
         <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the generator distinguish complexType from simpleType?</summary>
