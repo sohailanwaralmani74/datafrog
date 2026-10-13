@@ -74,4 +74,12 @@ keywords: "DataFrog sitemap, site directory, all tools list"
       {% endfor %}
     </ul>
   </section>
+  <section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Contributors</h2>
+    <ul style="line-height: 2; padding-left: 1.25rem;">
+      <li><a href="/profiles/sohail-anwar" style="color: var(--primary);">Sohail Anwar — Software Engineer</a></li>
+      <li><a href="/profiles/saeed-ahmed" style="color: var(--primary);">Saeed Ahmed — Software Engineer</a></li>
+      <li><a href="/profiles/gourav-mishra" style="color: var(--primary);">Gourav Mishra — Business Analyst</a></li>
+    </ul>
+  </section>
 </div>
