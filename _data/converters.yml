@@ -2,7 +2,7 @@
   short_name: "Excel to SQL"
   url: "/xlsx-to-sql-converter"
   category: "Excel"
-  description: "Convert Excel to SQL online – transform XLSX or XLS files into SQL INSERT statements. Choose table name, batch size, and SQL dialect. browser-based processing, browser-based processing."
+  description: "Convert Excel to SQL online – transform XLSX or XLS files into SQL INSERT statements. Choose table name, batch size, and SQL dialect. 100% private, no uploads."
   keywords: ["excel to sql", "convert excel to sql", "xlsx to sql", "xls to sql", "excel to insert statements", "excel to sql converter online", "free excel to sql", "excel to sql generator"]
   icon: "🗄️"
   featured: true
@@ -13,7 +13,7 @@
   short_name: "Excel to JSON"
   url: "/excel-to-json"
   category: "Excel"
-  description: "Convert Excel to JSON online – transform XLSX or XLS files into clean JSON instantly. Preview, edit, and download. browser-based processing, browser-based processing."
+  description: "Convert Excel to JSON online – transform XLSX or XLS files into clean JSON instantly. Preview, edit, and download. 100% private, no uploads."
   keywords: ["excel to json converter", "excel to json", "xlsx to json", "xls to json", "convert excel to json online free", "free excel to json", "browser based excel to json"]
   icon: "🔄"
   featured: true
@@ -24,7 +24,7 @@
   short_name: "Excel to HTML"
   url: "/excel-to-html"
   category: "Excel"
-  description: "Convert Excel to HTML table online – transform XLSX or XLS files into clean, responsive HTML tables. Preview, edit, and download as .html. browser-based processing, browser-based processing."
+  description: "Convert Excel to HTML table online – transform XLSX or XLS files into clean, responsive HTML tables. Preview, edit, and download as .html. 100% private, no uploads."
   keywords: ["excel to html", "convert excel to html table", "xlsx to html", "xls to html", "excel to html converter online", "free excel to html", "excel to html table generator"]
   icon: "📊"
   featured: true
@@ -35,7 +35,7 @@
   short_name: "Excel to TXT"
   url: "/excel-to-txt"
   category: "Excel"
-  description: "Convert Excel to TXT online – transform XLSX or XLS files into plain text. Choose delimiters, include headers, and download as .txt. browser-based processing, browser-based processing."
+  description: "Convert Excel to TXT online – transform XLSX or XLS files into plain text. Choose delimiters, include headers, and download as .txt. 100% private, no uploads."
   keywords: ["excel to txt", "convert excel to text", "xlsx to txt", "xls to txt", "excel to plain text", "excel to txt online", "free excel to text converter"]
   icon: "📝"
   featured: true
@@ -46,7 +46,7 @@
   short_name: "Excel to PDF"
   url: "/xlsx-to-pdf"
   category: "Excel"
-  description: "Convert Excel to PDF online – transform XLSX or XLS files into professional PDF documents. Choose orientation, page size, and include headers. browser-based processing, browser-based processing."
+  description: "Convert Excel to PDF online – transform XLSX or XLS files into professional PDF documents. Choose orientation, page size, and include headers. 100% private, no uploads."
   keywords: ["excel to pdf", "convert excel to pdf", "xlsx to pdf", "xls to pdf", "excel to pdf converter online", "free excel to pdf", "excel to pdf table", "excel to pdf document"]
   icon: "📄"
   featured: true
@@ -57,7 +57,7 @@
   short_name: "XML to JSON"
   url: "/xml-to-json"
   category: "XML"
-  description: "Convert XML to JSON online – transform XML documents, tags, or feeds into clean, structured JSON instantly. Preview, edit, and download. browser-based processing, zero uploads."
+  description: "Convert XML to JSON online – transform XML documents, tags, or feeds into clean, structured JSON instantly. Preview, edit, and download. 100% private, zero uploads."
   keywords: ["xml to json", "xml to json converter", "convert xml to json", "xml to json online", "free xml to json converter", "xml to json parser", "browser based xml to json"]
   icon: "📜"
   featured: true
@@ -68,7 +68,7 @@
   short_name: "XML to Excel"
   url: "/xml-to-excel"
   category: "XML"
-  description: "Convert XML to Excel online – transform XML data into XLSX and XLS spreadsheets instantly. Multi-format download, tabular preview. browser-based processing, browser-based processing."
+  description: "Convert XML to Excel online – transform XML data into XLSX and XLS spreadsheets instantly. Multi-format download, tabular preview. 100% private, no uploads."
   keywords: ["xml to excel", "convert xml to excel", "xml to xlsx", "xml to xls", "xml to spreadsheet online", "free xml to excel converter"]
   icon: "📊"
   featured: true
@@ -79,7 +79,7 @@
   short_name: "XML to CSV"
   url: "/xml-to-csv"
   category: "XML"
-  description: "Convert XML to CSV online – transform XML data into clean comma-delimited text files instantly. Configurable delimiters, quotes, & instant download. browser-based processing."
+  description: "Convert XML to CSV online – transform XML data into clean comma-delimited text files instantly. Configurable delimiters, quotes, & instant download. 100% private."
   keywords: ["xml to csv", "convert xml to csv", "xml to csv converter online", "free xml to csv", "export xml to csv"]
   icon: "📑"
   featured: true
@@ -90,7 +90,7 @@
   short_name: "XML to PDF"
   url: "/xml-to-pdf"
   category: "XML"
-  description: "Convert XML to PDF online – turn XML datasets, invoices, and reports into professional, printable PDF documents. Custom styling, portrait & landscape. browser-based processing."
+  description: "Convert XML to PDF online – turn XML datasets, invoices, and reports into professional, printable PDF documents. Custom styling, portrait & landscape. 100% private."
   keywords: ["xml to pdf", "convert xml to pdf", "xml to pdf online free", "export xml to pdf", "print xml to pdf"]
   icon: "📄"
   featured: true
@@ -101,7 +101,7 @@
   short_name: "XML to XSD"
   url: "/xml-to-xsd"
   category: "XML"
-  description: "Generate W3C XML Schema Definition (XSD) from any XML document online. Inferred data types, complexTypes, sequences, and attributes. browser-based processing."
+  description: "Generate W3C XML Schema Definition (XSD) from any XML document online. Inferred data types, complexTypes, sequences, and attributes. 100% private."
   keywords: ["xml to xsd", "xml to schema", "generate xsd from xml", "xml schema definition generator", "xml to xsd converter online"]
   icon: "🛡️"
   featured: true
@@ -112,7 +112,7 @@
   short_name: "XML to Word"
   url: "/xml-to-word"
   category: "XML"
-  description: "Convert XML to Microsoft Word documents (.doc) online. Turn raw XML into structured headings, styled tables, and formatted reports. browser-based processing in-browser."
+  description: "Convert XML to Microsoft Word documents (.doc) online. Turn raw XML into structured headings, styled tables, and formatted reports. 100% private in-browser."
   keywords: ["xml to word", "convert xml to word", "xml to docx", "xml to doc", "xml to word document online", "format xml in word"]
   icon: "📝"
   featured: true
@@ -123,7 +123,7 @@
   short_name: "XML to SVG"
   url: "/xml-to-svg"
   category: "XML"
-  description: "Convert XML to scalable vector graphics (SVG) online. Generate clean visual node trees or extract embedded SVGs instantly. browser-based processing in-browser."
+  description: "Convert XML to scalable vector graphics (SVG) online. Generate clean visual node trees or extract embedded SVGs instantly. 100% private in-browser."
   keywords: ["xml to svg", "convert xml to svg", "xml tree to svg", "xml vector diagram", "xml diagram generator online"]
   icon: "🎨"
   featured: true
@@ -134,7 +134,7 @@
   short_name: "XML to Base64"
   url: "/xml-to-base64"
   category: "XML"
-  description: "Convert XML to Base64 online. Encode XML into Standard RFC 4648, URL-Safe Base64, or Data URI. Perfect for SAML, SOAP, and API payloads. browser-based processing."
+  description: "Convert XML to Base64 online. Encode XML into Standard RFC 4648, URL-Safe Base64, or Data URI. Perfect for SAML, SOAP, and API payloads. 100% private."
   keywords: ["xml to base64", "encode xml to base64", "base64 xml encoder", "saml response base64", "soap xml base64"]
   icon: "🔒"
   featured: true
@@ -145,7 +145,7 @@
   short_name: "XML to SQL"
   url: "/xml-to-sql"
   category: "XML"
-  description: "Convert XML to SQL online – generate CREATE TABLE definitions and batch INSERT statements for PostgreSQL, MySQL, SQLite, and SQL Server. browser-based processing."
+  description: "Convert XML to SQL online – generate CREATE TABLE definitions and batch INSERT statements for PostgreSQL, MySQL, SQLite, and SQL Server. 100% private."
   keywords: ["xml to sql", "convert xml to sql", "xml to database", "xml to insert statements", "xml to sql converter online"]
   icon: "🗄️"
   featured: true
@@ -156,7 +156,7 @@
   short_name: "XML to DOM"
   url: "/xml-to-dom"
   category: "XML"
-  description: "Inspect and parse XML into an interactive Document Object Model (DOM) tree online. Evaluate XPath queries, inspect node types, attributes, & CDATA. browser-based processing."
+  description: "Inspect and parse XML into an interactive Document Object Model (DOM) tree online. Evaluate XPath queries, inspect node types, attributes, & CDATA. 100% private."
   keywords: ["xml to dom", "xml dom parser", "xml dom inspector", "xpath evaluator online", "xml node tree viewer"]
   icon: "🌳"
   featured: true
