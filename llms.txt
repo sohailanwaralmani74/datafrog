@@ -1,102 +1,122 @@
 # DataFrog
 
-> DataFrog is a collection of 100% free, browser-based data conversion and utility tools. All processing happens locally—no file uploads, no sign-up, and your data never leaves your device.
+> DataFrog provides browser-based tools for inspecting, analyzing, validating, comparing, cleaning, visualizing, and converting data files. Tool input is generally processed in the browser; the site also loads third-party analytics and advertising resources. Browser-side processing is not a guarantee that the website makes no third-party network requests.
 
-## Core Tools
+## Main pages
 
-- [/](https://datafrog.tools/): Home page with complete tool listing
-- [/about-us](https://datafrog.tools/about-us): Privacy-first philosophy and mission statement
-- [/contact-us](https://datafrog.tools/contact-us): Contact and support information
+- [Home](https://datafrog.tools/)
+- [About DataFrog](https://datafrog.tools/about-us)
+- [Contact](https://datafrog.tools/contact-us)
+- [Blog](https://datafrog.tools/blog/)
+- [Site directory](https://datafrog.tools/sitemap)
+- [Privacy policy](https://datafrog.tools/privacy-policy)
+- [Terms of service](https://datafrog.tools/terms-of-service)
+- [Disclaimer](https://datafrog.tools/disclaimer)
 
-## JSON Tools
+## Registered tools
 
-- [/json-to-excel](https://datafrog.tools/json-to-excel): Convert JSON arrays or objects to XLSX/XLS files
-- [/json-to-csv](https://datafrog.tools/json-to-csv): Transform JSON data to CSV with automatic flattening
-- [/json-to-pdf](https://datafrog.tools/json-to-pdf): Generate formatted PDF reports from JSON data
-- [/json-to-html](https://datafrog.tools/json-to-html): Convert JSON to responsive HTML tables or nested lists
-- [/json-to-xml](https://datafrog.tools/json-to-xml): Transform JSON objects to well-formed XML documents
-- [/json-to-sql](https://datafrog.tools/json-to-sql): Generate INSERT statements from JSON arrays (MySQL, PostgreSQL, SQLite)
-- [/json-string-to-json-object](https://datafrog.tools/json-string-to-json-object): Parse escaped JSON strings into valid objects
-- [/json-to-json-schema](https://datafrog.tools/json-to-json-schema): Auto-generate JSON Schema Draft-07 from sample JSON
-- [/json-to-dart](https://datafrog.tools/json-to-dart): Create Flutter-ready model classes with fromJson/toJson
-- [/json-to-yaml](https://datafrog.tools/json-to-yaml): Convert JSON to human-readable YAML for Kubernetes, Docker Compose
-- [/yaml-to-json](https://datafrog.tools/yaml-to-json): Convert YAML configuration files to JSON instantly
-- [/json-to-txt](https://datafrog.tools/json-to-txt): Convert JSON data to plain text format for logging, reporting, or simple data extraction
+### Inspect
 
-## Excel Tools
+- [JSON Viewer](https://datafrog.tools/inspect/json-viewer): View, inspect, search, validate, and explore JSON data locally in your browser with an interactive tree view, depth metrics, and JSON path copy.
+- [CSV Viewer](https://datafrog.tools/inspect/csv-viewer): Open, inspect, search, filter, sort, and explore CSV files locally in your browser with interactive tables, auto delimiter detection, and column metrics.
+- [XML Viewer](https://datafrog.tools/inspect/xml-viewer): Open, inspect, search, validate, and explore XML documents locally in your browser using an interactive tree structure, XPath finder, and attribute inspector.
+- [YAML Viewer](https://datafrog.tools/inspect/yaml-viewer): View, inspect, search, validate, and explore YAML documents locally in your browser using an interactive tree view, path finder, and depth statistics.
+- [Excel Viewer](https://datafrog.tools/inspect/excel-viewer): Open, inspect, search, filter, and explore Excel workbooks (.xlsx, .xls, .xlsm) locally in your browser with multi-sheet tabs, column sorting, and formula toggles.
+- [Data Dictionary Generator](https://datafrog.tools/inspect/data-dictionary-generator): Automatically analyze structured datasets (CSV, Excel, JSON, XML, YAML) and extract metadata to generate comprehensive data dictionaries with physical types, inferred semantic types, column quality stats, and multi-format exports.
+- [Metadata Viewer](https://datafrog.tools/inspect/metadata-viewer): Extract and inspect hidden file metadata, EXIF camera tags, document properties, ID3 audio tags, video containers, and cryptographic hashes locally in your browser.
+- [SQLite Viewer](https://datafrog.tools/inspect/sqlite-viewer): Open, inspect, explore, search, filter, and export SQLite databases (.sqlite, .sqlite3, .db) locally in your browser with table data grids, schema trees, foreign key maps, and visual charts.
+- [GeoJSON Viewer](https://datafrog.tools/inspect/geojson-viewer): Open, parse, validate, inspect, search, and visualize GeoJSON files (.geojson, .json) locally in your browser with interactive maps, attribute tables, feature trees, and exports.
 
-- [/excel-to-json](https://datafrog.tools/excel-to-json): Convert XLSX/XLS files to clean JSON objects
-- [/excel-to-txt](https://datafrog.tools/excel-to-txt): Export spreadsheets as plain text with aligned columns
-- [/xlsx-to-pdf](https://datafrog.tools/xlsx-to-pdf): Convert Excel tables to printable PDF documents
-- [/excel-to-html](https://datafrog.tools/excel-to-html): Generate ready-to-use HTML tables from Excel sheets
-- [/convert-xlsx-to-xml](https://datafrog.tools/convert-xlsx-to-xml): Transform Excel data into hierarchical XML
-- [/xlsx-to-sql-converter](https://datafrog.tools/xlsx-to-sql-converter): Convert Excel rows to INSERT statements
-- [/convert-xlsx-to-csv](https://datafrog.tools/convert-xlsx-to-csv): Save Excel sheets as standard CSV files
+### Analyze
 
-## CSV Tools
+- [JSON Analyzer](https://datafrog.tools/analyze/json-analyzer): Analyze JSON structure, complexity metrics, data type distribution, key frequencies, and data quality insights locally in your browser.
+- [CSV Analyzer](https://datafrog.tools/analyze/csv-analyzer): Analyze CSV datasets with column profiling, numeric summary stats (mean, median, min, max, sum), missing value detection, duplicate checks, and quality audits.
+- [Excel Analyzer](https://datafrog.tools/analyze/excel-analyzer): Analyze Excel workbooks (.xlsx, .xls, .xlsm) with multi-sheet statistics, formula audit, cell type breakdown, merged cell metrics, and data quality reports.
+- [XML Analyzer](https://datafrog.tools/analyze/xml-analyzer): Analyze XML structure, hierarchy depth, element frequencies, namespace usage, attribute metrics, and data quality reports locally in your browser.
+- [Data Profiler](https://datafrog.tools/analyze/data-profiler): Automatically profile CSV, Excel, JSON, and XML datasets in your browser. Generate column statistics, data quality scores, missing value analysis, duplicate detection, and insights.
+- [Duplicate Data Finder](https://datafrog.tools/analyze/duplicate-data-finder): Find duplicate rows, records, and values in CSV, Excel, JSON, XML, YAML, and more. Detect repeated entries, group duplicates, calculate duplicate percentage, and export clean or duplicate-only datasets.
+- [Deduplicate](https://datafrog.tools/analyze/deduplicate): Deduplicate CSV, Excel, JSON, XML, and YAML datasets locally in your browser. Remove duplicate rows and records with custom retention rules (keep first, keep last, keep most complete).
+- [Bank Statement Analyzer](https://datafrog.tools/analyze/bank-statement-analyzer): Analyze bank statements and transaction files locally in your browser. Automatic categorization, income vs expense analysis, cash flow trends, recurring payment detection, financial health scoring, and private reports.
+- [Analyze Database](https://datafrog.tools/analyze/database-analyzer): Analyze SQL databases, SQLite files, CSV, & JSON files locally in your browser. Inspect tables, columns, keys, ER diagrams, data quality, & schema issues.
+- [Financial Data Quality Management](https://datafrog.tools/analyze/financial-data-quality-management): Assess financial data quality online with DataFrog. Perform completeness checks, balance reconciliation, debit-credit audit, & currency validations free.
 
-- [/convert-csv-to-excel](https://datafrog.tools/convert-csv-to-excel): Convert CSV files to XLSX/XLS while preserving data types
-- [/convert-csv-to-json](https://datafrog.tools/convert-csv-to-json): Transform CSV rows into JSON arrays of objects
-- [/convert-csv-to-xml](https://datafrog.tools/convert-csv-to-xml): Convert CSV rows to XML elements
-- [/convert-csv-to-pdf](https://datafrog.tools/convert-csv-to-pdf): Turn CSV data into professional PDF tables
-- [/convert-csv-to-html](https://datafrog.tools/convert-csv-to-html): Generate HTML tables from CSV
-- [/csv-to-sql](https://datafrog.tools/csv-to-sql): Generate INSERT statements from CSV rows
-- [/convert-csv-to-txt](https://datafrog.tools/convert-csv-to-txt): Convert CSV to plain text with aligned columns
-- [/remove-csv-duplicates](https://datafrog.tools/remove-csv-duplicates): Remove duplicate rows from CSV files
+### Validate
 
-## QIF (Financial) Tools
+- [JSON Validator](https://datafrog.tools/validate/json-validator): Validate JSON syntax, detect parsing errors with line & column numbers, highlight syntax issues, pretty print, minify, and format JSON locally.
+- [XML Validator](https://datafrog.tools/validate/xml-validator): Validate XML documents, detect malformed syntax, unclosed tags, namespace issues, encoding errors, and format XML locally in your browser.
+- [CSV Validator](https://datafrog.tools/validate/csv-validator): Validate CSV files for column count consistency, duplicate headers, empty rows, invalid quote escaping, missing values, and delimiter issues.
+- [YAML Validator](https://datafrog.tools/validate/yaml-validator): Validate YAML syntax, indentation levels, duplicate keys, anchors, aliases, and structural integrity locally in your browser.
+- [JSON Schema Validator](https://datafrog.tools/validate/json-schema-validator): Validate JSON against JSON Schema online with instant error reporting, schema tree explorer, draft detection, and total client-side data privacy.
+- [Excel Validator](https://datafrog.tools/validate/excel-validator): Validate Excel workbooks (.xlsx, .xls, .xlsm) for broken formulas, type mismatches, merged cells, blank sheets, and errors with processed in your browser.
+- [SQL Validator](https://datafrog.tools/validate/sql-validator): Validate SQL queries, detect syntax errors, check DDL & DML statements, lint SELECT/UPDATE/DELETE queries, and analyze dialects with browser-based processing.
 
-- [/qif-to-csv](https://datafrog.tools/qif-to-csv): Convert QIF financial files to CSV format
-- [/qif-to-excel](https://datafrog.tools/qif-to-excel): Convert QIF files to Excel spreadsheets
-- [/qif-to-qbo](https://datafrog.tools/qif-to-qbo): Convert QIF files to QBO (QuickBooks Online) format
+### Compare
 
-## SQL Tools
+- [Text Compare](https://datafrog.tools/compare/text-compare): Compare two text blocks or code files side-by-side or inline. Highlight additions, deletions, modifications, line-by-line differences, and word changes.
+- [JSON Compare](https://datafrog.tools/compare/json-compare): Compare two JSON documents structurally. Highlight added keys, removed keys, modified values, nested array differences, and JSON paths.
+- [CSV Compare](https://datafrog.tools/compare/csv-compare): Compare two CSV files or spreadsheet data. Highlight added rows, removed rows, modified cell values, and column mismatches with diff reports.
+- [XML Compare](https://datafrog.tools/compare/xml-compare): Compare two XML documents by analyzing element nodes, attributes, namespace URIs, text contents, and XML hierarchy differences.
+- [Excel Compare](https://datafrog.tools/compare/excel-compare): Compare two Excel workbooks (.xlsx, .xls) cell-by-cell. Highlight modified values, formula changes, sheet mismatches, and row/column diffs.
+- [SQL Compare](https://datafrog.tools/compare/sql-compare): Compare SQL scripts, DDL queries, schemas, stored procedures, and tables side-by-side or inline. Highlight differences, detect changes, normalize formatting, and export diff reports.
+- [YAML Compare](https://datafrog.tools/compare/yaml-compare): Compare two YAML documents structurally or textually. Highlight added keys, removed keys, modified values, array changes, data types, and tree hierarchy differences.
 
-- [/sql-to-csv](https://datafrog.tools/sql-to-csv): Convert SQL query results to CSV format
-- [/sql-to-excel](https://datafrog.tools/sql-to-excel): Convert SQL query results to Excel spreadsheets
-- [/sql-to-xml](https://datafrog.tools/sql-to-xml): Convert SQL query results to XML documents
-- [/remove-duplicates-in-sql](https://datafrog.tools/remove-duplicates-in-sql): Guide to removing duplicate records in SQL
-- [/remove-excel-duplicates](https://datafrog.tools/remove-excel-duplicates): Remove duplicate rows in Excel spreadsheets
+### Visualize
 
-## XML & Schema Tools
+- [JSON Visualizer](https://datafrog.tools/visualize/json-visualizer): Transform JSON documents into interactive visual trees. Expand/collapse branches, search nodes, display JSON paths, view statistics, and export diagrams.
+- [CSV Visualizer](https://datafrog.tools/visualize/csv-visualizer): Convert CSV datasets into interactive charts (Bar, Line, Area, Pie, Scatter, Doughnut). Auto-detect columns, filter metrics, and export high-res PNG/SVG charts.
+- [XML Visualizer](https://datafrog.tools/visualize/xml-visualizer): Visualize XML documents as interactive element hierarchy trees. Inspect attributes, namespace URIs, XPath pointers, and export SVG/PNG structure diagrams.
+- [Excel Visualizer](https://datafrog.tools/visualize/excel-visualizer): Convert Excel workbooks (.xlsx, .xls) into interactive dashboards and charts. Multi-sheet support, automatic column detection, and PNG/SVG export.
+- [Flowchart Builder](https://datafrog.tools/visualize/flowchart-builder): Create, edit, organize, and export flowcharts, workflow diagrams, org charts, and process maps in your browser. Drag-and-drop shapes, auto-connectors, templates, and PNG/SVG/JSON exports.
+- [Correlation Heatmap](https://datafrog.tools/visualize/correlation-heatmap): Calculate correlation matrices (Pearson, Spearman, Kendall) and visualize variable relationships with interactive heatmaps. Multi-format imports and PNG/SVG/CSV exports.
+- [YAML Visualizer](https://datafrog.tools/visualize/yaml-visualizer): Transform YAML configuration files into interactive visual trees. Inspect nested mappings, sequences, node paths, statistics, and export diagrams.
+- [Word Cloud Generator](https://datafrog.tools/visualize/word-cloud-generator): Transform text documents and datasets into interactive word clouds, generate word frequency analysis, bigrams, trigrams, and export high-res PNG, SVG, CSV, Excel, and HTML reports.
 
-- [/xml-to-json](https://datafrog.tools/xml-to-json): Convert XML documents to JSON format
-- [/xml-to-xsd-generator](https://datafrog.tools/xml-to-xsd-generator): Generate XSD schemas from XML documents
+### Clean
 
-## PDF & Presentation Tools
+- [Excel Duplicate Remover](https://datafrog.tools/clean/excel-duplicate-remover): Find and remove Excel duplicates (.xlsx, .xls) by selected columns or full rows. Preview duplicate groups and download cleaned files in total privacy.
+- [Compress Excel](https://datafrog.tools/clean/compress-excel): Compress Excel file online – reduce XLSX, XLS file size by removing empty rows and columns. Free, private, client-side tool. Download compressed Excel instantly.
+- [CSV Compressor](https://datafrog.tools/clean/csv-compressor): Compress CSV file online – reduce CSV file size by removing empty rows and columns. Download as CSV, GZIP, or BZIP2. browser-based processing, browser-based processing.
+- [XML Compressor](https://datafrog.tools/clean/xml-compressor): Compress XML file online – reduce XML file size by removing whitespace, comments, and empty nodes. Download as XML, GZIP, or BZIP2. browser-based processing, browser-based processing.
+- [JSON Compressor](https://datafrog.tools/clean/json-compressor): Compress JSON file online – reduce JSON file size by minifying, removing whitespace, and stripping comments. Download as JSON, GZIP, BZIP2, or ZIP. browser-based processing, browser-based processing.
+- [Data Anonymizer](https://datafrog.tools/clean/data-anonymizer): Anonymize sensitive PII, email addresses, phone numbers, credit cards, and IP addresses in Excel workbooks (.xlsx, .xls), CSV, JSON, or text files locally with processed in your browser.
 
-- [/pdf-to-powerpoint](https://datafrog.tools/pdf-to-powerpoint): Convert PDF files to PowerPoint presentations
-- [/pptx-to-pdf](https://datafrog.tools/pptx-to-pdf): Convert PowerPoint presentations to PDF files
+### Convert
 
-## Utilities
+- [Excel to SQL](https://datafrog.tools/xlsx-to-sql-converter): Convert Excel to SQL online – transform XLSX or XLS files into SQL INSERT statements. Choose table name, batch size, and SQL dialect. browser-based processing, browser-based processing.
+- [Excel to JSON](https://datafrog.tools/excel-to-json): Convert Excel to JSON online – transform XLSX or XLS files into clean JSON instantly. Preview, edit, and download. browser-based processing, browser-based processing.
+- [Excel to HTML](https://datafrog.tools/excel-to-html): Convert Excel to HTML table online – transform XLSX or XLS files into clean, responsive HTML tables. Preview, edit, and download as .html. browser-based processing, browser-based processing.
+- [Excel to TXT](https://datafrog.tools/excel-to-txt): Convert Excel to TXT online – transform XLSX or XLS files into plain text. Choose delimiters, include headers, and download as .txt. browser-based processing, browser-based processing.
+- [Excel to PDF](https://datafrog.tools/xlsx-to-pdf): Convert Excel to PDF online – transform XLSX or XLS files into professional PDF documents. Choose orientation, page size, and include headers. browser-based processing, browser-based processing.
+- [XML to JSON](https://datafrog.tools/xml-to-json): Convert XML to JSON online – transform XML documents, tags, or feeds into clean, structured JSON instantly. Preview, edit, and download. browser-based processing, zero uploads.
+- [XML to Excel](https://datafrog.tools/xml-to-excel): Convert XML to Excel online – transform XML data into XLSX and XLS spreadsheets instantly. Multi-format download, tabular preview. browser-based processing, browser-based processing.
+- [XML to CSV](https://datafrog.tools/xml-to-csv): Convert XML to CSV online – transform XML data into clean comma-delimited text files instantly. Configurable delimiters, quotes, & instant download. browser-based processing.
+- [XML to PDF](https://datafrog.tools/xml-to-pdf): Convert XML to PDF online – turn XML datasets, invoices, and reports into professional, printable PDF documents. Custom styling, portrait & landscape. browser-based processing.
+- [XML to XSD](https://datafrog.tools/xml-to-xsd): Generate W3C XML Schema Definition (XSD) from any XML document online. Inferred data types, complexTypes, sequences, and attributes. browser-based processing.
+- [XML to Word](https://datafrog.tools/xml-to-word): Convert XML to Microsoft Word documents (.doc) online. Turn raw XML into structured headings, styled tables, and formatted reports. browser-based processing in-browser.
+- [XML to SVG](https://datafrog.tools/xml-to-svg): Convert XML to scalable vector graphics (SVG) online. Generate clean visual node trees or extract embedded SVGs instantly. browser-based processing in-browser.
+- [XML to Base64](https://datafrog.tools/xml-to-base64): Convert XML to Base64 online. Encode XML into Standard RFC 4648, URL-Safe Base64, or Data URI. Perfect for SAML, SOAP, and API payloads. browser-based processing.
+- [XML to SQL](https://datafrog.tools/xml-to-sql): Convert XML to SQL online – generate CREATE TABLE definitions and batch INSERT statements for PostgreSQL, MySQL, SQLite, and SQL Server. browser-based processing.
+- [XML to DOM](https://datafrog.tools/xml-to-dom): Inspect and parse XML into an interactive Document Object Model (DOM) tree online. Evaluate XPath queries, inspect node types, attributes, & CDATA. browser-based processing.
 
-- [/uuid-generator](https://datafrog.tools/uuid-generator): Generate UUIDs (Universally Unique Identifiers)
-- [/uuid-generator](https://datafrog.tools/convert-epoch): Convert Epoch to UTC, Date and so on
+## Articles
 
-- [/blog](https://datafrog.tools/blog): Data conversion tutorials and workflow tips
-- [/how-to-convert-json-to-pdf](https://datafrog.tools/how-to-convert-json-to-pdf): Step-by-step guide to converting JSON to PDF
-- [/how-to-convert-json-to-csv](https://datafrog.tools/how-to-convert-json-to-csv): Guide to converting JSON to CSV format
-- [/how-to-convert-json-to-xml](https://datafrog.tools/how-to-convert-json-to-xml): Guide to converting JSON to XML
-- [/how-to-open-json-file-in-excel](https://datafrog.tools/how-to-open-json-file-in-excel): How to open JSON files in Microsoft Excel
-- [/how-i-rest-from-work](https://datafrog.tools/how-i-rest-from-work): Personal blog post about work-life balance
-- [/gourav-mishra](https://datafrog.tools/gourav-mishra): Author profile
-- [/saeed-ahmed](https://datafrog.tools/saeed-ahmed): Author profile
-- [/sohail-anwar](https://datafrog.tools/sohail-anwar): Author profile
+- [How to Handle Missing Data](https://datafrog.tools/blog/how-to-handle-missing-data)
+- [Compare Text Online](https://datafrog.tools/blog/compare-text-guide)
+- [JSON Schema Validation Guide](https://datafrog.tools/blog/mastering-json-schema-validation)
+- [How to Import JSON into Excel](https://datafrog.tools/blog/how-to-import-json-into-excel)
+- [How to View JSON Online](https://datafrog.tools/blog/json-online-view)
+- [How to Compress PDF File Size](https://datafrog.tools/blog/how-to-compress-pdf-file-size)
+- [How to Convert Word to PDF](https://datafrog.tools/blog/how-to-convert-word-to-pdf)
+- [How to Convert PDF to Word](https://datafrog.tools/blog/how-to-convert-pdf-to-word)
 
-## Legal
+## Contributors
 
-- [/privacy-policy](https://datafrog.tools/privacy-policy): Privacy policy – no tracking, no third-party cookies
-- [/terms-of-service](https://datafrog.tools/terms-of-service): Terms of service for using DataFrog tools
+- [Sohail Anwar](https://datafrog.tools/profiles/sohail-anwar): Software engineer.
+- [Saeed Ahmed](https://datafrog.tools/profiles/saeed-ahmed): Software engineer.
+- [Gourav Mishra](https://datafrog.tools/profiles/gourav-mishra): Business analyst.
 
-## Optional
+## Verification
 
-- [/404](https://datafrog.tools/404): Page not found – included for completeness only
+Check the relevant tool's input requirements and limitations before relying on output. Conversion fidelity depends on the format and input. This catalog is maintained from registered repository pages.
 
-## LLM Guidance
-
-- **Content Authority**: All tools are functional, browser-based converters. Blog content is educational.
-- **Allowed Actions**: Summarization, indexing, retrieval, use in AI-generated responses with attribution.
-- **Disallowed Actions**: Presenting content as guaranteed factual without verification, misrepresenting the site.
-- **Verification**: Encourage users to verify critical conversions, especially for financial or production data.
-- **Last Updated**: 2026-05-20
-- **Contact**: sohailanwaralmani74@gmail.com
+Last reviewed: 2026-10-13
