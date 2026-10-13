@@ -2,7 +2,7 @@
 layout: main
 title: "CSV Visualizer - Convert CSV Data into Charts | DataFrog"
 short_name: "CSV Visualizer"
-description: "Visualize CSV data locally in browser. Generate interactive bar charts, line graphs, scatter plots, & pie charts from tabular datasets 100% privately."
+description: "Create bar, line, scatter, and pie charts from CSV data in your browser; choose columns deliberately and inspect the result before exporting."
 keywords: "CSV Visualizer, CSV Chart Generator, CSV Graph, CSV Charts, CSV Visualization, Visualize CSV, CSV Dashboard"
 category: "Visualize"
 permalink: /visualize/csv-visualizer
@@ -77,7 +77,7 @@ permalink: /visualize/csv-visualizer
       "name": "Is my CSV dataset uploaded to external servers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, 100% private. All CSV parsing, column auto-detection, Chart.js canvas rendering, and PNG exports execute locally inside your web browser RAM."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -215,7 +215,7 @@ permalink: /visualize/csv-visualizer
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Export crisp, presentation-ready chart graphics for reports and slide decks.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All chart rendering happens in local browser memory. Zero CSV data is sent to external servers.</p>
     </div>
   </div>
@@ -256,6 +256,8 @@ permalink: /visualize/csv-visualizer
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Choose chart types based on the question</h2><p>A chart is only as useful as the fields and interpretation behind it. Bar charts are useful for comparing categories, line charts for ordered trends, scatter plots for relationships between numeric variables, and pie charts only when parts of one whole are meaningful.</p><ul><li>Check which columns are treated as labels and which as numeric values before reading the chart.</li><li>Look for blank values, inconsistent units, and dates stored as text; a chart cannot repair those data-quality problems automatically.</li><li>Keep the source CSV and verify the exported chart if it will be used in a report or decision.</li></ul></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
@@ -274,8 +276,7 @@ permalink: /visualize/csv-visualizer
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my CSV dataset uploaded to external servers?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          No, 100% private. All CSV parsing, column auto-detection, Chart.js canvas rendering, and PNG exports execute locally inside your web browser RAM.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">

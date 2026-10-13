@@ -2,7 +2,7 @@
 layout: main
 title: "Excel Visualizer - Create Interactive Charts Online"
 short_name: "Excel Visualizer"
-description: "Visualize Excel spreadsheet data locally in browser. Generate interactive charts & summary plots from .xlsx workbooks with zero server data uploads online."
+description: "Explore Excel worksheets and build charts from selected workbook columns in your browser; verify data types and sheet selection before interpreting results."
 keywords: "Excel Visualizer, Excel Chart Generator, Excel Dashboard, Spreadsheet Charts, Visualize Excel, Excel Graph Generator, Excel Data Visualization"
 category: "Visualize"
 permalink: /visualize/excel-visualizer
@@ -78,7 +78,7 @@ permalink: /visualize/excel-visualizer
       "name": "Are my Excel spreadsheets uploaded to remote servers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, 100% private. All binary parsing, table rendering, sheet searching, and chart canvas rendering execute locally inside your web browser RAM."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -229,7 +229,7 @@ permalink: /visualize/excel-visualizer
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Export crisp chart graphics for presentations, reports, and slide decks.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All binary parsing and table rendering happen in browser RAM. Zero spreadsheets are uploaded to servers.</p>
     </div>
   </div>
@@ -270,6 +270,8 @@ permalink: /visualize/excel-visualizer
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Before charting workbook data</h2><p>Workbook sheets often mix labels, formulas, blank rows, and values formatted as dates or currency. The chart is only meaningful when the selected columns represent the intended measures and categories.</p><ul><li>Choose the correct worksheet and confirm the first row contains the headers you expect.</li><li>Check whether numeric-looking values are actually stored as text and whether units are consistent.</li><li>Verify the chart against the original workbook before using it in a report; a browser visualization is not a substitute for checking the source formulas.</li></ul></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
@@ -288,8 +290,7 @@ permalink: /visualize/excel-visualizer
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Are my Excel spreadsheets uploaded to remote servers?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          No, 100% private. All binary parsing, table rendering, sheet searching, and chart canvas rendering execute locally inside your web browser RAM.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">

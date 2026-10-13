@@ -2,7 +2,7 @@
 layout: main
 title: "YAML Visualizer - Interactive Mappings Tree Viewer"
 short_name: "YAML Visualizer"
-description: "Visualize YAML structure locally in browser. Generate interactive node graphs, hierarchy maps, & structural diagrams with zero server data uploads online."
+description: "Turn YAML mappings and sequences into an interactive tree, search nested nodes, and copy paths to understand configuration structure."
 keywords: "YAML Visualizer, Visualize YAML, YAML Tree Viewer, YAML Structure Viewer, YAML Hierarchy Viewer, YAML Diagram, YAML Explorer"
 category: "Visualize"
 permalink: /visualize/yaml-visualizer
@@ -74,7 +74,7 @@ permalink: /visualize/yaml-visualizer
       "name": "Is my YAML configuration file safe during visualization?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, 100% private. All YAML indentation parsing, tree rendering, node search, and path copying execute locally inside your web browser RAM."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -197,7 +197,7 @@ permalink: /visualize/yaml-visualizer
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Highlights matching configuration keys or scalar values as you type.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All YAML processing runs in local browser RAM. Zero configuration files are sent to servers.</p>
     </div>
   </div>
@@ -238,6 +238,8 @@ permalink: /visualize/yaml-visualizer
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Use the tree to understand configuration structure</h2><p>A YAML hierarchy diagram shows where keys and list items sit relative to each other. It does not validate whether a configuration is accepted by Kubernetes, a CI runner, or another application that consumes YAML.</p><ul><li>Check indentation and parent-child relationships when a value appears under the wrong key.</li><li>Review quoted strings and values that may be interpreted as booleans, numbers, or null by the relevant YAML parser.</li><li>After inspecting the tree, validate the file and run the target application's own configuration checks.</li></ul><p>For syntax checks, use the <a href="/validate/yaml-validator">YAML Validator</a>; use this page when the structure is easier to understand visually.</p></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
@@ -256,8 +258,7 @@ permalink: /visualize/yaml-visualizer
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my YAML configuration file safe during visualization?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          Yes, 100% private. All YAML indentation parsing, tree rendering, node search, and path copying execute locally inside your web browser RAM.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">

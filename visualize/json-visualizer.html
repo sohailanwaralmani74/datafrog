@@ -1,8 +1,8 @@
 ---
 layout: main
-title: "JSON Visualizer - Interactive Tree Diagram Builder"
+title: "JSON Visualizer - Interactive JSON Hierarchy Diagrams"
 short_name: "JSON Visualizer"
-description: "Visualize JSON datasets locally in browser. Generate interactive node graphs, hierarchy maps, & data distribution charts with zero server data uploads."
+description: "Turn JSON into an interactive hierarchy diagram, expand branches, search nodes, and export a visual representation of nested data."
 keywords: "JSON Visualizer, Visualize JSON, JSON Tree Viewer, JSON Graph Viewer, JSON Structure Visualizer, JSON Hierarchy Viewer, JSON Diagram"
 category: "Visualize"
 permalink: /visualize/json-visualizer
@@ -74,7 +74,7 @@ permalink: /visualize/json-visualizer
       "name": "Is my JSON payload safe during visualization?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, 100% private. All JSON tree rendering, node search, path tracing, and SVG/PNG diagram exports execute locally inside your web browser RAM."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -97,7 +97,7 @@ permalink: /visualize/json-visualizer
     👁️ Visualize Module
   </span>
   <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 0.5rem;">
-    JSON Visualizer – Interactive Tree & Hierarchy Viewer
+    JSON Visualizer – Interactive JSON Hierarchy Diagram
   </h1>
   <p style="color: #475569; font-size: 1.05rem; max-width: 850px; line-height: 1.5; margin-bottom: 1.5rem;">
     Transform complex JSON payloads into interactive visual trees. Expand/collapse branches, search nodes, trace JSON paths, view depth metrics, and export tree diagrams.
@@ -197,7 +197,7 @@ permalink: /visualize/json-visualizer
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Highlights keys or values dynamically as you type in the search bar.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All tree rendering happens in local browser memory. Zero JSON payloads are sent to servers.</p>
     </div>
   </div>
@@ -238,6 +238,8 @@ permalink: /visualize/json-visualizer
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>Choose a JSON viewer or visualizer</h2><p>Use the <a href="/inspect/json-viewer">JSON Viewer</a> when your main task is to inspect values, search for keys, or copy a JSON path. Use this visualizer when the hierarchy itself is the thing you need to understand or explain, such as how nested objects and arrays branch through a document.</p><ul><li>Expand only the branches relevant to the question you are investigating.</li><li>Use the visual structure to explain nesting, not as proof that the data matches a schema.</li><li>For exact values or contract checks, return to the source JSON or use the JSON Schema Validator.</li></ul></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
@@ -256,8 +258,7 @@ permalink: /visualize/json-visualizer
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my JSON payload safe during visualization?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          Yes, 100% private. All JSON tree rendering, node search, path tracing, and SVG/PNG diagram exports execute locally inside your web browser RAM.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">

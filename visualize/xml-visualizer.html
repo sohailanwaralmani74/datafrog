@@ -2,7 +2,7 @@
 layout: main
 title: "XML Visualizer - Interactive Node Tree Diagrammer | DataFrog"
 short_name: "XML Visualizer"
-description: "Visualize XML hierarchies locally in browser. Generate interactive tree diagrams, element maps, & node charts from XML files with zero server uploads."
+description: "Render XML element nesting as an interactive hierarchy, inspect attributes and namespaces, and use paths to locate nodes in the source document."
 keywords: "XML Visualizer, XML Tree Viewer, Visualize XML, XML Structure Viewer, XML Hierarchy Viewer, XML Diagram, XML Graph"
 category: "Visualize"
 permalink: /visualize/xml-visualizer
@@ -74,7 +74,7 @@ permalink: /visualize/xml-visualizer
       "name": "Is my XML document safe during visualization?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, 100% private. All XML tree parsing, XPath generation, search filtering, and DOM rendering execute locally inside your web browser RAM."
+        "text": "The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests."
       }
     },
     {
@@ -197,7 +197,7 @@ permalink: /visualize/xml-visualizer
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">Displays element attribute key-value pairs and declared `xmlns` namespace URIs.</p>
     </div>
     <div style="background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">🔒 100% Client-Side Privacy</h3>
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem;">Local processing and privacy notes</h3>
       <p style="color: #475569; font-size: 0.875rem; line-height: 1.5;">All XML tree rendering uses local browser DOMParser. Zero documents are uploaded to servers.</p>
     </div>
   </div>
@@ -238,6 +238,8 @@ permalink: /visualize/xml-visualizer
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2>When an XML hierarchy diagram helps</h2><p>A hierarchy view is useful when you need to understand parent-child relationships, repeated elements, and where attributes sit in a document. It is not the same as validating the document against an XSD or checking application-specific rules.</p><ul><li>Inspect namespace URIs as well as prefixes when comparing elements from different vocabularies.</li><li>Check repeated elements and mixed content in the original XML before treating the diagram as a complete summary.</li><li>Use the <a href="/inspect/xml-viewer">XML Viewer</a> for detailed browsing and the <a href="/validate/xml-validator">XML Validator</a> for syntax checks.</li></ul></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
@@ -256,8 +258,7 @@ permalink: /visualize/xml-visualizer
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; font-size: 1rem; color: #0f172a;">Is my XML document safe during visualization?</summary>
         <p style="margin-top: 0.65rem; color: #475569; line-height: 1.5; font-size: 0.9rem;">
-          Yes, 100% private. All XML tree parsing, XPath generation, search filtering, and DOM rendering execute locally inside your web browser RAM.
-        </p>
+          The input is handled by browser-side code. The site also loads third-party analytics and advertising resources, so local processing is not a guarantee that the website makes no third-party network requests.</p>
       </details>
 
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; cursor: pointer;">
