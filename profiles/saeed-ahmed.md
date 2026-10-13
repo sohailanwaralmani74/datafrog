@@ -1,7 +1,7 @@
 ---
 layout: main
 title: "Saeed Ahmed — Software Engineer | DataFrog"
-description: "Meet Saeed Ahmed, a Software Engineer with 8 years of software development experience and a contributor to DataFrog's PDF and document conversion content."
+description: "Meet Saeed Ahmed, a Software Engineer with 8 years of software development experience and a contributor to DataFrog's comparison, visualization, XML inspection, and document-processing tools."
 permalink: /profiles/saeed-ahmed
 sitemap: true
 person_id: saeed-ahmed
@@ -19,16 +19,16 @@ person_id: saeed-ahmed
 
   <section>
     <h2>About Saeed</h2>
-    <p>Saeed Ahmed is a Software Engineer with 8 years of software development experience. At DataFrog, he contributes to document-processing work and technical articles where file structure, conversion behavior, and output quality matter.</p>
+    <p>Saeed Ahmed is a Software Engineer with 8 years of software development experience. At DataFrog, he contributes to interactive comparison and visualization tools, XML inspection, and document-processing workflows where structure and output quality matter.</p>
     <p>His perspective is especially useful when a document looks simple on screen but contains structures that are difficult to reproduce in another format. His articles explain those situations in practical terms so readers know what to expect before they convert an important file.</p>
   </section>
 
   <section>
     <h2>What he focuses on</h2>
     <ul>
-      <li>Document conversion and file-processing behavior</li>
-      <li>PDF structure, text extraction, and editable output</li>
-      <li>Conversion edge cases and output verification</li>
+      <li>Interactive comparisons for text, JSON, CSV, XML, Excel, SQL, and YAML</li>
+      <li>Visualizing nested data and making structural differences easier to inspect</li>
+      <li>XML inspection and document conversion edge cases</li>
       <li>Practical testing rather than idealized examples</li>
       <li>Readable technical documentation for everyday users</li>
     </ul>
@@ -49,12 +49,12 @@ person_id: saeed-ahmed
 
   <section>
     <h2>Editorial standard</h2>
-    <p>DataFrog attributes practical technical content to the contributor who prepared or reviewed it. The purpose is transparency: readers should be able to distinguish an observed workflow from a generic description of what a file format is supposed to do.</p>
+    <p>DataFrog uses explicit contributor labels to show who is associated with a tool or article. A contributor label is not a claim of independent review; review claims should appear only when a review actually took place.</p>
   </section>
 
 <section>
     <h2>How Saeed contributes</h2>
-    <p>Saeed focuses on document-processing behavior and output verification. He checks whether a generated file is genuinely usable after processing, including cases where a file opens successfully but still needs manual repair. His articles emphasize these practical differences instead of promising perfect conversion.</p>
+    <p>Saeed focuses on making differences and structures easier to inspect, while documenting the limitations of visualizations and file conversions. His contributions emphasize what the tool can show and what still needs checking in the original data.</p>
   </section>
 
 </article>
