@@ -13,7 +13,6 @@ image: "/assets/img/datafrog.png"
 canonical: "https://datafrog.tools/blog/how-to-convert-word-to-pdf"
 sitemap: true
 permalink: /blog/how-to-convert-word-to-pdf
-is_post: true
 ---
 
 # How To Convert Word To PDF Without Losing Your Formatting

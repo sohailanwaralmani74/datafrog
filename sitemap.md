@@ -21,6 +21,9 @@ keywords: "DataFrog sitemap, site directory, all tools list"
       <li><a href="/validate/" style="color: var(--primary);">✅ Validate Category</a></li>
       <li><a href="/compare/" style="color: var(--primary);">⚖️ Compare Category</a></li>
       <li><a href="/visualize/" style="color: var(--primary);">📈 Visualize Category</a></li>
+      <li><a href="/clean/" style="color: var(--primary);">🧹 Clean Category</a></li>
+      <li><a href="/convert/" style="color: var(--primary);">🔄 Convert Category</a></li>
+      <li><a href="/generate/" style="color: var(--primary);">⚙️ Generate Category</a></li>
     </ul>
   </section>
 
@@ -50,5 +53,25 @@ keywords: "DataFrog sitemap, site directory, all tools list"
         <p style="color: var(--text-muted); font-style: italic;">All tools registered in <code>_data/tools.yml</code> will dynamically populate in this catalog.</p>
       {% endfor %}
     </div>
+  </section>
+
+  <section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Converters</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;">
+      {% for tool in site.data.converters %}
+        <div style="background: var(--bg-soft); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-default);">
+          <a href="{{ tool.url }}" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">{{ tool.icon | default: "🔄" }} {{ tool.title }}</a>
+          <span style="display: block; font-size: 0.75rem; color: var(--text-muted);">{{ tool.category }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  <section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Articles</h2>
+    <ul style="line-height: 2; padding-left: 1.25rem;">
+      {% for post in site.posts %}
+        <li><a href="{{ post.url }}" style="color: var(--primary);">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
   </section>
 </div>

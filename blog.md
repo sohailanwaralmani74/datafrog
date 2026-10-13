@@ -15,7 +15,7 @@ sitemap: true
   "@type": "Blog",
   "name": "DataFrog Engineering Blog",
   "url": "https://datafrog.tools/blog",
-  "description": "Expert data engineering guides, API contract tutorials, and privacy-first local data tools.",
+  "description": "Practical guides to data formats, validation, comparison, conversion, and browser-based file workflows.",
   "publisher": {
     "@type": "Organization",
     "name": "DataFrog"

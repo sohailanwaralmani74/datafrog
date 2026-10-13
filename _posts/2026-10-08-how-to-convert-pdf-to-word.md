@@ -13,7 +13,6 @@ image: "/assets/img/datafrog.png"
 canonical: "https://datafrog.tools/blog/how-to-convert-pdf-to-word"
 sitemap: true
 permalink: /blog/how-to-convert-pdf-to-word
-is_post: true
 ---
 
 # How To Convert PDF To Word and Keep the Document Usable
