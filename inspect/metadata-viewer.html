@@ -699,7 +699,8 @@ short_name: Metadata Viewer
   </ul>
   <p>Our built-in security analysis engine automatically audits every uploaded file for privacy exposure, generating an instant <em>Privacy Score</em> and actionable safety recommendations.</p>
 
-  <h2>Frequently Asked Questions</h2>
+  <div style="margin:2rem 0;padding:1.5rem;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;"><h2>How to interpret missing metadata</h2><p>Metadata availability depends on the file format, the fields supported by the reader, and whether an earlier export or editing step removed those fields. An empty result does not prove that a file contains no identifying information.</p><ul><li>For photographs, inspect available EXIF fields such as capture time, camera model, and location when present.</li><li>For documents and media, check the properties the file format actually stores; different formats expose different metadata.</li><li>If you are preparing a file for public release, inspect the output file after removing metadata. Do not rely on a single empty panel as a complete privacy audit.</li></ul><p>This viewer can help identify metadata exposed by supported parsers. It cannot guarantee that every hidden field, embedded object, or format-specific data source has been detected.</p></div>
+<h2>Frequently Asked Questions</h2>
   <div class="faq-item active">
     <div class="faq-question" onclick="toggleFaq(this)">What is file metadata?</div>
     <div class="faq-answer">File metadata is hidden background information embedded inside files, including creation dates, author names, GPS location coordinates, camera settings (EXIF), software version info, page counts, and audio/video codecs.</div>

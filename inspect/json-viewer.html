@@ -374,6 +374,8 @@ permalink: /inspect/json-viewer
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2 style="font-size:1.5rem;font-weight:800;color:#0f172a;">What to check when inspecting JSON</h2><p style="line-height:1.7;color:#475569;">A tree view helps you navigate valid JSON, but it does not make non-JSON syntax valid. Standard JSON does not allow comments, trailing commas, single-quoted strings, or unquoted property names. If the input fails to parse, fix the syntax error first, then inspect the structure.</p><ul style="line-height:1.7;color:#475569;"><li>Expand arrays and objects around the field you need; a matching key can appear in several different branches.</li><li>Copy the full path, not only the key name, when documenting where a value lives.</li><li>For very large or deeply nested documents, collapse branches you do not need; browser memory and rendering speed depend on the input and device.</li></ul><p style="line-height:1.7;color:#475569;">A viewer shows structure; it does not establish that the data meets an application contract. Use a JSON Schema validator when you need to check required properties, types, or constraints.</p></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->

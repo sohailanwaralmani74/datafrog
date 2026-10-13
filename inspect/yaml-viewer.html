@@ -357,6 +357,8 @@ permalink: /inspect/yaml-viewer
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2 style="font-size:1.5rem;font-weight:800;color:#0f172a;">YAML checks that prevent misleading results</h2><p style="line-height:1.7;color:#475569;">YAML uses indentation to express structure, so a one-space change can move a key into a different mapping or sequence. Tabs used for indentation are not interchangeable with spaces. When a document fails to parse, inspect the surrounding indentation before changing the values themselves.</p><ul style="line-height:1.7;color:#475569;"><li>Check that list items line up with the intended parent key.</li><li>Review quoted and unquoted scalars carefully; punctuation and values such as booleans or null can be interpreted differently depending on YAML version and parser rules.</li><li>Syntax validation does not prove that a configuration has all required keys or that the values are accepted by the application that consumes it.</li></ul><p style="line-height:1.7;color:#475569;">For deployment configuration, follow the YAML version and schema expectations of the specific application. A document can parse successfully and still be rejected by that application.</p></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->

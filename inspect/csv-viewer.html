@@ -352,6 +352,8 @@ permalink: /inspect/csv-viewer
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2 style="font-size:1.5rem;font-weight:800;color:#0f172a;">Before trusting a CSV preview</h2><p style="line-height:1.7;color:#475569;">CSV is a text format with quoting rules, not a fixed spreadsheet layout. A comma inside a quoted field should remain part of that field, and a quoted field can contain a line break. If columns look shifted, check the delimiter, quote handling, and whether the first row is a header before interpreting the table.</p><ul style="line-height:1.7;color:#475569;"><li>Check a few rows against the original file after delimiter detection, especially when the file uses semicolons or tabs.</li><li>Sorting a column does not prove values were interpreted as numbers or dates; text values can sort differently from numeric values.</li><li>An empty-cell indicator identifies an empty field, not whether that value is missing by mistake or intentionally blank.</li></ul><p style="line-height:1.7;color:#475569;">For a data-quality decision, distinguish parsing problems from actual data problems. A correctly displayed CSV can still contain duplicate records, inconsistent units, or invalid business values.</p></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->

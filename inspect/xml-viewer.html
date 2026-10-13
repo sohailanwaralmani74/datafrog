@@ -363,6 +363,8 @@ permalink: /inspect/xml-viewer
   </div>
 </section>
 
+<section style="padding:2rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2 style="font-size:1.5rem;font-weight:800;color:#0f172a;">Well-formed XML is not the same as schema-valid XML</h2><p style="line-height:1.7;color:#475569;">An XML tree helps you inspect element nesting, attributes, and namespaces. Basic syntax checks can catch malformed markup, but they do not by themselves prove that a document conforms to a particular XSD or application-specific contract.</p><ul style="line-height:1.7;color:#475569;"><li>When elements use namespaces, pay attention to namespace URIs as well as visible prefixes; different prefixes can refer to the same namespace.</li><li>Use a copied path or XPath expression as a locator, then test it against the exact document and namespace context where it will be used.</li><li>Check repeated elements and mixed text-and-element content before assuming the tree represents a simple table.</li></ul><p style="line-height:1.7;color:#475569;">If the document must satisfy a published schema, validate against that schema separately. A tree view is primarily for navigation and inspection.</p></div></section>
+
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
 ═══════════════════════════════════════════════════ -->
