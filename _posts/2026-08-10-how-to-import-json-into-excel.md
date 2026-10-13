@@ -2,7 +2,7 @@
 layout: main
 title: "How to Import JSON into Excel: Complete Step-by-Step Guide"
 description: "Learn how to import JSON into Excel using Power Query, VBA macro scripts, CSV conversion, & web browser tools and troubleshoot common data-shape and encoding issues."
-excerpt: "Learn how to import JSON into Excel using Power Query, legacy VBA scripts, CSV conversion, and browser-based data tools. Step-by-step guide with error fixes."
+excerpt: "Learn how to import JSON into Excel using Power Query, legacy VBA scripts, CSV conversion, and troubleshoot common data-shape and encoding issues. Step-by-step guide with error fixes."
 keywords: "how to import JSON into Excel, import json to excel, import data from json file to excel, import json data to excel, import data from json to excel, json in excel, import json into excel, excel open json file, open json in excel"
 author: "Gourav Mishra"
 date: 2026-08-10
@@ -86,7 +86,7 @@ To import JSON into Excel, open Microsoft Excel 365 or Excel 2016+, navigate to 
 <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 1.25rem 1.5rem; border-radius: 0 10px 10px 0; margin: 1.5rem 0;">
   <span style="margin-top: 0; margin-bottom: 0.5rem; color: #1e40af; font-size: 1.1rem; font-weight: 700;">⚡ Quick Answer: Fastest Method</span>
   <p style="margin: 0; color: #1e3a8a; font-size: 0.95rem; line-height: 1.6;">
-    If you use Microsoft 365, Excel 2021, 2019, or 2016, use native Power Query: Click <strong>Data > Get Data > From File > From JSON</strong>. Select your <code>.json</code> file, click <strong>To Table</strong> in Power Query Editor, click the expand icon (<code>⤢</code>) in the column header, and click <strong>Close &amp; Load</strong>. For older Excel versions or instant web processing without desktop software, convert your JSON data using a privacy-first browser utility like <a href="/inspect/json-viewer">DataFrog JSON Viewer</a> or <a href="/analyze/json-analyzer">DataFrog JSON Analyzer</a> to generate downloadable Excel workbooks.
+    If you use Microsoft 365, Excel 2021, 2019, or 2016, use native Power Query: Click <strong>Data > Get Data > From File > From JSON</strong>. Select your <code>.json</code> file, click <strong>To Table</strong> in Power Query Editor, click the expand icon (<code>⤢</code>) in the column header, and click <strong>Close &amp; Load</strong>. For older Excel versions, consider the Power Query add-in where supported, a reviewed VBA workflow, or a converter that explicitly supports JSON-to-CSV or JSON-to-XLSX. DataFrog currently does not list a JSON-to-Excel converter, and its JSON Viewer and JSON Analyzer do not export Excel workbooks.
   </p>
 </div>
 
@@ -95,7 +95,7 @@ To import JSON into Excel, open Microsoft Excel 365 or Excel 2016+, navigate to 
 2. [Method 1: Import JSON to Excel via Power Query (Excel 365, 2021, 2019, 2016)](#method-1-import-json-to-excel-via-power-query-excel-365-2021-2019-2016)
 3. [Method 2: Opening JSON Files in Legacy Excel (Excel 2013, 2010, and VBA Macros)](#method-2-opening-json-files-in-legacy-excel-excel-2013-2010-and-vba-macros)
 4. [Method 3: Converting JSON to CSV Before Importing to Excel](#method-3-converting-json-to-csv-before-importing-to-excel)
-5. [Method 4: Browser-Based No-Install Method (Privacy-First Data Tools)](#method-4-browser-based-no-install-method-privacy-first-data-tools)
+5. [Method 4: Browser converters that support JSON to Excel](#method-4-use-a-browser-converter-only-when-it-supports-json-to-excel)
 6. [Method Comparison: Power Query vs. Legacy vs. Browser Conversion](#method-comparison-power-query-vs-legacy-vs-browser-conversion)
 7. [Common JSON-to-Excel Import Errors & Fixes](#common-json-to-excel-import-errors--fixes)
 8. [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
@@ -238,7 +238,7 @@ Once `output.csv` is generated, open Excel and navigate to **Data > From Text/CS
 
 A browser-based workflow can be useful when you do not want to install desktop software, but check the conversion direction before choosing a tool. DataFrog's current converter registry lists Excel-to-JSON; it does not currently register a JSON-to-Excel converter. Do not use an Excel-to-JSON tool for this task. For direct JSON import, Excel Power Query is the most straightforward built-in option in supported Excel versions.
 
-## Method Comparison: Power Query vs. Legacy vs. Browser Conversion
+## Method Comparison: Power Query, Legacy Methods, and File Conversion
 
 Selecting the right method depends on your installed Excel version, computer security permissions, and whether your JSON payload contains complex nested arrays.
 
@@ -248,7 +248,7 @@ Selecting the right method depends on your installed Excel version, computer sec
 | **Power Query Add-in** | Excel 2013, 2010 | Yes (Free Add-in) | Yes (Expand Lists) | Medium | Yes (1-Click Refresh) |
 | **VBA Macro Code** | All Excel Versions (Windows/Mac) | No (Built-in Editor) | Requires Custom Code | High (Writing Scripts) | Manual Re-run |
 | **CSV Conversion (`jq`)** | All Excel & Spreadsheet Software | Yes (CLI Tool) | Requires Scripting | Medium | No |
-| **Browser Converter** | Any Browser / Any Device | No (Zero Installation) | Yes (Auto-Flattening) | Instant (< 5 sec) | Manual Export |
+| **Third-party JSON-to-XLSX converter** | Depends on provider | Usually no | Depends on provider | Varies | Usually manual export |
 
 ---
 
