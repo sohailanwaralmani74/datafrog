@@ -1,5 +1,5 @@
-title: "DataFrog — Free Online Tools for JSON, CSV, XML & Excel Conversion"
-description: "Convert, format, and manage your data easily with DataFrog. Free browser-based tools for JSON, CSV, XML, and Excel — secure, accurate, and fast."
+title: "DataFrog — Browser-Based Data Tools"
+description: "Browser-based tools to inspect, analyze, validate, compare, convert, clean, and visualize data files including JSON, CSV, XML, Excel, and YAML."
 permalink: ':title'
 baseurl: ""
 url: "https://datafrog.tools" # the base hostname & protocol for your site, e.g. http://example.com
@@ -36,7 +36,6 @@ plugins:
 toc:
   min_level: 2  # Adjust if you want to skip h1
   max_level: 6
-  list_class: toc
   list_class: toc__list
   sublist_class: toc__sublist
 
