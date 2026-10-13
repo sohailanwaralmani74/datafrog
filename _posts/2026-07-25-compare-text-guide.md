@@ -8,7 +8,7 @@ author: "DataFrog Engineering Team"
 date: 2026-07-25
 categories: ["Compare"]
 tags: ["Text Compare", "Diff Checker", "Developer Tools", "Text Analysis", "Privacy"]
-image: "/assets/img/compare-text-hero.png"
+image: "/assets/img/compare-text-hero.webp"
 canonical: "https://datafrog.tools/blog/compare-text-guide"
 sitemap: true
 permalink: /blog/compare-text-guide
