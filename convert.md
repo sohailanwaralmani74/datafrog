@@ -1,7 +1,7 @@
 ---
 layout: main
-title: "Convert Tools - Fast Data & File Converters Online | DataFrog"
-description: "Free browser-based online data conversion tools. Convert CSV, Excel, JSON, XML, YAML, & SQL files locally in your browser with 100% complete data privacy."
+title: "Convert Tools - File & Schema Transformers | DataFrog"
+description: "Browser-based data converters for Excel, XML, JSON, CSV, SQL, and schemas. Transform file formats, map structures, and generate code locally with zero data transmission."
 permalink: /convert/
 is_category: true
 category_name: "Convert"
@@ -12,21 +12,21 @@ category_name: "Convert"
   <!-- Header -->
   <header style="margin-bottom: 2.5rem; text-align: center;">
     <span style="font-size: 3rem; display: block; margin-bottom: 0.5rem;">🔄</span>
-    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Convert Tools</h1>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Data Conversion Tools</h1>
     <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6;">
-      Format transformers, file converters, structure mappers, and schema transcoders — processed 100% locally in your browser with complete privacy.
+      Format transformers, structure mappers, and schema generators — transform spreadsheets, markup trees, and datasets directly in your browser memory.
     </p>
 
     <!-- Search within Category -->
    <div style="max-width: 540px; margin: 0 auto 1rem; position: relative;">
-      <input type="text" id="category-search-input" placeholder="Search within Convert tools..." 
+      <input type="text" id="category-search-input" placeholder="Search converters by format, feature, or keyword..." 
              style="width: 100%; padding: 0.85rem 1rem 0.85rem 2.75rem; font-size: 0.95rem; border-radius: 10px; border: 1px solid #cbd5e1; background: #ffffff;">
       <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); opacity: 0.5;">🔍</span>
     </div>
 
     {% assign category_tools = site.data.converters %}
   <div style="font-size: 0.9rem; font-weight: 600; color: #0284c7; background: #f0f9ff; display: inline-block; padding: 0.35rem 1rem; border-radius: 9999px;">
-      Total Tools Available: <span id="tool-count-badge">{{ category_tools.size | default: 0 }}</span>
+      Available Converters: <span id="tool-count-badge">{{ category_tools.size | default: 0 }}</span>
     </div>
   </header>
 
@@ -63,18 +63,30 @@ category_name: "Convert"
 
   <!-- Category FAQ -->
   <section style="max-width: 850px; margin: 0 auto;">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem; text-align: center;">Data Conversion FAQ</h2>
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem; text-align: center;">Data Conversion Guide &amp; FAQ</h2>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem; cursor: pointer;">
-        <summary style="font-weight: 700; color: #0f172a;">What are Convert Tools?</summary>
+        <summary style="font-weight: 700; color: #0f172a;">What are DataFrog conversion tools?</summary>
         <p style="margin-top: 0.5rem; color: #475569; font-size: 0.95rem; line-height: 1.6;">
-          Convert tools transform structured datasets from one format to another (such as CSV to JSON, Excel to SQL, XML to YAML, or JSON to CSV) while preserving data types and hierarchy.
+          DataFrog conversion tools transform structured data between spreadsheet formats (XLSX, XLS), structured markup (XML), interchange standards (JSON, CSV, TXT), relational databases (SQL INSERTs &amp; DDL), and document formats (PDF, Word, SVG). Each tool runs entirely on your local machine.
+        </p>
+      </details>
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; color: #0f172a;">How does DataFrog handle hierarchical data when mapping to tabular formats?</summary>
+        <p style="margin-top: 0.5rem; color: #475569; font-size: 0.95rem; line-height: 1.6;">
+          When converting tree-structured formats like XML to tabular formats (Excel, CSV, or SQL), the converters automatically identify repeating record elements, extract tag attributes as discrete columns, and unroll nested values into clean column headers.
+        </p>
+      </details>
+      <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; color: #0f172a;">Are data types (numbers, dates, booleans) preserved?</summary>
+        <p style="margin-top: 0.5rem; color: #475569; font-size: 0.95rem; line-height: 1.6;">
+          Yes. Values are parsed with semantic type inference. Numbers and floating-point values remain numeric, boolean tokens become literal true/false flags, and ISO dates are formatted according to the target standard.
         </p>
       </details>
       <details style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem; cursor: pointer;">
         <summary style="font-weight: 700; color: #0f172a;">Is my data private during file conversion?</summary>
         <p style="margin-top: 0.5rem; color: #475569; font-size: 0.95rem; line-height: 1.6;">
-          Yes, 100% private. All conversions execute strictly inside your web browser using client-side JavaScript. Zero data or files are ever transmitted to cloud servers.
+          Yes, 100% private. All conversions execute strictly inside your web browser sandbox using client-side Web APIs and JavaScript libraries (such as SheetJS, pdfmake, and DOMParser). No files or data bytes are ever uploaded to any server.
         </p>
       </details>
     </div>

@@ -1,9 +1,9 @@
 ---
 layout: main
-title: "Excel to SQL – Convert XLSX / XLS to SQL INSERT Statements Online Free"
+title: "Excel to SQL Converter & Generator | DataFrog"
 short_name: "Excel to SQL"
-description: "Convert Excel to SQL online – transform XLSX or XLS files into SQL INSERT statements. Choose table name, batch size, and SQL dialect. 100% private, no uploads."
-keywords: "excel to sql, convert excel to sql, xlsx to sql, xls to sql, excel to insert statements, excel to sql converter online, free excel to sql, excel to sql generator"
+description: "Generates database-ready SQL CREATE TABLE definitions and batch INSERT statements directly from Excel (.xlsx and .xls) workbooks, with configurable SQL dialects, table names, and batch chunking."
+keywords: "excel to sql, xlsx to sql, spreadsheet to sql, sql insert generator, create table excel, database migration"
 category: "Excel"
 permalink: /xlsx-to-sql-converter
 ---
@@ -19,15 +19,15 @@ permalink: /xlsx-to-sql-converter
       <span>🗄️</span> Client‑Side Excel to SQL Engine
     </div>
     <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
-      Excel to SQL – Generate INSERT Statements from Spreadsheets
+      Excel to SQL Generator &amp; Converter
     </h1>
     <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
-      Turn any Excel file (<strong>.xlsx</strong> or <strong>.xls</strong>) into SQL INSERT statements. Choose your table name, column mapping, and batch size. Perfect for database seeding, data migration, and ETL pipelines. No signup, no limits, 100% private.
+      Convert Excel spreadsheets (<strong>.xlsx</strong> and <strong>.xls</strong>) into database scripts. Generate schema DDL and batched <code>INSERT INTO</code> queries tailored for PostgreSQL, MySQL, SQLite, and SQL Server.
     </p>
 
     <!-- Privacy Banner -->
     <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
-      <span>🔒 100% Private – Your Excel file never leaves your device. No server uploads. No tracking.</span>
+      <span>🔒 100% Client-Side – SQL compilation runs in your browser. No database credentials or table rows are sent to remote servers.</span>
     </div>
   </div>
 
@@ -198,50 +198,43 @@ permalink: /xlsx-to-sql-converter
     </div>
   </div>
 
-  <!-- Educational Article (SEO & GEO Optimised) -->
+  <!-- Tool Definition & Technical Reference -->
   <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Why Convert Excel to SQL?</h2>
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Excel to SQL Converter Technical Guide</h2>
     <p>
-      Converting Excel spreadsheets to SQL is essential for database migration, data seeding, and ETL (Extract, Transform, Load) pipelines. Whether you're populating a development database, migrating data to production, or sharing structured data with a development team, SQL INSERT statements are the standard way to load data into relational databases. This tool transforms your <strong>.xlsx</strong> or <strong>.xls</strong> files into ready‑to‑run SQL – perfect for PostgreSQL, MySQL, SQLite, and SQL Server.
+      The Excel to SQL converter parses spreadsheet rows into structured relational database commands. When migrating business records, seeding local development environments, or loading bulk data into staging databases where direct GUI imports are restricted, standard SQL scripts provide a universal, auditable data transfer format.
     </p>
 
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">How to Use the Excel to SQL Converter</h3>
-    <ol style="padding-left: 1.5rem;">
-      <li><strong>Upload</strong> – drag &amp; drop your Excel file or click to browse.</li>
-      <li><strong>Configure</strong> – set the table name, choose your SQL dialect, batch size, and quote style.</li>
-      <li><strong>Options</strong> – toggle headers, column name quoting, DROP TABLE, and CREATE TABLE statements.</li>
-      <li><strong>Generate</strong> – click <kbd>Generate SQL</kbd> to produce the INSERT statements.</li>
-      <li><strong>Copy or Download</strong> – copy the SQL to your clipboard or download it as a <code>.sql</code> file.</li>
-    </ol>
-    <p>
-      The tool automatically maps Excel column names to SQL column names, handles data types (strings, numbers, dates), and escapes special characters. Large datasets are batched into multiple INSERT statements for efficiency.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Privacy &amp; Security</h3>
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">SQL Dialect Support &amp; Identifier Escaping</h3>
     <ul style="padding-left: 1.5rem;">
-      <li>🔒 All processing happens in your browser – no files are uploaded.</li>
-      <li>🚫 No server interaction – everything runs locally using SheetJS.</li>
-      <li>🕵️ No tracking, no logging – your data stays yours.</li>
-      <li>💼 Safe for sensitive data – perfect for financial or customer spreadsheets.</li>
+      <li><strong>PostgreSQL:</strong> Uses standard double quotes for identifiers (<code>"table_name"</code>, <code>"column_name"</code>) and dollar-quoted strings or standard single quotes.</li>
+      <li><strong>MySQL / MariaDB:</strong> Quotes table and column identifiers with backticks (<code>`table_name`</code>) and escapes internal single quotes with <code>\'</code>.</li>
+      <li><strong>SQLite:</strong> Uses ANSI standard quoting (<code>"column"</code>) and handles typeless column declarations cleanly.</li>
+      <li><strong>Microsoft SQL Server (T-SQL):</strong> Wraps table and column names with square brackets (<code>[table_name]</code>) and generates compatible multi-row values syntax.</li>
     </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Batching &amp; Query Optimization</h3>
+    <p>
+      Executing individual <code>INSERT INTO table VALUES (...)</code> queries for each row incurs massive transaction overhead and can trigger query timeouts in database engines. The <strong>Batch Size</strong> option allows you to group up to 1,000 rows into a single multi-row statement:
+    </p>
+    <pre style="background: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 8px; font-size: 0.85rem; overflow-x: auto;"><code>INSERT INTO "customers" ("id", "name", "country") VALUES
+  (1, 'Alice Smith', 'US'),
+  (2, 'Bob Jones', 'CA'),
+  (3, 'Charlie Brown', 'UK');</code></pre>
 
     <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
     <div style="display:flex; flex-direction:column; gap:1rem;">
       <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Which SQL dialects are supported?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">MySQL, PostgreSQL, SQLite, and SQL Server. The tool adapts quoting, escaping, and syntax accordingly.</p>
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">How does the tool sanitize single quotes in string values?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Any cell containing single quotes (such as <em>O'Connor</em> or <em>McDonald's</em>) has its single quotes automatically doubled (<code>''</code>) according to ANSI SQL standards, preventing SQL injection issues and query syntax errors.</p>
       </details>
       <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Does this tool support multiple sheets?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Only the <strong>first sheet</strong> is converted. You can select a different sheet from the dropdown after uploading.</p>
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">How are empty Excel cells mapped in SQL?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Blank cells are converted to literal <code>NULL</code> tokens rather than empty string literals (<code>''</code>), allowing database foreign keys and default constraints to behave as intended.</p>
       </details>
       <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">How are data types handled?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Numbers become numeric literals, strings are quoted, and empty cells become NULL. Dates are converted to string literals in standard format.</p>
-      </details>
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">What is batch size?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Batch size controls how many rows are included in each INSERT statement. Larger batches produce fewer statements and can run faster in some databases.</p>
+        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Can I generate a CREATE TABLE statement as well?</summary>
+        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Yes. Check the "Include CREATE TABLE" option to automatically infer column types (VARCHAR, NUMERIC, INT, DATE) based on the first several rows and prepend a DDL table creation block.</p>
       </details>
     </div>
   </article>
