@@ -1,3 +1,23 @@
+- title: "PDF to Base64"
+  short_name: "PDF to Base64"
+  url: "/pdf-to-base64"
+  category: "PDF"
+  description: "Encodes binary PDF files into RFC 4648 standard Base64, URL-safe Base64, or Data URI strings for embedding in JSON APIs, XML payloads, email MIME bodies, and HTML data attributes."
+  keywords: ["pdf to base64", "encode pdf", "pdf base64 encoder", "data uri pdf", "pdf to data url", "base64 encode pdf"]
+  icon: "🔐"
+  date: "2026-10-14"
+  updated: "2026-10-14"
+
+- title: "Base64 to PDF"
+  short_name: "Base64 to PDF"
+  url: "/base64-to-pdf"
+  category: "PDF"
+  description: "Decodes Base64 encoded strings and Data URIs into downloadable PDF documents with instant in-browser preview, integrity checks, and local binary reconstruction."
+  keywords: ["base64", "pdf", "base64-to-pdf", "data-uri", "decode-pdf", "pdf-preview", "binary-decoder"]
+  icon: "📄"
+  date: "2026-10-14"
+  updated: "2026-10-14"
+
 - title: "Excel to SQL"
   short_name: "Excel to SQL"
   url: "/xlsx-to-sql-converter"

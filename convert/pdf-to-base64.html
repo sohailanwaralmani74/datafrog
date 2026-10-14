@@ -1,0 +1,491 @@
+---
+layout: main
+title: "PDF to Base64 Encoder | DataFrog"
+short_name: "PDF to Base64"
+description: "Encode binary PDF files into RFC 4648 standard Base64, URL-safe Base64, or Data URI strings for embedding in JSON APIs, XML payloads, email MIME bodies, and HTML data attributes."
+keywords: "pdf to base64, encode pdf base64, pdf to data uri, base64 encode pdf online, pdf binary encoder"
+category: "PDF"
+author_id: "sohail-anwar"
+permalink: /pdf-to-base64
+---
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>🔐</span> Client‑Side PDF to Base64 Encoder
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      PDF to Base64 Encoder
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Encode any PDF document into RFC 4648 Base64, URL-safe Base64, or a <code>data:application/pdf;base64,...</code> Data URI string. Export for JSON API payloads, SOAP XML, email MIME attachments, or HTML embedding.
+    </p>
+
+    <!-- Privacy Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Client-Side – Binary encoding runs in your browser memory. No PDF bytes leave your device.</span>
+    </div>
+  </div>
+
+  <!-- Drop Zone -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2.5rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+      <div style="font-size: 2.75rem; margin-bottom: 0.75rem;">📄</div>
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+        Drag &amp; Drop Your PDF Here
+      </h3>
+      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+        Supports <strong>.pdf</strong> files — single or multi-page, encrypted, or scanned
+      </p>
+      <label style="display: inline-block; padding: 0.65rem 1.5rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer;">
+        Browse PDF File
+        <input type="file" id="fileInput" accept=".pdf,application/pdf" style="display: none;" onchange="handleFileSelect(event)">
+      </label>
+    </div>
+
+    <!-- Actions Row -->
+    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a;">Try a sample:</span>
+        <button type="button" onclick="loadSamplePdf()" style="padding: 0.4rem 0.85rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          📄 Load Sample PDF
+        </button>
+      </div>
+      <button type="button" onclick="resetTool()" style="padding: 0.4rem 0.85rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+        Clear
+      </button>
+    </div>
+  </div>
+
+  <!-- Output Options -->
+  <div id="optionsPanel" style="display: none; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; font-size: 0.875rem;">
+
+      <!-- File Meta -->
+      <div style="display: flex; align-items: center; gap: 0.65rem; min-width: 200px;">
+        <span style="font-size: 1.5rem;">📄</span>
+        <div>
+          <strong id="metaFilename" style="font-size: 0.95rem; color: #0f172a; display: block;">document.pdf</strong>
+          <span id="metaFilesize" style="color: #64748b; font-size: 0.8rem;">0 KB</span>
+          <span id="metaPages" style="color: #64748b; font-size: 0.8rem; margin-left: 0.5rem;"></span>
+        </div>
+      </div>
+
+      <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem;">
+        <!-- Output Format -->
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <label for="formatSelect" style="font-weight: 700; color: #0f172a; white-space: nowrap;">Output Format:</label>
+          <select id="formatSelect" onchange="encodeFile()" style="padding: 0.4rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.875rem; background: #ffffff; color: #0f172a;">
+            <option value="standard">Standard Base64 (RFC 4648)</option>
+            <option value="urlsafe">URL-Safe Base64 (- and _)</option>
+            <option value="datauri">Data URI (data:application/pdf;base64,...)</option>
+          </select>
+        </div>
+
+        <!-- Line Wrap -->
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <label for="wrapSelect" style="font-weight: 700; color: #0f172a; white-space: nowrap;">Line Wrap:</label>
+          <select id="wrapSelect" onchange="encodeFile()" style="padding: 0.4rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.875rem; background: #ffffff; color: #0f172a;">
+            <option value="none">None (Continuous)</option>
+            <option value="76">76 chars (MIME standard)</option>
+            <option value="64">64 chars (PEM standard)</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Result Area -->
+  <div id="resultArea" style="display: none;">
+
+    <!-- Stats Bar -->
+    <div style="background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.5rem;">✅</span>
+          <div>
+            <div style="font-weight: 800; color: #0f172a; font-size: 1rem;">Encoding Complete</div>
+            <div style="font-size: 0.8rem; color: #64748b;">PDF binary successfully encoded to Base64</div>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-left: auto;">
+          <div style="text-align: center;">
+            <div id="statOriginal" style="font-size: 1.2rem; font-weight: 800; color: #0f172a;">0 KB</div>
+            <div style="font-size: 0.75rem; color: #64748b;">Original PDF</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 1.2rem; font-weight: 800; color: #0f172a;">→</div>
+          </div>
+          <div style="text-align: center;">
+            <div id="statEncoded" style="font-size: 1.2rem; font-weight: 800; color: #2563eb;">0 KB</div>
+            <div style="font-size: 0.75rem; color: #64748b;">Encoded Size</div>
+          </div>
+          <div style="text-align: center;">
+            <div id="statRatio" style="font-size: 1.2rem; font-weight: 800; color: #7c3aed;">+33%</div>
+            <div style="font-size: 0.75rem; color: #64748b;">Size Overhead</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Output Viewer -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+
+      <!-- Toolbar -->
+      <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem;">
+        <span id="outputLabel" style="font-weight: 700; color: #0f172a; font-size: 0.95rem;">Base64 Output</span>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button onclick="copyOutput()" style="padding: 0.5rem 1.1rem; background: #0f172a; color: #ffffff; border: none; border-radius: 7px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>📋</span> Copy
+          </button>
+          <button onclick="downloadTxt()" style="padding: 0.5rem 1.1rem; background: #2563eb; color: #ffffff; border: none; border-radius: 7px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>💾</span> Download .txt
+          </button>
+          <button onclick="downloadB64()" style="padding: 0.5rem 1.1rem; background: #7c3aed; color: #ffffff; border: none; border-radius: 7px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>💾</span> Download .b64
+          </button>
+        </div>
+      </div>
+
+      <!-- Output Textarea -->
+      <textarea id="base64Output" readonly
+        style="width: 100%; min-height: 320px; max-height: 520px; background: #0f172a; color: #f8fafc; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.82rem; padding: 1.25rem; border: none; resize: vertical; outline: none; line-height: 1.6; box-sizing: border-box; word-break: break-all;"></textarea>
+
+      <!-- Footer metrics -->
+      <div style="padding: 0.75rem 1.25rem; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.8rem; color: #64748b;">
+        <span>Characters: <strong id="charCountStat" style="color: #0f172a;">0</strong></span>
+        <span>Lines: <strong id="lineCountStat" style="color: #0f172a;">1</strong></span>
+        <span>PDF Version: <strong id="pdfVersionStat" style="color: #0f172a;">—</strong></span>
+      </div>
+    </div>
+
+    <!-- Snippet Examples -->
+    <div id="snippetSection" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;">
+      <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem;">Integration Snippets</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+        <div>
+          <div style="font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em;">JSON API Payload</div>
+          <pre id="snippetJson" style="background: #0f172a; color: #a5f3fc; font-family: ui-monospace, Consolas, monospace; font-size: 0.8rem; padding: 1rem; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 0;"></pre>
+        </div>
+
+        <div>
+          <div style="font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em;">HTML &lt;embed&gt; / &lt;iframe&gt;</div>
+          <pre id="snippetHtml" style="background: #0f172a; color: #bbf7d0; font-family: ui-monospace, Consolas, monospace; font-size: 0.8rem; padding: 1rem; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 0;"></pre>
+        </div>
+
+        <div>
+          <div style="font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em;">cURL — POST to API</div>
+          <pre id="snippetCurl" style="background: #0f172a; color: #fde68a; font-family: ui-monospace, Consolas, monospace; font-size: 0.8rem; padding: 1rem; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 0;"></pre>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tool Definition & Technical Reference -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">PDF to Base64 Encoder Technical Reference</h2>
+    <p>
+      Binary PDF documents cannot be transmitted safely inside JSON fields, XML elements, or email message bodies without encoding because those protocols are designed for printable text. Base64 encoding converts each group of 3 binary bytes (24 bits) into 4 ASCII characters drawn from a 64-symbol alphabet, producing a text-safe representation that survives transit through any text-only channel at approximately 33% size overhead.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Encoding Variants</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>Standard Base64 (RFC 4648 §4):</strong> Uses <code>+</code> and <code>/</code> as the 62nd and 63rd characters with <code>=</code> padding. Compatible with <code>atob()</code> / <code>btoa()</code> in browsers, Java's <code>Base64.getEncoder()</code>, and Python's <code>base64.b64encode()</code>.</li>
+      <li><strong>URL-Safe Base64 (RFC 4648 §5):</strong> Replaces <code>+</code> with <code>-</code> and <code>/</code> with <code>_</code> so the encoded string is safe in query parameters, S3 object keys, JWT tokens, and file names without percent-encoding.</li>
+      <li><strong>Data URI:</strong> Prefixes the Base64 payload with <code>data:application/pdf;base64,</code> — the complete string can be assigned directly to an <code>&lt;iframe src&gt;</code>, <code>&lt;embed src&gt;</code>, or <code>window.open()</code> call to display the PDF inline in any browser.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Line Wrapping Modes</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>None (Continuous):</strong> Single-line output required by JSON values, JWT payloads, and most REST API fields.</li>
+      <li><strong>76-character wrap (MIME):</strong> Required by RFC 2045 for email attachment encoding (<code>Content-Transfer-Encoding: base64</code>) and multipart MIME bodies.</li>
+      <li><strong>64-character wrap (PEM):</strong> Required by RFC 7468 for PEM certificate and key formats (<code>-----BEGIN CERTIFICATE-----</code> blocks).</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Why is the encoded output larger than the original PDF?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Base64 maps every 3 input bytes to 4 output characters (4/3 expansion), resulting in roughly 33% overhead. A 1 MB PDF becomes approximately 1.37 MB as a Base64 string. Line wrapping adds additional newline characters.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I embed the Data URI directly into an HTML page?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. Use the Data URI format and assign it to <code>&lt;iframe src="data:application/pdf;base64,..."&gt;</code> or <code>&lt;embed src="data:application/pdf;base64,..." type="application/pdf"&gt;</code>. Note: most browsers limit Data URI size for inline elements to around 2–64 MB depending on the browser engine and memory.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does encoding work for large PDFs?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          The file is read directly into a browser <code>ArrayBuffer</code> via the <code>FileReader</code> API and converted to a Base64 string in a single pass using <code>btoa()</code>. For very large files (above ~50 MB), this runs in the browser's main thread and may take a few seconds depending on device performance.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is the encoded PDF secure for transmission over HTTPS?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Base64 is an encoding scheme, not encryption. The content is fully reversible by anyone who receives the string. For secure transmission, combine Base64 encoding with TLS (HTTPS) transport, JWT signing, or AES payload encryption before embedding.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  let currentFileName = 'document';
+  let rawBytes = null;
+  let rawB64Standard = '';
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const optionsPanel = document.getElementById('optionsPanel');
+  const resultArea = document.getElementById('resultArea');
+  const parseError = document.getElementById('parseError');
+  const errorMessage = document.getElementById('errorMessage');
+  const base64Output = document.getElementById('base64Output');
+  const metaFilename = document.getElementById('metaFilename');
+  const metaFilesize = document.getElementById('metaFilesize');
+  const formatSelect = document.getElementById('formatSelect');
+  const wrapSelect = document.getElementById('wrapSelect');
+
+  // Drag and drop
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(evt => {
+    dropzone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); }, false);
+    document.body.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); }, false);
+  });
+
+  ['dragenter', 'dragover'].forEach(evt => {
+    dropzone.addEventListener(evt, () => {
+      dropzone.style.borderColor = '#059669';
+      dropzone.style.background = '#f0fdf4';
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(evt => {
+    dropzone.addEventListener(evt, () => {
+      dropzone.style.borderColor = '#cbd5e1';
+      dropzone.style.background = '#f8fafc';
+    });
+  });
+
+  dropzone.addEventListener('drop', e => {
+    const files = e.dataTransfer.files;
+    if (files.length > 0) processFile(files[0]);
+  });
+
+  window.handleFileSelect = function(e) {
+    const files = e.target.files;
+    if (files.length > 0) processFile(files[0]);
+  };
+
+  function processFile(file) {
+    if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+      showError('Please upload a valid PDF file (.pdf).');
+      return;
+    }
+    parseError.style.display = 'none';
+    currentFileName = file.name.replace(/\.pdf$/i, '');
+
+    // Display file meta
+    metaFilename.textContent = file.name;
+    const kb = (file.size / 1024).toFixed(1);
+    const mb = (file.size / 1048576).toFixed(2);
+    metaFilesize.textContent = file.size >= 1048576 ? mb + ' MB' : kb + ' KB';
+
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      rawBytes = evt.target.result;
+      detectPdfVersion(rawBytes);
+      rawB64Standard = arrayBufferToBase64(rawBytes);
+      optionsPanel.style.display = 'block';
+      encodeFile();
+    };
+    reader.onerror = function() {
+      showError('Could not read the file. Please try again.');
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  function detectPdfVersion(buffer) {
+    const bytes = new Uint8Array(buffer).slice(0, 8);
+    let header = '';
+    for (let i = 0; i < bytes.length; i++) {
+      header += String.fromCharCode(bytes[i]);
+      if (bytes[i] === 0x0A || bytes[i] === 0x0D) break;
+    }
+    document.getElementById('pdfVersionStat').textContent = header.startsWith('%PDF-') ? header.replace(/[\r\n]/g, '') : 'Unknown';
+  }
+
+  function arrayBufferToBase64(buffer) {
+    const bytes = new Uint8Array(buffer);
+    let binary = '';
+    const chunkSize = 8192;
+    for (let i = 0; i < bytes.length; i += chunkSize) {
+      binary += String.fromCharCode(...bytes.subarray(i, Math.min(i + chunkSize, bytes.length)));
+    }
+    return btoa(binary);
+  }
+
+  function applyWrap(b64, wrapLen) {
+    if (wrapLen === 'none') return b64;
+    const n = parseInt(wrapLen, 10);
+    const chunks = [];
+    for (let i = 0; i < b64.length; i += n) {
+      chunks.push(b64.slice(i, i + n));
+    }
+    return chunks.join('\n');
+  }
+
+  window.encodeFile = function() {
+    if (!rawB64Standard) return;
+
+    const format = formatSelect.value;
+    const wrap = wrapSelect.value;
+
+    let output = rawB64Standard;
+
+    // Convert to URL-safe if needed
+    if (format === 'urlsafe') {
+      output = output.replace(/\+/g, '-').replace(/\//g, '_');
+    }
+
+    // Apply line wrap (not for datauri)
+    if (format !== 'datauri') {
+      output = applyWrap(output, wrap);
+    }
+
+    // Prepend Data URI header
+    if (format === 'datauri') {
+      output = 'data:application/pdf;base64,' + output;
+    }
+
+    base64Output.value = output;
+
+    // Update stats
+    const origBytes = rawBytes.byteLength;
+    const encLen = output.length;
+    document.getElementById('statOriginal').textContent = formatSize(origBytes);
+    document.getElementById('statEncoded').textContent = formatSize(encLen);
+    const overhead = (((encLen / origBytes) - 1) * 100).toFixed(1);
+    document.getElementById('statRatio').textContent = '+' + overhead + '%';
+
+    // Character & line counts
+    document.getElementById('charCountStat').textContent = encLen.toLocaleString();
+    const lines = output.split('\n').length;
+    document.getElementById('lineCountStat').textContent = lines.toLocaleString();
+
+    // Output label
+    const labels = {
+      standard: 'Base64 Output — Standard (RFC 4648)',
+      urlsafe: 'Base64 Output — URL-Safe (RFC 4648 §5)',
+      datauri: 'Base64 Output — Data URI'
+    };
+    document.getElementById('outputLabel').textContent = labels[format];
+
+    // Integration snippets
+    const b64Short = rawB64Standard.slice(0, 40) + '...';
+    const dataUri = 'data:application/pdf;base64,' + rawB64Standard.slice(0, 40) + '...';
+    document.getElementById('snippetJson').textContent =
+      '{\n  "filename": "' + (currentFileName || 'document') + '.pdf",\n  "content": "' + b64Short + '"\n}';
+    document.getElementById('snippetHtml').textContent =
+      '<iframe\n  src="' + dataUri + '"\n  type="application/pdf"\n  width="100%"\n  height="800px"\n></iframe>';
+    document.getElementById('snippetCurl').textContent =
+      'curl -X POST https://api.example.com/upload \\\n  -H "Content-Type: application/json" \\\n  -d \'{"pdf": "' + b64Short + '"}\'';
+
+    resultArea.style.display = 'block';
+    resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  function formatSize(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1048576).toFixed(2) + ' MB';
+  }
+
+  function showError(msg) {
+    errorMessage.textContent = msg;
+    parseError.style.display = 'block';
+  }
+
+  window.loadSamplePdf = function() {
+    // Minimal valid 1-page PDF as binary
+    const b64Sample = 'JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvQ29udGVudHMgNCAwIFIgL1Jlc291cmNlcyA8PCAvRm9udCA8PCAvRjEgNSAwIFIgPj4gPj4gPj4KZW5kb2JqCjQgMCBvYmoKPDwgL0xlbmd0aCA1NiA+PgpzdHJlYW0KQlQKL0YxIDI0IFRmCjcyIDcwMCBUZAooRGF0YUZyb2cgUERGIHRvIEJhc2U2NCBTYW1wbGUpIFRqCkVUCmVuZHN0cmVhbQplbmRvYmoKNSAwIG9iago8PCAvVHlwZSAvRm9udCAvU3VidHlwZSAvVHlwZTEgL0Jhc2VGb250IC9IZWx2ZXRpY2EgPj4KZW5kb2JqCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDU4IDAwMDAwIG4gCjAwMDAwMDAxMTUgMDAwMDAgbiAKMDAwMDAwMDIyOSAwMDAwMCBuIAowMDAwMDAwMzM2IDAwMDAwIG4gCnRyYWlsZXIKPDwgL1NpemUgNiAvUm9vdCAxIDAgUiA+PgpzdGFydHhyZWYKNDE3CiUlRU9G';
+
+    // Reconstruct as ArrayBuffer
+    const binaryStr = atob(b64Sample);
+    const buf = new ArrayBuffer(binaryStr.length);
+    const view = new Uint8Array(buf);
+    for (let i = 0; i < binaryStr.length; i++) {
+      view[i] = binaryStr.charCodeAt(i);
+    }
+
+    currentFileName = 'sample-document';
+    rawBytes = buf;
+    rawB64Standard = b64Sample;
+
+    metaFilename.textContent = 'sample-document.pdf';
+    metaFilesize.textContent = (binaryStr.length / 1024).toFixed(1) + ' KB';
+    document.getElementById('pdfVersionStat').textContent = '%PDF-1.4';
+    optionsPanel.style.display = 'block';
+    encodeFile();
+  };
+
+  window.copyOutput = function() {
+    const text = base64Output.value;
+    if (!text) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('[onclick="copyOutput()"]');
+        const original = btn.innerHTML;
+        btn.innerHTML = '✅ Copied!';
+        setTimeout(() => { btn.innerHTML = original; }, 2000);
+      }).catch(() => {
+        base64Output.select();
+        document.execCommand('copy');
+      });
+    } else {
+      base64Output.select();
+      document.execCommand('copy');
+    }
+  };
+
+  function downloadAs(ext) {
+    const text = base64Output.value;
+    if (!text) return;
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (currentFileName || 'document') + '-base64.' + ext;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  window.downloadTxt = () => downloadAs('txt');
+  window.downloadB64 = () => downloadAs('b64');
+
+  window.resetTool = function() {
+    fileInput.value = '';
+    rawBytes = null;
+    rawB64Standard = '';
+    optionsPanel.style.display = 'none';
+    resultArea.style.display = 'none';
+    parseError.style.display = 'none';
+    base64Output.value = '';
+  };
+</script>
