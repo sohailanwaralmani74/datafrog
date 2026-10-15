@@ -531,5 +531,15 @@
   icon: "🔒"
   featured: true
   date: "2026-08-25"
-  updated: "2026-08-25"  
+  updated: "2026-08-25"
 
+- title: "UUID Generator"
+  short_name: "UUID Generator"
+  url: "/uuid-generator"
+  category: "Generate"
+  description: "Generate and copy UUIDs online with selectable versions, including random, time-based, name-based, and time-ordered identifiers directly in your browser."
+  keywords: ["UUID generator", "UUID generator online", "GUID generator", "random UUID", "UUID v4 generator", "UUID v7 generator", "UUID v1", "UUID v3", "UUID v5", "UUID v6", "UUID v8"]
+  icon: "🆔"
+  featured: true
+  date: "2026-10-15"
+  updated: "2026-10-15"
