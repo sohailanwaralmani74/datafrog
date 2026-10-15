@@ -16,7 +16,7 @@ is_homepage: true
     </span>
     
     <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem; color: #0f172a;">
-      Free Online Data Tools for Inspecting, Analyzing, Converting & Cleaning Files
+      Free Online Data Tools for Inspecting, Analyzing, Converting & Cleaning
     </h1>
     
     <p style="font-size: 1.15rem; color: #475569; max-width: 780px; margin: 0 auto 2.25rem; line-height: 1.6;">
@@ -90,7 +90,7 @@ is_homepage: true
 
       <div style="display: flex; flex-direction: column; gap: 1rem;">
         {% assign sorted_tools = site.data.tools | sort: 'date' | reverse %}
-        {% for tool in sorted_tools limit:2 %}
+        {% for tool in sorted_tools limit:5 %}
           <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.15rem; display: flex; flex-direction: column; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
               <span style="font-size: 1.3rem;">{{ tool.icon | default: "⚡" }}</span>
@@ -123,7 +123,7 @@ is_homepage: true
 
       <div style="display: flex; flex-direction: column; gap: 1rem;">
         {% assign sorted_converters = site.data.converters | sort: 'date' | reverse %}
-        {% for tool in sorted_converters limit:2 %}
+        {% for tool in sorted_converters limit:4 %}
           <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.15rem; display: flex; flex-direction: column; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
               <span style="font-size: 1.3rem;">{{ tool.icon | default: "🔄" }}</span>
@@ -148,37 +148,6 @@ is_homepage: true
     </section>
 
     <!-- 3. RECENTLY UPDATED (On Left Column) -->
-    <section id="recently-updated">
-      <div style="margin-bottom: 1.25rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
-        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.2rem;">Recently Updated</h2>
-        <p style="color: #475569; font-size: 0.875rem;">Tools with recent feature and performance updates</p>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
-        {% assign updated_tools = site.data.tools | sort: 'updated' | reverse %}
-        {% for tool in updated_tools limit:3 %}
-          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.15rem; display: flex; flex-direction: column; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
-              <span style="font-size: 1.3rem;">{{ tool.icon | default: "🔄" }}</span>
-              <span style="font-size: 0.7rem; color: #64748b;">
-                Updated: {{ tool.updated }}
-              </span>
-            </div>
-            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">
-              <a href="{{ tool.url }}" style="color: #0f172a; text-decoration: none;">{{ tool.title }}</a>
-            </h3>
-            <p style="color: #64748b; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.75rem; flex-grow: 1;">
-              {{ tool.description }}
-            </p>
-            <a href="{{ tool.url }}" style="font-size: 0.85rem; font-weight: 600; color: #2563eb; text-decoration: none;">Launch Tool →</a>
-          </div>
-        {% else %}
-          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; text-align: center;">
-            <p style="color: #64748b; font-style: italic; font-size: 0.9rem; margin: 0;">Recently updated tools will display here automatically.</p>
-          </div>
-        {% endfor %}
-      </div>
-    </section>
 
   </div>
 
@@ -190,12 +159,31 @@ is_homepage: true
     <!-- TOOL CATEGORIES (6 Category Boxes Grid) -->
     <section id="categories-sidebar">
       <div style="margin-bottom: 1.25rem; border-bottom: 2px solid #2563eb; padding-bottom: 0.5rem;">
-        <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 0.2rem;">Data Intelligence Categories</h2>
-        <p style="font-size: 0.875rem; color: #64748b;">Select a category to view all tools, profilers, and visualizers</p>
+        <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 0.2rem;">Data Converters And Inspectors</h2>
+        <p style="font-size: 0.875rem; color: #64748b;">Select a category to view all tools, profilers, Converters, and visualizers</p>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-        
+        <!-- Convert --> 
+         {% assign inspect_tools = site.data.converters %}
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.85rem;">🔍</span>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: #0f172a;">Convert</h3>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.65rem; background: #eff6ff; color: #2563eb; border-radius: 9999px;">
+              {{ inspect_tools.size | default: 0 }} Tools
+            </span>
+          </div>
+          <p style="color: #475569; font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Explore our file format converters and find the right tool for any conversion. Turn Excel spreadsheets into PDFs, transform XML into DOM structures, and more. With a wide range of converters available, you can easily switch between the formats you need. Fast, accurate, and simple to use.          </p>
+          <div style="text-align: right;">
+            <a href="/inspect/" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
+              Check More Converters →
+            </a>
+          </div>
+        </div>         
         <!-- Inspect -->
         {% assign inspect_tools = site.data.tools | where: "category", "Inspect" %}
         <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03); width: 100%; box-sizing: border-box;">
@@ -213,7 +201,7 @@ is_homepage: true
           </p>
           <div style="text-align: right;">
             <a href="/inspect/" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
-              Open Inspect Category →
+              Explore Inspect Data Tools →
             </a>
           </div>
         </div>
@@ -235,7 +223,7 @@ is_homepage: true
           </p>
           <div style="text-align: right;">
             <a href="/analyze/" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
-              Open Analyze Category →
+              Analyze Data Deeply →
             </a>
           </div>
         </div>
@@ -257,7 +245,7 @@ is_homepage: true
           </p>
           <div style="text-align: right;">
             <a href="/validate/" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
-              Open Validate Category →
+              Validate Data Here →
             </a>
           </div>
         </div>
@@ -279,7 +267,7 @@ is_homepage: true
           </p>
           <div style="text-align: right;">
             <a href="/compare/" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
-              Open Compare Category →
+              Compare Your Data →
             </a>
           </div>
         </div>
@@ -301,7 +289,7 @@ is_homepage: true
           </p>
           <div style="text-align: right;">
             <a href="/clean/" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
-              Open Clean Category →
+              Lets Clean Files →
             </a>
           </div>
         </div>
@@ -323,7 +311,7 @@ is_homepage: true
           </p>
           <div style="text-align: right;">
             <a href="/generate/" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
-              Open Generate Category →
+             Want To Generate Data →
             </a>
           </div>
         </div>
@@ -345,7 +333,7 @@ is_homepage: true
           </p>
           <div style="text-align: right;">
             <a href="/visualize/" style="display: inline-block; padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.875rem;">
-              Open Visualize Category →
+              Visualize Data Now →
             </a>
           </div>
         </div>
