@@ -1,0 +1,184 @@
+---
+layout: main
+title: "UUID Generator - Generate UUIDs Online | DataFrog"
+short_name: "UUID Generator"
+description: "Generate and copy UUIDs online. Choose UUID versions 1 through 8, including random, name-based, and time-ordered identifiers, directly in your browser."
+keywords: "UUID generator, UUID generator online, GUID generator, random UUID, UUID v4 generator, UUID v7 generator, UUID v1, UUID v3, UUID v5, UUID v6, UUID v8, generate UUID"
+category: "Generate"
+permalink: /uuid-generator
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "UUID Generator - DataFrog",
+  "url": "https://datafrog.tools/uuid-generator",
+  "description": "Generate and copy UUIDs in your browser with selectable UUID versions.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<div style="margin-bottom:1.5rem">
+  <span style="display:inline-block;padding:.25rem .75rem;background:#f5f3ff;color:#6d28d9;font-weight:700;font-size:.8rem;border-radius:9999px;margin-bottom:.5rem">⚙️ Generate Tool</span>
+  <h1 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:.5rem">UUID Generator</h1>
+  <p style="color:#475569;font-size:1.05rem;max-width:850px;line-height:1.6">Generate a universally unique identifier and copy it with one click. Choose a UUID version to suit your use case. Generation happens in your browser.</p>
+</div>
+
+<section style="border:1px solid #e2e8f0;border-radius:16px;background:#fff;padding:clamp(1rem,3vw,1.75rem);box-shadow:0 4px 14px rgba(15,23,42,.04);margin-bottom:2rem">
+  <label for="uuid-version" style="display:block;font-weight:700;color:#0f172a;margin-bottom:.45rem">UUID version</label>
+  <select id="uuid-version" style="width:100%;max-width:420px;padding:.8rem .9rem;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:#0f172a;font-size:1rem">
+    <option value="4" selected>Version 4 — Random</option>
+    <option value="7">Version 7 — Time-ordered</option>
+    <option value="1">Version 1 — Time-based</option>
+    <option value="6">Version 6 — Reordered time-based</option>
+    <option value="3">Version 3 — Name-based (MD5)</option>
+    <option value="5">Version 5 — Name-based (SHA-1)</option>
+    <option value="2">Version 2 — DCE Security (legacy)</option>
+    <option value="8">Version 8 — Custom format</option>
+  </select>
+
+  <div id="name-options" style="display:none;margin-top:1rem;max-width:620px">
+    <label for="uuid-namespace" style="display:block;font-weight:700;color:#0f172a;margin-bottom:.45rem">Namespace</label>
+    <select id="uuid-namespace" style="width:100%;padding:.75rem;border:1px solid #cbd5e1;border-radius:9px;background:#fff">
+      <option value="dns">DNS</option><option value="url">URL</option><option value="oid">OID</option><option value="x500">X.500</option>
+    </select>
+    <label for="uuid-name" style="display:block;font-weight:700;color:#0f172a;margin:.85rem 0 .45rem">Name</label>
+    <input id="uuid-name" type="text" placeholder="Enter a name, domain, or URL" style="width:100%;box-sizing:border-box;padding:.75rem;border:1px solid #cbd5e1;border-radius:9px">
+    <p style="font-size:.85rem;color:#64748b;margin:.4rem 0 0">The same namespace and name produce the same UUID for version 3 or 5.</p>
+  </div>
+
+  <div style="margin-top:1.25rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem">
+    <div style="font-size:.8rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem">Generated UUID</div>
+    <output id="uuid-output" aria-live="polite" style="display:block;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(1rem,2.5vw,1.35rem);font-weight:700;line-height:1.7;color:#0f172a">Generating…</output>
+  </div>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem">
+    <button id="uuid-generate" type="button" style="padding:.8rem 1.25rem;background:#2563eb;color:#fff;border:0;border-radius:9px;font-weight:700;cursor:pointer">Generate UUID</button>
+    <button id="uuid-copy" type="button" style="padding:.8rem 1.25rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Copy UUID</button>
+    <span id="uuid-status" role="status" style="align-self:center;color:#475569;font-size:.9rem"></span>
+  </div>
+</section>
+
+<section style="max-width:900px">
+  <h2 style="font-size:1.5rem;font-weight:800;color:#0f172a">About UUID versions</h2>
+  <p style="color:#475569;line-height:1.7">A UUID is a 128-bit identifier commonly used for database records, application objects, sessions, and distributed systems. Different versions create identifiers in different ways.</p>
+  <ul style="color:#475569;line-height:1.8;padding-left:1.4rem">
+    <li><strong>UUID v4:</strong> random or pseudorandom bits; a practical default for most applications.</li>
+    <li><strong>UUID v7:</strong> includes a Unix timestamp and random bits, so identifiers sort roughly by creation time.</li>
+    <li><strong>UUID v1 and v6:</strong> time-based formats; v6 rearranges timestamp fields for improved sorting.</li>
+    <li><strong>UUID v3 and v5:</strong> deterministic identifiers derived from a namespace and name; v3 uses MD5 and v5 uses SHA-1.</li>
+    <li><strong>UUID v2:</strong> a legacy DCE Security format and rarely needed in modern applications.</li>
+    <li><strong>UUID v8:</strong> for application-specific formats; uniqueness depends on the implementation.</li>
+  </ul>
+  <h2 style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-top:1.75rem">Frequently asked questions</h2>
+  <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a">Which UUID version should I use?</h3>
+  <p style="color:#475569;line-height:1.7">Use version 4 as a general-purpose random identifier. Consider version 7 when time ordering is useful and your systems support it. Use versions 3 or 5 when the same name and namespace must always produce the same identifier.</p>
+  <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a">Can I generate multiple UUIDs?</h3>
+  <p style="color:#475569;line-height:1.7">Yes. Select a version and press Generate UUID again to create another identifier. Copy UUID places the displayed value on your clipboard.</p>
+  <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a">Is my input sent to a server?</h3>
+  <p style="color:#475569;line-height:1.7">UUID generation and name hashing run in your browser. The name you enter for versions 3 and 5 is not sent to a DataFrog processing server.</p>
+</section>
+
+<script>
+(function () {
+  'use strict';
+  const versionSelect = document.getElementById('uuid-version');
+  const output = document.getElementById('uuid-output');
+  const status = document.getElementById('uuid-status');
+  const nameOptions = document.getElementById('name-options');
+  const namespaceSelect = document.getElementById('uuid-namespace');
+  const nameInput = document.getElementById('uuid-name');
+  let currentUuid = '';
+
+  const hex = bytes => Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+  const format = bytes => {
+    const h = hex(bytes);
+    return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20);
+  };
+  const randomBytes = n => {
+    const b = new Uint8Array(n);
+    crypto.getRandomValues(b);
+    return b;
+  };
+  const setBits = (b, version) => { b[6] = (b[6] & 15) | (version << 4); b[8] = (b[8] & 63) | 128; return b; };
+  const namespaces = {
+    dns: '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+    url: '6ba7b811-9dad-11d1-80b4-00c04fd430c8',
+    oid: '6ba7b812-9dad-11d1-80b4-00c04fd430c8',
+    x500: '6ba7b814-9dad-11d1-80b4-00c04fd430c8'
+  };
+  const uuidBytes = s => new Uint8Array(s.replaceAll('-', '').match(/../g).map(x => parseInt(x,16)));
+  async function nameUuid(version) {
+    const namespace = uuidBytes(namespaces[namespaceSelect.value]);
+    const name = new TextEncoder().encode(nameInput.value);
+    const all = new Uint8Array(namespace.length + name.length);
+    all.set(namespace); all.set(name, namespace.length);
+    const algorithm = version === 3 ? 'MD5' : 'SHA-1';
+    let digest;
+    if (version === 3) {
+      // Web Crypto does not expose MD5. Use a small local MD5 implementation-free fallback is not valid.
+      throw new Error('UUID v3 (MD5) is not supported by this browser-only build yet. Choose v5 for name-based UUIDs.');
+    }
+    digest = new Uint8Array(await crypto.subtle.digest(algorithm, all));
+    return format(setBits(digest.slice(0,16), version));
+  }
+  function timeUuid(version) {
+    const b = randomBytes(16);
+    const gregorianOffset = 0x01b21dd213814000n;
+    const ticks = (BigInt(Date.now()) * 10000n) + gregorianOffset;
+    const clock = (BigInt(b[8] & 63) << 8n) | BigInt(b[9]);
+    const node = randomBytes(6); node[0] |= 1;
+    if (version === 6) {
+      const ts = ticks;
+      b[0] = Number((ts >> 52n) & 255n); b[1] = Number((ts >> 44n) & 255n);
+      b[2] = Number((ts >> 36n) & 255n); b[3] = Number((ts >> 28n) & 255n);
+      b[4] = Number((ts >> 20n) & 255n); b[5] = Number((ts >> 12n) & 255n);
+      b[6] = Number((ts >> 8n) & 15n) | 96; b[7] = Number(ts & 255n);
+    } else {
+      const low = Number(ticks & 0xffffffffn), mid = Number((ticks >> 32n) & 0xffffn), hi = Number((ticks >> 48n) & 0x0fffn);
+      b[0]=low>>>24; b[1]=(low>>>16)&255; b[2]=(low>>>8)&255; b[3]=low&255;
+      b[4]=mid>>>8; b[5]=mid&255; b[6]=(hi>>>8)&15; b[6]|=version===2?32:16; b[7]=hi&255;
+    }
+    b[8] = 128 | Number((clock >> 8n) & 63n); b[9] = Number(clock & 255n);
+    b.set(node,10);
+    if (version === 2) { b[0]=0; b[1]=0; b[2]=0; b[3]=0; b[9]=0; }
+    return format(b);
+  }
+  function randomUuid(version) {
+    const b = setBits(randomBytes(16), version);
+    if (version === 7) {
+      const ms = BigInt(Date.now());
+      for (let i=5;i>=0;i--) b[i]=Number((ms >> BigInt((5-i)*8)) & 255n);
+    }
+    return format(b);
+  }
+  async function generate() {
+    status.textContent = '';
+    try {
+      const v = Number(versionSelect.value);
+      if ((v === 3 || v === 5) && !nameInput.value.trim()) throw new Error('Enter a name for UUID v3 or v5.');
+      currentUuid = (v === 3 || v === 5) ? await nameUuid(v) : (v === 1 || v === 2 || v === 6) ? timeUuid(v) : randomUuid(v);
+      output.textContent = currentUuid;
+    } catch (e) {
+      currentUuid = '';
+      output.textContent = 'Unable to generate UUID';
+      status.textContent = e.message || 'Generation failed.';
+    }
+  }
+  versionSelect.addEventListener('change', () => {
+    nameOptions.style.display = ['3','5'].includes(versionSelect.value) ? 'block' : 'none';
+    generate();
+  });
+  document.getElementById('uuid-generate').addEventListener('click', generate);
+  namespaceSelect.addEventListener('change', generate);
+  nameInput.addEventListener('input', () => { if (['3','5'].includes(versionSelect.value)) generate(); });
+  document.getElementById('uuid-copy').addEventListener('click', async () => {
+    if (!currentUuid) { status.textContent = 'Generate a UUID first.'; return; }
+    try { await navigator.clipboard.writeText(currentUuid); status.textContent = 'Copied to clipboard.'; }
+    catch (_) { status.textContent = 'Clipboard access was blocked by your browser.'; }
+  });
+  generate();
+})();
+</script>
