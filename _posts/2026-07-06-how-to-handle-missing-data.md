@@ -83,7 +83,7 @@ author_id: gourav-mishra
       "name": "What is the best way to handle missing data in a dataset?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The best method depends on the missingness mechanism. If under 5% of data is missing completely at random (MCAR), listwise deletion is safe. For higher missingness or structured data, use KNN or MICE imputation rather than simple mean replacement."
+        "text": "The best method depends on what the values represent, why they are missing, how much data is affected, and how the dataset will be used. Row deletion and imputation each have trade-offs; check the missingness pattern before choosing."
       }
     },
     {
@@ -115,7 +115,7 @@ author_id: gourav-mishra
       "name": "When should I drop a column due to missing values?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Drop a column if more than 60% to 70% of its entries are missing and the feature is non-critical for domain prediction, as imputing excessive missingness introduces heavy synthetic bias."
+        "text": "There is no universal cutoff for dropping a column. Consider how much is missing, why it is missing, whether the field is important, and whether its remaining values are reliable enough for your analysis."
       }
     },
     {
@@ -149,7 +149,7 @@ Missing values are not all the same problem. A blank cell might mean a question 
 <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 1.25rem 1.5rem; border-radius: 0 10px 10px 0; margin: 1.5rem 0;">
   <span style="margin-top: 0; margin-bottom: 0.5rem; color: #1e40af; font-size: 1.1rem; font-weight: 700;">⚡ Quick Summary: Recommended Missing Data Strategy</span>
   <p style="margin: 0; color: #1e3a8a; font-size: 0.95rem; line-height: 1.6;">
-    If missing data accounts for less than 5% of rows and is un-correlated with key features, use row deletion (<code>df.dropna()</code>). For missingness between 5% and 30% in continuous features, use median imputation for skewed data or KNN imputation for correlated variables. If a column has over 60% missing entries, consider dropping the column or creating an explicit <code>Missing</code> indicator category. Always analyze null distributions first using tools like <a href="/analyze/data-profiler">DataFrog Data Profiler</a> or <a href="/analyze/csv-analyzer">DataFrog CSV Analyzer</a> before training models.
+    There is no universal percentage that makes row deletion or imputation safe. First check which columns have gaps and whether the missing values follow a pattern. Removing rows can bias a dataset if the missingness is systematic; mean or median filling can hide variation; and methods such as KNN need suitable features and scaling. Treat a column with extensive missingness as a reason to investigate its usefulness and meaning, not an automatic instruction to delete it. Always analyze null distributions first using tools like <a href="/analyze/data-profiler">DataFrog Data Profiler</a> or <a href="/analyze/csv-analyzer">DataFrog CSV Analyzer</a> before training models.
   </p>
 </div>
 
