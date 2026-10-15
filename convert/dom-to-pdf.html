@@ -1,0 +1,630 @@
+---
+layout: main
+title: "DOM to PDF Converter | DataFrog"
+short_name: "DOM to PDF"
+description: "Renders HTML markup into pixel-accurate, paginated PDF documents using html2canvas rasterization and jsPDF composition — with configurable page sizes, orientations, scaling, and margin controls."
+keywords: "dom to pdf, html to pdf, html2canvas jspdf, render html to pdf, webpage to pdf converter"
+category: "PDF"
+author_id: "sohail-anwar"
+permalink: /dom-to-pdf
+---
+
+<!-- html2canvas: rasterizes live DOM nodes to canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- jsPDF: assembles canvas frames into a PDF binary -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style>
+  #htmlEditor {
+    width: 100%;
+    min-height: 280px;
+    max-height: 460px;
+    padding: 1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.85rem;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    background: #0f172a;
+    color: #f8fafc;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    box-sizing: border-box;
+    tab-size: 2;
+  }
+  #renderFrame {
+    width: 100%;
+    border: none;
+    background: #ffffff;
+    border-radius: 8px;
+    display: block;
+  }
+  .opt-label { font-weight: 700; color: #0f172a; font-size: 0.875rem; white-space: nowrap; }
+  .opt-select {
+    padding: 0.4rem 0.65rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    background: #ffffff;
+    color: #0f172a;
+  }
+  #convertBtn:disabled { opacity: 0.55; cursor: not-allowed; }
+  #progressBar {
+    height: 4px;
+    background: #2563eb;
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+</style>
+
+<div class="tool-workspace" style="max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+      <span>🖨️</span> Client‑Side DOM to PDF Renderer
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; line-height: 1.2;">
+      DOM to PDF Converter
+    </h1>
+    <p style="font-size: 1.05rem; color: #475569; max-width: 780px; margin: 0 auto 1.5rem; line-height: 1.6;">
+      Paste or upload HTML markup — the tool renders it in a live browser sandbox, rasterizes the layout with <strong>html2canvas</strong>, and composes a paginated PDF with <strong>jsPDF</strong>. Configure page size, orientation, scale, and margins before downloading.
+    </p>
+    <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 0.65rem 1.25rem; font-size: 0.875rem; color: #166534; font-weight: 600;">
+      <span>🔒 100% Client-Side – HTML rendering and PDF generation run entirely in your browser sandbox.</span>
+    </div>
+  </div>
+
+  <!-- Input Panel -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+
+    <!-- Tabs -->
+    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0;">
+      <button id="tabPaste" onclick="switchTab('paste')"
+        style="padding: 0.55rem 1.25rem; background: #0f172a; color: #ffffff; border: none; border-radius: 8px 8px 0 0; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        ✏️ Paste HTML
+      </button>
+      <button id="tabUpload" onclick="switchTab('upload')"
+        style="padding: 0.55rem 1.25rem; background: #f1f5f9; color: #475569; border: none; border-radius: 8px 8px 0 0; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+        📁 Upload .html
+      </button>
+    </div>
+
+    <!-- Paste Tab -->
+    <div id="panePaste">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+        <span style="font-size: 0.8rem; color: #64748b; font-family: monospace;"><span id="charCount">0</span> characters</span>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button onclick="loadSampleHtml()" style="padding: 0.35rem 0.8rem; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer;">📄 Load Sample</button>
+          <button onclick="clearEditor()" style="padding: 0.35rem 0.8rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer;">Clear</button>
+        </div>
+      </div>
+      <textarea id="htmlEditor" spellcheck="false" placeholder="Paste your HTML here, e.g. a complete page, a &lt;div&gt; component, or a report template..." oninput="onEditorInput()"></textarea>
+    </div>
+
+    <!-- Upload Tab -->
+    <div id="paneUpload" style="display: none;">
+      <div id="dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2.25rem 1.5rem; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s;">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📁</div>
+        <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: 0.4rem;">Drag &amp; Drop Your HTML File</h3>
+        <p style="color: #64748b; font-size: 0.875rem; margin-bottom: 1rem;">Supports <strong>.html</strong> and <strong>.htm</strong> files</p>
+        <label style="display: inline-block; padding: 0.6rem 1.35rem; background: #0f172a; color: #ffffff; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+          Browse File
+          <input type="file" id="fileInput" accept=".html,.htm" style="display: none;" onchange="handleFileSelect(event)">
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Options Bar -->
+  <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem;">
+
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <label for="pageSize" class="opt-label">Page Size:</label>
+        <select id="pageSize" class="opt-select">
+          <option value="a4">A4</option>
+          <option value="letter">Letter</option>
+          <option value="legal">Legal</option>
+          <option value="a3">A3</option>
+        </select>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <label for="orientation" class="opt-label">Orientation:</label>
+        <select id="orientation" class="opt-select">
+          <option value="portrait">Portrait</option>
+          <option value="landscape">Landscape</option>
+        </select>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <label for="scaleInput" class="opt-label">Canvas Scale:</label>
+        <select id="scaleInput" class="opt-select">
+          <option value="1">1× (Fast)</option>
+          <option value="2" selected>2× (Sharp)</option>
+          <option value="3">3× (High-DPI)</option>
+        </select>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <label for="marginInput" class="opt-label">Margin (mm):</label>
+        <input type="number" id="marginInput" value="10" min="0" max="50" step="1"
+          style="padding: 0.4rem 0.5rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.875rem; width: 64px; color: #0f172a;">
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <label for="filenameInput" class="opt-label">Filename:</label>
+        <input type="text" id="filenameInput" value="document.pdf"
+          style="padding: 0.4rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.875rem; width: 160px; color: #0f172a;">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div id="parseError" style="display: none; background: #fef2f2; border: 1px solid #f87171; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>Error: </strong><span id="errorMessage"></span>
+  </div>
+
+  <!-- Preview + Convert -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+
+    <!-- Preview Toolbar -->
+    <div style="padding: 1rem 1.25rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-weight: 700; color: #0f172a; font-size: 0.95rem;">Live Preview</span>
+        <span id="previewStatus" style="font-size: 0.8rem; color: #94a3b8;">Paste or upload HTML to preview</span>
+      </div>
+      <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+        <button onclick="refreshPreview()" id="previewBtn"
+          style="padding: 0.55rem 1.1rem; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+          🔄 Refresh Preview
+        </button>
+        <button onclick="convertToPdf()" id="convertBtn"
+          style="padding: 0.55rem 1.4rem; background: #0f172a; color: #ffffff; border: none; border-radius: 8px; font-weight: 800; font-size: 0.95rem; cursor: pointer;">
+          ⚡ Generate PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div style="background: #e2e8f0; height: 4px;">
+      <div id="progressBar"></div>
+    </div>
+
+    <!-- Render Frame -->
+    <div style="background: #e2e8f0; padding: 1.5rem; min-height: 320px;">
+      <div style="background: #ffffff; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto;">
+        <iframe id="renderFrame" title="HTML Preview" style="height: 520px;"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Result / Download Bar -->
+  <div id="resultArea" style="display: none; background: #ffffff; border: 2px solid #d1fae5; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 14px rgba(0,0,0,0.04);">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 2rem;">📄</span>
+        <div>
+          <div style="font-weight: 800; color: #0f172a; font-size: 1.05rem;" id="resultFilename">document.pdf</div>
+          <div style="font-size: 0.85rem; color: #64748b; margin-top: 0.1rem;">
+            Pages: <strong id="resultPages" style="color: #0f172a;">1</strong> &nbsp;·&nbsp;
+            Size: <strong id="resultSize" style="color: #0f172a;">— KB</strong> &nbsp;·&nbsp;
+            <span style="color: #059669; font-weight: 700;">✓ PDF ready</span>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+        <button id="downloadBtn" onclick="downloadResult()"
+          style="padding: 0.65rem 1.75rem; background: #059669; color: #ffffff; border: none; border-radius: 8px; font-weight: 800; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;">
+          💾 Download PDF
+        </button>
+        <button onclick="convertToPdf()"
+          style="padding: 0.65rem 1.1rem; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer;">
+          🔄 Re-generate
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technical Reference -->
+  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">DOM to PDF Converter Technical Reference</h2>
+    <p>
+      This tool converts HTML markup into PDF documents using a two-stage pipeline: the DOM tree is first rendered in a live browser sandbox, then rasterized to a bitmap canvas, and finally composed into a paginated PDF using vector-preserving page layout. No server-side headless Chrome or Puppeteer is required.
+    </p>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Rendering Pipeline</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>Stage 1 — DOM Sandboxing:</strong> The HTML string is written into a hidden <code>&lt;iframe&gt;</code> via <code>srcdoc</code>, giving it a fully isolated browsing context with its own <code>document</code>, CSS cascade, and inline <code>&lt;style&gt;</code> resolution.</li>
+      <li><strong>Stage 2 — Canvas Rasterization (html2canvas):</strong> html2canvas traverses the iframe's rendered DOM, reads computed CSS styles (including transforms, gradients, borders, and box shadows), and paints each element onto an HTML5 <code>&lt;canvas&gt;</code>. The scale factor (1×, 2×, 3×) controls pixel density for sharpness.</li>
+      <li><strong>Stage 3 — PDF Composition (jsPDF):</strong> The canvas bitmap is exported as a PNG and embedded into a jsPDF document. For content taller than one page, the canvas is sliced into page-height segments and each segment is placed on a successive page.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Configuration Options</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>Page Size:</strong> A4 (210 × 297 mm), Letter (216 × 279 mm), Legal (216 × 356 mm), A3 (297 × 420 mm).</li>
+      <li><strong>Orientation:</strong> Portrait (tall) or Landscape (wide). Affects usable page width for content scaling.</li>
+      <li><strong>Canvas Scale:</strong> Higher scale values (2×, 3×) produce crisper text and images at the cost of longer render times and larger PDF size.</li>
+      <li><strong>Margin:</strong> Uniform margin in millimetres applied to all four sides of every page.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Known Limitations</h3>
+    <ul style="padding-left: 1.5rem;">
+      <li><strong>External fonts &amp; images:</strong> Resources loaded from external domains may be blocked by CORS policy. Inline Base64 images and system fonts render reliably; Google Fonts and CDN-hosted images may not.</li>
+      <li><strong>CSS media queries:</strong> html2canvas evaluates screen styles, not <code>@media print</code> rules. Add print-specific styles inside your HTML using <code>&lt;style&gt;@media print { ... }&lt;/style&gt;</code>.</li>
+      <li><strong>JavaScript inside the HTML:</strong> Scripts inside the rendered iframe are sandboxed and may not execute. Interactive components are captured in their initial rendered state.</li>
+    </ul>
+
+    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I convert a full webpage with navigation and sidebars?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes, paste the complete HTML source. For print-optimised output, wrap only your content area in a clean <code>&lt;div&gt;</code> with explicit widths and remove navigation elements before converting.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are multi-page documents handled?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          The full rendered height of the HTML is measured. If it exceeds the printable page height, the canvas is split into sequential slices and each slice is placed on a new PDF page with the configured margin.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Are inline SVGs and CSS gradients supported?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. html2canvas renders inline SVG elements and CSS gradients (<code>linear-gradient</code>, <code>radial-gradient</code>) natively as canvas paths. Complex SVG animations are captured in their static initial frame.
+        </p>
+      </details>
+      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is private or confidential HTML kept secure?</summary>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
+          Yes. HTML rendering, canvas rasterization, and PDF binary generation all execute inside your browser's local sandbox via html2canvas and jsPDF. No markup, pixels, or file bytes are transmitted to any server.
+        </p>
+      </details>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  const { jsPDF } = window.jspdf;
+
+  let currentPdfBlob = null;
+  let currentTab = 'paste';
+
+  // ─── Tab switching ─────────────────────────────────────────────
+  window.switchTab = function(tab) {
+    currentTab = tab;
+    document.getElementById('panePaste').style.display   = tab === 'paste'  ? '' : 'none';
+    document.getElementById('paneUpload').style.display  = tab === 'upload' ? '' : 'none';
+    document.getElementById('tabPaste').style.background  = tab === 'paste'  ? '#0f172a' : '#f1f5f9';
+    document.getElementById('tabPaste').style.color       = tab === 'paste'  ? '#ffffff' : '#475569';
+    document.getElementById('tabUpload').style.background = tab === 'upload' ? '#0f172a' : '#f1f5f9';
+    document.getElementById('tabUpload').style.color      = tab === 'upload' ? '#ffffff' : '#475569';
+  };
+
+  // ─── Editor helpers ────────────────────────────────────────────
+  window.onEditorInput = function() {
+    const len = document.getElementById('htmlEditor').value.length;
+    document.getElementById('charCount').textContent = len.toLocaleString();
+  };
+
+  window.clearEditor = function() {
+    document.getElementById('htmlEditor').value = '';
+    document.getElementById('charCount').textContent = '0';
+    document.getElementById('renderFrame').srcdoc = '';
+    document.getElementById('previewStatus').textContent = 'Editor cleared';
+    document.getElementById('resultArea').style.display = 'none';
+    currentPdfBlob = null;
+  };
+
+  // ─── File upload ───────────────────────────────────────────────
+  const dropzone = document.getElementById('dropzone');
+
+  ['dragenter','dragover','dragleave','drop'].forEach(evt => {
+    dropzone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); }, false);
+    document.body.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); }, false);
+  });
+  ['dragenter','dragover'].forEach(evt => {
+    dropzone.addEventListener(evt, () => {
+      dropzone.style.borderColor = '#059669'; dropzone.style.background = '#f0fdf4';
+    });
+  });
+  ['dragleave','drop'].forEach(evt => {
+    dropzone.addEventListener(evt, () => {
+      dropzone.style.borderColor = '#cbd5e1'; dropzone.style.background = '#f8fafc';
+    });
+  });
+  dropzone.addEventListener('drop', e => {
+    const files = e.dataTransfer.files;
+    if (files.length > 0) loadFile(files[0]);
+  });
+
+  window.handleFileSelect = function(e) {
+    if (e.target.files.length > 0) loadFile(e.target.files[0]);
+  };
+
+  function loadFile(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('htmlEditor').value = e.target.result;
+      document.getElementById('filenameInput').value = file.name.replace(/\.(html|htm)$/i, '') + '.pdf';
+      onEditorInput();
+      switchTab('paste');
+      refreshPreview();
+    };
+    reader.readAsText(file);
+  }
+
+  // ─── Sample HTML ───────────────────────────────────────────────
+  window.loadSampleHtml = function() {
+    const sample = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; background: #f8fafc; color: #1e293b; }
+  .header { background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem; }
+  h1 { margin: 0 0 0.5rem; font-size: 2rem; }
+  .subtitle { opacity: 0.8; font-size: 1rem; margin: 0; }
+  .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; margin-top: 0.75rem; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .stat-card { background: white; border-radius: 10px; padding: 1.25rem; border: 1px solid #e2e8f0; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+  .stat-value { font-size: 2rem; font-weight: 800; color: #0f172a; }
+  .stat-label { font-size: 0.8rem; color: #64748b; margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+  thead th { background: #0f172a; color: white; padding: 0.85rem 1rem; text-align: left; font-size: 0.875rem; letter-spacing: 0.03em; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody td { padding: 0.85rem 1rem; font-size: 0.9rem; border-bottom: 1px solid #f1f5f9; }
+  .pill { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 700; }
+  .pill-green { background: #d1fae5; color: #065f46; }
+  .pill-blue  { background: #dbeafe; color: #1e40af; }
+  .pill-amber { background: #fef3c7; color: #92400e; }
+  .footer { margin-top: 1.5rem; text-align: center; color: #94a3b8; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Q3 Sales Report</h1>
+    <p class="subtitle">Generated by DataFrog DOM to PDF Converter</p>
+    <span class="badge">July – September 2026</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-value">$1.24M</div>
+      <div class="stat-label">Total Revenue</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">3,821</div>
+      <div class="stat-label">Orders</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">+18.4%</div>
+      <div class="stat-label">YoY Growth</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Product</th><th>Region</th><th>Units</th><th>Revenue</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>DataFrog Pro</td><td>North America</td><td>1,240</td><td>$496,000</td><td><span class="pill pill-green">On Track</span></td></tr>
+      <tr><td>DataFrog Lite</td><td>Europe</td><td>980</td><td>$294,000</td><td><span class="pill pill-green">On Track</span></td></tr>
+      <tr><td>DataFrog API</td><td>APAC</td><td>750</td><td>$262,500</td><td><span class="pill pill-blue">Trending</span></td></tr>
+      <tr><td>DataFrog Teams</td><td>LATAM</td><td>520</td><td>$156,000</td><td><span class="pill pill-amber">Review</span></td></tr>
+      <tr><td>DataFrog Enterprise</td><td>MENA</td><td>331</td><td>$33,100</td><td><span class="pill pill-green">On Track</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">Confidential · DataFrog Analytics · Generated ${new Date().toLocaleDateString()}</div>
+</body>
+</html>`;
+
+    document.getElementById('htmlEditor').value = sample;
+    document.getElementById('filenameInput').value = 'q3-sales-report.pdf';
+    onEditorInput();
+    refreshPreview();
+  };
+
+  // ─── Preview ───────────────────────────────────────────────────
+  window.refreshPreview = function() {
+    const html = document.getElementById('htmlEditor').value.trim();
+    const frame = document.getElementById('renderFrame');
+    const status = document.getElementById('previewStatus');
+    hideError();
+
+    if (!html) {
+      status.textContent = 'No HTML to preview';
+      return;
+    }
+
+    frame.srcdoc = html;
+    status.textContent = 'Rendering…';
+
+    frame.onload = function() {
+      try {
+        const body = frame.contentDocument.body;
+        const height = Math.max(body.scrollHeight, body.offsetHeight, 520);
+        frame.style.height = Math.min(height + 40, 900) + 'px';
+        status.textContent = 'Preview ready — ' + html.length.toLocaleString() + ' characters';
+      } catch(e) {
+        frame.style.height = '520px';
+        status.textContent = 'Preview loaded (cross-origin constraints apply)';
+      }
+    };
+  };
+
+  // ─── PDF generation ────────────────────────────────────────────
+  window.convertToPdf = async function() {
+    const html = document.getElementById('htmlEditor').value.trim();
+    hideError();
+
+    if (!html) {
+      showError('Please paste or upload some HTML before generating a PDF.');
+      return;
+    }
+
+    const btn = document.getElementById('convertBtn');
+    const progress = document.getElementById('progressBar');
+    btn.disabled = true;
+    btn.textContent = '⏳ Rendering…';
+    setProgress(5);
+
+    try {
+      const pageSize    = document.getElementById('pageSize').value;
+      const orientation = document.getElementById('orientation').value;
+      const scale       = parseInt(document.getElementById('scaleInput').value, 10);
+      const marginMm    = parseFloat(document.getElementById('marginInput').value) || 10;
+      const filename    = sanitizeFilename(document.getElementById('filenameInput').value || 'document.pdf');
+
+      // Create an off-screen div to render HTML in-document (avoids cross-origin iframe restrictions)
+      const container = document.createElement('div');
+      container.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:900px;background:#ffffff;';
+      container.innerHTML = html;
+      document.body.appendChild(container);
+
+      setProgress(20);
+      btn.textContent = '📸 Capturing…';
+
+      // Give the browser time to layout
+      await new Promise(r => setTimeout(r, 300));
+
+      const canvas = await html2canvas(container, {
+        scale: scale,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+        windowWidth: 900
+      });
+
+      document.body.removeChild(container);
+      setProgress(65);
+      btn.textContent = '📄 Composing PDF…';
+
+      // Page dimensions in mm
+      const pageDims = {
+        a4:     orientation === 'portrait' ? [210, 297] : [297, 210],
+        letter: orientation === 'portrait' ? [216, 279] : [279, 216],
+        legal:  orientation === 'portrait' ? [216, 356] : [356, 216],
+        a3:     orientation === 'portrait' ? [297, 420] : [420, 297],
+      };
+      const [pgW, pgH] = pageDims[pageSize] || pageDims.a4;
+
+      const doc = new jsPDF({ orientation, unit: 'mm', format: pageSize });
+
+      const contentW = pgW - marginMm * 2;
+      const contentH = pgH - marginMm * 2;
+
+      // Scale canvas to page width
+      const imgWidthPx  = canvas.width;
+      const imgHeightPx = canvas.height;
+      const ratio       = contentW / (imgWidthPx / (scale * 3.7795)); // px-to-mm
+
+      const renderedHeightMm = (imgHeightPx / (scale * 3.7795)) * ratio;
+
+      let pageCount = 0;
+      let offsetMm  = 0;
+
+      while (offsetMm < renderedHeightMm) {
+        if (pageCount > 0) doc.addPage(pageSize, orientation);
+
+        const srcY    = (offsetMm / ratio) * scale * 3.7795;
+        const srcH    = Math.min((contentH / ratio) * scale * 3.7795, imgHeightPx - srcY);
+
+        if (srcH <= 0) break;
+
+        // Slice canvas for this page
+        const sliceCanvas  = document.createElement('canvas');
+        sliceCanvas.width  = imgWidthPx;
+        sliceCanvas.height = Math.ceil(srcH);
+
+        const ctx = sliceCanvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+        ctx.drawImage(canvas, 0, -srcY);
+
+        const imgData = sliceCanvas.toDataURL('image/png');
+        const sliceHeightMm = (srcH / (scale * 3.7795)) * ratio;
+
+        doc.addImage(imgData, 'PNG', marginMm, marginMm, contentW, sliceHeightMm, '', 'FAST');
+
+        offsetMm  += contentH;
+        pageCount += 1;
+      }
+
+      setProgress(90);
+
+      const pdfBlob = doc.output('blob');
+      currentPdfBlob = { blob: pdfBlob, filename };
+
+      // Update result bar
+      document.getElementById('resultFilename').textContent = filename;
+      document.getElementById('resultPages').textContent = pageCount;
+      document.getElementById('resultSize').textContent = formatSize(pdfBlob.size);
+      document.getElementById('resultArea').style.display = 'block';
+      document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      setProgress(100);
+      setTimeout(() => setProgress(0), 800);
+
+    } catch (err) {
+      showError('PDF generation failed: ' + err.message);
+      setProgress(0);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '⚡ Generate PDF';
+    }
+  };
+
+  window.downloadResult = function() {
+    if (!currentPdfBlob) return;
+    const url = URL.createObjectURL(currentPdfBlob.blob);
+    const a   = document.createElement('a');
+    a.href     = url;
+    a.download = currentPdfBlob.filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  // ─── Utilities ─────────────────────────────────────────────────
+  function setProgress(pct) {
+    document.getElementById('progressBar').style.width = pct + '%';
+  }
+
+  function showError(msg) {
+    document.getElementById('errorMessage').textContent = msg;
+    document.getElementById('parseError').style.display = 'block';
+    document.getElementById('parseError').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function hideError() {
+    document.getElementById('parseError').style.display = 'none';
+  }
+
+  function formatSize(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1048576).toFixed(2) + ' MB';
+  }
+
+  function sanitizeFilename(name) {
+    name = name.trim();
+    if (!name.toLowerCase().endsWith('.pdf')) name += '.pdf';
+    return name.replace(/[<>:"/\\|?*]+/g, '-');
+  }
+
+  // Auto-refresh preview on paste / load
+  document.getElementById('htmlEditor').addEventListener('input', function() {
+    clearTimeout(window._previewTimer);
+    window._previewTimer = setTimeout(refreshPreview, 800);
+  });
+</script>

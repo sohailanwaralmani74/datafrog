@@ -1,3 +1,13 @@
+- title: "DOM to PDF"
+  short_name: "DOM to PDF"
+  url: "/dom-to-pdf"
+  category: "PDF"
+  description: "Renders HTML markup into pixel-accurate, paginated PDF documents using html2canvas rasterization and jsPDF composition — with configurable page sizes, orientations, scaling, and margin controls."
+  keywords: ["dom to pdf", "html to pdf", "html2canvas pdf", "jspdf html", "render html pdf", "webpage to pdf"]
+  icon: "🖨️"
+  date: "2026-10-15"
+  updated: "2026-10-15"
+
 - title: "PDF to Base64"
   short_name: "PDF to Base64"
   url: "/pdf-to-base64"
