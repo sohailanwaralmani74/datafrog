@@ -1,8 +1,8 @@
 ---
 layout: main
-title: "How to Import JSON into Excel: Complete Step-by-Step Guide"
-description: "Learn how to import JSON into Excel using Power Query, VBA macro scripts, CSV conversion, & web browser tools without any data loss or encoding errors."
-excerpt: "Learn how to import JSON into Excel using Power Query, legacy VBA scripts, CSV conversion, and browser-based data tools. Step-by-step guide with error fixes."
+title: "How to Import JSON into Excel (Power Query and Browser Options)"
+description: "Import a JSON file into Excel with Power Query, or learn when to flatten nested data and use CSV. Includes practical steps and common fixes."
+excerpt: "A practical guide to bringing JSON into Excel, including Power Query steps, nested records, older Excel versions, CSV alternatives, and common import errors."
 keywords: "how to import JSON into Excel, import json to excel, import data from json file to excel, import json data to excel, import data from json to excel, json in excel, import json into excel, excel open json file, open json in excel"
 author: "DataFrog Engineering Team"
 date: 2026-08-10
@@ -22,8 +22,8 @@ author_id: gourav-mishra
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "How to Import JSON into Excel: Step-by-Step Tutorial & Best Methods",
-  "description": "Learn how to import JSON into Excel using Power Query, VBA macros, CSV conversion, & local browser tools without data loss or encoding bugs.",
+  "headline": "How to Import JSON into Excel (Power Query and Browser Options)",
+  "description": "Import JSON into Excel with Power Query, understand nested records, and choose a practical CSV or browser-based workflow.",
   "image": "https://datafrog.tools/assets/img/how-to-import-json-into-excel-hero.jpg",
   "author": {
     "@type": "Organization",
@@ -39,7 +39,7 @@ author_id: gourav-mishra
     }
   },
   "datePublished": "2026-08-10",
-  "dateModified": "2026-08-10",
+  "dateModified": "2026-10-15",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://datafrog.tools/blog/how-to-import-json-into-excel"
@@ -130,9 +130,18 @@ author_id: gourav-mishra
 }
 </script>
 
-# How to Import JSON into Excel: Step-by-Step Tutorial & Best Methods
+# How to Import JSON into Excel: Power Query and Other Options
 
-To import JSON into Excel, open Microsoft Excel 365 or Excel 2016+, navigate to **Data > Get Data > From File > From JSON**, select your file, and click **Import**. Inside the Power Query Editor window, click **To Table**, expand the nested record attributes using the double-arrow column header icon, and click **Close & Load** to output clean tabular rows.
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem 1rem;border:1px solid #dbeafe;background:#f8fbff;border-radius:12px;padding:1rem 1.1rem;margin:1rem 0 1.5rem;">
+  <div style="flex:1;min-width:220px;">
+    <strong style="display:block;color:#0f172a;margin-bottom:0.25rem;">Need to inspect the JSON before importing it?</strong>
+    <span style="color:#475569;font-size:0.92rem;line-height:1.5;">Explore nested keys in the JSON Viewer, or check the structure and key counts with the JSON Analyzer. For a real Excel workbook, follow the Power Query steps below.</span>
+  </div>
+  <a href="/inspect/json-viewer" style="display:inline-block;background:#1d4ed8;color:#fff;padding:0.65rem 0.9rem;border-radius:8px;text-decoration:none;font-weight:700;">Open JSON Viewer</a>
+  <a href="/analyze/json-analyzer" style="display:inline-block;background:#fff;color:#1d4ed8;border:1px solid #bfdbfe;padding:0.65rem 0.9rem;border-radius:8px;text-decoration:none;font-weight:700;">Analyze JSON</a>
+</div>
+
+If your JSON file contains a list of records, Excel's Power Query is usually the simplest way to turn it into a worksheet. Open **Data → Get Data → From File → From JSON**, select the file, then use the Power Query Editor to expand any nested records or lists before choosing **Close & Load**. The exact steps depend on how the JSON is organised, so this guide covers both flat data and nested structures.
 
 ![How to import JSON into Excel featuring Power Query data transformation](/assets/img/how-to-import-json-into-excel-hero.jpg)
 *Figure 1: Transforming structured JSON documents into clean Microsoft Excel tables using native queries and browser converters.*
