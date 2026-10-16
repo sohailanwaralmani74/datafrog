@@ -533,6 +533,28 @@
   date: "2026-08-25"
   updated: "2026-08-25"
 
+- title: "ULID Generator"
+  short_name: "ULID Generator"
+  url: "/ulid-generator"
+  category: "Generate"
+  description: "Generate sortable ULIDs individually or in batches of up to 500. Copy results or export timestamp-based identifiers to CSV and Excel locally in your browser."
+  keywords: ["ULID generator", "ULID generator online", "generate ULID", "bulk ULID generator", "sortable identifier generator", "ULID CSV", "ULID Excel"]
+  icon: "🔢"
+  featured: true
+  date: "2026-10-16"
+  updated: "2026-10-16"
+
+- title: "Nano ID Generator"
+  short_name: "Nano ID Generator"
+  url: "/nano-id-generator"
+  category: "Generate"
+  description: "Generate customizable short, URL-friendly Nano IDs individually or in batches of up to 500. Copy results or export them to CSV and Excel in your browser."
+  keywords: ["Nano ID generator", "Nano ID generator online", "generate Nano ID", "bulk Nano ID generator", "random ID generator", "URL friendly ID generator", "Nano ID CSV", "Nano ID Excel"]
+  icon: "🆔"
+  featured: true
+  date: "2026-10-16"
+  updated: "2026-10-16"
+
 - title: "UUID Generator"
   short_name: "UUID Generator"
   url: "/uuid-generator"
