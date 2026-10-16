@@ -1,0 +1,115 @@
+---
+layout: main
+title: "CSV to Excel Converter | DataFrog"
+short_name: "CSV to Excel"
+description: "Turn CSV data into a downloadable Excel workbook (.xlsx), using the first row as column headers or treating every row as data. Conversion runs in your browser."
+keywords: "csv to excel, csv to xlsx, csv to excel converter, convert csv to spreadsheet"
+category: "CSV"
+permalink: /csv-to-excel
+---
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div class="tool-workspace" style="max-width:1120px;margin:0 auto;padding:2rem 1.25rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#0f172a;">
+  <header style="text-align:center;margin-bottom:2rem;">
+    <div style="display:inline-block;padding:.35rem .8rem;border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;border-radius:999px;font-size:.85rem;font-weight:700;margin-bottom:.8rem;">CSV CONVERTER</div>
+    <h1 style="font-size:clamp(2rem,5vw,2.7rem);line-height:1.15;margin:0 0 .75rem;font-weight:800;">CSV to Excel Converter</h1>
+    <p style="max-width:790px;margin:0 auto 1rem;color:#475569;line-height:1.7;">Turn CSV data into a downloadable Excel workbook (.xlsx), using the first row as column headers or treating every row as data. Conversion runs in your browser.</p>
+    <p style="display:inline-block;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:8px;padding:.6rem .85rem;font-size:.9rem;">🔒 Your CSV data is processed in this browser, not uploaded to DataFrog.</p>
+  </header>
+  <section style="border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:clamp(1rem,3vw,1.5rem);box-shadow:0 3px 12px rgba(15,23,42,.04);">
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:end;margin-bottom:1rem;">
+      <div style="flex:1;min-width:220px;"><label for="csvFile" style="display:block;font-weight:700;margin-bottom:.4rem;">Open a CSV file (optional)</label><input id="csvFile" type="file" accept=".csv,.txt,text/csv,text/plain" style="max-width:100%;"></div>
+      <div style="min-width:180px;"><label for="delimiter" style="display:block;font-weight:700;margin-bottom:.4rem;">Field delimiter</label><select id="delimiter" style="width:100%;padding:.65rem;border:1px solid #cbd5e1;border-radius:8px;"><option value=",">Comma (,)</option><option value=";">Semicolon (;)</option><option value="\t">Tab</option><option value="|">Pipe (|)</option></select></div>
+    </div>
+    <label for="csvInput" style="display:block;font-weight:700;margin-bottom:.4rem;">CSV input</label>
+    <textarea id="csvInput" rows="9" spellcheck="false" style="box-sizing:border-box;width:100%;padding:.85rem;border:1px solid #cbd5e1;border-radius:9px;font: .92rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical;">name,department,active
+Amina,Design,true
+Bilal,Engineering,true
+Sara,Marketing,false</textarea>
+    <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1rem 0;">
+      <label style="display:flex;gap:.5rem;align-items:center;font-size:.92rem;"><input id="hasHeader" type="checkbox" checked> First row contains column headers</label>
+      
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:.65rem;">
+      <button id="convertBtn" type="button" style="padding:.75rem 1.15rem;background:#1d4ed8;color:#fff;border:0;border-radius:8px;font-weight:750;cursor:pointer;">Convert to Excel</button>
+      <button id="sampleBtn" type="button" style="padding:.75rem 1rem;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;font-weight:700;cursor:pointer;">Load sample</button>
+      <button id="clearBtn" type="button" style="padding:.75rem 1rem;background:#fff;border:1px solid #cbd5e1;border-radius:8px;font-weight:700;cursor:pointer;">Clear</button>
+    </div>
+    <p id="status" role="status" aria-live="polite" style="min-height:1.4em;color:#475569;margin:.8rem 0 0;">An Excel workbook (.xlsx) will be generated and downloaded.</p>
+    <div id="outputWrap" style="margin-top:1rem;">
+      <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;margin-bottom:.45rem;"><label for="output" style="font-weight:700;">Converted output</label><div style="display:flex;gap:.5rem;flex-wrap:wrap;"><button id="copyBtn" type="button" style="padding:.5rem .8rem;border:1px solid #cbd5e1;background:#fff;border-radius:7px;font-weight:700;cursor:pointer;">Copy output</button><button id="downloadBtn" type="button" style="padding:.5rem .8rem;border:1px solid #cbd5e1;background:#fff;border-radius:7px;font-weight:700;cursor:pointer;">Download .xlsx</button></div></div>
+      <textarea id="output" rows="12" readonly spellcheck="false" placeholder="Your converted result will appear here…" style="box-sizing:border-box;width:100%;padding:.85rem;border:1px solid #cbd5e1;border-radius:9px;background:#f8fafc;font:.9rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical;"></textarea>
+    </div>
+  </section>
+  <section style="margin-top:1.25rem;border:1px solid #e2e8f0;border-radius:14px;padding:clamp(1rem,3vw,1.5rem);line-height:1.75;color:#334155;">
+    <h2 style="font-size:1.35rem;color:#0f172a;margin-top:0;">How to convert CSV to Excel</h2>
+    <ol><li>Paste your CSV text or choose a local CSV file.</li><li>Choose the field delimiter used in your data and indicate whether the first row contains headers.</li><li>Select <strong>Convert to Excel</strong>. Review the result, then copy it or download the converted file.</li></ol>
+    <h3 style="font-size:1.1rem;color:#0f172a;">What happens to your data?</h3>
+    <p>The conversion runs in your browser. CSV fields enclosed in double quotes are parsed, including commas inside quoted values and escaped double quotes. Check the output before using it in another application, especially when the CSV contains unusual line breaks, duplicate column names, or values that require a specific data type.</p>
+    <h3 style="font-size:1.1rem;color:#0f172a;">CSV conversion tips</h3>
+    <p>Make sure the delimiter matches your source file. If the first row is actual data rather than column names, turn off the header option. Keep a copy of the original CSV so you can compare the converted output and confirm that all rows and columns were preserved.</p>
+  </section>
+</div>
+<style>
+.tool-workspace .option{display:flex;flex-direction:column;gap:.35rem;min-width:190px}.tool-workspace .option label{font-weight:700;font-size:.9rem}.tool-workspace .option input,.tool-workspace .option select{padding:.6rem;border:1px solid #cbd5e1;border-radius:8px;max-width:100%}
+@media(max-width:600px){.tool-workspace{padding:1rem .75rem!important}.tool-workspace button{max-width:100%}}
+</style>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const sample='name,department,active\nAmina,Design,true\nBilal,Engineering,true\nSara,Marketing,false';
+let generatedFile=null;
+function parseCSV(text,delimiter){
+ const rows=[];let row=[],field='',quoted=false;
+ text=String(text||'').replace(/^\uFEFF/,'');
+ for(let i=0;i<text.length;i++){
+  const c=text[i];
+  if(quoted){if(c==='"'&&text[i+1]==='"'){field+='"';i++;}else if(c==='"')quoted=false;else field+=c;}
+  else if(c==='"'&&field==='')quoted=true;
+  else if(c===delimiter){row.push(field);field='';}
+  else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field);if(row.some(v=>v!=='')||field!=='')rows.push(row);row=[];field='';}
+  else field+=c;
+ }
+ if(quoted)throw Error('A quoted CSV field was not closed. Check the input quotes.');
+ if(field!==''||row.length){row.push(field);rows.push(row);}
+ return rows.filter(r=>r.some(v=>v!==''));
+}
+function xmlEscape(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');}
+function htmlEscape(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function validName(v,fallback){v=String(v||'').trim();return /^[A-Za-z_][A-Za-z0-9_.-]*$/.test(v)?v:fallback;}
+function validSqlName(v){v=String(v||'').trim();if(!/^[A-Za-z_][A-Za-z0-9_]*$/.test(v))throw Error('Use a simple SQL table name with letters, numbers, and underscores.');return v;}
+function sqlValue(v){if(v==='')return 'NULL';if(/^(true|false)$/i.test(v))return v.toUpperCase();if(/^-?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i.test(v))return v;return "'"+String(v).replace(/'/g,"''")+"'";}
+function getRows(){
+ const d=$('delimiter').value==='\\t'?'\t':$('delimiter').value;
+ const rows=parseCSV($('csvInput').value,d);if(!rows.length)throw Error('Paste CSV data or choose a CSV file first.');
+ const hasHeader=$('hasHeader').checked;
+ const headers=hasHeader?rows[0].map((h,i)=>h.trim()||'column_'+(i+1)):rows[0].map((_,i)=>'column_'+(i+1));
+ const records=hasHeader?rows.slice(1):rows;
+ if(!records.length)throw Error('No data rows found. Add at least one row after the header.');
+ const width=Math.max(headers.length,...records.map(r=>r.length));
+ while(headers.length<width)headers.push('column_'+(headers.length+1));
+ return {headers,records,hasHeader};
+}
+function convert(){
+ try{
+  const {headers,records,hasHeader}=getRows();const objects=$('shape')?$('shape').value==='objects':true;let result='';
+  if(!window.XLSX)throw Error("Excel library did not load. Check your connection and try again."); const aoa=hasHeader?[headers,...records]:records; const wb=XLSX.utils.book_new(); const ws=XLSX.utils.aoa_to_sheet(aoa); XLSX.utils.book_append_sheet(wb,ws,"CSV Data"); XLSX.writeFile(wb,"csv-converted.xlsx"); result="Excel workbook created and downloaded ("+records.length+" data rows).";
+  $('output').value=result;generatedFile=null;$('status').textContent=records.length+' data row(s) converted. '+(isBinary?'Your file should download automatically.':'Review the output, then copy or download it.'); 
+  if(!result.startsWith("Error")){}
+  if(true){ /* workbook is generated above */ }
+  if(false){ /* PDF is generated above */ }
+ }catch(e){$('status').textContent=e.message||'Conversion failed. Check the input and try again.';}
+}
+$('convertBtn').addEventListener('click',convert);
+$('sampleBtn').addEventListener('click',()=>{$('csvInput').value=sample;$('status').textContent='Sample CSV loaded.';});
+$('clearBtn').addEventListener('click',()=>{$('csvInput').value='';$('output').value='';generatedFile=null;$('status').textContent='Input and output cleared.';});
+$('csvFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{$('csvInput').value=await f.text();$('status').textContent='Loaded '+f.name+' ('+f.size.toLocaleString()+' bytes).';}catch(err){$('status').textContent='Could not read this file.';}});
+$('copyBtn').addEventListener('click',async()=>{const value=$('output').value;if(!value){$('status').textContent='Convert data first.';return;}try{await navigator.clipboard.writeText(value);$('status').textContent='Output copied.';}catch(e){$('output').focus();$('output').select();$('status').textContent='Output selected. Press Ctrl+C to copy.';}});
+$('downloadBtn').addEventListener('click',()=>{
+ const value=$('output').value;if(!value){$('status').textContent='Convert data first.';return;}
+ const mime="text/markdown";
+ const blob=new Blob([value],{type:mime+';charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download="csv-converted.xlsx";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);$('status').textContent='Download started.';
+});
+})();
+</script>
