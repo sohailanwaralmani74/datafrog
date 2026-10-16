@@ -200,6 +200,77 @@ permalink: /uuid-generator
       status.textContent = e.message || 'Generation failed.';
     }
   }
+  const bulkOutput = document.getElementById('uuid-bulk-output');
+  const bulkStatus = document.getElementById('uuid-bulk-status');
+  let bulkUuids = [];
+  const downloadBlob = (blob, filename) => {
+    const url = URL.createObjectURL(blob), a = document.createElement('a');
+    a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  const csvEscape = value => '"' + String(value).replace(/"/g, '""') + '"';
+  async function makeBulk() {
+    const count = Number(document.getElementById('uuid-count').value);
+    if (!Number.isInteger(count) || count < 1 || count > 500) {
+      bulkStatus.textContent = 'Enter a whole number from 1 to 500.'; return;
+    }
+    const v = Number(versionSelect.value);
+    if ((v === 3 || v === 5) && !nameInput.value.trim()) {
+      bulkStatus.textContent = 'Enter a name before generating UUID v3 or v5 values.'; return;
+    }
+    const originalName = nameInput.value;
+    const values = [];
+    try {
+      bulkStatus.textContent = 'Generating…';
+      for (let i = 0; i < count; i++) {
+        if (v === 3 || v === 5) {
+          nameInput.value = originalName + '-' + (i + 1);
+          values.push(await nameUuid(v));
+        } else {
+          values.push((v === 1 || v === 2 || v === 6) ? timeUuid(v) : randomUuid(v));
+        }
+      }
+      nameInput.value = originalName;
+      bulkUuids = values;
+      bulkOutput.value = values.join('\n');
+      bulkStatus.textContent = 'Generated ' + values.length + ' UUIDs.';
+    } catch (e) {
+      nameInput.value = originalName;
+      bulkStatus.textContent = e.message || 'Could not generate the UUID list.';
+    }
+  }
+  function exportBulkCsv() {
+    if (!bulkUuids.length) { bulkStatus.textContent = 'Generate UUIDs first.'; return; }
+    const csv = 'UUID\r\n' + bulkUuids.map(csvEscape).join('\r\n');
+    downloadBlob(new Blob(['\ufeff' + csv], {type:'text/csv;charset=utf-8;'}), 'datafrog-uuids.csv');
+  }
+  async function exportBulkXlsx() {
+    if (!bulkUuids.length) { bulkStatus.textContent = 'Generate UUIDs first.'; return; }
+    try {
+      if (!window.XLSX) {
+        bulkStatus.textContent = 'Loading Excel export…';
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+          script.onload = resolve; script.onerror = () => reject(new Error('Excel library could not load. You can still export CSV.'));
+          document.head.appendChild(script);
+        });
+      }
+      const ws = XLSX.utils.aoa_to_sheet([['UUID'], ...bulkUuids.map(id => [id])]);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'UUIDs');
+      XLSX.writeFile(wb, 'datafrog-uuids.xlsx');
+      bulkStatus.textContent = 'Excel file prepared.';
+    } catch (e) { bulkStatus.textContent = e.message || 'Excel export failed.'; }
+  }
+  document.getElementById('uuid-bulk-generate').addEventListener('click', makeBulk);
+  document.getElementById('uuid-export-csv').addEventListener('click', exportBulkCsv);
+  document.getElementById('uuid-export-xlsx').addEventListener('click', exportBulkXlsx);
+  document.getElementById('uuid-bulk-copy').addEventListener('click', async () => {
+    if (!bulkUuids.length) { bulkStatus.textContent = 'Generate UUIDs first.'; return; }
+    try { await navigator.clipboard.writeText(bulkUuids.join('\n')); bulkStatus.textContent = 'Copied ' + bulkUuids.length + ' UUIDs.'; }
+    catch (_) { bulkStatus.textContent = 'Clipboard access was blocked by your browser.'; }
+  });
   versionSelect.addEventListener('change', () => {
     nameOptions.style.display = ['3','5'].includes(versionSelect.value) ? 'block' : 'none';
     generate();
