@@ -59,6 +59,20 @@ permalink: /uuid-generator
     <button id="uuid-copy" type="button" style="padding:.8rem 1.25rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Copy UUID</button>
     <span id="uuid-status" role="status" style="align-self:center;color:#475569;font-size:.9rem"></span>
   </div>
+  <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid #e2e8f0">
+    <h2 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin:0 0 .75rem">Bulk UUID generator</h2>
+    <label for="uuid-count" style="display:block;font-weight:700;color:#0f172a;margin-bottom:.4rem">Number of UUIDs (1–500)</label>
+    <input id="uuid-count" type="number" min="1" max="500" value="100" style="width:100%;max-width:180px;box-sizing:border-box;padding:.7rem;border:1px solid #cbd5e1;border-radius:8px">
+    <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.8rem">
+      <button id="uuid-bulk-generate" type="button" style="padding:.75rem 1rem;background:#0f766e;color:#fff;border:0;border-radius:9px;font-weight:700;cursor:pointer">Generate bulk UUIDs</button>
+      <button id="uuid-export-csv" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Export CSV</button>
+      <button id="uuid-export-xlsx" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Export Excel (.xlsx)</button>
+      <button id="uuid-bulk-copy" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Copy all</button>
+    </div>
+    <p id="uuid-bulk-status" role="status" style="color:#475569;font-size:.9rem;line-height:1.5">Generate up to 500 UUIDs and export the list. For UUID v3/v5, each row uses your entered name plus a row number to produce a distinct deterministic name.</p>
+    <label for="uuid-bulk-output" style="display:block;font-weight:700;color:#0f172a;margin:.8rem 0 .4rem">Generated UUIDs</label>
+    <textarea id="uuid-bulk-output" rows="8" readonly spellcheck="false" placeholder="Your generated UUIDs will appear here, one per line." style="width:100%;box-sizing:border-box;padding:.8rem;border:1px solid #cbd5e1;border-radius:9px;font:.9rem/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;resize:vertical"></textarea>
+  </div>
 </section>
 
 <section style="max-width:900px">
