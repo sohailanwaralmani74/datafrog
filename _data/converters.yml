@@ -187,4 +187,93 @@
   icon: "🎨"
   date: "2026-10-16"
   updated: "2026-10-16"
+- title: "CSV to JSON"
+  short_name: "CSV to JSON"
+  url: "/csv-to-json"
+  category: "CSV"
+  description: "Convert CSV rows into a JSON array of objects or arrays. Preview structured data and download the result directly in your browser."
+  keywords: ["csv to json", "csv to json converter", "convert csv to json", "csv json array"]
+  icon: "📄"
+  date: "2026-06-24"
+  updated: "2026-06-24"
+
+- title: "CSV to XML"
+  short_name: "CSV to XML"
+  url: "/csv-to-xml"
+  category: "CSV"
+  description: "Convert CSV rows into XML records with configurable root and row element names. Escape special XML characters and download the converted document locally."
+  keywords: ["csv to xml", "csv to xml converter", "convert csv to xml", "csv xml conversion"]
+  icon: "📄"
+  date: "2026-07-08"
+  updated: "2026-07-08"
+
+- title: "CSV to Excel"
+  short_name: "CSV to Excel"
+  url: "/csv-to-excel"
+  category: "CSV"
+  description: "Turn CSV data into a downloadable Excel workbook (.xlsx), using the first row as column headers or treating every row as data. Conversion runs in your browser."
+  keywords: ["csv to excel", "csv to xlsx", "csv to excel converter", "convert csv to spreadsheet"]
+  icon: "📄"
+  date: "2026-07-19"
+  updated: "2026-07-19"
+
+- title: "CSV to PDF"
+  short_name: "CSV to PDF"
+  url: "/csv-to-pdf"
+  category: "CSV"
+  description: "Turn CSV rows into a neatly formatted PDF table with repeating column headings and automatic page breaks. Generate and download the PDF in your browser."
+  keywords: ["csv to pdf", "csv to pdf converter", "convert csv to pdf", "csv table pdf"]
+  icon: "📄"
+  date: "2026-08-02"
+  updated: "2026-08-02"
+
+- title: "CSV to HTML"
+  short_name: "CSV to HTML"
+  url: "/csv-to-html"
+  category: "CSV"
+  description: "Convert CSV data into an HTML table with escaped cell content and optional styled markup. Copy the generated HTML or download it for a webpage."
+  keywords: ["csv to html", "csv to html table", "convert csv to html", "csv html converter"]
+  icon: "📄"
+  date: "2026-08-14"
+  updated: "2026-08-14"
+
+- title: "CSV to SQL"
+  short_name: "CSV to SQL"
+  url: "/csv-to-sql"
+  category: "CSV"
+  description: "Convert CSV records into SQL INSERT statements with configurable table names and escaped values. Download the generated script locally."
+  keywords: ["csv to sql", "csv to sql insert", "csv to insert statement", "convert csv to sql"]
+  icon: "📄"
+  date: "2026-08-27"
+  updated: "2026-08-27"
+
+- title: "CSV to YAML"
+  short_name: "CSV to YAML"
+  url: "/csv-to-yaml"
+  category: "CSV"
+  description: "Convert tabular CSV rows into a YAML list of objects or row arrays. Handle quoted CSV fields and download clean YAML output from your browser."
+  keywords: ["csv to yaml", "csv yaml converter", "convert csv to yaml", "csv to yml"]
+  icon: "📄"
+  date: "2026-09-04"
+  updated: "2026-09-04"
+
+- title: "CSV to TSV"
+  short_name: "CSV to TSV"
+  url: "/csv-to-tsv"
+  category: "CSV"
+  description: "Convert CSV data to tab-separated values for spreadsheets, data imports, and text workflows while handling quoted commas and line breaks."
+  keywords: ["csv to tsv", "csv to tab separated", "csv to tab delimited", "convert csv to tsv"]
+  icon: "📄"
+  date: "2026-09-12"
+  updated: "2026-09-12"
+
+- title: "CSV to Markdown Table"
+  short_name: "CSV to Markdown Table"
+  url: "/csv-to-markdown"
+  category: "CSV"
+  description: "Convert CSV rows into a Markdown table for README files, documentation, notes, and issue descriptions. Escape table separators and copy or download the result."
+  keywords: ["csv to markdown", "csv to markdown table", "convert csv to markdown", "csv markdown converter"]
+  icon: "📄"
+  date: "2026-09-21"
+  updated: "2026-09-21"
 
