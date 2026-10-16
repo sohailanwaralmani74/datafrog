@@ -7,98 +7,59 @@ keywords: "qr code scanner, scan qr code from image, qr scanner online, scan qr 
 category: "Inspect"
 permalink: /inspect/qr-code-scanner
 ---
-<div class="tool-workspace" style="max-width:1000px;margin:0 auto;padding:2rem 1.25rem">
+
+<style>
+.df-tool{max-width:1000px;margin:0 auto;padding:1.5rem 1rem;color:#172033}
+.df-tool *{box-sizing:border-box}
+.df-panel{border:1px solid #dbe3ec;border-radius:12px;padding:1.25rem;margin:1.25rem 0;background:#fff}
+.df-drop{border:2px dashed #a8b6c7;border-radius:12px;background:#f8fafc;min-height:170px;padding:1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.65rem;text-align:center;transition:background .15s,border-color .15s}
+.df-drop.df-over{border-color:#2563eb;background:#eff6ff}
+.df-upload-btn,.df-action{border:0;border-radius:8px;padding:.72rem 1.15rem;background:#2563eb;color:#fff;font-weight:650;cursor:pointer}
+.df-upload-btn:hover,.df-action:hover{background:#1d4ed8}
+.df-action:disabled{opacity:.55;cursor:not-allowed}
+.df-muted{color:#64748b;font-size:.92rem}
+.df-file{font-weight:600;overflow-wrap:anywhere}
+.df-actions{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap;margin-top:1rem}
+.df-status{padding:.8rem 1rem;background:#f1f5f9;border-radius:8px;margin:1rem 0}
+.df-results{margin-top:1.25rem}
+.df-results[hidden],.df-action[hidden],.df-drop input[hidden]{display:none!important}
+.df-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.df-preview{display:block;max-width:100%;max-height:360px;margin:.5rem auto;object-fit:contain}
+.df-result-box{border:1px solid #dbe3ec;border-radius:10px;padding:1rem;min-width:0;overflow-wrap:anywhere}
+.df-tool textarea{width:100%;max-width:100%;padding:.8rem;border:1px solid #cbd5e1;border-radius:8px;font:inherit}
+.df-tool input[type=number],.df-tool input[type=range]{max-width:100%}
+@media(max-width:600px){.df-tool{padding:1rem .75rem}.df-panel{padding:1rem}.df-drop{padding:1rem}}
+</style>
+<div class="df-tool">
 <h1>QR Code Scanner</h1>
-<p>Scan a QR code from an image or your camera. Images are processed in your browser. Camera access requires your permission and a secure HTTPS connection. Always check decoded links before visiting them.</p>
-<section style="border:1px solid #ddd;border-radius:10px;padding:1rem;margin:1rem 0">
-<h2>Scan an image</h2>
-<label for="qr-file">Choose an image containing a QR code</label>
-<input id="qr-file" type="file" accept="image/png,image/jpeg,image/gif,image/webp,.png,.jpg,.jpeg,.gif,.webp" style="display:block;position:relative;z-index:5;opacity:1;width:100%;max-width:100%;margin:0.75rem 0;padding:0.5rem;cursor:pointer"><p id="qr-file-name" aria-live="polite">No image selected.</p>
-<button id="qr-image-scan" type="button" disabled>Scan image</button>
-<img id="qr-image" alt="Selected image preview" style="display:block;max-width:100%;max-height:320px;margin-top:1rem">
+<p>Upload or drop an image containing a QR code, then click <strong>Scan image</strong>. You can also use your camera. Decoding happens in your browser. Check links before opening them.</p>
+<section class="df-panel">
+<h2>Scan from an image</h2>
+<div id="qr-drop" class="df-drop" tabindex="0" role="button" aria-label="Upload or drop an image containing a QR code"><strong>Drop an image containing a QR code</strong><span class="df-muted">PNG, JPG, GIF, or WebP</span><button id="qr-upload" class="df-upload-btn" type="button">Upload image</button><input id="qr-file" type="file" accept="image/png,image/jpeg,image/gif,image/webp,.png,.jpg,.jpeg,.gif,.webp" hidden></div>
+<p id="qr-file-name" class="df-file df-muted" aria-live="polite">No image selected.</p>
+<img id="qr-preview" class="df-preview" alt="Selected image preview" hidden>
+<div class="df-actions"><button id="qr-scan" class="df-action" type="button" hidden disabled>Scan image</button></div>
 </section>
-<section style="border:1px solid #ddd;border-radius:10px;padding:1rem;margin:1rem 0">
-<h2>Scan with camera</h2>
-<button id="qr-start" type="button">Start camera</button>
-<button id="qr-stop" type="button" disabled>Stop camera</button>
-<video id="qr-video" playsinline muted style="display:block;max-width:100%;max-height:360px;margin-top:1rem"></video>
+<section class="df-panel">
+<h2>Scan with camera</h2><div class="df-actions"><button id="qr-start" class="df-action" type="button">Start camera</button><button id="qr-stop" class="df-action" type="button" disabled>Stop camera</button></div><video id="qr-video" playsinline muted style="display:block;width:100%;max-width:520px;max-height:360px;margin-top:1rem;background:#0f172a;border-radius:8px"></video>
 </section>
-<h2>Decoded result</h2>
-<textarea id="qr-result" rows="4" style="width:100%;box-sizing:border-box" readonly placeholder="Scanned text appears here"></textarea>
-<p><button id="qr-copy" type="button">Copy result</button> <a id="qr-open" hidden target="_blank" rel="noopener noreferrer">Open decoded link (check it first)</a></p>
-<p id="qr-status" role="status" aria-live="polite">Choose an image or start the camera.</p>
-<canvas id="qr-canvas" hidden></canvas>
+<section id="qr-results" class="df-panel df-results" hidden><h2>Scan result</h2><textarea id="qr-result" rows="4" readonly placeholder="Decoded QR content appears here"></textarea><div class="df-actions"><button id="qr-copy" class="df-action" type="button">Copy result</button><a id="qr-open" class="df-action" hidden target="_blank" rel="noopener noreferrer">Open decoded link</a></div></section>
+<p id="qr-status" class="df-status" role="status" aria-live="polite">Upload an image or start the camera.</p><canvas id="qr-canvas" hidden></canvas>
 </div>
 <script>
 (function(){
-const file=document.getElementById('qr-file'),img=document.getElementById('qr-image'),scanImage=document.getElementById('qr-image-scan'),result=document.getElementById('qr-result'),status=document.getElementById('qr-status'),video=document.getElementById('qr-video'),canvas=document.getElementById('qr-canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true}),start=document.getElementById('qr-start'),stop=document.getElementById('qr-stop'),open=document.getElementById('qr-open');
-let imageUrl=null,stream=null,timer=null,loadingLibrary=null;\nconst fileName=document.getElementById('qr-file-name');
-function show(text){result.value=text;open.hidden=true;try{const u=new URL(text);if(u.protocol==='https:'||u.protocol==='http:'){open.href=u.href;open.hidden=false}}catch(e){}}
-function loadScanner(){
- if(window.jsQR)return Promise.resolve();
- if(loadingLibrary)return loadingLibrary;
- loadingLibrary=new Promise((resolve,reject)=>{
-  const script=document.createElement('script');
-  script.src='https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js';
-  script.onload=()=>window.jsQR?resolve():reject(new Error('QR scanner library did not initialize.'));
-  script.onerror=()=>reject(new Error('Could not load the QR scanner library. Check your connection or content blocker.'));
-  document.head.appendChild(script);
- });
- return loadingLibrary;
-}
-function decode(source){
- if(!window.jsQR)throw new Error('The scanner library is not ready yet.');
- const sw=source.naturalWidth||source.videoWidth,sh=source.naturalHeight||source.videoHeight;
- if(!sw||!sh)throw new Error('The image is not ready yet. Please try again.');
- const scale=Math.min(1,1800/Math.max(sw,sh));
- canvas.width=Math.max(1,Math.round(sw*scale));canvas.height=Math.max(1,Math.round(sh*scale));
- ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(source,0,0,canvas.width,canvas.height);
- const d=ctx.getImageData(0,0,canvas.width,canvas.height),code=window.jsQR(d.data,d.width,d.height,{inversionAttempts:'attemptBoth'});
- if(code){show(code.data);status.textContent='QR code detected. Review the result before opening any link.';return true}
- return false;
-}
-function loadSelectedImage(f){
- scanImage.disabled=true;show('');
- if(!f){fileName.textContent='No image selected.';img.removeAttribute('src');return}
- const allowed=/\\.(png|jpe?g|gif|webp)$/i.test(f.name);
- if((f.type&&!f.type.startsWith('image/'))||(!f.type&&!allowed)){fileName.textContent='Unsupported file: '+f.name;status.textContent='Choose a PNG, JPG, GIF, or WebP image.';return}
- if(imageUrl){URL.revokeObjectURL(imageUrl);imageUrl=null}
- fileName.textContent='Selected: '+f.name+' ('+Math.round(f.size/1024)+' KB). Loading preview…';
- const reader=new FileReader();
- reader.onload=()=>{
-  img.onload=()=>{scanImage.disabled=false;fileName.textContent='Ready: '+f.name;status.textContent='Image loaded. Click Scan image to read the QR code.'};
-  img.onerror=()=>{scanImage.disabled=true;fileName.textContent='Could not preview '+f.name;status.textContent='This image could not be opened. Try another PNG or JPG.'};
-  img.src=String(reader.result||'');
- };
- reader.onerror=()=>{scanImage.disabled=true;fileName.textContent='Could not read '+f.name;status.textContent='Your browser could not read this file. Try another image.'};
- reader.readAsDataURL(f);
-}
-file.addEventListener('change',()=>loadSelectedImage(file.files&&file.files[0]));
-file.addEventListener('input',()=>{if(file.files&&file.files[0])loadSelectedImage(file.files[0])});
-scanImage.addEventListener('click',async()=>{
- if(!img.complete||!img.naturalWidth){status.textContent='Choose an image and wait for its preview to finish loading.';return}
- scanImage.disabled=true;status.textContent='Scanning image…';
- try{await loadScanner();if(!decode(img))status.textContent='No QR code found. Try a clearer image with the full code visible.'}
- catch(e){status.textContent=e.message||'Could not scan this image.'}
- finally{scanImage.disabled=false}
-});
-function halt(){if(timer){clearInterval(timer);timer=null}if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}video.srcObject=null;start.disabled=false;stop.disabled=true}
-start.addEventListener('click',async()=>{
- start.disabled=true;status.textContent='Preparing scanner…';
- try{
-  await loadScanner();
-  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('Camera access is unavailable. Use HTTPS or scan an image instead.');
-  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
-  video.srcObject=stream;await video.play();stop.disabled=false;status.textContent='Camera running. Point it at a QR code.';
-  timer=setInterval(()=>{if(video.readyState>=2){try{if(decode(video))halt()}catch(e){status.textContent='Camera scan error. Try stopping and restarting the camera.';halt()}}},400);
- }catch(e){halt();status.textContent=e.message||'Camera could not start. Check browser permission or scan an image instead.'}
-});
-stop.addEventListener('click',()=>{halt();status.textContent='Camera stopped.'});
-document.getElementById('qr-copy').addEventListener('click',async()=>{
- if(!result.value){status.textContent='There is no result to copy yet.';return}
- try{await navigator.clipboard.writeText(result.value);status.textContent='Result copied.'}
- catch(e){result.focus();result.select();status.textContent='Automatic copy was blocked. The result is selected; copy it manually.'}
-});
-window.addEventListener('pagehide',()=>{halt();if(imageUrl)URL.revokeObjectURL(imageUrl)});
+const file=document.getElementById('qr-file'),drop=document.getElementById('qr-drop'),upload=document.getElementById('qr-upload'),fileName=document.getElementById('qr-file-name'),preview=document.getElementById('qr-preview'),scan=document.getElementById('qr-scan'),results=document.getElementById('qr-results'),result=document.getElementById('qr-result'),status=document.getElementById('qr-status'),canvas=document.getElementById('qr-canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true}),video=document.getElementById('qr-video'),start=document.getElementById('qr-start'),stop=document.getElementById('qr-stop'),copy=document.getElementById('qr-copy'),open=document.getElementById('qr-open');
+let selectedFile=null,scannerPromise=null,stream=null,timer=null;
+upload.addEventListener('click',()=>file.click());drop.addEventListener('click',e=>{if(e.target!==upload)file.click()});drop.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();file.click()}});['dragenter','dragover'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add('df-over')}));['dragleave','drop'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove('df-over')}));drop.addEventListener('drop',e=>loadFile(e.dataTransfer.files&&e.dataTransfer.files[0]));file.addEventListener('change',()=>loadFile(file.files&&file.files[0]));
+function loadFile(f){selectedFile=null;scan.hidden=true;scan.disabled=true;preview.hidden=true;preview.removeAttribute('src');results.hidden=true;setResult('');if(!f){fileName.textContent='No image selected.';return}const validType=!f.type||/^image\/(png|jpeg|gif|webp)$/i.test(f.type);const validName=/\.(png|jpe?g|gif|webp)$/i.test(f.name);if(!validType||!validName){fileName.textContent='Unsupported file type.';status.textContent='Choose a PNG, JPG, GIF, or WebP image.';return}fileName.textContent='Loading '+f.name+'…';const url=URL.createObjectURL(f);preview.onload=()=>{selectedFile=f;preview.hidden=false;scan.hidden=false;scan.disabled=false;fileName.textContent='Ready: '+f.name;status.textContent='Image loaded. Click Scan image to check for a QR code.';URL.revokeObjectURL(url)};preview.onerror=()=>{fileName.textContent='Could not open '+f.name;status.textContent='This file is not a readable image.';URL.revokeObjectURL(url)};preview.src=url}
+function loadScanner(){if(window.jsQR)return Promise.resolve();if(scannerPromise)return scannerPromise;scannerPromise=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js';s.onload=()=>window.jsQR?resolve():reject(new Error('QR scanner library did not initialize.'));s.onerror=()=>reject(new Error('Could not load the QR scanner library. Check your connection or content blocker.'));document.head.appendChild(s)});return scannerPromise}
+function setResult(value){result.value=value||'';open.hidden=true;open.removeAttribute('href');if(!value)return;try{const u=new URL(value);if(u.protocol==='https:'||u.protocol==='http:'){open.href=u.href;open.hidden=false}}catch(_){}}
+function decode(source){if(!window.jsQR)throw new Error('QR scanner is not ready.');const w=source.naturalWidth||source.videoWidth,h=source.naturalHeight||source.videoHeight;if(!w||!h)throw new Error('The image is not ready. Please try another image.');const scale=Math.min(1,1800/Math.max(w,h));canvas.width=Math.max(1,Math.round(w*scale));canvas.height=Math.max(1,Math.round(h*scale));ctx.drawImage(source,0,0,canvas.width,canvas.height);const pixels=ctx.getImageData(0,0,canvas.width,canvas.height);const code=window.jsQR(pixels.data,pixels.width,pixels.height,{inversionAttempts:'attemptBoth'});if(!code)return false;setResult(code.data);results.hidden=false;status.textContent='QR code found. Check the decoded content before opening any link.';return true}
+scan.addEventListener('click',async()=>{if(!selectedFile||!preview.complete||!preview.naturalWidth){status.textContent='Upload a valid image before scanning.';return}scan.disabled=true;status.textContent='Scanning image…';setResult('');results.hidden=true;try{await loadScanner();if(!decode(preview)){results.hidden=false;status.textContent='No readable QR code was found. Try a clearer image with the entire QR code visible.'}}catch(e){status.textContent=e.message||'Could not scan this image.'}finally{scan.disabled=false}});
+function stopCamera(){if(timer){clearInterval(timer);timer=null}if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}video.srcObject=null;start.disabled=false;stop.disabled=true}
+start.addEventListener('click',async()=>{start.disabled=true;status.textContent='Preparing camera…';try{await loadScanner();if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('Camera access is unavailable. Use HTTPS or upload an image instead.');stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});video.srcObject=stream;await video.play();stop.disabled=false;status.textContent='Camera running. Point it at a QR code.';timer=setInterval(()=>{if(video.readyState<2)return;try{if(decode(video))stopCamera()}catch(e){status.textContent='Camera scan failed. Try uploading an image instead.';stopCamera()}},400)}catch(e){stopCamera();status.textContent=e.message||'Camera could not start. Check browser permissions.'}});
+stop.addEventListener('click',()=>{stopCamera();status.textContent='Camera stopped.'});
+copy.addEventListener('click',async()=>{if(!result.value){status.textContent='There is no result to copy.';return}try{await navigator.clipboard.writeText(result.value);status.textContent='Result copied.'}catch(e){result.focus();result.select();status.textContent='Automatic copying was blocked. Copy the selected result manually.'}});
+window.addEventListener('pagehide',stopCamera);
 })();
 </script>
