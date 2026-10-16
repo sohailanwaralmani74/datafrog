@@ -177,3 +177,14 @@
   icon: "🌳"
   date: "2026-09-29"
   updated: "2026-09-29"
+
+- title: "PX to REM"
+  short_name: "PX to REM"
+  url: "/px-to-rem"
+  category: "CSS"
+  description: "Convert CSS pixel values to rem units and rem values back to pixels with a configurable root font size. Convert multiple values and copy CSS-ready results locally in your browser."
+  keywords: ["px to rem", "px to rem converter", "pixels to rem", "rem to px", "rem to px converter", "CSS unit converter"]
+  icon: "🎨"
+  date: "2026-10-16"
+  updated: "2026-10-16"
+
