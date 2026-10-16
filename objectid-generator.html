@@ -61,7 +61,7 @@ permalink: /objectid-generator
 const $=id=>document.getElementById(id);
 let randomPart, counter, values=[];
 function randomBytes(length){const bytes=new Uint8Array(length);crypto.getRandomValues(bytes);return bytes;}
-function resetProcess(){randomPart=randomBytes(5);counter=(randomBytes(3)[0]<<16)|(randomBytes(3)[1]<<8)|randomBytes(3)[2];counter&=0xffffff;}
+function resetProcess(){randomPart=randomBytes(5);const seed=randomBytes(3);counter=(seed[0]<<16)|(seed[1]<<8)|seed[2];}
 function makeObjectId(){
  const bytes=new Uint8Array(12),seconds=Math.floor(Date.now()/1000);
  bytes[0]=(seconds>>>24)&255;bytes[1]=(seconds>>>16)&255;bytes[2]=(seconds>>>8)&255;bytes[3]=seconds&255;
