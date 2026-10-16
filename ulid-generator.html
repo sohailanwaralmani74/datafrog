@@ -1,0 +1,93 @@
+---
+layout: main
+title: "ULID Generator - Generate Sortable ULIDs Online | DataFrog"
+short_name: "ULID Generator"
+description: "Generate ULIDs individually or in batches of up to 500. Export sortable, timestamp-based identifiers to CSV or Excel directly from your browser."
+keywords: "ULID generator, ULID generator online, generate ULID, bulk ULID generator, ULID to CSV, ULID Excel export, sortable unique identifier"
+category: "Generate"
+permalink: /ulid-generator
+---
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"ULID Generator - DataFrog","url":"https://datafrog.tools/ulid-generator","description":"Generate sortable ULIDs in your browser with bulk CSV and Excel export.","applicationCategory":"DeveloperApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+
+<div style="margin-bottom:1.5rem">
+  <span style="display:inline-block;padding:.25rem .75rem;background:#f5f3ff;color:#6d28d9;font-weight:700;font-size:.8rem;border-radius:9999px;margin-bottom:.5rem">⚙️ Generate Tool</span>
+  <h1 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:.5rem">ULID Generator</h1>
+  <p style="color:#475569;font-size:1.05rem;max-width:850px;line-height:1.6">Generate Universally Unique Lexicographically Sortable Identifiers (ULIDs). Create one ULID or a batch of up to 500, then copy or export your list as CSV or Excel.</p>
+</div>
+
+<section style="border:1px solid #e2e8f0;border-radius:16px;background:#fff;padding:clamp(1rem,3vw,1.75rem);box-shadow:0 4px 14px rgba(15,23,42,.04);margin-bottom:2rem">
+  <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem">
+    <div style="font-size:.8rem;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:.5rem">Generated ULID</div>
+    <output id="ulid-single" aria-live="polite" style="display:block;overflow-wrap:anywhere;font:700 clamp(1rem,2.5vw,1.35rem)/1.7 ui-monospace,monospace;color:#0f172a">Generating…</output>
+  </div>
+  <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1rem">
+    <button id="ulid-one" type="button" style="padding:.8rem 1.1rem;background:#2563eb;color:#fff;border:0;border-radius:9px;font-weight:700;cursor:pointer">Generate ULID</button>
+    <button id="ulid-copy-one" type="button" style="padding:.8rem 1.1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Copy ULID</button>
+  </div>
+  <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid #e2e8f0">
+    <h2 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin:0 0 .75rem">Bulk ULID generator</h2>
+    <label for="ulid-count" style="display:block;font-weight:700;margin-bottom:.4rem">Number of ULIDs (1–500)</label>
+    <input id="ulid-count" type="number" min="1" max="500" value="100" style="width:100%;max-width:180px;box-sizing:border-box;padding:.7rem;border:1px solid #cbd5e1;border-radius:8px">
+    <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.8rem">
+      <button id="ulid-bulk-generate" type="button" style="padding:.75rem 1rem;background:#0f766e;color:#fff;border:0;border-radius:9px;font-weight:700;cursor:pointer">Generate bulk ULIDs</button>
+      <button id="ulid-csv" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Export CSV</button>
+      <button id="ulid-xlsx" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Export Excel (.xlsx)</button>
+      <button id="ulid-copy-all" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Copy all</button>
+    </div>
+    <p id="ulid-status" role="status" style="color:#475569;font-size:.9rem;line-height:1.5">Generate up to 500 ULIDs. Each identifier includes a millisecond timestamp and random component.</p>
+    <label for="ulid-list" style="display:block;font-weight:700;margin:.8rem 0 .4rem">Generated ULIDs</label>
+    <textarea id="ulid-list" rows="8" readonly spellcheck="false" placeholder="Generated ULIDs appear here, one per line." style="width:100%;box-sizing:border-box;padding:.8rem;border:1px solid #cbd5e1;border-radius:9px;font:.9rem/1.6 ui-monospace,monospace;resize:vertical"></textarea>
+  </div>
+</section>
+
+<section style="max-width:900px;color:#475569;line-height:1.7">
+  <h2 style="font-size:1.5rem;font-weight:800;color:#0f172a">What is a ULID?</h2>
+  <p>A ULID is a 128-bit identifier represented by 26 Crockford Base32 characters. Its first 48 bits encode a Unix timestamp in milliseconds, followed by 80 bits of randomness. This design makes ULIDs sortable by creation time when compared lexicographically.</p>
+  <h2 style="font-size:1.3rem;font-weight:800;color:#0f172a">ULID vs UUID</h2>
+  <p>ULIDs are compact, use an uppercase alphanumeric alphabet, and sort by timestamp. UUIDs use a different standard format and have multiple versions, including random UUID v4 and time-ordered UUID v7. Choose the format your database and application expect.</p>
+  <h2 style="font-size:1.3rem;font-weight:800;color:#0f172a">Frequently asked questions</h2>
+  <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a">Are ULIDs guaranteed to be unique?</h3>
+  <p>No identifier format can promise absolute uniqueness when random values are used. ULID collisions are extremely unlikely with proper random generation, but applications with strict requirements should still enforce uniqueness where identifiers are stored.</p>
+  <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a">Can I export multiple ULIDs?</h3>
+  <p>Yes. Generate up to 500 at a time and export the list as CSV or an Excel workbook. Processing happens in your browser; Excel export loads its spreadsheet library only when you request that format.</p>
+</section>
+
+<script>
+(function(){
+'use strict';
+const alphabet='0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+const $=id=>document.getElementById(id);
+function makeUlid(){
+  const bytes=new Uint8Array(16);
+  const now=BigInt(Date.now());
+  for(let i=5;i>=0;i--) bytes[5-i]=Number((now>>BigInt(i*8))&255n);
+  crypto.getRandomValues(bytes.subarray(6));
+  let n=0n; for(const b of bytes)n=(n<<8n)|BigInt(b);
+  let out=''; for(let i=0;i<26;i++){out=alphabet[Number(n&31n)]+out;n>>=5n;}
+  return out;
+}
+let values=[];
+function single(){ $('ulid-single').textContent=makeUlid(); }
+function count(){
+ const n=Number($('ulid-count').value);
+ if(!Number.isInteger(n)||n<1||n>500){$('ulid-status').textContent='Enter a whole number from 1 to 500.';return null;}
+ return n;
+}
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function csv(){if(!values.length){$('ulid-status').textContent='Generate ULIDs first.';return;}download(new Blob(['\ufeffULID\r\n'+values.map(x=>'"'+x+'"').join('\r\n')],{type:'text/csv;charset=utf-8;'}),'datafrog-ulids.csv');}
+async function xlsx(){
+ if(!values.length){$('ulid-status').textContent='Generate ULIDs first.';return;}
+ try{
+  if(!window.XLSX){$('ulid-status').textContent='Loading Excel export…';await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';s.onload=res;s.onerror=()=>rej(new Error('Excel library could not load. CSV export is still available.'));document.head.appendChild(s);});}
+  const wb=XLSX.utils.book_new(),ws=XLSX.utils.aoa_to_sheet([['ULID'],...values.map(x=>[x])]);XLSX.utils.book_append_sheet(wb,ws,'ULIDs');XLSX.writeFile(wb,'datafrog-ulids.xlsx');$('ulid-status').textContent='Excel file prepared.';
+ }catch(e){$('ulid-status').textContent=e.message||'Excel export failed.';}
+}
+$('ulid-one').addEventListener('click',single);$('ulid-copy-one').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('ulid-single').textContent);$('ulid-status').textContent='Copied ULID.';}catch(e){$('ulid-status').textContent='Clipboard access was blocked by your browser.';}});
+$('ulid-bulk-generate').addEventListener('click',()=>{const n=count();if(!n)return;values=Array.from({length:n},makeUlid);$('ulid-list').value=values.join('\n');$('ulid-status').textContent='Generated '+n+' ULIDs.';});
+$('ulid-csv').addEventListener('click',csv);$('ulid-xlsx').addEventListener('click',xlsx);$('ulid-copy-all').addEventListener('click',async()=>{if(!values.length){$('ulid-status').textContent='Generate ULIDs first.';return;}try{await navigator.clipboard.writeText(values.join('\n'));$('ulid-status').textContent='Copied '+values.length+' ULIDs.';}catch(e){$('ulid-status').textContent='Clipboard access was blocked by your browser.';}});
+single();
+})();
+</script>
