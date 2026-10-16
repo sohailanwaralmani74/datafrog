@@ -1,0 +1,21 @@
+---
+layout: main
+title: "Compress PNG Online - Reduce PNG Image Size | DataFrog"
+short_name: "Compress PNG"
+description: "Resize and re-encode PNG images locally in your browser while preserving transparency. Compare output size before downloading."
+keywords: "compress png, png compressor, reduce png file size, compress png online"
+category: "Clean"
+permalink: /clean/compress-png
+---
+<div class="tool-workspace" style="max-width:1000px;margin:0 auto;padding:2rem 1.25rem">
+<h1>Compress PNG Image</h1><p>Re-encode or resize a PNG image in your browser. Transparency is retained, but browser re-encoding is not a specialist lossless PNG optimizer and may produce a larger file.</p>
+<p><label for="png-file">Choose PNG image</label> <input id="png-file" type="file" accept="image/png,.png"></p>
+<p><label for="png-width">Max width in pixels (0 keeps original width)</label> <input id="png-width" type="number" min="0" value="0"><button id="png-run" type="button" disabled>Process PNG</button> <a id="png-download" hidden>Download PNG</a></p>
+<p id="png-status" role="status" aria-live="polite"></p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem"><div><h2>Original</h2><img id="png-original" alt="Original PNG preview" style="max-width:100%;max-height:360px"><p id="png-before"></p></div><div><h2>Processed</h2><img id="png-result" alt="Processed PNG preview" style="max-width:100%;max-height:360px"><p id="png-after"></p></div></div>
+</div>
+<script>
+(()=>{const file=document.getElementById('png-file'),w=document.getElementById('png-width'),run=document.getElementById('png-run'),status=document.getElementById('png-status'),orig=document.getElementById('png-original'),out=document.getElementById('png-result'),dl=document.getElementById('png-download');let img=null,src=null;const size=n=>n<1024?n+' B':(n/1024).toFixed(1)+' KB';
+file.onchange=()=>{const f=file.files[0];if(!f)return;if(src)URL.revokeObjectURL(src);src=URL.createObjectURL(f);img=new Image();img.onload=()=>{orig.src=src;document.getElementById('png-before').textContent=img.naturalWidth+' × '+img.naturalHeight+' · '+size(f.size);run.disabled=false;out.removeAttribute('src');dl.hidden=true;status.textContent='Image ready.'};img.onerror=()=>status.textContent='Could not open this PNG.';img.src=src};
+run.onclick=()=>{if(!img)return;const factor=Number(w.value)>0?Math.min(1,Number(w.value)/img.naturalWidth):1,c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.naturalWidth*factor));c.height=Math.max(1,Math.round(img.naturalHeight*factor));c.getContext('2d').drawImage(img,0,0,c.width,c.height);c.toBlob(b=>{if(!b){status.textContent='Could not process this image.';return}const u=URL.createObjectURL(b);out.src=u;document.getElementById('png-after').textContent=c.width+' × '+c.height+' · '+size(b.size)+' ('+(b.size<file.files[0].size?'smaller':'not smaller than original')+')';dl.href=u;dl.download='processed.png';dl.hidden=false;status.textContent='Done. Check the size comparison; re-encoding alone may not reduce PNG size.'},'image/png')};
+})();
+</script>
