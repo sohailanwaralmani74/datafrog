@@ -91,7 +91,7 @@ function getRows(){
 function convert(){
  try{
   const {headers,records,hasHeader}=getRows();const objects=$('shape')?$('shape').value==='objects':true;let result='';
-  const objects=$('shape').value==='objects'; result=JSON.stringify(records.map(row=>objects?Object.fromEntries(headers.map((h,i)=>[h,row[i]??""])):row),null,2);
+  result=JSON.stringify(records.map(row=>objects?Object.fromEntries(headers.map((h,i)=>[h,row[i]??""])):row),null,2);
   resultValue=result;$('output').value=result;$('status').textContent=records.length+' data row(s) converted. '+(false?'Your file was generated and downloaded.':'Review the output, then copy or download it.');
  }catch(e){$('status').textContent=e.message||'Conversion failed. Check the input and try again.';}
 }
