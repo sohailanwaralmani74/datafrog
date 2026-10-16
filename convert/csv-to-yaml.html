@@ -59,16 +59,14 @@ Sara,Marketing,false</textarea>
 'use strict';
 const $=id=>document.getElementById(id);
 const sample='name,department,active\nAmina,Design,true\nBilal,Engineering,true\nSara,Marketing,false';
-let generatedFile=null;
+let resultValue='';
 function parseCSV(text,delimiter){
- const rows=[];let row=[],field='',quoted=false;
- text=String(text||'').replace(/^\uFEFF/,'');
- for(let i=0;i<text.length;i++){
-  const c=text[i];
+ const rows=[];let row=[],field='',quoted=false;text=String(text||'').replace(/^\uFEFF/,'');
+ for(let i=0;i<text.length;i++){const c=text[i];
   if(quoted){if(c==='"'&&text[i+1]==='"'){field+='"';i++;}else if(c==='"')quoted=false;else field+=c;}
   else if(c==='"'&&field==='')quoted=true;
   else if(c===delimiter){row.push(field);field='';}
-  else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field);if(row.some(v=>v!=='')||field!=='')rows.push(row);row=[];field='';}
+  else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field);if(row.some(v=>v!==''))rows.push(row);row=[];field='';}
   else field+=c;
  }
  if(quoted)throw Error('A quoted CSV field was not closed. Check the input quotes.');
@@ -81,35 +79,25 @@ function validName(v,fallback){v=String(v||'').trim();return /^[A-Za-z_][A-Za-z0
 function validSqlName(v){v=String(v||'').trim();if(!/^[A-Za-z_][A-Za-z0-9_]*$/.test(v))throw Error('Use a simple SQL table name with letters, numbers, and underscores.');return v;}
 function sqlValue(v){if(v==='')return 'NULL';if(/^(true|false)$/i.test(v))return v.toUpperCase();if(/^-?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i.test(v))return v;return "'"+String(v).replace(/'/g,"''")+"'";}
 function getRows(){
- const d=$('delimiter').value==='\\t'?'\t':$('delimiter').value;
- const rows=parseCSV($('csvInput').value,d);if(!rows.length)throw Error('Paste CSV data or choose a CSV file first.');
- const hasHeader=$('hasHeader').checked;
- const headers=hasHeader?rows[0].map((h,i)=>h.trim()||'column_'+(i+1)):rows[0].map((_,i)=>'column_'+(i+1));
- const records=hasHeader?rows.slice(1):rows;
- if(!records.length)throw Error('No data rows found. Add at least one row after the header.');
- const width=Math.max(headers.length,...records.map(r=>r.length));
- while(headers.length<width)headers.push('column_'+(headers.length+1));
+ const delim=$('delimiter').value==='\\t'?'\t':$('delimiter').value;
+ const rows=parseCSV($('csvInput').value,delim);if(!rows.length)throw Error('Paste CSV data or choose a CSV file first.');
+ const hasHeader=$('hasHeader').checked;const headers=hasHeader?rows[0].map((h,i)=>h.trim()||'column_'+(i+1)):rows[0].map((_,i)=>'column_'+(i+1));
+ const records=hasHeader?rows.slice(1):rows;if(!records.length)throw Error('No data rows found. Add at least one row after the header.');
+ const width=Math.max(headers.length,...records.map(r=>r.length));while(headers.length<width)headers.push('column_'+(headers.length+1));
  return {headers,records,hasHeader};
 }
 function convert(){
  try{
   const {headers,records,hasHeader}=getRows();const objects=$('shape')?$('shape').value==='objects':true;let result='';
-  const scalar=v=>v===""?'""':/^(true|false|null|~|[-+]?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?)$/i.test(v)||/[:#\[\]{}&,*!|>'"%@\x60]|^\s|\s$|\n/.test(v)?JSON.stringify(v):v; result=objects?records.map(row=>'- '+headers.map((h,i)=>'\n  '+JSON.stringify(h)+': '+scalar(row[i]??"")).join("")).join('\n'):records.map(row=>'- '+row.map(scalar).join('\n  - ')).join('\n');
-  $('output').value=result;generatedFile=null;$('status').textContent=records.length+' data row(s) converted. '+(isBinary?'Your file should download automatically.':'Review the output, then copy or download it.'); 
-  
-  if(false){ /* workbook is generated above */ }
-  if(false){ /* PDF is generated above */ }
+  const scalar=v=>v===''?'""':(/^(true|false|null|~|[-+]?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?)$/i.test(v)||/[:#\[\]{}&,*!|>'"%@\x60]|^\s|\s$|\n/.test(v))?JSON.stringify(v):v;result=objects?records.map(row=>'- '+headers.map((h,i)=>'\n  '+JSON.stringify(h)+': '+scalar(row[i]??'')).join('')).join('\n'):records.map(row=>'- '+row.map(scalar).join('\n  - ')).join('\n');
+  resultValue=result;$('output').value=result;$('status').textContent=records.length+' data row(s) converted. '+(false?'Your file was generated and downloaded.':'Review the output, then copy or download it.');
  }catch(e){$('status').textContent=e.message||'Conversion failed. Check the input and try again.';}
 }
 $('convertBtn').addEventListener('click',convert);
 $('sampleBtn').addEventListener('click',()=>{$('csvInput').value=sample;$('status').textContent='Sample CSV loaded.';});
-$('clearBtn').addEventListener('click',()=>{$('csvInput').value='';$('output').value='';generatedFile=null;$('status').textContent='Input and output cleared.';});
+$('clearBtn').addEventListener('click',()=>{$('csvInput').value='';$('output').value='';resultValue='';$('status').textContent='Input and output cleared.';});
 $('csvFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{$('csvInput').value=await f.text();$('status').textContent='Loaded '+f.name+' ('+f.size.toLocaleString()+' bytes).';}catch(err){$('status').textContent='Could not read this file.';}});
-$('copyBtn').addEventListener('click',async()=>{const value=$('output').value;if(!value){$('status').textContent='Convert data first.';return;}try{await navigator.clipboard.writeText(value);$('status').textContent='Output copied.';}catch(e){$('output').focus();$('output').select();$('status').textContent='Output selected. Press Ctrl+C to copy.';}});
-$('downloadBtn').addEventListener('click',()=>{
- const value=$('output').value;if(!value){$('status').textContent='Convert data first.';return;}
- const mime="text/yaml";
- const blob=new Blob([value],{type:mime+';charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download="csv-converted.yaml";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);$('status').textContent='Download started.';
-});
+$('copyBtn').addEventListener('click',async()=>{if(false){ $('status').textContent='This converter creates a downloadable file; use Convert to YAML to generate it.';return;}const value=resultValue;if(!value){$('status').textContent='Convert data first.';return;}try{await navigator.clipboard.writeText(value);$('status').textContent='Output copied.';}catch(e){$('output').focus();$('output').select();$('status').textContent='Output selected. Press Ctrl+C to copy.';}});
+$('downloadBtn').addEventListener('click',()=>{if(false){convert();return;}const value=resultValue;if(!value){$('status').textContent='Convert data first.';return;}const blob=new Blob([value],{type:"text/yaml"+';charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download="csv-converted.yaml";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);$('status').textContent='Download started.';});
 })();
 </script>
