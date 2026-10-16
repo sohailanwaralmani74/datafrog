@@ -13,7 +13,7 @@ permalink: /inspect/qr-code-scanner
 <section style="border:1px solid #ddd;border-radius:10px;padding:1rem;margin:1rem 0">
 <h2>Scan an image</h2>
 <label for="qr-file">Choose an image containing a QR code</label>
-<input id="qr-file" type="file" accept="image/*">
+<input id="qr-file" type="file" accept="image/png,image/jpeg,image/gif,image/webp,.png,.jpg,.jpeg,.gif,.webp" style="display:block;position:relative;z-index:5;opacity:1;width:100%;max-width:100%;margin:0.75rem 0;padding:0.5rem;cursor:pointer"><p id="qr-file-name" aria-live="polite">No image selected.</p>
 <button id="qr-image-scan" type="button" disabled>Scan image</button>
 <img id="qr-image" alt="Selected image preview" style="display:block;max-width:100%;max-height:320px;margin-top:1rem">
 </section>
@@ -32,7 +32,7 @@ permalink: /inspect/qr-code-scanner
 <script>
 (function(){
 const file=document.getElementById('qr-file'),img=document.getElementById('qr-image'),scanImage=document.getElementById('qr-image-scan'),result=document.getElementById('qr-result'),status=document.getElementById('qr-status'),video=document.getElementById('qr-video'),canvas=document.getElementById('qr-canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true}),start=document.getElementById('qr-start'),stop=document.getElementById('qr-stop'),open=document.getElementById('qr-open');
-let imageUrl=null,stream=null,timer=null,loadingLibrary=null;
+let imageUrl=null,stream=null,timer=null,loadingLibrary=null;\nconst fileName=document.getElementById('qr-file-name');
 function show(text){result.value=text;open.hidden=true;try{const u=new URL(text);if(u.protocol==='https:'||u.protocol==='http:'){open.href=u.href;open.hidden=false}}catch(e){}}
 function loadScanner(){
  if(window.jsQR)return Promise.resolve();
@@ -57,15 +57,24 @@ function decode(source){
  if(code){show(code.data);status.textContent='QR code detected. Review the result before opening any link.';return true}
  return false;
 }
-file.addEventListener('change',()=>{
- const f=file.files&&file.files[0];scanImage.disabled=true;show('');
- if(!f){img.removeAttribute('src');return}
- if(!f.type.startsWith('image/')){status.textContent='Please choose an image file.';return}
- if(imageUrl)URL.revokeObjectURL(imageUrl);
- imageUrl=URL.createObjectURL(f);img.onload=()=>{scanImage.disabled=false;status.textContent='Image loaded. Select Scan image to read the QR code.'};
- img.onerror=()=>{scanImage.disabled=true;status.textContent='Could not open this image. Try a PNG or JPG image.'};
- img.src=imageUrl;
-});
+function loadSelectedImage(f){
+ scanImage.disabled=true;show('');
+ if(!f){fileName.textContent='No image selected.';img.removeAttribute('src');return}
+ const allowed=/\\.(png|jpe?g|gif|webp)$/i.test(f.name);
+ if((f.type&&!f.type.startsWith('image/'))||(!f.type&&!allowed)){fileName.textContent='Unsupported file: '+f.name;status.textContent='Choose a PNG, JPG, GIF, or WebP image.';return}
+ if(imageUrl){URL.revokeObjectURL(imageUrl);imageUrl=null}
+ fileName.textContent='Selected: '+f.name+' ('+Math.round(f.size/1024)+' KB). Loading preview…';
+ const reader=new FileReader();
+ reader.onload=()=>{
+  img.onload=()=>{scanImage.disabled=false;fileName.textContent='Ready: '+f.name;status.textContent='Image loaded. Click Scan image to read the QR code.'};
+  img.onerror=()=>{scanImage.disabled=true;fileName.textContent='Could not preview '+f.name;status.textContent='This image could not be opened. Try another PNG or JPG.'};
+  img.src=String(reader.result||'');
+ };
+ reader.onerror=()=>{scanImage.disabled=true;fileName.textContent='Could not read '+f.name;status.textContent='Your browser could not read this file. Try another image.'};
+ reader.readAsDataURL(f);
+}
+file.addEventListener('change',()=>loadSelectedImage(file.files&&file.files[0]));
+file.addEventListener('input',()=>{if(file.files&&file.files[0])loadSelectedImage(file.files[0])});
 scanImage.addEventListener('click',async()=>{
  if(!img.complete||!img.naturalWidth){status.textContent='Choose an image and wait for its preview to finish loading.';return}
  scanImage.disabled=true;status.textContent='Scanning image…';
