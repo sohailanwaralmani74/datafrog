@@ -7,42 +7,60 @@ keywords: "markdown viewer, md viewer, markdown file viewer, open markdown file,
 category: "Inspect"
 permalink: /inspect/markdown-viewer
 ---
-<div class="tool-workspace" style="max-width:1100px;margin:0 auto;padding:2rem 1.25rem">
-  <h1>Markdown Viewer</h1>
-  <p>Open an .md file or paste Markdown to preview its structure. Your text stays in this browser unless you choose to load an external link yourself.</p>
-  <p><label for="md-file">Open Markdown file</label> <input id="md-file" type="file" accept=".md,.markdown,.mdown,.txt"></p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem">
-    <section><label for="md-source"><strong>Markdown source</strong></label><textarea id="md-source" rows="20" style="width:100%;box-sizing:border-box" placeholder="# My notes&#10;&#10;Write Markdown here..."></textarea><button id="md-sample" type="button">Load sample</button><button id="md-clear" type="button">Clear</button><button id="md-download" type="button">Download .md</button></section>
-    <section><strong>Preview</strong><div id="md-preview" style="border:1px solid #ddd;border-radius:8px;padding:1rem;min-height:320px;overflow-wrap:anywhere"></div></section>
-  </div>
-  <p id="md-status" role="status" aria-live="polite"></p>
+
+<style>
+.df-tool{max-width:1000px;margin:0 auto;padding:1.5rem 1rem;color:#172033}
+.df-tool *{box-sizing:border-box}
+.df-panel{border:1px solid #dbe3ec;border-radius:12px;padding:1.25rem;margin:1.25rem 0;background:#fff}
+.df-drop{border:2px dashed #a8b6c7;border-radius:12px;background:#f8fafc;min-height:170px;padding:1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.65rem;text-align:center;transition:background .15s,border-color .15s}
+.df-drop.df-over{border-color:#2563eb;background:#eff6ff}
+.df-upload-btn,.df-action{border:0;border-radius:8px;padding:.72rem 1.15rem;background:#2563eb;color:#fff;font-weight:650;cursor:pointer}
+.df-upload-btn:hover,.df-action:hover{background:#1d4ed8}
+.df-action:disabled{opacity:.55;cursor:not-allowed}
+.df-muted{color:#64748b;font-size:.92rem}
+.df-file{font-weight:600;overflow-wrap:anywhere}
+.df-actions{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap;margin-top:1rem}
+.df-status{padding:.8rem 1rem;background:#f1f5f9;border-radius:8px;margin:1rem 0}
+.df-results{margin-top:1.25rem}
+.df-results[hidden],.df-action[hidden],.df-drop input[hidden]{display:none!important}
+.df-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.df-preview{display:block;max-width:100%;max-height:360px;margin:.5rem auto;object-fit:contain}
+.df-result-box{border:1px solid #dbe3ec;border-radius:10px;padding:1rem;min-width:0;overflow-wrap:anywhere}
+.df-tool textarea{width:100%;max-width:100%;padding:.8rem;border:1px solid #cbd5e1;border-radius:8px;font:inherit}
+.df-tool input[type=number],.df-tool input[type=range]{max-width:100%}
+@media(max-width:600px){.df-tool{padding:1rem .75rem}.df-panel{padding:1rem}.df-drop{padding:1rem}}
+</style>
+<div class="df-tool">
+<h1>Markdown Viewer</h1>
+<p>Upload a Markdown file or drop it into the box. Choose <strong>Preview Markdown</strong> to see the rendered result below. Files stay in your browser.</p>
+<section class="df-panel">
+<div id="md-drop" class="df-drop" tabindex="0" role="button" aria-label="Upload or drop a Markdown file">
+<strong>Drop your Markdown file here</strong>
+<span class="df-muted">Supported files: .md, .markdown, .mdown, .txt</span>
+<button id="md-upload" class="df-upload-btn" type="button">Upload Markdown file</button>
+<input id="md-file" type="file" accept=".md,.markdown,.mdown,.txt,text/markdown,text/plain" hidden>
+</div>
+<p id="md-file-name" class="df-file df-muted" aria-live="polite">No file selected.</p>
+<div class="df-actions"><button id="md-view" class="df-action" type="button" hidden disabled>Preview Markdown</button><button id="md-sample" class="df-action" type="button">Try sample</button></div>
+</section>
+<section id="md-results" class="df-panel df-results" hidden>
+<h2>Markdown preview</h2>
+<div id="md-preview" class="df-result-box" style="min-height:180px"></div>
+<h3>Source text</h3>
+<textarea id="md-source" rows="12" spellcheck="false" aria-label="Markdown source"></textarea>
+<div class="df-actions"><button id="md-refresh" class="df-action" type="button">Update preview</button><button id="md-download" class="df-action" type="button">Download Markdown</button></div>
+</section>
+<p id="md-status" class="df-status" role="status" aria-live="polite">Upload a file or try the sample.</p>
 </div>
 <script>
 (function(){
-const source=document.getElementById('md-source'), preview=document.getElementById('md-preview'), status=document.getElementById('md-status');
-function escapeHTML(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
-function render(){
- const lines=source.value.split(/\r?\n/); let html='', list=null, code=false, codeLines=[];
- const closeList=()=>{if(list){html+='</'+list+'>';list=null}};
- for(const line of lines){
-  if(line.trim().startsWith('```')){closeList();if(code){html+='<pre><code>'+escapeHTML(codeLines.join('\n'))+'</code></pre>';codeLines=[];code=false}else code=true;continue}
-  if(code){codeLines.push(line);continue}
-  let m;
-  if(!line.trim()){closeList();continue}
-  if((m=line.match(/^(#{1,6})\s+(.+)$/))){closeList();const n=m[1].length;html+='<h'+n+'>'+inline(m[2])+'</h'+n+'>';continue}
-  if(/^\s*([-*+] )/.test(line)){if(list!=='ul'){closeList();html+='<ul>';list='ul'}html+='<li>'+inline(line.replace(/^\s*[-*+] /,''))+'</li>';continue}
-  if(/^\s*\d+\. /.test(line)){if(list!=='ol'){closeList();html+='<ol>';list='ol'}html+='<li>'+inline(line.replace(/^\s*\d+\. /,''))+'</li>';continue}
-  closeList(); if(/^>\s?/.test(line)) html+='<blockquote>'+inline(line.replace(/^>\s?/,''))+'</blockquote>';else html+='<p>'+inline(line)+'</p>';
- }
- closeList();if(code)html+='<pre><code>'+escapeHTML(codeLines.join('\n'))+'</code></pre>';
- preview.innerHTML=html||'<p>Preview will appear here.</p>';
-}
-function inline(s){let x=escapeHTML(s);x=x.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>');return x}
-source.addEventListener('input',render);
-document.getElementById('md-file').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{source.value=String(r.result||'');render();status.textContent='Loaded '+f.name};r.onerror=()=>status.textContent='Could not read that file.';r.readAsText(f)});
-document.getElementById('md-sample').onclick=()=>{source.value='# Project notes\n\nA **Markdown** preview with *emphasis*.\n\n## Tasks\n- Review the document\n- Share the notes\n\n```js\nconst ready = true;\n```';render()};
-document.getElementById('md-clear').onclick=()=>{source.value='';render();status.textContent='Cleared'};
-document.getElementById('md-download').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([source.value],{type:'text/markdown;charset=utf-8'}));a.download='document.md';a.click();URL.revokeObjectURL(a.href)};
-render();
+const file=document.getElementById('md-file'),drop=document.getElementById('md-drop'),upload=document.getElementById('md-upload'),fileName=document.getElementById('md-file-name'),view=document.getElementById('md-view'),results=document.getElementById('md-results'),source=document.getElementById('md-source'),preview=document.getElementById('md-preview'),status=document.getElementById('md-status');
+let chosenName='document.md';
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+function inline(s){return escapeHtml(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')}
+function render(){const lines=source.value.split(/\r?\n/);let html='',list='',code=false,codeLines=[];function close(){if(list){html+='</'+list+'>';list=''}}for(const line of lines){if(line.trim().startsWith('```')){close();if(code){html+='<pre><code>'+escapeHtml(codeLines.join('\n'))+'</code></pre>';codeLines=[];code=false}else code=true;continue}if(code){codeLines.push(line);continue}if(!line.trim()){close();continue}let m;if((m=line.match(/^(#{1,6})\s+(.+)$/))){close();let n=m[1].length;html+='<h'+n+'>'+inline(m[2])+'</h'+n+'>';continue}if(/^\s*[-*+]\s+/.test(line)){if(list!=='ul'){close();html+='<ul>';list='ul'}html+='<li>'+inline(line.replace(/^\s*[-*+]\s+/,''))+'</li>';continue}if(/^\s*\d+\.\s+/.test(line)){if(list!=='ol'){close();html+='<ol>';list='ol'}html+='<li>'+inline(line.replace(/^\s*\d+\.\s+/,''))+'</li>';continue}close();if(/^>\s?/.test(line))html+='<blockquote>'+inline(line.replace(/^>\s?/,''))+'</blockquote>';else html+='<p>'+inline(line)+'</p>'}close();if(code)html+='<pre><code>'+escapeHtml(codeLines.join('\n'))+'</code></pre>';preview.innerHTML=html||'<p>No preview content.</p>';results.hidden=false;status.textContent='Preview updated.'}
+function load(f){if(!f)return;if(!/\.(md|markdown|mdown|txt)$/i.test(f.name)){status.textContent='Choose a Markdown or text file.';return}chosenName=f.name;fileName.textContent='Selected: '+f.name+' ('+Math.ceil(f.size/1024)+' KB)';view.hidden=false;view.disabled=true;status.textContent='Reading file…';const reader=new FileReader();reader.onload=()=>{source.value=String(reader.result||'');view.disabled=false;status.textContent='File ready. Click Preview Markdown.'};reader.onerror=()=>status.textContent='Could not read this file. Try another one.';reader.readAsText(f)}
+upload.addEventListener('click',()=>file.click());drop.addEventListener('click',e=>{if(e.target!==upload)file.click()});drop.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();file.click()}});file.addEventListener('change',()=>load(file.files&&file.files[0]));['dragenter','dragover'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add('df-over')}));['dragleave','drop'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove('df-over')}));drop.addEventListener('drop',e=>load(e.dataTransfer.files&&e.dataTransfer.files[0]));
+view.addEventListener('click',render);document.getElementById('md-refresh').addEventListener('click',render);document.getElementById('md-sample').addEventListener('click',()=>{chosenName='sample.md';fileName.textContent='Sample Markdown loaded';source.value='# Project notes\n\nA **Markdown** preview with *emphasis*.\n\n## Tasks\n- Review the document\n- Share the notes\n\n```js\nconst ready = true;\n```';view.hidden=false;view.disabled=false;render()});document.getElementById('md-download').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([source.value],{type:'text/markdown;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=chosenName.replace(/\.[^.]+$/,'')+'.md';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}); 
 })();
 </script>
