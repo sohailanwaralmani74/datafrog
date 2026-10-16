@@ -1,0 +1,48 @@
+---
+layout: main
+title: "Markdown Viewer Online - Open and Preview MD Files | DataFrog"
+short_name: "Markdown Viewer"
+description: "Open Markdown files, edit Markdown text, and preview headings, lists, links, and code locally in your browser."
+keywords: "markdown viewer, md viewer, markdown file viewer, open markdown file, markdown preview online"
+category: "Inspect"
+permalink: /inspect/markdown-viewer
+---
+<div class="tool-workspace" style="max-width:1100px;margin:0 auto;padding:2rem 1.25rem">
+  <h1>Markdown Viewer</h1>
+  <p>Open an .md file or paste Markdown to preview its structure. Your text stays in this browser unless you choose to load an external link yourself.</p>
+  <p><label for="md-file">Open Markdown file</label> <input id="md-file" type="file" accept=".md,.markdown,.mdown,.txt"></p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem">
+    <section><label for="md-source"><strong>Markdown source</strong></label><textarea id="md-source" rows="20" style="width:100%;box-sizing:border-box" placeholder="# My notes&#10;&#10;Write Markdown here..."></textarea><button id="md-sample" type="button">Load sample</button><button id="md-clear" type="button">Clear</button><button id="md-download" type="button">Download .md</button></section>
+    <section><strong>Preview</strong><div id="md-preview" style="border:1px solid #ddd;border-radius:8px;padding:1rem;min-height:320px;overflow-wrap:anywhere"></div></section>
+  </div>
+  <p id="md-status" role="status" aria-live="polite"></p>
+</div>
+<script>
+(function(){
+const source=document.getElementById('md-source'), preview=document.getElementById('md-preview'), status=document.getElementById('md-status');
+function escapeHTML(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+function render(){
+ const lines=source.value.split(/\r?\n/); let html='', list=null, code=false, codeLines=[];
+ const closeList=()=>{if(list){html+='</'+list+'>';list=null}};
+ for(const line of lines){
+  if(line.trim().startsWith('```')){closeList();if(code){html+='<pre><code>'+escapeHTML(codeLines.join('\n'))+'</code></pre>';codeLines=[];code=false}else code=true;continue}
+  if(code){codeLines.push(line);continue}
+  let m;
+  if(!line.trim()){closeList();continue}
+  if((m=line.match(/^(#{1,6})\s+(.+)$/))){closeList();const n=m[1].length;html+='<h'+n+'>'+inline(m[2])+'</h'+n+'>';continue}
+  if(/^\s*([-*+] )/.test(line)){if(list!=='ul'){closeList();html+='<ul>';list='ul'}html+='<li>'+inline(line.replace(/^\s*[-*+] /,''))+'</li>';continue}
+  if(/^\s*\d+\. /.test(line)){if(list!=='ol'){closeList();html+='<ol>';list='ol'}html+='<li>'+inline(line.replace(/^\s*\d+\. /,''))+'</li>';continue}
+  closeList(); if(/^>\s?/.test(line)) html+='<blockquote>'+inline(line.replace(/^>\s?/,''))+'</blockquote>';else html+='<p>'+inline(line)+'</p>';
+ }
+ closeList();if(code)html+='<pre><code>'+escapeHTML(codeLines.join('\n'))+'</code></pre>';
+ preview.innerHTML=html||'<p>Preview will appear here.</p>';
+}
+function inline(s){let x=escapeHTML(s);x=x.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>');return x}
+source.addEventListener('input',render);
+document.getElementById('md-file').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{source.value=String(r.result||'');render();status.textContent='Loaded '+f.name};r.onerror=()=>status.textContent='Could not read that file.';r.readAsText(f)});
+document.getElementById('md-sample').onclick=()=>{source.value='# Project notes\n\nA **Markdown** preview with *emphasis*.\n\n## Tasks\n- Review the document\n- Share the notes\n\n```js\nconst ready = true;\n```';render()};
+document.getElementById('md-clear').onclick=()=>{source.value='';render();status.textContent='Cleared'};
+document.getElementById('md-download').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([source.value],{type:'text/markdown;charset=utf-8'}));a.download='document.md';a.click();URL.revokeObjectURL(a.href)};
+render();
+})();
+</script>
