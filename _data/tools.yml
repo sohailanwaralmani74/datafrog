@@ -300,8 +300,6 @@
   date: "2026-08-08"
   updated: "2026-08-08"
 
-
-
 - title: "Text Compare"
   short_name: "Text Compare"
   url: "/compare/text-compare"
@@ -595,28 +593,6 @@
   description: "Open Markdown files, edit Markdown text, and preview headings, lists, links, and code locally in your browser."
   keywords: ["Markdown Viewer", "MD Viewer", "Markdown File Viewer", "Open Markdown File", "Markdown Preview Online"]
   icon: "📝"
-  featured: false
-  date: "2026-10-16"
-  updated: "2026-10-16"
-
-- title: "Compress JPG"
-  short_name: "Compress JPG"
-  url: "/clean/compress-jpg"
-  category: "Clean"
-  description: "Reduce JPG and JPEG image size in your browser with adjustable quality and dimensions, and preview the result before downloading."
-  keywords: ["Compress JPG", "Compress JPEG", "Reduce JPG File Size", "JPG Compressor Online"]
-  icon: "🖼️"
-  featured: false
-  date: "2026-10-16"
-  updated: "2026-10-16"
-
-- title: "Compress PNG"
-  short_name: "Compress PNG"
-  url: "/clean/compress-png"
-  category: "Clean"
-  description: "Resize and re-encode PNG images locally in your browser while preserving transparency, with an output size comparison."
-  keywords: ["Compress PNG", "PNG Compressor", "Reduce PNG File Size", "Compress PNG Online"]
-  icon: "🖼️"
   featured: false
   date: "2026-10-16"
   updated: "2026-10-16"
