@@ -1,0 +1,103 @@
+---
+layout: main
+title: "Snowflake ID Generator - Generate Distributed IDs | DataFrog"
+short_name: "Snowflake ID Generator"
+description: "Generate 64-bit Snowflake-style IDs individually or in batches of up to 500. Set worker and datacenter IDs, copy results, and export CSV or Excel in your browser."
+keywords: "Snowflake ID generator, Snowflake ID generator online, distributed ID generator, 64 bit ID, Twitter Snowflake, bulk Snowflake IDs, Snowflake ID CSV, Snowflake ID Excel"
+category: "Generate"
+permalink: /snowflake-id-generator
+---
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Snowflake ID Generator - DataFrog","url":"https://datafrog.tools/snowflake-id-generator","description":"Generate 64-bit Snowflake-style IDs in your browser with configurable worker and datacenter IDs and bulk CSV or Excel export.","applicationCategory":"DeveloperApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+
+<div style="margin-bottom:1.5rem">
+  <span style="display:inline-block;padding:.25rem .75rem;background:#f5f3ff;color:#6d28d9;font-weight:700;font-size:.8rem;border-radius:9999px;margin-bottom:.5rem">⚙️ Generate Tool</span>
+  <h1 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:.5rem">Snowflake ID Generator</h1>
+  <p style="color:#475569;font-size:1.05rem;max-width:850px;line-height:1.6">Generate 64-bit, time-ordered Snowflake-style IDs. Configure the datacenter and worker numbers, create one ID or a batch of up to 500, and copy or export the results. Everything runs in your browser.</p>
+</div>
+
+<section style="border:1px solid #e2e8f0;border-radius:16px;background:#fff;padding:clamp(1rem,3vw,1.75rem);box-shadow:0 4px 14px rgba(15,23,42,.04);margin-bottom:2rem">
+  <div style="display:flex;gap:1rem;flex-wrap:wrap">
+    <div><label for="snow-dc" style="display:block;font-weight:700;color:#0f172a;margin-bottom:.4rem">Datacenter ID (0–31)</label><input id="snow-dc" type="number" min="0" max="31" value="0" style="width:150px;box-sizing:border-box;padding:.7rem;border:1px solid #cbd5e1;border-radius:8px"></div>
+    <div><label for="snow-worker" style="display:block;font-weight:700;color:#0f172a;margin-bottom:.4rem">Worker ID (0–31)</label><input id="snow-worker" type="number" min="0" max="31" value="0" style="width:150px;box-sizing:border-box;padding:.7rem;border:1px solid #cbd5e1;border-radius:8px"></div>
+  </div>
+  <p style="color:#64748b;font-size:.88rem;line-height:1.5">Uses the commonly known 41-bit timestamp, 5-bit datacenter, 5-bit worker, and 12-bit sequence layout with the Twitter Snowflake epoch (2010-11-04). Different processes or machines must use distinct datacenter/worker combinations to avoid collisions.</p>
+  <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem;margin-top:1rem">
+    <div style="font-size:.8rem;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:.5rem">Generated Snowflake ID</div>
+    <output id="snow-single" aria-live="polite" style="display:block;overflow-wrap:anywhere;font:700 clamp(1rem,2.5vw,1.35rem)/1.7 ui-monospace,monospace;color:#0f172a">Generating…</output>
+  </div>
+  <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1rem">
+    <button id="snow-one" type="button" style="padding:.8rem 1.1rem;background:#2563eb;color:#fff;border:0;border-radius:9px;font-weight:700;cursor:pointer">Generate ID</button>
+    <button id="snow-copy-one" type="button" style="padding:.8rem 1.1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Copy ID</button>
+  </div>
+  <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid #e2e8f0">
+    <h2 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin:0 0 .75rem">Bulk Snowflake ID generator</h2>
+    <label for="snow-count" style="display:block;font-weight:700;margin-bottom:.4rem">Number of IDs (1–500)</label>
+    <input id="snow-count" type="number" min="1" max="500" value="100" style="width:100%;max-width:180px;box-sizing:border-box;padding:.7rem;border:1px solid #cbd5e1;border-radius:8px">
+    <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.8rem">
+      <button id="snow-bulk-generate" type="button" style="padding:.75rem 1rem;background:#0f766e;color:#fff;border:0;border-radius:9px;font-weight:700;cursor:pointer">Generate bulk IDs</button>
+      <button id="snow-csv" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Export CSV</button>
+      <button id="snow-xlsx" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Export Excel (.xlsx)</button>
+      <button id="snow-copy-all" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Copy all</button>
+    </div>
+    <p id="snow-status" role="status" style="color:#475569;font-size:.9rem;line-height:1.5">Generate up to 500 IDs. Each result is returned as a decimal string to preserve its full 64-bit value.</p>
+    <label for="snow-list" style="display:block;font-weight:700;margin:.8rem 0 .4rem">Generated IDs</label>
+    <textarea id="snow-list" rows="8" readonly spellcheck="false" placeholder="Generated IDs appear here, one per line." style="width:100%;box-sizing:border-box;padding:.8rem;border:1px solid #cbd5e1;border-radius:9px;font:.9rem/1.6 ui-monospace,monospace;resize:vertical"></textarea>
+  </div>
+</section>
+
+<section style="max-width:900px;color:#475569;line-height:1.7">
+  <h2 style="font-size:1.5rem;font-weight:800;color:#0f172a">What is a Snowflake ID?</h2>
+  <p>A Snowflake-style ID is a 64-bit integer assembled from a timestamp, a machine or worker identifier, and a per-millisecond sequence. The timestamp helps IDs sort roughly by creation time, while worker and sequence fields allow many IDs to be produced without relying on a central database.</p>
+  <h2 style="font-size:1.3rem;font-weight:800;color:#0f172a">Avoiding duplicate IDs</h2>
+  <p>This page generates IDs locally using the worker and datacenter values you choose. For use across multiple machines, assign each active generator a unique combination and ensure their clocks are managed correctly. Reusing the same combination across independent generators can create collisions.</p>
+  <h2 style="font-size:1.3rem;font-weight:800;color:#0f172a">Frequently asked questions</h2>
+  <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a">Are Snowflake IDs UUIDs?</h3>
+  <p>No. A Snowflake ID is typically a 64-bit integer, while a UUID is a 128-bit identifier commonly displayed as a 36-character string.</p>
+  <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a">Can I export a batch?</h3>
+  <p>Yes. Generate up to 500 IDs and copy them or export them as CSV or an Excel workbook. Generation takes place in your browser; Excel export loads its spreadsheet library only when requested.</p>
+</section>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const EPOCH=1288834974657n;
+let sequence=0, lastMs=-1, values=[];
+function config(){
+ const dc=Number($('snow-dc').value),worker=Number($('snow-worker').value);
+ if(!Number.isInteger(dc)||dc<0||dc>31||!Number.isInteger(worker)||worker<0||worker>31){
+  $('snow-status').textContent='Datacenter and worker IDs must each be whole numbers from 0 to 31.';return null;
+ }
+ return {dc,worker};
+}
+function makeId(cfg){
+ let now=Date.now();
+ if(now<lastMs) throw new Error('Your system clock moved backwards. Wait until the clock catches up, then try again.');
+ if(now===lastMs){sequence=(sequence+1)&4095;if(sequence===0)throw new Error('Sequence limit reached for this millisecond. Try again shortly.');}
+ else {lastMs=now;sequence=0;}
+ const elapsed=BigInt(now)-EPOCH;
+ if(elapsed<0n)throw new Error('The selected Snowflake epoch is later than the current time.');
+ return ((elapsed<<22n)|(BigInt(cfg.dc)<<17n)|(BigInt(cfg.worker)<<12n)|BigInt(sequence)).toString();
+}
+function single(){try{const cfg=config();if(!cfg)return;$('snow-single').textContent=makeId(cfg);$('snow-status').textContent='Generated one Snowflake-style ID.';}catch(e){$('snow-status').textContent=e.message;}}
+function count(){const n=Number($('snow-count').value);if(!Number.isInteger(n)||n<1||n>500){$('snow-status').textContent='Enter a whole number from 1 to 500.';return null;}return n;}
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function csv(){if(!values.length){$('snow-status').textContent='Generate IDs first.';return;}download(new Blob(['\ufeffSnowflake ID\r\n'+values.map(x=>'"'+x+'"').join('\r\n')],{type:'text/csv;charset=utf-8;'}),'datafrog-snowflake-ids.csv');}
+async function xlsx(){
+ if(!values.length){$('snow-status').textContent='Generate IDs first.';return;}
+ try{
+  if(!window.XLSX){$('snow-status').textContent='Loading Excel export…';await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';s.onload=res;s.onerror=()=>rej(new Error('Excel library could not load. CSV export is still available.'));document.head.appendChild(s);});}
+  const wb=XLSX.utils.book_new(),ws=XLSX.utils.aoa_to_sheet([['Snowflake ID'],...values.map(x=>[x])]);XLSX.utils.book_append_sheet(wb,ws,'Snowflake IDs');XLSX.writeFile(wb,'datafrog-snowflake-ids.xlsx');$('snow-status').textContent='Excel file prepared.';
+ }catch(e){$('snow-status').textContent=e.message||'Excel export failed.';}
+}
+$('snow-one').addEventListener('click',single);
+$('snow-copy-one').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('snow-single').textContent);$('snow-status').textContent='Copied ID.';}catch(e){$('snow-status').textContent='Clipboard access was blocked by your browser.';}});
+$('snow-bulk-generate').addEventListener('click',()=>{const n=count(),cfg=config();if(n===null||!cfg)return;try{values=[];for(let i=0;i<n;i++)values.push(makeId(cfg));$('snow-list').value=values.join('\n');$('snow-status').textContent='Generated '+n+' Snowflake-style IDs.';}catch(e){$('snow-status').textContent=e.message;}});
+$('snow-csv').addEventListener('click',csv);$('snow-xlsx').addEventListener('click',xlsx);
+$('snow-copy-all').addEventListener('click',async()=>{if(!values.length){$('snow-status').textContent='Generate IDs first.';return;}try{await navigator.clipboard.writeText(values.join('\n'));$('snow-status').textContent='Copied '+values.length+' IDs.';}catch(e){$('snow-status').textContent='Clipboard access was blocked by your browser.';}});
+single();
+})();
+</script>
