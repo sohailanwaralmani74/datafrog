@@ -544,6 +544,28 @@
   date: "2026-10-16"
   updated: "2026-10-16"
 
+- title: "Snowflake ID Generator"
+  short_name: "Snowflake ID Generator"
+  url: "/snowflake-id-generator"
+  category: "Generate"
+  description: "Generate 64-bit Snowflake-style IDs individually or in batches of up to 500. Configure worker and datacenter IDs, then copy or export results to CSV or Excel in your browser."
+  keywords: ["Snowflake ID generator", "Snowflake ID generator online", "distributed ID generator", "64 bit ID generator", "bulk Snowflake IDs", "Snowflake ID CSV", "Snowflake ID Excel"]
+  icon: "🔢"
+  featured: true
+  date: "2026-10-16"
+  updated: "2026-10-16"
+
+- title: "MongoDB ObjectId Generator"
+  short_name: "ObjectId Generator"
+  url: "/objectid-generator"
+  category: "Generate"
+  description: "Generate MongoDB-style 24-character hexadecimal ObjectIds individually or in batches of up to 500. Copy results or export to CSV and Excel in your browser."
+  keywords: ["MongoDB ObjectId generator", "ObjectId generator online", "generate ObjectId", "MongoDB ID generator", "bulk ObjectId generator", "24 character ObjectId", "ObjectId CSV", "ObjectId Excel"]
+  icon: "🆔"
+  featured: true
+  date: "2026-10-16"
+  updated: "2026-10-16"
+
 - title: "Nano ID Generator"
   short_name: "Nano ID Generator"
   url: "/nano-id-generator"
