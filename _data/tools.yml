@@ -541,8 +541,8 @@
   keywords: ["ULID generator", "ULID generator online", "generate ULID", "bulk ULID generator", "sortable identifier generator", "ULID CSV", "ULID Excel"]
   icon: "🔢"
   featured: true
-  date: "2026-10-16"
-  updated: "2026-10-16"
+  date: "2026-10-01"
+  updated: "2026-10-01"
 
 - title: "Snowflake ID Generator"
   short_name: "Snowflake ID Generator"
@@ -552,8 +552,8 @@
   keywords: ["Snowflake ID generator", "Snowflake ID generator online", "distributed ID generator", "64 bit ID generator", "bulk Snowflake IDs", "Snowflake ID CSV", "Snowflake ID Excel"]
   icon: "🔢"
   featured: true
-  date: "2026-10-16"
-  updated: "2026-10-16"
+  date: "2026-10-03"
+  updated: "2026-10-03"
 
 - title: "MongoDB ObjectId Generator"
   short_name: "ObjectId Generator"
@@ -563,8 +563,8 @@
   keywords: ["MongoDB ObjectId generator", "ObjectId generator online", "generate ObjectId", "MongoDB ID generator", "bulk ObjectId generator", "24 character ObjectId", "ObjectId CSV", "ObjectId Excel"]
   icon: "🆔"
   featured: true
-  date: "2026-10-16"
-  updated: "2026-10-16"
+  date: "2026-10-10"
+  updated: "2026-10-10"
 
 - title: "Nano ID Generator"
   short_name: "Nano ID Generator"
@@ -574,8 +574,8 @@
   keywords: ["Nano ID generator", "Nano ID generator online", "generate Nano ID", "bulk Nano ID generator", "random ID generator", "URL friendly ID generator", "Nano ID CSV", "Nano ID Excel"]
   icon: "🆔"
   featured: true
-  date: "2026-10-16"
-  updated: "2026-10-16"
+  date: "2026-08-10"
+  updated: "2026-08-10"
 
 - title: "UUID Generator"
   short_name: "UUID Generator"
@@ -585,5 +585,5 @@
   keywords: ["UUID generator", "UUID generator online", "GUID generator", "random UUID", "UUID v4 generator", "UUID v7 generator", "UUID v1", "UUID v3", "UUID v5", "UUID v6", "UUID v8"]
   icon: "🆔"
   featured: true
-  date: "2026-10-15"
-  updated: "2026-10-15"
+  date: "2026-08-15"
+  updated: "2026-08-15"
