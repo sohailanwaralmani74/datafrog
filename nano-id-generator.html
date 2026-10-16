@@ -1,0 +1,92 @@
+---
+layout: main
+title: "Nano ID Generator - Generate Random IDs Online | DataFrog"
+short_name: "Nano ID Generator"
+description: "Generate short, URL-friendly Nano IDs individually or in batches of up to 500. Customize ID length and export results to CSV or Excel in your browser."
+keywords: "Nano ID generator, Nano ID generator online, generate Nano ID, bulk Nano ID generator, random ID generator, URL friendly ID, Nano ID CSV, Nano ID Excel"
+category: "Generate"
+permalink: /nano-id-generator
+---
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Nano ID Generator - DataFrog","url":"https://datafrog.tools/nano-id-generator","description":"Generate customizable random Nano IDs with bulk CSV and Excel export in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+
+<div style="margin-bottom:1.5rem">
+  <span style="display:inline-block;padding:.25rem .75rem;background:#f5f3ff;color:#6d28d9;font-weight:700;font-size:.8rem;border-radius:9999px;margin-bottom:.5rem">⚙️ Generate Tool</span>
+  <h1 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:.5rem">Nano ID Generator</h1>
+  <p style="color:#475569;font-size:1.05rem;max-width:850px;line-height:1.6">Create compact, random, URL-friendly identifiers. Set your preferred ID length, generate one or up to 500 at once, and copy or export the results as CSV or Excel.</p>
+</div>
+
+<section style="border:1px solid #e2e8f0;border-radius:16px;background:#fff;padding:clamp(1rem,3vw,1.75rem);box-shadow:0 4px 14px rgba(15,23,42,.04);margin-bottom:2rem">
+  <label for="nano-length" style="display:block;font-weight:700;color:#0f172a;margin-bottom:.4rem">ID length (1–64 characters)</label>
+  <input id="nano-length" type="number" min="1" max="64" value="21" style="width:100%;max-width:180px;box-sizing:border-box;padding:.7rem;border:1px solid #cbd5e1;border-radius:8px">
+  <p style="color:#64748b;font-size:.88rem;margin:.4rem 0 1rem">Default length: 21 characters. The standard URL-safe alphabet is used.</p>
+  <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem">
+    <div style="font-size:.8rem;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:.5rem">Generated Nano ID</div>
+    <output id="nano-single" aria-live="polite" style="display:block;overflow-wrap:anywhere;font:700 clamp(1rem,2.5vw,1.35rem)/1.7 ui-monospace,monospace;color:#0f172a">Generating…</output>
+  </div>
+  <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1rem">
+    <button id="nano-one" type="button" style="padding:.8rem 1.1rem;background:#2563eb;color:#fff;border:0;border-radius:9px;font-weight:700;cursor:pointer">Generate Nano ID</button>
+    <button id="nano-copy-one" type="button" style="padding:.8rem 1.1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Copy Nano ID</button>
+  </div>
+  <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid #e2e8f0">
+    <h2 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin:0 0 .75rem">Bulk Nano ID generator</h2>
+    <label for="nano-count" style="display:block;font-weight:700;margin-bottom:.4rem">Number of IDs (1–500)</label>
+    <input id="nano-count" type="number" min="1" max="500" value="100" style="width:100%;max-width:180px;box-sizing:border-box;padding:.7rem;border:1px solid #cbd5e1;border-radius:8px">
+    <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.8rem">
+      <button id="nano-bulk-generate" type="button" style="padding:.75rem 1rem;background:#0f766e;color:#fff;border:0;border-radius:9px;font-weight:700;cursor:pointer">Generate bulk Nano IDs</button>
+      <button id="nano-csv" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Export CSV</button>
+      <button id="nano-xlsx" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Export Excel (.xlsx)</button>
+      <button id="nano-copy-all" type="button" style="padding:.75rem 1rem;background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:9px;font-weight:700;cursor:pointer">Copy all</button>
+    </div>
+    <p id="nano-status" role="status" style="color:#475569;font-size:.9rem;line-height:1.5">Generate up to 500 IDs. All generation is performed in your browser.</p>
+    <label for="nano-list" style="display:block;font-weight:700;margin:.8rem 0 .4rem">Generated Nano IDs</label>
+    <textarea id="nano-list" rows="8" readonly spellcheck="false" placeholder="Generated Nano IDs appear here, one per line." style="width:100%;box-sizing:border-box;padding:.8rem;border:1px solid #cbd5e1;border-radius:9px;font:.9rem/1.6 ui-monospace,monospace;resize:vertical"></textarea>
+  </div>
+</section>
+
+<section style="max-width:900px;color:#475569;line-height:1.7">
+  <h2 style="font-size:1.5rem;font-weight:800;color:#0f172a">What is a Nano ID?</h2>
+  <p>Nano ID is a compact identifier format designed to create random strings that work well in URLs. A common configuration uses 21 characters from a URL-safe alphabet, but the suitable length depends on your collision-risk tolerance and application requirements.</p>
+  <h2 style="font-size:1.3rem;font-weight:800;color:#0f172a">Nano ID vs UUID</h2>
+  <p>A default Nano ID is shorter than a standard 36-character UUID and is convenient for URLs and compact keys. UUIDs have a standardized 128-bit structure and version conventions. Choose a format supported by the systems that will store or consume the identifiers.</p>
+  <h2 style="font-size:1.3rem;font-weight:800;color:#0f172a">Frequently asked questions</h2>
+  <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a">Can I choose the Nano ID length?</h3>
+  <p>Yes. Choose from 1 to 64 characters. Longer IDs provide more possible combinations; very short IDs have a higher chance of collisions, especially when generating many values.</p>
+  <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a">Can I export IDs to Excel?</h3>
+  <p>Yes. Generate up to 500 IDs and download them as CSV or an Excel (.xlsx) workbook. CSV export works without an additional library; the spreadsheet library is loaded only when Excel export is requested.</p>
+</section>
+
+<script>
+(function(){
+'use strict';
+const alphabet='_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const $=id=>document.getElementById(id);
+let values=[];
+function length(){const n=Number($('nano-length').value);if(!Number.isInteger(n)||n<1||n>64){$('nano-status').textContent='Enter an ID length from 1 to 64.';return null;}return n;}
+function makeNano(size){
+ const out=[];const mask=63;const step=Math.ceil(1.6*mask*size/ alphabet.length);
+ while(out.length<size){
+  const bytes=new Uint8Array(Math.max(step,size-out.length));crypto.getRandomValues(bytes);
+  for(const b of bytes){const idx=b&mask;if(idx<alphabet.length){out.push(alphabet[idx]);if(out.length===size)break;}}
+ }
+ return out.join('');
+}
+function single(){const n=length();if(n!==null)$('nano-single').textContent=makeNano(n);}
+function count(){const n=Number($('nano-count').value);if(!Number.isInteger(n)||n<1||n>500){$('nano-status').textContent='Enter a whole number from 1 to 500.';return null;}return n;}
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function csv(){if(!values.length){$('nano-status').textContent='Generate Nano IDs first.';return;}download(new Blob(['\ufeffNano ID\r\n'+values.map(x=>'"'+x.replace(/"/g,'""')+'"').join('\r\n')],{type:'text/csv;charset=utf-8;'}),'datafrog-nano-ids.csv');}
+async function xlsx(){
+ if(!values.length){$('nano-status').textContent='Generate Nano IDs first.';return;}
+ try{
+  if(!window.XLSX){$('nano-status').textContent='Loading Excel export…';await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';s.onload=res;s.onerror=()=>rej(new Error('Excel library could not load. CSV export is still available.'));document.head.appendChild(s);});}
+  const wb=XLSX.utils.book_new(),ws=XLSX.utils.aoa_to_sheet([['Nano ID'],...values.map(x=>[x])]);XLSX.utils.book_append_sheet(wb,ws,'Nano IDs');XLSX.writeFile(wb,'datafrog-nano-ids.xlsx');$('nano-status').textContent='Excel file prepared.';
+ }catch(e){$('nano-status').textContent=e.message||'Excel export failed.';}
+}
+$('nano-length').addEventListener('change',single);$('nano-one').addEventListener('click',single);$('nano-copy-one').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('nano-single').textContent);$('nano-status').textContent='Copied Nano ID.';}catch(e){$('nano-status').textContent='Clipboard access was blocked by your browser.';}});
+$('nano-bulk-generate').addEventListener('click',()=>{const n=count(),size=length();if(n===null||size===null)return;values=Array.from({length:n},()=>makeNano(size));$('nano-list').value=values.join('\n');$('nano-status').textContent='Generated '+n+' Nano IDs ('+size+' characters each).';});
+$('nano-csv').addEventListener('click',csv);$('nano-xlsx').addEventListener('click',xlsx);$('nano-copy-all').addEventListener('click',async()=>{if(!values.length){$('nano-status').textContent='Generate Nano IDs first.';return;}try{await navigator.clipboard.writeText(values.join('\n'));$('nano-status').textContent='Copied '+values.length+' Nano IDs.';}catch(e){$('nano-status').textContent='Clipboard access was blocked by your browser.';}});
+single();
+})();
+</script>
