@@ -1,0 +1,46 @@
+---
+layout: main
+title: "QBO to CSV Converter | DataFrog"
+short_name: "QBO to CSV"
+description: "Convert a QuickBooks Online (QBO) bank statement into a CSV transaction table. Extract posted dates, amounts, payees, memos, and available transaction IDs locally in your browser."
+keywords: "qbo to csv, qbo to csv converter, convert qbo to csv, quickbooks qbo csv export"
+category: "QBO"
+date: "2026-09-02"
+updated: "2026-09-02"
+permalink: /qbo-to-csv
+---
+
+
+<style>
+.converter-workspace{max-width:1120px;margin:0 auto;padding:2rem 1.25rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#0f172a}
+.converter-workspace *{box-sizing:border-box}.converter-hero{text-align:center;margin-bottom:2rem}.converter-badge{display:inline-block;padding:.35rem .8rem;border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;border-radius:999px;font-size:.85rem;font-weight:700;margin-bottom:.8rem}.converter-hero h1{font-size:clamp(2rem,5vw,2.7rem);line-height:1.15;margin:0 0 .75rem;font-weight:800}.converter-hero p{max-width:790px;margin:0 auto 1rem;color:#475569;line-height:1.7}.privacy-note{display:inline-block;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:8px;padding:.6rem .85rem;font-size:.9rem}.converter-panel,.converter-guide{border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:clamp(1rem,3vw,1.5rem);box-shadow:0 3px 12px rgba(15,23,42,.04);margin-bottom:1.25rem}.converter-workspace label{display:block;font-weight:700;margin-bottom:.4rem}.converter-workspace textarea,.converter-workspace input[type=text],.converter-workspace select{width:100%;max-width:100%;padding:.75rem;border:1px solid #cbd5e1;border-radius:8px;font:inherit}.converter-workspace textarea{font:.92rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical}.converter-fields{display:flex;flex-wrap:wrap;gap:1rem;align-items:end;margin-bottom:1rem}.converter-fields>div{flex:1;min-width:220px}.converter-buttons{display:flex;flex-wrap:wrap;gap:.65rem;margin:1rem 0}.converter-buttons button{padding:.72rem 1rem;border:1px solid #cbd5e1;background:#f8fafc;border-radius:8px;font-weight:700;cursor:pointer;color:#0f172a}.converter-buttons button.primary{background:#1d4ed8;color:#fff;border-color:#1d4ed8}.converter-buttons button:hover{filter:brightness(.97)}.converter-status{min-height:1.5em;color:#475569;margin:.8rem 0 0}.converter-output-head{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:1rem 0 .45rem}.converter-guide{line-height:1.75;color:#334155}.converter-guide h2{font-size:1.35rem;color:#0f172a;margin-top:0}.converter-guide h3{font-size:1.1rem;color:#0f172a}.converter-guide p,.converter-guide li{line-height:1.75}@media(max-width:600px){.converter-workspace{padding:1rem .75rem}.converter-buttons button{max-width:100%}}
+</style>
+<div class="converter-workspace" data-source-format="qbo" data-output-format="csv">
+  <header class="converter-hero">
+    <div class="converter-badge">QBO STATEMENT CONVERTER</div>
+    <h1>QBO to CSV Converter</h1>
+    <p>Convert a QuickBooks Online (QBO) bank statement into a CSV transaction table. Extract posted dates, amounts, payees, memos, and available transaction IDs locally in your browser.</p>
+    <p class="privacy-note">🔒 Your files are processed in your browser. DataFrog does not upload your content.</p>
+  </header>
+  <section class="converter-panel">
+    <div class="converter-fields">
+      <div><label for="fileInput">Choose a file (optional)</label><input id="fileInput" type="file" accept=".qbo,.ofx,.txt,text/plain" style="max-width:100%;"></div>
+      
+    </div>
+    <label for="input">Statement contents</label>
+    <textarea id="input" rows="11" spellcheck="false" placeholder="Choose a statement file or paste its contents here…"></textarea>
+    <div class="converter-buttons">
+      <button id="convertBtn" class="primary" type="button">Convert to CSV</button>
+      <button id="sampleBtn" type="button">Load sample</button>
+      <button id="clearBtn" type="button">Clear</button>
+    </div>
+    <p id="status" class="converter-status" role="status" aria-live="polite">Choose a file or paste your content, then select Convert to CSV.</p>
+    <div class="converter-output-head"><label for="output">Converted output / preview</label><div class="converter-buttons" style="margin:0"><button id="copyBtn" type="button">Copy output</button><button id="downloadBtn" type="button">Download result</button></div></div>
+    <textarea id="output" rows="12" readonly spellcheck="false" placeholder="Your converted result will appear here…"></textarea>
+  </section>
+  <section class="converter-guide">
+    <h2>How to convert QBO to CSV</h2>
+    <ol><li>Choose a Quicken/QuickBooks Bank Online (<code>.qbo</code>) statement, or paste its contents.</li><li>Select <strong>Convert to CSV</strong> to extract the statement transactions.</li><li>Review the output and download the CSV for a spreadsheet or data import.</li></ol><h3>Transaction columns</h3><p>The export includes posted date, amount, payee, memo, category when present, account type, transaction type, check number, and FITID transaction ID. The original statement may include additional bank metadata that is not part of the CSV transaction table.</p><h3>Verify before importing</h3><p>QBO files commonly use OFX-style statement records. Compare transaction totals, dates, and debit/credit signs against your source file. This converter does not connect to your bank or submit financial information anywhere.</p>
+  </section>
+</div>
+<script src="/assets/js/financial-statement-converter.js" defer></script>
