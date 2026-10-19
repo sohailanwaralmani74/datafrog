@@ -183,41 +183,7 @@ permalink: /xlsx-to-pdf
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Excel to PDF Converter Technical Guide</h2>
-    <p>
-      The Excel to PDF converter transforms dynamic, unpaginated spreadsheet rows into fixed-geometry, publication-quality PDF documents. In enterprise environments, distributing raw spreadsheet files exposes internal calculation models, accidental cell edits, and inconsistent printer setups. Converting to PDF preserves table formatting, font metrics, and page layouts across every operating system and device.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Pagination, Margins &amp; Header Repeat</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>Automatic Page Breaks:</strong> Datasets with dozens or hundreds of rows are cleanly partitioned into page chunks based on the chosen paper dimensions.</li>
-      <li><strong>Repeating Column Headers:</strong> When multi-page tables break across sheets, the top table header row automatically duplicates on subsequent pages for continuous readability.</li>
-      <li><strong>Orientation Control:</strong> Switch between <em>Portrait</em> (optimized for narrow lists and financial summaries) and <em>Landscape</em> (essential for wide tables with 6+ columns).</li>
-      <li><strong>Standard Paper Sizes:</strong> Outputs to International A4, US Letter, Legal, A3 (for large engineering schedules), or A5.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Client-Side Vector Engine (pdfmake)</h3>
-    <p>
-      This converter builds vector PDF primitives entirely within browser memory using pdfmake and virtual font definitions. Because conversion does not rely on headless browser printing or raster screenshot images, all table cell text remains searchable, selectable, and crisp at any zoom level.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display:flex; flex-direction:column; gap:1rem;">
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">How should I handle wide Excel sheets that get cut off horizontally?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Switch the Page Orientation setting to <strong>Landscape</strong> and select <strong>A4</strong> or <strong>Letter</strong>. If the table contains more than 10 columns, selecting <strong>A3 Landscape</strong> provides ample horizontal width.</p>
-      </details>
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Is text inside the generated PDF searchable?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Yes. The PDF contains native vector text objects rather than flattened raster images, allowing users to search with Ctrl+F and copy text directly from PDF readers.</p>
-      </details>
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Can confidential salary or customer sheets be safely converted here?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Yes. The entire rendering cycle runs in client memory. No telemetry, third-party trackers, or cloud storage endpoints receive your financial data.</p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Make a spreadsheet ready to print or send</h2><p>When someone needs to read a spreadsheet but should not have to edit cells, a PDF is often easier to share. Convert the workbook, review the page layout, and check that important columns and headings remain readable in the downloaded document.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3><ol><li>Choose the Excel workbook and review the available data preview and PDF settings.</li><li>Set the page orientation, margins, scaling, or other available options to suit the number of columns and the intended paper size.</li><li>Generate the PDF, then open it and check every page—especially wide tables, repeated headings, and long values.</li></ol><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Fit the information to the page</h3><p>A worksheet may be wider than a printed page, and scaling everything to fit can make text too small to read. Landscape orientation, sensible margins, or splitting a wide table across pages may produce a clearer result. Use the preview and final PDF to decide whether the information is legible.</p><p>PDF output is intended for viewing and printing, not as a replacement for the original workbook. Spreadsheet formulas, interactive filters, macros, and multiple-sheet behaviour may not be preserved as workbook features. Keep the Excel file if recipients will need to sort, calculate, or edit the data.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have checked the generated result and confirmed it works for the intended task.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does conversion guarantee the result will work everywhere?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Receiving applications can have different format, size, and layout requirements. Review the output and test it in the destination workflow before relying on it.</p></details></div></article>
 
 </div>
 
