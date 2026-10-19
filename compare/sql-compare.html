@@ -330,44 +330,17 @@ permalink: /compare/sql-compare
 </section>
 
 <section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
-  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">How to Compare SQL Scripts</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Paste or Upload</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Paste original SQL into the left box and modified SQL into the right box, or upload files.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Set Options</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Choose your SQL dialect and select whether to ignore comments, whitespace, or case.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Run Compare</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click Compare SQL. The engine calculates line diffs, similarity %, and change counts.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Inspect Visual Diff</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Switch between side-by-side or inline view and use Prev/Next buttons to jump between changes.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Export Change Report</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Export your SQL comparison report in Markdown, HTML, JSON, or copy summary to clipboard.</p>
-    </div>
-  </div>
+<h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Review SQL changes before you apply them</h2>
+<p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">When two SQL scripts look almost identical, a small change to a column, condition, index, or migration statement can be easy to miss. Compare the earlier version with the revised one to locate changes, separate meaningful edits from formatting differences, and prepare a review before running the new script.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Choose the two versions</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Place the original SQL on one side and the edited or proposed version on the other. Use the exact files you intend to review, not snippets copied from different revisions.</p></div>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Decide what counts as a change</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Choose the SQL dialect and whether comments, whitespace, or letter case should be ignored. For a strict review, keep options that might hide a difference you need to see.</p></div>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Compare and follow each difference</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Run the comparison, inspect the highlighted changes, and move between differences. Check the surrounding SQL so each change is understood in context.</p></div>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">4. Save a reviewable report</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Use the available report export or copy action to share the differences with a teammate or keep a record alongside a migration review.</p></div>
+</div>
+<h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">What to look at first</h3>
+<ul style="padding-left:1.25rem;color:#475569;line-height:1.7;"><li>New or removed columns, tables, indexes, constraints, or statements.</li><li>Changed conditions, joins, default values, or data types that could alter results.</li><li>Differences hidden by formatting choices—do not ignore comments or case if they matter to your review process.</li><li>Migration steps that may behave differently across environments or database versions.</li></ul>
+<p style="color:#475569;line-height:1.7;">A text comparison helps you find edits, but it does not execute the SQL, prove that a migration is safe, or confirm that two live database schemas are identical. Read the surrounding statements and test important changes in the appropriate environment before deployment.</p>
 </section>
 
 <section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
