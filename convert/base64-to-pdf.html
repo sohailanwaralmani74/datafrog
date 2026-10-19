@@ -164,48 +164,7 @@ permalink: /base64-to-pdf
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Base64 to PDF Decoder Technical Reference</h2>
-    <p>
-      Base64 encoding represents binary PDF byte streams as ASCII characters using a 64-symbol alphabet (<code>A–Z</code>, <code>a–z</code>, <code>0–9</code>, <code>+</code>, <code>/</code>, with <code>=</code> padding). This encoding allows binary PDF files—such as digital invoices, shipping labels, and contracts—to be safely transported across protocols that only support text, including JSON REST APIs, GraphQL payloads, SOAP XML envelopes, and email MIME bodies.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Decoding Mechanics &amp; Binary Reconstruction</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>Radix Conversion:</strong> Base64 maps 4 printable characters (24 bits) back into 3 binary bytes (octets). Any whitespace, linebreaks (MIME 76-character wrapping), or carriage returns are stripped during preprocessing.</li>
-      <li><strong>Data URI Scheme Extraction:</strong> When payloads start with <code>data:application/pdf;base64,</code>, the metadata header is isolated, and the trailing Base64 string is parsed directly into an ArrayBuffer.</li>
-      <li><strong>PDF Magic Byte Verification:</strong> Valid PDF documents start with the 5-byte magic signature <code>%PDF-</code> (hexadecimal: <code>0x25 0x50 0x44 0x46 0x2D</code>). The tool examines the leading byte sequence to confirm document integrity and detect the PDF version specification (e.g. <code>1.4</code>, <code>1.7</code>, or <code>2.0</code>).</li>
-      <li><strong>In-Memory Blob URL Generation:</strong> The reconstructed <code>Uint8Array</code> is converted into a native <code>Blob</code> with MIME type <code>application/pdf</code>, allowing secure rendering in the browser's PDF engine without writing temporary files to a server.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Why is a Base64 string larger than the resulting PDF file?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Base64 expands binary data by approximately 33%. Every 3 bytes (24 bits) of binary PDF data are encoded into 4 ASCII characters (32 bits), increasing transmission overhead in exchange for safe text-only transmission.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How can I extract Base64 PDF data from API responses?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Many REST and SOAP APIs return generated reports or invoices inside a JSON field (e.g., <code>"pdf_data": "JVBERi0xLjQK..."</code>) or XML tag (<code>&lt;InvoiceData&gt;JVBERi...&lt;/InvoiceData&gt;</code>). You can copy that string directly and paste it into the input area or upload the response file.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Are multi-page, scanned, or encrypted PDFs supported?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes. Base64 decoding reconstructs the exact binary stream byte-for-byte. If the original encoded file was a multi-page PDF, password-protected document, or scanned image report, the decoded PDF preserves all internal pages, fonts, images, and encryption structures.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is my sensitive document data kept private?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes. Decoding, magic header validation, and PDF rendering run strictly inside your web browser sandbox using client-side Web APIs (<code>atob</code>, <code>Uint8Array</code>, and <code>URL.createObjectURL</code>). No data or file bytes are ever uploaded or logged.
-        </p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Recover a PDF from a Base64 string or data URI</h2><p>If a PDF arrived as a long encoded string in a message, export, or data field, it will not open as a normal document until it is decoded. Use this page to provide the Base64 content, generate the PDF file, and check that the recovered document opens correctly.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3><ol><li>Paste the Base64 text or load the file or data URI you received, using the input format supported by the page.</li><li>Decode the content and review any available preview or file information.</li><li>Download the PDF and open it in a PDF reader to confirm that the file is complete and readable.</li></ol><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Make sure you have the complete encoded content</h3><p>Base64 text can be copied incompletely when it is long, wrapped, or surrounded by extra message text. If decoding fails or the PDF will not open, check that the string was not truncated and that you included the correct Base64 portion. A data URI may include a prefix before the encoded data.</p><p>Decoding does not repair a damaged PDF or prove that the document is trustworthy. Only decode content from sources you trust, and inspect the resulting file before using it. The conversion runs in your browser; your source string and generated file are not uploaded to DataFrog.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have checked the generated result and confirmed it works for the intended task.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does conversion guarantee the result will work everywhere?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Receiving applications can have different format, size, and layout requirements. Review the output and test it in the destination workflow before relying on it.</p></details></div></article>
 
 </div>
 
