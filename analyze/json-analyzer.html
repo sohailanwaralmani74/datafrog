@@ -392,37 +392,7 @@ author_id: gourav-mishra
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
-  <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use JSON Analyzer</h2>
-
-    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input JSON Document</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste your JSON text into the input box, drag & drop a <code>.json</code> file into the dropzone, or click <strong>Load Sample JSON</strong>.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Dashboard Metrics</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review the data type breakdown bars, nesting depth extrema, key frequencies, and automated quality audit recommendations.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong> or <strong>Download Report</strong> to save the generated analysis summary.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section style="padding:3rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;text-align:center;">Understand the shape and quality of a JSON document</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">When a JSON export is too large to understand by eye, the key questions are how deeply nested it is, what kinds of values it contains, and whether some keys or structures appear unexpectedly often. The analyzer gives you a summary to guide that inspection.</p><div style="display:flex;flex-direction:column;gap:1.25rem;"><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">1. Load the exact JSON document</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Paste the content, select a file, or load the sample. If the document is invalid JSON, correct the syntax first so the analysis describes the data you intend to inspect.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">2. Start with the overview</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Review the data-type breakdown and nesting-depth information to understand whether the file is mostly simple values or deeply nested objects and arrays.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">3. Investigate unusual patterns</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Look at key frequency and quality recommendations for repeated or unexpected structures. Compare a flagged pattern with real records before deciding it is an error.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">4. Choose the right follow-up</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Use the JSON Viewer to explore a particular branch, or the JSON Validator if the file does not parse. Analysis highlights patterns; it does not automatically repair the data or determine your application's rules.</p></div></div><h3 style="font-size:1.25rem;font-weight:800;color:#0f172a;margin-top:1.75rem;">How to interpret the metrics</h3><p style="color:#475569;line-height:1.7;">Deep nesting can make a file harder to maintain, but it is not automatically a defect. Frequently repeated keys may be normal for a list of similar records. A useful warning is a reason to inspect the affected structure, not proof that the data is wrong. Judge the summary against the expected shape of your own document.</p><h3 style="font-size:1.25rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does the analyzer validate JSON syntax?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Analysis requires parseable JSON. If syntax is the problem, use the JSON Validator to locate the issue before interpreting structural metrics.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a warning mean the data is incorrect?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Warnings point to patterns worth checking. Whether a pattern is a problem depends on what the document is supposed to contain.</p></details></div></div></section>
 
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
