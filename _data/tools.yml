@@ -611,7 +611,7 @@
 - title: "YAML to JSON"
   short_name: "YAML to JSON"
   url: "/yaml-to-json"
-  category: "YAML"
+  category: "Convert"
   description: "Convert YAML configuration, settings, and structured data into formatted JSON in your browser. Upload a YAML file or paste its contents and download the result."
   keywords: ["yaml to json", "yaml to json converter", "convert yaml to json online", "yml to json", "yaml parser"]
   icon: "🔄"
@@ -621,7 +621,7 @@
 - title: "JSON to Dart"
   short_name: "JSON to Dart"
   url: "/json-to-dart"
-  category: "JSON"
+  category: "Convert"
   description: "Generate Dart model classes from JSON objects, including fields and fromJson/toJson helpers for nested data. Review, copy, or download the generated Dart code."
   keywords: ["json to dart", "json to dart model", "json to dart class generator", "convert json to dart online", "dart fromjson"]
   icon: "🔄"
@@ -631,7 +631,7 @@
 - title: "QIF to CSV"
   short_name: "QIF to CSV"
   url: "/qif-to-csv"
-  category: "QIF"
+  category: "Convert"
   description: "Convert Quicken Interchange Format (QIF) transactions into a spreadsheet-ready CSV with available dates, amounts, payees, memos, categories, and transaction details."
   keywords: ["qif to csv", "qif to csv converter", "convert qif to csv online", "qif transaction export"]
   icon: "📑"
@@ -641,7 +641,7 @@
 - title: "QIF to Excel"
   short_name: "QIF to Excel"
   url: "/qif-to-excel"
-  category: "QIF"
+  category: "Convert"
   description: "Convert a Quicken Interchange Format (QIF) statement into an Excel workbook for reviewing, sorting, and filtering transactions. Processing stays in your browser."
   keywords: ["qif to excel", "qif to xlsx", "qif to excel converter", "convert qif file to excel"]
   icon: "📊"
@@ -651,7 +651,7 @@
 - title: "QBO to Excel"
   short_name: "QBO to Excel"
   url: "/qbo-to-excel"
-  category: "QBO"
+  category: "Convert"
   description: "Convert a QBO bank statement into an Excel workbook for reviewing and organizing transactions, including dates, amounts, payees, memos, and available transaction IDs."
   keywords: ["qbo to excel", "qbo to xlsx", "qbo to excel converter", "quickbooks qbo excel export"]
   icon: "📊"
@@ -661,7 +661,7 @@
 - title: "QBO to CSV"
   short_name: "QBO to CSV"
   url: "/qbo-to-csv"
-  category: "QBO"
+  category: "Convert"
   description: "Convert a QBO bank statement into a CSV transaction table with posted dates, amounts, payees, memos, and available transaction IDs, directly in your browser."
   keywords: ["qbo to csv", "qbo to csv converter", "convert qbo to csv", "quickbooks qbo csv export"]
   icon: "📑"
