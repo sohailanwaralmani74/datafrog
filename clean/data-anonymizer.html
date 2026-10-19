@@ -273,37 +273,7 @@ permalink: /clean/data-anonymizer
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
-  <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Anonymize Data</h2>
-
-    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Paste or Upload Input Data</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste CSV, JSON, logs, or text into the input container, or drag & drop your data file.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Configure PII Filters & Strategy</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Check desired PII fields (Emails, Phones, IPs, Cards) and pick your preferred masking strategy.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Click "🔒 Anonymize Data" & Export</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click the <strong>🔒 Anonymize Data</strong> button to execute processing, then copy or download the anonymised data.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section style="padding:3rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2 style="font-size:1.65rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Prepare a safer copy of data for testing or sharing</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">When a dataset is needed for a demo, support request, or test, sharing real names, email addresses, phone numbers, or account details may expose more information than the recipient needs. Use the anonymization options to create a reduced-risk copy, then inspect the output before sending it anywhere.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Start with the source</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Load the supported dataset and identify which columns may contain personal or identifying information.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Choose the right settings</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Choose the available fields and masking or replacement strategy that suits the purpose of the copy. Check whether indirect identifiers also need attention.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Review before sharing</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Generate the anonymized output and inspect representative rows to confirm that the values were transformed as expected before exporting.</p></div></div><h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Masking is not always full anonymization</h3><p style="color:#475569;line-height:1.7;">Replacing a name or email address does not guarantee that a person cannot be identified. Rare job titles, exact dates, addresses, account IDs, or combinations of fields may still point to an individual. Remove or generalise fields that are not needed for the task, and consider whether the transformed data could be linked with other information.</p><p style="color:#475569;line-height:1.7;">Keep the original data access-restricted and share only the minimum necessary output. Review the generated copy carefully, because automated rules may not recognise every custom identifier or sensitive field in your dataset.</p></div></section>
 
 <!-- ═══════════════════════════════════════════════════
      TEXTUAL SEO EDUCATIONAL CONTENT
