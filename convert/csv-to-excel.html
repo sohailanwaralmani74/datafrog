@@ -44,13 +44,20 @@ Sara,Marketing,false</textarea>
     </div>
   </section>
   <section style="margin-top:1.25rem;border:1px solid #e2e8f0;border-radius:14px;padding:clamp(1rem,3vw,1.5rem);line-height:1.75;color:#334155;">
-    <h2 style="font-size:1.35rem;color:#0f172a;margin-top:0;">How to convert CSV to Excel</h2>
-    <ol><li>Paste your CSV text or choose a local CSV file.</li><li>Choose the field delimiter used in your data and indicate whether the first row contains headers.</li><li>Select <strong>Convert to Excel</strong>. Review the result, then copy it or download the converted file.</li></ol>
-    <h3 style="font-size:1.1rem;color:#0f172a;">What happens to your data?</h3>
-    <p>The conversion runs in your browser. CSV fields enclosed in double quotes are parsed, including commas inside quoted values and escaped double quotes. Check the output before using it in another application, especially when the CSV contains unusual line breaks, duplicate column names, or values that require a specific data type.</p>
-    <h3 style="font-size:1.1rem;color:#0f172a;">CSV conversion tips</h3>
-    <p>Make sure the delimiter matches your source file. If the first row is actual data rather than column names, turn off the header option. Keep a copy of the original CSV so you can compare the converted output and confirm that all rows and columns were preserved.</p>
-  </section>
+<h2 style="font-size:1.35rem;color:#0f172a;margin-top:0;">Turn a CSV file into an Excel workbook</h2>
+<p>When someone sends you a CSV export, you may want to open it in Excel, keep the columns arranged as a table, or share it as an <code>.xlsx</code> workbook. Use the converter above to select the CSV file or paste its contents, set the delimiter and header option, then generate the Excel download. The conversion runs in your browser.</p>
+<h3 style="font-size:1.1rem;color:#0f172a;">Convert it without shifting columns</h3>
+<ol><li>Choose a local CSV file or paste the CSV text into the input.</li><li>Set the delimiter to match the source file. A comma-separated export normally uses a comma, while some regional spreadsheet exports use semicolons or tabs.</li><li>Enable the header option only if the first row contains column names such as <code>Name</code>, <code>Date</code>, or <code>Amount</code>. If that row is actual data, leave the option off.</li><li>Select <strong>Convert to Excel</strong>. The page generates and downloads an <code>.xlsx</code> workbook.</li><li>Open the workbook and check the first and last few rows, especially if the CSV contains quoted commas, empty fields, or long identifiers.</li></ol>
+<h3 style="font-size:1.1rem;color:#0f172a;">What carries over—and what to check</h3>
+<p>CSV stores rows of text separated by a delimiter; it does not preserve workbook formatting, formulas, multiple sheets, or cell styles. This conversion creates an Excel workbook from the CSV data, so do not expect the original CSV to contain formatting that can be restored.</p>
+<p>Quoted fields are important: a value such as <code>"London, UK"</code> should remain in one cell even though it contains a comma. After conversion, check rows with embedded quotes, line breaks, or inconsistent field counts. If a source file contains unusual CSV formatting, inspect a sample before relying on the entire workbook.</p>
+<h3 style="font-size:1.1rem;color:#0f172a;">Avoid spreadsheet changes to important values</h3>
+<p>Excel may interpret date-like strings, long numbers, and codes with leading zeroes differently when you open or import data. If an identifier such as <code>001247</code> must remain exact, check its cell after conversion and use Excel's text import or cell-formatting options when needed. Keep the original CSV until the workbook has been checked.</p>
+<h3 style="font-size:1.1rem;color:#0f172a;">Frequently asked questions</h3>
+<details><summary>Will this create an XLSX file?</summary><p>Yes. Choose Convert to Excel to generate and download an Excel workbook with the CSV rows in a worksheet.</p></details>
+<details><summary>Why are my columns in the wrong places?</summary><p>Check the delimiter setting and confirm whether the first row contains headers. Quoted values containing commas should stay within one field; unusual quoting should be reviewed in the original CSV.</p></details>
+<details><summary>Will CSV formatting and formulas be preserved?</summary><p>CSV contains plain tabular values, not Excel formatting or formulas. The workbook is created from the data available in the CSV.</p></details>
+</section>
 </div>
 <style>
 .tool-workspace .option{display:flex;flex-direction:column;gap:.35rem;min-width:190px}.tool-workspace .option label{font-weight:700;font-size:.9rem}.tool-workspace .option input,.tool-workspace .option select{padding:.6rem;border:1px solid #cbd5e1;border-radius:8px;max-width:100%}
