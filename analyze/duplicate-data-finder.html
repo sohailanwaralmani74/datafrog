@@ -361,44 +361,18 @@ author_id: gourav-mishra
 </section>
 
 <section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
-  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">How to Find Duplicate Records</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Upload or Paste</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Drag and drop a file, use Browse, or paste raw text into the textarea.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Configure Options</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Choose matching options and optionally select which columns form the duplicate key.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Find Duplicates</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click Find Duplicates. The engine scans the dataset and highlights every duplicate row.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Review Results</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Filter to show all rows, duplicates only, or unique only. Review grouped clusters.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Export Results</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Download the clean dataset, duplicates CSV, JSON report, or HTML summary.</p>
-    </div>
-  </div>
+<h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Find repeated records without deleting good data</h2>
+<p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">Duplicate records can inflate counts, create repeated customer entries, and make imports harder to reconcile. The important decision is what makes two rows duplicates in your dataset: every column matching may be too strict, while matching only one common field may group records that are actually different.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Load the table</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Upload a supported file or paste tabular text. Confirm the delimiter and headers so the matching rules refer to the intended columns.</p></div>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Choose the matching key</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">If two rows count as duplicates only when their email addresses match, use that field. If records need both an account ID and date to identify a repeat, select the relevant combination when supported.</p></div>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Run the scan and review groups</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Run the duplicate check, then inspect the grouped rows. Compare fields that were not part of the matching key before deciding whether the records represent the same real-world item.</p></div>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">4. Export only after checking</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Review duplicate-only and unique-row views or use the available exports. Keep the source file unchanged until you have confirmed which records should be retained.</p></div>
+</div>
+<h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Exact duplicates and possible duplicates are different</h3>
+<p style="color:#475569;line-height:1.7;">Two rows can be exact matches across all fields, or they can share one key while differing elsewhere. For example, two customer rows with the same email but different phone numbers may be an update, a family account, or a data-entry problem. The matching result tells you which rows meet the rule you selected; it does not decide which record is correct.</p>
+<h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Before cleaning the dataset</h3>
+<ul style="padding-left:1.25rem;color:#475569;line-height:1.7;"><li>Decide whether spaces, capitalization, and blank values should affect matching.</li><li>Check a few duplicate groups manually, especially if the data contains names or addresses that can legitimately repeat.</li><li>Keep the original and document the rule used so the cleanup can be reviewed.</li><li>Recheck row counts and key fields in the cleaned export before importing it into another system.</li></ul>
 </section>
 
 <section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
