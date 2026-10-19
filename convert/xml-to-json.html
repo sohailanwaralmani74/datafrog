@@ -135,51 +135,40 @@ permalink: /xml-to-json
 
   <!-- Tool Definition & Technical Reference -->
   <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">XML to JSON Converter Reference &amp; Mapping Rules</h2>
-    <p>
-      The XML to JSON converter transforms nested XML tags and schema structures into standard JSON data objects. In modern application stacks, consuming raw XML in frontend JavaScript or serverless Node.js functions requires bulky parser dependencies. Converting XML payloads directly into JSON provides native compatibility with modern REST APIs, MongoDB, PostgreSQL JSONB fields, and TypeScript interfaces.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">How XML Constructs Map to JSON</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>Repeating Elements to Arrays:</strong> Sibling elements sharing identical tag names (such as multiple <code>&lt;item&gt;</code> tags) automatically combine into a JSON array of objects.</li>
-      <li><strong>Attribute Prefixing:</strong> Tag attributes can be preserved with a distinct prefix (e.g. <code>@id</code> or <code>_id</code>) or mapped directly as standard object properties.</li>
-      <li><strong>Type Coercion:</strong> When enabled, numerical strings and booleans (<code>"true"</code>, <code>"false"</code>) automatically convert to native JSON numbers and boolean literals.</li>
-      <li><strong>Mixed Content &amp; CDATA:</strong> Tags containing both text content and child tags isolate their character data cleanly into <code>#text</code> properties without data corruption.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Privacy &amp; Security</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li>🔒 All processing happens in your browser – no files are uploaded.</li>
-      <li>🚫 No server interaction – everything runs locally using the native browser DOMParser.</li>
-      <li>🕵️ No tracking, no logging – your data stays yours.</li>
-      <li>💼 Safe for sensitive data – perfect for confidential enterprise or financial files.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are repeated XML tags handled?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">When sibling tags share the same name (such as multiple <code>&lt;item&gt;</code> tags), they are automatically aggregated into a JSON array of objects.</p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I customize attribute names in the output?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">Yes – use the Attribute Prefix dropdown to prefix attributes with <code>@</code> (default), <code>_</code>, or no prefix.</p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is the JSON output valid and formatted?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">Yes – it is valid JSON formatted with 2-space indentation, ready to integrate into any application.</p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are mixed content tags containing both text and child elements handled?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">For elements with mixed content or attributes alongside text, DataFrog isolates the text node into a #text property while representing child tags and attributes as sibling properties, ensuring zero data loss.</p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I convert SOAP envelopes or XML RSS feeds with namespaces into JSON?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">Yes! DataFrog handles XML namespaces gracefully by preserving tag local names or prefixes according to W3C DOM specifications, allowing RSS, Atom, and SOAP payloads to convert into clean JSON objects.</p>
-      </details>
-    </div>
-  </article>
+<h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Turn an XML file into usable JSON</h2>
+<p>Have an XML export, product feed, RSS file, or data document that you need in JSON? Load the XML above, review the text, choose how attributes should appear, and convert it. You can then copy the result into another tool or download a <code>.json</code> file. You do not need to retype nested records by hand.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">When this conversion helps</h3>
+<ul style="padding-left:1.5rem;">
+<li><strong>Moving product or inventory data:</strong> turn repeated product elements into JSON records that are easier to pass to another data workflow.</li>
+<li><strong>Working with XML feeds:</strong> convert an RSS, Atom, or other XML document when the next tool expects JSON. Check namespace-heavy feeds after conversion because element names are kept as the parser sees them.</li>
+<li><strong>Inspecting nested records:</strong> make parent-child relationships visible as nested objects instead of searching through long XML markup.</li>
+<li><strong>Preparing data for a JSON-based workflow:</strong> create a starting JSON file, then review field names and value types before importing it elsewhere.</li>
+</ul>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">How to get the result you need</h3>
+<ol style="padding-left:1.5rem;">
+<li>Choose an XML file or load the sample catalog to see the output format.</li>
+<li>Review the editable XML text. If the file contains an error, correct the markup before converting.</li>
+<li>Choose an attribute prefix: <code>@</code> keeps attributes distinct, <code>_</code> uses an underscore, and <strong>None</strong> uses the attribute name without a prefix.</li>
+<li>Leave automatic number and boolean conversion enabled if values such as <code>24</code> and <code>true</code> should become JSON numbers and booleans. Turn it off if those values must remain text, such as an identifier with leading zeroes.</li>
+<li>Select <strong>Convert to JSON</strong>, inspect the output, then copy or download it.</li>
+</ol>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Example: repeated XML records</h3>
+<p>Several sibling elements with the same name, such as multiple <code>&lt;product&gt;</code> elements, are represented as an array in the resulting JSON. That is useful when a feed contains a list of products, orders, or entries. A single element may instead appear as one object or value, so check the shape if another system expects an array every time.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Check these details before using the JSON</h3>
+<ul style="padding-left:1.5rem;">
+<li><strong>Numbers that look like text:</strong> automatic conversion can change values such as postal codes, account numbers, or product codes. Disable coercion when the exact text matters.</li>
+<li><strong>Attributes and child elements:</strong> attributes become object properties, while nested tags become child properties. Review the chosen prefix if names overlap.</li>
+<li><strong>Mixed content:</strong> text and child elements in the same XML element need careful review; do not assume every document maps perfectly to a simple object.</li>
+<li><strong>Namespaces and special XML features:</strong> inspect the output for namespaced tags, comments, processing instructions, and document-specific conventions before relying on it.</li>
+<li><strong>Large or important files:</strong> compare a few records against the original, especially before importing converted financial, inventory, or customer data.</li>
+</ul>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3>
+<div style="display:flex;flex-direction:column;gap:1rem;">
+<details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Can I convert an XML file without installing software?</summary><p style="color:#64748b;font-size:.9rem;margin-top:.75rem;margin-bottom:0;">Yes. Open the page in a modern browser, select your file, and convert it there. The file is read in your browser rather than uploaded to a conversion server.</p></details>
+<details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Why did a value become a number instead of text?</summary><p style="color:#64748b;font-size:.9rem;margin-top:.75rem;margin-bottom:0;">Automatic type conversion is enabled by default. Turn it off when numeric-looking values must remain exact strings, especially identifiers with leading zeroes.</p></details>
+<details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">What should I do if conversion fails?</summary><p style="color:#64748b;font-size:.9rem;margin-top:.75rem;margin-bottom:0;">Read the XML error, correct unclosed tags, invalid nesting, or unescaped special characters in the editable input, and convert again.</p></details>
+</div>
+</article>
 
 </div>
 
