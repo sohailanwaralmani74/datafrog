@@ -154,42 +154,16 @@ permalink: /excel-to-txt
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Excel to Plain Text (TXT) Converter Reference</h2>
-    <p>
-      The Excel to TXT converter extracts tabular spreadsheet data into unformatted plain text. Mainframe architectures, batch data ingestion jobs, financial clearing systems, and POS terminals often require raw delimiter-separated text streams rather than binary Office files. This tool converts multi-column worksheets into deterministic text rows with precision delimiter control.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Supported Delimiters &amp; Quoting Modes</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>Tab Delimited (TSV / <code>\t</code>):</strong> The standard format for pasting directly into text editors, terminal buffers, and spreadsheets without quoting conflicts.</li>
-      <li><strong>Comma Delimited (CSV / <code>,</code>):</strong> Standard RFC 4180 format for database ingestion and data science tools.</li>
-      <li><strong>Pipe Delimited (<code>|</code>):</strong> Preferred for datasets containing natural commas and semicolons in address or description fields.</li>
-      <li><strong>Semicolon Delimited (<code>;</code>):</strong> Standard separator in European locales where the comma represents a decimal point.</li>
-      <li><strong>Custom Separators:</strong> Define custom multi-character delimiters (e.g. <code>::</code> or <code>~</code>) for legacy parser requirements.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Quoting Rules &amp; Empty Cell Handling</h3>
-    <p>
-      When the <strong>"Quote fields containing spaces or delimiters"</strong> option is checked, values containing the active delimiter or line breaks are enclosed in double quotes (<code>"like, this"</code>). Existing double quotes within values are escaped as <code>""</code>. Empty cells maintain their delimiter boundaries (e.g., <code>val1,,val3</code>) so columnar alignment is never displaced across downstream lines.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display:flex; flex-direction:column; gap:1rem;">
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Does this tool convert all sheets or a selected sheet?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">You can select any specific sheet from the workbook using the sheet dropdown. Plain text files do not support multi-tab concepts, so each sheet is exported as its own clean text stream.</p>
-      </details>
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">What character encoding is used for the downloaded .txt file?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">The output is exported in universal UTF-8 character encoding, ensuring international accents, currency symbols, and non-Latin alphabets are preserved without garbled characters.</p>
-      </details>
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Are formulas converted to their values?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Yes. The calculated values of formula cells are extracted directly so your output reflects the true numerical or string data rather than raw Excel formula strings.</p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;">
+<h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Export worksheet data as plain text for another system</h2>
+<p>Use this when a system asks for a .txt file, when you need a simple data extract, or when you want to move worksheet values into a text-based workflow. You can choose how fields are separated and how values are quoted, rather than copying cells one by one.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3>
+<ol><li>Open the workbook and select the worksheet whose rows you need to export.</li><li>Choose the field delimiter expected by the receiving application, such as tabs, commas, pipes, or semicolons.</li><li>Review quotation and empty-cell settings, generate the text, and inspect the output before downloading it.</li></ol>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Choose settings that match the destination</h3>
+<p>A tab-separated file is often convenient for pasting into spreadsheets, while pipes or semicolons may be useful when commas occur inside values. Quoting can help keep separators inside a field from being mistaken for a boundary. The right settings depend on the application that will read the file.</p><p>Plain text does not preserve Excel formatting, formulas as formulas, multiple worksheet tabs, charts, or macros. Check dates, leading zeroes, blank cells, and values containing separators or line breaks. Keep the original workbook until the exported text has been accepted by the next step in your workflow.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3>
+<div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have reviewed the generated result and confirmed that it meets the needs of the next step in your workflow.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a successful conversion guarantee the output is correct for my use?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Check the output against your requirements and test it in the application that will receive it, especially when structure or data types matter.</p></details></div>
+</article>
 
 </div>
 
