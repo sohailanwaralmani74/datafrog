@@ -201,37 +201,7 @@ permalink: /validate/xml-validator
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
-  <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use XML Validator</h2>
-
-    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #fff7ed; color: #ea580c; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input XML Document</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste XML text into the editor, drag & drop a <code>.xml</code> file, or click <strong>Load Sample XML</strong>.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #fff7ed; color: #ea580c; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Check Validation Feedback</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review the green success badge or red syntax error callout detailing unclosed tags or parser errors.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #fff7ed; color: #ea580c; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Pretty Print or Download</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Pretty Print</strong>, <strong>Copy</strong>, or <strong>Download</strong> to export clean XML files.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;"><h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Find why an XML file will not open or import</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">A missing closing tag, mismatched element name, or misplaced character can stop an XML document from being parsed. Validate the exact file that is failing so you can use the error feedback to find the likely problem before editing the source.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Start with the source</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Paste the XML or select the local XML file that fails in your workflow.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Review the results</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Run validation and read the error message or line reference. Check the surrounding lines, not just the character where the parser stopped.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Confirm before acting</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Correct the source and validate again. Once the document parses, check any schema or application-specific rules separately if your workflow requires them.</p></div></div><h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Well-formed XML is not always valid for an application</h3><p style="color:#475569;line-height:1.7;">Basic XML validation checks whether tags and markup follow XML syntax rules. A document can be well formed and still omit a required element, use an unexpected value, or fail a schema expected by another system. If syntax passes but the import still fails, check the receiving application's requirements.</p><p style="color:#475569;line-height:1.7;">Make small changes and recheck the document after each fix; one unclosed tag can cause several later errors. Keep the original file and confirm the final XML in the application that needs to consume it.</p></section>
 
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
