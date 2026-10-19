@@ -373,46 +373,7 @@ author_id: gourav-mishra
   </div>
 </section>
 
-<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
-  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">How to Deduplicate Data</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Upload or Paste</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Drag and drop your file into the input box or paste raw tabular text directly.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Set Retention Rule</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Select whether to keep the first row, last row, or the row with the most complete fields.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Select Key Columns</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Check the columns that define record identity (or leave unselected to check all columns).</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Run &amp; Review</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click Deduplicate. Inspect retained vs removed rows in the table and cluster views.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Export Clean File</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Download your cleaned dataset as CSV, Excel, or JSON for immediate use in production.</p>
-    </div>
-  </div>
-</section>
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;"><h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Remove repeated records without losing the right entry</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">Duplicate rows can inflate totals, repeat contacts, or cause an import to create the same record twice. Before removing anything, decide what makes two rows duplicates in this dataset and which version should be kept. The right rule depends on whether you are cleaning a contact list, transaction export, inventory, or another table.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Start with the source</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Load the dataset and check that headers and columns are interpreted correctly.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Review the results</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Choose the key columns that identify a duplicate, then select the available rule for which matching row to retain.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Confirm before acting</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Review several duplicate groups, including rows that match on the key but differ in other fields. Export the cleaned data only after confirming the result.</p></div></div><h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Choose a matching rule that fits the records</h3><p style="color:#475569;line-height:1.7;">Matching every column finds exact duplicate rows but may miss repeated people whose phone number or address differs. Matching only a name can remove valid records when several people share that name. A stable ID or a combination of fields is often a better key when the dataset provides one.</p><p style="color:#475569;line-height:1.7;">Deduplication can discard information if the retention rule is wrong. Keep the original file, check row counts before and after cleaning, and inspect conflicting values before importing the result into another system.</p></section>
 
 <section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
   <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Common Types of Duplicate Records</h2>
