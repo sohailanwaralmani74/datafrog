@@ -143,51 +143,16 @@ permalink: /xml-to-svg
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">XML to SVG Diagram Generator Reference</h2>
-    <p>
-      XML’s tree-based object hierarchy can become overwhelming when documents nest 5 to 10 levels deep. Translating complex XML into an SVG (Scalable Vector Graphics) diagram provides immediate spatial clarity. Technical architects, schema engineers, and documentation authors use SVG diagrams to visualize data schemas, organizational charts, and XML-RPC network payloads directly within technical specifications.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Infinite Scalability &amp; Web Standard</h3>
-    <p>
-      Because SVG is XML-based vector graphics, output files can be scaled to billboard resolution without pixelation, inserted directly into HTML using <code>&lt;svg&gt;</code> tags, or imported into vector editing tools like Adobe Illustrator, Figma, and Inkscape.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">What happens if my XML already contains SVG vector code?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Select the "Extract Raw &lt;svg&gt; Tag" mode. The converter will isolate the vector graphic from any surrounding SOAP envelopes or container tags and clean up namespaces.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I embed the downloaded SVG directly in Figma or React?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes. The generated SVG is 100% compliant with the W3C SVG 1.1 specification and can be dropped directly into Figma canvas or used as an inline JSX SVG component in React/Next.js.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Are large tree diagrams legible in SVG?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes. Nodes are rendered with high-contrast text badges and dynamic width calculation to ensure label text never collides or truncates.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does the generated SVG diagram scale cleanly without pixelation?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes, because the output is pure vector graphics using SVG &lt;rect&gt;, &lt;path&gt;, and &lt;text&gt; elements, the diagram can be zoomed indefinitely, printed on high-resolution posters, or embedded into crisp web vector illustrations.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I customize the colors and font of the generated SVG tree?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Absolutely. The generated SVG contains clean inline attributes and CSS classes that you can open and customize in vector editors like Adobe Illustrator, Inkscape, or Figma, or style with external CSS rules.
-        </p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;">
+<h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Turn structured XML into a visual diagram</h2>
+<p>If XML contains a hierarchy that is difficult to follow as raw text, a diagram can make the relationships easier to scan. Use the generated SVG as a visual aid, then inspect the result to confirm that the important nodes and connections are clear.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3>
+<ol><li>Load the XML document and make sure it contains the structure you want to visualise.</li><li>Generate the SVG and inspect labels, branches, and relationships for missing or crowded content.</li><li>Download the result and open it at different sizes to check that labels remain readable.</li></ol>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A diagram is a view of the structure, not the source itself</h3>
+<p>Large or deeply nested XML documents can produce crowded diagrams. Long labels, repeated elements, and complex branches may be difficult to read in one view. For a large document, focus on the relevant section or use an XML viewer to locate the source element first.</p><p>SVG is a scalable graphic format; it does not replace the original XML or guarantee that every data value is represented in full. Keep the source document and verify the diagram against it when exact content or relationships matter.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3>
+<div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have reviewed the generated result and confirmed that it meets the needs of the next step in your workflow.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a successful conversion guarantee the output is correct for my use?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Check the output against your requirements and test it in the application that will receive it, especially when structure or data types matter.</p></details></div>
+</article>
 
 </div>
 
