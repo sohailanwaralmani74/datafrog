@@ -666,67 +666,40 @@ short_name: Metadata Viewer
 
 <!-- Comprehensive Educational SEO Content -->
 <article class="content-article">
-  <h2>What is a Metadata Viewer?</h2>
-  <p>A photo can contain the time it was taken, the camera or phone model, and sometimes GPS coordinates. Office documents may retain an author name or other properties. This information can be useful when checking a file before sharing it, but not every file contains every field.</p>
-  <p>This browser-based Metadata Inspector parses raw binary signatures, document headers, EXIF tags, ID3 audio attributes, and container data structures to reveal exact creation dates, author names, camera settings, GPS coordinates, software versions, and cryptographic hashes without sending a single byte to external servers.</p>
-
-  <h2>Supported File Types & Extraction Capabilities</h2>
-  <p>Our client-side extraction engine supports every major document, multimedia, and structured data format:</p>
-  <ul>
-    <li><strong>Document Files (PDF, DOCX, XLSX, PPTX, ODT, ODS, EPUB):</strong> Title, author, organization name, creation/modification timestamps, page count, word count, total editing time, revision number, application name, PDF version, encryption status, and font attachments.</li>
-    <li><strong>Image Files (JPEG, PNG, WebP, GIF, TIFF, HEIC, AVIF, SVG, ICO):</strong> EXIF camera manufacturer, lens model, aperture ($f$-stop), ISO speed, shutter speed, focal length, flash status, color space, dimensions, DPI resolution, and embedded GPS location coordinates.</li>
-    <li><strong>Audio Files (MP3, WAV, FLAC, AAC, OGG, M4A):</strong> Artist, album title, track number, genre, release year, duration, audio bitrate, sample rate, channel count, and ID3 tag versions.</li>
-    <li><strong>Video Files (MP4, MOV, AVI, MKV, WebM):</strong> Video resolution (1080p, 4K), aspect ratio, frame rate (FPS), video codec, audio channels, container type, and creation timestamps.</li>
-    <li><strong>Structured Data (JSON, XML, YAML, CSV):</strong> Root type, element count, schema structure, CSV row/column metrics, and delimiter detection.</li>
-  </ul>
-
-  <h2>Understanding File Metadata Categories</h2>
-  <p>Extracted metadata fields are organized into structured, searchable categories:</p>
-  <ol>
-    <li><strong>General Information:</strong> File name, file size in bytes/MB, MIME type, file extension, last modified date, and magic byte signature confidence.</li>
-    <li><strong>Document Properties:</strong> Authorship, revision histories, application templates, section counts, and document summary metadata.</li>
-    <li><strong>EXIF & Camera Metadata:</strong> Physical hardware details, camera settings, exposure settings, software tags, and geolocational GPS coordinates.</li>
-    <li><strong>Audio & Video Parameters:</strong> Codec specifications, sampling rates, bitrates, channel layout, and media duration.</li>
-    <li><strong>Security & Cryptographic Hashes:</strong> Encryption flags, digital signature presence, and browser-calculated MD5, SHA-1, and SHA-256 integrity hashes.</li>
-  </ol>
-
-  <h2>Privacy Considerations & Security Audit</h2>
-  <p>While metadata provides valuable forensic and organizational context, exposed metadata can introduce severe privacy and security risks:</p>
-  <ul>
-    <li><strong>GPS Location Leakage:</strong> Digital photos captured on modern smartphones frequently embed precise GPS latitude and longitude coordinates, exposing exact physical home or office addresses when shared online.</li>
-    <li><strong>Identity Exposure:</strong> Office documents (DOCX, PDF) often store internal employee names, internal network paths, user IDs, and company names.</li>
-    <li><strong>Software Vulnerability Fingerprinting:</strong> Leaked software names and version numbers can inform attackers of unpatched application vulnerabilities.</li>
-  </ul>
-  <p>Our built-in security analysis engine automatically audits every uploaded file for privacy exposure, generating an instant <em>Privacy Score</em> and actionable safety recommendations.</p>
-
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-item active">
-    <div class="faq-question" onclick="toggleFaq(this)">What is file metadata?</div>
-    <div class="faq-answer">File metadata is hidden background information embedded inside files, including creation dates, author names, GPS location coordinates, camera settings (EXIF), software version info, page counts, and audio/video codecs.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Is my file uploaded to any server or cloud service?</div>
-    <div class="faq-answer">No. All file reading, magic byte detection, EXIF extraction, document property parsing, hash generation, and report building occur 100% locally inside your browser. No data ever leaves your device.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Which file formats are supported by this Metadata Viewer?</div>
-    <div class="faq-answer">This tool supports Documents (PDF, DOCX, XLSX, PPTX, ODT, ODS, EPUB), Images (JPEG, PNG, GIF, WebP, HEIC, TIFF, SVG, ICO), Audio (MP3, WAV, FLAC, AAC, OGG, M4A), Video (MP4, MOV, AVI, MKV, WebM), and Structured Datasets (JSON, XML, YAML, CSV).</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Can this tool extract EXIF GPS location coordinates from photos?</div>
-    <div class="faq-answer">Yes. If your digital camera or smartphone embedded GPS coordinates when taking a photo, this tool extracts the latitude, longitude, and altitude, while highlighting any associated privacy risks.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">How does privacy risk scoring work?</div>
-    <div class="faq-answer">The security analysis engine audits extracted metadata for sensitive information such as physical GPS location, author real names, organization details, device serial numbers, and software versions, generating a privacy score and security recommendation.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Can I export the extracted file metadata?</div>
-    <div class="faq-answer">Yes. You can export complete metadata reports in HTML, PDF, JSON, CSV, Excel, and Markdown formats, or copy summary tables to your clipboard.</div>
-  </div>
-
-  <h2>Conclusion</h2>
-  <p>The <strong>Metadata Viewer</strong> gives developers, privacy advocates, digital forensicians, and casual users complete transparency into the hidden properties of their files. By performing all processing 100% locally inside your browser, you can inspect document properties, camera EXIF tags, and security risks with total privacy peace of mind.</p>
+<h2>Check what a file may reveal before you share it</h2>
+<p>Before sending a photo, PDF, or office document to a client, colleague, or public website, it can be worth checking its metadata. A picture may contain camera details or location coordinates; a document may retain an author name, creation dates, or application information. Select a file above to see which properties are available and decide whether they belong in the copy you plan to share.</p>
+<h3>Everyday reasons to inspect metadata</h3>
+<ul>
+<li><strong>Photos and screenshots:</strong> check for camera information, timestamps, and possible GPS coordinates before posting an image publicly.</li>
+<li><strong>PDFs and office documents:</strong> review author, title, creator application, and date fields before distributing a report, proposal, or résumé.</li>
+<li><strong>Files received from someone else:</strong> inspect available properties to understand how the file was created or exported.</li>
+<li><strong>Preparing public downloads:</strong> make metadata review part of your publishing checklist, especially when a file came from a personal device or internal document.</li>
+</ul>
+<h3>How to check a file</h3>
+<ol>
+<li>Choose the local file you want to inspect.</li>
+<li>Review the metadata groups the browser can read for that file type.</li>
+<li>Look closely at location fields, personal names, timestamps, software names, and document titles.</li>
+<li>If something should not be shared, remove or change it with an appropriate editor and inspect the saved copy again. This viewer is for inspection; do not assume that viewing a property removes it.</li>
+</ol>
+<h3>What metadata can tell you</h3>
+<p>Metadata is information stored alongside a file's main content. Depending on the format and the software that created it, it can include technical properties, dates, author details, camera settings, GPS coordinates, or a document title. Two files of the same type can expose different properties, and many files contain very little metadata.</p>
+<p>Available fields depend on the file format and what has been retained. A missing GPS field does not prove that a photo has never contained location data, and a displayed author name does not prove who currently owns or sent the file. Treat metadata as clues about the file, not as a complete history or proof of identity.</p>
+<h3>Before sharing a sensitive file</h3>
+<ul>
+<li><strong>Check location data:</strong> coordinates can reveal where a photo was taken. Consider this before sharing images of your home, workplace, or children.</li>
+<li><strong>Review personal details:</strong> author names and document titles can disclose information you did not intend to publish.</li>
+<li><strong>Inspect the final copy:</strong> editing or exporting a file can add, remove, or preserve different fields. Check the exact version you will share.</li>
+<li><strong>Do not confuse inspection with removal:</strong> use a trusted editor or the application's document-inspection tools to remove unwanted metadata, then verify the saved result.</li>
+<li><strong>Respect confidentiality:</strong> only inspect files you are permitted to access.</li>
+</ul>
+<h3>Privacy and local processing</h3>
+<p>The file is processed in your browser rather than uploaded to a metadata-extraction service. That helps avoid sending the file to a separate conversion server, but it does not change the file itself or replace your organisation's security requirements. Keep your browser and device secure when working with confidential material.</p>
+<h3>Frequently asked questions</h3>
+<details><summary>Can metadata reveal where a photo was taken?</summary><p>Some photos include GPS coordinates, but many do not. Check the fields shown for the specific image rather than assuming every photo has location data.</p></details>
+<details><summary>Does this tool remove metadata?</summary><p>No. It helps you inspect available metadata. If you need to remove fields, use an appropriate editor and inspect the resulting file again.</p></details>
+<details><summary>Why can’t I see the same fields in every file?</summary><p>Metadata varies by format, device, application, export settings, and prior editing. A field may never have been recorded or may have been removed already.</p></details>
+<details><summary>Is a metadata date proof of when a file was created?</summary><p>Not necessarily. Dates can be changed, copied, or reset during editing and export. Use them as context, not definitive evidence.</p></details>
 </article>
 
 {% raw %}
