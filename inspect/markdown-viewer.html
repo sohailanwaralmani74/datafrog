@@ -24,6 +24,12 @@ permalink: /inspect/markdown-viewer
 .df-results{margin-top:1.25rem}
 .df-results[hidden],.df-action[hidden],.df-drop input[hidden]{display:none!important}
 .df-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.md-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;align-items:start}
+.md-workspace h3{margin-top:0}
+.md-editor,.md-preview-pane{min-width:0}
+.md-editor textarea{min-height:360px;resize:vertical}
+.md-preview-pane .df-result-box{min-height:360px;overflow-wrap:anywhere}
+@media(max-width:700px){.md-workspace{grid-template-columns:minmax(0,1fr)}.md-editor textarea,.md-preview-pane .df-result-box{min-height:240px}}
 .df-preview{display:block;max-width:100%;max-height:360px;margin:.5rem auto;object-fit:contain}
 .df-result-box{border:1px solid #dbe3ec;border-radius:10px;padding:1rem;min-width:0;overflow-wrap:anywhere}
 .df-tool textarea{width:100%;max-width:100%;padding:.8rem;border:1px solid #cbd5e1;border-radius:8px;font:inherit}
@@ -44,10 +50,12 @@ permalink: /inspect/markdown-viewer
 <div class="df-actions"><button id="md-view" class="df-action" type="button" hidden disabled>Preview Markdown</button><button id="md-sample" class="df-action" type="button">Try sample</button></div>
 </section>
 <section id="md-results" class="df-panel df-results" hidden>
-<h2>Markdown preview</h2>
-<div id="md-preview" class="df-result-box" style="min-height:180px"></div>
-<h3>Source text</h3>
-<textarea id="md-source" rows="12" spellcheck="false" aria-label="Markdown source"></textarea>
+<div class="md-workspace">
+<div class="md-editor"><h2>Markdown editor</h2>
+<textarea id="md-source" rows="18" spellcheck="false" aria-label="Markdown source" placeholder="Write or edit Markdown here…"></textarea></div>
+<div class="md-preview-pane"><h2>Live preview</h2>
+<div id="md-preview" class="df-result-box" aria-live="polite"></div></div>
+</div>
 <div class="df-actions"><button id="md-refresh" class="df-action" type="button">Update preview</button><button id="md-download" class="df-action" type="button">Download Markdown</button></div>
 </section>
 <p id="md-status" class="df-status" role="status" aria-live="polite">Upload a file or try the sample.</p>
@@ -74,6 +82,6 @@ function inline(s){return escapeHtml(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</st
 function render(){const lines=source.value.split(/\r?\n/);let html='',list='',code=false,codeLines=[];function close(){if(list){html+='</'+list+'>';list=''}}for(const line of lines){if(line.trim().startsWith('```')){close();if(code){html+='<pre><code>'+escapeHtml(codeLines.join('\n'))+'</code></pre>';codeLines=[];code=false}else code=true;continue}if(code){codeLines.push(line);continue}if(!line.trim()){close();continue}let m;if((m=line.match(/^(#{1,6})\s+(.+)$/))){close();let n=m[1].length;html+='<h'+n+'>'+inline(m[2])+'</h'+n+'>';continue}if(/^\s*[-*+]\s+/.test(line)){if(list!=='ul'){close();html+='<ul>';list='ul'}html+='<li>'+inline(line.replace(/^\s*[-*+]\s+/,''))+'</li>';continue}if(/^\s*\d+\.\s+/.test(line)){if(list!=='ol'){close();html+='<ol>';list='ol'}html+='<li>'+inline(line.replace(/^\s*\d+\.\s+/,''))+'</li>';continue}close();if(/^>\s?/.test(line))html+='<blockquote>'+inline(line.replace(/^>\s?/,''))+'</blockquote>';else html+='<p>'+inline(line)+'</p>'}close();if(code)html+='<pre><code>'+escapeHtml(codeLines.join('\n'))+'</code></pre>';preview.innerHTML=html||'<p>No preview content.</p>';results.hidden=false;status.textContent='Preview updated.'}
 function load(f){if(!f)return;if(!/\.(md|markdown|mdown|txt)$/i.test(f.name)){status.textContent='Choose a Markdown or text file.';return}chosenName=f.name;fileName.textContent='Selected: '+f.name+' ('+Math.ceil(f.size/1024)+' KB)';view.hidden=false;view.disabled=true;status.textContent='Reading file…';const reader=new FileReader();reader.onload=()=>{source.value=String(reader.result||'');view.disabled=false;status.textContent='File ready. Click Preview Markdown.'};reader.onerror=()=>status.textContent='Could not read this file. Try another one.';reader.readAsText(f)}
 upload.addEventListener('click',()=>file.click());drop.addEventListener('click',e=>{if(e.target!==upload)file.click()});drop.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();file.click()}});file.addEventListener('change',()=>load(file.files&&file.files[0]));['dragenter','dragover'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add('df-over')}));['dragleave','drop'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove('df-over')}));drop.addEventListener('drop',e=>load(e.dataTransfer.files&&e.dataTransfer.files[0]));
-view.addEventListener('click',render);document.getElementById('md-refresh').addEventListener('click',render);document.getElementById('md-sample').addEventListener('click',()=>{chosenName='sample.md';fileName.textContent='Sample Markdown loaded';source.value='# Project notes\n\nA **Markdown** preview with *emphasis*.\n\n## Tasks\n- Review the document\n- Share the notes\n\n```js\nconst ready = true;\n```';view.hidden=false;view.disabled=false;render()});document.getElementById('md-download').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([source.value],{type:'text/markdown;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=chosenName.replace(/\.[^.]+$/,'')+'.md';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}); 
+view.addEventListener('click',render);source.addEventListener('input',render);document.getElementById('md-refresh').addEventListener('click',render);document.getElementById('md-sample').addEventListener('click',()=>{chosenName='sample.md';fileName.textContent='Sample Markdown loaded';source.value='# Project notes\n\nA **Markdown** preview with *emphasis*.\n\n## Tasks\n- Review the document\n- Share the notes\n\n```js\nconst ready = true;\n```';view.hidden=false;view.disabled=false;render()});document.getElementById('md-download').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([source.value],{type:'text/markdown;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=chosenName.replace(/\.[^.]+$/,'')+'.md';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}); 
 })();
 </script>
