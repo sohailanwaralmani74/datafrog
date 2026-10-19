@@ -135,55 +135,16 @@ permalink: /xml-to-xsd
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">XML to XSD Schema Generator Reference</h2>
-    <p>
-      An XML Schema Definition (XSD) formalizes data structure contracts for XML documents used in APIs, configuration files, and data integration pipelines. This tool parses an XML sample and produces a valid W3C XML Schema (XSD 1.0) that defines the tag hierarchy, attribute declarations, complex and simple types, and element cardinality.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">W3C Datatype Detection Rules</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><code>xs:integer</code> – Whole positive and negative numbers without fractional decimals.</li>
-      <li><code>xs:decimal</code> – Numbers containing decimal points or floating-point notation.</li>
-      <li><code>xs:boolean</code> – Exact literal values <code>true</code> or <code>false</code>.</li>
-      <li><code>xs:date</code> &amp; <code>xs:dateTime</code> – ISO 8601 calendar strings and timestamp formats.</li>
-      <li><code>xs:string</code> – Free text strings and mixed alphanumeric values.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the generator distinguish complexType from simpleType?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Any XML tag enclosing child elements or declaring attributes is declared as an <code>xs:complexType</code>. Tags containing exclusively scalar text values without attributes are assigned simple W3C datatypes.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are repeated sibling elements represented in the schema?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          When an element occurs multiple times within a parent node, the schema generator declares it with <code>maxOccurs="unbounded"</code> to model arrays and collections.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can the generated XSD be used in Java, .NET, or Python validators?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes. The output strictly conforms to the official W3C XML Schema 1.0 recommendation, compatible with Java Xerces, Microsoft .NET XmlSchemaSet, and Python lxml.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the schema generator detect optional vs required elements?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          When sibling records are evaluated, if an element is absent from one or more records, the generator assigns <code>minOccurs="0"</code> to mark it as optional. Elements present in all records default to <code>minOccurs="1"</code>.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Which W3C XML Schema versions are supported?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          The generated schema adheres to the universal W3C XML Schema 1.0 (XSD 1.0) standard with <code>xmlns:xs="http://www.w3.org/2001/XMLSchema"</code>, compatible with standard parsers like Xerces, lxml, System.Xml, and JAXB.
-        </p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;">
+<h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Create a starting schema from an XML example</h2>
+<p>When you need an XML Schema Definition (XSD) but only have a sample XML document, generating a draft schema can save time. Use the sample as evidence of the structure, then review the schema against the full range of XML documents your application is expected to accept.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3>
+<ol><li>Load a representative XML file that includes the important elements and typical values.</li><li>Generate the XSD and review element names, required fields, and inferred data types.</li><li>Validate the schema with other representative XML samples and adjust it for optional fields or structures that vary.</li></ol>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">One sample cannot show every possible case</h3>
+<p>A generated schema infers rules from the example it sees. If a field is empty in the sample, appears only once, or always contains the same kind of value, the schema may not capture every valid case in your real data. Include examples of optional elements, repeated items, and different values where possible.</p><p>Treat the generated XSD as a draft to review, not as an authoritative description of every document your system should accept. Check it against your application requirements and validate multiple representative XML files before using it as a strict contract.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3>
+<div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have reviewed the generated result and confirmed that it meets the needs of the next step in your workflow.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a successful conversion guarantee the output is correct for my use?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Check the output against your requirements and test it in the application that will receive it, especially when structure or data types matter.</p></details></div>
+</article>
 
 </div>
 
