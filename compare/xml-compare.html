@@ -234,37 +234,7 @@ permalink: /compare/xml-compare
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
-  <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use XML Compare</h2>
-
-    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input Original & Modified XML</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste XML into boxes 1 and 2 or drag & drop <code>.xml</code> documents.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect XML Node Differences</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review element additions (+), node deletions (-), and text/attribute changes (~).</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Diff Report</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Diff</strong> or <strong>Download Report</strong> to save your XML comparison log.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;"><h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Review changes between two XML documents</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">When an XML export or configuration changes, the important differences may be buried among many repeated tags. Compare the original and updated documents to find added or removed elements and changed text or attributes, then review the surrounding structure before using the new version.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Start with the source</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Load the original XML and the modified XML in the two input areas.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Review the results</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Run the comparison and inspect added nodes, removed nodes, and changed text or attributes.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Confirm before acting</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Follow each reported difference back to its parent element. Confirm that repeated records and important identifiers still appear as expected.</p></div></div><h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Check structure as well as values</h3><p style="color:#475569;line-height:1.7;">An XML change can affect more than the text inside a tag: moving a child element, changing an attribute, or removing a repeated node can alter how another system reads the document. Review the parent and sibling elements around each difference rather than judging a change from a single value.</p><p style="color:#475569;line-height:1.7;">A diff shows what changed between the two supplied documents; it does not prove that the new XML is valid or compatible with the receiving system. Validate the updated document and test it against the expected schema or workflow when correctness matters.</p></section>
 
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
