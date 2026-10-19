@@ -44,13 +44,16 @@ Sara,Marketing,false</textarea>
     </div>
   </section>
   <section style="margin-top:1.25rem;border:1px solid #e2e8f0;border-radius:14px;padding:clamp(1rem,3vw,1.5rem);line-height:1.75;color:#334155;">
-    <h2 style="font-size:1.35rem;color:#0f172a;margin-top:0;">How to convert CSV to JSON</h2>
-    <ol><li>Paste your CSV text or choose a local CSV file.</li><li>Choose the field delimiter used in your data and indicate whether the first row contains headers.</li><li>Select <strong>Convert to JSON</strong>. Review the result, then copy it or download the converted file.</li></ol>
-    <h3 style="font-size:1.1rem;color:#0f172a;">What happens to your data?</h3>
-    <p>The conversion runs in your browser. CSV fields enclosed in double quotes are parsed, including commas inside quoted values and escaped double quotes. Check the output before using it in another application, especially when the CSV contains unusual line breaks, duplicate column names, or values that require a specific data type.</p>
-    <h3 style="font-size:1.1rem;color:#0f172a;">CSV conversion tips</h3>
-    <p>Make sure the delimiter matches your source file. If the first row is actual data rather than column names, turn off the header option. Keep a copy of the original CSV so you can compare the converted output and confirm that all rows and columns were preserved.</p>
-  </section>
+<h2 style="font-size:1.35rem;color:#0f172a;margin-top:0;">Turn rows into records your app can use</h2>
+<p>Use CSV to JSON when a spreadsheet export needs to become structured data for a configuration, import, or data exchange. Each row can become a JSON object, with column headings used as property names when the header option is enabled.</p>
+<h3 style="font-size:1.1rem;color:#0f172a;">How to get a useful result</h3>
+<ol><li>Paste your CSV text or choose a local CSV file.</li><li>Choose the field delimiter that matches the original file and indicate whether its first row contains column headings.</li><li>Select <strong>Convert to JSON</strong>, then review the output before copying or downloading it.</li></ol>
+<h3 style="font-size:1.1rem;color:#0f172a;">What happens to your data?</h3>
+<p>JSON is structured around objects and arrays, so the result depends on how the CSV rows and headings are interpreted. Check duplicate or empty headings, values that look like numbers or dates, and rows with missing fields before sending the output to another application.</p>
+<h3 style="font-size:1.1rem;color:#0f172a;">Before you use the converted file</h3>
+<p>Check the first row setting carefully. Enable headers when the first row contains names such as `id` or `email`; disable it when that row is actual data. Confirm the generated object keys and a few records against the source CSV.</p>
+<p>CSV fields are text; conversion does not know every application's intended data types. A value like `00125` may be an identifier rather than a number, so inspect leading zeroes and date-like values. Keep the original CSV until the receiving system accepts the JSON.</p>
+</section>
 </div>
 <style>
 .tool-workspace .option{display:flex;flex-direction:column;gap:.35rem;min-width:190px}.tool-workspace .option label{font-weight:700;font-size:.9rem}.tool-workspace .option input,.tool-workspace .option select{padding:.6rem;border:1px solid #cbd5e1;border-radius:8px;max-width:100%}
