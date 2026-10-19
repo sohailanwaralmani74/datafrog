@@ -313,37 +313,7 @@ permalink: /analyze/xml-analyzer
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
-  <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use XML Analyzer</h2>
-
-    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input XML Document</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste your XML markup into the input box, drag & drop a <code>.xml</code> file, or click <strong>Load Sample XML</strong>.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Tag Stats & Audit</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review element tag frequencies, attribute metrics, deepest node paths, namespaces, and quality warnings.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #f0fdf4; color: #16a34a; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Export Report</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong>, <strong>Download Report</strong>, or <strong>Export Stats CSV</strong> to export analysis results.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;"><h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Understand a large XML file before editing it</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">When an XML export contains hundreds of tags or deeply nested records, opening it as plain text can make patterns hard to spot. Analyse the document first to see which elements repeat, how attributes are used, and where the deepest branches occur.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Start with the source</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Load the XML file or paste the document you want to inspect.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Review the results</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Review element and attribute counts, repeated tags, nesting depth, and any reported structure warnings.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Confirm before acting</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Use the results to locate the sections that need attention, then open the original XML or an XML viewer to inspect their actual values.</p></div></div><h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Frequency is not the same as a fault</h3><p style="color:#475569;line-height:1.7;">Repeated elements are normal in many XML documents because each record may use the same tags. Deep nesting can reflect the data model rather than a defect. Use the metrics to understand the document's shape and to identify patterns that look unexpected for your particular file.</p><p style="color:#475569;line-height:1.7;">An analysis summary does not guarantee that the XML matches a required schema or that a receiving application will accept it. Use an XML validator when you need to check syntax, and compare the document with the expected schema or application rules when required.</p></section>
 
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
