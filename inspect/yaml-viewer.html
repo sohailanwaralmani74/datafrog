@@ -325,37 +325,7 @@ permalink: /inspect/yaml-viewer
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
-  <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use YAML Viewer</h2>
-
-    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input YAML File</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste raw YAML into the input area, drag and drop a <code>.yaml</code> or <code>.yml</code> file, or click <strong>Load Sample YAML</strong>.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Explore Structure & Depth</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Expand and collapse key mappings and lists. Use <strong>Expand All</strong> or <strong>Collapse All</strong> to manage deep trees.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Search, Copy & Download</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Search for keys, copy paths to clipboard, and click <strong>Download Formatted YAML</strong> to save your validated file.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;"><h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Find the setting you need in a YAML file</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">Configuration files can be hard to scan when they contain nested sections, lists, and many repeated keys. Open the YAML document to explore its structure, search for a setting, and copy or download the content after you have found the relevant section.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Open the source</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Paste the YAML or open the local file you want to inspect.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Explore the relevant data</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Expand or browse the structure and use search to locate the key, value, or section you need.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Check before using it</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">If the document shows a parsing or indentation warning, inspect the surrounding lines. Copy or download the content only after checking the part you intend to use.</p></div></div><h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Indentation determines what belongs together</h3><p style="color:#475569;line-height:1.7;">In YAML, moving a line left or right can change whether a setting belongs to a parent object or a list item. When a value seems to be missing, check the nesting and nearby indentation before assuming the key does not exist. Quoted strings and values that resemble booleans or numbers may also need attention.</p><p style="color:#475569;line-height:1.7;">A viewer helps you read the document, but a configuration can be syntactically valid and still use a setting your application does not support. Keep the original file and validate application-specific rules before replacing a working configuration.</p></section>
 
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
