@@ -199,45 +199,7 @@ permalink: /xlsx-to-sql-converter
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Excel to SQL Converter Technical Guide</h2>
-    <p>
-      The Excel to SQL converter parses spreadsheet rows into structured relational database commands. When migrating business records, seeding local development environments, or loading bulk data into staging databases where direct GUI imports are restricted, standard SQL scripts provide a universal, auditable data transfer format.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">SQL Dialect Support &amp; Identifier Escaping</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>PostgreSQL:</strong> Uses standard double quotes for identifiers (<code>"table_name"</code>, <code>"column_name"</code>) and dollar-quoted strings or standard single quotes.</li>
-      <li><strong>MySQL / MariaDB:</strong> Quotes table and column identifiers with backticks (<code>`table_name`</code>) and escapes internal single quotes with <code>\'</code>.</li>
-      <li><strong>SQLite:</strong> Uses ANSI standard quoting (<code>"column"</code>) and handles typeless column declarations cleanly.</li>
-      <li><strong>Microsoft SQL Server (T-SQL):</strong> Wraps table and column names with square brackets (<code>[table_name]</code>) and generates compatible multi-row values syntax.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Batching &amp; Query Optimization</h3>
-    <p>
-      Executing individual <code>INSERT INTO table VALUES (...)</code> queries for each row incurs massive transaction overhead and can trigger query timeouts in database engines. The <strong>Batch Size</strong> option allows you to group up to 1,000 rows into a single multi-row statement:
-    </p>
-    <pre style="background: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 8px; font-size: 0.85rem; overflow-x: auto;"><code>INSERT INTO "customers" ("id", "name", "country") VALUES
-  (1, 'Alice Smith', 'US'),
-  (2, 'Bob Jones', 'CA'),
-  (3, 'Charlie Brown', 'UK');</code></pre>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display:flex; flex-direction:column; gap:1rem;">
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">How does the tool sanitize single quotes in string values?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Any cell containing single quotes (such as <em>O'Connor</em> or <em>McDonald's</em>) has its single quotes automatically doubled (<code>''</code>) according to ANSI SQL standards, preventing SQL injection issues and query syntax errors.</p>
-      </details>
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">How are empty Excel cells mapped in SQL?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Blank cells are converted to literal <code>NULL</code> tokens rather than empty string literals (<code>''</code>), allowing database foreign keys and default constraints to behave as intended.</p>
-      </details>
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Can I generate a CREATE TABLE statement as well?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Yes. Check the "Include CREATE TABLE" option to automatically infer column types (VARCHAR, NUMERIC, INT, DATE) based on the first several rows and prepend a DDL table creation block.</p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Prepare spreadsheet rows for a database script</h2><p>When a spreadsheet contains records that need to be loaded into a database, generating SQL can reduce repetitive manual work. Use the workbook preview and SQL settings to prepare a draft script, then verify that the table, columns, values, and database dialect match the destination.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3><ol><li>Load the Excel workbook and choose the worksheet that contains the records you want to import.</li><li>Review headers, target table settings, SQL dialect, and any options for creating tables or batching insert statements.</li><li>Generate the script and inspect representative statements, including empty cells, quotes, dates, and identifier values, before running it.</li></ol><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Review the script before executing it</h3><p>Spreadsheet columns do not automatically reveal every database rule. Column names may need adjustment, values may require explicit types, and the target table may have constraints or required fields. Check how blank cells and text values are represented, especially when a value contains apostrophes or looks like a number but is really an identifier.</p><p>The converter does not connect to your database or guarantee that the script fits its existing schema. Confirm the SQL dialect and review escaping, constraints, and table names. Test with a small sample or safe transaction before using a large script against important data.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have checked the generated result and confirmed it works for the intended task.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does conversion guarantee the result will work everywhere?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Receiving applications can have different format, size, and layout requirements. Review the output and test it in the destination workflow before relying on it.</p></details></div></article>
 
 </div>
 
