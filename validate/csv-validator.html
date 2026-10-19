@@ -195,37 +195,7 @@ permalink: /validate/csv-validator
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
-  <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use CSV Validator</h2>
-
-    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #fff7ed; color: #ea580c; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input CSV File</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste CSV text, drag & drop a <code>.csv</code> file, or click <strong>Load Sample CSV</strong>.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #fff7ed; color: #ea580c; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect Validation Report</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review column count mismatches, duplicate header warnings, and row line numbers.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #fff7ed; color: #ea580c; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Download Report</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Report</strong> or <strong>Download Report</strong> to save the validation log.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section style="padding:3rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;text-align:center;">Check a CSV before importing or sharing it</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">A CSV can look fine at first glance but still fail an import because some rows have a different number of fields, headers are repeated, or quotes are malformed. Validate the exact file you plan to use so you can catch structural issues before they spread into another system.</p><div style="display:flex;flex-direction:column;gap:1.25rem;"><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">1. Load the source CSV</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Paste the data, select a CSV file, or use the sample. Validate the original export rather than a retyped version that might hide the problem.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">2. Review row and header warnings</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Check any row-width mismatches, duplicate header names, and line references in the report. A row with extra separators may have shifted values into the wrong columns.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">3. Fix the source and validate again</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Correct the affected row or export settings in your editor, then run validation on the saved copy. Rechecking confirms whether the structural issue is resolved.</p></div></div><h3 style="font-size:1.25rem;font-weight:800;color:#0f172a;margin-top:1.75rem;">CSV validity is not the same as data accuracy</h3><p style="color:#475569;line-height:1.7;">A structurally consistent CSV can still contain an incorrect email address, an invalid date, or an amount that does not match your records. This check helps find formatting and structure problems; use your own rules to confirm whether the values are correct.</p><h3 style="font-size:1.25rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Why does one row have more columns than the others?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">A delimiter inside a value may not be quoted correctly, or the row may contain an extra separator. Inspect the original line and its quoting before editing it.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">If validation passes, is the data ready for import?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">It may still need checks for required fields, permitted values, dates, and identifiers. Structural validation cannot confirm business accuracy.</p></details></div></div></section>
 
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
