@@ -144,54 +144,16 @@ permalink: /xml-to-sql
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">XML to Relational SQL Generator Reference</h2>
-    <p>
-      While modern document stores ingest JSON natively, most enterprise transactions, data warehouses, and mission-critical applications run on relational SQL databases like PostgreSQL, MySQL, and Microsoft SQL Server. Parsing nested XML directly in SQL stored procedures using <code>OPENXML</code> or XPath queries is notoriously slow and resource-intensive. Converting XML into clean, pre-compiled <code>INSERT</code> statements accelerates data ingestion by orders of magnitude.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Dialect-Specific Syntax Generation</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>PostgreSQL:</strong> Uses standard single-quote literal escaping, <code>BOOLEAN</code>, <code>NUMERIC</code>, and <code>TIMESTAMP</code> types.</li>
-      <li><strong>MySQL / MariaDB:</strong> Generates multi-row <code>INSERT INTO table (...) VALUES (...), (...)</code> batches for maximum throughput.</li>
-      <li><strong>SQLite:</strong> Uses clean ANSI SQL compatible with embedded mobile and local database setups.</li>
-      <li><strong>SQL Server (T-SQL):</strong> Implements <code>SET NOCOUNT ON;</code> and T-SQL type declarations (<code>NVARCHAR</code>, <code>DECIMAL</code>).</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the converter escape single quotes in text fields?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          All string values undergo automatic SQL injection sanitization: single quotes (<code>'</code>) are escaped to double single quotes (<code>''</code>) according to ANSI SQL standards, preventing SQL syntax errors.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are missing or empty XML tags handled in INSERT statements?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Missing tags or empty self-closing elements (e.g. <code>&lt;discount/&gt;</code>) are emitted as standard SQL <code>NULL</code> keywords rather than empty strings, preserving database integrity.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is my data uploaded to any SQL database during conversion?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          No. This tool generates pure SQL text scripts locally in your browser. You can inspect the complete script before manually executing it against your database server.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the converter differentiate numeric and boolean values from text strings?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          DataFrog inspects each field's contents: integers and floating-point decimals are rendered unquoted as numbers, booleans are mapped to TRUE/FALSE or 1/0 according to the selected dialect, and strings are wrapped in escaped single quotes.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I choose different SQL dialects like PostgreSQL, MySQL, and SQLite?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes! The toolbar includes a Dialect dropdown that automatically adjusts column data types (such as SERIAL vs AUTO_INCREMENT, TEXT vs VARCHAR, BOOLEAN vs TINYINT(1)) and quoting conventions.
-        </p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;">
+<h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Prepare XML records for a database import</h2>
+<p>If an XML export needs to be loaded into a relational database, manually turning each record into SQL can be slow and error-prone. Use the converter to prepare an initial SQL script, then review the table layout and statements against the database where the data will go.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3>
+<ol><li>Load the XML file and inspect the input to confirm it is the export you intend to import.</li><li>Choose the SQL dialect that matches your target database and review the generated table or column settings.</li><li>Generate the script and inspect table names, field names, data types, and sample values before running anything.</li></ol>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Review relationships and data types</h3>
+<p>XML can represent nested records and repeated child elements, while a relational database stores data in tables linked by columns and keys. The generated script may need decisions about how that hierarchy should be represented. Check optional fields, repeated elements, empty values, and values that should be dates, numbers, or text.</p><p>Generating SQL does not connect to your database, check its existing schema, or guarantee that every statement will run successfully. Review escaping, constraints, table names, and dialect-specific syntax. Test with a small sample or safe transaction first, and never run an unreviewed script against important production data.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3>
+<div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have reviewed the generated result and confirmed that it meets the needs of the next step in your workflow.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a successful conversion guarantee the output is correct for my use?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Check the output against your requirements and test it in the application that will receive it, especially when structure or data types matter.</p></details></div>
+</article>
 
 </div>
 
