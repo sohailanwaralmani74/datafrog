@@ -231,62 +231,7 @@ permalink: /dom-to-pdf
   </div>
 
   <!-- Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">DOM to PDF Converter Technical Reference</h2>
-    <p>
-      This tool converts HTML markup into PDF documents using a two-stage pipeline: the DOM tree is first rendered in a live browser sandbox, then rasterized to a bitmap canvas, and finally composed into a paginated PDF using vector-preserving page layout. No server-side headless Chrome or Puppeteer is required.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Rendering Pipeline</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>Stage 1 — DOM Sandboxing:</strong> The HTML string is written into a hidden <code>&lt;iframe&gt;</code> via <code>srcdoc</code>, giving it a fully isolated browsing context with its own <code>document</code>, CSS cascade, and inline <code>&lt;style&gt;</code> resolution.</li>
-      <li><strong>Stage 2 — Canvas Rasterization (html2canvas):</strong> html2canvas traverses the iframe's rendered DOM, reads computed CSS styles (including transforms, gradients, borders, and box shadows), and paints each element onto an HTML5 <code>&lt;canvas&gt;</code>. The scale factor (1×, 2×, 3×) controls pixel density for sharpness.</li>
-      <li><strong>Stage 3 — PDF Composition (jsPDF):</strong> The canvas bitmap is exported as a PNG and embedded into a jsPDF document. For content taller than one page, the canvas is sliced into page-height segments and each segment is placed on a successive page.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Configuration Options</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>Page Size:</strong> A4 (210 × 297 mm), Letter (216 × 279 mm), Legal (216 × 356 mm), A3 (297 × 420 mm).</li>
-      <li><strong>Orientation:</strong> Portrait (tall) or Landscape (wide). Affects usable page width for content scaling.</li>
-      <li><strong>Canvas Scale:</strong> Higher scale values (2×, 3×) produce crisper text and images at the cost of longer render times and larger PDF size.</li>
-      <li><strong>Margin:</strong> Uniform margin in millimetres applied to all four sides of every page.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Known Limitations</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>External fonts &amp; images:</strong> Resources loaded from external domains may be blocked by CORS policy. Inline Base64 images and system fonts render reliably; Google Fonts and CDN-hosted images may not.</li>
-      <li><strong>CSS media queries:</strong> html2canvas evaluates screen styles, not <code>@media print</code> rules. Add print-specific styles inside your HTML using <code>&lt;style&gt;@media print { ... }&lt;/style&gt;</code>.</li>
-      <li><strong>JavaScript inside the HTML:</strong> Scripts inside the rendered iframe are sandboxed and may not execute. Interactive components are captured in their initial rendered state.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I convert a full webpage with navigation and sidebars?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes, paste the complete HTML source. For print-optimised output, wrap only your content area in a clean <code>&lt;div&gt;</code> with explicit widths and remove navigation elements before converting.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How are multi-page documents handled?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          The full rendered height of the HTML is measured. If it exceeds the printable page height, the canvas is split into sequential slices and each slice is placed on a new PDF page with the configured margin.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Are inline SVGs and CSS gradients supported?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes. html2canvas renders inline SVG elements and CSS gradients (<code>linear-gradient</code>, <code>radial-gradient</code>) natively as canvas paths. Complex SVG animations are captured in their static initial frame.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is private or confidential HTML kept secure?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes. HTML rendering, canvas rasterization, and PDF binary generation all execute inside your browser's local sandbox via html2canvas and jsPDF. No markup, pixels, or file bytes are transmitted to any server.
-        </p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Save a web page or HTML document as a PDF</h2><p>When you need a shareable copy of a web page, report, invoice, or locally saved HTML document, PDF is often easier to send and print than a live page. Add the HTML source, review the rendered preview, and adjust the available page settings before generating the PDF.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3><ol><li>Paste HTML or select a supported local HTML file, depending on the input option you want to use.</li><li>Review the preview. Check images, fonts, tables, page width, and any content that depends on external resources.</li><li>Choose the available page and rendering settings, generate the PDF, then open it and inspect page breaks before sharing.</li></ol><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">The preview is important</h3><p>A browser page can reflow depending on screen width, loaded fonts, images, and CSS. Content that looks correct in a narrow preview may be too wide for a printed page, while long tables or large images may cross page boundaries. Check the preview at the intended page size and inspect the final PDF.</p><p>Not every website can be reproduced exactly as a PDF. Content that requires a login, scripts, external network resources, or browser-specific behaviour may not render as expected. Keep a copy of the source HTML, and do not assume the generated PDF includes content that was not visible in the preview.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have checked the generated result and confirmed it works for the intended task.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does conversion guarantee the result will work everywhere?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Receiving applications can have different format, size, and layout requirements. Review the output and test it in the destination workflow before relying on it.</p></details></div></article>
 
 </div>
 
