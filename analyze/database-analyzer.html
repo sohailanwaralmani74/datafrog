@@ -631,33 +631,7 @@ author_id: gourav-mishra
   </div>
 
   <!-- Educational Article -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 3rem;">
-    
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
-      What Is Database Analysis &amp; Inspection?
-    </h2>
-    <p>
-      Database analysis is the process of auditing a database's structural schema, physical data types, primary and foreign key constraints, table relationships, indexing coverage, and underlying data quality metrics. Whether preparing a legacy database for cloud migration, auditing third-party application schemas, or debugging missing foreign keys, static and statistical database analysis reveals potential performance bottlenecks and schema anti-patterns before deploying code.
-    </p>
-
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
-      Core Metrics Audited by DataFrog Analyze Database
-    </h2>
-    <ul style="padding-left: 1.25rem;">
-      <li><strong>Schema Integrity:</strong> Checks primary key definitions, foreign key integrity, and table constraints.</li>
-      <li><strong>Referential Integrity:</strong> Detects orphan records where child table foreign keys point to missing parent rows.</li>
-      <li><strong>Indexing Coverage:</strong> Flags unindexed foreign key columns that cause full-table scans during relational joins.</li>
-      <li><strong>Data Quality Profiling:</strong> Measures NULL percentages, duplicate rows, distinct counts, and numerical outliers.</li>
-      <li><strong>Schema Normalization:</strong> Identifies First Normal Form (1NF) violations like comma-separated list values or repeating attribute columns.</li>
-    </ul>
-
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 1rem;">
-      100% Client-Side Browser Privacy
-    </h2>
-    <p>
-      Traditional database inspection tools require database connection strings or uploading sensitive schema files to remote cloud servers. DataFrog <strong>Analyze Database</strong> runs entirely in your web browser memory using WASM and local JavaScript parsers. Your SQL code, SQLite binaries, CSV files, and JSON payloads never leave your computer.
-    </p>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Check a database structure before a migration or handover</h2><p>Before moving a database, integrating a new data source, or taking over an unfamiliar project, it helps to understand how its tables fit together. Look for missing relationships, inconsistent columns, duplicate-looking records, and areas that may need a closer review before making changes.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical review process</h3><ol><li>Load the database information or supported export that this page accepts, and confirm you are reviewing the intended dataset.</li><li>Start with the table and column overview. Check key fields, relationships, empty values, repeated records, and any reported warnings.</li><li>Investigate flagged tables in the source database or export. Record which issues are confirmed and which are only possibilities before changing the schema or data.</li></ol><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Prioritise findings by impact</h3><p>A table without an obvious relationship may be intentional, and a column with many empty values may be optional. Conversely, a missing key or unexpected duplicate can affect imports and reports. Compare each finding with the application's data rules and ask whether it could cause an actual problem for the work you plan to do.</p><p>A static analysis cannot confirm every behaviour of a live database, execute all queries, or prove that an application will work after a migration. Keep a backup, test planned changes in a safe environment, and verify important relationships against the actual schema and data.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a clean report guarantee the data or query is correct?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. The checks help find likely problems, but you still need to verify results against the requirements of the application and the data itself.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep an unchanged copy?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the original file or script until the reviewed result has been checked and accepted in the intended workflow.</p></details></div></article>
 
 </div>
 
