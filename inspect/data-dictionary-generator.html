@@ -292,46 +292,7 @@ permalink: /inspect/data-dictionary-generator
   </div>
 </section>
 
-<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
-  <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">How to Generate a Data Dictionary &amp; Analyze Metadata</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Upload or Paste</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Drag and drop your dataset file or paste raw tabular text directly into the input area.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Analyze &amp; Profile</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click Analyze Metadata to trigger automated column profiling, type inference, and metadata extraction.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Review Metadata</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Examine physical types, inferred business meanings, nullability %, and primary key candidates.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Filter &amp; Search</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Filter column metadata by physical data type or semantic category as needed.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Export Reports</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Download generated metadata documentation in Markdown, HTML, JSON, Excel, or CSV format.</p>
-    </div>
-  </div>
-</section>
+<section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;"><h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Document a dataset so other people can use it correctly</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">When a CSV or spreadsheet is handed to another team, column names alone rarely explain what the data means. A data dictionary helps people understand each field, its values, and potential quality issues before the dataset is imported, analysed, or maintained.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Open the source</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Load the supported dataset and confirm that the first row is interpreted correctly as column headings when appropriate.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Explore the relevant data</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Review each column's name, detected value patterns, missing values, and other available statistics. Treat automated descriptions as suggestions to verify.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Check before using it</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Export the dictionary in the available format, then add business definitions, units, ownership, and rules that cannot be inferred from the data alone.</p></div></div><h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Use the generated dictionary as a starting point</h3><p style="color:#475569;line-height:1.7;">A column named `status` might mean an order state, an account state, or something else entirely. Statistics can show that a column contains repeated labels or missing values, but they cannot reliably explain the business meaning without context. Check field names and sample values with the person or system that owns the data.</p><p style="color:#475569;line-height:1.7;">Before sharing a dictionary, remove sensitive sample values if they are not needed. Review inferred data types and completeness metrics against the real dataset, and keep a copy of the source so later updates can be compared.</p></section>
 
 <section style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e2e8f0;">
   <h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
