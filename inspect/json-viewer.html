@@ -342,37 +342,7 @@ permalink: /inspect/json-viewer
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
-  <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use JSON Viewer</h2>
-
-    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Provide JSON Data</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste raw JSON into the text area, drag and drop a <code>.json</code> file into the drop zone, or click <strong>Load Sample JSON</strong> to test with sample data.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect & Explore Structure</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click arrow icons to expand or collapse nested objects and arrays. Use <strong>Expand All</strong> or <strong>Collapse All</strong> to manage deep trees quickly.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Search & Copy Paths</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Use the top search bar to highlight specific keys or values. Click any node to instantly view and copy its JSONPath string.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section style="padding:3rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;text-align:center;">Find the value or field you need in a JSON file</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">When a JSON response contains hundreds of nested fields, reading it line by line is slow. Use the viewer to open the file, expand only the relevant objects or arrays, search for a key or value, and copy a JSON path when you need to refer to a specific field.</p><div style="display:flex;flex-direction:column;gap:1.25rem;"><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">1. Open the data you need to inspect</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Paste JSON, drop a <code>.json</code> file, or load the sample. If the data came from an export or a response, start with the exact copy that is giving you trouble.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">2. Follow the structure instead of scrolling</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Expand the parent object or array that contains your field. Use Expand All only when you need the complete tree; for deeply nested files, opening a few branches at a time is easier to follow.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">3. Search and copy the field path</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Search for a key or value, then use the path shown for the matching node when discussing a field or locating it in another workflow. A path helps identify the location; it does not change the original JSON.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">4. Check the data before reusing it</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Look at neighbouring fields and array items to confirm you found the correct record. If the JSON is malformed, use the validator to identify the syntax problem before trying to explore it.</p></div></div><h3 style="font-size:1.25rem;font-weight:800;color:#0f172a;margin-top:1.75rem;">What this viewer is useful for</h3><p style="color:#475569;line-height:1.7;">Use it to inspect nested API responses, configuration files, exported records, or unfamiliar JSON. It is a viewer, not a database editor: searching and expanding help you understand the structure, while changing the source data requires editing and saving a separate copy.</p><h3 style="font-size:1.25rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">How do I find one field in a large JSON file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Load the file and use search to locate a key or value. Expand its parent nodes and check the path and nearby fields to confirm the match.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Can I use this to fix invalid JSON?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Use the JSON Validator to diagnose syntax errors. A viewer is most useful once the document can be parsed.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does opening the file upload it?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">The viewer processes the selected data locally in your browser rather than sending the file to a conversion server.</p></details></div></div></section>
 
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
