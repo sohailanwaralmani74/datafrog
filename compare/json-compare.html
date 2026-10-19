@@ -235,37 +235,7 @@ permalink: /compare/json-compare
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="padding: 3rem 0; border-top: 1px solid #e2e8f0;">
-  <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; text-align: center;">How to Use JSON Compare</h2>
-
-    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">1</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Input Original & Modified JSON</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Paste JSON payloads into boxes 1 and 2 or drag & drop <code>.json</code> files.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">2</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Inspect JSON Path Differences</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Review the structural diff stream detailing added keys (+), removed keys (-), and modified values (~).</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 1rem; align-items: flex-start; background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <span style="font-weight: 800; font-size: 1.25rem; background: #eff6ff; color: #2563eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;">3</span>
-        <div>
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Copy or Download Report</h3>
-          <p style="color: #475569; font-size: 0.9rem; margin: 0; line-height: 1.5;">Click <strong>Copy Diff</strong> or <strong>Download Report</strong> to export your JSON comparison log.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section style="padding:3rem 0;border-top:1px solid #e2e8f0;"><div style="max-width:900px;margin:0 auto;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1.5rem;text-align:center;">Find changed keys and values between JSON files</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">Comparing two formatted JSON files line by line can produce noise when spacing or key order differs. Use a structural comparison when you need to find which keys were added, removed, or changed between two data snapshots or configuration versions.</p><div style="display:flex;flex-direction:column;gap:1.25rem;"><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">1. Load the original and revised JSON</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Paste both documents or choose supported files. Make sure each input is the version you intend to compare; if either document is invalid, validate it first.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">2. Review paths and values</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Inspect added keys, removed keys, and modified values. A path helps locate the field in the nested structure; check the parent object and nearby values to understand the impact.</p></div><div style="background:#fff;padding:1.25rem;border:1px solid #e2e8f0;border-radius:12px;"><h3 style="font-size:1.1rem;font-weight:700;color:#0f172a;">3. Confirm changes before replacing data</h3><p style="color:#475569;font-size:.9rem;line-height:1.6;margin:0;">Pay attention to changed identifiers, settings, arrays, and fields that may be required by another application. Keep both originals until the differences are understood.</p></div></div><h3 style="font-size:1.25rem;font-weight:800;color:#0f172a;margin-top:1.75rem;">Examples of useful comparisons</h3><ul style="padding-left:1.25rem;color:#475569;line-height:1.7;"><li>Compare an old and new API response to see which fields changed.</li><li>Review configuration changes before using the updated settings.</li><li>Check two exports to find new, missing, or edited records and values.</li></ul><p style="color:#475569;line-height:1.7;">A structural difference report does not confirm that the revised data is correct or compatible with a particular application. Valid JSON can still contain an unexpected value or omit a field your workflow requires.</p><h3 style="font-size:1.25rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Do both JSON files need to be formatted the same way?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">They need to be valid JSON. Structural comparison is intended to help focus on data changes rather than superficial formatting differences.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a difference mean the new JSON is wrong?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. It identifies changes; decide whether each one is expected based on the data's purpose and the receiving application's requirements.</p></details></div></div></section>
 
 <!-- ═══════════════════════════════════════════════════
      FREQUENTLY ASKED QUESTIONS
