@@ -96,20 +96,25 @@
     }
 
     function loadScanner() {
+      // Prefer the browser's built-in QR decoder when available. It avoids a
+      // network dependency for many users and keeps image processing local.
+      if ('BarcodeDetector' in window) return Promise.resolve();
       if (window.jsQR) return Promise.resolve();
       if (scannerPromise) return scannerPromise;
       scannerPromise = new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js';
-        script.onload = () => window.jsQR ? resolve() : reject(new Error('QR scanner library did not initialize.'));
-        script.onerror = () => reject(new Error('Could not load the QR scanner library. Check your connection or content blocker.'));
+        script.onload = () => window.jsQR ? resolve() : reject(new Error('The QR decoder could not start. Reload the page and try again.'));
+        script.onerror = () => {
+          scannerPromise = null;
+          reject(new Error('The QR decoder could not load. Check your connection or content blocker, then try again.'));
+        };
         document.head.appendChild(script);
       });
       return scannerPromise;
     }
 
-    function decode(source) {
-      if (!window.jsQR) throw new Error('QR scanner is not ready. Please try again.');
+    async function decode(source) {
       const width = source.naturalWidth || source.videoWidth;
       const height = source.naturalHeight || source.videoHeight;
       if (!width || !height) throw new Error('The image is not ready. Please try another image.');
@@ -117,6 +122,26 @@
       canvas.width = Math.max(1, Math.round(width * scale));
       canvas.height = Math.max(1, Math.round(height * scale));
       ctx.drawImage(source, 0, 0, canvas.width, canvas.height);
+
+      // Use native decoding first when the browser supports it.
+      if ('BarcodeDetector' in window) {
+        try {
+          const detector = new BarcodeDetector({ formats: ['qr_code'] });
+          const matches = await detector.detect(canvas);
+          if (matches.length && matches[0].rawValue) {
+            setResult(matches[0].rawValue);
+            results.hidden = false;
+            setStatus('QR code found. Check the decoded content before opening any link.');
+            return true;
+          }
+        } catch (error) {
+          // Some browsers expose BarcodeDetector but do not support QR decoding.
+          console.warn('Built-in QR decoder unavailable; trying the fallback.', error);
+        }
+      }
+
+      if (!window.jsQR) await loadScanner();
+      if (!window.jsQR) throw new Error('No QR decoder is available in this browser.');
       const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const code = window.jsQR(pixels.data, pixels.width, pixels.height, { inversionAttempts: 'attemptBoth' });
       if (!code) return false;
@@ -161,7 +186,7 @@
       results.hidden = true;
       try {
         await loadScanner();
-        if (!decode(preview)) {
+        if (!(await decode(preview))) {
           results.hidden = false;
           setStatus('No readable QR code was found. Try a clearer image with the entire QR code visible.');
         }
@@ -203,14 +228,18 @@
         await video.play();
         stop.disabled = false;
         setStatus('Camera running. Point it at a QR code.');
-        timer = setInterval(() => {
-          if (video.readyState < 2) return;
+        let frameBusy = false;
+        timer = setInterval(async () => {
+          if (frameBusy || video.readyState < 2) return;
+          frameBusy = true;
           try {
-            if (decode(video)) stopCamera();
+            if (await decode(video)) stopCamera();
           } catch (error) {
             console.error('QR camera scan failed:', error);
-            setStatus('Camera scan failed. Try uploading an image instead.');
+            setStatus(error && error.message ? error.message : 'Camera scan failed. Try uploading an image instead.');
             stopCamera();
+          } finally {
+            frameBusy = false;
           }
         }, 400);
       } catch (error) {
