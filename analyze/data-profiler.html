@@ -377,46 +377,7 @@ author_id: gourav-mishra
 <!-- ═══════════════════════════════════════════════════
      HOW TO USE SECTION
 ═══════════════════════════════════════════════════ -->
-<section style="margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
-  <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 1.25rem;">How to Profile a Dataset</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Upload or Paste</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Drag and drop a CSV, Excel, JSON, or XML file onto the upload zone — or paste raw text directly into the input area.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Choose Format</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">The profiler automatically detects the file format, delimiter (for CSV), and encoding. No manual configuration required.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Run Profiler</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Click the Profile Dataset button to trigger the analysis engine. All processing happens instantly inside your browser with no data leaving your device.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Review Results</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Examine the overview cards, column profile table, quality audit panel, automated insights, and visual charts for a complete picture of your data.</p>
-    </div>
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-      <div style="display:flex;align-items:center;gap:0.6rem;">
-        <span style="width:28px;height:28px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
-        <strong style="font-size:0.95rem;color:#0f172a;">Export Report</strong>
-      </div>
-      <p style="color:#475569;font-size:0.825rem;line-height:1.55;margin:0;">Download an HTML report for presentations, a JSON report for pipeline use, or export column statistics as a CSV file.</p>
-    </div>
-  </div>
-</section>
+<section style="margin-bottom:3rem;padding-top:2rem;border-top:1px solid #e2e8f0;"><h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Find data quality issues before they become import problems</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">A dataset can have thousands of rows and still contain missing values, inconsistent fields, or unexpected ranges. Profiling gives you a quick picture of the data before you clean it, combine it with another source, or use it for reporting.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Load the dataset</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Choose a supported file or paste data. Confirm the file is the correct export and that its rows and columns are interpreted as intended.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Review completeness</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Look for columns with missing values and decide whether those blanks are acceptable or block the task the dataset is meant to support.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Check value patterns</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Use unique counts and numeric summaries to spot unusual ranges, unexpected variety, or inconsistent values that deserve a closer look.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">4. Fix and profile again</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Correct problems in the source or an editor, then rerun the profile on the saved copy to see whether the intended issues have changed.</p></div></div><h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">A profile is a guide, not a verdict</h3><p style="color:#475569;line-height:1.7;">A high number of unique values can be normal for an identifier column. Missing values may be acceptable in optional fields. Outliers may be legitimate records rather than mistakes. Use the statistics to focus your review, then apply the rules that belong to your dataset and workflow.</p><p style="color:#475569;line-height:1.7;">Profiling also differs from deduplication and validation. Use a duplicate finder to identify repeated records, and a format-specific validator when you need to check structural rules. No single summary proves every row is accurate.</p></section>
 
 <!-- ═══════════════════════════════════════════════════
      BENEFITS SECTION
