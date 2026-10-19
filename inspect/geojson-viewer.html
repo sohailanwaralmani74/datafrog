@@ -805,63 +805,7 @@ short_name: GeoJSON Viewer
 </div>
 
 <!-- Comprehensive Educational SEO Content -->
-<article class="content-article">
-  <h2>What is a GeoJSON Viewer?</h2>
-  <p>A <strong>GeoJSON Viewer</strong> is a web-based spatial data inspection utility that parses, visualizes, explores, and validates GeoJSON files directly within your web browser. GeoJSON is an open format specification based on JavaScript Object Notation (JSON) designed to represent geographic features, vector shapes, bounding boxes, and non-spatial property metadata.</p>
-  <p>Because spatial datasets often contain complex coordinate arrays and nested attribute structures, inspecting them requires both a visual map renderer and a structured feature explorer. Our browser-based GeoJSON Inspector converts geographic coordinates into interactive vector graphics while providing complete property table searching and multi-format data exports without transferring any data to external cloud servers.</p>
-
-  <h2>Supported GeoJSON Objects & Geometries</h2>
-  <p>Our client-side inspector natively validates and renders all GeoJSON specifications defined in RFC 7946:</p>
-  <ul>
-    <li><code>Point</code> & <code>MultiPoint</code>: Single coordinate pairs <code>[longitude, latitude]</code> or clusters representing point locations.</li>
-    <li><code>LineString</code> & <code>MultiLineString</code>: Connected coordinate sequences representing roads, rivers, flight paths, and boundaries.</li>
-    <li><code>Polygon</code> & <code>MultiPolygon</code>: Closed coordinate rings representing administrative boundaries, land parcels, lakes, and building footprints.</li>
-    <li><code>GeometryCollection</code>: Heterogeneous combinations of multiple geometry objects within a single feature.</li>
-    <li><code>Feature</code> & <code>FeatureCollection</code>: Spatial geometry objects bundled with non-spatial attribute key-value properties.</li>
-  </ul>
-
-  <h2>Core Features of the GeoJSON Inspector</h2>
-  <p>Our client-side spatial data engine includes a robust set of features for data analysts and GIS professionals:</p>
-  <ol>
-    <li><strong>Interactive Vector Map:</strong> High-performance Leaflet map canvas with tile layers, zoom controls, bounding box fitting, coordinate tracking, and feature hover tooltips.</li>
-    <li><strong>Feature Explorer & Property Inspector:</strong> Hierarchical feature list displaying individual geometry types, bounding boxes, vertex counts, and property tables.</li>
-    <li><strong>Attribute Data Grid:</strong> Searchable, paginated attribute table listing all non-spatial feature properties with sorting and column filters.</li>
-    <li><strong>GeoJSON Syntax Validation:</strong> Automatically verifies JSON syntax, coordinate structures, closed polygon rings, and specification compliance.</li>
-    <li><strong>Multi-Format Exports:</strong> Export spatial data into CSV attribute tables, formatted GeoJSON, Markdown reports, and standalone HTML summaries.</li>
-  </ol>
-
-  <h2>Common GIS & Spatial Data Use Cases</h2>
-  <ul>
-    <li><strong>Open Data & Boundary Inspection:</strong> Examine public municipal boundaries, election districts, zoning maps, and census tracts.</li>
-    <li><strong>Web App & Map Debugging:</strong> Validate API GeoJSON payloads, mobile GPS tracks, and spatial database exports before deployment.</li>
-    <li><strong>Environmental & Urban Research:</strong> Profile land use polygons, elevation contour lines, transit routes, and field sample points locally with complete privacy.</li>
-  </ul>
-
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-item active">
-    <div class="faq-question" onclick="toggleFaq(this)">What is GeoJSON?</div>
-    <div class="faq-answer">GeoJSON is an open standard format based on JSON designed for representing geographic data structures, including points, line strings, polygons, and feature collections with non-spatial attributes.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Is my GeoJSON data uploaded to any server?</div>
-    <div class="faq-answer">No. All file reading, JSON validation, coordinate projection, map rendering, feature searching, and exports execute 100% locally inside your web browser. No data ever leaves your device.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Which geometry types are supported?</div>
-    <div class="faq-answer">This viewer supports all standard GeoJSON geometries including Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection, Feature, and FeatureCollection objects.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Can I inspect feature attributes and properties?</div>
-    <div class="faq-answer">Yes. You can inspect feature property tables, search attributes, view coordinate bounding boxes, estimate polygon areas, and export data into CSV or JSON.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Does this tool support large GeoJSON files?</div>
-    <div class="faq-answer">Yes. Our client-side rendering engine uses Leaflet interactive maps and virtualized data grids to handle datasets with thousands of features efficiently.</div>
-  </div>
-
-  <h2>Conclusion</h2>
-  <p>The <strong>GeoJSON Viewer</strong> offers developers, GIS analysts, and data researchers an instant, browser-only workspace for exploring and validating geographic datasets. With client-side vector map rendering, interactive attribute grids, and multi-format exports, you can inspect spatial data anywhere with total privacy. All spatial calculations and renderings take place directly on your machine without transmitting sensitive spatial coordinates to third-party servers.</p>
-</article>
+<article class="content-article"><h2 style="font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">Inspect geographic data before using it on a map</h2><p style="color:#475569;line-height:1.7;margin-bottom:1.25rem;">If a GeoJSON file will not display as expected in a mapping tool, first check what features it contains and whether their coordinates and properties look sensible. Open the file to inspect the geometry and associated attributes before passing it to another map, GIS workflow, or web application.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">1. Open the source</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Load the GeoJSON file or paste the content if the viewer supports text input.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">2. Explore the relevant data</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">Inspect the feature collection, geometry types, map display, and property fields. Check a few known locations against what you expect.</p></div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;"><strong style="font-size:.95rem;color:#0f172a;">3. Check before using it</strong><p style="color:#475569;font-size:.875rem;line-height:1.6;margin:.5rem 0 0;">If a feature is missing or misplaced, inspect its coordinates and geometry in the source file before changing the data.</p></div></div><h3 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-top:1.5rem;">Check coordinates and properties together</h3><p style="color:#475569;line-height:1.7;">A feature can have valid-looking properties but incorrect coordinates, or geometry that is present but not displayed at the expected location. Check that longitude and latitude are in the expected order and that the geometry type suits the feature. Empty geometry, invalid coordinate arrays, or an unexpected coordinate reference can lead to confusing results.</p><p style="color:#475569;line-height:1.7;">Viewing GeoJSON is not the same as confirming that its geographic data is authoritative or suitable for a specific map projection. Keep the source file and compare important features with a trusted reference before publishing or using the data for decisions.</p></article>
 
 {% raw %}
 <script>
