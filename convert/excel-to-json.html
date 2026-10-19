@@ -129,48 +129,16 @@ permalink: /excel-to-json
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Excel to JSON Converter Reference</h2>
-    <p>
-      The Excel to JSON converter bridges the gap between tabular spreadsheets and JavaScript Object Notation (JSON). When building modern web applications, loading fixtures into MongoDB or PostgreSQL JSONB columns, or preparing mock data for frontend testing, converting Excel sheets into structured JSON objects eliminates manual data reformatting and schema mismatches.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Output Structure &amp; Header Mapping</h3>
-    <p>
-      When the <strong>"First row as JSON keys"</strong> option is enabled, the converter treats row 1 as property identifiers. Each subsequent row generates an individual JSON object where column names serve as keys:
-    </p>
-    <pre style="background: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 8px; font-size: 0.85rem; overflow-x: auto;"><code>[
-  { "id": 1, "name": "Acme Corp", "balance": 1420.50, "active": true },
-  { "id": 2, "name": "Globex", "balance": 890.00, "active": false }
-]</code></pre>
-    <p style="margin-top: 0.75rem;">
-      If the header option is unchecked, the converter outputs a 2D array of raw values (<code>[["id", "name"], [1, "Acme Corp"]]</code>), preserving the exact coordinate layout of the sheet.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Data Type Inference</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>Numeric Fields:</strong> Integer and floating-point quantities are serialized as unquoted JSON numbers (e.g. <code>42</code>, <code>19.99</code>).</li>
-      <li><strong>Boolean Tokens:</strong> Cell values containing <code>TRUE</code> or <code>FALSE</code> are parsed as native JavaScript booleans.</li>
-      <li><strong>Empty &amp; Blank Cells:</strong> Blank cells within a row are emitted as <code>null</code> or omitted according to sparse array rules.</li>
-      <li><strong>Date &amp; Time Values:</strong> Excel serial date timestamps are converted to standardized ISO 8601 strings (<code>YYYY-MM-DD</code>).</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display:flex; flex-direction:column; gap:1rem;">
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Can I convert workbooks containing multiple sheets?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Yes. The workbook metadata inspector reads all worksheet tabs in the file. Use the "Worksheet" dropdown to switch between tabs and convert any sheet independently.</p>
-      </details>
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Can I edit cell values prior to downloading JSON?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Yes. The data preview table is content-editable. Click any cell to modify values, fix typos, or adjust column names before clicking Convert to JSON.</p>
-      </details>
-      <details style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:1rem 1.25rem;">
-        <summary style="font-weight:700; color:#0f172a; cursor:pointer;">Is there a file size limit for in-browser JSON conversion?</summary>
-        <p style="color:#64748b; font-size:0.9rem; margin-top:0.75rem; margin-bottom:0;">Because parsing runs client-side using SheetJS in browser RAM, files with tens of thousands of rows process in seconds without encountering server upload size caps or timeouts.</p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;">
+<h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Turn workbook rows into JSON your workflow can use</h2>
+<p>When an Excel workbook needs to feed another tool, you may need its rows as structured JSON rather than a spreadsheet. Use this page to choose the workbook, review the worksheet data, adjust the preview if needed, and generate JSON for an import or data exchange.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3>
+<ol><li>Choose the Excel workbook and select the worksheet you need. Do not assume every workbook's relevant data is on its first sheet.</li><li>Review the editable preview and confirm the column headings. The headings may become the property names in each JSON object.</li><li>Generate the JSON, inspect a few objects, then copy or download the result.</li></ol>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Check the shape before you send it</h3>
+<p>A worksheet is a grid, while JSON can represent objects and arrays. The selected worksheet and its headings affect how the output is structured. Check blank or repeated headings, empty cells, and identifiers with leading zeroes. If a workbook contains several sheets, verify that you converted the intended one.</p><p>The output represents worksheet data; it should not be treated as a complete copy of an Excel workbook. Spreadsheet formatting, formulas, charts, macros, and workbook relationships may not be represented in JSON. Keep the original workbook and confirm that the receiving application expects the generated structure.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3>
+<div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have reviewed the generated result and confirmed that it meets the needs of the next step in your workflow.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a successful conversion guarantee the output is correct for my use?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Check the output against your requirements and test it in the application that will receive it, especially when structure or data types matter.</p></details></div>
+</article>
 
 </div>
 
