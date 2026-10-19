@@ -98,13 +98,18 @@
     function loadScanner() {
       // Prefer the browser's built-in QR decoder when available. It avoids a
       // network dependency for many users and keeps image processing local.
-      if ('BarcodeDetector' in window) return Promise.resolve();
       if (window.jsQR) return Promise.resolve();
       if (scannerPromise) return scannerPromise;
       scannerPromise = new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js';
-        script.onload = () => window.jsQR ? resolve() : reject(new Error('The QR decoder could not start. Reload the page and try again.'));
+        script.onload = () => {
+          if (window.jsQR) resolve();
+          else {
+            scannerPromise = null;
+            reject(new Error('The QR decoder could not start. Reload the page and try again.'));
+          }
+        };
         script.onerror = () => {
           scannerPromise = null;
           reject(new Error('The QR decoder could not load. Check your connection or content blocker, then try again.'));
@@ -185,7 +190,6 @@
       setResult('');
       results.hidden = true;
       try {
-        await loadScanner();
         if (!(await decode(preview))) {
           results.hidden = false;
           setStatus('No readable QR code was found. Try a clearer image with the entire QR code visible.');
@@ -216,7 +220,6 @@
       start.disabled = true;
       setStatus('Preparing camera…');
       try {
-        await loadScanner();
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
           throw new Error('Camera access is unavailable. Use HTTPS or upload an image instead.');
         }
