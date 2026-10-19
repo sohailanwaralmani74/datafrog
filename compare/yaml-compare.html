@@ -924,73 +924,7 @@ services:
 </div>
 
 <!-- Comprehensive Educational SEO Content -->
-<article class="content-article">
-  <h2>What is YAML Compare?</h2>
-  <p><strong>YAML Compare</strong> is a browser-based developer utility designed to compare two YAML (YAML Ain't Markup Language) documents structurally and textually. Unlike basic line-by-line text diff tools, this tool parses raw YAML into hierarchical data structures (maps, sequences, scalars, anchors, and aliases) to evaluate structural integrity, path modifications, data type shifts, and value changes regardless of key order or whitespace formatting.</p>
-  <p>In modern software development and DevOps practices, YAML serves as the primary syntax for infrastructure-as-code manifests, Kubernetes deployment files, Docker Compose definitions, CI/CD pipelines, microservice configuration files, and OpenAPI specifications. Finding subtle changes between configuration files across environments (such as development vs production) is critical for preventing runtime outages and security vulnerabilities.</p>
-
-  <h2>Why Compare YAML Files Structurally?</h2>
-  <p>Line-by-line text comparison tools often generate misleading diff results when applied to YAML documents. Because YAML relies on significant indentation and allows arbitrary key ordering within mapping structures, a simple key reordering or line-wrap change can cause a text diff tool to flag dozens of false positives.</p>
-  <ul>
-    <li><strong>Key Order Independence:</strong> YAML maps represent unordered key-value pairs. Structural comparison evaluates matching keys regardless of line position.</li>
-    <li><strong>Whitespace & Indentation Normalization:</strong> Distinguishes actual scalar value modifications from trivial tab or space formatting shifts.</li>
-    <li><strong>Data Type Inspection:</strong> Flags hidden type mismatches, such as string <code>"8080"</code> vs integer <code>8080</code> or boolean <code>"true"</code> vs scalar <code>true</code>.</li>
-    <li><strong>Anchor & Alias Resolution:</strong> Resolves YAML anchors (<code>&anchor</code>), aliases (<code>*alias</code>), and merge keys (<code><<:</code>) to compare the resolved data model rather than raw references.</li>
-  </ul>
-
-  <h2>Supported Input Formats & Validation</h2>
-  <p>This comparison engine supports standard YAML and YML formats across all versions (YAML 1.1 and 1.2). Before comparison, both input documents undergo automated syntax validation to prevent comparison errors caused by syntax bugs:</p>
-  <ul>
-    <li><strong>Syntax Error Highlighting:</strong> Displays exact line numbers, column offsets, and error descriptions when a YAML syntax error occurs.</li>
-    <li><strong>Flexible Input Options:</strong> Copy-paste YAML blocks, drag and drop <code>.yaml</code> or <code>.yml</code> files directly into the editor panels, or load pre-built sample microservice configs.</li>
-    <li><strong>Dual Document Controls:</strong> Instantly swap left and right documents to invert the source-target diff perspective.</li>
-  </ul>
-
-  <h2>Comparison Modes Explained</h2>
-  <p>Select from flexible comparison settings tailored to your specific workflow needs:</p>
-  <ol>
-    <li><strong>Structural Hierarchy Mode:</strong> Evaluates data nodes recursively by JSON path (e.g., <code>$.database.credentials.host</code>), reporting exact node additions, deletions, value changes, and array mutations.</li>
-    <li><strong>Normalized Semantic Mode:</strong> Ignores whitespace trimming, quotation styles (single vs double quotes), comment lines, and key ordering to focus strictly on semantic data equivalency.</li>
-    <li><strong>Textual Side-by-Side & Unified Diff Mode:</strong> Generates line-by-line colored diff views with line numbers and collapsible unchanged sections for code review.</li>
-  </ol>
-
-  <h2>Common Engineering & DevOps Use Cases</h2>
-  <ul>
-    <li><strong>Kubernetes Deployment Auditing:</strong> Compare production vs staging <code>deployment.yaml</code> manifests to detect container image tag mismatches, memory/CPU limit discrepancies, or missing environment variables.</li>
-    <li><strong>CI/CD Pipeline Troubleshooting:</strong> Verify configuration changes between workflow pipelines across repositories or release branches.</li>
-    <li><strong>Microservice Environment Drift:</strong> Audit configuration files across development, testing, staging, and production clusters to ensure secrets and endpoints are properly overridden.</li>
-    <li><strong>OpenAPI & Swagger Spec Evolution:</strong> Compare REST API schemas between releases to identify breaking changes, added endpoints, or modified payload parameters.</li>
-  </ul>
-
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-item active">
-    <div class="faq-question" onclick="toggleFaq(this)">How does structural YAML comparison differ from text comparison?</div>
-    <div class="faq-answer">Textual comparison compares raw characters and line numbers, which can create false positives if indentation, whitespace, comments, or key order change. Structural comparison parses both YAML documents into hierarchical data trees (maps, sequences, scalars) and evaluates key paths, data types, and values regardless of formatting.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Is my YAML data sent to any server or cloud service?</div>
-    <div class="faq-answer">No. All YAML parsing, syntax validation, tree construction, diffing, visualization, and report generation occur 100% locally inside your web browser. Zero bytes are uploaded or processed by external backends.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Does this tool support YAML anchors, aliases, and merge keys?</div>
-    <div class="faq-answer">Yes. The underlying parser resolves YAML anchors (&anchor), aliases (*alias), and merge keys (<<:) during object tree construction, allowing accurate structural comparison of inherited configuration values.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">Can I compare YAML files with different key orders or array sequences?</div>
-    <div class="faq-answer">Yes. You can enable 'Ignore Key Order' to compare maps structurally regardless of key sequence, or enable 'Ignore Array Order' to compare sequence contents by element matching.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">What export formats are available for YAML diff reports?</div>
-    <div class="faq-answer">You can export comparison results as printable HTML reports, PDF documents, structured JSON files, CSV summary sheets, Markdown tables, and unified YAML patch lists.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFaq(this)">How are invalid YAML syntax errors handled?</div>
-    <div class="faq-answer">Before comparing, both documents undergo automated syntax validation. If a document contains invalid YAML syntax, the tool highlights the exact line number, column offset, and error description so you can correct it before diffing.</div>
-  </div>
-
-  <h2>Conclusion</h2>
-  <p>The <strong>YAML Compare</strong> tool empowers engineers, system administrators, and developers to audit, debug, and validate YAML files instantly inside the browser. By combining deep structural hierarchy parsing with line-by-line text diffing and multi-format exports, you can eliminate configuration errors and ensure infrastructure stability with zero privacy risk.</p>
-</article>
+<article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Review YAML changes without getting distracted by formatting</h2><p>When a configuration file changes, you usually need to know whether a setting or value changed—not whether someone reordered keys or adjusted spacing. Compare the two YAML versions and use the reported differences to focus on changes that could affect the application or environment.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical review process</h3><ol><li>Paste or load the original YAML and the revised YAML, making sure each input is a complete version of the file.</li><li>Run the comparison and review changed values, added keys, removed keys, and any validation messages.</li><li>Check each difference in context, especially settings that control ports, paths, access, environment values, or deployment behaviour.</li></ol><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A small configuration change can have a large effect</h3><p>A changed value may be intentional, but changes to indentation can also move a setting into a different parent block. Review the surrounding structure rather than reading a difference in isolation. If the files represent different environments, check whether the difference is expected for that environment.</p><p>A comparison shows differences; it does not prove the updated configuration is valid for your application or safe to deploy. Validate the YAML syntax, check application-specific requirements, and test important changes before replacing a working configuration.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a clean report guarantee the data or query is correct?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. The checks help find likely problems, but you still need to verify results against the requirements of the application and the data itself.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep an unchanged copy?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the original file or script until the reviewed result has been checked and accepted in the intended workflow.</p></details></div></article>
 
 {% raw %}
 <script>
