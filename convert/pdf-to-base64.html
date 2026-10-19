@@ -193,54 +193,7 @@ permalink: /pdf-to-base64
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">PDF to Base64 Encoder Technical Reference</h2>
-    <p>
-      Binary PDF documents cannot be transmitted safely inside JSON fields, XML elements, or email message bodies without encoding because those protocols are designed for printable text. Base64 encoding converts each group of 3 binary bytes (24 bits) into 4 ASCII characters drawn from a 64-symbol alphabet, producing a text-safe representation that survives transit through any text-only channel at approximately 33% size overhead.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Encoding Variants</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>Standard Base64 (RFC 4648 §4):</strong> Uses <code>+</code> and <code>/</code> as the 62nd and 63rd characters with <code>=</code> padding. Compatible with <code>atob()</code> / <code>btoa()</code> in browsers, Java's <code>Base64.getEncoder()</code>, and Python's <code>base64.b64encode()</code>.</li>
-      <li><strong>URL-Safe Base64 (RFC 4648 §5):</strong> Replaces <code>+</code> with <code>-</code> and <code>/</code> with <code>_</code> so the encoded string is safe in query parameters, S3 object keys, JWT tokens, and file names without percent-encoding.</li>
-      <li><strong>Data URI:</strong> Prefixes the Base64 payload with <code>data:application/pdf;base64,</code> — the complete string can be assigned directly to an <code>&lt;iframe src&gt;</code>, <code>&lt;embed src&gt;</code>, or <code>window.open()</code> call to display the PDF inline in any browser.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Line Wrapping Modes</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>None (Continuous):</strong> Single-line output required by JSON values, JWT payloads, and most REST API fields.</li>
-      <li><strong>76-character wrap (MIME):</strong> Required by RFC 2045 for email attachment encoding (<code>Content-Transfer-Encoding: base64</code>) and multipart MIME bodies.</li>
-      <li><strong>64-character wrap (PEM):</strong> Required by RFC 7468 for PEM certificate and key formats (<code>-----BEGIN CERTIFICATE-----</code> blocks).</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Why is the encoded output larger than the original PDF?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Base64 maps every 3 input bytes to 4 output characters (4/3 expansion), resulting in roughly 33% overhead. A 1 MB PDF becomes approximately 1.37 MB as a Base64 string. Line wrapping adds additional newline characters.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can I embed the Data URI directly into an HTML page?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes. Use the Data URI format and assign it to <code>&lt;iframe src="data:application/pdf;base64,..."&gt;</code> or <code>&lt;embed src="data:application/pdf;base64,..." type="application/pdf"&gt;</code>. Note: most browsers limit Data URI size for inline elements to around 2–64 MB depending on the browser engine and memory.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does encoding work for large PDFs?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          The file is read directly into a browser <code>ArrayBuffer</code> via the <code>FileReader</code> API and converted to a Base64 string in a single pass using <code>btoa()</code>. For very large files (above ~50 MB), this runs in the browser's main thread and may take a few seconds depending on device performance.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is the encoded PDF secure for transmission over HTTPS?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Base64 is an encoding scheme, not encryption. The content is fully reversible by anyone who receives the string. For secure transmission, combine Base64 encoding with TLS (HTTPS) transport, JWT signing, or AES payload encryption before embedding.
-        </p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;"><h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Turn a PDF into Base64 text for a system that needs encoded data</h2><p>Some data formats and workflows carry a PDF as text rather than as a separate file. If you need to place a document in a JSON field, XML payload, or compatible data URI, encode the local PDF and copy or download the resulting text in the format the receiving system expects.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3><ol><li>Select the PDF file you need to encode.</li><li>Choose the output format required by the receiving application, such as standard Base64 or a data URI when supported.</li><li>Generate the text and copy or download it. Check the destination's requirements for prefixes and line wrapping before pasting it.</li></ol><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Encoded text can become very large</h3><p>Base64 output is typically larger than the original binary file, so a large PDF can produce a very long string. Make sure the destination can accept that size and does not impose a smaller field or request limit. Line wrapping and data-URI prefixes also depend on what the receiving system expects.</p><p>Base64 is an encoding format, not encryption. Anyone who gets the string may be able to decode the PDF, so treat the output with the same care as the original document. The conversion runs in your browser; the selected PDF is not uploaded to DataFrog.</p><h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3><div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have checked the generated result and confirmed it works for the intended task.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does conversion guarantee the result will work everywhere?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Receiving applications can have different format, size, and layout requirements. Review the output and test it in the destination workflow before relying on it.</p></details></div></article>
 
 </div>
 
