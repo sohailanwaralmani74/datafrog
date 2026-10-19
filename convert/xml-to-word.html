@@ -137,54 +137,16 @@ permalink: /xml-to-word
   </div>
 
   <!-- Tool Definition & Technical Reference -->
-  <article style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2.5rem 2rem; line-height: 1.7; color: #334155; margin-top: 2.5rem;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">XML to Word Document Converter Technical Reference</h2>
-    <p>
-      Converting raw XML into Microsoft Word documents requires transforming hierarchical tags and repetitive data nodes into styled typographic structures and formatted tables. Without transformation stylesheets, opening raw XML in Word produces unformatted markup. This tool parses the DOM tree, detects tabular repeating elements, and exports an editable Word document.
-    </p>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Document Formatting and Schema Handling</h3>
-    <ul style="padding-left: 1.5rem;">
-      <li><strong>Automatic Table Reconstruction:</strong> Detects repeating record nodes (e.g. transactions, line items, lists) and generates structured tables with styled header rows and alternate cell padding.</li>
-      <li><strong>Preserved Document Hierarchy:</strong> Parent tags map to document heading levels, preserving semantic structure when opened in Word or LibreOffice.</li>
-      <li><strong>Metadata Callout Formatting:</strong> Document attributes and metadata tags are organized into clean summary panels above tabular data.</li>
-      <li><strong>Native Office OpenXML / Word Compatibility:</strong> Exports clean Word-compatible HTML markup with standard Microsoft Office namespaces (<code>xmlns:w="urn:schemas-microsoft-com:office:word"</code>) that open reliably in Word 365, Word 2016-2024, Google Docs, and LibreOffice Writer.</li>
-    </ul>
-
-    <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem;">Frequently Asked Questions</h3>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Why does raw XML normally appear unformatted in Microsoft Word?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Microsoft Word treats arbitrary XML files as plain text markup unless an XSLT transformation stylesheet is attached. This converter interprets the XML schema and translates tags into styled headings and tabular structures before saving.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Can the generated Word document be edited?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes. The exported document contains native text paragraphs, heading styles, and tables that can be edited, styled, or merged with corporate templates.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Is my XML data kept private when converting to Word?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          All XML parsing and Word document construction execute directly in your browser using client-side JavaScript and Data URI blobs. No file content or data is transmitted to external servers.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">How does the converter handle deeply nested XML elements and repeating lists without crashing Word?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Deeply nested or unformatted XML structures frequently cause Word layout overflow errors. DataFrog intelligently detects repeated record nodes and converts them into clean tables with proportional column widths, while child metadata is converted into styled sub-headings and lists to preserve readability without document corruption.
-        </p>
-      </details>
-      <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem;">
-        <summary style="font-weight: 700; color: #0f172a; cursor: pointer;">Does the converted document support header rows repeating across pages in Word?</summary>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; margin-bottom: 0;">
-          Yes! The generated tables include standard Word table header definitions (&lt;thead&gt; and shaded &lt;th&gt; cells) with standard page margin settings, allowing Microsoft Word and LibreOffice to cleanly split multi-page tables across pages.
-        </p>
-      </details>
-    </div>
-  </article>
+  <article style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:2.5rem 2rem;line-height:1.7;color:#334155;margin-top:2.5rem;">
+<h2 style="font-size:1.75rem;font-weight:800;color:#0f172a;margin-bottom:1rem;">Create a Word document from XML content</h2>
+<p>Use this page when XML content needs to be reviewed or shared in a Word document instead of as raw tags. This can be useful for a readable draft, a document handoff, or a report that someone may continue editing after conversion.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">A practical way to use this page</h3>
+<ol><li>Choose the XML file and inspect the source content before converting.</li><li>Review the document preview to check headings, paragraphs, lists, and any repeated or nested content.</li><li>Generate the Word document, open it in a compatible editor, and check the layout before making further edits or sharing.</li></ol>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Check how the XML structure becomes a document</h3>
+<p>XML stores structured elements, but a Word document is organised around paragraphs, headings, and page layout. The converter must present the source content in a document-friendly form, so the result may not retain every tag or relationship from the original XML.</p><p>Treat the output as a converted document rather than a byte-for-byte representation of the XML. Check special characters, long sections, repeated records, and page breaks. Keep the original XML if the underlying structured data will be needed later.</p>
+<h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-top:1.5rem;">Frequently asked questions</h3>
+<div style="display:flex;flex-direction:column;gap:1rem;"><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Should I keep the original file?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">Yes. Keep the source until you have reviewed the generated result and confirmed that it meets the needs of the next step in your workflow.</p></details><details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;"><summary style="font-weight:700;color:#0f172a;cursor:pointer;">Does a successful conversion guarantee the output is correct for my use?</summary><p style="color:#64748b;font-size:.9rem;margin:.75rem 0 0;">No. Check the output against your requirements and test it in the application that will receive it, especially when structure or data types matter.</p></details></div>
+</article>
 
 </div>
 
