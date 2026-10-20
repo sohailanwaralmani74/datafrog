@@ -276,11 +276,13 @@ permalink: /json-to-excel
   }
   $("jx-convert").addEventListener("click", convert);
   $("jx-sample").addEventListener("click", function(){
+    outputName = "sample-data.xlsx";
     $("jx-input").value = JSON.stringify(sample, null, 2);
     $("jx-result").hidden = true;
     setStatus("Sample JSON loaded. Choose a layout and convert.");
   });
   $("jx-clear").addEventListener("click", function(){
+    outputName = "json-to-excel.xlsx";
     $("jx-input").value = "";
     $("jx-file").value = "";
     $("jx-result").hidden = true;
