@@ -128,6 +128,15 @@ permalink: /json-to-excel
     if(typeof value === "object") return JSON.stringify(value);
     return value;
   }
+  function rowsToSheet(rows){
+    if(!rows.length) return XLSX.utils.aoa_to_sheet([["_parent_id","_value"]]);
+    const headers = [];
+    const seen = new Set();
+    rows.forEach(row => Object.keys(row).forEach(key => {
+      if(!seen.has(key)){seen.add(key);headers.push(key);}
+    }));
+    return XLSX.utils.json_to_sheet(rows, {header:headers});
+  }
   function flattenObject(value, prefix, target){
     if(value && typeof value === "object" && !Array.isArray(value)){
       const keys = Object.keys(value);
@@ -158,7 +167,7 @@ permalink: /json-to-excel
     const sheetStats = [];
     function addSheet(path, rows){
       const name = uniqueSheetName(path, usedNames);
-      const ws = rows.length ? XLSX.utils.json_to_sheet(rows) : XLSX.utils.aoa_to_sheet([["_parent_id","_value"]]);
+      const ws = rowsToSheet(rows);
       XLSX.utils.book_append_sheet(wb, ws, name);
       sheetStats.push({name:name, rows:rows.length});
     }
@@ -258,7 +267,6 @@ permalink: /json-to-excel
         container.appendChild(card);
       });
       $("jx-result").hidden = false;
-      outputName = "json-to-excel.xlsx";
       setStatus("Conversion ready: " + result.stats.length + (result.stats.length === 1 ? " worksheet." : " worksheets."));
       $("jx-result").scrollIntoView({behavior:"smooth", block:"nearest"});
     } catch(error){
@@ -284,6 +292,7 @@ permalink: /json-to-excel
     if(!file) return;
     try{
       $("jx-input").value = await file.text();
+      outputName = file.name.replace(/\.[^.]+$/, "") + ".xlsx";
       $("jx-result").hidden = true;
       setStatus("Loaded " + file.name + ". Check the input, then convert.");
     } catch(error){
