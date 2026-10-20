@@ -618,6 +618,17 @@
   date: "2026-08-22"
   updated: "2026-08-22"
 
+- title: "JSON to Excel"
+  short_name: "JSON to Excel"
+  url: "/json-to-excel"
+  category: "Convert"
+  description: "Convert JSON objects and arrays to Excel. Flatten nested objects into one worksheet or split nested objects and arrays into related worksheets with parent IDs."
+  keywords: ["json to excel", "json to xlsx", "convert json to excel online", "nested json to excel", "json array to spreadsheet"]
+  icon: "📊"
+  featured: false
+  date: "2026-08-12"
+  updated: "2026-08-12"
+
 - title: "JSON to Dart"
   short_name: "JSON to Dart"
   url: "/json-to-dart"
