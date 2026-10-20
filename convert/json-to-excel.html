@@ -1,0 +1,306 @@
+---
+layout: main
+title: "JSON to Excel Converter | DataFrog"
+short_name: "JSON to Excel"
+description: "Convert JSON data into an Excel workbook. Flatten nested objects into one worksheet or split nested objects and arrays into related worksheets, all in your browser."
+keywords: "json to excel, json to xlsx, convert json to excel online, nested json to excel, json array to spreadsheet"
+category: "JSON"
+date: "2026-08-12"
+updated: "2026-08-12"
+permalink: /json-to-excel
+---
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+.jx-tool{max-width:1120px;margin:0 auto;padding:2rem 1.25rem;color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.jx-tool *{box-sizing:border-box}.jx-hero{text-align:center;margin-bottom:2rem}.jx-hero h1{font-size:clamp(2rem,5vw,2.7rem);line-height:1.15;margin:0 0 .8rem;font-weight:800}.jx-hero p{max-width:800px;margin:.7rem auto;color:#475569;line-height:1.7}
+.jx-privacy{display:inline-block;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:8px;padding:.6rem .85rem;font-size:.9rem}
+.jx-panel{border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:clamp(1rem,3vw,1.5rem);margin-bottom:1.25rem;box-shadow:0 3px 12px rgba(15,23,42,.04)}
+.jx-tool label{display:block;font-weight:700;margin-bottom:.4rem}.jx-tool textarea,.jx-tool input[type=file],.jx-tool select{width:100%;max-width:100%;font:inherit}.jx-tool textarea{padding:.8rem;border:1px solid #cbd5e1;border-radius:9px;font: .92rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical}
+.jx-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.jx-choice{border:1px solid #cbd5e1;border-radius:10px;padding:1rem;display:flex;gap:.7rem;align-items:flex-start;cursor:pointer;height:100%}.jx-choice input{margin-top:.3rem}.jx-choice strong{display:block;margin-bottom:.3rem}.jx-choice span{font-size:.9rem;line-height:1.5;color:#475569}
+.jx-buttons{display:flex;flex-wrap:wrap;gap:.65rem;margin:1rem 0}.jx-buttons button{padding:.72rem 1rem;border:1px solid #cbd5e1;background:#f8fafc;border-radius:8px;font-weight:700;cursor:pointer;color:#0f172a}.jx-buttons button.primary{background:#1d4ed8;color:#fff;border-color:#1d4ed8}.jx-buttons button:hover{filter:brightness(.97)}
+.jx-status{min-height:1.5em;color:#475569;margin:.8rem 0 0}.jx-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem}.jx-summary-item{padding:.85rem;border:1px solid #e2e8f0;border-radius:9px;background:#f8fafc;overflow-wrap:anywhere}.jx-summary-item strong{display:block;margin-bottom:.3rem}
+.jx-guide{line-height:1.75;color:#334155}.jx-guide h2{font-size:1.35rem;color:#0f172a;margin-top:0}.jx-guide h3{font-size:1.1rem;color:#0f172a}.jx-guide p,.jx-guide li{line-height:1.75}
+@media(max-width:650px){.jx-tool{padding:1rem .75rem}.jx-fields{grid-template-columns:1fr}.jx-buttons button{max-width:100%}}
+</style>
+
+<div class="jx-tool">
+  <header class="jx-hero">
+    <h1>JSON to Excel Converter</h1>
+    <p>Turn JSON records into an Excel workbook you can sort, filter, and share. Choose a single flat worksheet, or keep nested objects and arrays in separate worksheets linked by record IDs.</p>
+    <p class="jx-privacy">🔒 Your JSON is processed in this browser. DataFrog does not upload your content.</p>
+  </header>
+
+  <section class="jx-panel">
+    <div style="margin-bottom:1rem">
+      <label for="jx-file">Open a JSON file (optional)</label>
+      <input id="jx-file" type="file" accept=".json,application/json">
+    </div>
+    <label for="jx-input">JSON input</label>
+    <textarea id="jx-input" rows="13" spellcheck="false" aria-describedby="jx-input-help" placeholder='Paste a JSON object or array here'></textarea>
+    <p id="jx-input-help" style="font-size:.9rem;color:#64748b">Accepts a JSON object or an array of objects. The sample shows nested customer details and order items.</p>
+
+    <h2 style="font-size:1.15rem;margin:1.4rem 0 .75rem">How should nested data be arranged?</h2>
+    <div class="jx-fields">
+      <label class="jx-choice" for="jx-flat">
+        <input id="jx-flat" type="radio" name="jx-mode" value="flat" checked>
+        <span><strong>Flatten into one worksheet</strong>Nested object fields become columns such as <code>customer.name</code>. Arrays are kept in a cell as JSON text.</span>
+      </label>
+      <label class="jx-choice" for="jx-split">
+        <input id="jx-split" type="radio" name="jx-mode" value="split">
+        <span><strong>Separate nested data into worksheets</strong>Objects and arrays get their own worksheets. Parent record IDs help you match related rows across sheets.</span>
+      </label>
+    </div>
+    <div class="jx-buttons">
+      <button id="jx-convert" class="primary" type="button">Convert to Excel</button>
+      <button id="jx-sample" type="button">Load sample</button>
+      <button id="jx-clear" type="button">Clear</button>
+    </div>
+    <p id="jx-status" class="jx-status" role="status" aria-live="polite">Paste JSON or choose a file, select a layout, then convert.</p>
+  </section>
+
+  <section id="jx-result" class="jx-panel" hidden>
+    <h2 style="font-size:1.25rem;margin-top:0">Workbook ready</h2>
+    <p id="jx-result-note" style="color:#475569"></p>
+    <div id="jx-sheets" class="jx-summary"></div>
+    <div class="jx-buttons"><button id="jx-download" class="primary" type="button">Download Excel workbook (.xlsx)</button></div>
+  </section>
+
+  <article class="jx-panel jx-guide">
+    <h2>Choose the worksheet layout that suits your data</h2>
+    <p>JSON can contain objects inside objects and lists inside records. A spreadsheet is a grid, so the best layout depends on what you need to do with the data after conversion.</p>
+    <h3>Flatten nested JSON into one worksheet</h3>
+    <p>This layout keeps each top-level record on one row. Nested object fields become columns with dotted names, such as <code>customer.name</code> and <code>customer.city</code>. It is convenient for filtering and quick review. Arrays stay in a cell as JSON text because spreading a list across columns can make rows difficult to compare.</p>
+    <h3>Put nested objects and arrays in separate worksheets</h3>
+    <p>This layout creates a main worksheet for top-level records and additional worksheets for nested objects or arrays. Each related worksheet includes a <code>_parent_id</code> column so you can identify which main record it belongs to. Array rows also include an item index. This is usually easier to work with when a record contains multiple items or other repeated entries.</p>
+    <h3>Check the workbook before using it</h3>
+    <ul>
+      <li>Make sure the JSON is valid and the top-level value is an object or an array of records.</li>
+      <li>Review blank values, long text, dates, and identifiers that may look like numbers but should remain text.</li>
+      <li>In separate-worksheet mode, use the parent IDs to connect related records. A workbook is not the same as a database, and relationships are represented by these ID columns.</li>
+    </ul>
+    <p>Conversion runs locally in your browser. The workbook contains the data structure created by this converter; it does not recreate application behavior or guarantee that every destination system will interpret values in the same way.</p>
+  </article>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  let workbook = null;
+  let outputName = "json-data.xlsx";
+  const sample = [
+    {
+      "orderId": "ORD-1001",
+      "status": "Processing",
+      "customer": {"name": "Amina Khan", "city": "Lahore", "email": "amina@example.com"},
+      "items": [
+        {"sku": "BK-12", "product": "Notebook", "quantity": 2, "price": 450},
+        {"sku": "PN-08", "product": "Pen set", "quantity": 1, "price": 320}
+      ]
+    },
+    {
+      "orderId": "ORD-1002",
+      "status": "Shipped",
+      "customer": {"name": "Bilal Ahmed", "city": "Karachi", "email": "bilal@example.com"},
+      "items": [
+        {"sku": "BG-04", "product": "Bag", "quantity": 1, "price": 1850}
+      ]
+    }
+  ];
+  function setStatus(message){ $("jx-status").textContent = message; }
+  function safeName(value){
+    let name = String(value || "Data").replace(/[\\/?*[\]:]/g, " ").replace(/\s+/g, " ").trim();
+    if(!name) name = "Data";
+    return name.slice(0,31);
+  }
+  function uniqueSheetName(value, used){
+    const base = safeName(value);
+    let name = base, n = 2;
+    while(used.has(name.toLowerCase())){
+      const suffix = " " + n++;
+      name = base.slice(0,31-suffix.length) + suffix;
+    }
+    used.add(name.toLowerCase());
+    return name;
+  }
+  function cellValue(value){
+    if(value === null || value === undefined) return "";
+    if(typeof value === "object") return JSON.stringify(value);
+    return value;
+  }
+  function flattenObject(value, prefix, target){
+    if(value && typeof value === "object" && !Array.isArray(value)){
+      const keys = Object.keys(value);
+      if(!keys.length && prefix) target[prefix] = "{}";
+      keys.forEach(key => {
+        const path = prefix ? prefix + "." + key : key;
+        const child = value[key];
+        if(child && typeof child === "object" && !Array.isArray(child)) flattenObject(child, path, target);
+        else target[path] = cellValue(child);
+      });
+    } else if(prefix) target[prefix] = cellValue(value);
+  }
+  function flattenRows(data){
+    const records = Array.isArray(data) ? data : [data];
+    if(!records.length) throw new Error("The JSON array is empty.");
+    return records.map((record, index) => {
+      if(record === null || typeof record !== "object" || Array.isArray(record)){
+        return {_record_id:index+1, value:cellValue(record)};
+      }
+      const row = {_record_id:index+1};
+      flattenObject(record, "", row);
+      return row;
+    });
+  }
+  function makeWorkbook(data, mode){
+    const usedNames = new Set();
+    const wb = XLSX.utils.book_new();
+    const sheetStats = [];
+    function addSheet(path, rows){
+      const name = uniqueSheetName(path, usedNames);
+      const ws = rows.length ? XLSX.utils.json_to_sheet(rows) : XLSX.utils.aoa_to_sheet([["_parent_id","_value"]]);
+      XLSX.utils.book_append_sheet(wb, ws, name);
+      sheetStats.push({name:name, rows:rows.length});
+      return name;
+    }
+    if(mode === "flat"){
+      const rows = flattenRows(data);
+      addSheet("Data", rows);
+      return {workbook:wb, stats:sheetStats};
+    }
+
+    const roots = Array.isArray(data) ? data : [data];
+    if(!roots.length) throw new Error("The JSON array is empty.");
+    const mainRows = [];
+    roots.forEach((record, index) => {
+      const id = "R" + (index + 1);
+      const row = {_record_id:id};
+      if(record && typeof record === "object" && !Array.isArray(record)){
+        Object.keys(record).forEach(key => {
+          const value = record[key];
+          if(value === null || typeof value !== "object") row[key] = cellValue(value);
+        });
+      } else {
+        row.value = cellValue(record);
+      }
+      mainRows.push(row);
+    });
+    addSheet("Data", mainRows);
+
+    function visit(value, path, parentId, itemIndex){
+      if(value === null || typeof value !== "object") return;
+      const isArray = Array.isArray(value);
+      const entries = isArray ? value : [value];
+      const rows = [];
+      entries.forEach((entry, index) => {
+        const id = path.replace(/[^a-zA-Z0-9]+/g,"_") + "_" + (rows.length + 1);
+        const row = {_id:id, _parent_id:parentId};
+        if(isArray) row._item_index = index;
+        if(entry !== null && typeof entry === "object" && !Array.isArray(entry)){
+          Object.keys(entry).forEach(key => {
+            const child = entry[key];
+            if(child === null || typeof child !== "object") row[key] = cellValue(child);
+          });
+        } else if(Array.isArray(entry)){
+          row._value = JSON.stringify(entry);
+        } else {
+          row._value = cellValue(entry);
+        }
+        rows.push(row);
+      });
+      addSheet(path, rows);
+      entries.forEach((entry, index) => {
+        if(entry && typeof entry === "object"){
+          const currentId = path.replace(/[^a-zA-Z0-9]+/g,"_") + "_" + (index + 1);
+          Object.keys(entry).forEach(key => {
+            const child = entry[key];
+            if(child !== null && typeof child === "object") visit(child, path + "." + key, currentId);
+          });
+        }
+      });
+    }
+
+    roots.forEach((record, index) => {
+      if(record && typeof record === "object" && !Array.isArray(record)){
+        Object.keys(record).forEach(key => {
+          const value = record[key];
+          if(value !== null && typeof value === "object") visit(value, key, "R" + (index + 1));
+        });
+      }
+    });
+    return {workbook:wb, stats:sheetStats};
+  }
+  function convert(){
+    try{
+      if(typeof XLSX === "undefined") throw new Error("The Excel workbook library did not load. Refresh the page and try again.");
+      const raw = $("jx-input").value.trim();
+      if(!raw) throw new Error("Paste JSON or choose a JSON file first.");
+      const data = JSON.parse(raw);
+      if(data === null || typeof data !== "object") throw new Error("Use a JSON object or an array of records.");
+      if(Array.isArray(data) && data.some(item => item === null || typeof item !== "object")){
+        setStatus("Note: the input includes primitive array items. They will be preserved in the workbook.");
+      }
+      const mode = document.querySelector('input[name="jx-mode"]:checked').value;
+      const result = makeWorkbook(data, mode);
+      workbook = result.workbook;
+      $("jx-result-note").textContent = mode === "flat"
+        ? "Nested object fields have been placed in one worksheet. Arrays are stored as JSON text in their cells."
+        : "Nested objects and arrays are in separate worksheets. Use each worksheet's _parent_id column to match related rows.";
+      const container = $("jx-sheets");
+      container.innerHTML = "";
+      result.stats.forEach(stat => {
+        const card = document.createElement("div");
+        card.className = "jx-summary-item";
+        const title = document.createElement("strong");
+        title.textContent = stat.name;
+        const detail = document.createElement("span");
+        detail.textContent = stat.rows.toLocaleString() + (stat.rows === 1 ? " data row" : " data rows");
+        card.appendChild(title);
+        card.appendChild(detail);
+        container.appendChild(card);
+      });
+      $("jx-result").hidden = false;
+      outputName = "json-to-excel.xlsx";
+      setStatus("Conversion ready: " + result.stats.length + (result.stats.length === 1 ? " worksheet." : " worksheets."));
+      $("jx-result").scrollIntoView({behavior:"smooth", block:"nearest"});
+    } catch(error){
+      $("jx-result").hidden = true;
+      setStatus("Could not convert JSON: " + error.message);
+    }
+  }
+  $("jx-convert").addEventListener("click", convert);
+  $("jx-sample").addEventListener("click", function(){
+    $("jx-input").value = JSON.stringify(sample, null, 2);
+    $("jx-result").hidden = true;
+    setStatus("Sample JSON loaded. Choose a layout and convert.");
+  });
+  $("jx-clear").addEventListener("click", function(){
+    $("jx-input").value = "";
+    $("jx-file").value = "";
+    $("jx-result").hidden = true;
+    workbook = null;
+    setStatus("Input cleared.");
+  });
+  $("jx-file").addEventListener("change", async function(event){
+    const file = event.target.files && event.target.files[0];
+    if(!file) return;
+    try{
+      $("jx-input").value = await file.text();
+      $("jx-result").hidden = true;
+      setStatus("Loaded " + file.name + ". Check the input, then convert.");
+    } catch(error){
+      setStatus("Could not read the selected file.");
+    }
+  });
+  $("jx-download").addEventListener("click", function(){
+    if(!workbook){setStatus("Convert the JSON before downloading.");return;}
+    try{
+      XLSX.writeFile(workbook, outputName);
+      setStatus("Excel download started.");
+    } catch(error){
+      setStatus("Could not create the Excel file: " + error.message);
+    }
+  });
+  $("jx-input").value = JSON.stringify(sample, null, 2);
+})();
+</script>
