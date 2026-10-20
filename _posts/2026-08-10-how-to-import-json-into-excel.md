@@ -6,6 +6,7 @@ excerpt: "A practical guide to bringing JSON into Excel, including Power Query s
 keywords: "how to import JSON into Excel, import json to excel, import data from json file to excel, import json data to excel, import data from json to excel, json in excel, import json into excel, excel open json file, open json in excel"
 author: "DataFrog Engineering Team"
 date: 2026-08-10
+updated: 2026-09-29
 categories: ["Inspect"]
 tags: ["JSON", "Excel", "Power Query", "Data Import", "Developer Tools"]
 image: "/assets/img/how-to-import-json-into-excel-hero.jpg"
@@ -39,7 +40,7 @@ author_id: gourav-mishra
     }
   },
   "datePublished": "2026-08-10",
-  "dateModified": "2026-10-15",
+  "dateModified": "2026-09-29",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://datafrog.tools/blog/how-to-import-json-into-excel"
@@ -132,12 +133,18 @@ author_id: gourav-mishra
 
 # How to Import JSON into Excel: Power Query and Other Options
 
-<div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem 1rem;border:1px solid #dbeafe;background:#f8fbff;border-radius:12px;padding:1rem 1.1rem;margin:1rem 0 1.5rem;">
+<div style="border:1px solid #bfdbfe;background:#eff6ff;border-radius:12px;padding:1.1rem 1.2rem;margin:1rem 0 1.5rem;">
+  <strong style="display:block;color:#1e3a8a;font-size:1.08rem;margin-bottom:.35rem;">Are you looking for a JSON to Excel Converter?</strong>
+  <p style="margin:0 0 .85rem;color:#1e40af;line-height:1.6;">Convert a JSON file or pasted data into a downloadable Excel workbook right in your browser. Choose one flattened worksheet, or put nested objects and arrays into separate worksheets with parent IDs.</p>
+  <a href="/json-to-excel" style="display:inline-block;background:#1d4ed8;color:#fff;padding:.7rem 1rem;border-radius:8px;text-decoration:none;font-weight:700;">Open JSON to Excel Converter →</a>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem 1rem;border:1px solid #e2e8f0;background:#fff;border-radius:12px;padding:1rem 1.1rem;margin:1rem 0 1.5rem;">
   <div style="flex:1;min-width:220px;">
-    <strong style="display:block;color:#0f172a;margin-bottom:0.25rem;">Need to inspect the JSON before importing it?</strong>
-    <span style="color:#475569;font-size:0.92rem;line-height:1.5;">Explore nested keys in the JSON Viewer, or check the structure and key counts with the JSON Analyzer. For a real Excel workbook, follow the Power Query steps below.</span>
+    <strong style="display:block;color:#0f172a;margin-bottom:0.25rem;">Need to inspect the JSON before converting?</strong>
+    <span style="color:#475569;font-size:0.92rem;line-height:1.5;">Explore nested keys in the JSON Viewer or review the structure with the JSON Analyzer. Then use the converter when you need an actual .xlsx workbook.</span>
   </div>
-  <a href="/inspect/json-viewer" style="display:inline-block;background:#1d4ed8;color:#fff;padding:0.65rem 0.9rem;border-radius:8px;text-decoration:none;font-weight:700;">Open JSON Viewer</a>
+  <a href="/inspect/json-viewer" style="display:inline-block;background:#fff;color:#1d4ed8;border:1px solid #bfdbfe;padding:0.65rem 0.9rem;border-radius:8px;text-decoration:none;font-weight:700;">Open JSON Viewer</a>
   <a href="/analyze/json-analyzer" style="display:inline-block;background:#fff;color:#1d4ed8;border:1px solid #bfdbfe;padding:0.65rem 0.9rem;border-radius:8px;text-decoration:none;font-weight:700;">Analyze JSON</a>
 </div>
 
@@ -304,14 +311,16 @@ When working on restricted enterprise workstations where add-in installations or
 ![Diagram showing nested JSON array objects expanding into clean Excel columns](/assets/img/nested-json-expanding-diagram.jpg)
 *Figure 3: Expanding multi-level nested JSON object arrays into structured tabular format before exporting.*
 
-### Step 1: Inspect and Format JSON Online
-Open [DataFrog JSON Viewer](/inspect/json-viewer) or [DataFrog JSON Analyzer](/analyze/json-analyzer) in your browser. Copy and paste your JSON string or drag-and-drop your `.json` file into the editor.
+### Step 1: Decide how nested data should appear
+If you need to understand the structure first, inspect the file with [DataFrog JSON Viewer](/inspect/json-viewer) or review its fields with the [JSON Analyzer](/analyze/json-analyzer). These are inspection tools; they do not themselves create an Excel workbook.
 
-### Step 2: Validate Schema and Structure
-Use [DataFrog JSON Schema Validator](/validate/json-schema-validator) to ensure your JSON payload contains valid syntax and adheres to required structural types.
+### Step 2: Choose the worksheet layout
+Open the [JSON to Excel Converter](/json-to-excel), paste your JSON or select a `.json` file, then choose the layout that suits your task:
+- **Flatten into one worksheet:** nested object fields become columns such as `customer.name`. Arrays remain JSON text in a cell.
+- **Separate nested data into worksheets:** nested objects and arrays are placed in additional worksheets, with parent IDs to help match related rows.
 
-### Step 3: Convert and Download Clean Excel File
-Click the **Export to Excel (.xlsx)** or **Export CSV** button inside the browser workspace. The tool parses the JSON hierarchy entirely in client browser RAM and generates a clean workbook file for download without sending data to external servers.
+### Step 3: Convert and download the workbook
+Select **Convert to Excel**, review the worksheet summary, then choose **Download Excel workbook (.xlsx)**. Conversion runs in your browser; the JSON content is not uploaded to DataFrog. Check dates, long identifiers, and important totals in Excel before relying on the result.
 
 ---
 
@@ -325,7 +334,7 @@ Selecting the right method depends on your installed Excel version, computer sec
 | **Power Query Add-in** | Excel 2013, 2010 | Yes (Free Add-in) | Yes (Expand Lists) | Medium | Yes (1-Click Refresh) |
 | **VBA Macro Code** | All Excel Versions (Windows/Mac) | No (Built-in Editor) | Requires Custom Code | High (Writing Scripts) | Manual Re-run |
 | **CSV Conversion (`jq`)** | All Excel & Spreadsheet Software | Yes (CLI Tool) | Requires Scripting | Medium | No |
-| **Browser Converter** | Any Browser / Any Device | No (Zero Installation) | Yes (Auto-Flattening) | Instant (< 5 sec) | Manual Export |
+| **[DataFrog JSON to Excel Converter](/json-to-excel)** | Any modern browser | No | Yes; flatten or split nested data into worksheets | Low | Manual Export |
 
 ---
 
@@ -375,8 +384,9 @@ Excel 2010 and 2013 lack built-in native JSON menu imports. To open JSON in olde
 
 ## Clean and Audit Your Excel Workbooks Privately
 
-Once you have imported your JSON data into Excel, inspect your spreadsheet for duplicate entries or formatted errors using DataFrog's privacy-first browser utilities:
+Once you have imported your JSON data into Excel, inspect your spreadsheet for duplicate entries or formatting problems using DataFrog's browser utilities. If you still need to create the workbook, go straight to the [JSON to Excel Converter](/json-to-excel) and choose a flat or multi-worksheet layout.
 
-- **[DataFrog JSON Viewer](/inspect/json-viewer)**: Inspect, format, search, and validate raw JSON documents in interactive visual trees.
+- **[DataFrog JSON to Excel Converter](/json-to-excel)**: Create an `.xlsx` workbook from JSON, either as one flattened worksheet or as separate worksheets for nested objects and arrays.
+- **[DataFrog JSON Viewer](/inspect/json-viewer)**: Inspect and format raw JSON documents in interactive visual trees.
 - **[DataFrog JSON Analyzer](/analyze/json-analyzer)**: Profile JSON datasets, detect missing keys, analyze data types, and export clean files.
 - **[DataFrog Excel Duplicate Remover](/clean/excel-duplicate-remover)**: Scan uploaded Excel workbooks (`.xlsx`, `.xls`), group duplicate records by key columns, preview duplicate groups, and download deduplicated workbooks 100% locally in your browser.
