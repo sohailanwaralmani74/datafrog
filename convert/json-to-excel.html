@@ -161,20 +161,53 @@ permalink: /json-to-excel
       const ws = rows.length ? XLSX.utils.json_to_sheet(rows) : XLSX.utils.aoa_to_sheet([["_parent_id","_value"]]);
       XLSX.utils.book_append_sheet(wb, ws, name);
       sheetStats.push({name:name, rows:rows.length});
-      return name;
     }
     if(mode === "flat"){
-      const rows = flattenRows(data);
-      addSheet("Data", rows);
+      addSheet("Data", flattenRows(data));
       return {workbook:wb, stats:sheetStats};
     }
 
     const roots = Array.isArray(data) ? data : [data];
     if(!roots.length) throw new Error("The JSON array is empty.");
     const mainRows = [];
+    const nestedTables = new Map();
+    function tableFor(path){
+      if(!nestedTables.has(path)) nestedTables.set(path, []);
+      return nestedTables.get(path);
+    }
+    function safeIdPart(path){
+      return path.replace(/[^a-zA-Z0-9]+/g,"_").replace(/^_+|_+$/g,"") || "nested";
+    }
+    function visit(value, path, parentId, rootIndex){
+      if(value === null || typeof value !== "object") return;
+      const isArray = Array.isArray(value);
+      const entries = isArray ? value : [value];
+      const rows = tableFor(path);
+      entries.forEach((entry, index) => {
+        const rowId = "R" + (rootIndex + 1) + "_" + safeIdPart(path) + "_" + (index + 1);
+        const row = {_id:rowId, _parent_id:parentId};
+        if(isArray) row._item_index = index;
+        if(entry !== null && typeof entry === "object" && !Array.isArray(entry)){
+          Object.keys(entry).forEach(key => {
+            const child = entry[key];
+            if(child === null || typeof child !== "object") row[key] = cellValue(child);
+          });
+        } else {
+          row._value = cellValue(entry);
+        }
+        rows.push(row);
+        if(entry && typeof entry === "object" && !Array.isArray(entry)){
+          Object.keys(entry).forEach(key => {
+            const child = entry[key];
+            if(child !== null && typeof child === "object") visit(child, path + "." + key, rowId, rootIndex);
+          });
+        }
+      });
+    }
+
     roots.forEach((record, index) => {
-      const id = "R" + (index + 1);
-      const row = {_record_id:id};
+      const rootId = "R" + (index + 1);
+      const row = {_record_id:rootId};
       if(record && typeof record === "object" && !Array.isArray(record)){
         Object.keys(record).forEach(key => {
           const value = record[key];
@@ -184,50 +217,15 @@ permalink: /json-to-excel
         row.value = cellValue(record);
       }
       mainRows.push(row);
-    });
-    addSheet("Data", mainRows);
-
-    function visit(value, path, parentId, itemIndex){
-      if(value === null || typeof value !== "object") return;
-      const isArray = Array.isArray(value);
-      const entries = isArray ? value : [value];
-      const rows = [];
-      entries.forEach((entry, index) => {
-        const id = path.replace(/[^a-zA-Z0-9]+/g,"_") + "_" + (rows.length + 1);
-        const row = {_id:id, _parent_id:parentId};
-        if(isArray) row._item_index = index;
-        if(entry !== null && typeof entry === "object" && !Array.isArray(entry)){
-          Object.keys(entry).forEach(key => {
-            const child = entry[key];
-            if(child === null || typeof child !== "object") row[key] = cellValue(child);
-          });
-        } else if(Array.isArray(entry)){
-          row._value = JSON.stringify(entry);
-        } else {
-          row._value = cellValue(entry);
-        }
-        rows.push(row);
-      });
-      addSheet(path, rows);
-      entries.forEach((entry, index) => {
-        if(entry && typeof entry === "object"){
-          const currentId = path.replace(/[^a-zA-Z0-9]+/g,"_") + "_" + (index + 1);
-          Object.keys(entry).forEach(key => {
-            const child = entry[key];
-            if(child !== null && typeof child === "object") visit(child, path + "." + key, currentId);
-          });
-        }
-      });
-    }
-
-    roots.forEach((record, index) => {
       if(record && typeof record === "object" && !Array.isArray(record)){
         Object.keys(record).forEach(key => {
           const value = record[key];
-          if(value !== null && typeof value === "object") visit(value, key, "R" + (index + 1));
+          if(value !== null && typeof value === "object") visit(value, key, rootId, index);
         });
       }
     });
+    addSheet("Data", mainRows);
+    nestedTables.forEach((rows, path) => addSheet(path, rows));
     return {workbook:wb, stats:sheetStats};
   }
   function convert(){
